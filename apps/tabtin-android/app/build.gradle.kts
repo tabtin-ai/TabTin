@@ -74,7 +74,7 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = overrideVersionCode ?: 1
-        versionName = overrideVersionName ?: "1.0.0"
+        versionName = overrideVersionName ?: "1.1.2"
 
         // Debug 默认连 api-test，避免 Native API 与 WebView Web 环境错配。
         // 本地后端可用局域网 IP 覆盖：-PDEV_HOST=192.168.x.x -PDEV_PORT=6060。

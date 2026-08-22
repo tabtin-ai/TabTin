@@ -13,6 +13,7 @@
 - Bug 和信息相对完整的功能需求：使用对应 Issue 模板。
 - 使用帮助、开放想法和尚未成形的方向：使用 Discussions。
 - 安全漏洞：按照 [SECURITY.md](SECURITY.md) 私密报告，不要公开提交。
+- 维护者发版：按照 [RELEASING.md](RELEASING.md)。公开 tag 使用产品版本号，不触发官方生产部署。
 - 小型 Bug、测试和文档修正：可以提交 Pull Request 供评审，但适用上述临时合并限制。
 - 会显著改变产品行为、数据结构、公共 API 或整体架构的改动：先发起 Issue 或 Discussion，确认方向后再编码。
 
