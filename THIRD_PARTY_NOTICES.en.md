@@ -14,7 +14,6 @@ TabTin includes third-party software, fonts, and assets. Their own licenses appl
 | Chart.js | 4.4.0 | MIT | `apps/tabtin_django/apps/tabslide/assets/vendor/chartjs/LICENSE.md` |
 | Apache ECharts | 5.5.0 | Apache-2.0 | `apps/tabtin_django/apps/tabslide/assets/vendor/echarts/LICENSE` |
 | MathJax | 3.2.2 | Apache-2.0 | `apps/tabtin_django/apps/tabslide/assets/vendor/mathjax/LICENSE` |
-| lv-markdown-in | LiuWei | MIT | `apps/tabtin-harmony/libs/lv-markdown-in/LICENSE` |
 | Superpowers personal plugin fixtures | Jesse Vincent | MIT | `packages/agent-runtime/fixtures/personal-plugins/superpowers/LICENSE` |
 | Ponytail | DietrichGebert | MIT | `packages/apps/ponytail/LICENSE` |
 | Table Engine Canvas / Teable-derived work | Teable, Inc. and TabTin Contributors | MIT | `packages/table-engine-canvas/LICENSE` |

@@ -58,7 +58,7 @@ body:
       options:
         - '个人工作流 / Individual workflow'
         - '团队协作 / Team collaboration'
-        - '自托管与管理 / Self-hosting and administration'
+        - 'Community Server 与管理 / Community Server and administration'
         - 'Agent Runtime 与工具 / Agent Runtime and tools'
         - '开发者体验 / Developer experience'
         - '文档与社区 / Documentation and community'

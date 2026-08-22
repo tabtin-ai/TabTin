@@ -16,7 +16,7 @@ TabTin 只承诺支持最新公开稳定版本。Public Preview 或实验性组�
 
 ## 私密报告漏洞
 
-请使用公开仓库 **Security** 页面中的 **Report a vulnerability** 私密漏洞报告入口。不要通过普通 Issue、Discussion、Pull Request、群聊或社交媒体披露未修复漏洞。
+请优先使用 [TabTin 公开仓库的 Security 页面](https://github.com/tabtin-ai/TabTin/security)中的 **Report a vulnerability** 私密漏洞报告入口。如果该入口暂未显示，请发送邮件至 [contact@larchiveai.com](mailto:contact@larchiveai.com)，并在主题中注明 `[SECURITY]`。不要通过普通 Issue、Discussion、Pull Request、群聊或社交媒体披露未修复漏洞。
 
 报告中请尽量提供：
 
@@ -54,6 +54,6 @@ TabTin 只承诺支持最新公开稳定版本。Public Preview 或实验性组�
 
 请把测试限制在你拥有或明确获准使用的账号、组织、设备和部署环境内。
 
-## 自托管责任
+## 自行部署责任
 
-自托管部署者负责操作系统、网络边界、TLS、数据库、对象存储、密钥管理、备份、监控和依赖升级。TabTin 的安全更新不能替代基础设施安全管理。
+官方 Community Server 默认只监听本机地址。如果部署者修改默认配置、允许其他设备访问或对公网开放服务，需要自行负责操作系统、网络边界、TLS、数据库、对象存储、密钥管理、备份、监控和依赖升级。TabTin 的安全更新不能替代基础设施安全管理。

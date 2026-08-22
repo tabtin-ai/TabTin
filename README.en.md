@@ -4,7 +4,9 @@
 
 > Public Preview: TabTin is preparing its first complete public source release. Components may have different maturity levels. Refer to the public documentation and verified behavior for the current status.
 
-TabTin is an open-source collaboration platform for people and Agents, built for individuals and teams that want to bring Agents into real work. Developers can self-host, extend, and help build the platform.
+TabTin is an open-source collaboration platform for people and Agents, built for individuals and teams that want to bring Agents into real work. Developers can run it in their own environments, extend it, and help build the platform.
+
+Public repository: [github.com/tabtin-ai/TabTin](https://github.com/tabtin-ai/TabTin)
 
 > **Let people and Agents work together, and turn individual work into capability the whole team can build on.**
 >
@@ -14,9 +16,9 @@ TabTin is an open-source collaboration platform for people and Agents, built for
 
 AI increases individual output, but it does not automatically improve team efficiency.
 
-When teams begin using Agents deeply, different working styles create new collaboration costs. Good methods are difficult to reuse. Tasks are researched again when ownership changes. Tokens are spent repeatedly rebuilding the same context. Final documents are visible, while the judgments and trade-offs behind them are easily lost. Agents may produce a large amount of material without anyone taking real responsibility for the outcome.
+As teams rely more heavily on Agents, repeated research, lost context and decision rationale, repeated Token spending, methods that are difficult to reuse, and unclear accountability become more visible.
 
-TabTin starts with one question: **Can work completed by one person become the next colleague's starting point?**
+TabTin starts by asking one question: **Can work completed by one person become the next colleague's starting point?**
 
 Teams already using AI deeply are TabTin's first wedge, not its product boundary. TabTin is for any individual or team that wants to bring Agents into real work.
 
@@ -24,7 +26,7 @@ Teams already using AI deeply are TabTin's first wedge, not its product boundary
 
 ### Work can be handed off
 
-A handoff can include more than the final document. It may include the Agent task, the necessary conversation context, and selected documents and attachments. The next person can understand how the outcome was formed and continue in their own Agent and Workspace.
+A handoff can include more than the final document. Task continuation freezes the necessary conversation context and carries documents, tables, cloud files, and local files referenced by the task when they can be shared. The next person can understand how the outcome was formed and create an independent task with an Agent and Workspace they select.
 
 Each person's local files and execution environment remain separate, while completed research does not need to be repeated.
 
@@ -42,7 +44,7 @@ Agents can execute work, while important decisions, accountability, and acceptan
 
 ### Teams can own their Agent work system
 
-TabTin includes more than a client. It also includes server components, an Agent Runtime, real-time collaboration, work applications, and administration capabilities. Small teams can start with the client, organizations that need control over data and infrastructure can self-host, and developers can continue from the source.
+TabTin includes more than a client. It also includes server components, an Agent Runtime, real-time collaboration, work applications, and administration capabilities. Individuals and small teams can use the official service, while developers can run Community Server on their own computer or continue developing and modifying the product from source.
 
 We will continue making the architecture more modular and pluggable. Only capabilities that exist in the public source and have been verified are described as current. Future directions belong in the [roadmap](ROADMAP.en.md).
 
@@ -57,12 +59,24 @@ The intended public system includes desktop and mobile clients, server component
 Choose the path that matches your goal:
 
 1. **Desktop client with the official service**: for individuals and small teams that want to experience the product without operating server infrastructure. Visit the [TabTin website](https://tabtin.com/).
-2. **Full self-hosting**: for teams that need control over data, model configuration, member permissions, and infrastructure.
+2. **Community Server**: for users who want the server and its data to run on their own computer. The official configuration currently operates in local-only mode.
 3. **Source development**: for developers who want to understand the architecture, modify the product, or contribute.
 
 Published installation and startup commands must be verified in a clean environment. If the documentation differs from the source, please file a bug.
 
-### Community source development
+### Community Server
+
+Community Server requires Docker. After downloading or cloning the [public repository](https://github.com/tabtin-ai/TabTin), use the platform entry point from the source root:
+
+- Windows: double-click `start.bat`.
+- macOS: double-click `start.command`.
+- macOS or Linux terminal: run `./start.sh`.
+
+Wait for `TabTin Community is READY`, then start a matching desktop client, register or sign in, and configure your own OpenAI-compatible model under **Settings → Model Configuration → BYOK**.
+
+Use `status.bat`, `status.command`, or `./status.sh` to inspect the stack. Use `stop.bat`, `stop.command`, or `./stop.sh` to stop it. Stopping preserves accounts, configuration, and Docker volumes. The official Community Server currently listens only on `127.0.0.1` for a client on the same computer; it is not the entry point for multi-device or Internet-facing deployment. See the [Community Open Source Guide](COMMUNITY_OPEN_SOURCE_GUIDE.md) for the complete flow.
+
+### Source development
 
 If this is your first time running TabTin from source, start with the [Beginner's Guide to Local Development and Desktop Packaging](docs/development/getting-started.en.md). It covers environment setup, checks, startup, packaging, and troubleshooting in order.
 
@@ -103,11 +117,11 @@ Contributions in Chinese and English are welcome. When AI is used, the contribut
 
 ## Data and privacy
 
-Self-hosted deployments do not send business data to the TabTin maintainers by default. Error reporting and diagnostics in official clients follow the published privacy policy. Full diagnostic bundles may be uploaded only with explicit user consent.
+Community Server listens only on the local machine by default and stores account, configuration, and business data in local Docker volumes. The Community client does not connect to TabTin-maintainer Sentry or update services by default. Full diagnostic bundles may be uploaded only with explicit user consent. Data processing for the official service follows its published privacy policy.
 
 ## License and trademarks
 
-TabTin's public source is provided under [AGPL-3.0-only](LICENSE). Organizations whose use or distribution is incompatible with AGPL-3.0-only may ask Shanghai Mofan Technology Co., Ltd. about separate commercial licensing.
+TabTin's public source is provided under [AGPL-3.0-only](LICENSE). Organizations whose use or distribution is incompatible with AGPL-3.0-only may contact Shanghai Mofan Technology Co., Ltd. at [contact@larchiveai.com](mailto:contact@larchiveai.com) about separate commercial licensing.
 
 Third-party components remain subject to their respective licenses. See [THIRD_PARTY_NOTICES.en.md](THIRD_PARTY_NOTICES.en.md). The TabTin name and marks are trademarks of the project maintainer. Forks may truthfully state that they are “based on TabTin,” but must not impersonate an official release.
 

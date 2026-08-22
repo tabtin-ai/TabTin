@@ -14,7 +14,7 @@ Choose the channel that matches the nature of your request. This helps maintaine
 | Documentation error | Issue or small documentation PR | Identify the page, incorrect content, and suggested correction |
 | Security vulnerability | GitHub private vulnerability reporting | Do not open a public Issue; see [SECURITY.en.md](SECURITY.en.md) |
 | Community conduct concern | Private security reporting entry | Prefix the title with “Code of Conduct”; see [CODE_OF_CONDUCT.en.md](CODE_OF_CONDUCT.en.md) |
-| Deployment assessment, migration, or custom services | [TabTin website](https://tabtin.com/) | Refer to the information currently published on the website |
+| Deployment assessment, migration, or custom services | [contact@larchiveai.com](mailto:contact@larchiveai.com) | Do not send secrets, tokens, or business data by email |
 
 ## Before opening a report
 
@@ -32,6 +32,6 @@ Components may have different maturity levels during the Public Preview. Maintai
 
 ## Commercial support
 
-Organizations that need deployment assessment, migration assistance, custom development, or other commercial services should refer to the information currently published on the [TabTin website](https://tabtin.com/).
+Organizations that need deployment assessment, migration assistance, custom development, or other commercial services should contact [contact@larchiveai.com](mailto:contact@larchiveai.com).
 
 Commercial support is separate from community Issues and does not change the visibility of public reports or anyone's open-source license rights.

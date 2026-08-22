@@ -14,7 +14,7 @@
 | 文档错误 | Issue 或小型文档 PR | 指出具体页面、错误内容和建议修改 |
 | 安全漏洞 | GitHub 私密漏洞报告 | 不要提交公开 Issue，详见 [SECURITY.md](SECURITY.md) |
 | 社区行为问题 | 私密安全报告入口 | 标题注明“Code of Conduct”，详见 [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) |
-| 部署评估、迁移或定制服务 | [TabTin 官网](https://tabtin.com/) | 以官网当前公开信息为准 |
+| 部署评估、迁移或定制服务 | [contact@larchiveai.com](mailto:contact@larchiveai.com) | 请勿在邮件中发送密钥、Token 或业务数据 |
 
 ## 提交问题前
 
@@ -32,6 +32,6 @@ Public Preview 阶段，不同组件的成熟度可能不同。维护者会根�
 
 ## 商业支持
 
-需要部署评估、迁移协助、定制开发或其他商业服务的组织，请以 [TabTin 官网](https://tabtin.com/)当前公开的信息为准。
+需要部署评估、迁移协助、定制开发或其他商业服务的组织，请联系 [contact@larchiveai.com](mailto:contact@larchiveai.com)。
 
 商业支持与社区 Issue 分开，不会改变公开问题的可见性或开源许可证权利。

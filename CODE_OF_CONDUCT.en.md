@@ -34,7 +34,7 @@ The following behavior violates this Code:
 
 ## Private reporting
 
-Report privately through **Security → Report a vulnerability** in the public repository and prefix the title with **Code of Conduct**. Include the time, location, relevant accounts, verifiable records, impact, and requested protective measures.
+Use **Report a vulnerability** on the [TabTin public repository's Security page](https://github.com/tabtin-ai/TabTin/security) and prefix the title with **Code of Conduct**. If that entry is not yet visible, email [contact@larchiveai.com](mailto:contact@larchiveai.com) with `[Code of Conduct]` in the subject. Include the time, location, relevant accounts, verifiable records, impact, and requested protective measures.
 
 Do not publish information through Issues, Discussions, or social media if doing so could cause further harm.
 

@@ -4,6 +4,8 @@
 
 Thank you for your interest in TabTin. Contributions in Chinese and English are welcome.
 
+> Public Preview temporary policy: contributors outside the maintaining organization may open Pull Requests and participate in review, but the current release branch does not yet merge externally submitted code, documentation, or media. Start with Issues, Discussions, reproductions, and product feedback to avoid investing in a large change that cannot enter the current release before the final merge policy is confirmed.
+
 By contributing, you agree to follow the project's [Code of Conduct](CODE_OF_CONDUCT.en.md) and remain responsible for the content, provenance, and verification of your submission.
 
 ## Choose the right channel
@@ -11,12 +13,12 @@ By contributing, you agree to follow the project's [Code of Conduct](CODE_OF_CON
 - Bugs and well-shaped feature requests: use the corresponding Issue template.
 - Usage help, open ideas, and early directions: use Discussions.
 - Security vulnerabilities: report them privately according to [SECURITY.en.md](SECURITY.en.md). Do not disclose them publicly.
-- Small bug fixes, tests, and documentation corrections: open a Pull Request directly.
+- Small bug fixes, tests, and documentation corrections: open a Pull Request for review, subject to the temporary merge restriction above.
 - Changes that significantly affect product behavior, data structures, public APIs, or the overall architecture: start with an Issue or Discussion and align on direction before implementation.
 
 ## Development flow
 
-1. Fork the public repository.
+1. Fork the [TabTin public repository](https://github.com/tabtin-ai/TabTin).
 2. Create a branch from the latest `main` and keep it focused on one problem.
 3. Configure the environment using the public Getting Started and development documentation.
 4. Make the change and run relevant tests and static checks.
@@ -42,7 +44,7 @@ Unless maintainers explicitly approve a breaking release plan, HTTP, WebSocket, 
 
 Code changes should include tests or explain in the Pull Request why tests cannot currently be provided. Run at least the local checks directly relevant to the changed module and record the commands and results.
 
-Use the relevant module READMEs and reproducible repository scripts as the source for development and test commands. CI that is not currently running will not be presented as a fictional merge guarantee. Local verification is an important part of review.
+Use relevant module READMEs and reproducible repository scripts as the source for development and test commands. The public repository does not currently configure automated CI. The absence of checks does not prove correctness, so local verification recorded in the Pull Request is an important part of review. Any automated checks added later must also pass.
 
 For documentation changes, check at least:
 

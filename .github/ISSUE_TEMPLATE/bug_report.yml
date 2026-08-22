@@ -40,9 +40,8 @@ body:
         - 'Server / 服务端'
         - 'iOS'
         - 'Android'
-        - 'Harmony'
         - 'CLI'
-        - 'Self-hosting / 自托管'
+        - 'Community Server'
         - 'Documentation / 文档'
         - 'Other / 其他'
     validations:
