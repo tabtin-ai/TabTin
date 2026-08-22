@@ -1,0 +1,76 @@
+# TabTin 本地开发基础设施（PostgreSQL + Redis）
+#
+# 用途：给新同学一键拉起本地数据库 + Redis，避免本机装数据库。
+# 应用层（Django / Electron / Celery）仍在宿主机跑，通过 localhost 端口连接。
+#
+# 业务关系库只走 PostgreSQL（与 settings.py 单库架构对齐；MySQL 已于 INFRA-30 退役）。
+# `up -d` 起 postgres + redis 两件套。
+#
+# 启动：docker compose -f docker-compose.dev.yml up -d
+# 停止：docker compose -f docker-compose.dev.yml down
+# 日志：docker compose -f docker-compose.dev.yml logs -f
+#
+# 业务库 = PostgreSQL `tabtin_single`（与 apps/tabtin_django/.env 的 PG_DB_NAME 对齐），
+# 凭证 user `tabtin` / 密码 `tabtin_dev_pass`。checkout 后无需改 env，bash scripts/dev/menu.sh 即连得上。
+#
+# 首次使用（空库建表）：
+#   bash scripts/dev/menu.sh        # 菜单启动；或直接 source venv && python apps/tabtin_django/manage.py migrate
+#   # 需要导入快照时见 dev-db-dumps/README.md
+#
+# 与 docker-compose.search.yml 独立，可并行启动（ES 走 9200 端口）。
+#
+# ⚠️ project 名必须显式，避免与同目录下的其他 Compose 项目共享默认项目名。
+# 推导的默认 project 名（如 tabtin），`up -d` 会把对方的同名服务（postgres/redis）
+# 误当本项目服务重建，互相摧毁容器。这里固定 name: tabtin-dev，与部署栈彻底隔离。
+name: tabtin-dev
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: tabtin-postgres-dev
+    restart: unless-stopped
+    environment:
+      # 单库默认业务库 = tabtin_single，与 apps/tabtin_django/.env 的 PG_DB_NAME 对齐，
+      # 这样 checkout 后 bash scripts/dev/menu.sh / runserver 直接连得上（INFRA-9）。
+      POSTGRES_DB: tabtin_single
+      POSTGRES_USER: tabtin
+      POSTGRES_PASSWORD: tabtin_dev_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - tabtin-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tabtin -d tabtin_single"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    networks:
+      - tabtin-dev
+
+  redis:
+    image: redis:8-alpine
+    container_name: tabtin-redis-dev
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - tabtin-redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    networks:
+      - tabtin-dev
+
+networks:
+  tabtin-dev:
+    name: tabtin-dev
+    driver: bridge
+
+volumes:
+  tabtin-postgres-data:
+    name: tabtin-postgres-data
+  tabtin-redis-data:
+    name: tabtin-redis-data

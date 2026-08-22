@@ -1,0 +1,1102 @@
+/*
+ * Tabdoc editor ProseMirror styles
+ * TabTin theme integration.
+ */
+
+/* ─── Editor highlight color CSS variables ─── */
+:root {
+  --novel-black: #000;
+  --novel-highlight-default: transparent;
+  --novel-highlight-purple: #f3e8ff;
+  --novel-highlight-red: #fee2e2;
+  --novel-highlight-yellow: #fef9c3;
+  --novel-highlight-blue: #dbeafe;
+  --novel-highlight-green: #dcfce7;
+  --novel-highlight-orange: #ffedd5;
+  --novel-highlight-pink: #fce7f3;
+  --novel-highlight-gray: #f3f4f6;
+  --novel-stone-100: #f5f5f4;
+  --novel-stone-200: #e7e5e4;
+}
+
+.dark {
+  --novel-black: #fff;
+  --novel-highlight-default: transparent;
+  --novel-highlight-purple: #3b0764;
+  --novel-highlight-red: #450a0a;
+  --novel-highlight-yellow: #422006;
+  --novel-highlight-blue: #172554;
+  --novel-highlight-green: #052e16;
+  --novel-highlight-orange: #431407;
+  --novel-highlight-pink: #500724;
+  --novel-highlight-gray: #1f2937;
+  --novel-stone-100: #292524;
+  --novel-stone-200: #44403c;
+}
+
+/* ─── Tabdoc page resets ─── */
+
+/* ─── ProseMirror base ─── */
+.ProseMirror {
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* The drag handle is rendered ~20px to the left of each block, which lands in
+   the page container's left padding — outside .ProseMirror. Moving the cursor
+   there to grab the handle leaves the editor and triggers the handle's
+   mouseout-hide before it can be clicked. Extend the editor box leftward to
+   cover that gutter (negative margin) while re-adding equal left padding so the
+   text stays visually aligned: now the cursor reaches the handle without ever
+   leaving .ProseMirror. */
+.tabdoc-page .ProseMirror {
+  padding-left: 1.5rem;
+  margin-left: -1.5rem;
+}
+
+/* ─── 文档展示偏好（由「更多」菜单控制，持久化到 font_style / properties.small_text） ───
+   字体/字号只作用于正文容器，不进协作内容流，切换时无需重建编辑器。 */
+.tabdoc-font-serif .ProseMirror {
+  font-family: Georgia, Cambria, "Times New Roman", "Songti SC", "SimSun", serif;
+}
+.tabdoc-font-mono .ProseMirror {
+  font-family: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+}
+.tabdoc-small-text .ProseMirror {
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.ProseMirror:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* Remove any focus ring / border from Tiptap / Novel wrapper */
+.tiptap,
+.tiptap:focus,
+.tiptap:focus-visible,
+.ProseMirror:focus-visible,
+[contenteditable]:focus,
+[contenteditable]:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* ─── Placeholder ─── */
+.ProseMirror .is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: hsl(var(--muted-foreground));
+  pointer-events: none;
+  height: 0;
+}
+
+/* ─── Headings ─── */
+/* 使用 em 单位，使标题字阶相对于 .ProseMirror 基础字体（14px）缩放 */
+.ProseMirror h1 {
+  font-size: 1.75em;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+.ProseMirror h2 {
+  font-size: 1.375em;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-top: 1.5em;
+  margin-bottom: 0.4em;
+}
+
+.ProseMirror h3 {
+  font-size: 1.125em;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 1.25em;
+  margin-bottom: 0.3em;
+}
+
+.ProseMirror h4 {
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.45;
+  margin-top: 1em;
+  margin-bottom: 0.25em;
+}
+
+.ProseMirror h5 {
+  font-size: 0.925em;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-top: 0.85em;
+  margin-bottom: 0.2em;
+}
+
+.ProseMirror h6 {
+  font-size: 0.85em;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-top: 0.75em;
+  margin-bottom: 0.15em;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Heading immediately after another heading: reduce top margin */
+.ProseMirror :is(h1, h2, h3, h4, h5, h6) + :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 0.75rem;
+}
+
+/* ─── Paragraph spacing ─── */
+.ProseMirror p {
+  margin: 0.5rem 0;
+}
+
+.ProseMirror .tabdoc-source-reveal-highlight {
+  animation: tabdoc-source-reveal-pulse 1.8s ease-out;
+  border-radius: 0.375rem;
+}
+
+.ProseMirror .tabdoc-find-match {
+  border-radius: 0.1875rem;
+  background-color: hsl(var(--primary) / 0.16);
+}
+
+.ProseMirror .tabdoc-find-match-active {
+  background-color: hsl(var(--primary) / 0.28);
+  box-shadow: 0 0 0 1px hsl(var(--primary) / 0.4);
+}
+
+@keyframes tabdoc-source-reveal-pulse {
+  0% {
+    background-color: hsl(var(--accent) / 0.22);
+    box-shadow: 0 0 0 3px hsl(var(--accent) / 0.16);
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: 0 0 0 0 hsl(var(--accent) / 0);
+  }
+}
+
+/* ─── Collaboration cursor ─── */
+.ProseMirror .tabdoc-collaboration-cursor__caret,
+.ProseMirror .ProseMirror-yjs-cursor,
+.ProseMirror .collaboration-cursor__caret,
+.ProseMirror .collaboration-carets__caret {
+  border-left: 2px solid currentColor;
+  border-right: none;
+  margin-left: -1px;
+  margin-right: -1px;
+  pointer-events: none;
+  position: relative;
+  word-break: normal;
+}
+
+.ProseMirror .tabdoc-collaboration-cursor__label,
+.ProseMirror .ProseMirror-yjs-cursor > div,
+.ProseMirror .collaboration-cursor__label,
+.ProseMirror .collaboration-carets__label {
+  border-radius: 0.25rem 0.25rem 0.25rem 0;
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  left: -1px;
+  line-height: 1;
+  max-width: 12rem;
+  overflow: hidden;
+  padding: 0.125rem 0.375rem;
+  position: absolute;
+  text-overflow: ellipsis;
+  top: -1.35rem;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.ProseMirror .tabdoc-collaboration-cursor__label {
+  box-shadow: 0 1px 2px hsl(var(--foreground) / 0.12);
+}
+
+/* ─── Links ─── */
+.ProseMirror a {
+  color: hsl(var(--primary));
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ProseMirror a:hover {
+  opacity: 0.8;
+}
+
+/* ─── Blockquote ─── */
+.ProseMirror blockquote {
+  border-left: 3px solid hsl(var(--border));
+  margin: 1rem 0;
+  padding-left: 1rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.ProseMirror blockquote p {
+  margin: 0.35rem 0;
+}
+
+/* ─── Lists ─── */
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+/*
+ * Nested list marker cycles (Notion-style).
+ * Each deeper selector must beat shallower ones by specificity, otherwise
+ * level 4+ would stick on the first style instead of continuing the cycle.
+ * Covers 9 levels (3 full cycles); practical docs rarely nest deeper.
+ *
+ * Bullet: disc → circle → square → …
+ * Ordered: decimal → lower-alpha → lower-roman → …
+ */
+.ProseMirror ul {
+  list-style-type: disc;
+}
+.ProseMirror ul ul {
+  list-style-type: circle;
+}
+.ProseMirror ul ul ul {
+  list-style-type: square;
+}
+.ProseMirror ul ul ul ul {
+  list-style-type: disc;
+}
+.ProseMirror ul ul ul ul ul {
+  list-style-type: circle;
+}
+.ProseMirror ul ul ul ul ul ul {
+  list-style-type: square;
+}
+.ProseMirror ul ul ul ul ul ul ul {
+  list-style-type: disc;
+}
+.ProseMirror ul ul ul ul ul ul ul ul {
+  list-style-type: circle;
+}
+.ProseMirror ul ul ul ul ul ul ul ul ul {
+  list-style-type: square;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+  list-style-position: outside;
+}
+.ProseMirror ol ol {
+  list-style-type: lower-alpha;
+}
+.ProseMirror ol ol ol {
+  list-style-type: lower-roman;
+}
+.ProseMirror ol ol ol ol {
+  list-style-type: decimal;
+}
+.ProseMirror ol ol ol ol ol {
+  list-style-type: lower-alpha;
+}
+.ProseMirror ol ol ol ol ol ol {
+  list-style-type: lower-roman;
+}
+.ProseMirror ol ol ol ol ol ol ol {
+  list-style-type: decimal;
+}
+.ProseMirror ol ol ol ol ol ol ol ol {
+  list-style-type: lower-alpha;
+}
+.ProseMirror ol ol ol ol ol ol ol ol ol {
+  list-style-type: lower-roman;
+}
+
+.ProseMirror li {
+  line-height: 1.75;
+  margin: 0.25rem 0;
+  padding-left: 0.25rem;
+}
+
+.ProseMirror li > p {
+  margin: 0.15rem 0;
+}
+
+/* Nested lists: reduce top/bottom margin to avoid excessive spacing */
+.ProseMirror li > ul,
+.ProseMirror li > ol {
+  margin: 0.15rem 0;
+}
+
+/* Prevent double indentation in tabdoc context */
+.tabdoc-page .ProseMirror ol,
+.tabdoc-page .ProseMirror ul {
+  margin-left: 0;
+}
+
+/* ─── Horizontal rule ─── */
+/* A bare 1px line is nearly impossible to click, so the divider could not be
+   selected. Keep the visible rule thin (drawn by ::before, centered) but turn
+   the surrounding gap from dead margin into clickable padding — a ~24px hit
+   band. Total spacing is unchanged (1.25rem margin + 0.75rem padding = 2rem per
+   side); selecting the node highlights the whole band via .ProseMirror-selectednode. */
+.ProseMirror hr {
+  border: none;
+  margin: 1.25rem 0;
+  padding: 0.75rem 0;
+  cursor: pointer;
+  /* The global drag handle centers itself on a line of height `line-height`
+     starting at the content top (handle.top = top + (lineHeight - 24)/2 +
+     paddingTop). The hr's content is the 1px rule, so declare line-height: 1px
+     — otherwise it inherits ~24.5px and the handle lands ~12px below the line. */
+  line-height: 1px;
+}
+
+.ProseMirror hr::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background-color: hsl(var(--border));
+}
+
+/* ─── Gapcursor（表/图片等结构块后落点，#9472） ─── */
+.ProseMirror-gapcursor {
+  display: none;
+  pointer-events: none;
+  position: absolute;
+}
+
+.ProseMirror-gapcursor::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -2px;
+  width: 20px;
+  border-top: 1px solid hsl(var(--foreground));
+  animation: ProseMirror-cursor-blink 1.1s steps(2, start) infinite;
+}
+
+@keyframes ProseMirror-cursor-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+.ProseMirror-focused .ProseMirror-gapcursor {
+  display: block;
+}
+
+/* ─── Tables ─── */
+.ProseMirror .tableWrapper {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 1rem 0;
+  /* 为覆盖式横向滚动条留出专用轨道，避免压住最后一行单元格。 */
+  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
+  scrollbar-width: none;
+}
+
+.ProseMirror .tableWrapper::-webkit-scrollbar {
+  height: 0;
+}
+
+.tabdoc-table-horizontal-scrollbar {
+  border-radius: 999px;
+  background: transparent;
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.35) transparent;
+}
+
+.tabdoc-table-horizontal-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+
+.tabdoc-table-horizontal-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: hsl(var(--muted-foreground) / 0.35);
+}
+
+.ProseMirror table {
+  border-collapse: collapse;
+  overflow: hidden;
+  table-layout: fixed;
+  width: max-content;
+  min-width: 100%;
+  max-width: none;
+}
+
+.ProseMirror table td,
+.ProseMirror table th {
+  border: 1px solid hsl(var(--border));
+  min-width: 10rem;
+  padding: 6px 8px;
+  position: relative;
+  vertical-align: top;
+}
+
+.ProseMirror table th {
+  background-color: hsl(var(--muted));
+  font-weight: bold;
+  text-align: left;
+}
+
+.ProseMirror .column-resize-handle {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: -2px;
+  width: 4px;
+  background-color: hsl(var(--primary));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ProseMirror.resize-cursor {
+  cursor: col-resize;
+}
+
+.ProseMirror .selectedCell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: hsl(var(--primary) / 0.1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ─── Code blocks with syntax highlighting ─── */
+.ProseMirror pre {
+  background: #f6f8fa;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  color: #1f2328;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.ProseMirror pre code {
+  background: none;
+  color: inherit;
+  font-size: 0.8em;
+  padding: 0;
+}
+
+.dark .ProseMirror pre {
+  background: #1e1e1e;
+  border-color: hsl(var(--border));
+  color: #d4d4d4;
+}
+
+/* hljs syntax highlighting — light mode */
+.ProseMirror pre .hljs-comment,
+.ProseMirror pre .hljs-quote {
+  color: #6a737d;
+}
+
+.ProseMirror pre .hljs-variable,
+.ProseMirror pre .hljs-template-variable,
+.ProseMirror pre .hljs-attribute,
+.ProseMirror pre .hljs-tag,
+.ProseMirror pre .hljs-name,
+.ProseMirror pre .hljs-regexp,
+.ProseMirror pre .hljs-link,
+.ProseMirror pre .hljs-selector-id,
+.ProseMirror pre .hljs-selector-class {
+  color: #d73a49;
+}
+
+.ProseMirror pre .hljs-number,
+.ProseMirror pre .hljs-meta,
+.ProseMirror pre .hljs-built_in,
+.ProseMirror pre .hljs-builtin-name,
+.ProseMirror pre .hljs-literal,
+.ProseMirror pre .hljs-type,
+.ProseMirror pre .hljs-params {
+  color: #005cc5;
+}
+
+.ProseMirror pre .hljs-string,
+.ProseMirror pre .hljs-symbol,
+.ProseMirror pre .hljs-bullet {
+  color: #032f62;
+}
+
+.ProseMirror pre .hljs-title,
+.ProseMirror pre .hljs-section {
+  color: #6f42c1;
+}
+
+.ProseMirror pre .hljs-keyword,
+.ProseMirror pre .hljs-selector-tag {
+  color: #d73a49;
+}
+
+.ProseMirror pre .hljs-emphasis {
+  font-style: italic;
+}
+
+.ProseMirror pre .hljs-strong {
+  font-weight: 700;
+}
+
+/* hljs syntax highlighting — dark mode overrides */
+.dark .ProseMirror pre .hljs-comment,
+.dark .ProseMirror pre .hljs-quote {
+  color: #6a9955;
+}
+
+.dark .ProseMirror pre .hljs-variable,
+.dark .ProseMirror pre .hljs-template-variable,
+.dark .ProseMirror pre .hljs-attribute,
+.dark .ProseMirror pre .hljs-tag,
+.dark .ProseMirror pre .hljs-name,
+.dark .ProseMirror pre .hljs-regexp,
+.dark .ProseMirror pre .hljs-link,
+.dark .ProseMirror pre .hljs-selector-id,
+.dark .ProseMirror pre .hljs-selector-class {
+  color: #f98181;
+}
+
+.dark .ProseMirror pre .hljs-number,
+.dark .ProseMirror pre .hljs-meta,
+.dark .ProseMirror pre .hljs-built_in,
+.dark .ProseMirror pre .hljs-builtin-name,
+.dark .ProseMirror pre .hljs-literal,
+.dark .ProseMirror pre .hljs-type,
+.dark .ProseMirror pre .hljs-params {
+  color: #fbbc88;
+}
+
+.dark .ProseMirror pre .hljs-string,
+.dark .ProseMirror pre .hljs-symbol,
+.dark .ProseMirror pre .hljs-bullet {
+  color: #ce9178;
+}
+
+.dark .ProseMirror pre .hljs-title,
+.dark .ProseMirror pre .hljs-section {
+  color: #dcdcaa;
+}
+
+.dark .ProseMirror pre .hljs-keyword,
+.dark .ProseMirror pre .hljs-selector-tag {
+  color: #569cd6;
+}
+
+/* ─── Inline code ─── */
+.ProseMirror code {
+  background-color: hsl(var(--muted));
+  border-radius: 0.25em;
+  box-decoration-break: clone;
+  color: hsl(var(--foreground));
+  font-size: 0.9em;
+  padding: 0.15em 0.35em;
+}
+
+/* ─── Image styling ─── */
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 0.5rem 0;
+  transition: filter 0.1s ease-in-out;
+}
+
+.ProseMirror p > img:only-child {
+  display: block;
+}
+
+.ProseMirror img:hover {
+  cursor: pointer;
+  filter: brightness(90%);
+}
+
+.ProseMirror img.ProseMirror-selectednode {
+  outline: 3px solid hsl(var(--primary));
+  filter: brightness(90%);
+}
+
+.ProseMirror .tabdoc-image-node-view {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.ProseMirror .tabdoc-image-node-view > img {
+  display: block;
+  max-width: 100%;
+}
+
+.ProseMirror .tabdoc-image-node-view.ProseMirror-selectednode {
+  background-color: transparent !important;
+}
+
+.ProseMirror .tabdoc-image-node-view.ProseMirror-selectednode > img {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+  filter: none;
+}
+
+.tabdoc-image-resize-handle {
+  position: absolute;
+  z-index: 1;
+  width: 1.5rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.tabdoc-image-resize-handle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.625rem;
+  height: 0.625rem;
+  border: 2px solid hsl(var(--background));
+  border-radius: 999px;
+  background: hsl(var(--primary));
+  box-shadow: 0 1px 3px hsl(var(--foreground) / 0.2);
+  transform: translate(-50%, -50%);
+}
+
+.tabdoc-image-resize-handle:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 1px;
+}
+
+/* Image upload placeholder spinner */
+.img-placeholder {
+  position: relative;
+}
+
+.img-placeholder::before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid var(--novel-stone-200);
+  border-top-color: var(--novel-stone-100);
+  animation: spinning 0.6s linear infinite;
+}
+
+@keyframes spinning {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ─── Task list ─── */
+ul[data-type='taskList'] {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+ul[data-type='taskList'] li {
+  list-style: none;
+}
+
+ul[data-type='taskList'] li > label {
+  margin-right: 0;
+  user-select: none;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 1.5em;
+}
+
+ul[data-type='taskList'] li > label input[type='checkbox'] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: hsl(var(--background));
+  margin: 0;
+  cursor: pointer;
+  width: 1em;
+  height: 1em;
+  border: 2px solid hsl(var(--border));
+  border-radius: 0.2em;
+  display: grid;
+  place-content: center;
+  flex-shrink: 0;
+}
+
+ul[data-type='taskList'] li > label input[type='checkbox']:hover {
+  background-color: hsl(var(--accent));
+}
+
+ul[data-type='taskList'] li > label input[type='checkbox']::before {
+  content: '';
+  width: 0.6em;
+  height: 0.6em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em;
+  transform-origin: center;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+ul[data-type='taskList'] li > label input[type='checkbox']:checked {
+  background-color: hsl(var(--primary));
+  border-color: hsl(var(--primary));
+}
+
+ul[data-type='taskList'] li > label input[type='checkbox']:checked::before {
+  transform: scale(1);
+  color: hsl(var(--primary-foreground));
+}
+
+ul[data-type='taskList'] li > div {
+  flex: 1;
+  min-width: 0;
+}
+
+ul[data-type='taskList'] li > div > p {
+  margin: 0;
+}
+
+ul[data-type='taskList'] li[data-checked='true'] > div > p {
+  color: hsl(var(--muted-foreground));
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+ul[data-type='taskList'] ul[data-type='taskList'] {
+  padding-left: 1.5rem;
+}
+
+/* ─── Floating editor menus ─── */
+.tabdoc-floating-menu-surface {
+  position: relative;
+  isolation: isolate;
+  z-index: var(--z-dropdown, 55);
+  opacity: 1;
+  background-color: hsl(var(--glass-bg-overlay, 0 0% 100%)) !important;
+  box-shadow:
+    var(--shadow-overlay, 0 10px 28px rgb(0 0 0 / 0.12)),
+    inset 0 0 0 1px hsl(var(--border, 30 6% 88%));
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.dark .tabdoc-floating-menu-surface {
+  background-color: hsl(var(--glass-bg-overlay, 0 0% 0%)) !important;
+}
+
+/* ─── Floating menu layering ─── */
+[data-tippy-root]:has(.tabdoc-floating-menu-surface) {
+  z-index: var(--z-dropdown, 55) !important;
+}
+
+/* ─── TabDoc bubble menu sizing ─── */
+[data-tippy-root]:has(.tabdoc-bubble-menu) {
+  z-index: var(--z-dropdown, 55) !important;
+}
+
+[data-tippy-root]:has(.tabdoc-bubble-menu) > .tippy-box {
+  width: max-content;
+  z-index: var(--z-dropdown, 55);
+}
+
+[data-tippy-root]:has(.tabdoc-bubble-menu) > .tippy-box > .tippy-content {
+  width: 100%;
+  padding: 0;
+}
+
+.tabdoc-bubble-menu {
+  display: flex;
+  width: max-content;
+  max-width: 100%;
+  flex-wrap: wrap;
+  overflow: visible;
+}
+
+/*
+ * Radix keeps dropdown content mounted while closing. In Electron shell panes the
+ * close animation can miss its cleanup and leave a closed menu visible at 0,0.
+ * Closed menus are no longer part of the user's current document context, so make
+ * the closed state non-rendering as a lifecycle fallback.
+ */
+.tabdoc-toolbar-dropdown-menu[data-state='closed'] {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+/* ─── Selection highlight ─── */
+.ProseMirror:not(.dragging) .ProseMirror-selectednode {
+  outline: none !important;
+  background-color: var(--novel-highlight-blue);
+  transition: background-color 0.2s;
+  box-shadow: none;
+}
+
+/* ─── Drag handle ─── */
+.drag-handle {
+  position: fixed;
+  opacity: 1;
+  transition: opacity ease-in 0.2s;
+  border-radius: 0.25rem;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10' style='fill: rgba(0, 0, 0, 0.5)'%3E%3Cpath d='M3,2 C2.44771525,2 2,1.55228475 2,1 C2,0.44771525 2.44771525,0 3,0 C3.55228475,0 4,0.44771525 4,1 C4,1.55228475 3.55228475,2 3,2 Z M3,6 C2.44771525,6 2,5.55228475 2,5 C2,4.44771525 2.44771525,4 3,4 C3.55228475,4 4,4.44771525 4,5 C4,5.55228475 3.55228475,6 3,6 Z M3,10 C2.44771525,10 2,9.55228475 2,9 C2,8.44771525 2.44771525,8 3,8 C3.55228475,8 4,8.44771525 4,9 C4,9.55228475 3.55228475,10 3,10 Z M7,2 C6.44771525,2 6,1.55228475 6,1 C6,0.44771525 6.44771525,0 7,0 C7.55228475,0 8,0.44771525 8,1 C8,1.55228475 7.55228475,2 7,2 Z M7,6 C6.44771525,6 6,5.55228475 6,5 C6,4.44771525 6.44771525,4 7,4 C7.55228475,4 8,4.44771525 8,5 C8,5.55228475 7.55228475,6 7,6 Z M7,10 C6.44771525,10 6,9.55228475 6,9 C6,8.44771525 6.44771525,8 7,8 C7.55228475,8 8,8.44771525 8,9 C8,9.55228475 7.55228475,10 7,10 Z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: calc(0.5em + 0.375rem) calc(0.5em + 0.375rem);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 1.2rem;
+  height: 1.5rem;
+  z-index: var(--z-modal);
+  cursor: pointer;
+}
+
+.drag-handle:hover {
+  background-color: var(--novel-stone-100);
+  transition: background-color 0.2s;
+}
+
+.drag-handle:active {
+  background-color: var(--novel-stone-200);
+  transition: background-color 0.2s;
+  cursor: grabbing;
+}
+
+.drag-handle.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 600px) {
+  .drag-handle {
+    display: none;
+    pointer-events: none;
+  }
+}
+
+/* Drag handle dark mode */
+.dark .drag-handle {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10' style='fill: rgba(255, 255, 255, 0.5)'%3E%3Cpath d='M3,2 C2.44771525,2 2,1.55228475 2,1 C2,0.44771525 2.44771525,0 3,0 C3.55228475,0 4,0.44771525 4,1 C4,1.55228475 3.55228475,2 3,2 Z M3,6 C2.44771525,6 2,5.55228475 2,5 C2,4.44771525 2.44771525,4 3,4 C3.55228475,4 4,4.44771525 4,5 C4,5.55228475 3.55228475,6 3,6 Z M3,10 C2.44771525,10 2,9.55228475 2,9 C2,8.44771525 2.44771525,8 3,8 C3.55228475,8 4,8.44771525 4,9 C4,9.55228475 3.55228475,10 3,10 Z M7,2 C6.44771525,2 6,1.55228475 6,1 C6,0.44771525 6.44771525,0 7,0 C7.55228475,0 8,0.44771525 8,1 C8,1.55228475 7.55228475,2 7,2 Z M7,6 C6.44771525,6 6,5.55228475 6,5 C6,4.44771525 6.44771525,4 7,4 C7.55228475,4 8,4.44771525 8,5 C8,5.55228475 7.55228475,6 7,6 Z M7,10 C6.44771525,10 6,9.55228475 6,9 C6,8.44771525 6.44771525,8 7,8 C7.55228475,8 8,8.44771525 8,9 C8,9.55228475 7.55228475,10 7,10 Z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+/* ─── YouTube video embed ─── */
+.ProseMirror iframe {
+  border: 8px solid #ffd00027;
+  border-radius: 4px;
+  min-width: 200px;
+  min-height: 200px;
+  display: block;
+  outline: 0px solid transparent;
+}
+
+.ProseMirror div[data-youtube-video] {
+  margin: 1rem 0;
+}
+
+.ProseMirror div[data-youtube-video] > iframe {
+  cursor: move;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+
+.ProseMirror .ProseMirror-selectednode iframe {
+  transition: outline 0.15s;
+  outline: 6px solid #fbbf24;
+}
+
+@media only screen and (max-width: 480px) {
+  .ProseMirror div[data-youtube-video] > iframe {
+    max-height: 50px;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .ProseMirror div[data-youtube-video] > iframe {
+    max-height: 100px;
+  }
+}
+
+/* ─── Bold inside colored / highlighted text ─── */
+span[style] strong,
+mark[style] strong {
+  color: inherit;
+}
+
+/* ─── Mathematics (KaTeX) ─── */
+.Tiptap-mathematics-editor {
+  background: hsl(var(--muted));
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.3rem;
+  font-family: 'KaTeX_Main', serif;
+}
+
+.Tiptap-mathematics-render {
+  cursor: pointer;
+  padding: 0 0.25rem;
+  transition: background-color 0.15s;
+}
+
+.Tiptap-mathematics-render:hover {
+  background-color: hsl(var(--accent));
+  border-radius: 0.25rem;
+}
+
+.Tiptap-mathematics-render .katex {
+  color: inherit;
+}
+
+/* ─── Mention styling ─── */
+.ProseMirror .mention {
+  background-color: var(--purple-light);
+  border-radius: 0.4rem;
+  box-decoration-break: clone;
+  color: var(--brand);
+  padding: 0.1rem 0.3rem;
+}
+
+/* ─── TabData Block styling ─── */
+.ProseMirror .tabdata-block-wrapper {
+  user-select: none;
+}
+
+.ProseMirror .tabdata-block-wrapper.ProseMirror-selectednode > div {
+  border-color: hsl(var(--primary) / 0.4);
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.15);
+}
+
+.ProseMirror .tabdata-block-placeholder {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875em;
+}
+
+.ProseMirror .tabdata-block-icon {
+  font-size: 1.125rem;
+}
+
+.ProseMirror .tabdata-block-title {
+  font-weight: 500;
+}
+
+/* ─── TabData Resize Handle ─── */
+.tabdata-resize-handle {
+  height: 6px;
+  cursor: row-resize;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.tabdata-resize-handle::after {
+  content: '';
+  width: 48px;
+  height: 3px;
+  border-radius: 1.5px;
+  background-color: hsl(var(--border));
+  transition: background-color 0.15s;
+}
+
+.tabdata-block-wrapper:hover .tabdata-resize-handle,
+.tabdata-resize-handle.is-dragging,
+.tabdata-resize-handle:focus-visible {
+  opacity: 1;
+}
+
+.tabdata-resize-handle:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+body.tabdata-resizing,
+body.tabdata-resizing * {
+  cursor: row-resize !important;
+}
+
+.tabdata-resize-handle:hover::after,
+.tabdata-resize-handle.is-dragging::after {
+  background-color: hsl(var(--primary) / 0.5);
+}
+
+/* ─── TabData Empty State Overlay ─── */
+.embed-empty-state {
+  transition: opacity 0.2s;
+}
+
+.embed-empty-state:hover {
+  opacity: 0.7;
+}
+
+/* ─── Comment thread decorations (highlight only; never in doc/history) ─── */
+.ProseMirror .tabdoc-comment-highlight {
+  background-color: transparent;
+  border-bottom: 2px solid hsl(var(--primary) / 0.55);
+  border-radius: 2px;
+}
+
+.ProseMirror .tabdoc-comment-highlight--active {
+  background-color: hsl(var(--primary) / 0.36);
+  border-bottom-color: hsl(var(--primary));
+}
+
+.ProseMirror .tabdoc-comment-highlight--inline-node,
+.ProseMirror .tabdoc-comment-highlight--inline-node.tabdoc-comment-highlight--active {
+  background-color: transparent;
+  border-bottom: 0;
+  border-radius: 0;
+}
+
+.ProseMirror .tabdoc-comment-highlight--inline-node > .tabdoc-image-node-view::after {
+  position: absolute;
+  right: 0;
+  bottom: 6px;
+  left: 0;
+  height: 2px;
+  background-color: hsl(var(--primary) / 0.55);
+  content: '';
+  pointer-events: none;
+}
+
+.ProseMirror
+  .tabdoc-comment-highlight--inline-node.tabdoc-comment-highlight--active
+  > .tabdoc-image-node-view::after {
+  background-color: hsl(var(--primary));
+}
+
+.ProseMirror .tabdoc-comment-block-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.35rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: hsl(var(--warning-foreground, var(--foreground)));
+  background-color: hsl(var(--warning) / 0.28);
+  user-select: none;
+  cursor: pointer;
+}

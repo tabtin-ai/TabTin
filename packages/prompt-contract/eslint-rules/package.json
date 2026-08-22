@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "type": "module",
+  "description": "@tabtin/prompt-contract ESLint plugin — agent-prompt 治理阶段 1.5 三条最前线护栏。详见 ./README.md。NOT a publishable package。",
+  "scripts": {
+    "test": "node __tests__/no-inline-llm-prompt.test.mjs && node __tests__/tool-description-length.test.mjs && node __tests__/section-name-match.test.mjs",
+    "scan": "node __tests__/_ad-hoc-scan.mjs"
+  }
+}

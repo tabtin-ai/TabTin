@@ -1,0 +1,84 @@
+{
+  "actions": {
+    "useful": "有用",
+    "correct": "纠正",
+    "forget": "忘记",
+    "cancel": "取消",
+    "retry": "重试",
+    "loadMore": "加载更多"
+  },
+  "errors": {
+    "loadFailed": "加载失败，请重试",
+    "loadMoreFailed": "加载更多失败，请重试",
+    "actionFailed": "操作失败",
+    "correctFailed": "更正失败",
+    "exportFailed": "导出失败"
+  },
+  "toast": {
+    "corrected": "已更正这条记忆"
+  },
+  "types": {
+    "about_you": "关于你",
+    "insight": "洞察",
+    "task_summary": "协作小结",
+    "diary": "日记"
+  },
+  "emotions": {
+    "happy": "开心",
+    "curious": "好奇",
+    "frustrated": "受挫",
+    "relieved": "释然",
+    "surprised": "惊讶",
+    "reflective": "反思",
+    "neutral": "记录"
+  },
+  "time": {
+    "justNow": "刚刚",
+    "minutesAgo": "{{count}} 分钟前",
+    "hoursAgo": "{{count}} 小时前",
+    "daysAgo": "{{count}} 天前",
+    "today": "今天",
+    "yesterday": "昨天"
+  },
+  "importanceTitle": "重要度 {{count}}",
+  "exportDoc": {
+    "title": "{{name}} 的记忆",
+    "organization": "组织：{{name}}",
+    "exportedAt": "导出时间：{{time}}",
+    "count": "共 {{count}} 条",
+    "importanceLabel": "重要度"
+  },
+  "diary": {
+    "title": "{{name}} 的成长记录",
+    "subtitle": "TA 在和你协作里记下的所思所想",
+    "loadFailedTitle": "加载成长记录失败",
+    "selectAgent": "选择一个 AI 分身查看成长记录",
+    "emptyTitle": "还没有成长记录",
+    "emptyHint": "和 TA 协作后，工作日记会自动出现在这里",
+    "forgetTitle": "让这个 AI 分身忘记这条记录？",
+    "forgetDesc": "忘记后，TA 之后不会再用到这条记忆，也不会在这里显示。此操作不可撤销。"
+  },
+  "governance": {
+    "tabs": {
+      "overview": "概览",
+      "records": "全部记录"
+    },
+    "filters": {
+      "all": "全部"
+    },
+    "records": {
+      "hint": "纠正或忘记条目后，「概览」里的综合理解会在下次整理时更新。",
+      "loadFailedTitle": "加载记忆失败",
+      "emptyTitle": "这个 AI 分身还没有记忆记录",
+      "emptyHint": "和 TA 协作后，记录会自动出现在这里"
+    },
+    "forgetTitle": "让这个 AI 分身忘记这条记忆？",
+    "disabledNotice": "记忆记录当前已关闭，AI 分身不再记录、召回或展示记忆。可在「记忆」App →「记忆偏好」→「让 Agent 记笔记」重新打开。",
+    "export": {
+      "nothing": "这个 AI 分身还没有可导出的记忆",
+      "disabledEmpty": "记忆记录已关闭，暂无可导出内容。可在「记忆」App →「记忆偏好」→「让 Agent 记笔记」重新打开。",
+      "filenameMemory": "记忆",
+      "done": "已导出 {{count}} 条记忆"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "design": {
+    "project": {
+      "notFound": "Design project not found",
+      "createSuccess": "Design project created successfully",
+      "updateSuccess": "Design project updated successfully",
+      "deleteSuccess": "Design project deleted successfully"
+    },
+    "file": {
+      "notFound": "Design file not found",
+      "createSuccess": "Design file created successfully",
+      "saveSuccess": "Design file saved successfully",
+      "revisionConflict": "Version conflict. Please refresh and try again."
+    },
+    "export": {
+      "success": "Exported successfully",
+      "failed": "Export failed: {{detail}}",
+      "formatNotSupported": "Export format not supported: {{format}}",
+      "pngExportFailed": "PNG export failed",
+      "svgExportFailed": "SVG export failed",
+      "pptxExportFailed": "PPTX export failed"
+    },
+    "import": {
+      "htmlImportFailed": "HTML import failed: {{detail}}",
+      "invalidHtml": "Invalid HTML content",
+      "parseError": "Parse error"
+    },
+    "validation": {
+      "invalidFileId": "Invalid file ID",
+      "invalidProjectId": "Invalid project ID",
+      "missingRequiredFields": "Missing required fields",
+      "invalidFileData": "Invalid file data"
+    },
+    "errors": {
+      "unknown": "Unknown error",
+      "internalError": "Internal server error",
+      "permissionDenied": "Permission denied",
+      "resourceNotFound": "Resource not found"
+    }
+  }
+}

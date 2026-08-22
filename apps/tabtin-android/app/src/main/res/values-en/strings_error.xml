@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_invalid_phone">Please enter an email or phone number</string>
+    <string name="error_send_code_failed">Failed to send verification code</string>
+    <string name="error_login_failed">Login failed</string>
+    <string name="error_session_expired">Session expired, please log in again</string>
+    <string name="error_session_expired_toast">Your session has expired. Please log in again.</string>
+    <string name="organization_access_revoked_title">Removed from organization</string>
+    <string name="organization_access_revoked_message">You were removed from “%1$s” and can no longer access its content.</string>
+    <string name="organization_access_revoked_message_generic">You were removed from the current organization and can no longer access its content.</string>
+    <string name="organization_access_revoked_switch_default">Switch to default organization</string>
+    <string name="organization_access_revoked_acknowledge">OK</string>
+
+    <string name="error_load_messages_failed">Failed to load messages</string>
+    <string name="error_session_not_loaded">Session not loaded, please try again later</string>
+    <string name="error_not_logged_in">Not logged in, please log in again</string>
+    <string name="error_wait_upload">Please wait for attachments to finish uploading</string>
+    <string name="error_all_attachments_failed">All uploads failed. Please try again.</string>
+    <string name="error_stream_exception">Streaming communication error</string>
+    <string name="error_prefix">Error: %s</string>
+
+    <string name="error_attachment_limit">Attachment limit reached (max %d)</string>
+    <string name="error_cannot_read_file_info">Cannot read file info</string>
+    <string name="error_unsupported_file_type">Unsupported file type: %s</string>
+    <string name="error_file_too_large">File too large (max %dMB)</string>
+    <string name="error_upload_failed">Upload failed</string>
+    <string name="error_cannot_read_file">Cannot read file</string>
+    <string name="error_camera_image_failed">Unable to process camera image</string>
+
+    <string name="error_ws_timeout">WebSocket connection timeout</string>
+    <string name="error_subscribe_failed">Subscription failed</string>
+    <string name="error_subscribe_timeout">Timed out subscribing to the conversation stream. Check your network and retry.</string>
+    <string name="error_subscribe_disconnected">The connection was interrupted. Retry after the network recovers.</string>
+    <string name="error_subscribe_denied">You do not have access to this conversation. Go back and open it again.</string>
+    <string name="error_subscribe_rejected">The server rejected the conversation subscription. Try again shortly.</string>
+    <string name="error_agent_start_timeout">Agent start timeout, no response received</string>
+    <string name="error_send_failed">Failed to send message</string>
+    <string name="error_agent_timeout">Agent response timeout</string>
+    <string name="error_agent_execution">Agent execution error</string>
+    <string name="error_no_workspace">No organization selected</string>
+    <string name="error_request_failed">Request failed</string>
+    <string name="error_rate_limited">Too many attempts. Please try again later.</string>
+
+    <string name="error_image_load_failed">Image loading failed</string>
+    <string name="error_image_format_unsupported">Image format not supported</string>
+    <string name="error_save_failed">Save failed</string>
+    <string name="error_save_failed_detail">Save failed: %s</string>
+
+    <string name="error_instant_no_file_id">Instant upload missing file_id</string>
+    <string name="error_missing_presigned_url">Missing presigned_url</string>
+    <string name="error_missing_object_key">Missing object_key</string>
+    <string name="error_oss_put_failed">Upload to OSS failed (%1$d)</string>
+
+    <string name="error_label_login">Login</string>
+    <string name="error_label_fetch_config">Get upload config</string>
+    <string name="error_label_get_presign">Get upload signature</string>
+    <string name="error_label_confirm_upload">Confirm upload</string>
+    <string name="error_label_load_agents">Load Agents</string>
+    <string name="error_label_load_sessions">Load session list</string>
+    <string name="error_label_create_session">Create session</string>
+    <string name="error_label_load_messages">Load messages</string>
+    <string name="error_label_submit_answer">Submit answer</string>
+    <string name="error_label_submit_permission">Submit permission</string>
+    <string name="error_label_fork_session">Fork session</string>
+
+    <string name="error_invalid_url">Invalid URL</string>
+    <string name="error_server_error">Server error (%d)</string>
+    <string name="error_decoding_failed">Data parsing failed: %s</string>
+    <string name="error_file_empty_or_unreadable">File is empty or cannot be read</string>
+
+    <string name="error_network">Network error, please try again later</string>
+    <string name="error_server">Server error, please try again later</string>
+    <string name="error_unknown">Operation failed, please try again later</string>
+    <string name="error_forbidden">Permission denied</string>
+
+    <string name="error_webview_render_gone">Failed to load content: the page was reclaimed by the system, usually because memory ran low. Tap Retry to reload.</string>
+</resources>

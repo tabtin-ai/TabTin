@@ -1,0 +1,98 @@
+# Runtime top-level tool error kinds (W2h orchestration / buildToolErrorResult).
+# These appear in Electron TOOL_ERROR_CATALOG + i18n, but are NOT part of
+# agent-runtime TOOL_ERROR_KINDS (tool-layer jsonError metadata set).
+#
+# include_in_tool_error_kinds: false for all entries in this file.
+
+kinds:
+  - enum: BUDGET_SKIPPED
+    kind: budget_skipped
+    i18n_key: budget_skipped
+    description: Budget grace period — tool execution skipped
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: false
+      userInitiated: false
+
+  - enum: ABORTED
+    kind: aborted
+    i18n_key: aborted
+    description: AbortSignal fired (user cancel)
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: false
+      userInitiated: true
+
+  # Historical Wave 2h alias; runtime unified on `aborted`. Kept in catalog for
+  # old events / mixed-version cloud payloads. i18n normalizes to `aborted`.
+  - enum: ABORTED_BY_USER
+    kind: aborted_by_user
+    i18n_key: aborted
+    description: Legacy alias of aborted
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: false
+      userInitiated: true
+
+  - enum: TOOL_TIMEOUT
+    kind: tool_timeout
+    i18n_key: tool_timeout
+    description: tool.execute() exceeded timeoutMs
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: EXECUTE_ERROR
+    kind: execute_error
+    i18n_key: execute_error
+    description: tool.execute() threw
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: UNKNOWN_TOOL
+    kind: unknown_tool
+    i18n_key: unknown_tool
+    description: Model hallucinated a tool name not in the registry
+    catalog:
+      soft: false
+      translatable: false
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: SCHEMA_INVALID
+    kind: schema_invalid
+    i18n_key: schema_invalid
+    description: JSON Schema validation failed
+    catalog:
+      soft: false
+      translatable: false
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: VALIDATE_INPUT
+    kind: validate_input
+    i18n_key: validate_input
+    description: Business-semantic validation failed
+    catalog:
+      soft: false
+      translatable: false
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: PLAN_GUARD_DENY
+    kind: plan_guard_deny
+    i18n_key: plan_guard_deny
+    description: Plan/Study/Ask mode guard rejected the call
+    catalog:
+      soft: false
+      translatable: false
+      countsAsAnomaly: true
+      userInitiated: false

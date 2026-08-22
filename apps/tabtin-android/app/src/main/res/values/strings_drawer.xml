@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- drawer-first 重构（W_DT.3）—— sidebar / push 抽屉相关文案 -->
+    <string name="drawer_open">打开抽屉</string>
+    <string name="drawer_close">关闭抽屉</string>
+    <string name="account_drawer_open_menu">打开菜单</string>
+    <string name="account_drawer_title">账户</string>
+    <string name="account_drawer_notifications_hint">查看最新动态</string>
+    <string name="account_drawer_settings">设置</string>
+    <string name="drawer_all_conversations">全部对话</string>
+    <string name="drawer_agents_header">WORKSPACE</string>
+    <string name="drawer_profile">个人资料</string>
+    <string name="drawer_new_agent">新建 Workspace</string>
+    <string name="drawer_search_placeholder">搜索对话或 Workspace</string>
+    <string name="drawer_all_empty_title">还没有对话</string>
+    <string name="drawer_all_empty_hint">去「工作」页选择一个 Workspace 开始聊天</string>
+    <string name="chat_workbench">工作台</string>
+</resources>

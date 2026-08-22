@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+  <defs>
+    <linearGradient id="window" x1="4.25" y1="4.5" x2="16" y2="16" gradientUnits="userSpaceOnUse"><stop stop-color="#176EDC"/><stop offset="1" stop-color="#5A3FD1"/></linearGradient>
+    <linearGradient id="pointer" x1="7.25" y1="7.25" x2="14.5" y2="14.5" gradientUnits="userSpaceOnUse"><stop stop-color="#18D9D0"/><stop offset=".38" stop-color="#75D0FF"/><stop offset=".72" stop-color="#B092FF"/><stop offset="1" stop-color="#F2A3D8"/></linearGradient>
+    <linearGradient id="rim" x1="7.25" y1="7.25" x2="14.5" y2="14.5" gradientUnits="userSpaceOnUse"><stop stop-color="#08CFC6"/><stop offset=".55" stop-color="#7968F1"/><stop offset="1" stop-color="#EA87CE"/></linearGradient>
+  </defs>
+  <rect x="3.5" y="4.5" width="13" height="11.5" rx="2.75" fill="url(#window)"/><path d="M3.5 7.75h13" stroke="#FFF" stroke-width=".65" stroke-opacity=".76"/><path d="M5.5 7.75v-1.5a1 1 0 0 1 1-1h2.75a1 1 0 0 1 1 1v1.5" fill="#FFF" fill-opacity=".96"/><path d="M7.25 7.25c2.25.5 4.5 1.25 6.75 2.25.75.25.75 1 0 1.25L12.25 12 14 13.5c.5.5.5.75.25.75 0 .25-.25.25-.75-.25L12 12.25 10.75 14c-.25.75-1 .75-1.25 0-1-2.25-1.75-4.5-2.25-6.75Z" fill="url(#pointer)" stroke="url(#rim)" stroke-width=".75" stroke-linejoin="round" paint-order="stroke fill"/>
+</svg>

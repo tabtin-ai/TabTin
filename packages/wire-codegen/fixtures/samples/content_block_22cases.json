@@ -1,0 +1,227 @@
+[
+  {
+    "type": "text",
+    "text": "我先想一下 🤔。Now let me check the file...",
+    "citations": [
+      {
+        "type": "char_location",
+        "cited_text": "cited example",
+        "document_index": 0,
+        "document_title": "src/main.ts",
+        "start_char_index": 100,
+        "end_char_index": 113
+      }
+    ]
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_01abc",
+    "name": "read_file",
+    "input": {
+      "path": "src/main.ts",
+      "limit": 100
+    },
+    "input_parse_error": {
+      "message": "Unexpected end of JSON",
+      "partial": "{\"path\":\"src/main.ts\",\"lim"
+    }
+  },
+  {
+    "type": "tool_result",
+    "tool_use_id": "toolu_01abc",
+    "content": "export function main() { return 0 }",
+    "is_error": false,
+    "tabtin_metadata": {
+      "duration_ms": 12,
+      "exit_code": 0,
+      "truncated": false
+    }
+  },
+  {
+    "type": "thinking",
+    "thinking": "用户想要一个 X，所以我需要先 read_file 看下当前实现。\n包含换行 + 反斜杠 \\ + 引号 \"test\"。",
+    "signature": "sig_abc123_signature_payload"
+  },
+  {
+    "type": "redacted_thinking",
+    "data": "aGVsbG8gd29ybGQgZW5jcnlwdGVkIHBheWxvYWQ="
+  },
+  {
+    "type": "image",
+    "source": {
+      "type": "base64",
+      "media_type": "image/png",
+      "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="
+    }
+  },
+  {
+    "type": "document",
+    "source": {
+      "type": "base64",
+      "media_type": "application/pdf",
+      "data": "JVBERi0xLjQKJeTjz9IKMSAwIG9iago="
+    },
+    "title": "spec.pdf",
+    "context": "Anthropic protocol spec",
+    "citations": {
+      "enabled": true
+    }
+  },
+  {
+    "type": "server_tool_use",
+    "id": "srv_tool_01",
+    "name": "web_search",
+    "input": {
+      "query": "anthropic messages api"
+    }
+  },
+  {
+    "type": "web_search_tool_result",
+    "tool_use_id": "srv_tool_01",
+    "content": [
+      {
+        "type": "web_search_result",
+        "url": "https://docs.anthropic.com/messages",
+        "title": "Messages API",
+        "encrypted_content": "enc_xxx",
+        "page_age": "2 days ago"
+      }
+    ]
+  },
+  {
+    "type": "code_execution_tool_result",
+    "tool_use_id": "srv_tool_02",
+    "content": {
+      "type": "code_execution_result",
+      "stdout": "Hello World\n",
+      "stderr": "",
+      "return_code": 0
+    }
+  },
+  {
+    "type": "bash_code_execution_tool_result",
+    "tool_use_id": "srv_tool_03",
+    "content": {
+      "type": "code_execution_result",
+      "stdout": "total 16\n",
+      "stderr": "",
+      "return_code": 0
+    }
+  },
+  {
+    "type": "text_editor_code_execution_tool_result",
+    "tool_use_id": "srv_tool_04",
+    "content": {
+      "type": "code_execution_result",
+      "stdout": "@@ -1,2 +1,2 @@\n-old\n+new\n",
+      "stderr": "",
+      "return_code": 0
+    }
+  },
+  {
+    "type": "mcp_tool_use",
+    "id": "mcp_tool_05",
+    "name": "list_files",
+    "server_name": "fs-mcp-server",
+    "input": {
+      "path": "/"
+    }
+  },
+  {
+    "type": "mcp_tool_result",
+    "tool_use_id": "mcp_tool_05",
+    "is_error": false,
+    "content": "README.md\nsrc/\n"
+  },
+  {
+    "type": "container_upload",
+    "file_id": "file_xyz",
+    "container_id": "cont_abc"
+  },
+  {
+    "type": "search_result",
+    "source": "kb://product-spec",
+    "title": "Product Spec",
+    "content": [
+      {
+        "type": "text",
+        "text": "TabTin 是一个让人和 AI Agent 一起干活的平台。"
+      }
+    ],
+    "citations": {
+      "enabled": true
+    }
+  },
+  {
+    "type": "tabtin_rich_content",
+    "kind": "cli_output_table",
+    "summary": "docker ps 输出",
+    "group_id": "grp_01",
+    "payload": {
+      "headers": [
+        "CONTAINER ID",
+        "IMAGE"
+      ],
+      "rows": [
+        [
+          "abc",
+          "nginx"
+        ]
+      ]
+    }
+  },
+  {
+    "type": "tabtin_composer_preset",
+    "preset_id": "preset.refactor",
+    "params": {
+      "target": "src/old.ts"
+    },
+    "source": "preset"
+  },
+  {
+    "type": "tabtin_ask_user_fields",
+    "field_values": {
+      "name": "Alice",
+      "age": 30
+    }
+  },
+  {
+    "type": "tabtin_skill_invocation",
+    "skill_id": "skill.babysit",
+    "skill_name": "Babysit PR",
+    "injected_text": "[Skill: Babysit] Keep PR merge-ready. ...",
+    "injected_text_summary": "Babysit skill 已注入"
+  },
+  {
+    "type": "tabtin_source_ref",
+    "source_id": "src_web_01",
+    "ref_kind": "web",
+    "snapshot": {
+      "kind": "web",
+      "url": "https://docs.anthropic.com/messages",
+      "title": "Anthropic Messages API",
+      "preview": "Messages allow you to ...",
+      "selected_text": "content blocks array"
+    }
+  },
+  {
+    "type": "tabtin_approval_request",
+    "approval_id": "apr_01",
+    "prompt": "是否允许执行 rm -rf /tmp/cache？",
+    "options": [
+      {
+        "id": "allow_once",
+        "label": "本次允许"
+      },
+      {
+        "id": "allow_session",
+        "label": "会话内允许"
+      },
+      {
+        "id": "deny",
+        "label": "拒绝"
+      }
+    ],
+    "expires_at": "2026-05-10T22:00:00Z"
+  }
+]

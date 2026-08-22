@@ -1,0 +1,98 @@
+{
+  "labels": {
+    "strategy": "사용자 에이전트 전략",
+    "recommended": "추천",
+    "highestRealism": "💯 최고의 현실감: {{system}}",
+    "mobileDeviceHint": "📱 42개 이상의 실제 장치 중에서 무작위로 선택됨",
+    "desktopPoolHint": "🎲 20개 이상의 데스크톱 UA 중에서 무작위로 선택, Chrome 버전 추적 지원",
+    "platform": "플랫폼",
+    "browser": "브라우저",
+    "preview": "실시간 미리보기",
+    "uaPreview": "사용자 에이전트 미리보기",
+    "refreshRandom": "무작위 UA 새로고침",
+    "refreshOne": "다른 것을 선택하세요",
+    "previewDesktopPool": "🎲 데스크톱 풀 예: {{platform}} + {{browser}} 풀에서 무작위로 선택됨",
+    "previewMobile": "📱 모바일 예: {{device}} 장치 풀에서 무작위로 가중치를 부여함",
+    "previewAuto": "✅ 현실감을 극대화하려면 시스템 UA를 사용하세요.",
+    "consistencyTitle": "플랫폼 일관성 확인",
+    "consistencyLine": "현재 시스템: {{current}} → 대상 플랫폼: {{target}}",
+    "fingerprintTitle": "스마트 지문 미리보기",
+    "gpuVendor": "GPU 공급업체",
+    "renderer": "렌더러",
+    "platformInfo": "플랫폼 정보",
+    "clientHints": "클라이언트 힌트 헤더가 자동으로 조정됩니다.",
+    "advancedSettings": "고급 설정",
+    "customPlaceholder": "모질라/5.0 ..."
+  },
+  "mode": {
+    "auto": {
+      "label": "자동 감지",
+      "description": "최고의 현실감을 위해 시스템 환경을 사용하여 기본 GPU 및 클라이언트 힌트 지문을 유지합니다."
+    },
+    "mobile": {
+      "label": "모바일 시뮬레이션",
+      "description": "실제 장치 프로필로 모바일 장치 시뮬레이션(42개 이상의 장치, GPU 및 해상도 자동 조정)"
+    },
+    "desktop_pool": {
+      "label": "데스크톱 UA 풀",
+      "description": "20개 이상의 데스크톱 UA 중에서 무작위로 선택하세요. 선택적인 크로스 플랫폼 시뮬레이션 및 플랫폼/브라우저 필터를 사용하여 일관성을 위해 기본값은 현재 플랫폼입니다."
+    },
+    "custom": {
+      "label": "맞춤형 UA",
+      "description": "특별한 요구 사항에 맞게 UA 문자열을 완전히 맞춤화하세요."
+    }
+  },
+  "platforms": {
+    "current": "현재 플랫폼(기본 유지)",
+    "windows": "윈도우",
+    "macos": "macOS",
+    "linux": "리눅스"
+  },
+  "browsers": {
+    "chrome": "크롬",
+    "edge": "가장자리",
+    "firefox": "파이어폭스",
+    "safari": "사파리"
+  },
+  "mobileDevices": {
+    "iphone": "iPhone (임의의 인기 모델)",
+    "android": "Android(임의의 인기 모델)",
+    "ipad": "iPad(임의의 인기 모델)"
+  },
+  "mobileDevicesShort": {
+    "iphone": "아이폰",
+    "android": "안드로이드",
+    "ipad": "아이패드"
+  },
+  "platformNames": {
+    "macOS": "macOS",
+    "Windows": "윈도우",
+    "Linux": "리눅스",
+    "iOS": "iOS",
+    "iPadOS": "아이패드OS",
+    "Android": "안드로이드",
+    "Unknown": "알 수 없음"
+  },
+  "fingerprint": {
+    "mobileSummary": "📱 모바일 시뮬레이션: {{device}} ({{os}} {{version}}) + {{gpu}}",
+    "androidSummary": "📱 모바일 시뮬레이션: {{device}} + {{gpu}}",
+    "mac": {
+      "consistent": "✅ 플랫폼 일치: 기본 Apple GPU 지문 유지",
+      "cross": "⚠️ 크로스 플랫폼 시뮬레이션: Apple GPU 지문 사용"
+    },
+    "windows": {
+      "macToWindows": "⚠️ 크로스 플랫폼 시뮬레이션: Mac → Windows, GPU는 NVIDIA로 스푸핑됩니다(런타임 주입).",
+      "consistent": "✅ 플랫폼 일치: 기본 NVIDIA/AMD/Intel GPU 지문 유지",
+      "cross": "⚠️ 크로스 플랫폼 시뮬레이션: NVIDIA GPU 지문 사용"
+    },
+    "linux": {
+      "consistent": "✅ 플랫폼 일치: 기본 GPU 지문 유지",
+      "cross": "⚠️ 크로스 플랫폼 시뮬레이션: Intel GPU 지문 사용"
+    },
+    "unknown": "⚠️ 기본 Intel GPU 지문을 사용하는 인식되지 않은 UA"
+  },
+  "consistency": {
+    "best": "✅ 최고의 설정! 플랫폼을 일관되게 유지하면 기본 GPU 지문이 허용되며 감지하기가 가장 어렵습니다.",
+    "cross": "⚠️ 크로스 플랫폼 시뮬레이션은 GPU 지문을 변경합니다. 플랫폼 일관성을 유지하려면 \"스마트 모드\"를 고려하세요."
+  }
+}

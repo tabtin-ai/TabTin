@@ -1,0 +1,130 @@
+{
+  "rewind": {
+    "recordHistoryMissing": "「{{tableName}}」无法完整回退：{{count}} 行记录的历史快照已超期清理。本次回退已停止，数据保持当前状态。建议：① 选择更近的版本点；② 若必须用此版本点，联系管理员从备份恢复。"
+  },
+  "field": {
+    "typeConvertFailed": "「{{fieldName}}」从 {{oldType}} 改为 {{newType}} 失败：第 {{rowNo}} 行的「{{sample}}」无法转换。本次更改已撤销，字段类型保持原样。建议：① 导出该列后用表格软件清洗；② 改用「批量更新」先把异常值统一；③ 联系管理员协助处理 {{count}} 行受影响数据。",
+    "renameConflict": "「{{oldName}}」无法改名为「{{newName}}」：已有同名字段或被 {{count}} 个关联字段引用。建议先在「字段依赖」中查看引用关系，或选择不同名称。",
+    "deleteReferenced": "「{{fieldName}}」无法删除：仍被 {{count}} 个关联字段引用。建议先删除引用方，或在「字段依赖」中查看完整链路后再决策。",
+    "primaryFieldDeleteForbidden": "无法删除「{{fieldName}}」：这是主键字段。直接删除可能影响现有数据或关联列。请先在表设置里更换主键。",
+    "deleteImpactDialog": {
+      "warningHigh": "此字段被其它字段或视图引用，删除会让下游字段失效。建议先到「字段依赖」中查看完整链路再决策。",
+      "warningMedium": "此字段被部分视图引用，删除后视图配置会自动清理。",
+      "warningLow": "此字段无下游依赖，可安全删除。",
+      "noImpactSafe": "确认要删除字段「{{name}}」吗？该字段无下游依赖，可放心操作。是否可撤销请看下方提示。",
+      "undoSimpleHint": "可以撤销：删除后按 Ctrl+Z 或 ⌘Z 即可恢复字段及历史结构。",
+      "undoComplexHint": "可以撤销：删除后按 Ctrl+Z 或 ⌘Z 恢复字段。恢复时会自动重建依赖图并重算值（可能需要几秒）；若依赖的字段已被删除，系统会提示具体缺失信息。",
+      "undoNotInWaveHint": "无法撤销：该字段类型本期不在撤销白名单。如需恢复请前往「版本历史」还原到删除前的版本，或联系组织管理员。",
+      "undoUnknownHint": "无法撤销：未知字段类型，请联系组织管理员。",
+      "openVersionHistory": "查看版本历史",
+      "fetchErrorFallback": "依赖分析加载失败，请稍后重试。仍可继续删除，但删除后建议立即检查表格状态。"
+    },
+    "batchRestore": {
+      "title": "撤销结果包含部分无法恢复的字段",
+      "summary": "本次撤销中：{{restorableCount}} 个简单字段已可单独 Ctrl+Z 恢复；{{unrestorableCount}} 个复杂字段需走「版本历史」还原。",
+      "restorableSection": "可单独撤销 ({{count}})",
+      "unrestorableSection": "需走版本历史 ({{count}})",
+      "openVersionHistory": "打开版本历史",
+      "complexFieldHint": "部分系统托管字段需要通过版本历史恢复。",
+      "close": "知道了"
+    }
+  },
+  "table": {
+    "deleteReferenced": "「{{tableName}}」无法删除：仍有 {{skillCount}} 个 Skill / {{viewCount}} 个跨表视图依赖它。强行删除会让这些 Skill 报错或视图为空。建议先在「字段依赖」中查看完整引用，或先归档表格让依赖方有时间迁移。",
+    "trashedBanner": {
+      "title": "「{{tableName}}」已移到回收站",
+      "description": "后台计算任务已停止；依赖此表的 Skill 规则 / 跨表视图已自动暂停。30 天内可在「组织设置 · 资源回收站」中恢复表格。",
+      "restoreAction": "恢复表格",
+      "viewTrash": "前往回收站",
+      "dismiss": "知道了"
+    },
+    "deletedBanner": {
+      "title": "「{{tableName}}」已删除",
+      "description": "已停止该表的所有后台计算任务，并暂停依赖此表的 Skill 规则 / 跨表视图。永久删除后无法恢复，如需历史数据请联系组织管理员从备份处理。"
+    }
+  },
+  "bulk": {
+    "checkpointCreating": "「{{tableName}}」AI 操作影响 {{count}} 行，正在创建自动版本点... 完成后可在对话中「撤销这次 AI 操作」一键撤回。",
+    "quotaExceeded": "本次更新预计消耗 {{tokens}} 个组织配额，超出剩余 {{remaining}} 个。本次预检已停止，数据未变化。建议：① 缩小筛选条件；② 等待月度配额刷新；③ 联系组织管理员升级套餐。",
+    "affectedRecords_one": "{{count}} 行记录受影响",
+    "affectedRecords_other": "{{count}} 行记录受影响",
+    "updateByFilter": {
+      "previewTitle": "批量更新预览",
+      "matchedRows": "匹配 {{count}} 行",
+      "samplePreview": "预览（最多 20 行样本）",
+      "riskLow": "低风险操作",
+      "riskLowDesc": "影响行数较少，可放心执行。",
+      "riskMedium": "中风险操作",
+      "riskMediumDesc": "影响 {{count}} 行，将自动创建版本点。",
+      "riskHigh": "高风险操作",
+      "riskHighDesc": "影响 {{count}} 行，请输入「确认更新」后执行。",
+      "highRiskConfirmText": "确认更新",
+      "highRiskInputPlaceholder": "请输入「确认更新」以继续",
+      "estimatedDuration": "预计 ~{{seconds}} 秒",
+      "estimatedDurationLong": "预计 ~{{seconds}} 秒，可在后台继续",
+      "checkpointHint": "将自动创建版本点，可随时回退",
+      "confirm": "确认执行",
+      "cancel": "取消",
+      "committing": "正在执行批量更新…",
+      "commitSuccess": "批量更新完成，共更新 {{count}} 行。",
+      "preflightFailed": "批量更新预检失败：{{reason}}。数据保持当前状态。建议稍后重试；多次失败请联系组织管理员。",
+      "commitFailed": "批量更新提交失败：{{reason}}。数据保持当前状态。建议稍后重试；多次失败请联系组织管理员。",
+      "rejected": "超出单次更新上限",
+      "rejectedDesc": "匹配 {{count}} 行，超出单次上限 10000 行。请缩小筛选条件分批执行，或联系管理员。",
+      "driftWarning": "实际更新行数与预检时有 {{ratio}}% 差异（预检 {{expected}} 行，实际 {{actual}} 行），建议核查数据。",
+      "driftDismiss": "知道了",
+      "errorListTitle": "{{count}} 条记录更新失败",
+      "errorItem": "记录 {{recordId}}：{{reason}}",
+      "showMore": "展开更多 {{count}} 条",
+      "showLess": "收起"
+    }
+  },
+  "view": {
+    "filterInvalid": "当前视图的筛选条件已失效：依赖的「{{fieldName}}」字段已被删除。视图将显示所有记录，不应用筛选。请打开视图设置重新配置筛选条件。"
+  },
+  "form": {
+  },
+  "record": {
+    "concurrentEditConflict": "这条记录刚被 {{collaboratorName}} 修改过：你的本次改动尚未保存。系统已为你保留输入，刷新后可基于最新版本继续编辑；如需强制覆盖，请点「我已确认，覆盖保存」。",
+    "restoreConflict": "无法把这条记录恢复到原位置：{{reason}}。继续操作可能产生重复或错位数据。请到表中确认最新结构，或改用「复制为新行」等方式处理。"
+  },
+  "import": {
+    "fieldUnmapped": "导入预检发现 {{count}} 列未映射到目标字段（例如「{{exampleColumn}}」）。这些列会被忽略，不影响其它列导入。建议在「字段映射」中显式选择对应目标，或勾选「忽略未映射列」继续。",
+    "failed": "导入在第 {{rowNo}} 行失败：「{{columnName}}」这一列{{expected}}，但文件里是「{{actualValue}}」。本次导入已停止，已成功写入的数据请以提示为准。请修正该单元格或列映射后重新导入；大范围问题可用更小文件分批试。"
+  },
+  "undo": {
+    "failed": "无法撤销上一步操作：{{reason}}。表格内容保持当前状态不变。请刷新后重试；若仍失败，可从版本记录尝试恢复。"
+  },
+  "admin": {
+    "fieldRecycleBin": {
+      "title": "已删除字段",
+      "description": "保留期内的已删除字段可在此恢复。超过 {{days}} 天将被永久清理。",
+      "empty": "暂无已删除字段",
+      "loading": "加载中…",
+      "loadFailed": "加载失败，请稍后重试。",
+      "fieldName": "字段名",
+      "fieldType": "类型",
+      "deletedAt": "删除时间",
+      "daysRemaining": "剩余天数",
+      "daysRemainingValue": "{{days}} 天",
+      "actions": "操作",
+      "restoreAction": "恢复字段",
+      "restoreSuccess": "字段「{{name}}」已恢复。",
+      "restoreFailed": "恢复失败：{{reason}}",
+      "refresh": "刷新",
+      "close": "关闭",
+      "ttlHint": "字段删除后保留 {{days}} 天，超期后永久清理。"
+    },
+    "integrity": {
+      "title": "一致性检查",
+      "checkAction": "检查",
+      "repairAction": "修复",
+      "checking": "检查中…",
+      "repairing": "修复中…",
+      "noDrift": "未发现漂移项",
+      "driftFound": "发现 {{count}} 处漂移",
+      "autoFixable": "可自动修复",
+      "manualFix": "需手动修复"
+    }
+  }
+}

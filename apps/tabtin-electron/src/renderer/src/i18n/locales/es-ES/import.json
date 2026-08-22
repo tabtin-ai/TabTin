@@ -1,0 +1,31 @@
+{
+  "errors": {
+    "responseInvalid": "Formato de respuesta no válido del servidor",
+    "missingStats": "A la respuesta le faltan datos estadísticos",
+    "missingFieldMapping": "A la respuesta le faltan datos de mapeo de campos",
+    "previewFailed": "Error en la vista previa del archivo. Por favor inténtalo de nuevo.",
+    "previewNetworkUnstable": "La conexión de red es inestable. Vuelva a intentarlo y verifique su proxy/VPN.",
+    "importFailed": "Error al importar datos. Por favor inténtalo de nuevo.",
+    "importInFlight": "Importación ya en curso. Espere por favor.",
+    "templateDownloadFailed": "Error al descargar la plantilla. Por favor inténtalo de nuevo."
+  },
+  "apiErrors": {
+    "previewFailedWithStatus": "Error en la vista previa: HTTP {{status}}",
+    "emptyResponse": "El servidor devolvió datos vacíos",
+    "missingStats": "Falta el campo de estadísticas de respuesta del servidor",
+    "missingFieldMapping": "Falta el campo field_mapping en la respuesta del servidor",
+    "csvImportFailedWithStatus": "Error al importar CSV: HTTP {{status}}",
+    "excelImportFailedWithStatus": "Error al importar Excel: HTTP {{status}}",
+    "jsonImportFailedWithStatus": "Error al importar JSON: HTTP {{status}}",
+    "templateDownloadFailedWithStatus": "Error al descargar la plantilla: HTTP {{status}}",
+    "unsupportedFileFormat": "Formato de archivo no compatible: {{format}}",
+    "fileEmpty": "El contenido del archivo está vacío.",
+    "fileReadFailed": "No se pudo leer el archivo"
+  },
+  "template": {
+    "defaultTableName": "mesa",
+    "filenameExcel": "{{tableName}}_import_template.xlsx",
+    "filename": "{{tableName}}_import_template.csv",
+    "filenameJson": "{{tableName}}_import_template.json"
+  }
+}

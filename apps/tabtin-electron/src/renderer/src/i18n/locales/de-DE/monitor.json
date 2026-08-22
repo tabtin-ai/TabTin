@@ -1,0 +1,84 @@
+{
+  "status": {
+    "running": "Laufen",
+    "stopped": "Angehalten",
+    "streamEnded": "Stream beendet",
+    "failed": "Fehlgeschlagen"
+  },
+  "stop": "Stoppen Sie den Monitor",
+  "failReason": {
+    "spawnPtyFailed": "Der Monitor konnte nicht gestartet werden (ausgelastet oder Grenzwert erreicht). Versuchen Sie es später noch einmal.",
+    "writePtyFailed": "Der Monitorbefehl konnte nicht ausgeführt werden. Bitte versuchen Sie es erneut.",
+    "invalidRegex": "Ungültiges Filtermuster. Überprüfen Sie die Regel und versuchen Sie es erneut.",
+    "alreadyRunning": "Dieser Monitor läuft bereits.",
+    "unknownAction": "Unbekannte Monitoraktion."
+  },
+  "emitInterrupted": "Überwachungsberichterstellung unterbrochen (Authentifizierung abgelaufen). Die Daten können unvollständig sein. Überprüfen Sie den Anmeldestatus.",
+  "resourceMonitor": {
+    "severity": {
+      "healthy": "Entspannt",
+      "attention": "Gut",
+      "heavy": "Schwer"
+    },
+    "tagline": {
+      "healthy": "Alles ist ruhig – mit Leichtigkeit kreieren",
+      "attention": "Reibungsloser Ablauf – lassen Sie sich inspirieren",
+      "heavy": "Fühlen Sie sich schwer – versuchen Sie, ungenutzte Tabs zu schließen?"
+    },
+    "current": "Aktuell",
+    "browser": "Browser",
+    "browserReclaim": {
+      "checkTitle": "Überprüfen Sie den Aufbau der Browseransicht",
+      "available": "{{count}} inaktive Browser können zurückgefordert werden",
+      "noneIdle": "Im Moment gibt es keinen inaktiven Browser, der zurückgewonnen werden könnte",
+      "noBrowsers": "Es werden keine Browseraufrufe erfasst",
+      "reclaimMany": "{{reason}}. Fordern Sie zuerst die von {{count}} getrennten, inaktiven Browser zurück und prüfen Sie dann, ob die Gesamtnutzung abnimmt.",
+      "reclaimOne": "{{reason}}. Schließen Sie zuerst den getrennten, inaktiven Browser {{title}} und prüfen Sie dann, ob die Gesamtnutzung abnimmt.",
+      "overview": "{{reason}}. Derzeit gibt es {{total}} Browseransichten, {{share}} insgesamt.",
+      "retained": "{{count}} Getrennte oder Vorschau-Browseransicht(en) werden noch verwendet oder geladen. Sie werden nicht zurückgefordert, um eine Arbeitsunterbrechung zu vermeiden.",
+      "metricAvailable": "{{count}} rückgewinnbar",
+      "metricNoneIdle": "Keiner untätig",
+      "metricNoBrowsers": "Keine",
+      "action": "Fordern Sie ungenutzte Browser zurück",
+      "actionUnavailable": "Keine zurückgeforderten Artikel",
+      "actionShort": "Zurückfordern",
+      "boundaryNote": "Stellt nur getrennte oder inaktive Browser in der Vorschau wieder her, die im Hauptfenster nicht verwendet werden. Normale Hauptfensterregisterkarten werden nicht geschlossen."
+    },
+    "spaceSection": "Raum",
+    "resourcesSection": "Ressourcen",
+    "systemOverhead": "Systemaufwand",
+    "uiEngine": "UI-Engine",
+    "uiEngineDetail": "{{cpu}} · Gemeinsamer Speicher für die Seitenrendering-Engine",
+    "appHost": "App-Host",
+    "appHostDetail": "{{cpu}} · Basisspeicher für die TabTin-App selbst",
+    "unassigned": "Nicht zugewiesen",
+    "unassignedDetail": "{{cpu}} · Ressourcen, die noch keinem Space zugeordnet sind",
+    "background": "Hintergrund",
+    "cpu": "CPU",
+    "cpuCores": "{{count}} Kerne",
+    "memory": "Erinnerung",
+    "ramShare": "{{percent}} des RAM",
+    "tabs": "Tabs",
+    "currentTabs": "Aktuelle Registerkarten",
+    "allSessionTabs": "{{count}} Gesamtzahl der Tabs",
+    "closeAllTabs": "Schließen Sie alle Tabs in jeder nicht archivierten Sitzung",
+    "panes": "{{count}}-Fenster",
+    "tabCount": "{{count}}-Registerkarten",
+    "runCount": "{{count}} läuft",
+    "appCount": "{{label}} × {{count}}",
+    "appBreakdownSeparator": ",",
+    "notCollected": "Nicht gesammelt",
+    "refresh": "Aktualisieren",
+    "refreshLoading": "Laden",
+    "trend": {
+      "memoryUp": "Speicher aufwärts {{delta}}",
+      "memoryDown": "Speicher ausgefallen {{delta}}",
+      "cpuUp": "CPU hoch {{delta}}",
+      "cpuDown": "CPU um {{delta}} gesunken",
+      "stale": "Daten verzögert {{duration}}"
+    },
+    "viewDetails": "Details anzeigen",
+    "indicatorTitle": "Leistung",
+    "openSettingsAria": "Öffnen Sie die Einstellungen des Leistungsmonitors"
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "问题跟踪工作流"
+  short_description: "创建并维护团队问题表，串联证据、开发、自测与人工验收闭环"
+  default_prompt: "使用 $issue-tracker-workflow 创建或处理一条团队问题记录。"

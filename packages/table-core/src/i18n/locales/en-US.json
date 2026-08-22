@@ -1,0 +1,29 @@
+{
+  "apiErrors": {
+    "fetchListFailed": "Failed to fetch records",
+    "fetchDetailFailed": "Failed to fetch record details",
+    "createFailed": "Failed to create record",
+    "updateFailed": "Failed to update record",
+    "deleteFailed": "Failed to delete record",
+    "bulkCreateFailed": "Failed to bulk create records",
+    "bulkUpdateFailed": "Failed to bulk update records",
+    "bulkDeleteFailed": "Failed to bulk delete records"
+  },
+  "logs": {
+    "fetchDetailSuccess": "Record details fetched",
+    "createSuccess": "Record created",
+    "bulkUpdateMissingRecord": "Target record missing from bulk update result",
+    "deleteSuccess": "Record deleted",
+    "bulkProgress": "Bulk operation progress",
+    "bulkCreateSuccess": "Bulk create completed",
+    "bulkCreatePartialFailed": "Bulk create partially failed",
+    "bulkUpdateSuccess": "Bulk update completed",
+    "bulkUpdatePartialFailed": "Bulk update partially failed",
+    "syncViewRecordsSuccess": "View records synced",
+    "syncViewRecordsFailed": "Failed to sync view records",
+    "bulkDeleteSuccess": "Bulk delete completed",
+    "bulkDeletePartialFailed": "Bulk delete partially failed",
+    "mergeIncremental": "Merged {{count}} incremental records, new version: {{version}}",
+    "removeByIds": "Records removed"
+  }
+}

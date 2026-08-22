@@ -1,0 +1,23 @@
+{
+  "errors": {
+    "loadStatsFailed": "Échec du chargement des statistiques d'exportation",
+    "exportFailed": "Échec de l'exportation, veuillez réessayer"
+  },
+  "success": {
+    "exported": "Exporté {{filename}}",
+    "showInFolder": "Afficher dans le dossier"
+  },
+  "stats": {
+    "sampledHint": "Les statistiques sont des estimations échantillonnées ; l'exportation réelle inclut tous les enregistrements sélectionnés {{total}}"
+  },
+  "apiErrors": {
+    "exportFailedWithStatus": "Échec de l'exportation : HTTP {{status}}",
+    "unsupportedFormat": "Format d'exportation non pris en charge : {{format}}",
+    "unsupportedResponseType": "Type de données de réponse non pris en charge : {{type}}",
+    "downloadBlobRequired": "downloadFile attend un Blob, mais a reçu : {{type}}",
+    "filenameRequired": "le nom de fichier doit être une chaîne non vide, mais reçu : {{type}}"
+  },
+  "filename": {
+    "defaultTableName": "tableau"
+  }
+}

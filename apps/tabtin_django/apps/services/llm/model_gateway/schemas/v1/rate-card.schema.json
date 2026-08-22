@@ -1,0 +1,237 @@
+{
+  "$defs": {
+    "ArtifactIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical_hash": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Canonical Hash",
+          "type": "string"
+        },
+        "key": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "model-capability",
+            "product-control-mapping",
+            "runtime-wire-mapping",
+            "protocol-readiness",
+            "extension-target-allowlist",
+            "deployment-profile",
+            "model-deployment-binding",
+            "rate-card",
+            "platform-safety-policy",
+            "rollout-policy",
+            "projection-metadata"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^[1-9][0-9]*$",
+          "title": "Revision",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "key",
+        "revision",
+        "canonical_hash"
+      ],
+      "title": "ArtifactIdentity",
+      "type": "object"
+    },
+    "ExactRef": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_hash": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Expected Hash",
+          "type": "string"
+        },
+        "key": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "model-capability",
+            "product-control-mapping",
+            "runtime-wire-mapping",
+            "protocol-readiness",
+            "extension-target-allowlist",
+            "deployment-profile",
+            "model-deployment-binding",
+            "rate-card",
+            "platform-safety-policy",
+            "rollout-policy",
+            "projection-metadata"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^[1-9][0-9]*$",
+          "title": "Revision",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "key",
+        "revision",
+        "expected_hash"
+      ],
+      "title": "ExactRef",
+      "type": "object"
+    },
+    "RateLine": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "pattern": "^(0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "unit": {
+          "enum": [
+            "input-token",
+            "output-token",
+            "cached-input-token",
+            "request"
+          ],
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "unit",
+        "amount",
+        "currency"
+      ],
+      "title": "RateLine",
+      "type": "object"
+    },
+    "UTCValidityInterval": {
+      "additionalProperties": false,
+      "properties": {
+        "valid_from": {
+          "format": "date-time",
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_until": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Valid Until"
+        }
+      },
+      "required": [
+        "valid_from"
+      ],
+      "title": "UTCValidityInterval",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "binding_ref": {
+      "$ref": "#/$defs/ExactRef"
+    },
+    "deployment_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ExactRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "identity": {
+      "$ref": "#/$defs/ArtifactIdentity"
+    },
+    "non_billed_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Non Billed Reason"
+    },
+    "pricing_scheme": {
+      "default": "metered",
+      "enum": [
+        "metered",
+        "non-billed"
+      ],
+      "title": "Pricing Scheme",
+      "type": "string"
+    },
+    "rates": {
+      "items": {
+        "$ref": "#/$defs/RateLine"
+      },
+      "title": "Rates",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "service_profile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Service Profile"
+    },
+    "validity": {
+      "$ref": "#/$defs/UTCValidityInterval"
+    }
+  },
+  "required": [
+    "schema_version",
+    "identity",
+    "binding_ref",
+    "validity",
+    "rates"
+  ],
+  "title": "RateCard",
+  "type": "object"
+}

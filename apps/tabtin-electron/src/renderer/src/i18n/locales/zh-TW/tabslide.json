@@ -1,0 +1,984 @@
+{
+  "title": "TabSlide 簡報",
+  "untitled": "未命名簡報",
+  "preset": {
+    "ppt": "簡報 (1920×1080)",
+    "xiaohongshu": "小紅書筆記 (1080×1440)",
+    "poster": "海報",
+    "custom": "自訂尺寸"
+  },
+  "toolbar": {
+    "font": "字體",
+    "fontSize": "號碼",
+    "fontColor": "文字顏色",
+    "bold": "加粗",
+    "italic": "斜體",
+    "underline": "底線",
+    "strikethrough": "刪除線",
+    "link": "連結",
+    "alignLeft": "左對齊",
+    "alignCenter": "居中",
+    "alignRight": "右對齊",
+    "alignJustify": "兩端對齊",
+    "lineHeight": "行高",
+    "letterSpacing": "字間距",
+    "bulletList": "無序列表",
+    "orderedList": "有序列表",
+    "indent": "增加縮排",
+    "outdent": "減少縮排",
+    "superscript": "上標",
+    "subscript": "下標",
+    "backgroundColor": "背景高亮",
+    "themeColor": "主題色"
+  },
+  "font": {
+    "default": "預設",
+    "system": "系統字體",
+    "document": "簡報",
+    "chinese": "中文",
+    "sansSerif": "無襯線",
+    "serif": "襯線",
+    "monospace": "等寬"
+  },
+  "color": {
+    "default": "預設",
+    "themeColors": "主題色",
+    "textColors": "文字顏色",
+    "highlightColors": "背景高亮",
+    "red": "紅色",
+    "orange": "橘色",
+    "yellow": "黃色",
+    "green": "綠色",
+    "blue": "藍色",
+    "purple": "紫色",
+    "pink": "粉紅色",
+    "gray": "灰色",
+    "black": "黑色",
+    "white": "白色",
+    "none": "無",
+    "dark1": "深色 1",
+    "light1": "淺色 1",
+    "accent1": "強調 1",
+    "accent2": "強調 2",
+    "accent3": "強調 3",
+    "accent4": "強調 4",
+    "accent5": "強調 5",
+    "accent6": "強調 6",
+    "dark2": "深色 2",
+    "light2": "淺色 2",
+    "background1": "背景 1",
+    "background2": "背景 2",
+    "text1": "文字 1",
+    "text2": "文字 2"
+  },
+  "link": {
+    "placeholder": "https://... 或 page-2",
+    "confirm": "確定",
+    "remove": "刪除"
+  },
+  "letterSpacing": {
+    "default": "預設",
+    "tight": "緊湊"
+  },
+  "canvas": {
+    "zoomIn": "放大",
+    "zoomOut": "縮小",
+    "fitToScreen": "適應視窗",
+    "fit": "適應",
+    "reset100": "重設為 100%",
+    "noData": "暫無幻燈片數據",
+    "dropImage": "釋放以插入圖片"
+  },
+  "versionHistory": "版本歷史",
+  "slideshow": {
+    "prev": "上一步",
+    "next": "下一步",
+    "exit": "退出放映",
+    "start": "放映",
+    "endTitle": "演示結束",
+    "endSubtitle": "點選任意位置或按 ESC 退出",
+    "hintNavigate": "翻頁",
+    "hintNext": "下一步",
+    "hintExit": "退出",
+    "autoplayRestricted": "自動播放受限",
+    "autoplayMuted": "已靜音自動播放",
+    "clickToPlay": "點擊播放",
+    "unmute": "開啟聲音"
+  },
+  "image": {
+    "crop": "裁切",
+    "cropCircle": "圓形裁切",
+    "removeCrop": "移除裁切",
+    "replace": "替換圖片",
+    "delete": "刪除",
+    "confirm": "確認",
+    "cancel": "取消",
+    "reset": "重置",
+    "loadFailed": "圖片載入失敗"
+  },
+  "export": {
+    "title": "匯出",
+    "format": "導出格式",
+    "pptx": "匯出為 PPTX",
+    "pdf": "匯出為 PDF",
+    "image": "圖片",
+    "images": "匯出為圖片",
+    "exporting": "正在導出...",
+    "success": "匯出成功",
+    "failed": "匯出失敗"
+  },
+  "import": {
+    "title": "導入",
+    "pptx": "導入 PPTX",
+    "importing": "正在導入...",
+    "success": "導入成功",
+    "failed": "導入失敗"
+  },
+  "label": {
+    "user": "使用者"
+  },
+  "host": {
+    "loading": "載入簡報...",
+    "reload": "重新載入",
+    "preset": {
+      "title": "新簡報",
+      "description": "選擇畫幅比例開始創作，或匯入已有 PPTX 文件",
+      "or": "或",
+      "importButton": "導入 PPTX 文件",
+      "option": {
+        "widescreen": {
+          "label": "16:9 寬屏",
+          "description": "1920 × 1080"
+        },
+        "classic": {
+          "label": "4:3 經典",
+          "description": "1024 × 768"
+        },
+        "xiaohongshu": {
+          "label": "小紅書",
+          "description": "1080 × 1440"
+        }
+      }
+    },
+    "importing": {
+      "title": "正在導入 PPTX 文件...",
+      "description": "解析投影片內容，請稍候"
+    },
+    "import": {
+      "successWithStats": "匯入成功，共 {{slides}} 頁、{{elements}} 個元素",
+      "failedWithReason": "導入失敗：{{reason}}"
+    },
+    "export": {
+      "failedWithReason": "匯出失敗：{{reason}}"
+    },
+    "exportWarning": {
+      "imagePlaceholderFallback": "偵測到 {{count}} 張遠端圖片未能內聯，已自動替換為佔位圖。",
+      "imageProxyFailed": "有 {{count}} 張圖片代理失敗，匯出的 PPTX 中這些圖片將顯示為空白。",
+      "imageProxyNormalized": "已為 {{count}} 張遠端圖片完成跨域代理，匯出內容已自動修正。",
+      "imageRasterizeFailed": "有 {{count}} 張圖片柵格化失敗，已回退佔位圖。"
+    },
+    "error": {
+      "saveMissingContext": "儲存失敗，正在等待工作區和 Agent 上下文恢復...",
+      "saveRetryExceeded": "儲存失敗，重試次數已達上限，請檢查網路後刷新重試。",
+      "loadFailedRetry": "載入失敗，請刷新後重試",
+      "uploadEmptyUrl": "上傳成功但未回傳圖片地址",
+      "uploadValidation": "文件校驗失敗：類型或大小不符合要求",
+      "imageTooLarge": "圖片檔案過大，最大支援 {{maxSize}}",
+      "imageTypeNotSupported": "不支援該圖片格式",
+      "imageUploadFallback": "圖片已插入，連網後將自動上傳至雲端",
+      "imageLoadFailed": "圖片載入失敗"
+    },
+    "reupload": {
+      "success": "已將 {{count}} 張離線圖片上傳至雲端",
+      "failed": "{{count}} 張離線圖片上傳失敗，將在下次連網時重試",
+      "partialFailed": "{{success}} 張圖片已上傳，{{failed}} 張上傳失敗"
+    },
+    "longOfflineWarning": "您已離線較長時間",
+    "longOfflineWarningDesc": "建議檢查簡報內容是否與預期一致，離線期間的編輯已自動合併。",
+    "versionRestored": "版本恢復成功",
+    "versionRestoreFailed": "版本恢復失敗",
+    "collabSyncWarning": "版本已恢復，但部分線上使用者的協作狀態可能未同步，請通知相關使用者重新整理頁面",
+    "versionMigrationNotice": "更早的版本正在遷移中，部分舊版本可能暫時不可見",
+    "storeFailedWarning": "內容保存失敗，請檢查網路連接",
+    "concurrentEditWarning": "其他協作者也在編輯此元素，修改可能被覆蓋"
+  },
+  "history": {
+    "title": "版本歷史",
+    "restore": "恢復此版本",
+    "createVersion": "建立命名版本",
+    "versionName": "版本名稱",
+    "unnamed": "未命名版本",
+    "restoreSuccess": "版本恢復成功",
+    "restoreFailed": "版本恢復失敗"
+  },
+  "error": {
+    "projectNotFound": "簡報不存在",
+    "loadFailed": "載入失敗",
+    "saveFailed": "保存失敗",
+    "versionConflict": "版本衝突，請刷新後重試",
+    "exportFailed": "匯出失敗",
+    "importFailed": "導入失敗"
+  },
+  "message": {
+    "saved": "已儲存",
+    "saving": "正在儲存...",
+    "autoSave": "自動儲存",
+    "unsavedChanges": "有未儲存的更改",
+    "editing": "編輯中",
+    "saveError": "保存失敗"
+  },
+  "common": {
+    "cancel": "取消",
+    "delete": "刪除"
+  },
+  "file": {
+    "title": "文件",
+    "importPptx": "導入 PPTX",
+    "exportPptx": "匯出為 PPTX",
+    "exportPdf": "匯出為 PDF",
+    "versionHistory": "版本歷史"
+  },
+  "page": {
+    "title": "頁面",
+    "totalCount": "共 {{count}} 頁",
+    "addFirst": "新第一頁",
+    "addAfterCurrent": "在當前頁後新增新頁",
+    "expandList": "展開頁面列表",
+    "dropHere": "放置到此處",
+    "insertHere": "在此插入投影片",
+    "context": {
+      "duplicateCurrent": "複製目前頁",
+      "addAfter": "在後方添加頁",
+      "addRemark": "新增備註",
+      "copyToClipboard": "複製到剪貼簿",
+      "cut": "剪下此頁",
+      "pasteAfter": "貼到此頁後",
+      "delete": "刪除此頁"
+    },
+    "deleteConfirm": {
+      "title": "確認刪除第 {{index}} 頁？",
+      "desc": "該頁包含內容，刪除後可透過撤銷 (Ctrl/Cmd+Z) 恢復。"
+    },
+    "addSlide": "新增幻燈片"
+  },
+  "align": {
+    "left": "左對齊",
+    "horizontalCenter": "水平居中",
+    "right": "右對齊",
+    "top": "上對齊",
+    "verticalCenter": "垂直居中",
+    "bottom": "下對齊",
+    "distributeH": "水平均勻分佈",
+    "distributeV": "垂直均勻分佈",
+    "enableSmartGuides": "開啟智慧參考線吸附",
+    "disableSmartGuides": "關閉智慧參考線吸附",
+    "enableGridSnap": "開啟網格吸附",
+    "disableGridSnap": "關閉網格吸附",
+    "showGrid": "顯示網格",
+    "hideGrid": "隱藏網格",
+    "tidyUp": "智慧整理"
+  },
+  "contextMenu": {
+    "copy": "複製",
+    "cut": "剪切",
+    "paste": "貼上",
+    "duplicate": "複製副本",
+    "selectAll": "全選",
+    "layer": "圖層",
+    "bringToFront": "置頂",
+    "bringForward": "上移一層",
+    "sendBackward": "下移一層",
+    "sendToBack": "置底",
+    "group": "組合",
+    "ungroup": "取消組合",
+    "lock": "鎖定",
+    "unlock": "解鎖",
+    "lockSelected": "鎖定所選",
+    "unlockSelected": "解鎖所選",
+    "show": "顯示",
+    "hide": "隱藏",
+    "showSelected": "顯示所選",
+    "hideSelected": "隱藏所選",
+    "delete": "刪除",
+    "align": "對齊"
+  },
+  "moveable": {
+    "partialLocked": "部分元素已鎖定"
+  },
+  "animation": {
+    "title": "動畫",
+    "add": "新增動畫",
+    "empty": "選擇一個元素，然後加入動畫效果",
+    "emptyWithSelection": "選取元素後，點選「+ 新增動畫」為元素新增動畫效果",
+    "delete": "刪除動畫",
+    "elementDeleted": "(已刪除)",
+    "effect": {
+      "fadeIn": "淡入",
+      "fadeInDown": "向下淡入",
+      "fadeInUp": "向上淡入",
+      "fadeInLeft": "向右淡入",
+      "fadeInRight": "向左淡入",
+      "zoomIn": "放大",
+      "zoomInDown": "向下放大",
+      "zoomInUp": "向上放大",
+      "zoomInLeft": "從左放大",
+      "zoomInRight": "從右放大",
+      "bounceIn": "彈入",
+      "bounceInDown": "向下彈入",
+      "bounceInUp": "向上彈入",
+      "bounceInLeft": "從左彈入",
+      "bounceInRight": "從右彈入",
+      "slideInDown": "向下滑入",
+      "slideInUp": "向上滑入",
+      "slideInLeft": "從左滑入",
+      "slideInRight": "從右滑入",
+      "rotateIn": "旋轉進入",
+      "rotateInDownLeft": "左下旋入",
+      "rotateInDownRight": "右下旋入",
+      "rotateInUpLeft": "左上旋入",
+      "rotateInUpRight": "右上旋入",
+      "flipInX": "水平翻入",
+      "flipInY": "垂直翻入",
+      "backInDown": "後方向下進入",
+      "backInUp": "後方向上進入",
+      "backInLeft": "後方由左進入",
+      "backInRight": "後方從右進入",
+      "lightSpeedInRight": "光速從右進入",
+      "lightSpeedInLeft": "光速從左進入",
+      "fadeOut": "淡出",
+      "fadeOutDown": "向下淡出",
+      "fadeOutUp": "向上淡出",
+      "fadeOutLeft": "向左淡出",
+      "fadeOutRight": "向右淡出",
+      "zoomOut": "縮小",
+      "zoomOutDown": "向下縮小",
+      "zoomOutUp": "向上縮小",
+      "zoomOutLeft": "向左縮小",
+      "zoomOutRight": "向右縮小",
+      "bounceOut": "彈出",
+      "bounceOutDown": "向下彈出",
+      "bounceOutUp": "向上彈出",
+      "bounceOutLeft": "向左彈出",
+      "bounceOutRight": "向右彈出",
+      "slideOutDown": "向下滑出",
+      "slideOutUp": "向上滑出",
+      "slideOutLeft": "向左滑出",
+      "slideOutRight": "向右滑出",
+      "bounce": "彈跳",
+      "shakeX": "左右震動",
+      "shakeY": "上下震動",
+      "wobble": "搖擺",
+      "swing": "擺動",
+      "headShake": "搖頭",
+      "jello": "果凍",
+      "rubberBand": "橡皮筋",
+      "tada": "Tada",
+      "flash": "閃爍",
+      "pulse": "脈衝",
+      "heartBeat": "心跳",
+      "flip": "翻轉"
+    },
+    "triggerLabel": "觸發",
+    "duration": "時長",
+    "type": {
+      "in": "入場",
+      "out": "退場",
+      "attention": "強調"
+    },
+    "trigger": {
+      "click": "點選",
+      "meantime": "同時",
+      "auto": "之後"
+    },
+    "group": {
+      "fade": "淡變",
+      "zoom": "縮放",
+      "bounce": "彈跳",
+      "slide": "滑動",
+      "rotate": "旋轉",
+      "flip": "翻轉",
+      "shake": "震動",
+      "other": "其他"
+    },
+    "effectLabel": "效果"
+  },
+  "element": {
+    "type": {
+      "text": "文字",
+      "image": "圖片",
+      "shape": "形狀",
+      "line": "線條",
+      "chart": "圖表",
+      "table": "表格",
+      "latex": "公式",
+      "video": "影片",
+      "audio": "音訊"
+    }
+  },
+  "insert": {
+    "defaultText": "按兩下編輯文字",
+    "text": "文字",
+    "image": "圖片",
+    "shape": "形狀",
+    "line": {
+      "title": "線條",
+      "presets": {
+        "straight": "直線",
+        "singleArrow": "單箭頭",
+        "doubleArrow": "雙箭頭",
+        "diamondArrow": "菱形箭頭",
+        "stealthArrow": "尖角箭頭",
+        "dotEnd": "圓點終點",
+        "dashed": "虛線",
+        "dashedArrow": "虛線箭頭",
+        "dotted": "點線",
+        "curve": "曲線",
+        "broken": "折線",
+        "broken2": "雙折線",
+        "cubic": "三次曲線"
+      },
+      "category": {
+        "basic": "基礎線條",
+        "arrows": "箭頭線條",
+        "paths": "路徑線條"
+      }
+    },
+    "table": {
+      "chooseSize": "選擇表格大小",
+      "preview": "{{rows}} × {{cols}} 表格",
+      "title": "表格"
+    },
+    "chart": {
+      "title": "圖表",
+      "types": {
+        "bar": {
+          "label": "長條圖",
+          "desc": "垂直柱形對比"
+        },
+        "column": {
+          "label": "長條圖",
+          "desc": "水平條形對比"
+        },
+        "line": {
+          "label": "折線圖",
+          "desc": "趨勢變化"
+        },
+        "area": {
+          "label": "面積圖",
+          "desc": "趨勢與規模"
+        },
+        "pie": {
+          "label": "圓餅圖",
+          "desc": "佔比構成"
+        },
+        "ring": {
+          "label": "環形圖",
+          "desc": "佔比構成（中空）"
+        },
+        "radar": {
+          "label": "雷達圖",
+          "desc": "多維度能力對比"
+        },
+        "scatter": {
+          "label": "散點圖",
+          "desc": "相關性分佈"
+        }
+      },
+      "default": {
+        "pieTitle": "佔比分析",
+        "ringTitle": "構成分析",
+        "lineTitle": "趨勢分析",
+        "areaTitle": "面積趨勢",
+        "compareTitle": "數據對比",
+        "radarTitle": "維度對比",
+        "scatterTitle": "散點分佈",
+        "labels": {
+          "a": "A 類",
+          "b": "B 類",
+          "c": "C 類",
+          "d": "D 類"
+        },
+        "legendShare": "佔比",
+        "series1": "系列1",
+        "series2": "系列2",
+        "dimension1": "維度1",
+        "dimension2": "維度2",
+        "dimension3": "維度3",
+        "dimension4": "維度4",
+        "dimension5": "維度5",
+        "sampleA": "樣本A",
+        "sampleB": "樣本B"
+      }
+    },
+    "latex": {
+      "title": "公式",
+      "placeholder": "輸入 LaTeX，例如：x=\\\\frac{-b\\\\pm\\\\sqrt{b^2-4ac}}{2a}",
+      "color": "顏色",
+      "submit": "插入公式",
+      "processing": "處理中…",
+      "previewUnavailable": "公式預覽不可用",
+      "presets": {
+        "quadratic": "二次公式",
+        "gaussian": "高斯分佈",
+        "euler": "歐拉恆等式"
+      },
+      "errors": {
+        "empty": "請輸入公式內容",
+        "renderFailed": "公式渲染失敗，請檢查語法"
+      }
+    },
+    "title": "插入"
+  },
+  "chart": {
+    "noData": "暫無數據"
+  },
+  "name": {
+    "editHint": "點擊或雙擊編輯名稱"
+  },
+  "property": {
+    "toolbar": {
+      "page": "頁面",
+      "position": "位置",
+      "transform": "變換",
+      "layer": "圖層"
+    },
+    "multiSelection": "已選擇 {{count}} 個元素",
+    "page": "頁面",
+    "collapse": "收起",
+    "pageLayout": {
+      "title": "頁面版式",
+      "unbound": "未綁定",
+      "index": "索引：{{index}}",
+      "noOriginMeta": "該頁面未包含原始版式元訊息",
+      "noSnapshots": "暫無可用版式快照",
+      "unnamed": "未命名版式",
+      "master": "母版：{{name}}",
+      "layoutIndex": "版式 {{index}}"
+    },
+    "pageTransition": {
+      "title": "翻頁動畫",
+      "option": {
+        "no": "無",
+        "fade": "淡入淡出",
+        "slideX": "左右推移",
+        "slideY": "上下推移",
+        "slideX3D": "左右推移 (3D)",
+        "slideY3D": "上下推移 (3D)",
+        "rotate": "旋轉",
+        "scaleY": "縱向展開",
+        "scaleX": "橫向展開",
+        "scale": "放大",
+        "scaleReverse": "縮小",
+        "random": "隨機"
+      }
+    },
+    "pageBackground": {
+      "title": "頁面背景",
+      "themeKey": "主題鍵",
+      "resolvedColor": "解析顏色",
+      "themePalette": "主題色板",
+      "switchToNormal": "切換為普通背景",
+      "imageFit": "圖片適配",
+      "imageFitCover": "填滿（可能裁切）",
+      "imageFitContain": "完整顯示",
+      "imageFitRepeat": "平鋪重複",
+      "useTheme": "使用主題背景",
+      "typeImage": "圖片",
+      "typeGradient": "漸變"
+    },
+    "themeFont": {
+      "title": "主題字體",
+      "heading": "標題字體",
+      "headingPlaceholder": "輸入標題字體名稱",
+      "body": "正文字體",
+      "bodyPlaceholder": "輸入正文字體名稱"
+    },
+    "canvasAssist": {
+      "title": "畫布輔助",
+      "snapToGuides": "智慧參考線吸附",
+      "snapToGrid": "網格吸附",
+      "showGrid": "顯示網格"
+    },
+    "currentValue": "目前值：{{value}}",
+    "default": "預設",
+    "remark": "備註",
+    "remarkPlaceholder": "輸入本頁備註…",
+    "positionSize": "位置與尺寸",
+    "transform": "變換",
+    "rotate": "旋轉",
+    "opacity": "不透明度",
+    "flipHorizontal": "水平翻轉",
+    "flipVertical": "垂直翻轉",
+    "fixedRatio": "鎖定比例",
+    "elementName": "元素名稱",
+    "lock": "鎖定",
+    "unlock": "解鎖",
+    "show": "顯示",
+    "hide": "隱藏",
+    "color": "顏色",
+    "font": "字體",
+    "none": "無",
+    "enabled": "啟用",
+    "apply": "應用",
+    "clear": "清除",
+    "layer": {
+      "action": {
+        "toFront": "置頂",
+        "forward": "上移一層",
+        "backward": "下移一層",
+        "toBack": "置底",
+        "hideAll": "全部隱藏",
+        "showAll": "全部顯示",
+        "lockAll": "全部鎖定",
+        "unlockAll": "全部解鎖",
+        "lockedHint": "圖層已鎖定"
+      },
+      "empty": "暫無元素",
+      "show": "顯示",
+      "hide": "隱藏",
+      "lock": "鎖定",
+      "unlock": "解鎖",
+      "group": {
+        "defaultName": "組合（{{count}}）",
+        "collapse": "收起組合",
+        "expand": "展開組合",
+        "placeholder": "輸入組合名稱",
+        "renameHint": "按 Enter 儲存",
+        "show": "顯示組合",
+        "hide": "隱藏組合",
+        "hidePartial": "隱藏未隱藏項",
+        "lock": "鎖定組合",
+        "lockPartial": "鎖定未鎖定項",
+        "unlock": "解鎖組合"
+      }
+    },
+    "style": {
+      "chart": {
+        "title": "圖表"
+      },
+      "fill": {
+        "title": "填充",
+        "modeSolid": "純色",
+        "modeGradient": "漸變",
+        "modeImage": "圖片",
+        "opacity": "不透明度",
+        "gradientType": "類型",
+        "gradientTypeLinear": "線性",
+        "gradientTypeRadial": "徑向",
+        "angle": "角度",
+        "positionPercent": "位置 %",
+        "addStop": "+ 色標",
+        "removeStop": "- 色標",
+        "selectImage": "選擇圖片",
+        "uploadLocalImage": "上傳本機圖片",
+        "inputImageUrl": "或輸入圖片 URL"
+      },
+      "themeColor": "主題色",
+      "corners": {
+        "title": "圓角（四角）",
+        "topLeft": "左上",
+        "topRight": "右上",
+        "bottomRight": "右下",
+        "bottomLeft": "左下"
+      },
+      "shapeText": {
+        "title": "形狀文字",
+        "content": "文字內容",
+        "fontFamily": "字體",
+        "fontFamilyPlaceholder": "如：Microsoft YaHei",
+        "fontSize": "字號 (pt)",
+        "color": "文字顏色",
+        "align": "水平對齊",
+        "alignLeft": "左",
+        "alignCenter": "中",
+        "alignRight": "右",
+        "verticalAlign": "垂直對齊",
+        "verticalAlignTop": "頂",
+        "verticalAlignMiddle": "中",
+        "verticalAlignBottom": "底"
+      },
+      "image": {
+        "src": "圖片地址",
+        "altText": "替代文字",
+        "altTextPlaceholder": "用於無障礙輔助的圖片描述",
+        "radius": "圓角",
+        "effects": {
+          "title": "圖片效果",
+          "fitMode": "適配模式",
+          "fit": {
+            "cover": "填滿（可能裁切）",
+            "contain": "完整顯示",
+            "fill": "拉伸填滿"
+          },
+          "colorMask": "色彩遮罩",
+          "enableMask": "啟用遮罩",
+          "filters": "濾鏡",
+          "filterBrightness": "亮度",
+          "filterContrast": "對比",
+          "filterSaturation": "飽和度",
+          "filterBlur": "模糊",
+          "filterGrayscale": "灰階",
+          "filterInvert": "反相",
+          "filterHueRotate": "色相旋轉",
+          "filterSepia": "棕褐色",
+          "cropHint": "雙擊圖片可進入裁切（長方形/圓形）",
+          "resetFilters": "重置濾鏡"
+        }
+      },
+      "textDefault": {
+        "title": "文字樣式",
+        "defaultColor": "文字顏色",
+        "background": "文字背景",
+        "fontFamily": "字體",
+        "fontFamilyPlaceholder": "如：Microsoft YaHei",
+        "fontSize": "字號 (pt)",
+        "lineHeight": "行高",
+        "lineHeightPlaceholder": "倍數，如 1.5",
+        "wordSpace": "字間距",
+        "paragraphSpace": "段間距",
+        "verticalAlign": "垂直對齊",
+        "verticalAlignTop": "頂部",
+        "verticalAlignMiddle": "居中",
+        "verticalAlignBottom": "底部",
+        "verticalText": "垂直排文本",
+        "autoFit": "文字適應",
+        "autoFitNone": "不適應",
+        "autoFitShrink": "縮小字體",
+        "autoFitResize": "調整框大小",
+        "margin": "內邊距",
+        "marginTop": "上",
+        "marginRight": "右",
+        "marginBottom": "下",
+        "marginLeft": "左"
+      },
+      "link": {
+        "title": "元素連結",
+        "type": {
+          "web": "外部連結",
+          "slide": "頁面跳轉"
+        },
+        "placeholder": {
+          "web": "https://example.com",
+          "slide": "page-2 / 2 / slide2.xml"
+        },
+        "save": "儲存連結",
+        "remove": "刪除連結",
+        "noTarget": "無連結目標",
+        "pageLabel": "第"
+      },
+      "tableRichText": {
+        "title": "單元格富文本",
+        "tip": "雙擊表格儲存格進入編輯後，可在此控制選取範圍字體、顏色和對齊。",
+        "align": {
+          "left": "左",
+          "center": "中",
+          "right": "右",
+          "justify": "齊"
+        },
+        "fontSize": "字號 (pt)",
+        "fontPlaceholder": "如：Microsoft YaHei",
+        "unorderedList": "無序列表",
+        "orderedList": "有序列表",
+        "linkPrompt": "輸入連結位址（支援 https://... 或 page-2）",
+        "linkPlaceholder": "https://... 或 page-2",
+        "link": "連結",
+        "unlink": "去鏈",
+        "cellBg": "單元格背景",
+        "cellVerticalAlign": "垂直對齊",
+        "clearFormatting": "清除格式"
+      },
+      "tableTheme": {
+        "title": "表格主題",
+        "color": "主題色",
+        "headerRow": "首行高亮",
+        "headerCol": "首列高亮",
+        "footerRow": "末行高亮",
+        "lastCol": "末列高亮",
+        "stripedRows": "條紋行",
+        "stripedCols": "條紋列"
+      },
+      "tableBorders": {
+        "title": "表格邊框",
+        "top": "上",
+        "bottom": "下",
+        "left": "左",
+        "right": "右",
+        "insideH": "內橫線",
+        "insideV": "內豎線"
+      },
+      "latex": {
+        "title": "公式",
+        "placeholder": "輸入 LaTeX 公式",
+        "stroke": "描邊",
+        "hintApply": "Ctrl/Cmd + Enter 應用程式公式",
+        "rendering": "渲染中…",
+        "errorEmpty": "公式不能為空",
+        "errorRenderFailed": "公式渲染失敗"
+      },
+      "line": {
+        "title": "線條樣式",
+        "width": "線寬",
+        "style": "線型",
+        "styleOptions": {
+          "solid": "實線",
+          "dashed": "虛線",
+          "dotted": "點線",
+          "dashDot": "點劃線",
+          "longDash": "長虛線",
+          "longDashDot": "長點劃線"
+        },
+        "type": "線條類型",
+        "typeOptions": {
+          "straight": "直線",
+          "broken": "折線",
+          "broken2": "雙折線",
+          "curve": "二次曲線",
+          "cubic": "三次曲線"
+        },
+        "startCap": "起點端點",
+        "endCap": "終點端點",
+        "cap": {
+          "none": "無",
+          "arrow": "箭頭",
+          "triangle": "三角",
+          "stealth": "尖角",
+          "diamond": "菱形",
+          "dot": "圓點"
+        }
+      },
+      "outline": {
+        "title": "邊框",
+        "none": "無邊框",
+        "width": "寬度",
+        "style": "線型"
+      },
+      "shadow": {
+        "title": "陰影",
+        "none": "無陰影",
+        "offsetX": "水平偏移",
+        "offsetY": "垂直偏移",
+        "blur": "模糊",
+        "colorPlaceholder": "rgba(0,0,0,0.15)"
+      },
+      "video": {
+        "title": "影片",
+        "src": "視訊位址",
+        "poster": "封面圖",
+        "posterPlaceholder": "封面圖 URL（可選）",
+        "autoplay": "自動播放"
+      },
+      "audio": {
+        "title": "音訊",
+        "src": "音訊位址",
+        "iconColor": "圖示顏色",
+        "autoplay": "自動播放",
+        "loop": "循環播放"
+      }
+    },
+    "chart": {
+      "type": "類型",
+      "title": "標題",
+      "titlePlaceholder": "圖表標題",
+      "labelsField": "分類標籤（逗號分隔）",
+      "labelsFieldScatter": "X 軸座標（預設/首系列，逗號分隔）",
+      "labelsPlaceholder": "Q1, Q2, Q3, Q4",
+      "labelsPlaceholderScatter": "1, 2, 3, 4",
+      "legendsField": "圖例名稱（逗號分隔）",
+      "legendsFieldPie": "系列名稱（僅首個生效）",
+      "legendsPlaceholder": "系列1, 系列2",
+      "legendsPlaceholderPie": "佔比",
+      "seriesField": "資料系列（每行一個系列，數值用逗號分隔）",
+      "seriesFieldPie": "資料值（單行，逗號分隔）",
+      "xSeriesField": "按系列 X 座標（每行一個系列，可選）",
+      "xSeriesPlaceholder": "1, 2, 3, 4\n10, 20, 30, 40",
+      "xSeriesHint": "留空時將使用上方 X 軸座標並自動對齊到各系列長度。",
+      "pieHint": "圓餅圖/環形圖僅使用第一行資料和第一個系列名稱。",
+      "showLegend": "顯示圖例",
+      "legendPosition": "圖例位置",
+      "legendPositionBottom": "底部",
+      "legendPositionTop": "頂部",
+      "legendPositionLeft": "左側",
+      "legendPositionRight": "右側",
+      "showDataLabel": "顯示數據標籤",
+      "stack": "堆疊顯示",
+      "smooth": "平滑曲線",
+      "smoothScatter": "平滑連線",
+      "radarFilled": "填充區域",
+      "themeMapping": "主題色映射",
+      "themeMappingHint": "支援按系列綁定主題鍵，隨主題切換自動跟隨",
+      "resetByTheme": "按主題重設",
+      "removeColor": "移除顏色",
+      "customColor": "自訂顏色",
+      "addColor": "+ 顏色",
+      "chartFillColor": "圖表背景色",
+      "axisTextColor": "坐標軸文字色",
+      "gridLineColor": "網格線顏色",
+      "defaultCategory": "分類{{index}}",
+      "defaultLegendShare": "佔比",
+      "defaultSeries": "系列{{index}}"
+    },
+    "noSelection": "請先選擇一個元素",
+    "slideStyle": "投影片樣式",
+    "pageProperties": "頁面屬性"
+  },
+  "tab": {
+    "slide": "幻燈片",
+    "design": "設計",
+    "properties": "屬性",
+    "layers": "圖層",
+    "insert": "插入",
+    "edit": "編輯",
+    "animation": "動畫"
+  },
+  "colorPicker": {
+    "themeColors": "主題色",
+    "documentColors": "文檔顏色"
+  },
+  "present": {
+    "title": "放映",
+    "fromBeginning": "從頭開始",
+    "fromCurrent": "從目前頁開始"
+  },
+  "insertShape": {
+    "category": {
+      "rect": "長方形",
+      "basic": "基礎形狀",
+      "basic2": "基礎形狀 2",
+      "arrows": "箭頭",
+      "stars": "星形"
+    },
+    "presets": {
+      "rect": "長方形",
+      "roundRect": "圓角矩形",
+      "roundRectSingle": "單圓角矩形",
+      "cutRect": "剪切矩形",
+      "ellipse": "橢圓",
+      "circle": "圓形",
+      "triangle": "三角形",
+      "diamond": "菱形",
+      "parallelogram": "平行四邊形",
+      "trapezoid": "梯形",
+      "pentagon": "五邊形",
+      "hexagon": "六邊形",
+      "octagon": "八邊形",
+      "cross": "十字形",
+      "rightTriangle": "直角三角形",
+      "heart": "心形",
+      "lightning": "閃電",
+      "cloud": "雲形",
+      "chevron": "V 型標",
+      "callout": "標註框",
+      "roundCallout": "圓角標註框",
+      "rightArrow": "右箭頭",
+      "leftArrow": "左箭頭",
+      "upArrow": "上箭頭",
+      "downArrow": "下箭頭",
+      "leftRightArrow": "左右雙向箭頭",
+      "upDownArrow": "上下雙向箭頭",
+      "notchedRightArrow": "缺口右箭頭",
+      "star5": "五角星",
+      "star4": "四角星",
+      "star6": "六角星"
+    }
+  }
+}

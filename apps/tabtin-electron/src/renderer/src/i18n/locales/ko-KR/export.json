@@ -1,0 +1,23 @@
+{
+  "errors": {
+    "loadStatsFailed": "내보내기 통계를 로드하지 못했습니다.",
+    "exportFailed": "내보내기에 실패했습니다. 다시 시도해 주세요."
+  },
+  "success": {
+    "exported": "내보냈습니다 {{filename}}",
+    "showInFolder": "폴더에 표시"
+  },
+  "stats": {
+    "sampledHint": "통계는 샘플링된 추정치입니다. 실제 내보내기에는 선택한 모든 {{total}} 레코드가 포함됩니다."
+  },
+  "apiErrors": {
+    "exportFailedWithStatus": "내보내기 실패: HTTP {{status}}",
+    "unsupportedFormat": "지원되지 않는 내보내기 형식: {{format}}",
+    "unsupportedResponseType": "지원되지 않는 응답 데이터 유형: {{type}}",
+    "downloadBlobRequired": "downloadFile이 Blob을 예상했지만 수신됨: {{type}}",
+    "filenameRequired": "파일 이름은 비어 있지 않은 문자열이어야 하지만 수신됨: {{type}}"
+  },
+  "filename": {
+    "defaultTableName": "테이블"
+  }
+}

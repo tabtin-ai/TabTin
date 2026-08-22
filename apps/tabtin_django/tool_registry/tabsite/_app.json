@@ -1,0 +1,12 @@
+{
+  "id": "tabsite",
+  "name": "TabSite",
+  "icon": "globe-2",
+  "description": "站点云应用 — 创建、管理和发布轻量级网站",
+  "capability_summary": "创建站点、发布部署、版本管理、访问控制",
+  "tool_hints": "创建站点用 create_site，发布用 publish_site，查询列表用 list_sites",
+  "skill_name": "tabsite-operator",
+  "execution_env": "backend",
+  "status": "active",
+  "order": 14
+}

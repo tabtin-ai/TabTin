@@ -1,0 +1,83 @@
+{
+  "title": "缶",
+  "installedCount": "{{count}}がインストールされました",
+  "section": {
+    "installed": "インストール済み",
+    "available": "利用可能"
+  },
+  "action": {
+    "install": "インストール",
+    "uninstall": "アンインストール",
+    "enable": "有効にする",
+    "disable": "無効にする",
+    "pin": "ピン",
+    "unpin": "固定を解除する",
+    "edit": "編集",
+    "retry": "再試行",
+    "saveAll": "すべて保存"
+  },
+  "confirm": {
+    "uninstall": "「{{name}}」をアンインストールしてもよろしいですか?",
+    "delete": "「{{name}}」を削除してもよろしいですか?この操作は元に戻すことができません。",
+    "unsavedChanges": "未保存の変更があります。本当に退会してもよろしいですか?"
+  },
+  "empty": {
+    "title": "缶はまだありません",
+    "description": "達成したいことをエージェントに伝えてください。エージェントが Tin を作成してインストールできます。チームメイトが公開した缶は、下の [利用可能] リストに表示されます。",
+    "askAgent": "エージェントに缶の作成を依頼する",
+    "agentPrompt": "Tin プラグインの作成を手伝ってください。まず、解決したいシナリオ (ページの自動強調表示、情報の抽出、ブラウザー ヘルパーなど) を尋ね、それをこのワークスペースに作成してインストールします。",
+    "errorNoSession": "現在チャットを開始できません。もう一度試してください。",
+    "openPanel": "オープン缶パネル"
+  },
+  "sidePanel": {
+    "emptyTitle": "錫は取り付けられていません",
+    "emptyDescription": "Tins は、ブラウジング中にアクティブ化され、ヘルパー機能を提供するスマート プラグインです。",
+    "openPanel": "ブリキを取り付ける"
+  },
+  "home": {
+    "loading": "読み込み中...",
+    "viewAll": "{{count}} 缶をすべて表示...",
+    "activeCount": "{{count}} Tin がアクティブです",
+    "loadError": "缶のロードに失敗しました",
+    "retry": "再試行"
+  },
+  "activated": "アクティブ化された",
+  "editor": {
+    "tabs": {
+      "panelHtml": "UIパネル",
+      "contentScript": "コンテンツスクリプト",
+      "backgroundScript": "バックグラウンドスクリプト",
+      "agentInstructions": "エージェントの指示"
+    },
+    "placeholder": {
+      "panelHtml": "<!-- ここに Tin UI パネルの HTML を記述します -->\n<!-- CDN ライブラリを使用し、window.tin API 経由でホストと通信します -->",
+      "contentScript": "// 閲覧したページにスクリプトを挿入します\n// ページ DOM にアクセスして変更できます",
+      "backgroundScript": "// メインプロセスのサンドボックスで実行されるバックグラウンド スクリプト",
+      "agentInstructions": "# エージェントの指示\n\nこの缶が何をするのか、そしてそれとどのように対話するのかを説明してください..."
+    },
+    "lang": {
+      "html": "HTML",
+      "javascript": "JavaScript",
+      "markdown": "マークダウン"
+    },
+    "charCount": "{{count}} 文字"
+  },
+  "toast": {
+    "installSuccess": "「{{name}}」が正常にインストールされました",
+    "installFailed": "インストールに失敗しました",
+    "uninstallSuccess": "「{{name}}」がアンインストールされました",
+    "uninstallFailed": "アンインストールに失敗しました",
+    "activateSuccess": "「{{name}}」が有効になりました",
+    "activateFailed": "アクティベーションに失敗しました",
+    "disableSuccess": "「{{name}}」が無効になっています",
+    "disableFailed": "無効化に失敗しました",
+    "deleteSuccess": "「{{name}}」を削除しました",
+    "deleteFailed": "削除に失敗しました",
+    "enableFailed": "有効化に失敗しました",
+    "pinFailed": "ピン操作に失敗しました",
+    "loadFailed": "ロードに失敗しました",
+    "saveSuccess": "保存に成功しました",
+    "saveFailed": "保存に失敗しました",
+    "persistVarFailed": "変数の保存に失敗しました"
+  }
+}

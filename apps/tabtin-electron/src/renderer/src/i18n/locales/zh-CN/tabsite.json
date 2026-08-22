@@ -1,0 +1,73 @@
+{
+  "actions.create": "新建站点",
+  "actions.publish": "发布",
+  "actions.copyUrl": "复制链接",
+  "actions.urlCopied": "链接已复制",
+  "actions.editCode": "编辑代码",
+  "actions.refresh": "刷新",
+  "actions.rollback": "回滚",
+  "actions.download": "下载源码",
+  "status.draft": "草稿",
+  "status.published": "已发布",
+  "status.archived": "已归档",
+  "stats.views": "{{count}} 次访问",
+  "preview.empty": "暂无预览，发布后即可查看",
+  "preview.desktop": "桌面预览",
+  "preview.mobile": "移动端预览",
+  "sidebar.info": "站点信息",
+  "sidebar.url": "访问地址",
+  "sidebar.framework": "技术栈",
+  "sidebar.visibility": "可见性",
+  "sidebar.public": "公开",
+  "sidebar.private": "私有",
+  "sidebar.versions": "版本记录",
+  "sidebar.noVersions": "尚未发布过",
+  "version.current": "当前",
+  "error.siteNotFound": "站点未找到",
+  "error.publishFailed": "发布失败",
+  "error.noDistUrl": "请先构建并上传产物",
+  "error.noDistUrlHint": "在 TabCode 中执行 build，或使用 CLI: tabtin site build",
+  "actions.publishSuccess": "发布成功",
+  "publish.dialogTitle": "发布站点",
+  "publish.messageLabel": "版本说明",
+  "publish.messagePlaceholder": "描述本次发布的变更",
+  "empty.noSites": "暂无站点，创建你的第一个轻应用",
+  "home": {
+    "assetBrowser": {
+      "newTabsite": "新建站点",
+      "tabsiteEmpty": "暂无站点",
+      "tabsiteUnavailable": "TabSite不可用",
+      "tabsite": "站点"
+    }
+  },
+  "label": {
+    "untitled": "未命名站点",
+    "untitledSite": "未命名站点"
+  },
+  "dialog": {
+    "createTitle": "新建站点",
+    "siteName": "站点名称",
+    "siteNamePlaceholder": "输入站点名称",
+    "selectTemplate": "选择模板",
+    "cancel": "取消",
+    "create": "创建"
+  },
+  "guide": {
+    "initTitle": "站点项目未初始化",
+    "initDescription": "初始化模板项目后即可在 TabCode 中编辑代码",
+    "initButton": "初始化项目",
+    "linkButton": "关联已有目录",
+    "initSuccess": "项目初始化成功",
+    "initFailed": "初始化失败",
+    "linkSuccess": "目录已关联",
+    "linkFailed": "关联失败",
+    "linkWarning": "目录中未找到 package.json",
+    "linkWarningHint": "关联后可能无法正常构建，确认这是正确的项目目录"
+  },
+  "template": {
+    "blank": "空白站点",
+    "blankDesc": "React + Vite + Tailwind，从零开始",
+    "dashboard": "数据看板",
+    "dashboardDesc": "接入 TabData 的数据可视化面板"
+  }
+}

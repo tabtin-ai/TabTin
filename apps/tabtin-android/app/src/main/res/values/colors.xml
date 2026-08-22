@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#2563EB</color>
+    <color name="ic_launcher_foreground">#FFFFFF</color>
+    <color name="splash_background">#FFFFFF</color>
+    <color name="splash_ink">#20201C</color>
+
+    <!-- Doc Editor colors -->
+    <color name="doc_editor_text_primary">#22262A</color>
+    <color name="doc_editor_text_secondary">#6B6F76</color>
+    <color name="doc_editor_text_tertiary">#9A9EA6</color>
+    <color name="doc_editor_bg_primary">#F6F7F8</color>
+    <color name="doc_editor_bg_code">#F1F2F4</color>
+    <color name="doc_editor_divider">#E1E3E5</color>
+    <color name="doc_editor_highlight_bar">#E1E3E5</color>
+    <color name="doc_editor_checkbox_checked">#2563EB</color>
+    <color name="doc_editor_bullet">#6B6F76</color>
+</resources>

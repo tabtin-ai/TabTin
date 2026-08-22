@@ -1,0 +1,21 @@
+{
+  "analyzing": {
+    "title": "AI 分析中...",
+    "modeFlash": "Flash Mode - 快速分析",
+    "modeDeep": "Deep Mode - 深度分析",
+    "tasksTitle": "分析任务",
+    "tip": "💡 AI 正在自动分析页面结构，请稍候...",
+    "tipDeepSuffix": "Deep Mode 会额外分析详情页，可能需要更多时间。",
+    "cancel": "取消分析",
+    "phases": {
+      "initializing": "初始化",
+      "detecting_pre_actions": "检测前置动作",
+      "identifying_region": "识别列表区域",
+      "analyzing_fields": "分析字段结构",
+      "analyzing_pagination": "识别翻页方式",
+      "exploring_detail": "探索详情页入口",
+      "building_schema": "生成 Schema 配置",
+      "completed": "分析完成"
+    }
+  }
+}

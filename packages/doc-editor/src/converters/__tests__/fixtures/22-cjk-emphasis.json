@@ -1,0 +1,20 @@
+{
+  "name": "cjk-emphasis",
+  "description": "CJK text with italic emphasis — verifies * delimiters work adjacent to CJK (flanking rule for _ would block emphasis)",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          { "type": "text", "text": "中文" },
+          { "type": "text", "text": "重点", "marks": [{ "type": "italic" }] },
+          { "type": "text", "text": "内容和" },
+          { "type": "text", "text": "加粗", "marks": [{ "type": "bold" }] },
+          { "type": "text", "text": "部分" }
+        ]
+      }
+    ]
+  },
+  "expectedMarkdown": "中文*重点*内容和**加粗**部分"
+}

@@ -1,0 +1,131 @@
+{
+  "title": "Profile",
+  "description": "View and edit your profile, including basics, contact info, and account settings",
+  "saved": "Profile updated",
+  "validation": {
+    "usernameLength": "Username must be 3-20 characters",
+    "usernameFormat": "Username can only contain letters, numbers, and underscores, and must start with a letter",
+    "nicknameLength": "Nickname cannot exceed 50 characters",
+    "bioLength": "Bio cannot exceed 500 characters"
+  },
+  "errors": {
+    "updateFailed": "Update failed, please try again later",
+    "verificationFailed": "Failed to send verification code",
+    "logoutFailed": "Logout failed"
+  },
+  "labels": {
+    "nickname": "Nickname",
+    "username": "Username",
+    "userId": "User ID",
+    "phone": "Phone",
+    "email": "Email",
+    "bio": "Bio",
+    "contact": "Contact",
+    "accountInfo": "Account info",
+    "registeredAt": "Joined",
+    "loginCount": "Login count",
+    "lastLogin": "Last login",
+    "buildVersion": "Build version"
+  },
+  "placeholders": {
+    "nickname": "Enter a nickname",
+    "username": "Enter a username",
+    "bio": "Tell us about yourself..."
+  },
+  "empty": {
+    "nickname": "No nickname",
+    "username": "No username",
+    "bio": "This user hasn't written a bio...",
+    "contact": "No contact info",
+    "email": "No email bound"
+  },
+  "actions": {
+    "editProfile": "Edit profile",
+    "accountSettings": "Account settings",
+    "copyId": "Copy ID",
+    "copied": "Copied",
+    "logout": "Log out",
+    "avatarComingSoon": "Avatar upload coming soon",
+    "logoutConfirmTitle": "Log out of your account?",
+    "logoutConfirmDesc": "Any unsaved work on this device will be lost",
+    "openStorageManager": "Storage Manager",
+    "openStorageManagerHint": "See what TabTin has stored on your machine, then clean up or export",
+    "changePassword": "Change password",
+    "bindEmail": "Bind email"
+  },
+  "avatar": {
+    "cropTitle": "Crop avatar",
+    "saved": "Avatar saved",
+    "saveFailed": "Failed to save avatar",
+    "removeUnsupported": "Removing avatar is not supported yet"
+  },
+  "alt": {
+    "avatar": "Avatar"
+  },
+  "stats": {
+    "loginCount": "{{value}} times"
+  },
+  "changePassword": {
+    "title": "Change password",
+    "descChange": "Enter your current password to set a new one.",
+    "descReset": "A verification code will be sent to {{identifier}}. Verify it to set a new password.",
+    "descResetNoContact": "This account has no email or phone bound, so code-based reset is unavailable.",
+    "labels": {
+      "oldPassword": "Current password",
+      "verificationCode": "Verification code",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm new password"
+    },
+    "placeholders": {
+      "oldPassword": "Enter current password",
+      "verificationCode": "Enter the 6-digit code",
+      "newPassword": "Set a new password",
+      "confirmPassword": "Re-enter new password"
+    },
+    "capsLockHint": "Caps Lock is on",
+    "actions": {
+      "sendCode": "Send code",
+      "submit": "Update password",
+      "forgotOld": "Forgot current password? Reset with a code",
+      "useOldPassword": "Back to using current password"
+    },
+    "codeSent": "Verification code sent",
+    "success": "Password updated",
+    "successRelogin": "Please log in again with your new password",
+    "errors": {
+      "oldRequired": "Please enter your current password",
+      "codeInvalid": "Please enter the 6-digit code",
+      "newNoWhitespace": "New password cannot contain spaces; spaces have been removed",
+      "newNoCjk": "Password cannot contain CJK characters; do not paste other content",
+      "newTooShort": "New password must be at least 8 characters",
+      "newNotComplex": "New password must include at least 3 of: uppercase, lowercase, digits, special characters",
+      "mismatch": "The passwords don't match",
+      "sendCodeFailed": "Failed to send code, please try again later",
+      "failed": "Failed to update password, please check your input and retry"
+    }
+  },
+  "bindEmail": {
+    "title": "Bind email",
+    "description": "Use it for login, password recovery, and organization low-balance alerts.",
+    "labels": {
+      "email": "Email",
+      "verificationCode": "Verification code"
+    },
+    "placeholders": {
+      "email": "name@example.com",
+      "verificationCode": "Enter the 6-digit code"
+    },
+    "actions": {
+      "sendCode": "Send code",
+      "submit": "Bind email"
+    },
+    "codeSent": "Verification code sent",
+    "success": "Email bound successfully",
+    "errors": {
+      "emailInvalid": "Enter a valid email address",
+      "codeInvalid": "Enter the 6-digit code",
+      "sendCodeFailed": "Failed to send code, please try again later",
+      "failed": "Failed to bind email, please check your input and retry"
+    }
+  }
+}

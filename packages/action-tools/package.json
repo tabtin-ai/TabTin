@@ -1,0 +1,159 @@
+{
+  "name": "@tabtin/action-tools",
+  "version": "0.1.0",
+  "description": "统一的前端动作工具平台，支持 run 管理、事件归档、资源追踪",
+  "keywords": [
+    "action",
+    "tools",
+    "crawl",
+    "automation",
+    "run-management",
+    "agent"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./headless": {
+      "source": "./src/headless.ts",
+      "types": "./dist/headless.d.ts",
+      "import": "./dist/headless.js",
+      "default": "./dist/headless.js"
+    },
+    "./types": {
+      "source": "./src/types/public.ts",
+      "types": "./dist/types/public.d.ts",
+      "import": "./dist/types/public.js",
+      "default": "./dist/types/public.js"
+    },
+    "./errors": {
+      "source": "./src/errors/public.ts",
+      "types": "./dist/errors/public.d.ts",
+      "import": "./dist/errors/public.js",
+      "default": "./dist/errors/public.js"
+    },
+    "./manifest": {
+      "source": "./src/manifest.ts",
+      "types": "./dist/manifest/public.d.ts",
+      "import": "./dist/manifest/public.js",
+      "default": "./dist/manifest/public.js"
+    },
+    "./runtime": {
+      "source": "./src/runtime/public.ts",
+      "types": "./dist/runtime/public.d.ts",
+      "import": "./dist/runtime/public.js",
+      "default": "./dist/runtime/public.js"
+    },
+    "./tools": {
+      "source": "./src/tools/public.ts",
+      "types": "./dist/tools/public.d.ts",
+      "import": "./dist/tools/public.js",
+      "default": "./dist/tools/public.js"
+    },
+    "./impl": {
+      "source": "./src/impl/public.ts",
+      "types": "./dist/impl/public.d.ts",
+      "import": "./dist/impl/public.js",
+      "default": "./dist/impl/public.js"
+    },
+    "./adapters": {
+      "source": "./src/adapters/public.ts",
+      "types": "./dist/adapters/public.d.ts",
+      "import": "./dist/adapters/public.js",
+      "default": "./dist/adapters/public.js"
+    },
+    "./cdp": {
+      "source": "./src/cdp/public.ts",
+      "types": "./dist/cdp/public.d.ts",
+      "import": "./dist/cdp/public.js",
+      "default": "./dist/cdp/public.js"
+    },
+    "./registration": {
+      "types": "./dist/registration.d.ts",
+      "import": "./dist/registration.js",
+      "default": "./dist/registration.js"
+    },
+    "./utils/oss-upload": {
+      "source": "./src/utils/oss-upload.ts",
+      "types": "./dist/utils/oss-upload.d.ts",
+      "import": "./dist/utils/oss-upload.js",
+      "default": "./dist/utils/oss-upload.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "headless": [
+        "./dist/headless.d.ts"
+      ],
+      "types": [
+        "./dist/types/public.d.ts"
+      ],
+      "errors": [
+        "./dist/errors/public.d.ts"
+      ],
+      "manifest": [
+        "./dist/manifest/public.d.ts"
+      ],
+      "runtime": [
+        "./dist/runtime/public.d.ts"
+      ],
+      "tools": [
+        "./dist/tools/public.d.ts"
+      ],
+      "impl": [
+        "./dist/impl/public.d.ts"
+      ],
+      "adapters": [
+        "./dist/adapters/public.d.ts"
+      ],
+      "cdp": [
+        "./dist/cdp/public.d.ts"
+      ],
+      "registration": [
+        "./dist/registration.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "tsup && node ./scripts/verify-tsup-externals.mjs && node ./scripts/export-tool-manifest.mjs",
+    "build:dts": "tsup",
+    "manifest:generate": "node ./scripts/export-tool-manifest.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tabtin/anti-detect": "workspace:*",
+    "@tabtin/browser-core": "workspace:*",
+    "@tabtin/config": "workspace:*",
+    "@tabtin/crawl-integration": "workspace:*",
+    "@tabtin/extraction-core": "workspace:*",
+    "@tabtin/media-capabilities": "workspace:*",
+    "@tabtin/oss-client": "workspace:*",
+    "@tabtin/security-policy": "workspace:*",
+    "@tabtin/shared": "workspace:*",
+    "@tabtin/terminal-core": "workspace:*",
+    "cheerio": "^1.0.0-rc.12",
+    "diff": "8.0.2",
+    "iconv-lite": "0.7.2",
+    "joplin-turndown-plugin-gfm": "1.0.12",
+    "jschardet": "3.1.4",
+    "turndown": "7.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/turndown": "5.0.6",
+    "tsup": "^8.0.0",
+    "typescript": "^5.2.2",
+    "vitest": "4.0.18"
+  },
+  "files": [
+    "dist"
+  ]
+}

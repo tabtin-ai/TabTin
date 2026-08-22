@@ -1,0 +1,66 @@
+{
+  "id": "tabtin-creative-toolkit-pack",
+  "name": "创意设计工具包",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "创意设计：主题样式工具箱、落地页 HTML 原型生成。",
+  "icon": "palette",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "creative",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 34
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/theme-kit",
+    "skills/lp-proto-gen"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "theme-kit": {
+        "enabled": true
+      },
+      "lp-proto-gen": {
+        "enabled": true
+      }
+    }
+  }
+}

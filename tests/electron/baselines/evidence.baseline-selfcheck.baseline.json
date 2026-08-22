@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "evidence.baseline-selfcheck",
+  "title": "测试框架能产出证据包并进行 baseline 对比",
+  "automationStatus": "ready",
+  "profiles": [
+    "smoke",
+    "regression",
+    "p0-plus"
+  ],
+  "tags": [
+    "electron",
+    "evidence",
+    "baseline",
+    "selfcheck"
+  ],
+  "sourceCapability": "Electron E2E / 证据包与 baseline",
+  "data": {
+    "stepCount": 2,
+    "fixtureCount": 3,
+    "outputContract": [
+      "result.json",
+      "timeline.jsonl",
+      "snapshots/selfcheck.json"
+    ]
+  }
+}

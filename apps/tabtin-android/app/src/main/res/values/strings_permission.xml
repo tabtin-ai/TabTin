@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="perm_read_sms">短信读取</string>
+    <string name="perm_send_sms">短信发送</string>
+    <string name="perm_read_contacts">通讯录读取</string>
+    <string name="perm_write_contacts">通讯录写入</string>
+    <string name="perm_read_call_log">通话记录读取</string>
+    <string name="perm_call_phone">拨打电话</string>
+    <string name="perm_read_calendar">日历读取</string>
+    <string name="perm_write_calendar">日历写入</string>
+    <string name="perm_fine_location">精确定位</string>
+    <string name="perm_coarse_location">粗略定位</string>
+    <string name="perm_camera">相机</string>
+    <string name="perm_record_audio">录音</string>
+    <string name="perm_post_notifications">通知推送</string>
+    <string name="perm_read_media_images">图片读取</string>
+    <string name="perm_read_media_video">视频读取</string>
+    <string name="perm_read_media_audio">音频读取</string>
+    <string name="perm_read_storage">存储读取</string>
+    <string name="perm_write_storage">存储写入</string>
+    <string name="perm_background_location">后台定位</string>
+    <string name="perm_bluetooth_connect">蓝牙连接</string>
+    <string name="perm_bluetooth_scan">蓝牙扫描</string>
+    <string name="perm_nearby_wifi">附近 Wi-Fi 设备</string>
+
+    <string name="perm_required_template">需要「%s」权限才能执行此操作，请在 TabTin 应用设置中授权。</string>
+</resources>

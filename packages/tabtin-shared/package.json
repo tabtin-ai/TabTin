@@ -1,0 +1,118 @@
+{
+  "name": "@tabtin/shared",
+  "version": "0.1.0",
+  "description": "Shared utilities for TabTin apps (persist-safety, hooks, error helpers)",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./identity-avatar": {
+      "source": "./src/identity-avatar.ts",
+      "types": "./dist/identity-avatar.d.ts",
+      "import": "./dist/identity-avatar.js"
+    },
+    "./storage-paths": {
+      "source": "./src/storage-paths.ts",
+      "types": "./dist/storage-paths.d.ts",
+      "import": "./dist/storage-paths.js"
+    },
+    "./use-countdown": {
+      "source": "./src/use-countdown.ts",
+      "types": "./dist/use-countdown.d.ts",
+      "import": "./dist/use-countdown.js"
+    },
+    "./use-caps-lock-warning": {
+      "source": "./src/use-caps-lock-warning.ts",
+      "types": "./dist/use-caps-lock-warning.d.ts",
+      "import": "./dist/use-caps-lock-warning.js"
+    },
+    "./auth-forms": {
+      "source": "./src/auth-forms/index.ts",
+      "types": "./dist/auth-forms/index.d.ts",
+      "import": "./dist/auth-forms/index.js"
+    },
+    "./diagnostics-redact": {
+      "source": "./src/diagnostics-redact.ts",
+      "types": "./dist/diagnostics-redact.d.ts",
+      "import": "./dist/diagnostics-redact.js"
+    },
+    "./sentry-scrub": {
+      "source": "./src/sentry-scrub.ts",
+      "types": "./dist/sentry-scrub.d.ts",
+      "import": "./dist/sentry-scrub.js"
+    },
+    "./client-observability-context": {
+      "source": "./src/client-observability-context.ts",
+      "types": "./dist/client-observability-context.d.ts",
+      "import": "./dist/client-observability-context.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "identity-avatar": [
+        "dist/identity-avatar.d.ts"
+      ],
+      "storage-paths": [
+        "dist/storage-paths.d.ts"
+      ],
+      "use-countdown": [
+        "dist/use-countdown.d.ts"
+      ],
+      "use-caps-lock-warning": [
+        "dist/use-caps-lock-warning.d.ts"
+      ],
+      "auth-forms": [
+        "dist/auth-forms/index.d.ts"
+      ],
+      "diagnostics-redact": [
+        "dist/diagnostics-redact.d.ts"
+      ],
+      "sentry-scrub": [
+        "dist/sentry-scrub.d.ts"
+      ],
+      "client-observability-context": [
+        "dist/client-observability-context.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "zustand": ">=4",
+    "@tabtin/api-client": "workspace:*"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "zustand": {
+      "optional": true
+    },
+    "@tabtin/api-client": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^19.0.1",
+    "react": "^19.0.0",
+    "zustand": "^5.0.3",
+    "@tabtin/api-client": "workspace:*",
+    "typescript": "5.7.2",
+    "vitest": "4.0.18"
+  }
+}

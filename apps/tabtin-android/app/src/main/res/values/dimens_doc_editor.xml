@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- XML bridge for ui/theme/Spacing.kt. Keep these values aligned with TTSpacing. -->
+    <dimen name="tt_spacing_xxs">2dp</dimen>
+    <dimen name="tt_spacing_xs">4dp</dimen>
+    <dimen name="tt_spacing_sm">8dp</dimen>
+    <dimen name="tt_spacing_md">12dp</dimen>
+    <dimen name="tt_spacing_lg">16dp</dimen>
+    <dimen name="tt_spacing_xxl">24dp</dimen>
+    <dimen name="tt_spacing_xxxl">32dp</dimen>
+    <dimen name="tt_spacing_huge">48dp</dimen>
+
+    <!-- XML bridge for ui/theme/Type.kt. -->
+    <dimen name="tt_font_caption">12sp</dimen>
+    <dimen name="tt_font_meta">13sp</dimen>
+    <dimen name="tt_font_body">14sp</dimen>
+
+    <!-- XML bridge for ui/theme/Radius.kt. -->
+    <dimen name="tt_radius_xs">4dp</dimen>
+    <dimen name="tt_radius_sm">8dp</dimen>
+
+    <!-- Component geometry without a global spacing role. -->
+    <dimen name="doc_editor_bullet_size">6dp</dimen>
+    <!-- (body line-height 22dp - bullet 6dp) / 2: align to the first text line. -->
+    <dimen name="doc_editor_list_marker_vertical_offset">8dp</dimen>
+    <dimen name="doc_editor_code_toolbar_clearance">28dp</dimen>
+    <dimen name="doc_editor_image_placeholder_height">120dp</dimen>
+</resources>

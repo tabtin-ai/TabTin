@@ -1,0 +1,35 @@
+{
+  "name": "@tabtin/config",
+  "version": "0.1.0",
+  "description": "Shared runtime configuration for TabTin apps and packages",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "tabtin",
+    "config",
+    "runtime"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "5.7.2"
+  }
+}

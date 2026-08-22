@@ -1,0 +1,11 @@
+{
+  "panelEntry": {
+    "title": "クローラーのデバッグ",
+    "opening": "オープニング..."
+  },
+  "errorBoundary": {
+    "title": "レンダリングエラー",
+    "unknown": "不明なエラー",
+    "emptyStack": "利用可能なコンポーネントスタックがありません"
+  }
+}

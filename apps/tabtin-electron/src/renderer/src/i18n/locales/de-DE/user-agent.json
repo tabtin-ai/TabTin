@@ -1,0 +1,98 @@
+{
+  "labels": {
+    "strategy": "User-Agent-Strategie",
+    "recommended": "Empfohlen",
+    "highestRealism": "💯 Höchster Realismus: {{system}}",
+    "mobileDeviceHint": "📱 Zufällig ausgewählt aus über 42 echten Geräten",
+    "desktopPoolHint": "🎲 Zufällig ausgewählt aus über 20 Desktop-UAs, Chrome-Versionsverfolgung wird unterstützt",
+    "platform": "Plattform",
+    "browser": "Browser",
+    "preview": "Live-Vorschau",
+    "uaPreview": "User-Agent-Vorschau",
+    "refreshRandom": "Aktualisieren Sie zufällige UA",
+    "refreshOne": "Wählen Sie einen anderen",
+    "previewDesktopPool": "🎲Beispiel für einen Desktop-Pool: zufällig ausgewählt aus dem {{platform}} + {{browser}}-Pool",
+    "previewMobile": "📱 Mobiles Beispiel: gewichteter Zufall aus dem {{device}}-Gerätepool",
+    "previewAuto": "✅ Nutzen Sie das System UA für maximalen Realismus",
+    "consistencyTitle": "Plattformkonsistenzprüfung",
+    "consistencyLine": "Aktuelles System: {{current}} → Zielplattform: {{target}}",
+    "fingerprintTitle": "Intelligente Fingerabdruck-Vorschau",
+    "gpuVendor": "GPU-Anbieter",
+    "renderer": "Renderer",
+    "platformInfo": "Plattforminformationen",
+    "clientHints": "Client-Hinweis-Header werden automatisch angepasst",
+    "advancedSettings": "Erweiterte Einstellungen",
+    "customPlaceholder": "Mozilla/5.0 ..."
+  },
+  "mode": {
+    "auto": {
+      "label": "Automatische Erkennung",
+      "description": "Nutzen Sie die Systemumgebung, um native GPU- und Client-Hinweis-Fingerabdrücke für größtmöglichen Realismus beizubehalten"
+    },
+    "mobile": {
+      "label": "Mobile Simulation",
+      "description": "Simulieren Sie Mobilgeräte mit realen Geräteprofilen (über 42 Geräte, GPU und Auflösung werden automatisch angepasst)"
+    },
+    "desktop_pool": {
+      "label": "Desktop-UA-Pool",
+      "description": "Wählen Sie zufällig aus über 20 Desktop-UAs. Aus Gründen der Konsistenz wird standardmäßig die aktuelle Plattform verwendet, mit optionaler plattformübergreifender Simulation und Plattform-/Browserfiltern."
+    },
+    "custom": {
+      "label": "Benutzerdefinierte UA",
+      "description": "Passen Sie den UA-String vollständig an spezielle Anforderungen an"
+    }
+  },
+  "platforms": {
+    "current": "Aktuelle Plattform (nativ bleiben)",
+    "windows": "Windows",
+    "macos": "macOS",
+    "linux": "Linux"
+  },
+  "browsers": {
+    "chrome": "Chrom",
+    "edge": "Rand",
+    "firefox": "Firefox",
+    "safari": "Safari"
+  },
+  "mobileDevices": {
+    "iphone": "iPhone (zufällige beliebte Modelle)",
+    "android": "Android (zufällige beliebte Modelle)",
+    "ipad": "iPad (zufällige beliebte Modelle)"
+  },
+  "mobileDevicesShort": {
+    "iphone": "iPhone",
+    "android": "Android",
+    "ipad": "iPad"
+  },
+  "platformNames": {
+    "macOS": "macOS",
+    "Windows": "Windows",
+    "Linux": "Linux",
+    "iOS": "iOS",
+    "iPadOS": "iPadOS",
+    "Android": "Android",
+    "Unknown": "Unbekannt"
+  },
+  "fingerprint": {
+    "mobileSummary": "📱 Mobile Simulation: {{device}} ({{os}} {{version}}) + {{gpu}}",
+    "androidSummary": "📱 Mobile Simulation: {{device}} + {{gpu}}",
+    "mac": {
+      "consistent": "✅ Plattformübereinstimmung: Behalten Sie den nativen Apple GPU-Fingerabdruck bei",
+      "cross": "⚠️ Plattformübergreifende Simulation: Verwenden Sie den Apple GPU-Fingerabdruck"
+    },
+    "windows": {
+      "macToWindows": "⚠️ Plattformübergreifende Simulation: Mac → Windows, GPU wird als NVIDIA gefälscht (Laufzeitinjektion)",
+      "consistent": "✅ Plattformübereinstimmung: Behalten Sie den nativen NVIDIA/AMD/Intel-GPU-Fingerabdruck bei",
+      "cross": "⚠️ Plattformübergreifende Simulation: Verwenden Sie den NVIDIA GPU-Fingerabdruck"
+    },
+    "linux": {
+      "consistent": "✅ Plattformübereinstimmung: Behalten Sie den nativen GPU-Fingerabdruck bei",
+      "cross": "⚠️ Plattformübergreifende Simulation: Verwenden Sie den Intel GPU-Fingerabdruck"
+    },
+    "unknown": "⚠️ Nicht erkanntes UA, verwendet den Standard-Intel-GPU-Fingerabdruck"
+  },
+  "consistency": {
+    "best": "✅ Bestes Setup! Die Konsistenz der Plattform ermöglicht native GPU-Fingerabdrücke und ist am schwersten zu erkennen",
+    "cross": "⚠️ Die plattformübergreifende Simulation verändert die GPU-Fingerabdrücke. Ziehen Sie den „Smart-Modus“ in Betracht, um die Plattformkonsistenz aufrechtzuerhalten"
+  }
+}

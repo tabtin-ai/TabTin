@@ -1,0 +1,21 @@
+{
+  "analyzing": {
+    "title": "AI analyzing...",
+    "modeFlash": "Flash Mode - Fast analysis",
+    "modeDeep": "Deep Mode - In-depth analysis",
+    "tasksTitle": "Analysis tasks",
+    "tip": "💡 AI is analyzing the page structure. Please wait...",
+    "tipDeepSuffix": "Deep Mode will also analyze detail pages and may take longer.",
+    "cancel": "Cancel analysis",
+    "phases": {
+      "initializing": "Initializing",
+      "detecting_pre_actions": "Detecting pre-actions",
+      "identifying_region": "Identifying list region",
+      "analyzing_fields": "Analyzing field structure",
+      "analyzing_pagination": "Detecting pagination",
+      "exploring_detail": "Exploring detail entry",
+      "building_schema": "Building schema",
+      "completed": "Completed"
+    }
+  }
+}

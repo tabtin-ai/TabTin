@@ -1,0 +1,98 @@
+{
+  "labels": {
+    "strategy": "User-Agent strategy",
+    "recommended": "Recommended",
+    "highestRealism": "💯 Highest realism: {{system}}",
+    "mobileDeviceHint": "📱 Randomly chosen from 42+ real devices",
+    "desktopPoolHint": "🎲 Randomly chosen from 20+ desktop UAs, Chrome version tracking supported",
+    "platform": "Platform",
+    "browser": "Browser",
+    "preview": "Live preview",
+    "uaPreview": "User-Agent preview",
+    "refreshRandom": "Refresh random UA",
+    "refreshOne": "Pick another",
+    "previewDesktopPool": "🎲 Desktop pool example: randomly chosen from the {{platform}} + {{browser}} pool",
+    "previewMobile": "📱 Mobile example: weighted random from the {{device}} device pool",
+    "previewAuto": "✅ Use the system UA for maximum realism",
+    "consistencyTitle": "Platform consistency check",
+    "consistencyLine": "Current system: {{current}} → Target platform: {{target}}",
+    "fingerprintTitle": "Smart fingerprint preview",
+    "gpuVendor": "GPU vendor",
+    "renderer": "Renderer",
+    "platformInfo": "Platform info",
+    "clientHints": "Client Hints headers are auto-adapted",
+    "advancedSettings": "Advanced settings",
+    "customPlaceholder": "Mozilla/5.0 ..."
+  },
+  "mode": {
+    "auto": {
+      "label": "Auto detect",
+      "description": "Use the system environment to keep native GPU and Client Hints fingerprints for the highest realism"
+    },
+    "mobile": {
+      "label": "Mobile simulation",
+      "description": "Simulate mobile devices with real device profiles (42+ devices, auto-adapts GPU and resolution)"
+    },
+    "desktop_pool": {
+      "label": "Desktop UA pool",
+      "description": "Randomly choose from 20+ desktop UAs. Defaults to the current platform for consistency, with optional cross-platform simulation and platform/browser filters."
+    },
+    "custom": {
+      "label": "Custom UA",
+      "description": "Fully customize the UA string for special needs"
+    }
+  },
+  "platforms": {
+    "current": "Current platform (keep native)",
+    "windows": "Windows",
+    "macos": "macOS",
+    "linux": "Linux"
+  },
+  "browsers": {
+    "chrome": "Chrome",
+    "edge": "Edge",
+    "firefox": "Firefox",
+    "safari": "Safari"
+  },
+  "mobileDevices": {
+    "iphone": "iPhone (random popular models)",
+    "android": "Android (random popular models)",
+    "ipad": "iPad (random popular models)"
+  },
+  "mobileDevicesShort": {
+    "iphone": "iPhone",
+    "android": "Android",
+    "ipad": "iPad"
+  },
+  "platformNames": {
+    "macOS": "macOS",
+    "Windows": "Windows",
+    "Linux": "Linux",
+    "iOS": "iOS",
+    "iPadOS": "iPadOS",
+    "Android": "Android",
+    "Unknown": "Unknown"
+  },
+  "fingerprint": {
+    "mobileSummary": "📱 Mobile simulation: {{device}} ({{os}} {{version}}) + {{gpu}}",
+    "androidSummary": "📱 Mobile simulation: {{device}} + {{gpu}}",
+    "mac": {
+      "consistent": "✅ Platform match: keep native Apple GPU fingerprint",
+      "cross": "⚠️ Cross-platform simulation: use Apple GPU fingerprint"
+    },
+    "windows": {
+      "macToWindows": "⚠️ Cross-platform simulation: Mac → Windows, GPU will be spoofed as NVIDIA (runtime injection)",
+      "consistent": "✅ Platform match: keep native NVIDIA/AMD/Intel GPU fingerprint",
+      "cross": "⚠️ Cross-platform simulation: use NVIDIA GPU fingerprint"
+    },
+    "linux": {
+      "consistent": "✅ Platform match: keep native GPU fingerprint",
+      "cross": "⚠️ Cross-platform simulation: use Intel GPU fingerprint"
+    },
+    "unknown": "⚠️ Unrecognized UA, using default Intel GPU fingerprint"
+  },
+  "consistency": {
+    "best": "✅ Best setup! Keeping the platform consistent allows native GPU fingerprints and is the hardest to detect",
+    "cross": "⚠️ Cross-platform simulation will change GPU fingerprints; consider \"Smart mode\" to keep platform consistency"
+  }
+}

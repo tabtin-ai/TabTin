@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 表格块：表格信息与操作固定在横向滚动区域外。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/tt_spacing_lg">
+
+        <TextView
+            android:id="@+id/tableMeta"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/tableActionsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tt_spacing_huge"
+            android:contentDescription="@string/doc_table_actions"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:minWidth="@dimen/tt_spacing_huge"
+            android:text="@string/doc_table_actions_short"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tableScrollHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/tt_spacing_lg"
+        android:layout_marginBottom="@dimen/tt_spacing_xs"
+        android:text="@string/doc_table_swipe_hint"
+        android:visibility="gone" />
+
+    <HorizontalScrollView
+        android:id="@+id/tableScroller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fadeScrollbars="true"
+        android:fillViewport="true"
+        android:scrollbars="horizontal">
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </HorizontalScrollView>
+</LinearLayout>

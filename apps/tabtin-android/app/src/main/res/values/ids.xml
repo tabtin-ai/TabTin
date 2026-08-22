@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- WebView 渲染进程终止标记：打在 WebView 实例上，避免 Compose onRelease 二次 destroy
+         已销毁的实例。见 ui/web/WebViewRenderProcessGuard.kt。 -->
+    <item name="tabtin_webview_render_process_gone" type="id" />
+</resources>

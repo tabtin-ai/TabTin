@@ -1,0 +1,196 @@
+{
+  "id": "tabdesktop",
+  "name": "Desktop",
+  "version": "0.1.0",
+  "description": "桌面操控 — AI Agent 通过截屏、鼠标、键盘操控 macOS/Windows 桌面应用",
+  "kind": "app",
+  "executionTarget": "frontend",
+  "uiRuntime": "localBundle",
+  "agentRuntime": "frontendBridge",
+  "distribution": "builtin",
+  "surface": "builtin",
+  "runtimeBindings": {
+    "toolProvider": "cli:tabtin desktop",
+    "uiProvider": "electron:context-space.tabdesktop",
+    "skillsProvider": "skills:local"
+  },
+  "objectModel": {
+    "entities": [
+      "display",
+      "window"
+    ],
+    "schema": {
+      "type": "object",
+      "properties": {
+        "display": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "width": {
+              "type": "number"
+            },
+            "height": {
+              "type": "number"
+            },
+            "scaleFactor": {
+              "type": "number"
+            }
+          }
+        },
+        "window": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "app_name": {
+              "type": "string"
+            },
+            "bounds": {
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "imageResize": {
+        "type": "object",
+        "description": "截图尺寸对齐云端 vision tokenizer 网格（Wave 3 · D2）。关闭则回退到 Wave 2 的 maxDim 单参数路径（规范 § 4.5.1）。",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "default": true,
+            "description": "是否启用双约束二分搜索对齐云端 tokenizer 网格"
+          },
+          "pxPerToken": {
+            "type": "number",
+            "default": 28,
+            "description": "每个 vision token 覆盖的像素数（与云端模型 tokenizer 一致，改动前请联调云端）"
+          },
+          "maxTargetPx": {
+            "type": "number",
+            "default": 1568,
+            "description": "截图长边像素上限"
+          },
+          "maxTargetTokens": {
+            "type": "number",
+            "default": 1568,
+            "description": "token 总数上限（⌈w/px⌉ × ⌈h/px⌉）"
+          }
+        }
+      },
+      "pixelCompare": {
+        "type": "object",
+        "description": "点击前 9×9 像素陈旧度校验（Wave 3 · D2）。防止 Agent 基于过期截图盲点击（规范 § 4.5.3）。",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "default": true,
+            "description": "是否启用 click / drag 前的 9×9 像素比对防护"
+          }
+        }
+      }
+    }
+  },
+  "permissions": [
+    "tabdesktop"
+  ],
+  "contextSources": [
+    "tabdesktop"
+  ],
+  "skills": [
+    "skills/desktop-operator"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "desktop-operator": {
+        "enabled": true
+      }
+    }
+  },
+  "lifecycleHooks": {},
+  "requiredCapabilities": [
+    "desktop-capture",
+    "input-simulation"
+  ],
+  "runtimeDependencies": [
+    {
+      "name": "@nut-tree-fork/nut-js",
+      "version": ">=4.0.0",
+      "source": "npm",
+      "platforms": [
+        "darwin",
+        "win32"
+      ]
+    },
+    {
+      "name": "sharp",
+      "version": ">=0.33.0",
+      "source": "npm"
+    }
+  ],
+  "runtimeSupport": {
+    "electron": {
+      "mode": "full"
+    },
+    "daemon": {
+      "mode": "unavailable",
+      "reason": "需要 Electron desktopCapturer 和 GUI 环境"
+    },
+    "linux": {
+      "mode": "unavailable",
+      "reason": "桌面操控仅在 macOS 和 Windows 上验证；Linux 桌面环境碎片化（X11 / Wayland / 多种合成器），nut-js 与 desktopCapturer 在 Linux 下未走完整稳定性验证。所有桌面操控命令在 Linux 上将返回中文「不支持」错误。"
+    }
+  },
+  "uiHints": {
+    "panel": false,
+    "icon": "monitor"
+  },
+  "platformVersion": {
+    "min": "1.0.0"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "contextFields": [],
+    "toolDomains": [],
+    "hasPromptSection": true,
+    "displayField": "",
+    "workspaceRootSource": "",
+    "isFrontendDependent": true,
+    "typeAliases": []
+  },
+  "catalog": {
+    "category": "tools",
+    "desktopGroup": "capabilities",
+    "canCreate": false,
+    "searchable": false,
+    "isDefaultEnabled": false,
+    "order": 17
+  }
+}

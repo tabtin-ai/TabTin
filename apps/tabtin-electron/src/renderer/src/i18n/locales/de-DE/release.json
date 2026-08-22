@@ -1,0 +1,58 @@
+{
+  "outbox": {
+    "banner": {
+      "title": "Der Postausgang ist Live",
+      "body": "Die asynchrone Kaskaden-Engine ist jetzt aktiviert. Tabellenübergreifende Such-/Rollup-/Formelschreibvorgänge werden über die Postausgangswarteschlange verarbeitet, wodurch die Leistung von Massenaktualisierungen erheblich verbessert wird."
+    },
+    "rollback": {
+      "title": "Notfall-Rollback des Postausgangs",
+      "body": "Die asynchrone Kaskaden-Engine für den Postausgang wurde vorübergehend deaktiviert. Alle Neuberechnungen der Kaskade erfolgen jetzt synchron. Bitte aktualisieren Sie die Seite, wenn es zu Verzögerungen kommt."
+    },
+    "status": {
+      "healthy": "Der Postausgang ist in Ordnung",
+      "degraded": "Der Postausgang befindet sich im herabgesetzten Modus",
+      "paused": "Der Postausgang ist pausiert",
+      "disabled": "Der Postausgang ist deaktiviert"
+    }
+  },
+  "saga": {
+    "in_progress": "Massenvorgang läuft…",
+    "failed": "Der Massenvorgang ist fehlgeschlagen und wurde zurückgesetzt",
+    "completed": "Massenvorgang abgeschlossen",
+    "partial": "Massenvorgang teilweise abgeschlossen ({{success}}/{{total}})",
+    "timeout": "Zeitüberschreitung beim Massenvorgang. Bitte überprüfen Sie die Ergebnisse, bevor Sie es erneut versuchen."
+  },
+  "a3": {
+    "disabled": "Update-by-Filter (A3) ist deaktiviert",
+    "enabled": "Update-by-Filter (A3) ist aktiviert"
+  },
+  "c1": {
+    "restore_disabled": "Das Feld „Rückgängigmachen/Wiederherstellen“ wurde vom Administrator vorübergehend deaktiviert. Bitte verwenden Sie zur Wiederherstellung den Versionsverlauf."
+  },
+  "grayscale": {
+    "enrolled": "Diese Organisation wurde für die {{feature}}-Beta registriert",
+    "unenrolled": "Diese Organisation wurde aus der {{feature}} Beta entfernt"
+  },
+  "incident": {
+    "title": "[{{severity}}] {{service}} Servicevorfall",
+    "body": "Auswirkung: {{scope}}. Begonnen bei: {{startTime}}. Unser Team führt aktiv Untersuchungen durch.",
+    "update": "[Aktualisierung] {{service}}: {{message}}",
+    "resolution": "Vorfall gelöst. Dauer: {{duration}}. Grundursache: {{rootCause}}. Folgeverbesserungen sind geplant."
+  },
+  "maintenance": {
+    "start": "Die geplante Wartung beginnt um {{time}}, voraussichtliche Dauer {{duration}}. Einige Funktionen sind möglicherweise nicht verfügbar.",
+    "end": "Die geplante Wartung ist abgeschlossen. Alle Dienste laufen wieder normal."
+  },
+  "changelog": {
+    "title": "Änderungsprotokoll",
+    "version": "Version {{version}}",
+    "newFeatures": "Neue Funktionen",
+    "improvements": "Verbesserungen",
+    "bugFixes": "Fehlerbehebungen"
+  },
+  "notification": {
+    "dismiss": "Verstanden",
+    "learnMore": "Erfahren Sie mehr",
+    "doNotShowAgain": "Nicht mehr anzeigen"
+  }
+}

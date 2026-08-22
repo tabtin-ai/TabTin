@@ -1,0 +1,45 @@
+{
+  "name": "ordered-list-nested",
+  "description": "Ordered list with 3-level nesting",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "orderedList",
+        "attrs": { "start": 1 },
+        "content": [
+          {
+            "type": "listItem",
+            "content": [
+              { "type": "paragraph", "content": [{ "type": "text", "text": "First" }] },
+              {
+                "type": "orderedList",
+                "attrs": { "start": 1 },
+                "content": [
+                  {
+                    "type": "listItem",
+                    "content": [
+                      { "type": "paragraph", "content": [{ "type": "text", "text": "Sub first" }] },
+                      {
+                        "type": "orderedList",
+                        "attrs": { "start": 1 },
+                        "content": [
+                          {
+                            "type": "listItem",
+                            "content": [
+                              { "type": "paragraph", "content": [{ "type": "text", "text": "Sub sub first" }] }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

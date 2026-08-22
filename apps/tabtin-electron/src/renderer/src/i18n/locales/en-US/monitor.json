@@ -1,0 +1,84 @@
+{
+  "status": {
+    "running": "Running",
+    "stopped": "Stopped",
+    "streamEnded": "Stream ended",
+    "failed": "Failed"
+  },
+  "stop": "Stop monitor",
+  "failReason": {
+    "spawnPtyFailed": "Monitor failed to start (busy or limit reached). Try again later.",
+    "writePtyFailed": "Failed to execute monitor command. Please retry.",
+    "invalidRegex": "Invalid filter pattern. Check the rule and try again.",
+    "alreadyRunning": "This monitor is already running.",
+    "unknownAction": "Unknown monitor action."
+  },
+  "emitInterrupted": "Monitor reporting interrupted (auth expired). Data may be incomplete. Check login status.",
+  "resourceMonitor": {
+    "severity": {
+      "healthy": "Relaxed",
+      "attention": "Good",
+      "heavy": "Heavy"
+    },
+    "tagline": {
+      "healthy": "Everything's calm — create with ease",
+      "attention": "Running smoothly — follow your inspiration",
+      "heavy": "Feeling heavy — try closing unused tabs?"
+    },
+    "current": "Current",
+    "browser": "Browser",
+    "browserReclaim": {
+      "checkTitle": "Check Browser view buildup",
+      "available": "{{count}} idle Browser(s) can be reclaimed",
+      "noneIdle": "No idle Browser to reclaim right now",
+      "noBrowsers": "No Browser views tracked",
+      "reclaimMany": "{{reason}}. Reclaim {{count}} detached idle Browsers first, then check whether overall usage drops.",
+      "reclaimOne": "{{reason}}. Close detached idle Browser {{title}} first, then check whether overall usage drops.",
+      "overview": "{{reason}}. There are currently {{total}} Browser views, {{share}} of the total.",
+      "retained": "{{count}} detached or preview Browser view(s) are still in use or loading. They will not be reclaimed to avoid interrupting work.",
+      "metricAvailable": "{{count}} reclaimable",
+      "metricNoneIdle": "None idle",
+      "metricNoBrowsers": "None",
+      "action": "Reclaim idle Browsers",
+      "actionUnavailable": "No reclaimable items",
+      "actionShort": "Reclaim",
+      "boundaryNote": "Only reclaims detached or preview idle Browsers not in use on the main window. Regular main-window tabs are not closed."
+    },
+    "spaceSection": "Space",
+    "resourcesSection": "Resources",
+    "systemOverhead": "System overhead",
+    "uiEngine": "UI engine",
+    "uiEngineDetail": "{{cpu}} · Shared memory for the page rendering engine",
+    "appHost": "App host",
+    "appHostDetail": "{{cpu}} · Baseline memory for the TabTin app itself",
+    "unassigned": "Unassigned",
+    "unassignedDetail": "{{cpu}} · Resources not yet attributed to a Space",
+    "background": "Background",
+    "cpu": "CPU",
+    "cpuCores": "{{count}} cores",
+    "memory": "Memory",
+    "ramShare": "{{percent}} of RAM",
+    "tabs": "Tabs",
+    "currentTabs": "Current tabs",
+    "allSessionTabs": "{{count}} total tabs",
+    "closeAllTabs": "Close all tabs in every non-archived session",
+    "panes": "{{count}} panes",
+    "tabCount": "{{count}} tabs",
+    "runCount": "{{count}} runs",
+    "appCount": "{{label}} × {{count}}",
+    "appBreakdownSeparator": ", ",
+    "notCollected": "Not collected",
+    "refresh": "Refresh",
+    "refreshLoading": "Loading",
+    "trend": {
+      "memoryUp": "Memory up {{delta}}",
+      "memoryDown": "Memory down {{delta}}",
+      "cpuUp": "CPU up {{delta}}",
+      "cpuDown": "CPU down {{delta}}",
+      "stale": "Data delayed {{duration}}"
+    },
+    "viewDetails": "View details",
+    "indicatorTitle": "Performance",
+    "openSettingsAria": "Open performance monitor settings"
+  }
+}

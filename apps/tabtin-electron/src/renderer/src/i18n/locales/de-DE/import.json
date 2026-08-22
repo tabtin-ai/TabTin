@@ -1,0 +1,31 @@
+{
+  "errors": {
+    "responseInvalid": "Ungültiges Antwortformat vom Server",
+    "missingStats": "In der Antwort fehlen Statistikdaten",
+    "missingFieldMapping": "In der Antwort fehlen Feldzuordnungsdaten",
+    "previewFailed": "Dateivorschau fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "previewNetworkUnstable": "Die Netzwerkverbindung ist instabil. Bitte versuchen Sie es erneut und überprüfen Sie Ihren Proxy/VPN.",
+    "importFailed": "Der Datenimport ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "importInFlight": "Der Import läuft bereits. Bitte warten.",
+    "templateDownloadFailed": "Der Download der Vorlage ist fehlgeschlagen. Bitte versuchen Sie es erneut."
+  },
+  "apiErrors": {
+    "previewFailedWithStatus": "Vorschau fehlgeschlagen: HTTP {{status}}",
+    "emptyResponse": "Der Server hat leere Daten zurückgegeben",
+    "missingStats": "Bei der Serverantwort fehlt das Statistikfeld",
+    "missingFieldMapping": "In der Serverantwort fehlt das field_mapping-Feld",
+    "csvImportFailedWithStatus": "CSV-Import fehlgeschlagen: HTTP {{status}}",
+    "excelImportFailedWithStatus": "Excel-Import fehlgeschlagen: HTTP {{status}}",
+    "jsonImportFailedWithStatus": "JSON-Import fehlgeschlagen: HTTP {{status}}",
+    "templateDownloadFailedWithStatus": "Vorlagen-Download fehlgeschlagen: HTTP {{status}}",
+    "unsupportedFileFormat": "Nicht unterstütztes Dateiformat: {{format}}",
+    "fileEmpty": "Der Dateiinhalt ist leer",
+    "fileReadFailed": "Datei konnte nicht gelesen werden"
+  },
+  "template": {
+    "defaultTableName": "Tisch",
+    "filenameExcel": "{{tableName}}_import_template.xlsx",
+    "filename": "{{tableName}}_import_template.csv",
+    "filenameJson": "{{tableName}}_import_template.json"
+  }
+}

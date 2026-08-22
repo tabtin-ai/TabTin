@@ -1,0 +1,101 @@
+{
+  "name": "@tabtin/cli-server-core",
+  "version": "0.1.0",
+  "description": "Shared HTTP-over-socket CLI server infrastructure for Electron and Daemon",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./surfaces/chat-export-md": {
+      "source": "./src/surfaces/chat-export-md.ts",
+      "types": "./dist/surfaces/chat-export-md.d.ts",
+      "import": "./dist/surfaces/chat-export-md.js"
+    },
+    "./surfaces/skill-read-content": {
+      "source": "./src/surfaces/skill-read-content.ts",
+      "types": "./dist/surfaces/skill-read-content.d.ts",
+      "import": "./dist/surfaces/skill-read-content.js"
+    },
+    "./surfaces/skill-list": {
+      "source": "./src/surfaces/skill-list.ts",
+      "types": "./dist/surfaces/skill-list.d.ts",
+      "import": "./dist/surfaces/skill-list.js"
+    },
+    "./surfaces/skill-write-content": {
+      "source": "./src/surfaces/skill-write-content.ts",
+      "types": "./dist/surfaces/skill-write-content.d.ts",
+      "import": "./dist/surfaces/skill-write-content.js"
+    },
+    "./surfaces/skill-resolve-path": {
+      "source": "./src/surfaces/skill-resolve-path.ts",
+      "types": "./dist/surfaces/skill-resolve-path.d.ts",
+      "import": "./dist/surfaces/skill-resolve-path.js"
+    },
+    "./surfaces/skill-install": {
+      "source": "./src/surfaces/skill-install.ts",
+      "types": "./dist/surfaces/skill-install.d.ts",
+      "import": "./dist/surfaces/skill-install.js"
+    },
+    "./surfaces/skill-materialize-app": {
+      "source": "./src/surfaces/skill-materialize-app.ts",
+      "types": "./dist/surfaces/skill-materialize-app.d.ts",
+      "import": "./dist/surfaces/skill-materialize-app.js"
+    },
+    "./surfaces/skill-uninstall": {
+      "source": "./src/surfaces/skill-uninstall.ts",
+      "types": "./dist/surfaces/skill-uninstall.d.ts",
+      "import": "./dist/surfaces/skill-uninstall.js"
+    },
+    "./surfaces/session": {
+      "source": "./src/surfaces/session.ts",
+      "types": "./dist/surfaces/session.d.ts",
+      "import": "./dist/surfaces/session.js"
+    },
+    "./surfaces/agent-security": {
+      "source": "./src/surfaces/agent-security.ts",
+      "types": "./dist/surfaces/agent-security.d.ts",
+      "import": "./dist/surfaces/agent-security.js"
+    },
+    "./surfaces/agent-engine": {
+      "source": "./src/surfaces/agent-engine.ts",
+      "types": "./dist/surfaces/agent-engine.d.ts",
+      "import": "./dist/surfaces/agent-engine.js"
+    },
+    "./surfaces/space-set-active": {
+      "source": "./src/surfaces/space-set-active.ts",
+      "types": "./dist/surfaces/space-set-active.d.ts",
+      "import": "./dist/surfaces/space-set-active.js"
+    },
+    "./surfaces/import": {
+      "source": "./src/surfaces/import.ts",
+      "types": "./dist/surfaces/import.d.ts",
+      "import": "./dist/surfaces/import.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run"
+  },
+  "author": "TabTin Team",
+  "license": "MIT",
+  "dependencies": {
+    "@tabtin/agent-wire": "workspace:*",
+    "@tabtin/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "5.7.2",
+    "vitest": "^1.6.1"
+  }
+}

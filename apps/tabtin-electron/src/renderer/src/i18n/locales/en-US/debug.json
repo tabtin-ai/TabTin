@@ -1,0 +1,11 @@
+{
+  "panelEntry": {
+    "title": "Crawler Debug",
+    "opening": "Opening..."
+  },
+  "errorBoundary": {
+    "title": "Rendering error",
+    "unknown": "Unknown error",
+    "emptyStack": "No component stack available"
+  }
+}

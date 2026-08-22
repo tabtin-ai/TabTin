@@ -1,0 +1,151 @@
+# TabTin FTS — Prometheus 告警规则（Wave 5 PRD 6.3）
+# 部署方式：把本文件挂到 Prometheus 的 rule_files 路径
+# 例：/etc/prometheus/rules.d/fts.yml
+#
+# 告警分级（PRD 6.3 表格）：
+#   Critical → on-call 立即响应（P1）
+#   Warning  → 值班团队 24h 内响应（P2）
+groups:
+  - name: tabtin-fts-slo
+    interval: 30s
+    rules:
+      # ── 搜索延迟（PRD 2.2 SLO） ──
+      - alert: FtsSearchLatencyP95High
+        expr: |
+          histogram_quantile(0.95,
+            sum(rate(fts_search_duration_seconds_bucket[5m])) by (le)
+          ) > 0.5
+        for: 5m
+        labels:
+          severity: warning
+          service: fts
+        annotations:
+          summary: "FTS 搜索 P95 延迟 > 500ms 持续 5 分钟"
+          description: "当前 P95={{ $value | humanizeDuration }}；可能是 ES 节点负载高 / 索引膨胀 / GC 压力"
+
+      - alert: FtsSearchLatencyP99Critical
+        expr: |
+          histogram_quantile(0.99,
+            sum(rate(fts_search_duration_seconds_bucket[5m])) by (le)
+          ) > 1.0
+        for: 5m
+        labels:
+          severity: critical
+          service: fts
+        annotations:
+          summary: "FTS 搜索 P99 延迟 > 1s 持续 5 分钟（触发回滚评估）"
+          description: "当前 P99={{ $value | humanizeDuration }}；评估是否通过 SEARCH_ENGINE_ENABLED 切回 DB 搜索"
+
+      # ── 索引同步管道 ──
+      - alert: FtsOutboxBacklogHigh
+        expr: max(fts_outbox_backlog) by (db) > 10000
+        for: 5m
+        labels:
+          severity: warning
+          service: fts
+        annotations:
+          summary: "FTS Outbox 积压 > 10000 持续 5 分钟（db={{ $labels.db }}）"
+          description: "Celery search_indexing worker 处理不过来；检查 worker 数量 / ES 写入吞吐"
+
+      - alert: FtsOutboxTerminalBacklog
+        expr: max(fts_outbox_terminal_backlog) by (db) > 0
+        for: 5m
+        labels:
+          severity: critical
+          service: fts
+        annotations:
+          summary: "FTS 终态失败 outbox > 0（db={{ $labels.db }}；schema 问题）"
+          description: |
+            存在 mark_terminal 后的 outbox 行（retry_count=5），通常是 strict_dynamic_mapping_exception。
+            排查：
+              1. 看 Celery worker 日志 grep 'TERMINAL:' 找具体 schema 错误
+              2. PUT mapping 加缺失字段（curl /tabtin-<base>/_mapping）
+              3. manage.py fts_reindex --index=tabtin-<base> 重做全量回填
+
+      # ── 降级 ──
+      - alert: FtsDegradeSpikeCritical
+        expr: sum(rate(fts_degrade_total[1m])) * 60 > 1
+        for: 1m
+        labels:
+          severity: critical
+          service: fts
+        annotations:
+          summary: "FTS 降级速率 > 1/min（on-call 介入）"
+          description: |
+            过去 1min 触发降级 {{ $value }} 次。reason 分布通过 PromQL 查：
+              sum(rate(fts_degrade_total[5m])) by (reason)
+            常见 reason：
+              - circuit_open / health_red / opensearch_unavailable: ES 不可达
+              - error_rate_breach: 1min 错误率 > 50%
+              - rate_limited: 用户被限流（不是事故）
+
+      # ── 零结果率 ──
+      - alert: FtsZeroResultSpike
+        expr: |
+          sum(rate(fts_zero_result_total[5m]))
+          /
+          (sum(rate(fts_search_duration_seconds_count[5m])) > 0.1)
+          > 0.5
+        for: 10m
+        labels:
+          severity: warning
+          service: fts
+        annotations:
+          summary: "FTS 零结果率 > 50% 持续 10 分钟"
+          description: |
+            可能：
+              1. 索引被清空 / mapping 损坏 → 检查 fts_verify
+              2. ACL service 异常 → no_accessible_spaces 大量出现
+              3. 用户搜索关键词分布变化（产品 OK，监控 noise）
+
+      # ── ES 集群健康 ──
+      - alert: FtsHealthRedOrUnreachable
+        expr: |
+          (max(fts_health_status{status=~"red|unreachable"}) == 1)
+        for: 1m
+        labels:
+          severity: critical
+          service: fts
+        annotations:
+          summary: "ES 集群状态 red 或 unreachable 持续 1 分钟"
+          description: "立即按 ROLLBACK runbook 评估是否切回 DB 搜索"
+
+      # ── 同步管道健康 ──
+      - alert: FtsOutboxWriteFailures
+        expr: sum(rate(fts_outbox_write_failed_total[1m])) * 60 > 10
+        for: 5m
+        labels:
+          severity: warning
+          service: fts
+        annotations:
+          summary: "FTS Outbox 写入失败率 > 10/min（R1-08）"
+          description: "signal handler 内 _safe_write_outbox swallow 的失败次数。检查 MySQL/PG 连接 + Outbox schema"
+
+      - alert: FtsAclInvalidateFailures
+        expr: sum(rate(fts_acl_invalidate_failed_total[1m])) * 60 > 10
+        for: 5m
+        labels:
+          severity: warning
+          service: fts
+        annotations:
+          summary: "FTS ACL 缓存失效失败率 > 10/min（R2-10）"
+          description: "Redis 异常导致 SpaceMembership 变动后缓存未失效；检查 Redis 健康"
+
+      # ── FC 工具调用异常 ──
+      - alert: FtsFcInvokeErrorHigh
+        expr: |
+          sum(rate(fts_fc_invoke_total{notice=~"error|no_accessible_spaces"}[5m]))
+          /
+          sum(rate(fts_fc_invoke_total[5m]))
+          > 0.3
+        for: 10m
+        labels:
+          severity: warning
+          service: fts
+        annotations:
+          summary: "Agent FC tabtin.search 异常率 > 30% 持续 10 分钟"
+          description: |
+            Agent 调用搜索时 30%+ 命中错误（参数 / 越权 / 内部错误）或权限错配。
+            可能：
+              - prompt 教 Agent 错误使用方法 → 看 description 是否清晰
+              - 大量 no_accessible_spaces → ACL 配置问题或 Agent 上下文缺失

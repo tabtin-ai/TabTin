@@ -1,0 +1,73 @@
+{
+  "actions.create": "新しいサイト",
+  "actions.publish": "発行する",
+  "actions.copyUrl": "URLをコピー",
+  "actions.urlCopied": "URLをコピーしました",
+  "actions.editCode": "コードを編集する",
+  "actions.refresh": "リフレッシュ",
+  "actions.rollback": "ロールバック",
+  "actions.download": "ソースのダウンロード",
+  "status.draft": "草案",
+  "status.published": "発行済み",
+  "status.archived": "アーカイブ済み",
+  "stats.views": "{{count}} ビュー",
+  "preview.empty": "まだプレビューはありません。公開してサイトを表示します。",
+  "preview.desktop": "デスクトッププレビュー",
+  "preview.mobile": "モバイルプレビュー",
+  "sidebar.info": "サイト情報",
+  "sidebar.url": "URL",
+  "sidebar.framework": "フレームワーク",
+  "sidebar.visibility": "可視性",
+  "sidebar.public": "公共",
+  "sidebar.private": "プライベート",
+  "sidebar.versions": "バージョン履歴",
+  "sidebar.noVersions": "まだ公開されていません",
+  "version.current": "現在",
+  "error.siteNotFound": "サイトが見つかりません",
+  "error.publishFailed": "公開に失敗しました",
+  "error.noDistUrl": "まずアーティファクトを構築してアップロードしてください",
+  "error.noDistUrlHint": "TabCode でビルドを実行するか、CLI を使用します: tabtin site build",
+  "actions.publishSuccess": "正常に公開されました",
+  "publish.dialogTitle": "サイトを公開する",
+  "publish.messageLabel": "バージョンメモ",
+  "publish.messagePlaceholder": "このリリースでの変更点について説明する",
+  "empty.noSites": "まだサイトがありません。最初の軽量アプリを作成します。",
+  "home": {
+    "assetBrowser": {
+      "newTabsite": "新しいサイト",
+      "tabsiteEmpty": "まだサイトがありません",
+      "tabsiteUnavailable": "TabSite が利用できません",
+      "tabsite": "サイト"
+    }
+  },
+  "label": {
+    "untitled": "無題のサイト",
+    "untitledSite": "無題のサイト"
+  },
+  "dialog": {
+    "createTitle": "新しいサイト",
+    "siteName": "サイト名",
+    "siteNamePlaceholder": "サイト名を入力してください",
+    "selectTemplate": "テンプレートを選択してください",
+    "cancel": "キャンセル",
+    "create": "作成"
+  },
+  "guide": {
+    "initTitle": "サイトプロジェクトが初期化されていません",
+    "initDescription": "TabCode で編集を開始するには、テンプレート プロジェクトを初期化します。",
+    "initButton": "プロジェクトの初期化",
+    "linkButton": "既存のディレクトリをリンクする",
+    "initSuccess": "プロジェクトが正常に初期化されました",
+    "initFailed": "初期化に失敗しました",
+    "linkSuccess": "ディレクトリがリンクされています",
+    "linkFailed": "リンクに失敗しました",
+    "linkWarning": "ディレクトリに package.json が見つかりません",
+    "linkWarningHint": "ビルドが失敗する可能性があります。これが正しいプロジェクト ディレクトリであることを確認してください。"
+  },
+  "template": {
+    "blank": "空白のサイト",
+    "blankDesc": "React + Vite + Tailwind、ゼロから始める",
+    "dashboard": "ダッシュボード",
+    "dashboardDesc": "TabData を利用したデータ視覚化パネル"
+  }
+}

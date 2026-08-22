@@ -1,0 +1,21 @@
+{
+  "analyzing": {
+    "title": "AI 分析...",
+    "modeFlash": "Flash Mode - 快速分析",
+    "modeDeep": "Deep Mode - 深度分析",
+    "tasksTitle": "分析任務",
+    "tip": "💡 AI 正在自動分析頁面結構，請稍候...",
+    "tipDeepSuffix": "Deep Mode 會額外分析詳情頁，可能需要更多時間。",
+    "cancel": "取消分析",
+    "phases": {
+      "initializing": "初始化",
+      "detecting_pre_actions": "偵測前置動作",
+      "identifying_region": "識別列表區域",
+      "analyzing_fields": "分析字段結構",
+      "analyzing_pagination": "辨識翻頁方式",
+      "exploring_detail": "探索詳情頁入口",
+      "building_schema": "生成 Schema 配置",
+      "completed": "分析完成"
+    }
+  }
+}

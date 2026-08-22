@@ -1,0 +1,149 @@
+{
+  "_meta": {
+    "name": "user-directory",
+    "description": "人员字段目录解析夹具：覆盖 user / created_by / last_modified_by 从用户 ID 解析到「姓名 + 头像」的四种归属态（在职、离组、跨组织外部、查不到的脏数据）以及多选混合与空值。字段值一律使用裸 UUID，因为线上真实用户 ID 就是裸 UUID —— full-fields 夹具里的 usr-0001 风格可读 ID 会被 looksLikeInternalId 正则挡住，掩盖「裸 UUID 直接漏到界面」这条真实缺陷。目录数据放在顶层 directory 块：members 对应后端 GET /organizations/{id}/members 与 POST .../batch-profiles（只含当前在职成员），identitySnapshots 对应 GET .../members/identity-snapshots（已离组成员的历史姓名）。跨组织成员两个接口都查不到，只能靠字段值里内嵌的 name，这与 Web 正典 resolveUserDisplayName 的 embeddedName 优先级一致（packages/table-engine-canvas/src/userDisplayName.ts）。",
+    "frozenAt": "2026-08-18",
+    "batch": 3.2
+  },
+  "table": {
+    "id": "tbl-user-dir-0001",
+    "name": "人员字段目录验收表",
+    "fields": [
+      { "id": "fld-title", "name": "条目", "field_type": "text", "is_primary": true },
+      { "id": "fld-owner", "name": "负责人", "field_type": "user" },
+      { "id": "fld-reviewers", "name": "评审人", "field_type": "user", "options": { "multiple": true } },
+      { "id": "fld-creator", "name": "创建人", "field_type": "created_by" },
+      { "id": "fld-modifier", "name": "修改人", "field_type": "last_modified_by" }
+    ],
+    "records": [
+      {
+        "id": "rec-udir-active",
+        "version": 1,
+        "data": {
+          "fld-title": "在职成员（有头像）",
+          "fld-owner": "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3",
+          "fld-reviewers": [],
+          "fld-creator": "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3",
+          "fld-modifier": "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3"
+        }
+      },
+      {
+        "id": "rec-udir-active-noavatar",
+        "version": 1,
+        "data": {
+          "fld-title": "在职成员（无头像，走首字母兜底）",
+          "fld-owner": "7d1e5b42-6c93-4a08-b5f7-2e9a3d4c8f16",
+          "fld-reviewers": [],
+          "fld-creator": "7d1e5b42-6c93-4a08-b5f7-2e9a3d4c8f16",
+          "fld-modifier": "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3"
+        }
+      },
+      {
+        "id": "rec-udir-departed",
+        "version": 1,
+        "data": {
+          "fld-title": "已离组成员（只在快照里）",
+          "fld-owner": "a4c8f01d-3e92-4b76-8d15-6f2b7c9e4a83",
+          "fld-reviewers": [],
+          "fld-creator": "a4c8f01d-3e92-4b76-8d15-6f2b7c9e4a83",
+          "fld-modifier": "a4c8f01d-3e92-4b76-8d15-6f2b7c9e4a83"
+        }
+      },
+      {
+        "id": "rec-udir-external",
+        "version": 1,
+        "data": {
+          "fld-title": "跨组织成员（值内嵌姓名）",
+          "fld-owner": { "id": "e91b7d3a-5f04-42c8-9e67-1a8d3b5c7f20", "name": "外部-赵珂" },
+          "fld-reviewers": [],
+          "fld-creator": "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3",
+          "fld-modifier": "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3"
+        }
+      },
+      {
+        "id": "rec-udir-unknown",
+        "version": 1,
+        "data": {
+          "fld-title": "脏数据（任何目录都查不到）",
+          "fld-owner": "c05d8e27-4a16-4f93-b8c2-9d7e1f3a6b45",
+          "fld-reviewers": [],
+          "fld-creator": "c05d8e27-4a16-4f93-b8c2-9d7e1f3a6b45",
+          "fld-modifier": "c05d8e27-4a16-4f93-b8c2-9d7e1f3a6b45"
+        }
+      },
+      {
+        "id": "rec-udir-mixed",
+        "version": 1,
+        "data": {
+          "fld-title": "多选混合四态",
+          "fld-owner": "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3",
+          "fld-reviewers": [
+            "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3",
+            "a4c8f01d-3e92-4b76-8d15-6f2b7c9e4a83",
+            { "id": "e91b7d3a-5f04-42c8-9e67-1a8d3b5c7f20", "name": "外部-赵珂" },
+            "c05d8e27-4a16-4f93-b8c2-9d7e1f3a6b45"
+          ],
+          "fld-creator": "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3",
+          "fld-modifier": "7d1e5b42-6c93-4a08-b5f7-2e9a3d4c8f16"
+        }
+      },
+      {
+        "id": "rec-udir-empty",
+        "version": 1,
+        "data": {
+          "fld-title": "空人员字段",
+          "fld-owner": null,
+          "fld-reviewers": [],
+          "fld-creator": "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3",
+          "fld-modifier": "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3"
+        }
+      },
+      {
+        "id": "rec-udir-stale-embedded",
+        "version": 1,
+        "data": {
+          "fld-title": "目录现名 vs 值内嵌旧名（优先级鉴别）",
+          "fld-owner": { "id": "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3", "name": "林小满-导入时旧名" },
+          "fld-reviewers": [
+            { "id": "7d1e5b42-6c93-4a08-b5f7-2e9a3d4c8f16", "name": "陈以宁-导入时旧名" },
+            { "id": "a4c8f01d-3e92-4b76-8d15-6f2b7c9e4a83", "name": "周叙-导入时旧名" }
+          ],
+          "fld-creator": "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3",
+          "fld-modifier": "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3"
+        }
+      }
+    ],
+    "views": [
+      {
+        "id": "viw-udir-grid-0001",
+        "name": "全部字段",
+        "view_type": "grid",
+        "field_order": ["fld-title", "fld-owner", "fld-reviewers", "fld-creator", "fld-modifier"],
+        "visible_fields": ["fld-title", "fld-owner", "fld-reviewers", "fld-creator", "fld-modifier"]
+      }
+    ]
+  },
+  "directory": {
+    "_note": "members 只含当前在职成员，对应后端 batch-profiles 的过滤口径（组织成员且账号 is_active）。identitySnapshots 是已离组成员的历史姓名，后端不带任何后缀，「（已离职）」由客户端拼。跨组织成员和脏数据都不在这两个列表里 —— 前者靠字段值内嵌 name 区分，后者无处可查。",
+    "organizationId": "org-udir-0001",
+    "members": [
+      {
+        "userId": "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3",
+        "displayName": "林小满",
+        "avatarUrl": "https://oss.example.com/avatar/lin-xiaoman.png"
+      },
+      {
+        "userId": "7d1e5b42-6c93-4a08-b5f7-2e9a3d4c8f16",
+        "displayName": "陈以宁",
+        "avatarUrl": null
+      }
+    ],
+    "identitySnapshots": [
+      {
+        "userId": "a4c8f01d-3e92-4b76-8d15-6f2b7c9e4a83",
+        "displayName": "周叙",
+        "leftAt": "2026-05-01T00:00:00.000Z"
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "blocked_extension_targets": [
+    "protocol.request.headers.authorization"
+  ],
+  "commercial_tier_limit": null,
+  "evidence": [
+    {
+      "locator": "repository-configured max_output_tokens; not an official provider maximum",
+      "source": "migrations 0039, 0054 and 0055"
+    }
+  ],
+  "identity": {
+    "canonical_hash": "sha256:d8c1104ebcd331b0736e3e573b8cc64210b16f83efccea6c8d9f3ffe06bcefb1",
+    "key": "doubao-seed-2-0-lite-draft-output-safety",
+    "kind": "platform-safety-policy",
+    "revision": "1"
+  },
+  "platform_ceiling": 32768,
+  "platform_ceiling_enforceable": true,
+  "platform_ceiling_verified": true,
+  "policy_keys": [
+    "draft-only",
+    "legacy-output-ceiling"
+  ],
+  "provider_maximum": null,
+  "provider_maximum_verified": false,
+  "schema_version": "1"
+}

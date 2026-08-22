@@ -1,0 +1,106 @@
+[versions]
+# Wave A0 chain upgrade (2026-05-03):
+# Kotlin 2.0.21 -> 2.3.21, AGP 8.7.3 -> 9.2.0, Gradle wrapper 8.11.1 -> 9.4.1,
+# KSP -> 2.3.7 (KSP2 since 2.3.0 decoupled from Kotlin version,
+#               2.3.7 is "Bumped Kotlin target language version to 2.3"),
+# Hilt 2.53.1 -> 2.59.2 (AGP 9 jetifier bug fixed in 2.59.2, 2.59.0/2.59.1 broken),
+# OkHttp 4.12.0 -> 5.3.2 (binary compatible with Retrofit 2.11),
+# Compose BOM 2024.12.01 -> 2026.03.00,
+# compileSdk/targetSdk 35 -> 36 (Google Play 2026-08-31 policy),
+# markdown-renderer 0.33.0 -> 0.39.2 (PITFALLS #12, requires compileSdk=36),
+# Room 2.6.1 -> 2.8.4 （强制升：Room 2.6.1 在 KSP2 上有 "unexpected jvm signature V" bug，
+#                       Room 2.7.0-alpha11 起修复，2.8.4 当前最新稳定 + 完整 KSP2 支持）.
+# Coil/Retrofit/kotlinx-serialization/security-crypto 不动（独立议题）。
+# jvmTarget=17 不动（v0.2 §5 取消升 21）。
+agp = "9.2.0"
+kotlin = "2.3.21"
+ksp = "2.3.7"
+
+compose-bom = "2026.03.00"
+compose-navigation = "2.8.5"
+activity-compose = "1.9.3"
+lifecycle = "2.8.7"
+work = "2.10.0"
+core-ktx = "1.15.0"
+webkit = "1.14.0"
+
+hilt = "2.59.2"
+hilt-navigation-compose = "1.2.0"
+
+retrofit = "2.11.0"
+okhttp = "5.3.2"
+kotlinx-serialization = "1.7.3"
+retrofit-serialization = "1.0.0"
+
+room = "2.8.4"
+coil = "2.7.0"
+datastore = "1.1.1"
+security-crypto = "1.1.0-alpha06"
+appcompat = "1.7.0"
+recyclerview = "1.3.2"
+splashscreen = "1.0.1"
+markdown-renderer = "0.39.2"
+chucker = "4.3.1"
+sentry = "8.47.0"
+# TabChat IM 实时通道 SDK。注：需求书写 0.7.0，但 Maven Central 上该 artifact
+# 最新只到 0.5.0（无 0.6.x / 0.7.x），故锁 0.5.0（API 自 0.2.x 起稳定：Client /
+# Options.setData / newSubscription(SubscriptionOptions) / EventListener 均一致）。
+centrifuge = "0.5.0"
+zxing-embedded = "4.3.0"
+
+[libraries]
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+androidx-webkit = { group = "androidx.webkit", name = "webkit", version.ref = "webkit" }
+activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
+
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
+compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+compose-material-icons = { group = "androidx.compose.material", name = "material-icons-extended" }
+compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose-navigation" }
+
+lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "lifecycle" }
+work-runtime = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work" }
+
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
+
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+retrofit-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-serialization" }
+
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "security-crypto" }
+markdown-renderer = { group = "com.mikepenz", name = "multiplatform-markdown-renderer-android", version.ref = "markdown-renderer" }
+markdown-renderer-m3 = { group = "com.mikepenz", name = "multiplatform-markdown-renderer-m3", version.ref = "markdown-renderer" }
+chucker = { group = "com.github.chuckerteam.chucker", name = "library", version.ref = "chucker" }
+chucker-no-op = { group = "com.github.chuckerteam.chucker", name = "library-no-op", version.ref = "chucker" }
+sentry-android = { group = "io.sentry", name = "sentry-android", version.ref = "sentry" }
+centrifuge = { group = "io.github.centrifugal", name = "centrifuge-java", version.ref = "centrifuge" }
+zxing-android-embedded = { group = "com.journeyapps", name = "zxing-android-embedded", version.ref = "zxing-embedded" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+# kotlin-android 已删除：AGP 9.0+ 内置 Kotlin 支持，
+# 见 https://developer.android.com/build/migrate-to-built-in-kotlin
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

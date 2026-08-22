@@ -1,0 +1,19 @@
+[
+  {
+    "type": "text",
+    "text": "hi from future",
+    "_v3_marker": "future",
+    "nested_object": {
+      "future_field": 42
+    }
+  },
+  {
+    "type": "tool_use",
+    "id": "toolu_future",
+    "name": "future_tool",
+    "input": {
+      "future_arg": true
+    },
+    "future_top_level": "should be ignored by Pydantic extra=ignore"
+  }
+]

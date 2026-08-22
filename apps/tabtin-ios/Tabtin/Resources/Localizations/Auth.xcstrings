@@ -1,0 +1,300 @@
+{
+  "sourceLanguage" : "zh-Hans",
+  "strings" : {
+    "auth.slogan" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "AI Workspace" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "AI 工作平台" } }
+      }
+    },
+    "auth.hero.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Put agents\nto real work" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "让 Agent\n真正做事" } }
+      }
+    },
+    "auth.hero.subtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Every step stays visible." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "每一步，都看得见。" } }
+      }
+    },
+    "auth.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Log in to TabTin" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "登录 TabTin" } }
+      }
+    },
+    "auth.language.switchToEnglish" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Switch to English" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "切换到英文" } }
+      }
+    },
+    "auth.language.switchToChinese" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Switch to Chinese" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "切换到中文" } }
+      }
+    },
+    "auth.phone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Phone Number" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "手机号" } }
+      }
+    },
+    "auth.phonePlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter 11-digit number" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请输入 11 位手机号" } }
+      }
+    },
+    "auth.emailOrPhone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Account" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "邮箱/手机" } }
+      }
+    },
+    "auth.emailOrPhonePlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Email or phone" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "邮箱或手机号" } }
+      }
+    },
+    "auth.verificationCode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Verification Code" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "验证码" } }
+      }
+    },
+    "auth.codePlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "6-digit code" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "6 位验证码" } }
+      }
+    },
+    "auth.password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Password" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "密码" } }
+      }
+    },
+    "auth.passwordPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter password" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请输入密码" } }
+      }
+    },
+    "auth.showPassword" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Show password" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "显示密码" } }
+      }
+    },
+    "auth.hidePassword" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Hide password" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "隐藏密码" } }
+      }
+    },
+    "auth.login" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Log In" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "登录" } }
+      }
+    },
+    "auth.error.invalidPassword" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Account or password is incorrect. Try again." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "账号或密码不正确，请重试" } }
+      }
+    },
+    "auth.error.invalidVerificationCode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "The code is invalid or expired. Get a new code." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "验证码无效或已过期，请重新获取" } }
+      }
+    },
+    "auth.error.sendCode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn't send the code. Try again later." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "验证码发送失败，请稍后重试" } }
+      }
+    },
+    "auth.error.network" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Check your connection and try again." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "网络连接异常，请稍后重试" } }
+      }
+    },
+    "auth.error.login" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn't log in. Try again later." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "登录失败，请稍后重试" } }
+      }
+    },
+    "auth.loginFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Login Failed" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "登录失败" } }
+      }
+    },
+    "auth.loginWithPassword" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Log in with password" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "使用密码登录" } }
+      }
+    },
+    "auth.loginWithCode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Log in with verification code" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "使用验证码登录" } }
+      }
+    },
+    "auth.getCode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Get Code" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "获取验证码" } }
+      }
+    },
+    "auth.codeResend" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Retry in %llds" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%lld秒后重试" } }
+      }
+    },
+    "auth.inviteCodeTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Invitation Code Required" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "需要邀请码" } }
+      }
+    },
+    "auth.inviteCodeDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter your invitation code to start using TabTin." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请输入邀请码后继续使用 TabTin。" } }
+      }
+    },
+    "auth.inviteCodePlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Invitation code" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请输入邀请码" } }
+      }
+    },
+    "auth.inviteCodeContinue" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Verify and Continue" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "验证并继续" } }
+      }
+    },
+    "auth.inviteCodeChangeAccount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Use another account" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "换个账号" } }
+      }
+    },
+    "auth.inviteCodeRequired" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter an invitation code" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请输入邀请码" } }
+      }
+    },
+    "auth.inviteCodeRateLimited" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Too many attempts. Please try again later." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请求过于频繁，请稍后再试" } }
+      }
+    },
+    "auth.sessionExpired" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Session expired, please log in again" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "登录已过期，请重新登录" } }
+      }
+    },
+    "auth.privacyAgreementPrefix" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "I have read and agree to the " } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "我已阅读并同意" } }
+      }
+    },
+    "auth.privacyPolicy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Privacy Policy" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "隐私政策" } }
+      }
+    },
+    "auth.privacyCheckboxLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Agree to Privacy Policy" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "同意隐私政策" } }
+      }
+    },
+    "auth.privacyConsentTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Privacy Policy" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请先同意隐私政策" } }
+      }
+    },
+    "auth.privacyConsentMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Please read and agree to the Privacy Policy before continuing." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "继续前需要先阅读并同意隐私政策。" } }
+      }
+    },
+    "auth.privacyConsentAgree" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Agree and Select" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "同意并勾选" } }
+      }
+    },
+    "auth.privacyConsentDisagree" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Disagree" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "不同意" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

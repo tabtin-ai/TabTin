@@ -1,0 +1,209 @@
+{
+  "sourceLanguage" : "zh-Hans",
+  "strings" : {
+    "capabilityMarket.connector.sources" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Connector sources" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "连接器来源" } }
+      }
+    },
+    "capabilityMarket.connector.source.recommended" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Recommended" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "推荐" } }
+      }
+    },
+    "capabilityMarket.connector.source.organization" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "组织精选" } }
+      }
+    },
+    "capabilityMarket.connector.source.mine" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Mine" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "我的" } }
+      }
+    },
+    "capabilityMarket.connector.search" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search connectors" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "搜索连接器" } }
+      }
+    },
+    "capabilityMarket.connector.loading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Loading connectors…" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "正在加载连接器…" } }
+      }
+    },
+    "capabilityMarket.skill.loadFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn’t load skills. Try again later." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "技能库加载失败，请稍后重试。" } }
+      }
+    },
+    "capabilityMarket.connector.loadFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn’t load connectors. Try again later." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "连接器加载失败，请稍后重试。" } }
+      }
+    },
+    "capabilityMarket.connector.noMatches" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No matching connectors" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "没有匹配的连接器" } }
+      }
+    },
+    "capabilityMarket.connector.tryAnotherSearch" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Try another keyword or pull to refresh later." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "换个关键词试试，或稍后下拉刷新。" } }
+      }
+    },
+    "capabilityMarket.connector.recommended.empty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No recommended connectors" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂无推荐连接器" } }
+      }
+    },
+    "capabilityMarket.connector.recommended.emptyDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "The recommended catalog is unavailable. Pull to refresh later." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "推荐目录暂不可用，请稍后下拉刷新。" } }
+      }
+    },
+    "capabilityMarket.connector.organization.empty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No organization connectors" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "组织还没有精选连接器" } }
+      }
+    },
+    "capabilityMarket.connector.organization.emptyDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Shared organization connectors appear here. Manage them on desktop." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "组织共享连接器会显示在这里；请在电脑端管理。" } }
+      }
+    },
+    "capabilityMarket.connector.mine.empty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No registered connectors" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "还没有已登记的连接器" } }
+      }
+    },
+    "capabilityMarket.connector.mine.emptyDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Connectors registered on your devices appear here. Connect and manage them on desktop." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "当前账号设备上的连接器会显示在这里；请在电脑端接入和管理。" } }
+      }
+    },
+    "capabilityMarket.connector.mine.partialFailure" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Some devices could not be read. Connectors from other devices are still shown." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "部分设备暂时无法读取，已显示其余设备的连接器。" } }
+      }
+    },
+    "capabilityMarket.connector.mine.allDevicesFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Connectors could not be read from any device. Try again later." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "所有设备的连接器都暂时无法读取，请稍后重试。" } }
+      }
+    },
+    "capabilityMarket.connector.recommended.vercel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lets your Agent search Vercel docs, manage projects and deployments, and review logs and web analytics." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "让 Agent 搜索 Vercel 文档，管理项目与部署，查看日志和网站访问分析。" } }
+      }
+    },
+    "capabilityMarket.connector.recommended.github" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lets your Agent search repos and code, and help with issues, pull requests, and reviews." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "让 Agent 搜索仓库与代码，查看和协助处理 Issue、Pull Request 与代码评审。" } }
+      }
+    },
+    "capabilityMarket.connector.recommended.stripe" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lets your Agent look up customers, payments, and refunds, and search Stripe docs." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "让 Agent 查询客户、收款和退款，并检索 Stripe 文档与集成指引。" } }
+      }
+    },
+    "capabilityMarket.connector.recommended.notion" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lets your Agent search, read, and update Notion pages and databases." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "让 Agent 搜索、阅读和更新 Notion 页面与数据库，整理工作区内容。" } }
+      }
+    },
+    "capabilityMarket.connector.recommended.canva" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lets your Agent search and edit designs, manage assets and brand kits, and export files." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "让 Agent 搜索和编辑设计稿，管理素材与品牌套件，并导出多种格式成品。" } }
+      }
+    },
+    "capabilityMarket.connector.recommended.supabase" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lets your Agent query and manage databases and projects, run SQL, and deploy Edge Functions." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "让 Agent 查询和管理数据库与项目，执行 SQL，部署 Edge Functions。" } }
+      }
+    },
+    "capabilityMarket.connector.recommended.neon" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lets your Agent manage Neon projects and branches, run queries, and help change schemas." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "让 Agent 管理 Neon 项目与分支，执行查询，并协助调整表结构。" } }
+      }
+    },
+    "capabilityMarket.connector.recommended.cloudflare" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lets your Agent read account settings across DNS, Workers, storage, and security." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "让 Agent 读取账户配置，查看 DNS、Workers、存储与安全相关信息。" } }
+      }
+    },
+    "capabilityMarket.connector.recommended.tianyancha" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lets your Agent look up company registration, shareholders, reports, IP, and legal risks." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "让 Agent 查询企业工商、股东、年报、知识产权和司法风险等信息。" } }
+      }
+    },
+    "capabilityMarket.connector.recommended.hithinkAShare" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lets your Agent look up A-share live and historical quotes, financials, indices, sectors, and limit-up data." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "让 Agent 查询 A 股实时与历史行情、财务报表、指数、板块和涨停数据。" } }
+      }
+    },
+    "capabilityMarket.connector.recommended.dingtalk" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lets your Agent look up workplace contacts and manage calendars." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "让 Agent 查询企业通讯录，查看和安排日程。" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

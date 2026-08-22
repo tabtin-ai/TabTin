@@ -1,0 +1,70 @@
+{
+  "id": "tabtin-business-analysis-pack",
+  "name": "业务分析包",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "研究分析：OKR 教练、SaaS 指标分析、法律风险评估。",
+  "icon": "search",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "research",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 33
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/okr-planner",
+    "skills/saas-analyzer",
+    "skills/legal-risk-analyzer"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "okr-planner": {
+        "enabled": true
+      },
+      "saas-analyzer": {
+        "enabled": true
+      },
+      "legal-risk-analyzer": {
+        "enabled": true
+      }
+    }
+  }
+}

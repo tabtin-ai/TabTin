@@ -1,0 +1,404 @@
+{
+  "appName": "Automation",
+  "panel": {
+    "header": "Automation",
+    "overview": "Overview",
+    "list": "List",
+    "viewList": "List",
+    "viewAgenda": "Timeline",
+    "viewKanban": "Kanban",
+    "createTask": "New Automation Task",
+    "createAction": "New",
+    "search": "Search automation tasks…",
+    "filterAll": "All",
+    "filterAllStatus": "All statuses",
+    "filterStatus": "Status",
+    "filterType": "Type",
+    "loadMore": "Load more",
+    "totalCount": "{{count}} items",
+    "emptyTitle": "No automation tasks yet",
+    "emptyDescription": "Tell the Agent “check PRs every morning”, or fill in the form yourself.",
+    "emptyHint": "Use “New Automation Task” — Manual or Agent create",
+    "createFirst": "Create your first automation task",
+    "selectSpace": "Select a Workspace",
+    "noResults": "No matching tasks",
+    "workspaceUnavailable": "Workspace unavailable",
+    "agentUnavailable": "Agent unavailable",
+    "nextRunAt": "Next {{time}}",
+    "noNextRun": "No next run scheduled",
+    "pausedPlan": "Paused — won't run automatically",
+    "openTaskDetail": "Open scheduled task \"{{name}}\"",
+    "rowActions": {
+      "menu": "Task actions"
+    },
+    "columns": {
+      "task": "Task",
+      "workspace": "Workspace",
+      "status": "Status",
+      "type": "Type",
+      "instructions": "Instructions",
+      "schedule": "Next / recent run",
+      "actions": "Actions"
+    }
+  },
+  "overview": {
+    "attention": "Needs attention",
+    "summary": "{{total}} tasks · {{attention}} need attention · {{active}} active",
+    "attentionEmpty": "All clear",
+    "running": "Running",
+    "runningEmpty": "No tasks running",
+    "scheduled": "Scheduled",
+    "scheduledEmpty": "No automation tasks",
+    "dormant": "Drafts & Paused",
+    "view": "View",
+    "runNow": "Run now",
+    "activate": "Enable",
+    "resume": "Resume"
+  },
+  "status": {
+    "draft": "Draft",
+    "active": "Active",
+    "paused": "Paused",
+    "disabled": "Ended",
+    "archived": "Archived"
+  },
+  "trigger": {
+    "manual": "Manual",
+    "cron": "Cron",
+    "interval": "Interval",
+    "at": "One-time",
+    "webhook": "Webhook",
+    "table_event": "Table event",
+    "extension_event": "Extension event",
+    "tracker_completed": "On upstream task completed"
+  },
+  "scope": {
+    "all": "All"
+  },
+  "detail": {
+    "loading": "Loading…",
+    "empty": "Task not found",
+    "retry": "Retry",
+    "noRuns": "No runs yet",
+    "nextRun": "Next run",
+    "instructions": "Instructions",
+    "noInstructions": "No instructions yet",
+    "description": "List note",
+    "taskInfo": "Task information",
+    "workspace": "Workspace",
+    "agent": "Execution Agent",
+    "runHistory": "Run history",
+    "scheduleActive": "{{schedule}}",
+    "schedulePaused": "{{schedule}} · Paused",
+    "openRunSession": "Open this run's chat",
+    "openRunSessionFailed": "Failed to open this run's chat. Please try again.",
+    "refreshRuns": "Refresh",
+    "health": {
+      "disabled": "Paused — resume to keep running",
+      "missedSkipped": "The latest missed run was skipped as configured ({{time}}). Skipped {{count}} total."
+    },
+    "resultSummary": "Result",
+    "errorDetail": "Failure details",
+    "cancelDetail": "Cancellation reason",
+    "runStatus": {
+      "completed": "Completed",
+      "failed": "Failed",
+      "running": "Running",
+      "pending": "Pending",
+      "cancelled": "Cancelled",
+      "waiting_device": "Waiting for device"
+    },
+    "actions": {
+      "edit": "Edit",
+      "activate": "Enable",
+      "activateDraft": "Enable & start scheduling",
+      "activateDraftManual": "Enable to allow manual trigger",
+      "draftHint": "Drafts won't be triggered. Enable to run on your rules automatically.",
+      "pause": "Pause",
+      "trigger": "Run now",
+      "triggerDisabledActiveRun": "A run is already in progress. Wait for it to finish or cancel it first.",
+      "delete": "Delete",
+      "confirmDelete": "Confirm delete",
+      "confirmDeleteTitle": "Delete scheduled task",
+      "confirmDeleteHint": "The task card will be removed from the Automation list. If run history exists, its task name and Run entries remain in the sidebar.",
+      "resume": "Resume",
+      "paused": "Paused",
+      "resumed": "Resumed",
+      "triggered": "Triggered",
+      "deleted": "Deleted",
+      "cancelRun": "Cancel this run",
+      "runCancelled": "This run was cancelled"
+    },
+    "more": {
+      "title": "More",
+      "note": "Note",
+      "noNote": "No note",
+      "catchup": "Missed-run policy",
+      "authorization": "Authorization"
+    },
+    "frequencyLabel": "Frequency",
+    "highFrequencyToast": "Enabled · {{summary}}. Pause it from the detail page to change."
+  },
+  "frequencyHint": {
+    "manual": "Triggered manually only — won't run on its own",
+    "cronCustom": "Runs on a custom schedule",
+    "cronHourly": "Runs every hour (~24 times per day)",
+    "cronDaily": "Runs daily at {{at}}",
+    "cronWeekdays": "Runs each weekday at {{at}}",
+    "cronWeekly": "Runs every Monday at {{at}}",
+    "intervalUnknown": "Runs on a fixed time interval",
+    "intervalSummary": "{{unit}} (~{{count}} times per day)",
+    "atOnce": "Runs once at {{at}}",
+    "atUnknown": "Runs once at the scheduled time",
+    "unitSeconds": "every {{n}} seconds",
+    "unitMinutes": "~every {{n}} minutes",
+    "unitHours": "~every {{n}} hours",
+    "webhook": "Triggered by inbound webhooks — rate depends on caller",
+    "tableEvent": "Triggered by table events (row created / updated / deleted)",
+    "extensionEvent": "Triggered by extension events",
+    "trackerCompleted": "Triggered when an upstream automation task finishes"
+  },
+  "createDialog": {
+    "title": "New Automation Task",
+    "editTitle": "Edit Automation Task",
+    "sections": {
+      "what": "Task content",
+      "when": "Schedule"
+    },
+    "cancel": "Cancel",
+    "submit": "Create",
+    "save": "Save",
+    "moreOptions": "More options",
+    "createModeLabel": "Create method",
+    "tabs": {
+      "manual": "Manual",
+      "agent": "Agent create"
+    },
+    "agentTab": {
+      "hint": "After sending, the Agent in the side chat will create and enable it.",
+      "requestLabel": "What automation task should the Agent create?",
+      "placeholder": "e.g. Every day at 9am, list GitHub PRs older than 24h in my review queue and post to Inbox",
+      "submit": "Send to chat",
+      "submitting": "Opening chat…"
+    },
+    "fields": {
+      "name": "Task name",
+      "nameHint": "Shown in the task list so you can recognize this task.",
+      "title": "Title",
+      "description": "List note (optional)",
+      "instructions": "Instructions",
+      "instructionsHint": "Sent to the Agent each run. The Agent will pick a suitable Skill on its own as needed.",
+      "agent": "Execution Agent",
+      "workspace": "Execution Agent",
+      "activateOnCreate": "Enable immediately after creation",
+      "activateOnCreateHint": "Starts scheduling right away after creation. Manual tasks still require Run now.",
+      "schedule": "Schedule",
+      "atTime": "At",
+      "frequency": "Frequency",
+      "runTime": "Run time",
+      "firstRunTime": "First run time (optional)",
+      "intervalEvery": "Run frequency",
+      "hours": "hours",
+      "skillLabel": "Linked Skill (optional)",
+      "skillHint": "Pick a Skill for the Agent to use; leave empty to let the Agent decide.",
+      "recurrenceDays": "Repeat on",
+      "intervalMinutes": "Every N minutes",
+      "intervalPrefix": "Every",
+      "intervalSuffix": "minutes",
+      "onceAt": "Run date & time",
+      "catchup": "If a run is missed",
+      "table": "Select a table",
+      "tableEvents": "Trigger events",
+      "tableConditionNote": "Currently matches all changes in this table; field-based filters are coming soon."
+    },
+    "schedule": {
+      "manual": "Manual",
+      "recurring": "Recurring",
+      "interval": "Interval"
+    },
+    "permissionNotice": {
+      "hint": "This task runs automatically on schedule without asking at each step. You can pause it at any time."
+    },
+    "schedulePresets": {
+      "manual": "Manual",
+      "hourly": "Hourly",
+      "daily": "Daily",
+      "weekdays": "Weekdays",
+      "weekly": "Weekly",
+      "interval": "Interval",
+      "at": "Once",
+      "table_event": "On table change"
+    },
+    "schedulePresetHints": {
+      "manual": "Runs only when you press \"Run now\".",
+      "hourly": "Runs once at the top of every hour.",
+      "daily": "Runs once a day at the specified time.",
+      "weekdays": "Runs Monday through Friday at the specified time.",
+      "weekly": "Runs every Monday at the specified time.",
+      "interval": "Runs automatically at a fixed time interval.",
+      "at": "Runs once at the date & time you pick, then stops.",
+      "table_event": "Runs automatically when the selected table changes."
+    },
+    "tableEventTypes": {
+      "record_created": "Row added",
+      "record_updated": "Row updated",
+      "record_deleted": "Row deleted"
+    },
+    "recurrence": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "day": {
+        "MO": "Mo",
+        "TU": "Tu",
+        "WE": "We",
+        "TH": "Th",
+        "FR": "Fr",
+        "SA": "Sa",
+        "SU": "Su"
+      }
+    },
+    "placeholders": {
+      "name": "e.g. Daily data sync",
+      "nameTitle": "Enter task name",
+      "title": "Task title",
+      "description": "e.g. a note for teammates — optional",
+      "instructions": "e.g. Summarize yesterday's unread mail into three bullets and post to Inbox",
+      "agent": "Select an Agent",
+      "workspace": "Select a Space",
+      "agentDefault": "Default (current chat Agent)",
+      "workspaceDefault": "Default (current Space)",
+      "agentLoading": "Loading agents...",
+      "workspaceLoading": "Loading spaces...",
+      "skillKeyFriendly": "Leave empty = Agent auto-selects",
+      "table": "Select a table to watch",
+      "tableLoading": "Loading…",
+      "tableEmpty": "No tables in this space yet"
+    },
+    "errors": {
+      "nameRequired": "Please enter a name.",
+      "instructionsRequired": "Please enter instructions for what the Agent should do.",
+      "agentCreateFailed": "Could not start a chat. Please try again.",
+      "noOrganization": "Could not determine the organization. Please try again.",
+      "submitFailed": "Failed to create. Please retry or contact your admin.",
+      "intervalRequired": "Please enter a valid interval in minutes (≥ 1).",
+      "onceAtRequired": "Please pick a date & time to run.",
+      "onceAtMustBeFuture": "Run time must be in the future. Please pick a later time.",
+      "tableRequired": "Please select a table to watch.",
+      "tableEventsRequired": "Please select at least one trigger event."
+    },
+    "lockedTrigger": {
+      "cronValue": "Custom schedule rule ({{expression}})",
+      "hint": "This task's trigger can't be edited here. Saving will keep the original trigger unchanged."
+    },
+    "catchup": {
+      "run_once": "Catch up once",
+      "skip": "Skip missed runs",
+      "hint": "If the computer is off or the app isn't running, a run may miss its scheduled time. Choose what happens after recovery.",
+      "run_onceHint": "Run once automatically after recovery — good for reports and digests that shouldn't be missed.",
+      "skipHint": "Skip the missed run and wait for the next cycle — good for reminders that lose meaning once the time has passed."
+    },
+    "intentSnapshot": {
+      "title": "Creation intent",
+      "empty": "No original intent was recorded (this automation task may have been created earlier).",
+      "userUtterance": "What you said",
+      "agentProposal": "Agent's proposal",
+      "finalValues": "Final values",
+      "createdVia": "Created via",
+      "via": {
+        "ui": "UI form",
+        "cli": "Command line",
+        "agent": "Agent chat",
+        "command_palette": "Command palette"
+      }
+    }
+  },
+  "home": {
+    "subtitle": "Create and manage Agent automation tasks that run on a schedule",
+    "viewAll": "View all",
+    "nextRun": "Next run",
+    "create": "Create Task",
+    "loadFailed": "Failed to load"
+  },
+  "automation": {
+    "title": "Automation",
+    "subtitle": "Use automation tasks to let Agents run on a schedule"
+  },
+  "schedule": {
+    "prevWeek": "Previous week",
+    "nextWeek": "Next week",
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "today": "Today",
+    "weekView": "Week",
+    "monthView": "Month",
+    "scopeOrganization": "Organization scope",
+    "scopeSpace": "Current Workspace",
+    "scopeOrganizationShort": "Organization",
+    "scopeSpaceShort": "Workspace",
+    "manage": "Manage tasks",
+    "truncatedHint": "Too many scheduled runs; only part of this date range is shown.",
+    "loadError": "Failed to load schedule",
+    "emptyTitle": "No expected runs in this period",
+    "emptyDescription": "Future runs appear here after you create or enable an automation task",
+    "narrowList": "Schedule by date",
+    "pending": "Pending",
+    "weekGrid": "Weekly calendar",
+    "monthGrid": "Monthly calendar",
+    "moreCount": "+{{count}}",
+    "moreAriaLabel": "{{date}}, {{count}} more tasks"
+  },
+  "toast": {
+    "activated": "Enabled",
+    "createdAndActivated": "Created and enabled",
+    "createdAsDraft": "Created",
+    "createdAsDraftHint": "Drafts won't run automatically. Click 'Enable' in the detail view to start triggers.",
+    "activateAfterCreateFailed": "Saved, but enable failed — try Enable again in the detail view.",
+    "runCompleted": "Automation task completed",
+    "runFailed": "Automation task failed",
+    "error": "Operation failed"
+  },
+  "notification": {
+    "trackerCompletedBody": "Click to view this run",
+    "trackerFailedBody": "Click to view failure"
+  },
+  "chatSidebar": {
+    "trackersSection": "Automation",
+    "openModule": "Open Automation module",
+    "newTracker": "+ New Automation Task",
+    "emptyHint": "Create your first automation task",
+    "emptyForWorkspace": "No automation tasks in this Workspace",
+    "emptyCreate": "New automation task",
+    "viewAll": "View all ({{count}})",
+    "openTaskDetail": "Open task detail",
+    "archivedTask": "Deleted task; run history retained",
+    "deleteHistory": "Delete history",
+    "deleteHistoryTitle": "Delete automation history",
+    "deleteHistoryHint": "This permanently deletes every run record and its conversation. This cannot be undone.",
+    "deleteHistorySuccess": "History deleted",
+    "deleteHistoryFailed": "Delete failed. Try again.",
+    "expandRuns": "Expand run history",
+    "collapseRuns": "Collapse run history",
+    "runsLoading": "Loading run history…",
+    "runsError": "Failed to load",
+    "runsRetry": "Retry",
+    "runsEmpty": "No runs yet",
+    "viewAllRuns": "View all ({{count}})"
+  },
+  "timeline": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "thisWeek": "This week",
+    "later": "Later",
+    "noSchedule": "Unscheduled",
+    "empty": "No upcoming automation tasks"
+  },
+  "kanban": {
+    "empty": "No automation tasks",
+    "colEmpty": "Empty",
+    "colDraft": "Draft",
+    "colActive": "Active",
+    "colPaused": "Paused",
+    "colDisabled": "Ended"
+  }
+}

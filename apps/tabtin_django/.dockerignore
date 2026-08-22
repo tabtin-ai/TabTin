@@ -1,0 +1,28 @@
+# 镜像构建上下文裁剪 —— 见 docs/agent/pg-single-db-mainline-plan.md「整机 Compose」
+# 关键：不把 venv / 本地密钥 .env / 日志 / 测试 sqlite 烘焙进镜像（INFRA-1：密钥运行时注入）
+venv/
+.venv/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# 本地环境 / 密钥（运行时由 compose 注入，绝不进镜像）
+.env
+.env.*
+!.env.example
+
+# 运行产物
+logs/
+*.log
+*.sqlite3
+staticfiles/
+media/
+
+# 杂项
+.git/
+.DS_Store
+node_modules/

@@ -1,0 +1,1990 @@
+openapi: 3.1.0
+info:
+  title: TabTin REST API
+  version: 1.0.0
+  description: |
+    TabTin 平台 REST API 规范，覆盖 Auth、Chat、Context 三个核心模块。
+    所有响应均使用统一 ApiEnvelope 包装。
+  contact:
+    name: TabTin Team
+    url: https://www.example.com
+
+servers:
+  - url: http://localhost:6060/api
+    description: 开发环境
+  - url: https://api.example.com/api
+    description: 生产环境
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: auth
+    description: 认证与用户管理
+  - name: chat
+    description: 聊天会话与消息
+  - name: context
+    description: 团队（Organization）与 Space
+  - name: membership
+    description: 会员体系
+  - name: billing
+    description: 计费中心
+  - name: rag
+    description: 统一语义检索（W13c：本地 Runtime rag_search 工具依赖此端点）
+  - name: tabmemo
+    description: TabMemo 碎片记忆（W13c：本地 Runtime memory_* 工具依赖此端点）
+  - name: credential-vault
+    description: 凭据库（W13c：本地 Runtime credential_lookup/credential_retrieve 工具依赖此端点）
+
+# ────────────────────────── 公共组件 ──────────────────────────
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    X-Client-Type:
+      name: X-Client-Type
+      in: header
+      required: false
+      schema:
+        type: string
+        enum: [electron, ios, android, web, server]
+      description: 客户端类型标识
+
+  schemas:
+    # ── 引用 shared-models ──
+    ApiEnvelope:
+      $ref: '../models/shared-models.yaml#/$defs/ApiEnvelope'
+    UserInfo:
+      $ref: '../models/shared-models.yaml#/$defs/UserInfo'
+    LoginResponse:
+      $ref: '../models/shared-models.yaml#/$defs/LoginResponse'
+    Organization:
+      $ref: '../models/shared-models.yaml#/$defs/Organization'
+    Space:
+      $ref: '../models/shared-models.yaml#/$defs/Space'
+    ChatSession:
+      $ref: '../models/shared-models.yaml#/$defs/ChatSession'
+    ChatMessage:
+      $ref: '../models/shared-models.yaml#/$defs/ChatMessage'
+    MessageBlock:
+      $ref: '../models/shared-models.yaml#/$defs/MessageBlock'
+    Pagination:
+      $ref: '../models/shared-models.yaml#/$defs/Pagination'
+    MembershipTier:
+      $ref: '../models/shared-models.yaml#/$defs/MembershipTier'
+    OrganizationMembershipStatus:
+      $ref: '../models/shared-models.yaml#/$defs/OrganizationMembershipStatus'
+    BillingSummary:
+      $ref: '../models/shared-models.yaml#/$defs/BillingSummary'
+    BillingPolicy:
+      $ref: '../models/shared-models.yaml#/$defs/BillingPolicy'
+    BillingEntitlement:
+      $ref: '../models/shared-models.yaml#/$defs/BillingEntitlement'
+    BillingInvoice:
+      $ref: '../models/shared-models.yaml#/$defs/BillingInvoice'
+    UsageDashboard:
+      $ref: '../models/shared-models.yaml#/$defs/UsageDashboard'
+
+    # ── 请求体 ──
+
+    PasswordLoginRequest:
+      type: object
+      required: [username, password]
+      properties:
+        username:
+          type: string
+          description: 用户名、邮箱或手机号
+        password:
+          type: string
+          format: password
+        remember_me:
+          type: boolean
+          default: false
+
+    VerificationCodeLoginRequest:
+      type: object
+      required: [username, verification_code]
+      properties:
+        username:
+          type: string
+          description: 邮箱或手机号
+        verification_code:
+          type: string
+        remember_me:
+          type: boolean
+          default: false
+
+    RegisterRequest:
+      type: object
+      required: [password, verification_code]
+      properties:
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        password:
+          type: string
+          format: password
+        nickname:
+          type: string
+        username:
+          type: string
+        verification_code:
+          type: string
+
+    RefreshTokenRequest:
+      type: object
+      required: [refresh_token]
+      properties:
+        refresh_token:
+          type: string
+
+    SendVerificationCodeRequest:
+      type: object
+      required: [username, code_type]
+      properties:
+        username:
+          type: string
+          description: 邮箱或手机号
+        code_type:
+          type: string
+          description: 验证码用途（login, register, reset_password 等）
+
+    UpdateProfileRequest:
+      type: object
+      properties:
+        nickname:
+          type: string
+        username:
+          type: string
+        bio:
+          type: string
+        avatar:
+          type: string
+
+    ChangePasswordRequest:
+      type: object
+      required: [old_password, new_password]
+      properties:
+        old_password:
+          type: string
+          format: password
+        new_password:
+          type: string
+          format: password
+
+    ForgotPasswordRequest:
+      type: object
+      required: [username]
+      properties:
+        username:
+          type: string
+          description: 邮箱或手机号
+
+    ResetPasswordRequest:
+      type: object
+      required: [token, new_password]
+      properties:
+        token:
+          type: string
+        new_password:
+          type: string
+          format: password
+
+    CreateChatSessionRequest:
+      type: object
+      required: [space_id]
+      properties:
+        space_id:
+          type: string
+          format: uuid
+        organization_id:
+          type: string
+          format: uuid
+        model_id:
+          type: string
+
+    UpdateChatSessionRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        status:
+          type: string
+          enum: [active, completed, archived]
+
+    SendMessageRequest:
+      type: object
+      properties:
+        message:
+          type: string
+        blocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageBlock'
+        stream:
+          type: boolean
+          default: true
+        model_id:
+          type: string
+        agent_name:
+          type: string
+
+    SwitchModelRequest:
+      type: object
+      required: [model_id]
+      properties:
+        model_id:
+          type: string
+
+    CreateSpaceRequest:
+      type: object
+      required: [organization_id, name]
+      properties:
+        organization_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+        color:
+          type: string
+
+    AutoRenewRequest:
+      type: object
+      required: [auto_renew]
+      properties:
+        auto_renew:
+          type: boolean
+
+    OrganizationPurchaseRequest:
+      type: object
+      required: [tier_id, payment_method]
+      properties:
+        tier_id:
+          type: string
+        payment_method:
+          type: string
+          enum: [alipay, wechat]
+        extra_params:
+          type: object
+
+    OrganizationPolicyUpdateRequest:
+      type: object
+      properties:
+        storage_billing_mode:
+          type: string
+        llm_billing_mode:
+          type: string
+        currency:
+          type: string
+        is_active:
+          type: boolean
+        metadata:
+          type: object
+
+    OrganizationEntitlementUpdateRequest:
+      type: object
+      properties:
+        included_storage_bytes:
+          type: integer
+        purchased_storage_bytes:
+          type: integer
+        included_llm_credits_monthly:
+          type: string
+        effective_from:
+          type: string
+          format: date-time
+        effective_to:
+          type: string
+          format: date-time
+        is_active:
+          type: boolean
+        metadata:
+          type: object
+
+    # ── W13c：rag / tabmemo / credential-vault 工具契约 schema ──
+    # 仅声明本地 Runtime 7 个 FC 工具实际依赖的字段；其余字段保持开放
+    # （additionalProperties:true 默认）以便后端添字段不破坏 schema。
+
+    RagSearchRequest:
+      type: object
+      required: [query]
+      properties:
+        query:
+          type: string
+          description: 自然语言查询文本（1-2000 字符）
+        content_types:
+          type: array
+          description: 限定检索类型；为空检索所有可用类型
+          items:
+            type: string
+            enum: [table, record, skill, tool, mail, document, code]
+        organization_id:
+          type: string
+          description: 组织 ID
+        top_k:
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 50
+        similarity_threshold:
+          type: number
+          minimum: 0
+          maximum: 1
+        scope:
+          type: object
+          additionalProperties: { type: string }
+          description: '检索范围约束，如 {"space_id": "...", "table_id": "..."}'
+        return_context:
+          type: boolean
+          default: true
+
+    RagSearchHit:
+      type: object
+      properties:
+        content_type:
+          type: string
+        source_id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        similarity:
+          type: number
+        metadata:
+          type: object
+
+    RagSearchResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        query:
+          type: string
+        total:
+          type: integer
+        hits:
+          type: array
+          items:
+            $ref: '#/components/schemas/RagSearchHit'
+        context:
+          type: string
+          nullable: true
+        type_counts:
+          type: object
+          additionalProperties: { type: integer }
+        response_time_ms:
+          type: integer
+          nullable: true
+
+    MemoSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        space_id:
+          type: string
+          nullable: true
+        memo_type:
+          type: string
+        importance:
+          type: integer
+          nullable: true
+        content_plaintext:
+          type: string
+        content_markdown:
+          type: string
+        tags:
+          type: array
+          items: { type: string }
+        ai_tags:
+          type: array
+          items: { type: string }
+        color:
+          type: string
+        source:
+          type: string
+        status:
+          type: string
+        is_pinned:
+          type: boolean
+        bookmark_url:
+          type: string
+        bookmark_title:
+          type: string
+        bookmark_image:
+          type: string
+        attachment_count:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+
+    MemoListResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemoSummary'
+        next_cursor:
+          type: string
+        has_more:
+          type: boolean
+
+    MemoCreateRequest:
+      type: object
+      required: [organization_id]
+      properties:
+        organization_id:
+          type: string
+        space_id:
+          type: string
+          nullable: true
+        content_json:
+          type: object
+        content_markdown:
+          type: string
+        tags:
+          type: array
+          items: { type: string }
+        color:
+          type: string
+        memo_type:
+          type: string
+          enum: [note, bookmark, about_you, insight, task_summary]
+        importance:
+          type: integer
+          nullable: true
+          minimum: 1
+          maximum: 5
+        source:
+          type: string
+          enum: [manual, browser, share, api, agent, voice]
+        source_url:
+          type: string
+        bookmark_url:
+          type: string
+        collection_id:
+          type: string
+          nullable: true
+
+    WebsiteCredential:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        url:
+          type: string
+        username:
+          type: string
+        masked_password:
+          type: string
+        display_name:
+          type: string
+        is_active:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+
+    AppCredential:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        app_package:
+          type: string
+        app_name:
+          type: string
+        username:
+          type: string
+        masked_password:
+          type: string
+        display_name:
+          type: string
+        is_active:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+
+    WebsiteCredentialReveal:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            url:
+              type: string
+            username:
+              type: string
+            password:
+              type: string
+
+  responses:
+    Success:
+      description: 操作成功
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    BadRequest:
+      description: 请求参数错误
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    Unauthorized:
+      description: 未认证或 Token 过期
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    Forbidden:
+      description: 无权限
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    NotFound:
+      description: 资源不存在
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+
+# ────────────────────────── 路径定义 ──────────────────────────
+
+paths:
+
+  # ═══════════════════ Auth 模块 ═══════════════════
+
+  /auth/login:
+    post:
+      tags: [auth]
+      summary: 密码登录
+      operationId: loginWithPassword
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordLoginRequest'
+      responses:
+        '200':
+          description: 登录成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/login/verification-code:
+    post:
+      tags: [auth]
+      summary: 验证码登录
+      operationId: loginWithVerificationCode
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerificationCodeLoginRequest'
+      responses:
+        '200':
+          description: 登录成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/register:
+    post:
+      tags: [auth]
+      summary: 用户注册
+      operationId: register
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: 注册成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /auth/logout:
+    post:
+      tags: [auth]
+      summary: 登出
+      operationId: logout
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/refresh-token:
+    post:
+      tags: [auth]
+      summary: 刷新 Token
+      operationId: refreshToken
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequest'
+      responses:
+        '200':
+          description: Token 刷新成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/send-verification-code:
+    post:
+      tags: [auth]
+      summary: 发送验证码
+      operationId: sendVerificationCode
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendVerificationCodeRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /auth/profile:
+    get:
+      tags: [auth]
+      summary: 获取用户资料
+      operationId: getProfile
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      responses:
+        '200':
+          description: 用户资料
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      tags: [auth]
+      summary: 更新用户资料
+      operationId: updateProfile
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProfileRequest'
+      responses:
+        '200':
+          description: 更新后的用户资料
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInfo'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/profile/settings:
+    get:
+      tags: [auth]
+      summary: 获取用户设置
+      operationId: getProfileSettings
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      responses:
+        '200':
+          description: 用户设置
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      tags: [auth]
+      summary: 更新用户设置
+      operationId: updateProfileSettings
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: 更新后的用户设置
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/change-password:
+    post:
+      tags: [auth]
+      summary: 修改密码
+      operationId: changePassword
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/forgot-password:
+    post:
+      tags: [auth]
+      summary: 忘记密码（发送重置链接/验证码）
+      operationId: forgotPassword
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgotPasswordRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /auth/reset-password:
+    post:
+      tags: [auth]
+      summary: 重置密码
+      operationId: resetPassword
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /auth/sessions:
+    get:
+      tags: [auth]
+      summary: 获取登录会话列表
+      operationId: getAuthSessions
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      responses:
+        '200':
+          description: 会话列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    device_type:
+                      type: string
+                    ip_address:
+                      type: string
+                    last_active:
+                      type: string
+                      format: date-time
+                    is_current:
+                      type: boolean
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  # ═══════════════════ Chat 模块 ═══════════════════
+
+  /chat/sessions:
+    post:
+      tags: [chat]
+      summary: 创建聊天会话
+      operationId: createChatSession
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateChatSessionRequest'
+      responses:
+        '201':
+          description: 创建成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSession'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      tags: [chat]
+      summary: 获取会话列表
+      operationId: listChatSessions
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+        - name: space_id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [active, completed, archived]
+      responses:
+        '200':
+          description: 会话列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChatSession'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /chat/sessions/{session_id}:
+    parameters:
+      - name: session_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      tags: [chat]
+      summary: 获取会话详情
+      operationId: getChatSession
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      responses:
+        '200':
+          description: 会话详情
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSession'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags: [chat]
+      summary: 更新会话
+      operationId: updateChatSession
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateChatSessionRequest'
+      responses:
+        '200':
+          description: 更新后的会话
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSession'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags: [chat]
+      summary: 删除会话
+      operationId: deleteChatSession
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /chat/sessions/{session_id}/messages:
+    parameters:
+      - name: session_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    post:
+      tags: [chat]
+      summary: 发送消息
+      operationId: sendMessage
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendMessageRequest'
+      responses:
+        '200':
+          description: 消息已发送（非流式返回完整消息，流式返回 SSE）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatMessage'
+            text/event-stream:
+              schema:
+                type: string
+                description: SSE 流式响应（stream=true 时）
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    get:
+      tags: [chat]
+      summary: 获取消息列表
+      operationId: listMessages
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: 消息列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChatMessage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /chat/sessions/{session_id}/model:
+    put:
+      tags: [chat]
+      summary: 切换会话模型
+      operationId: switchModel
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SwitchModelRequest'
+      responses:
+        '200':
+          description: 模型切换成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSession'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /chat/sessions/{session_id}/generate-title:
+    post:
+      tags: [chat]
+      summary: 自动生成会话标题
+      operationId: generateTitle
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 标题生成成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /chat/sessions/{session_id}/compact:
+    post:
+      tags: [chat]
+      summary: 会话压缩（精简上下文）
+      operationId: compactSession
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 压缩成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSession'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ═══════════════════ Context 模块 ═══════════════════
+
+  /context/organizations:
+    get:
+      tags: [context]
+      summary: 获取团队列表
+      operationId: listOrganizations
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      responses:
+        '200':
+          description: 团队列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organization'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /context/agent-spaces:
+    get:
+      tags: [context]
+      summary: 获取智能体空间列表
+      operationId: listSpaces
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+        - name: organization_id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 智能体空间列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Space'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      tags: [context]
+      summary: 创建智能体空间
+      operationId: createSpace
+      parameters:
+        - $ref: '#/components/parameters/X-Client-Type'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSpaceRequest'
+      responses:
+        '201':
+          description: 创建成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  # ═══════════════════ Membership 模块 ═══════════════════
+
+  /membership/tiers:
+    get:
+      tags: [membership]
+      summary: 获取会员等级列表
+      operationId: getMembershipTiers
+      security: []
+      parameters:
+        - name: active_only
+          in: query
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: 会员等级列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MembershipTier'
+        '500':
+          $ref: '#/components/responses/BadRequest'
+
+  /membership/check-feature:
+    get:
+      tags: [membership]
+      summary: 检查功能权益
+      operationId: checkFeature
+      parameters:
+        - name: feature_key
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 功能权益检查结果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  available:
+                    type: boolean
+                  feature_key:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /membership/organizations/{organization_id}/membership:
+    get:
+      tags: [membership]
+      summary: 查询团队会员状态
+      operationId: getOrganizationMembership
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 团队会员状态
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationMembershipStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /membership/organizations/{organization_id}/purchase:
+    post:
+      tags: [membership]
+      summary: 为团队购买会员
+      operationId: purchaseOrganizationMembership
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationPurchaseRequest'
+      responses:
+        '200':
+          description: 支付订单信息
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /membership/organizations/{organization_id}/membership/auto-renew:
+    patch:
+      tags: [membership]
+      summary: 切换团队自动续费
+      operationId: toggleOrganizationAutoRenew
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutoRenewRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  # ═══════════════════ Billing 模块 ═══════════════════
+
+  /services/billing/organizations/{organization_id}/summary:
+    get:
+      tags: [billing]
+      summary: 获取团队计费摘要
+      operationId: getOrganizationBillingSummary
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: days
+          in: query
+          schema:
+            type: integer
+            default: 30
+        - name: event_limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: 计费摘要
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingSummary'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /services/billing/organizations/{organization_id}/policy:
+    get:
+      tags: [billing]
+      summary: 获取计费策略
+      operationId: getOrganizationBillingPolicy
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 计费策略
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingPolicy'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    put:
+      tags: [billing]
+      summary: 更新计费策略
+      operationId: upsertOrganizationBillingPolicy
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationPolicyUpdateRequest'
+      responses:
+        '200':
+          description: 更新后的计费策略
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingPolicy'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /services/billing/organizations/{organization_id}/entitlement:
+    get:
+      tags: [billing]
+      summary: 获取计费权益
+      operationId: getOrganizationBillingEntitlement
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 计费权益
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingEntitlement'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    put:
+      tags: [billing]
+      summary: 更新计费权益
+      operationId: upsertOrganizationBillingEntitlement
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationEntitlementUpdateRequest'
+      responses:
+        '200':
+          description: 更新后的计费权益
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingEntitlement'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /services/billing/organizations/{organization_id}/invoices:
+    get:
+      tags: [billing]
+      summary: 获取账单列表
+      operationId: listOrganizationInvoices
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, open, paid, void]
+      responses:
+        '200':
+          description: 账单列表
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  organization_id:
+                    type: string
+                  total:
+                    type: integer
+                  invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BillingInvoice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /services/billing/organizations/{organization_id}/invoices/{invoice_id}:
+    get:
+      tags: [billing]
+      summary: 获取账单详情
+      operationId: getOrganizationInvoiceDetail
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: invoice_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 账单详情
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingInvoice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /services/billing/organizations/{organization_id}/settlement/daily:
+    post:
+      tags: [billing]
+      summary: 触发日聚合结算
+      operationId: runOrganizationDailySettlement
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                usage_date:
+                  type: string
+                  format: date
+                  nullable: true
+      responses:
+        '200':
+          description: 日聚合结果
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiEnvelope'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /services/billing/organizations/{organization_id}/invoices/generate:
+    post:
+      tags: [billing]
+      summary: 生成月度账单
+      operationId: generateOrganizationInvoice
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [year, month]
+              properties:
+                year:
+                  type: integer
+                month:
+                  type: integer
+                  minimum: 1
+                  maximum: 12
+                overwrite_draft:
+                  type: boolean
+                  default: true
+      responses:
+        '200':
+          description: 生成的账单
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingInvoice'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /services/billing/organizations/{organization_id}/invoices/{invoice_id}/collect:
+    post:
+      tags: [billing]
+      summary: 账单扣款
+      operationId: collectOrganizationInvoice
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: invoice_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: force
+          in: query
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: 扣款结果
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiEnvelope'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /services/billing/organizations/{organization_id}/reports/invoice-overview:
+    get:
+      tags: [billing]
+      summary: 账单概览报表
+      operationId: getOrganizationInvoiceOverview
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: months
+          in: query
+          schema:
+            type: integer
+            default: 6
+      responses:
+        '200':
+          description: 账单概览
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiEnvelope'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /services/billing/organizations/{organization_id}/usage-dashboard:
+    get:
+      tags: [billing]
+      summary: 获取用量仪表盘
+      operationId: getOrganizationUsageDashboard
+      parameters:
+        - name: organization_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: days
+          in: query
+          schema:
+            type: integer
+            default: 30
+      responses:
+        '200':
+          description: 用量仪表盘数据
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageDashboard'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  # ═══════════════════ RAG 模块（W13c FC 工具：rag_search） ═══════════════════
+
+  /rag/v2/search:
+    post:
+      tags: [rag]
+      summary: 统一语义检索
+      operationId: ragUnifiedSearch
+      description: |
+        跨内容类型的统一检索入口。本地 Runtime 的 ``rag_search`` 工具是此端点的薄
+        wrapper（W13c D7.1）：业务逻辑在 ``apps/rag/services/unified_search_service.py``，
+        本地端只做调用 + 透传。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RagSearchRequest'
+      responses:
+        '200':
+          description: 检索结果（直接返回 RagSearchResponse，无 ApiEnvelope 包装）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RagSearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  # ═══════════════════ TabMemo 模块（W13c FC 工具：memory_*） ═══════════════════
+
+  /tabmemo/memos/:
+    get:
+      tags: [tabmemo]
+      summary: 列出 memo
+      operationId: listTabmemoMemos
+      description: |
+        本地 Runtime 的 ``memory_search`` 工具调此端点；W13c D7.1 新增 ``source`` 查询参数
+        实现 Agent / 用户 memo 隔离——本地 Runtime 必须传 ``source=agent``。
+      parameters:
+        - name: organization_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: space_id
+          in: query
+          schema:
+            type: string
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: tags
+          in: query
+          schema:
+            type: string
+        - name: color
+          in: query
+          schema:
+            type: string
+        - name: memo_type
+          in: query
+          schema:
+            type: string
+        - name: collection_id
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [active, archived, trashed]
+            default: active
+        - name: sort
+          in: query
+          schema:
+            type: string
+            enum: [-created_at, created_at, -updated_at, updated_at]
+            default: '-created_at'
+        - name: cursor
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: source
+          in: query
+          description: 'W13c D7.1：来源过滤。agent=仅 Agent 写入；user=排除 Agent；其它枚举（manual/browser/share/api/voice）精确匹配。不传保持兼容。'
+          schema:
+            type: string
+            enum: [agent, user, manual, browser, share, api, voice]
+      responses:
+        '200':
+          description: 列表（success_response 信封 wrap 后即 MemoListResponse）
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiEnvelope'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/MemoListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      tags: [tabmemo]
+      summary: 创建 memo
+      operationId: createTabmemoMemo
+      description: 本地 Runtime 的 ``memory_write`` 工具调此端点，须传 source='agent'。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemoCreateRequest'
+      responses:
+        '201':
+          description: 创建成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiEnvelope'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /tabmemo/memos/{memo_id}/archive/:
+    post:
+      tags: [tabmemo]
+      summary: 归档 memo
+      operationId: archiveTabmemoMemo
+      description: 本地 Runtime 的 ``memory_delete`` 工具调此端点（语义为归档而非物理删除）。
+      parameters:
+        - name: memo_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 归档成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiEnvelope'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ═══════════════════ 凭据库（W13c FC 工具：credential_*） ═══════════════════
+
+  /credential-vault/website/match:
+    get:
+      tags: [credential-vault]
+      summary: 按域名匹配网站凭据
+      operationId: matchWebsiteCredentials
+      description: 本地 Runtime 的 ``credential_lookup`` 工具调此端点查找网站登录凭据。
+      parameters:
+        - name: domain
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 匹配的凭据列表（脱敏，无明文密码）
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebsiteCredential'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /credential-vault/app/match:
+    get:
+      tags: [credential-vault]
+      summary: 按包名匹配 App 凭据
+      operationId: matchAppCredentials
+      description: 本地 Runtime 的 ``credential_lookup`` 工具调此端点查找 App 登录凭据。
+      parameters:
+        - name: package
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 匹配的 App 凭据列表（脱敏，无明文密码）
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AppCredential'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /credential-vault/website/{credential_id}/autofill-reveal:
+    post:
+      tags: [credential-vault]
+      summary: 网站凭据自动填充取明文
+      operationId: revealWebsiteCredentialForAutofill
+      description: |
+        本地 Runtime 的 ``credential_retrieve`` 工具调此端点拿网站密码明文。
+        无需用户主密码（仅 JWT 校验），但走独立的速率限制（20 次/5 分钟）。
+        D7.2：App 密码采用降级策略，本地 Runtime 不调对应 ``/app/{id}/reveal``。
+      parameters:
+        - name: credential_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: 网站凭据明文
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsiteCredentialReveal'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          description: 速率限制
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiEnvelope'

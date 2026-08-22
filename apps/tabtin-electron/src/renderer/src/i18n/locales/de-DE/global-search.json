@@ -1,0 +1,129 @@
+{
+  "dialogLabel": "Einheitliche Suche",
+  "inputLabel": "Stichwort suchen",
+  "placeholder": "Durchsuchen Sie Nachrichten, Ressourcen, Agenten, Bereiche, Memos, IM...",
+  "placeholderScoped": "Suche in „{{name}}“...",
+  "clearScope": "Freiraumbereich",
+  "clearAgentScope": "Agentenfilter löschen",
+  "selfLabel": "Du",
+  "typeFilterLabel": "Typfilter",
+  "resourceSubtypeLabel": "Ressourcentyp",
+  "creatorFilterLabel": "Erstellerfilter",
+  "resultsLabel": "Suchergebnisse",
+  "retry": "Versuchen Sie es noch einmal",
+  "cancel": "Abbrechen",
+  "slowHint": "Die Suche ist langsam, bitte warten...",
+  "resultsTotal": "{{total}} ergibt insgesamt",
+  "tookMs": "{{ms}}ms",
+  "tabs": {
+    "all": "Alle",
+    "messages": "Nachrichten",
+    "resources": "Ressourcen",
+    "agents": "Agenten",
+    "spaces": "Räume",
+    "memos": "Memos",
+    "im": "IM"
+  },
+  "resourceSubtype": {
+    "all": "Alle Arten"
+  },
+  "resultType": {
+    "message": "Nachricht",
+    "resource": "Ressource",
+    "agent": "Agent",
+    "space": "Arbeitsbereich",
+    "memo": "Notiz",
+    "im": "IM"
+  },
+  "logicalIndex": {
+    "messages": "Nachrichtensuche",
+    "resources": "Ressourcensuche",
+    "agents": "Agentensuche",
+    "spaces": "Arbeitsbereichssuche",
+    "memos": "Memosuche",
+    "im": "IM-Suche"
+  },
+  "creatorFilter": {
+    "any": "Alle",
+    "userOnly": "Nur meine Nachrichten",
+    "agentOnly": "Nur Agenten",
+    "r2_11Hint": "Der Agentenfilter gilt nur genau für Nachrichten-/Agententypen"
+  },
+  "picker": {
+    "agentTitle": "Wählen Sie den Agenten aus, nach dem gefiltert werden soll",
+    "typeTitle": "Wählen Sie einen Typfilter",
+    "spaceTitle": "Wählen Sie einen Arbeitsbereich aus, auf den Sie zugreifen möchten",
+    "noAgents": "Kein passender Agent",
+    "noTypes": "Kein passender Typ",
+    "noSpaces": "Kein passender Arbeitsbereich",
+    "resourceSubtypeBadge": "Ressourcenuntertyp"
+  },
+  "navigate": {
+    "imNotFound": "Diese IM-Konversation ist nicht in der aktuellen Liste (wird noch geladen oder gelöscht)",
+    "spaceNotFound": "Dieser Arbeitsbereich befindet sich nicht in der aktuellen Liste (wird noch geladen oder kein Zugriff möglich)",
+    "agentNoSpace": "Dieser Agent verfügt über keinen Arbeitsbereich, den er betreten kann",
+    "agentSpaceNotFound": "Der Hauptarbeitsbereich dieses Agenten ist nicht in der aktuellen Liste"
+  },
+  "notice": {
+    "noAccessibleSpacesTitle": "Keine zugänglichen Arbeitsbereiche in dieser Organisation",
+    "noAccessibleSpacesHint": "Leere Ergebnisse sind auf keinen Workspace-Zugriff in dieser Organisation zurückzuführen und nicht darauf, dass Daten fehlen. Bitten Sie einen Administrator, Sie zu den entsprechenden Arbeitsbereichen hinzuzufügen, oder überprüfen Sie Ihre Anmeldeidentität."
+  },
+  "degraded": {
+    "engine_disabled": "Suchmaschine nicht aktiviert; Zurück zur einfachen Suche (nur Ressourcen/Memos)",
+    "health_red": "Suchdienst nicht verfügbar; Zurück zur einfachen Suche",
+    "circuit_open": "Suchen Sie nach einem offenen Leistungsschalter. Kehren Sie zur einfachen Suche zurück. Bitte versuchen Sie es später noch einmal",
+    "error_rate_breach": "Suchfehlerrate erhöht; Zurück zur einfachen Suche",
+    "opensearch_unavailable": "Suchdienst beeinträchtigt; nur einfache Suche unterstützt (CJK-Tokenisierung ist grob)",
+    "partial_failure": "Einige Ergebnistypen sind vorübergehend nicht verfügbar. andere Typen anzeigen",
+    "partial_failure_with_indices": "{{indices}} vorübergehend nicht verfügbar; andere Typen anzeigen",
+    "rate_limited": "Zu viele Abfragen im herabgesetzten Modus; Bitte warten",
+    "auth_missing": "Authentifizierung fehlt; Bitte melden Sie sich erneut an",
+    "internal_error": "Interner Suchfehler; Bitte versuchen Sie es später noch einmal",
+    "unknown": "Suchdienst teilweise beeinträchtigt"
+  },
+  "group": {
+    "openTabs": "Tabs öffnen",
+    "viewAll": "Alle {{count}}-Ergebnisse anzeigen"
+  },
+  "empty": {
+    "noResults": "Keine Ergebnisse für „{{query}}“",
+    "didYouMean": "Meinten Sie:",
+    "recentSearches": "Letzte Suchanfragen:",
+    "tipsTitle": "Tipps:",
+    "tip1": "„genaue Phrase“ · in:Workspace · #type"
+  },
+  "initial": {
+    "title": "Durchsuchen Sie Nachrichten, Dokumente, Tabellen, Memos, Agenten ...",
+    "recentOpened": "Kürzlich eröffnet",
+    "clearRecentOpened": "Klar",
+    "untitled": "(ohne Titel)",
+    "recentSearches": "Aktuelle Suchanfragen",
+    "clearHistory": "Klar",
+    "tipsTitle": "Tipps:",
+    "tip1": "@ Agent · # Typ · in:Workspace · \"exakte Phrase\"",
+    "tipCli": "Befehlsmodus: Tracker neuer „Name“ – täglicher Zeitplan – um 09:00 Uhr"
+  },
+  "cli": {
+    "execute": "Ausführen (Eingabe)",
+    "trackerNewWithName": "Automatisierungsaufgabe erstellen: „{{name}}“",
+    "trackerNewNoName": "Automatisierungsaufgabe erstellen (Name erforderlich)",
+    "trackerNewManualDesc": "Manueller Auslöser",
+    "trackerNewHourlyDesc": "Läuft zu jeder vollen Stunde",
+    "trackerNewTimedDesc": "{{schedule}} bei {{at}}",
+    "trackerList": "Liste der Automatisierungsaufgaben anzeigen",
+    "editAfterTip": "Wir öffnen vor der Erstellung ein Formular zur Bestätigung",
+    "unknown": "Unbekannter Befehl",
+    "schedule": {
+      "manual": "Handbuch",
+      "hourly": "Stündlich",
+      "daily": "Täglich",
+      "weekdays": "Wochentags",
+      "weekly": "Wöchentlich"
+    }
+  },
+  "shortcut": {
+    "close": "Schließen",
+    "clearScope": "Freiraumbereich",
+    "openSearch": "Suche öffnen"
+  }
+}

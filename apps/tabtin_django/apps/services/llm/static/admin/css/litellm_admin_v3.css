@@ -1,0 +1,74 @@
+/**
+ * LiteLLM Admin 自定义样式
+ */
+
+/* ============================================
+   加载状态和高亮效果
+   ============================================ */
+
+/* 加载中状态 */
+.litellm-loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* 字段高亮动画 */
+.litellm-field-highlight {
+    transition: background-color 0.5s;
+    background-color: #c8e6c9 !important;
+}
+
+/* ============================================
+   Admin 列表页状态样式（替代内联样式）
+   ============================================ */
+
+/* 状态显示 - 成功/启用 */
+.llm-status-success {
+    color: #28a745;
+}
+
+/* 状态显示 - 错误/禁用 */
+.llm-status-error {
+    color: #dc3545;
+}
+
+/* 状态显示 - 信息/蓝色 */
+.llm-status-info {
+    color: #007bff;
+}
+
+/* 状态显示 - 等待中 */
+.llm-status-pending {
+    color: #ff9800;
+}
+
+/* 状态显示 - 处理中 */
+.llm-status-processing {
+    color: #2196f3;
+}
+
+/* 状态显示 - 已取消 */
+.llm-status-cancelled {
+    color: #9e9e9e;
+}
+
+/* 状态显示 - 未知 */
+.llm-status-unknown {
+    color: #000000;
+}
+
+/* 能力标识 - 流式 */
+.llm-cap-streaming {
+    color: #2196f3;
+}
+
+/* 能力标识 - 函数调用 */
+.llm-cap-function {
+    color: #28a745;
+}
+
+/* 能力标识 - 图像支持 */
+.llm-cap-vision {
+    color: #9c27b0;
+}
+

@@ -1,0 +1,45 @@
+{
+  "name": "@tabtin/tool-errors",
+  "version": "0.1.0",
+  "description": "Generative SSoT for tool error_kind literals, Electron catalog defaults, i18n key inventory, and browser/action string bridges. No numeric error_code (Wave 3).",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "codegen": "tsx codegen/generate.ts",
+    "codegen:verify": "tsx codegen/generate.ts --verify"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.30",
+    "tsx": "4.21.0",
+    "typescript": "5.7.2",
+    "vitest": "4.0.18",
+    "yaml": "2.8.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "tabtin",
+    "tool-errors",
+    "error-kind",
+    "codegen"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT"
+}

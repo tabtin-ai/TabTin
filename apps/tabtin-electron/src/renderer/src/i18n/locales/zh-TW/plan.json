@@ -1,0 +1,27 @@
+{
+  "proposal": {
+    "headerTitle": "Plan 草稿",
+    "summaryLabel": "概要",
+    "todosLabel": "Todos（{{count}} 項）",
+    "todosEmpty": "暫無 todos",
+    "expandButton": "展開完整方案",
+    "collapseButton": "收起",
+    "openDocButton": "開啟文檔",
+    "executeButton": "執行",
+    "executingButton": "執行中…",
+    "executedButton": "已執行",
+    "todoStatus": {
+      "pending": "未開始",
+      "in_progress": "進行中",
+      "completed": "已完成",
+      "cancelled": "已取消",
+      "unknown": "未知狀態"
+    },
+    "executeSuccess": "已開始執行《{{name}}》",
+    "executeSuccessNoName": "已開始執行該 Plan",
+    "executeErrorNoSession": "目前沒有活躍會話，無法執行計劃。",
+    "executeErrorSend": "計劃執行發送失敗，請重試。",
+    "executeError": "執行失敗：{{message}}",
+    "executeErrorUnknown": "未知錯誤"
+  }
+}

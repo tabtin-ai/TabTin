@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Billing WebSocket event notification strings -->
+    <string name="billing_balance_low">Low Balance Warning</string>
+    <string name="billing_balance_low_detail">Balance: %1$s credits, below threshold %2$s</string>
+    <string name="billing_blocked_desc">Service suspended, please top up to continue</string>
+    <string name="billing_unblocked">Service restored</string>
+    <string name="billing_quota_exhausted">Monthly quota exhausted</string>
+    <string name="billing_credits_recharged">Credits recharged</string>
+    <string name="billing_membership_activated">Membership activated</string>
+    <string name="billing_budget_warning">Budget usage warning</string>
+    <string name="billing_budget_critical">Budget nearly exhausted</string>
+    <string name="billing_budget_resolved">Budget back to normal</string>
+    <string name="billing_budget_usage_pct_limit">%1$d%% used, budget limit %2$s credits</string>
+    <string name="billing_budget_usage_pct">%1$d%% used</string>
+    <string name="billing_membership_expiring">Membership expiring soon</string>
+    <string name="billing_membership_expiring_days">Membership expires in %d days</string>
+    <string name="billing_membership_expired">Membership expired</string>
+    <string name="billing_auto_renew_failed">Auto-renewal failed</string>
+    <string name="billing_auto_renew_failed_balance">Auto-renewal failed: insufficient balance</string>
+    <string name="billing_membership_downgraded">Membership downgraded, %d items over limit</string>
+    <string name="billing_invoice_refunded">Refund completed</string>
+    <string name="billing_invoice_collection_succeeded">Invoice payment succeeded</string>
+    <string name="billing_invoice_collection_failed">Invoice payment failed. Please check your payment method</string>
+    <string name="billing_platform_refund_completed">Platform refund completed</string>
+    <string name="billing_platform_refund_failed">Platform refund failed. Please try again later or contact support</string>
+    <string name="billing_refund_partial_failure">Some refunds failed. Please check the refund records</string>
+    <string name="billing_storage_warning">Storage is %1$s%% used. Please clean up or expand storage soon</string>
+    <string name="billing_storage_critical">Storage is %1$s%% used. Service may be affected</string>
+    <string name="billing_storage_resolved">Storage usage is back to normal</string>
+    <string name="billing_storage_package_expiring">Storage package expires in %1$s days</string>
+    <string name="billing_storage_auto_renew_failed">Storage auto-renewal failed. Please check your balance or payment method</string>
+    <string name="billing_renewal_cancelled">Auto-renewal cancelled</string>
+    <string name="billing_degradation_alert">Service degradation: %s</string>
+
+    <!-- Member budget WS events -->
+    <string name="billing_member_budget_monthly_warning">Your monthly quota is %d%% used, please manage your usage</string>
+    <string name="billing_member_budget_daily_warning">Your daily quota is %d%% used, please manage your usage</string>
+    <string name="billing_member_budget_monthly_exhausted">Your monthly quota is exhausted. Please contact your admin</string>
+    <string name="billing_member_budget_daily_exhausted">Your daily quota is exhausted. Please contact your admin</string>
+    <string name="billing_member_budget_resolved">Quota restored</string>
+</resources>

@@ -1,0 +1,28 @@
+{
+  "blocked_extension_targets": [
+    "protocol.request.headers.authorization"
+  ],
+  "commercial_tier_limit": null,
+  "evidence": [
+    {
+      "locator": "repository-configured max_output_tokens; not an official provider maximum",
+      "source": "migrations 0040 and 0053"
+    }
+  ],
+  "identity": {
+    "canonical_hash": "sha256:14db7bfb1fcb3d0f08bc594e06fb5dcdc6761dd09b57ea8025330b8677088e1f",
+    "key": "kimi-k2-7-code-draft-output-safety",
+    "kind": "platform-safety-policy",
+    "revision": "1"
+  },
+  "platform_ceiling": 32768,
+  "platform_ceiling_enforceable": true,
+  "platform_ceiling_verified": true,
+  "policy_keys": [
+    "draft-only",
+    "legacy-output-ceiling"
+  ],
+  "provider_maximum": null,
+  "provider_maximum_verified": false,
+  "schema_version": "1"
+}

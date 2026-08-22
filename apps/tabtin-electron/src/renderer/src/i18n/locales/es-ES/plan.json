@@ -1,0 +1,27 @@
+{
+  "proposal": {
+    "headerTitle": "Borrador del plan",
+    "summaryLabel": "Resumen",
+    "todosLabel": "Todos ({{count}})",
+    "todosEmpty": "No todos",
+    "expandButton": "Mostrar plan completo",
+    "collapseButton": "Colapso",
+    "openDocButton": "Abrir documento",
+    "executeButton": "ejecutar",
+    "executingButton": "Ejecutando…",
+    "executedButton": "ejecutado",
+    "todoStatus": {
+      "pending": "Pendiente",
+      "in_progress": "En progreso",
+      "completed": "Completado",
+      "cancelled": "Cancelado",
+      "unknown": "Desconocido"
+    },
+    "executeSuccess": "Comenzó a ejecutar “{{name}}”",
+    "executeSuccessNoName": "Comenzó a ejecutar este plan.",
+    "executeErrorNoSession": "Sin sesión activa: no se puede ejecutar el plan.",
+    "executeErrorSend": "No se pudo enviar la ejecución del plan. Vuelva a intentarlo.",
+    "executeError": "No se pudo ejecutar: {{message}}",
+    "executeErrorUnknown": "Error desconocido"
+  }
+}

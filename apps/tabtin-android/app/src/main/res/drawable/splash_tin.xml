@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 会把启动图放进固定的大图标容器；收进安全区后才接近动画首帧尺寸。 -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/splash_tin_art"
+    android:inset="28%" />

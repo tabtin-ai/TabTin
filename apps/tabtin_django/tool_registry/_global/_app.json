@@ -1,0 +1,12 @@
+{
+  "id": "_global",
+  "name": "Global",
+  "icon": "⚡",
+  "description": "全局系统级工具（不属于任何特定 App）",
+  "capability_summary": "通用查询、Python 执行、RAG 搜索、子 Agent 调度等系统能力",
+  "tool_hints": "",
+  "skill_name": "",
+  "execution_env": "backend",
+  "status": "active",
+  "order": 0
+}

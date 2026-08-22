@@ -1,0 +1,41 @@
+{
+  "aliases": [],
+  "capability_ref": {
+    "expected_hash": "sha256:3797ed9d5f7e094d9193ce24b420292a343648cef03d279846327a14821205a5",
+    "key": "kimi-k2-7-code-draft-capability",
+    "kind": "model-capability",
+    "revision": "1"
+  },
+  "control_key": "thinking-mode",
+  "exposed_values": [
+    "standard",
+    "deep"
+  ],
+  "identity": {
+    "canonical_hash": "sha256:45ae5fa1fb09da4bdceb2358001c54901f36ca1b55b3eb980537003913b9eb31",
+    "key": "kimi-k2-7-code-draft-thinking-control",
+    "kind": "product-control-mapping",
+    "revision": "1"
+  },
+  "operations": [
+    {
+      "input_value": "standard",
+      "operation": "set",
+      "schema_version": "1",
+      "source": null,
+      "target": "thinking-mode",
+      "value": "on",
+      "when": null
+    },
+    {
+      "input_value": "deep",
+      "operation": "set",
+      "schema_version": "1",
+      "source": null,
+      "target": "thinking-mode",
+      "value": "on",
+      "when": null
+    }
+  ],
+  "schema_version": "1"
+}

@@ -1,0 +1,779 @@
+{
+  "_meta": {
+    "name": "rich-mixed 期望处置表",
+    "description": "与 rich-mixed.pm.json 一一对应。blocks 冻结顶层块，tableCells 冻结表格格子，markCases 以内嵌最小 paragraph fixture 独立冻结行内标记/atom；三者统一使用 editable（原生可编辑）、readonly_preserve（局部只读、原始子树必须无损保留）、summary（产品化摘要，禁止显示原始类型名）。无损往返总要求：对任意 editable 表面做受支持编辑后，其余内容（含未知节点/标记/属性）写回时零丢失。",
+    "frozenAt": "2026-08-15",
+    "batch": 0
+  },
+  "roundTrip": {
+    "rule": "对任意 editable 块执行受支持编辑并序列化回 ProseMirror JSON，除被编辑块外的所有节点、标记、属性（含 blockId、textAlign、colspan/rowspan、未知键）必须逐字节等价（JSON 深度相等）。",
+    "unknownContent": "零丢失",
+    "gate": "未通过本测试前，对应平台不得开放局部编辑"
+  },
+  "releaseGate": {
+    "requireDispositionParity": true,
+    "requireKnownGapsEmpty": true,
+    "releaseReadiness": "ready",
+    "note": "currentDisposition 只记录开发中 release 的事实；发版前双端处置必须一致、全部目标态达成且本夹具 knownGaps 必须清零。公式呈现已达 formula_rendered，本夹具内容门禁不再因公式 blocked。"
+  },
+  "blocks": [
+    {
+      "path": "/content/0",
+      "blockId": "blk-h1-0001",
+      "type": "heading",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "正文 H1；24 档。32 档只属于文档标题"
+    },
+    {
+      "path": "/content/1",
+      "blockId": "blk-h2-0002",
+      "type": "heading",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "正文 H2；20 档，textAlign=center 必须保留"
+    },
+    {
+      "path": "/content/2",
+      "blockId": "blk-h3-0003",
+      "type": "heading",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "正文 H3；16 档"
+    },
+    {
+      "path": "/content/3",
+      "blockId": "blk-h4-0004",
+      "type": "heading",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "正文 H4；14 档；H3–H6 视觉必须可区分，禁止画成同一级"
+    },
+    {
+      "path": "/content/4",
+      "blockId": "blk-h5-0005",
+      "type": "heading",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "正文 H5；13 档"
+    },
+    {
+      "path": "/content/5",
+      "blockId": "blk-h6-0006",
+      "type": "heading",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "正文 H6；12 档并使用次级文字色"
+    },
+    {
+      "path": "/content/6",
+      "blockId": "blk-p-0007",
+      "type": "paragraph",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "全部受支持行内标记：bold/italic/strike/underline/code/link/textStyle/highlight；link 支持 href-only 与 exact {href,target:\"_blank\"} 无损编辑，其它 target 值/类型及额外属性继续局部只读并原样保留"
+    },
+    {
+      "path": "/content/7",
+      "blockId": "blk-p-0008",
+      "type": "paragraph",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "presentation": {
+        "target": "formula_rendered",
+        "current": {
+          "ios": "formula_rendered",
+          "android": "formula_rendered"
+        }
+      },
+      "note": "subscript/superscript/inline mathematics 必须渲染且往返保留；双端已用桌面正典 KaTeX 真渲染行内公式"
+    },
+    {
+      "path": "/content/8",
+      "blockId": null,
+      "type": "mathematicsBlock",
+      "disposition": "readonly_preserve",
+      "currentDisposition": {
+        "ios": "readonly_preserve",
+        "android": "readonly_preserve"
+      },
+      "presentation": {
+        "target": "formula_rendered",
+        "current": {
+          "ios": "formula_rendered",
+          "android": "formula_rendered"
+        }
+      },
+      "note": "块级公式渲染为只读公式；定义/编辑交完整编辑器"
+    },
+    {
+      "path": "/content/9",
+      "blockId": "blk-q-0009",
+      "type": "blockquote",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "引用父块及子段落身份必须同时保留"
+    },
+    {
+      "path": "/content/10",
+      "blockId": "blk-c-0011",
+      "type": "codeBlock",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "language 属性保留"
+    },
+    {
+      "path": "/content/11",
+      "blockId": "blk-hr-0012",
+      "type": "horizontalRule",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      }
+    },
+    {
+      "path": "/content/12",
+      "blockId": "blk-bl-0013",
+      "type": "bulletList",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "嵌套列表必须支持；列表容器、列表项、项内段落三层身份均须保留"
+    },
+    {
+      "path": "/content/13",
+      "blockId": "blk-ol-0019",
+      "type": "orderedList",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "start 与三层身份属性保留"
+    },
+    {
+      "path": "/content/14",
+      "blockId": "blk-tl-0024",
+      "type": "taskList",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "checked 可切换，三层身份属性保留"
+    },
+    {
+      "path": "/content/15",
+      "blockId": "blk-p-0029",
+      "type": "paragraph",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "presentation": {
+        "target": "image_rendered",
+        "current": {
+          "ios": "image_rendered",
+          "android": "image_rendered"
+        }
+      },
+      "note": "图片查看、上传新图片与整块删除；fileId 是稳定引用，混排文字/image/hardBreak 往返必须保留。双端已可编辑混排正文并逐字段保留图片身份（含 fileId/alt/title/width/height），行内图片已与文字同行真排版，加载不出来时退回可读 alt 占位"
+    },
+    {
+      "path": "/content/16",
+      "blockId": "blk-t-0030",
+      "type": "table",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "简单表格（无合并单元格）：原生查看与编辑；独立横向滚动、等高行、长文本不截断"
+    },
+    {
+      "path": "/content/17",
+      "blockId": "blk-t-0040",
+      "type": "table",
+      "disposition": "readonly_preserve",
+      "currentDisposition": {
+        "ios": "readonly_preserve",
+        "android": "readonly_preserve"
+      },
+      "note": "合并单元格复杂表格：局部只读，colspan/rowspan 原样保留；只读不得牵连整篇文档"
+    },
+    {
+      "path": "/content/18",
+      "blockId": null,
+      "type": "tabdataBlock",
+      "disposition": "summary",
+      "currentDisposition": {
+        "ios": "summary",
+        "android": "summary"
+      },
+      "presentation": {
+        "target": "product_label_with_title",
+        "current": {
+          "ios": "product_label_with_title",
+          "android": "product_label_with_title"
+        }
+      },
+      "note": "显示产品化摘要（如「嵌入的多维表」+ 标题「项目任务表」），完整编辑器承接；禁止显示 tabdataBlock"
+    },
+    {
+      "path": "/content/19",
+      "blockId": null,
+      "type": "tabwhiteboard",
+      "disposition": "summary",
+      "currentDisposition": {
+        "ios": "summary",
+        "android": "summary"
+      },
+      "presentation": {
+        "target": "product_label_with_title",
+        "current": {
+          "ios": "product_label_with_title",
+          "android": "product_label_with_title"
+        }
+      },
+      "note": "显示「画板」+ 标题「架构草图」；禁止显示 whiteboard 实现名"
+    },
+    {
+      "path": "/content/20",
+      "blockId": null,
+      "type": "htmlBlock",
+      "disposition": "summary",
+      "currentDisposition": {
+        "ios": "summary",
+        "android": "summary"
+      },
+      "presentation": {
+        "target": "product_label_with_title",
+        "current": {
+          "ios": "product_label_with_title",
+          "android": "product_label_with_title"
+        }
+      },
+      "note": "显示「嵌入的 HTML」+ 标题；完整编辑器承接"
+    },
+    {
+      "path": "/content/21",
+      "blockId": null,
+      "type": "youtube",
+      "disposition": "summary",
+      "currentDisposition": {
+        "ios": "summary",
+        "android": "summary"
+      },
+      "note": "社交媒体嵌入：显示「视频」摘要，完整编辑器承接"
+    },
+    {
+      "path": "/content/22",
+      "blockId": "blk-f-0045",
+      "type": "futureChart",
+      "disposition": "readonly_preserve",
+      "currentDisposition": {
+        "ios": "readonly_preserve",
+        "android": "readonly_preserve"
+      },
+      "note": "未知节点：该块只读并显示「不支持的内容」类摘要，子树（含 futureChartSeries 及其 query/precision 属性）零丢失；不影响其他块编辑"
+    },
+    {
+      "path": "/content/23",
+      "blockId": "blk-p-0046",
+      "type": "paragraph",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "含未知 mark（futureMark）的段落仍可编辑文本；futureMark 及其 attrs 往返零丢失（mark 不渲染样式但不得剥离）"
+    },
+    {
+      "path": "/content/24",
+      "blockId": "blk-p-0047",
+      "type": "paragraph",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "已有独立图片可查看；类型专属内容变更仅开放整块删除，不可替换或编辑元数据；通用块级移动仍可用；新增图片走「添加图片块」；未删除时 fileId 与全部 attrs 必须原样保留"
+    },
+    {
+      "path": "/content/25",
+      "blockId": "blk-bl-adj-a",
+      "type": "bulletList",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "与 /content/26 紧邻的独立无序列表；容器/项/项内段落三层身份必须保留，不得与相邻同型容器合并"
+    },
+    {
+      "path": "/content/26",
+      "blockId": "blk-bl-adj-b",
+      "type": "bulletList",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "与 /content/25 紧邻的独立无序列表；编辑任一侧不得改写另一侧节点或身份"
+    },
+    {
+      "path": "/content/27",
+      "blockId": "blk-ol-adj-a",
+      "type": "orderedList",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "与 /content/28 紧邻的独立有序列表；容器/项/项内段落三层身份必须保留，不得与相邻同型容器合并"
+    },
+    {
+      "path": "/content/28",
+      "blockId": "blk-ol-adj-b",
+      "type": "orderedList",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "与 /content/27 紧邻的独立有序列表；合并会让本列表从 start=1 变成接着上一列表编号，是用户可见的内容损坏"
+    }
+  ],
+  "tableCells": [
+    {
+      "path": "/content/16/content/1/content/0",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "纯文本简单表格格子必须双端可编辑"
+    },
+    {
+      "path": "/content/16/content/3/content/1",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "含 hardBreak 的简单表格格子必须双端可编辑且保留换行"
+    },
+    {
+      "path": "/content/16/content/3/content/0",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "带 marks 的简单表格格子必须双端可编辑且保留 marks"
+    }
+  ],
+  "markCases": [
+    {
+      "path": "/markCases/basic-marks",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "普通段落内的 bold/italic/strike/underline/code/link(href-only) 必须双端可编辑；表格格子的 mark 权限由 tableCells 独立约束",
+      "fixture": {
+        "type": "paragraph",
+        "attrs": {
+          "blockId": "probe-basic-marks",
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "bold"
+              }
+            ],
+            "text": "粗体"
+          },
+          {
+            "type": "text",
+            "text": "、"
+          },
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "italic"
+              }
+            ],
+            "text": "斜体"
+          },
+          {
+            "type": "text",
+            "text": "、"
+          },
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "strike"
+              }
+            ],
+            "text": "删除线"
+          },
+          {
+            "type": "text",
+            "text": "、"
+          },
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "underline"
+              }
+            ],
+            "text": "下划线"
+          },
+          {
+            "type": "text",
+            "text": "、"
+          },
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "code"
+              }
+            ],
+            "text": "行内代码"
+          },
+          {
+            "type": "text",
+            "text": "、"
+          },
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "link",
+                "attrs": {
+                  "href": "https://tabtin.example.com/basic"
+                }
+              }
+            ],
+            "text": "链接"
+          },
+          {
+            "type": "text",
+            "text": "。"
+          }
+        ]
+      }
+    },
+    {
+      "path": "/markCases/link-extra-attrs",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "exact {href,target:\"_blank\"} 双端可无损编辑；_self、null、错误类型及额外 rel 等非 canonical 形态继续局部只读并原样保留",
+      "fixture": {
+        "type": "paragraph",
+        "attrs": {
+          "blockId": "probe-link-extra",
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "link",
+                "attrs": {
+                  "href": "https://tabtin.example.com/extra",
+                  "target": "_blank"
+                }
+              }
+            ],
+            "text": "新窗口链接"
+          },
+          {
+            "type": "text",
+            "text": "。"
+          }
+        ]
+      }
+    },
+    {
+      "path": "/markCases/text-style-hex6",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "color-only #RRGGBB 前景色：双端均可无损编辑；其它颜色形态继续局部只读",
+      "fixture": {
+        "type": "paragraph",
+        "attrs": {
+          "blockId": "probe-text-style-hex6",
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "textStyle",
+                "attrs": {
+                  "color": "#E5484D"
+                }
+              }
+            ],
+            "text": "红色文字"
+          },
+          {
+            "type": "text",
+            "text": "。"
+          }
+        ]
+      }
+    },
+    {
+      "path": "/markCases/highlight-hex6",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "color-only #RRGGBB 高亮：双端均可无损编辑；命名色与其它颜色形态继续局部只读",
+      "fixture": {
+        "type": "paragraph",
+        "attrs": {
+          "blockId": "probe-highlight-hex6",
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "highlight",
+                "attrs": {
+                  "color": "#FDE68A"
+                }
+              }
+            ],
+            "text": "六位色高亮"
+          },
+          {
+            "type": "text",
+            "text": "。"
+          }
+        ]
+      }
+    },
+    {
+      "path": "/markCases/highlight-named-default",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "Electron/Schema 产生的 exact lowercase yellow 默认高亮已由双端无损编辑；其它命名色继续局部只读",
+      "fixture": {
+        "type": "paragraph",
+        "attrs": {
+          "blockId": "probe-highlight-named",
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "highlight",
+                "attrs": {
+                  "color": "yellow"
+                }
+              }
+            ],
+            "text": "默认高亮"
+          },
+          {
+            "type": "text",
+            "text": "。"
+          }
+        ]
+      }
+    },
+    {
+      "path": "/markCases/subscript-only",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "仅含下标的普通段落已由双端独立模型无损编辑，不能由上下标与公式混合段落代替",
+      "fixture": {
+        "type": "paragraph",
+        "attrs": {
+          "blockId": "probe-subscript",
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "H"
+          },
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "subscript"
+              }
+            ],
+            "text": "2"
+          },
+          {
+            "type": "text",
+            "text": "O。"
+          }
+        ]
+      }
+    },
+    {
+      "path": "/markCases/superscript-only",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "note": "仅含上标的普通段落已由双端独立模型无损编辑，不能由上下标与公式混合段落代替",
+      "fixture": {
+        "type": "paragraph",
+        "attrs": {
+          "blockId": "probe-superscript",
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "x"
+          },
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "superscript"
+              }
+            ],
+            "text": "2"
+          },
+          {
+            "type": "text",
+            "text": "。"
+          }
+        ]
+      }
+    },
+    {
+      "path": "/markCases/inline-mathematics-only",
+      "disposition": "editable",
+      "currentDisposition": {
+        "ios": "editable",
+        "android": "editable"
+      },
+      "presentation": {
+        "target": "formula_rendered",
+        "current": {
+          "ios": "formula_rendered",
+          "android": "formula_rendered"
+        }
+      },
+      "note": "仅含行内公式的普通段落必须独立建模；LaTeX 源与 atom 身份无损，双端已真实公式排版",
+      "fixture": {
+        "type": "paragraph",
+        "attrs": {
+          "blockId": "probe-inline-mathematics",
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "质能方程 "
+          },
+          {
+            "type": "mathematics",
+            "attrs": {
+              "latex": "E = mc^2",
+              "display": false
+            }
+          },
+          {
+            "type": "text",
+            "text": "。"
+          }
+        ]
+      }
+    }
+  ],
+  "knownGaps": {
+    "ios": [],
+    "android": []
+  },
+  "marks": {
+    "targetEditable": [
+      "bold",
+      "italic",
+      "strike",
+      "underline",
+      "code",
+      "link",
+      "textStyle",
+      "highlight",
+      "superscript",
+      "subscript",
+      "mathematics(行内 atom 节点，渲染为公式，LaTeX 源保留)"
+    ],
+    "readonly_preserve": [],
+    "unknown": "未识别 mark 保留在 marks 数组中原样写回，文本本身可编辑"
+  }
+}

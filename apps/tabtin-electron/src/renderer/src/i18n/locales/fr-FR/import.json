@@ -1,0 +1,31 @@
+{
+  "errors": {
+    "responseInvalid": "Format de réponse invalide du serveur",
+    "missingStats": "La réponse ne contient pas de données statistiques",
+    "missingFieldMapping": "La réponse ne contient pas de données de mappage de champ",
+    "previewFailed": "L'aperçu du fichier a échoué. Veuillez réessayer.",
+    "previewNetworkUnstable": "La connexion réseau est instable. Veuillez réessayer et vérifier votre proxy/VPN.",
+    "importFailed": "L'importation des données a échoué. Veuillez réessayer.",
+    "importInFlight": "Importation déjà en cours. S'il vous plaît, attendez.",
+    "templateDownloadFailed": "Le téléchargement du modèle a échoué. Veuillez réessayer."
+  },
+  "apiErrors": {
+    "previewFailedWithStatus": "Échec de l'aperçu : HTTP {{status}}",
+    "emptyResponse": "Le serveur a renvoyé des données vides",
+    "missingStats": "Champ de statistiques manquant dans la réponse du serveur",
+    "missingFieldMapping": "Réponse du serveur manquant champ field_mapping",
+    "csvImportFailedWithStatus": "Échec de l'importation CSV : HTTP {{status}}",
+    "excelImportFailedWithStatus": "Échec de l'importation Excel : HTTP {{status}}",
+    "jsonImportFailedWithStatus": "Échec de l'importation JSON : HTTP {{status}}",
+    "templateDownloadFailedWithStatus": "Échec du téléchargement du modèle : HTTP {{status}}",
+    "unsupportedFileFormat": "Format de fichier non pris en charge : {{format}}",
+    "fileEmpty": "Le contenu du fichier est vide",
+    "fileReadFailed": "Échec de la lecture du fichier"
+  },
+  "template": {
+    "defaultTableName": "tableau",
+    "filenameExcel": "{{tableName}}_import_template.xlsx",
+    "filename": "{{tableName}}_import_template.csv",
+    "filenameJson": "{{tableName}}_import_template.json"
+  }
+}

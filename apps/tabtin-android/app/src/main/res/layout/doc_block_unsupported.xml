@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 已知嵌入内容摘要 / 未知块占位 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/tt_spacing_lg"
+    android:paddingVertical="@dimen/tt_spacing_sm">
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="不支持的块类型"
+        android:textColor="@color/doc_editor_text_tertiary"
+        android:textSize="@dimen/tt_font_caption" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tt_spacing_xs"
+        android:textColor="@color/doc_editor_text_primary"
+        android:textSize="@dimen/tt_font_body"
+        android:visibility="gone" />
+</LinearLayout>

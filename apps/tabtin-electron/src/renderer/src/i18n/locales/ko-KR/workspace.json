@@ -1,0 +1,468 @@
+{
+  "welcomeTitle": "TabTin에 오신 것을 환영합니다",
+  "welcomeSubtitle": "통합 AI 작업 플랫폼. 새 작업공간을 생성하거나 왼쪽에서 하나를 선택하세요.",
+  "welcomeSubtitleGuest": "로그인하여 작업공간을 만들고 공동작업을 시작하세요.",
+  "welcome": {
+    "title": "TabTin",
+    "tagline": "AI 작업 플랫폼",
+    "conceptIntro": "TabTin에서 Workspace는 실행 장치 및 작업 디렉터리에 바인딩된 영구 작업 사이트입니다. 에이전트가 해당 경계 내에서 도움을 줄 수 있도록 대화, 앱, 리소스 및 실행 컨텍스트를 함께 유지합니다.",
+    "loginCta": "로그인 / 등록",
+    "learnMore": "자세히 알아보기 →",
+    "readyTitle": "모두 설정되었습니다!",
+    "readyDesc": "시작하려면 첫 번째 작업공간을 만드세요. Workspace는 실행 장치와 작업 디렉터리를 바인딩하여 대화, 앱, 리소스 및 실행 컨텍스트를 함께 유지합니다.",
+    "defaultAgentName": "기본 작업 공간",
+    "createFirstAgent": "첫 번째 작업공간 만들기",
+    "creating": "만드는 중...",
+    "orCollaborate": "아니면 다른 사람과 협력하거나",
+    "createGroupRoom": "상담원 그룹방 만들기",
+    "createDM": "DM 시작",
+    "createFailed": "작업공간을 생성하지 못했습니다.",
+    "noOrganization": "먼저 조직을 선택하세요.",
+    "moreApps": "또한 비디오, 캔버스, 메모, 목표, 이메일 등",
+    "apps": {
+      "tabdata": "TabData",
+      "tabdataDesc": "AI 기반 스마트 테이블",
+      "tabdoc": "TabDoc",
+      "tabdocDesc": "협업 문서",
+      "tabslide": "TabSlide",
+      "tabslideDesc": "프리젠테이션 메이커",
+      "browser": "브라우저",
+      "browserDesc": "스마트한 웹 브라우징",
+      "tabcode": "TabCode",
+      "tabcodeDesc": "코드 및 터미널"
+    }
+  },
+  "actions": {
+    "createAgent": "작업공간 만들기",
+    "loginToStart": "시작하려면 로그인하세요.",
+    "viewDocs": "문서 보기"
+  },
+  "selector": {
+    "loginRequired": "로그인하세요",
+    "placeholder": "조직 선택",
+    "defaultBadge": "기본값",
+    "empty": "아직 조직이 없습니다.",
+    "pendingInvitations": "보류 중인 초대",
+    "invitedAs": "{{role}}로 초대됨",
+    "actions": {
+      "create": "조직 만들기",
+      "settings": "조직 설정",
+      "members": "회원관리"
+    }
+  },
+  "invitationResponse": {
+    "title": "조직 초대",
+    "description": "귀하는 조직에 가입하도록 초대되었습니다.",
+    "workspaceName": "조직",
+    "invitedBy": "{{name}}님이 초대함",
+    "role": "역할",
+    "expiresAt": "만료",
+    "accept": "수락",
+    "reject": "거절하다",
+    "accepting": "가입 중...",
+    "rejecting": "감소 중...",
+    "accepted": "가입된 조직 \"{{name}}\"",
+    "rejected": "초대가 거부되었습니다."
+  },
+  "invitationList": {
+    "title": "보류 중인 초대",
+    "description": "대기 중인 조직 초대가 {{count}}개 있습니다.",
+    "from": "{{name}}부터"
+  },
+  "create": {
+    "errors": {
+      "failed": "생성 실패"
+    }
+  },
+  "views": {
+    "newTab": "새 탭"
+  },
+  "settings": {
+    "title": "조직 설정",
+    "tabs": {
+      "general": "일반",
+      "llm": "모델 설정"
+    },
+    "validation": {
+      "nameRequired": "조직 이름은 필수 항목입니다.",
+      "nameMismatch": "조직 이름이 일치하지 않습니다.",
+      "nameTooLong": "조직 이름은 100자 이하여야 합니다."
+    },
+    "errors": {
+      "updateFailed": "업데이트 실패",
+      "deleteFailed": "삭제 실패",
+      "leaveFailed": "퇴사 실패"
+    },
+    "fields": {
+      "icon": "아이콘",
+      "avatar": "조직 아바타",
+      "name": "이름",
+      "namePlaceholder": "조직 이름",
+      "nameHint": "{{count}}/100자",
+      "description": "설명(선택사항)",
+      "descriptionPlaceholder": "조직을 설명하세요",
+      "descriptionHint": "{{count}}/500자"
+    },
+    "avatar": {
+      "pendingSave": "아바타가 잘렸습니다. 적용하려면 조직 프로필을 저장하세요.",
+      "pendingRemove": "저장하면 아바타가 삭제됩니다.",
+      "hint": "JPG, PNG, GIF 또는 WebP 최대 5MB. GIF는 정지 이미지가 됩니다.",
+      "cropTitle": "자르기 조직 아바타"
+    },
+    "actions": {
+      "save": "변경사항 저장",
+      "saving": "저장 중...",
+      "saved": "저장됨",
+      "delete": "조직 삭제",
+      "leave": "조직 탈퇴",
+      "cancel": "취소",
+      "confirmDelete": "삭제",
+      "deleting": "삭제 중...",
+      "transfer": "환승"
+    },
+    "danger": {
+      "title": "위험지대",
+      "deleteTitle": "조직 삭제",
+      "deleteDefault": "기본 조직은 삭제할 수 없습니다.",
+      "deleteDesc": "조직 및 모든 데이터가 영구적으로 삭제됩니다.",
+      "leaveTitle": "조직 탈퇴",
+      "leaveDesc": "액세스할 수 없게 되며 다시 참여하려면 새 초대가 필요합니다.",
+      "transferTitle": "소유권 이전",
+      "transferDesc": "기존 회원으로 이전"
+    },
+    "confirm": {
+      "title": "조직 삭제를 확인하시겠습니까?",
+      "subtitle": "다음 항목이 영구적으로 삭제됩니다.",
+      "items": {
+        "organization": "조직 \"{{name}}\"",
+        "spaces": "모든 에이전트 및 테이블",
+        "records": "모든 기록",
+        "members": "모든 회원 관계"
+      },
+      "warning": "⚠️ 이 작업은 취소할 수 없습니다!",
+      "inputLabel": "삭제를 확인하려면 조직 이름을 입력하세요."
+    },
+    "permissions": {
+      "ownerOnly": "💡 조직 소유자만 설정을 편집할 수 있습니다."
+    }
+  },
+  "llm": {
+    "defaultConfig": {
+      "title": "기본 모델 구성",
+      "subtitle": "팀 구성원이 모델을 선택하지 않으면 이 기본값이 먼저 사용됩니다.",
+      "configured": "구성됨",
+      "notConfigured": "구성되지 않음",
+      "currentModel": "현재 기본 모델",
+      "pickHint": "기본 모델을 선택하세요",
+      "unavailableCurrent": "현재는 이용할 수 없습니다",
+      "selectHelp": "지정된 모델이 없는 새 세션 및 작업에는 기본 모델이 사용됩니다."
+    },
+    "presetSection": {
+      "title": "TabTin 사전 설정 모델",
+      "subtitle": "내장된 플랫폼 모델. 기본값으로 사용할 준비가 되었습니다. 채널 설정이 필요하지 않습니다.",
+      "collapse": "사전 설정 모델 축소",
+      "expandHint": "{{count}} 더 많은 플랫폼 모델. 모두 보려면 펼치세요."
+    },
+    "providers": {
+      "title": "제공업체 채널",
+      "desc": "클라우드 모델 채널 추가(OpenAI 호환)",
+      "provider": "공급자",
+      "providerKey": "채널 키",
+      "displayName": "표시 이름",
+      "baseUrl": "API 기본 URL",
+      "apiKey": "API 키",
+      "scope": "가시성",
+      "scopeOrganization": "조직",
+      "scopeUser": "개인",
+      "scopeHint": "귀하의 역할은 개인 채널만 생성할 수 있습니다.",
+      "save": "변경사항 저장",
+      "cancel": "취소",
+      "edit": "편집",
+      "delete": "삭제",
+      "enable": "활성화",
+      "disable": "비활성화",
+      "validate": "테스트 연결",
+      "validating": "테스트 중...",
+      "validateSuccess": "연결 OK",
+      "validateFailed": "연결 실패",
+      "statusEnabled": "활성화됨",
+      "statusDisabled": "장애인",
+      "create": "채널 추가",
+      "creating": "만드는 중...",
+      "empty": "아직 채널이 없습니다",
+      "modelCount": "{{count}} 모델",
+      "createSuccess": "채널이 추가되었습니다",
+      "updateSuccess": "채널이 업데이트되었습니다.",
+      "deleteSuccess": "채널이 삭제되었습니다.",
+      "enableSuccess": "채널 활성화됨",
+      "disableSuccess": "채널이 비활성화되었습니다.",
+      "confirmDelete": "'{{name}}' 채널을 삭제하시겠습니까?",
+      "validation": {
+        "required": "기본 URL과 API 키를 입력하세요.",
+        "providerKeyInvalid": "잘못된 채널 키 형식"
+      }
+    },
+    "models": {
+      "title": "모델",
+      "desc": "채널 아래에 모델 추가",
+      "provider": "채널",
+      "providerPlaceholder": "채널 선택",
+      "searchKeyword": "검색 모델(LiteLLM)",
+      "searchPlaceholder": "예를 들어 gpt-4o, 클로드-3.5",
+      "search": "검색",
+      "searching": "검색 중...",
+      "clearSearch": "지우기",
+      "searchResults": "결과(입력하려면 클릭)",
+      "searchValidation": "검색 키워드를 입력하세요",
+      "searchEmpty": "일치하는 모델이 없습니다.",
+      "modelName": "모델명",
+      "displayName": "표시 이름",
+      "maxTokens": "컨텍스트 길이",
+      "supportsVision": "비전",
+      "supportsStreaming": "스트리밍",
+      "save": "변경사항 저장",
+      "cancel": "취소",
+      "edit": "편집",
+      "delete": "삭제",
+      "enable": "활성화",
+      "disable": "비활성화",
+      "statusEnabled": "활성화됨",
+      "statusDisabled": "장애인",
+      "statusReady": "준비",
+      "statusProviderDisabled": "채널이 비활성화되었습니다.",
+      "statusNotReady": "준비되지 않음",
+      "globalOnly": "시스템",
+      "organizationOnly": "조직",
+      "providerDisabled": "제공업체가 비활성화됨, 모델을 사용할 수 없음",
+      "create": "모델 추가",
+      "creating": "만드는 중...",
+      "empty": "아직 모델이 없습니다.",
+      "userOnly": "개인",
+      "createSuccess": "모델이 추가됨",
+      "updateSuccess": "모델이 업데이트되었습니다.",
+      "deleteSuccess": "모델이 삭제되었습니다.",
+      "enableSuccess": "모델 활성화됨",
+      "disableSuccess": "모델이 비활성화되었습니다.",
+      "confirmDelete": "모델 '{{name}}'을 삭제하시겠습니까?",
+      "validation": {
+        "required": "필수 입력란을 작성해주세요",
+        "providerRequired": "먼저 채널을 선택하세요",
+        "maxTokens": "유효한 컨텍스트 길이를 입력하세요."
+      }
+    },
+    "default": {
+      "title": "기본 모델",
+      "desc": "새 세션의 기본 모델",
+      "select": "기본 모델 선택",
+      "save": "기본값 설정",
+      "saving": "저장 중...",
+      "current": "현재 기본값: {{name}}"
+    },
+    "errors": {
+      "loadProvidersFailed": "채널을 로드하지 못했습니다.",
+      "loadModelsFailed": "모델을 로드하지 못했습니다.",
+      "createProviderFailed": "채널을 생성하지 못했습니다.",
+      "updateProviderFailed": "채널을 업데이트하지 못했습니다.",
+      "deleteProviderFailed": "채널을 삭제하지 못했습니다.",
+      "validateProviderFailed": "채널을 확인하지 못했습니다.",
+      "createModelFailed": "모델을 생성하지 못했습니다.",
+      "updateModelFailed": "모델을 업데이트하지 못했습니다.",
+      "deleteModelFailed": "모델을 삭제하지 못했습니다.",
+      "searchModelFailed": "모델 검색에 실패했습니다.",
+      "setDefaultModelFailed": "기본 모델을 설정하지 못했습니다."
+    }
+  },
+  "trashedSpaces": {
+    "title": "작업 공간 쓰레기",
+    "subtitle": "휴지통에 있는 워크스페이스는 보관기간 내 복원 후 영구삭제 가능",
+    "empty": "휴지통이 비어 있습니다.",
+    "emptyHint": "휴지통에 작업공간 없음",
+    "trashedAt": "{{date}}에 삭제됨",
+    "daysLeft": "{{days}}일 후 자동 삭제",
+    "restore": "복원",
+    "restoring": "복원 중...",
+    "restoreSuccess": "복원된 작업공간 \"{{name}}\"",
+    "restoreFailed": "복원 실패",
+    "permanentDelete": "영구 삭제",
+    "deleteConfirmTitle": "작업공간을 영구적으로 삭제",
+    "deleteConfirm": "'{{name}}'을(를) 영구적으로 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.",
+    "deleteSuccess": "영구적으로 삭제된 작업공간 '{{name}}'",
+    "deleteFailed": "영구적으로 삭제하지 못했습니다.",
+    "loading": "로드 중...",
+    "loadFailed": "휴지통에 있는 작업공간을 로드하지 못했습니다.",
+    "count": "{{count}} 작업공간"
+  },
+  "apiErrors": {
+    "listNoResponse": "조직을 가져오지 못했습니다. 응답이 없습니다.",
+    "listHttpFailed": "조직을 가져오지 못했습니다: HTTP {{status}}",
+    "listFailed": "조직을 가져오지 못했습니다.",
+    "listInvalid": "조직을 가져오지 못했습니다. 응답이 잘못되었습니다.",
+    "detailFailed": "조직을 가져오지 못했습니다.",
+    "detailInvalid": "조직을 가져오지 못했습니다. 응답이 잘못되었습니다.",
+    "createFailed": "조직을 생성하지 못했습니다.",
+    "createInvalid": "조직을 생성하지 못했습니다. 응답이 잘못되었습니다.",
+    "updateFailed": "조직을 업데이트하지 못했습니다.",
+    "updateInvalid": "조직을 업데이트하지 못했습니다. 응답이 잘못되었습니다.",
+    "deleteFailed": "조직을 삭제하지 못했습니다.",
+    "leaveFailed": "조직에서 탈퇴하지 못했습니다.",
+    "healthUnknownStatus": "알 수 없는 상태",
+    "healthUnexpected": "상태 확인에서 예기치 않은 응답이 반환되었습니다.",
+    "healthUnavailable": "서비스 이용 불가"
+  },
+  "members": {
+    "title": "회원관리",
+    "subtitle": "{{name}} · {{count}} 회원",
+    "actions": {
+      "add": "회원 추가",
+      "addTitle": "회원 추가",
+      "cancel": "취소",
+      "confirmAdd": "추가",
+      "sendInvitation": "초대장 보내기",
+      "adding": "추가 중...",
+      "setViewer": "뷰어로 설정",
+      "setEditor": "편집기로 설정",
+      "remove": "회원 삭제",
+      "invite": "초대",
+      "changeRole": "역할",
+      "cancelInvitation": "초대 취소"
+    },
+    "fields": {
+      "userId": "사용자 ID",
+      "userIdPlaceholder": "사용자 ID 붙여넣기",
+      "userIdHint": "설정 → 프로필에서 사용자 ID를 복사할 수 있습니다.",
+      "role": "역할"
+    },
+    "roles": {
+      "owner": "소유자",
+      "admin": "관리자",
+      "editor": "편집자",
+      "viewer": "뷰어"
+    },
+    "roleDescriptions": {
+      "owner": "모든 권한",
+      "admin": "구성원 및 조직 설정을 관리할 수 있습니다.",
+      "editor": "편집 가능",
+      "viewer": "보기 전용"
+    },
+    "errors": {
+      "loadFailed": "멤버를 로드하지 못했습니다.",
+      "loadInvalid": "구성원을 로드하지 못했습니다. 응답이 잘못되었습니다.",
+      "userIdRequired": "사용자 ID가 필요합니다",
+      "roleInvalid": "역할은 편집자 또는 뷰어여야 합니다.",
+      "addFailed": "구성원을 추가하지 못했습니다.",
+      "addInvalid": "구성원 추가 실패: 잘못된 응답",
+      "updateRoleFailed": "역할을 업데이트하지 못했습니다.",
+      "removeFailed": "구성원을 제거하지 못했습니다.",
+      "cancelInvitationFailed": "초대를 취소하지 못했습니다.",
+      "permissionDenied": "이 조직에 액세스할 수 있는 권한이 없습니다."
+    },
+    "pendingInvitations": "대기 중인 초대({{count}})",
+    "linkInvitations": "링크 초대({{count}})",
+    "linkInvitation": "링크 초대",
+    "linkInvitationActive": "활성",
+    "linkInvitationUsed": "{{count}} 가입함",
+    "directInvitation": "사용자 ID {{userId}}",
+    "phoneInvitation": "전화 {{phone}}",
+    "statusPending": "보류 중",
+    "expiresAt": "만료 {{date}}",
+    "confirmRemove": "이 구성원을 삭제하시겠습니까?",
+    "ownerSection": "소유자",
+    "memberSection": "회원 ({{count}})",
+    "you": "당신",
+    "joinedAt": "가입함 {{date}}",
+    "empty": {
+      "title": "아직 다른 회원이 없습니다.",
+      "hint": "회원을 추가하려면 위 버튼을 사용하세요."
+    },
+    "permissions": {
+      "ownerOnly": "💡 조직 소유자만이 구성원을 관리할 수 있습니다."
+    }
+  },
+  "search": {
+    "placeholder": "TabData, TabDoc, TabSlide 검색...",
+    "all": "모두",
+    "tables": "TabData",
+    "documents": "TabDoc",
+    "presentations": "TabSlide",
+    "code": "TabCode",
+    "videos": "TabVideo",
+    "canvases": "탭화이트보드",
+    "memos": "탭메모",
+    "sites": "탭사이트",
+    "functions": "기능",
+    "searching": "검색 중...",
+    "error": "검색에 실패했습니다. 다시 시도해 주세요.",
+    "noResults": "일치하는 결과가 없습니다",
+    "hint": "모든 에이전트에서 리소스를 검색하려면 키워드를 입력하세요.",
+    "navigate": "탐색",
+    "open": "열기",
+    "close": "닫기",
+    "results": "결과",
+    "shortcutHint": "검색 열기",
+    "dialogLabel": "글로벌 검색",
+    "inputLabel": "키워드 검색",
+    "typeFilter": "유형 필터",
+    "resultsList": "검색결과",
+    "shortcuts": "키보드 단축키",
+    "navigateFailedTitle": "리소스를 열 수 없습니다.",
+    "navigateFailedSpace": "대상 작업공간이 로드되지 않았습니다. 먼저 사이드바에서 선택하세요.",
+    "navigateFailedType": "지원되지 않는 리소스 유형",
+    "clearScope": "모든 프로젝트 검색",
+    "scopedPlaceholder": "\"{{name}}\"에서 검색하세요...",
+    "scopedHint": "\"{{name}}\"에서 검색 중입니다. 전체 검색으로 전환하려면 백스페이스를 누르세요.",
+    "globalMode": "글로벌 검색"
+  },
+  "logs": {
+    "loadListSuccess": "✅ 조직 목록 로드됨:",
+    "loadListFailed": "❌ 조직을 로드하지 못했습니다:",
+    "selectSuccess": "✅ 선택한 조직:",
+    "selectFailed": "❌ 조직을 선택하지 못했습니다:",
+    "createSuccess": "✅ 생성된 조직:",
+    "createFailed": "❌ 조직을 생성하지 못했습니다:",
+    "updateSuccess": "✅ 조직 업데이트됨:",
+    "updateFailed": "❌ 조직을 업데이트하지 못했습니다:",
+    "deleteSuccess": "✅ 조직이 삭제되었습니다",
+    "deleteFailed": "❌ 조직 삭제 실패:",
+    "leaveSuccess": "✅ 왼쪽 조직",
+    "leaveFailed": "❌ 조직 탈퇴 실패:",
+    "membersLoadSuccess": "✅ 회원 수:",
+    "membersLoadFailed": "❌ 멤버를 로드하지 못했습니다:",
+    "memberAddSuccess": "✅ 회원이 추가되었습니다",
+    "memberAddFailed": "❌ 회원 추가 실패:",
+    "memberRoleUpdateSuccess": "✅ 회원 역할이 업데이트되었습니다.",
+    "memberRoleUpdateFailed": "❌ 회원 역할 업데이트 실패:",
+    "memberRemoveSuccess": "✅ 회원이 삭제되었습니다",
+    "memberRemoveFailed": "❌ 멤버 삭제 실패:",
+    "memberRoleFetchFailed": "❌ 사용자 역할을 가져오지 못했습니다:",
+    "getDefaultFailed": "❌ 기본 조직을 가져오지 못했습니다:",
+    "healthCheckFailed": "❌ 조직 상태 확인 실패:",
+    "cleared": "✅ 조직 데이터가 삭제되었습니다."
+  },
+  "invitation": {
+    "errors": {
+      "sendFailed": "초대장을 보내지 못했습니다.",
+      "createLinkFailed": "초대 링크를 생성하지 못했습니다.",
+      "listFailed": "초대장을 로드하지 못했습니다.",
+      "cancelFailed": "초대를 취소하지 못했습니다.",
+      "notFound": "초대장을 찾을 수 없습니다.",
+      "acceptFailed": "초대를 수락하지 못했습니다.",
+      "respondFailed": "초대에 응답하지 못했습니다.",
+      "rateLimited": "초대장이 너무 많이 생성되었습니다. 나중에 다시 시도해 주세요."
+    },
+    "accept": {
+      "title": "조직 초대",
+      "confirm": "초대 수락",
+      "accepting": "가입 중...",
+      "invalid": "이 초대는 더 이상 유효하지 않습니다.",
+      "success": "조직에 성공적으로 가입했습니다.",
+      "successDesc": "'{{organization}}'에 가입하셨습니다.",
+      "goToOrganization": "조직으로 이동",
+      "loginRequired": "이 초대를 수락하려면 먼저 로그인하세요.",
+      "status": {
+        "expired": "초대장이 만료되었습니다",
+        "accepted": "초대장이 이미 사용되었습니다.",
+        "cancelled": "초대가 취소되었습니다"
+      }
+    }
+  }
+}

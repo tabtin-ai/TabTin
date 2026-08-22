@@ -1,0 +1,47 @@
+{
+  "errors": {
+    "noTable": "未选择表格",
+    "submitFailed": "操作失败",
+    "loadHistoryFailed": "加载历史记录失败",
+    "tryAgainLater": "请稍后重试"
+  },
+  "comments": {
+    "recoverableSubmitFailed": "网络连接失败或请求超时，评论未发送，草稿已保留。请检查网络后重试。",
+    "title": "评论",
+    "toggle": "打开评论",
+    "placeholder": "添加评论，输入 @ 提及成员",
+    "submit": "发送评论",
+    "delete": "删除",
+    "deleting": "正在删除...",
+    "retry": "重试",
+    "loading": "正在加载评论...",
+    "noMentionResults": "没有匹配的成员",
+    "loadMore": "加载更早评论",
+    "loadingMore": "正在加载...",
+    "reply": "回复",
+    "replyingTo": "回复",
+    "cancelReply": "取消回复",
+    "deletedComment": "原评论已删除",
+    "filterOpen": "未解决",
+    "filterResolved": "已解决",
+    "filterAll": "全部",
+    "resolveThread": "标记已解决",
+    "reopenThread": "重新打开",
+    "updatingThread": "正在更新...",
+    "empty": "暂无评论",
+    "countUnit": "条线程"
+  },
+  "dialog": {
+    "createTitle": "添加记录到 \"{{name}}\"",
+    "editTitle": "编辑记录",
+    "viewTitle": "查看记录",
+    "createDescription": "填写表单创建新记录。标记 * 的字段为必填项。",
+    "editDescription": "修改记录信息。主字段也可编辑，请确保唯一标识不重复。"
+  },
+  "incrementalSync": {
+    "errors": {
+      "aiTimeout": "AI 处理超时，请刷新页面",
+      "networkError": "网络错误，请刷新页面"
+    }
+  }
+}

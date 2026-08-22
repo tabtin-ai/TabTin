@@ -1,0 +1,38 @@
+{
+  "id": "spacelayout",
+  "name": "Space Layout",
+  "version": "0.1.0",
+  "description": "Organization layout UI component with tab/group management tools",
+  "objectModel": {
+    "entities": ["layout", "tab"],
+    "schema": {
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "executionTarget": "frontend",
+  "uiRuntime": "localBundle",
+  "agentRuntime": "frontendBridge",
+  "distribution": "builtin",
+  "uiOnly": false,
+  "contextSources": ["project-settings"],
+  "permissions": ["spacelayout"],
+  "requiredCapabilities": [],
+  "runtimeDependencies": [],
+  "skillsConfig": {
+    "entries": {
+      "spacelayout-operator": { "enabled": true }
+    }
+  },
+  "skills": ["skills/spacelayout-operator"],
+  "lifecycleHooks": {},
+  "kind": "ui-component",
+  "runtimeBindings": {
+    "toolProvider": "action-tools:spacelayout",
+    "uiProvider": "electron:context-space.layout"
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false
+  }
+}

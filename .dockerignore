@@ -1,0 +1,43 @@
+# 整机 compose 构建上下文裁剪（根上下文：django 镜像需 monorepo 同级 packages/）。
+# 见 docs/agent/pg-single-db-mainline-plan.md「整机 Compose」。
+# 关键：排除巨型/无关产物，但**保留** apps/tabtin_django + packages/（后端运行时按
+# parents[5/6] 读 packages/tabtin-shared、packages/apps、packages/agents、packages/skills）。
+
+# 体积大户
+**/node_modules
+.git
+**/dist
+**/.next
+**/.turbo
+**/out
+**/build
+
+# Python 本地产物 / venv
+**/venv
+**/.venv
+**/__pycache__
+*.py[cod]
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+
+# 本地密钥 / 环境（运行时注入，INFRA-1）
+**/.env
+**/.env.*
+!**/.env.example
+
+# 运行产物 / 数据
+**/logs
+*.log
+**/*.sqlite3
+dev-db-dumps
+**/staticfiles
+**/media
+
+# 客户端原生 / 大资源（后端镜像用不到）
+apps/tabtin-electron
+apps/tabtin-ios
+apps/tabtin-android
+apps/tabtin-harmony
+
+.DS_Store

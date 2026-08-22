@@ -1,0 +1,404 @@
+{
+  "appName": "自動化",
+  "panel": {
+    "header": "自動化",
+    "overview": "概覽",
+    "list": "清單",
+    "viewList": "清單",
+    "viewAgenda": "時間軸",
+    "viewKanban": "看板",
+    "createTask": "新自動化任務",
+    "createAction": "新建",
+    "search": "搜尋自動化任務…",
+    "filterAll": "全部",
+    "filterAllStatus": "全部狀態",
+    "filterStatus": "狀態",
+    "filterType": "類型",
+    "loadMore": "加載更多",
+    "totalCount": "共 {{count}} 項",
+    "emptyTitle": "還沒有任何自動化任務",
+    "emptyDescription": "可以說「每天早上檢查 PR」讓 Agent 幫你建，或自己填表創建",
+    "emptyHint": "點「新自動化任務」開始，可選手動填寫或 Agent 創建",
+    "createFirst": "建立第一個自動化任務",
+    "selectSpace": "請先選擇工作空間",
+    "noResults": "沒有符合的任務",
+    "workspaceUnavailable": "工作空間不可用",
+    "agentUnavailable": "Agent 不可用",
+    "nextRunAt": "下次 {{time}}",
+    "noNextRun": "暫無下次執行時間",
+    "pausedPlan": "已暫停，不會自動執行",
+    "openTaskDetail": "開啟定時任務「{{name}}」詳情",
+    "rowActions": {
+      "menu": "任務操作"
+    },
+    "columns": {
+      "task": "任務",
+      "workspace": "所屬工作空間",
+      "status": "狀態",
+      "type": "類型",
+      "instructions": "指令摘要",
+      "schedule": "下次/最近執行",
+      "actions": "操作"
+    }
+  },
+  "overview": {
+    "attention": "需要關注",
+    "summary": "共 {{total}} 個任務 · {{attention}} 個需要關注 · {{active}} 個已激活",
+    "attentionEmpty": "一切正常",
+    "running": "運作中",
+    "runningEmpty": "暫無運作中的任務",
+    "scheduled": "已排期",
+    "scheduledEmpty": "暫無已排期任務",
+    "dormant": "草稿與暫停",
+    "view": "查看",
+    "runNow": "立即執行",
+    "activate": "啟用",
+    "resume": "恢復"
+  },
+  "status": {
+    "draft": "草稿",
+    "active": "活動",
+    "paused": "暫停",
+    "disabled": "已結束",
+    "archived": "已歸檔"
+  },
+  "trigger": {
+    "manual": "手動觸發",
+    "cron": "定時",
+    "interval": "間隔",
+    "at": "定時一次",
+    "webhook": "Webhook",
+    "table_event": "表格事件",
+    "extension_event": "擴充事件",
+    "tracker_completed": "上游自動化任務完成"
+  },
+  "scope": {
+    "all": "全部"
+  },
+  "detail": {
+    "loading": "加載中…",
+    "empty": "未找到任務",
+    "retry": "重試",
+    "noRuns": "還沒執行過",
+    "nextRun": "下次執行",
+    "instructions": "指令",
+    "noInstructions": "未填寫指示",
+    "description": "清單備註",
+    "taskInfo": "任務訊息",
+    "workspace": "工作空間",
+    "agent": "執行 Agent",
+    "runHistory": "歷史記錄",
+    "scheduleActive": "{{schedule}}",
+    "schedulePaused": "{{schedule}} · 目前已暫停",
+    "openRunSession": "開啟本次執行對話",
+    "openRunSessionFailed": "開啟執行對話失敗，請重試",
+    "refreshRuns": "重新整理",
+    "health": {
+      "disabled": "目前已暫停，恢復後才會繼續執行",
+      "missedSkipped": "最近一次錯過已按設定跳過（{{time}}），累計跳過 {{count}} 次"
+    },
+    "resultSummary": "執行結果",
+    "errorDetail": "失敗詳情",
+    "cancelDetail": "取消原因",
+    "runStatus": {
+      "completed": "成功",
+      "failed": "失敗",
+      "running": "執行中",
+      "pending": "等待中",
+      "cancelled": "已取消",
+      "waiting_device": "等待設備上線"
+    },
+    "actions": {
+      "edit": "編輯",
+      "activate": "啟用",
+      "activateDraft": "啟用並開始調度",
+      "activateDraftManual": "啟用並允許手動觸發",
+      "draftHint": "草稿狀態不會被觸發。啟用後才會依照你設定的規則自動執行",
+      "pause": "暫停",
+      "trigger": "立即執行",
+      "triggerDisabledActiveRun": "已有執行中的任務，請等待完成或先取消後再觸發",
+      "delete": "刪除",
+      "confirmDelete": "確認刪除",
+      "confirmDeleteTitle": "刪除定時任務",
+      "confirmDeleteHint": "任務卡將從自動化主清單中移除；已有歷史記錄時，左側會保留任務名稱和 Run 入口。",
+      "resume": "恢復",
+      "paused": "已暫停",
+      "resumed": "已恢復",
+      "triggered": "已觸發執行",
+      "deleted": "已刪除",
+      "cancelRun": "取消本次執行",
+      "runCancelled": "已取消本次執行"
+    },
+    "more": {
+      "title": "更多",
+      "note": "備註",
+      "noNote": "未填寫備註",
+      "catchup": "錯過策略",
+      "authorization": "授權提示"
+    },
+    "frequencyLabel": "執行頻率",
+    "highFrequencyToast": "已啟用 · {{summary}}。如需調整頻率,去詳情頁點「暫停」"
+  },
+  "frequencyHint": {
+    "manual": "需手動觸發,不會自動跑",
+    "cronCustom": "按自訂計畫自動執行",
+    "cronHourly": "每小時自動執行一次(約每天 24 次)",
+    "cronDaily": "每天 {{at}} 自動執行一次",
+    "cronWeekdays": "每個工作日 {{at}} 自動執行一次",
+    "cronWeekly": "每週一 {{at}} 自動執行一次",
+    "intervalUnknown": "以固定時間間隔自動執行",
+    "intervalSummary": "{{unit}}(預計每天約 {{count}} 次)",
+    "atOnce": "{{at}} 執行一次",
+    "atUnknown": "在設定時間執行一次",
+    "unitSeconds": "每 {{n}} 秒一次",
+    "unitMinutes": "約每 {{n}} 分鐘一次",
+    "unitHours": "約每 {{n}} 小時一次",
+    "webhook": "由 webhook 入站觸發,頻率取決於上游調用",
+    "tableEvent": "由表格事件觸發(行新增/更新/刪除時)",
+    "extensionEvent": "由擴展事件觸發",
+    "trackerCompleted": "上游自動化任務完成時觸發"
+  },
+  "createDialog": {
+    "title": "新自動化任務",
+    "editTitle": "編輯自動化任務",
+    "sections": {
+      "what": "任務內容",
+      "when": "執行時機"
+    },
+    "cancel": "取消",
+    "submit": "創建",
+    "save": "儲存",
+    "moreOptions": "更多選項",
+    "createModeLabel": "創建方式",
+    "tabs": {
+      "manual": "手動填寫",
+      "agent": "Agent 創建"
+    },
+    "agentTab": {
+      "hint": "發送後，右邊對話的 Agent 會幫你建好並啟用。",
+      "requestLabel": "你想讓 Agent 建造什麼樣的自動化任務？",
+      "placeholder": "例如：每天早上 9 點檢查 GitHub 上超過 24 小時未處理的 PR，產生清單發送到 Inbox",
+      "submit": "傳送到對話",
+      "submitting": "正在開啟對話…"
+    },
+    "fields": {
+      "name": "任務名稱",
+      "nameHint": "顯示在任務清單裡，方便認出這條任務。",
+      "title": "標題",
+      "description": "清單備註（可選）",
+      "instructions": "執行指令",
+      "instructionsHint": "每次到點會把這段話發給 Agent 執行。 Agent 會按需自行選擇適當的 Skill。",
+      "agent": "執行 Agent",
+      "workspace": "執行 Agent",
+      "activateOnCreate": "建立後立即啟用",
+      "activateOnCreateHint": "建立後立刻進入調度（「手動」類別任務仍需點「立即執行」）",
+      "schedule": "調度方式",
+      "atTime": "執行時刻",
+      "frequency": "頻率",
+      "runTime": "執行時間",
+      "firstRunTime": "首次執行時間(可選)",
+      "intervalEvery": "執行頻率",
+      "hours": "小時",
+      "skillLabel": "關聯 Skill(可選)",
+      "skillHint": "指定 Agent 使用的 Skill,留空則由 Agent 自行決定",
+      "recurrenceDays": "重複日",
+      "intervalMinutes": "每隔幾分鐘",
+      "intervalPrefix": "每隔",
+      "intervalSuffix": "分分鐘",
+      "onceAt": "執行日期時間",
+      "catchup": "錯過後怎麼辦",
+      "table": "選擇數據表",
+      "tableEvents": "觸發事件",
+      "tableConditionNote": "目前符合該表所有變更，按欄位篩選條件即將支援。"
+    },
+    "schedule": {
+      "manual": "手動執行",
+      "recurring": "定時重複",
+      "interval": "間隔執行"
+    },
+    "permissionNotice": {
+      "hint": "任務會依照計畫自動執行，執行過程中不會逐步詢問；你可以隨時暫停任務。"
+    },
+    "schedulePresets": {
+      "manual": "手動",
+      "hourly": "每小時",
+      "daily": "每天",
+      "weekdays": "工作日",
+      "weekly": "每週",
+      "interval": "間隔執行",
+      "at": "定時一次",
+      "table_event": "表格變化"
+    },
+    "schedulePresetHints": {
+      "manual": "你點擊\"立即執行\"時才運行。",
+      "hourly": "每小時整點運行一次。",
+      "daily": "每天在指定時刻運行一次。",
+      "weekdays": "週一至週五在指定時刻運行。",
+      "weekly": "每週一在指定時刻運行。",
+      "interval": "每隔固定時間自動執行一次。",
+      "at": "在你指定的日期時間執行一次，跑完即停。",
+      "table_event": "當選定的資料表發生行變化時自動執行。"
+    },
+    "tableEventTypes": {
+      "record_created": "新增行",
+      "record_updated": "修改行",
+      "record_deleted": "刪除行"
+    },
+    "recurrence": {
+      "daily": "每天",
+      "weekly": "每週",
+      "monthly": "每月",
+      "day": {
+        "MO": "一",
+        "TU": "二",
+        "WE": "三",
+        "TH": "四",
+        "FR": "五",
+        "SA": "六",
+        "SU": "日"
+      }
+    },
+    "placeholders": {
+      "name": "例如：每日資料同步",
+      "nameTitle": "填寫任務名稱",
+      "title": "輸入任務標題",
+      "description": "例如：給同事看的備註，可不填",
+      "instructions": "例如：總結昨天的未讀郵件，產生三句話摘要發佈到 Inbox",
+      "agent": "選擇 Agent",
+      "workspace": "選擇 Space",
+      "agentDefault": "預設(當前對話 Agent)",
+      "workspaceDefault": "預設（當前 Space）",
+      "agentLoading": "Agent 清單載入中...",
+      "workspaceLoading": "Space 清單載入中...",
+      "skillKeyFriendly": "留空 = Agent 自動選擇",
+      "table": "選擇要監聽的資料表",
+      "tableLoading": "加載中…",
+      "tableEmpty": "該空間暫無資料表"
+    },
+    "errors": {
+      "nameRequired": "請填寫名稱",
+      "instructionsRequired": "請填寫指示，告訴 Agent 要做什麼",
+      "agentCreateFailed": "無法發起對話，請稍後再試",
+      "noOrganization": "無法確定組織,請稍後重試",
+      "submitFailed": "建立失敗,請重試或聯絡管理員",
+      "intervalRequired": "請填寫有效的間隔分鐘數(≥ 1)",
+      "onceAtRequired": "請選擇執行的日期時間",
+      "onceAtMustBeFuture": "執行時間必須在未來，請選擇一個之後的時間",
+      "tableRequired": "請選擇要監聽的資料表",
+      "tableEventsRequired": "請至少勾選一種觸發事件"
+    },
+    "lockedTrigger": {
+      "cronValue": "自訂調度規則（{{expression}}）",
+      "hint": "此任務的觸發方式在這裡不支援修改，儲存時會保持原有觸發配置不變。"
+    },
+    "catchup": {
+      "run_once": "錯過後補跑一次",
+      "skip": "錯過就跳過",
+      "hint": "電腦關機或應用程式沒開時，任務可能錯過原定時間。這裡決定恢復後要不要補跑。",
+      "run_onceHint": "恢復後自動補跑一次，適合日報、總結這類不能遺漏的任務。",
+      "skipHint": "錯過的這次不再執行，等下一個週期，適合提醒類任務（過了時間就沒意義）。"
+    },
+    "intentSnapshot": {
+      "title": "創建意圖回顧",
+      "empty": "本自動化任務創建時未保留原始意圖(可能是較早創建的)。",
+      "userUtterance": "你說的話",
+      "agentProposal": "Agent 的提議",
+      "finalValues": "最終採用",
+      "createdVia": "創建路徑",
+      "via": {
+        "ui": "UI 表單",
+        "cli": "命令列",
+        "agent": "Agent 對話",
+        "command_palette": "命令面板"
+      }
+    }
+  },
+  "home": {
+    "subtitle": "建立和管理讓 Agent 依照計畫運行的自動化任務",
+    "viewAll": "看全部",
+    "nextRun": "下次執行",
+    "create": "創建任務",
+    "loadFailed": "載入失敗"
+  },
+  "automation": {
+    "title": "自動化",
+    "subtitle": "用自動化任務讓 Agent 依照計畫自動執行"
+  },
+  "schedule": {
+    "prevWeek": "上一周",
+    "nextWeek": "下一周",
+    "prevMonth": "上一月",
+    "nextMonth": "下一月",
+    "today": "今天",
+    "weekView": "週",
+    "monthView": "月",
+    "scopeOrganization": "組織範圍",
+    "scopeSpace": "目前空間",
+    "scopeOrganizationShort": "組織",
+    "scopeSpaceShort": "空間",
+    "manage": "工作管理",
+    "truncatedHint": "執行點過多，僅顯示目前時間範圍內的部分結果",
+    "loadError": "日程加載失敗",
+    "emptyTitle": "這段時間沒有預計執行",
+    "emptyDescription": "建立或啟用自動化任務後，未來執行點會出現在這裡",
+    "narrowList": "按日期列表",
+    "pending": "待執行",
+    "weekGrid": "週日曆",
+    "monthGrid": "月日曆",
+    "moreCount": "+{{count}}",
+    "moreAriaLabel": "{{date}}，另有 {{count}} 個任務"
+  },
+  "toast": {
+    "activated": "已啟用",
+    "createdAndActivated": "已建立並啟用",
+    "createdAsDraft": "已創建",
+    "createdAsDraftHint": "草稿不會自動運作。在詳情頁點擊「啟用」後才會依照觸發條件執行",
+    "activateAfterCreateFailed": "任務已儲存，但啟用失敗－請在詳情頁點「啟用」重試",
+    "runCompleted": "自動化任務執行完成",
+    "runFailed": "自動化任務執行失敗",
+    "error": "操作失敗，請重試"
+  },
+  "notification": {
+    "trackerCompletedBody": "點擊查看本次執行結果",
+    "trackerFailedBody": "點擊看失敗原因"
+  },
+  "chatSidebar": {
+    "trackersSection": "自動化",
+    "openModule": "打開自動化模組",
+    "newTracker": "+ 新自動化任務",
+    "emptyHint": "建立首個自動化任務",
+    "emptyForWorkspace": "目前工作空間暫無自動化任務",
+    "emptyCreate": "新自動化任務",
+    "viewAll": "看全部 ({{count}})",
+    "openTaskDetail": "開啟任務詳情",
+    "archivedTask": "已刪除任務，僅保留歷史執行記錄",
+    "deleteHistory": "刪除歷史記錄",
+    "deleteHistoryTitle": "刪除自動化歷史",
+    "deleteHistoryHint": "將永久刪除該任務的全部執行記錄和對應對話，無法復原。",
+    "deleteHistorySuccess": "歷史記錄已刪除",
+    "deleteHistoryFailed": "刪除失敗，請重試",
+    "expandRuns": "展開執行記錄",
+    "collapseRuns": "收起執行記錄",
+    "runsLoading": "載入執行記錄…",
+    "runsError": "載入失敗",
+    "runsRetry": "重試",
+    "runsEmpty": "暫無執行記錄",
+    "viewAllRuns": "看全部 ({{count}})"
+  },
+  "timeline": {
+    "today": "今天",
+    "tomorrow": "明天",
+    "thisWeek": "本週",
+    "later": "更晚",
+    "noSchedule": "未排期",
+    "empty": "暫無計畫中的自動化任務"
+  },
+  "kanban": {
+    "empty": "暫無自動化任務",
+    "colEmpty": "空",
+    "colDraft": "草稿",
+    "colActive": "已啟用",
+    "colPaused": "已暫停",
+    "colDisabled": "已結束"
+  }
+}

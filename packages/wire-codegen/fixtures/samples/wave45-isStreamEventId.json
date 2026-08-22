@@ -1,0 +1,133 @@
+{
+  "_doc": "W4.5 B3 跨语言契约 fixture — `isStreamEventId(id)` 必须在 TS daemon / Renderer、Python Django、Swift iOS、Kotlin Android 4 端对同一字符串给出 byte-by-byte 一致的布尔判定。规则：仅当字符串严格匹配 ^[0-9]+-[0-9]+$（ASCII-only digits + 单 dash 分隔 + 两侧均非空）时返回 true。算法详见 packages/agent-wire/src/cross-lang-validators/isStreamEventId.ts。各端落地状态：① TS daemon ✅ import @tabtin/agent-wire SSOT；② TS Renderer 现网副本 apps/tabtin-electron/src/renderer/src/services/wsLastEventIdPersistence.ts:134-138（W4c R5-P0-1 引入，W7 收口改 import SSOT）；③ Python Django ✅ apps/tabtin_django/apps/services/common/ws/protocol.py::is_stream_event_id（W4.5 B3 已修紧为 frozenset+all 严格 ASCII，原先 str.isdigit() 实现已退役）；④ Swift iOS ✅ 占位 packages/wire-codegen/generated/swift/StreamEventIdValidator.swift（W5 vendor in 后调用方为 LastEventIdPersistence + WebSocketService.lastEventIdPerTopic 双使用点）；⑤ Kotlin Android ✅ 占位 packages/wire-codegen/generated/kotlin/StreamEventIdValidator.kt（W6 同上双使用点）。本 fixture 19 case 在 4 端 round-trip 全 PASS。本契约只校验字符串语法不校验语义合理性（譬如 `0-0` 接受但持久化层应再加'head ≥ 13 位时间戳'之类的健全性检查防 replay storm，那是 LastEventIdPersistence 的事）。W7 清理 Wave 应让 Renderer 直接 import @tabtin/agent-wire 收口为单一实现 + 评估把 cross-lang-validators 升级为 codegen 输入。",
+  "spec_version": "v1",
+  "ssot_anchor": "@tabtin/agent-wire cross-lang-fixtures/wave45-isStreamEventId.json",
+  "validation_rule": "Stream event id format: <ascii-digits>+ '-' <ascii-digits>+ (single dash, ASCII-only)",
+  "rules": {
+    "must_match_regex": "^[0-9]+-[0-9]+$",
+    "must_be_ascii_only": true,
+    "must_reject_empty": true,
+    "must_reject_non_string": true,
+    "leading_zero_accepted": true,
+    "syntax_only": true,
+    "rationale": "本契约的核心是用 ASCII-only 替代 isdigit()/isNumber()/isDigit() 等 Unicode-aware API 在 4 端的语义分歧。Python str.isdigit()、Swift Character.isNumber、Kotlin Char.isDigit() 都会接受 Unicode digit 等价物（U+FF10..U+FF19 全角 / U+0660..U+0669 阿拉伯-印度 / U+06F0..U+06F9 扩展阿拉伯-印度），TS /^\\d+$/（不带 u flag）严格 ASCII。本 fixture 硬约束 ASCII-only，让 4 端实现都强制走 'all c in [0-9]' 形态。`leading_zero_accepted: true` 是显式设计决策（Redis Stream 实际不生成前导零，但语法上接受 0001234-0；如未来收紧需 4 端同步）。`syntax_only: true` 提醒：是否拒绝 `0-0`/`1-0` 这种语法合法但语义可疑的小 stream id 由调用方持久化层决定（譬如加 head ≥ 13 位时间戳的健全性检查防 replay storm），不在本契约范围。"
+  },
+  "cases": [
+    {
+      "name": "valid · Redis Stream ID 标准形态",
+      "input": "1702000000000-0",
+      "expected": true,
+      "notes": "Redis XADD 默认生成的形态：毫秒时间戳 + 序号"
+    },
+    {
+      "name": "valid · 大整数 + 大序号",
+      "input": "1702000123456-999",
+      "expected": true
+    },
+    {
+      "name": "valid · 单字符 head + 单字符 tail",
+      "input": "1-0",
+      "expected": true,
+      "notes": "Redis 历史上有 0-1 形态（同一毫秒第二个事件）；最小合法长度"
+    },
+    {
+      "name": "valid · 前导零（设计决策接受）",
+      "input": "0001234-0",
+      "expected": true,
+      "notes": "Redis Stream 实际不会生成前导零，但语义上 ^[0-9]+-[0-9]+$ 接受；如未来收紧为 'no leading zero except single 0'，需 4 端同步改 fixture + 实现"
+    },
+    {
+      "name": "valid · head 与 tail 都是 0",
+      "input": "0-0",
+      "expected": true,
+      "notes": "Redis XADD '0-0' 是历史最早 ID，理论合法形态"
+    },
+    {
+      "name": "invalid · evt_uuid 老协议形态",
+      "input": "evt_8a3f2c9d-1234-5678",
+      "expected": false,
+      "notes": "老 publish_to_user 路径生成的 ID，不进 Redis Stream，写到 localStorage 等于污染 cursor"
+    },
+    {
+      "name": "invalid · 缺 dash 仅 digits",
+      "input": "1702000000000",
+      "expected": false
+    },
+    {
+      "name": "invalid · 多 dash（3 段）",
+      "input": "1702-000-0",
+      "expected": false
+    },
+    {
+      "name": "invalid · 全角数字（Unicode 分歧防御）",
+      "input": "１７０２０００-０",
+      "expected": false,
+      "notes": "Python str.isdigit() 历史上会接受 U+FF10..U+FF19 → True，TS /^\\d+$/ 拒绝 → False。本 fixture 硬约束 ASCII-only。W4.5 B3 已把 Django 实现修紧为 frozenset+all，本 case 现在 4 端均拒绝。"
+    },
+    {
+      "name": "invalid · 阿拉伯-印度数字（Unicode 分歧防御）",
+      "input": "١٧٠٢٠٠٠-٠",
+      "expected": false,
+      "notes": "同上 Unicode 分歧场景：Python str.isdigit() 接受 U+0660..U+0669，TS 拒绝"
+    },
+    {
+      "name": "invalid · 扩展阿拉伯-印度数字（Unicode 分歧防御）",
+      "input": "۱۷۰۲۰۰۰-۰",
+      "expected": false,
+      "notes": "波斯/扩展阿拉伯-印度数字 U+06F0..U+06F9：Python str.isdigit() 接受，TS 拒绝。本 case 补齐 3 种主流 Unicode digit 防御，让 4 端实现都被强制走 'all c in [0-9]' 而非 isdigit/isNumber/isDigit。"
+    },
+    {
+      "name": "invalid · 字母混入 head",
+      "input": "1702abc-0",
+      "expected": false
+    },
+    {
+      "name": "invalid · 字母混入 tail",
+      "input": "1702-abc",
+      "expected": false
+    },
+    {
+      "name": "invalid · 全字母 head（对抗 'removeprefix(\"evt_\")' 假修复）",
+      "input": "abc-0",
+      "expected": false,
+      "notes": "防止有人写 head=`removeprefix('evt_')` 后再走数字校验之类绕过——本 case 只有字母没有 evt_ 前缀，正确实现必须直接拒"
+    },
+    {
+      "name": "invalid · 老协议名疑似前缀 'evt-'",
+      "input": "evt-0",
+      "expected": false,
+      "notes": "`evt-0` 看起来像有 dash 的合法形态，但 head 全字母——和上一条互补，把'前缀化绕过'路径堵死"
+    },
+    {
+      "name": "invalid · 空字符串",
+      "input": "",
+      "expected": false
+    },
+    {
+      "name": "invalid · 仅一个 dash",
+      "input": "-",
+      "expected": false,
+      "notes": "head 和 tail 都空"
+    },
+    {
+      "name": "invalid · 缺 head",
+      "input": "-0",
+      "expected": false
+    },
+    {
+      "name": "invalid · 缺 tail",
+      "input": "1702-",
+      "expected": false
+    },
+    {
+      "name": "invalid · 含空格",
+      "input": "1702 -0",
+      "expected": false
+    },
+    {
+      "name": "invalid · 含负号（数字前）",
+      "input": "-1702-0",
+      "expected": false
+    }
+  ]
+}

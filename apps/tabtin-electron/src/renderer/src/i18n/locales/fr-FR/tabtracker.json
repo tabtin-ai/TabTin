@@ -1,0 +1,404 @@
+{
+  "appName": "Automatisation",
+  "panel": {
+    "header": "Automatisation",
+    "overview": "Aperçu",
+    "list": "Liste",
+    "viewList": "Liste",
+    "viewAgenda": "Chronologie",
+    "viewKanban": "Kanban",
+    "createTask": "Nouvelle tâche d'automatisation",
+    "createAction": "Nouveau",
+    "search": "Tâches d’automatisation de recherche…",
+    "filterAll": "Tout",
+    "filterAllStatus": "Tous les statuts",
+    "filterStatus": "Statut",
+    "filterType": "Tapez",
+    "loadMore": "Charger plus",
+    "totalCount": "Articles {{count}}",
+    "emptyTitle": "Aucune tâche d'automatisation pour l'instant",
+    "emptyDescription": "Dites à l'agent « vérifiez les PR tous les matins » ou remplissez le formulaire vous-même.",
+    "emptyHint": "Utilisez « Nouvelle tâche d'automatisation » – Création manuelle ou par agent",
+    "createFirst": "Créez votre première tâche d'automatisation",
+    "selectSpace": "Sélectionnez un espace de travail",
+    "noResults": "Aucune tâche correspondante",
+    "workspaceUnavailable": "Espace de travail indisponible",
+    "agentUnavailable": "Agent indisponible",
+    "nextRunAt": "Suivant {{time}}",
+    "noNextRun": "Aucune prochaine exécution prévue",
+    "pausedPlan": "En pause : ne s'exécutera pas automatiquement",
+    "openTaskDetail": "Ouvrir la tâche planifiée \"{{name}}\"",
+    "rowActions": {
+      "menu": "Actions de tâche"
+    },
+    "columns": {
+      "task": "Tâche",
+      "workspace": "Espace de travail",
+      "status": "Statut",
+      "type": "Tapez",
+      "instructions": "Instructions",
+      "schedule": "Exécution suivante/récente",
+      "actions": "Actions"
+    }
+  },
+  "overview": {
+    "attention": "A besoin d'attention",
+    "summary": "{{total}} tâches · {{attention}} ont besoin d'attention · {{active}} actif",
+    "attentionEmpty": "Tout est clair",
+    "running": "Courir",
+    "runningEmpty": "Aucune tâche en cours",
+    "scheduled": "Programmé",
+    "scheduledEmpty": "Aucune tâche d'automatisation",
+    "dormant": "Brouillons et pause",
+    "view": "Voir",
+    "runNow": "Courez maintenant",
+    "activate": "Activer",
+    "resume": "CV"
+  },
+  "status": {
+    "draft": "Brouillon",
+    "active": "Actif",
+    "paused": "En pause",
+    "disabled": "Terminé",
+    "archived": "Archivé"
+  },
+  "trigger": {
+    "manual": "Manuel",
+    "cron": "Cron",
+    "interval": "Intervalle",
+    "at": "Une fois",
+    "webhook": "Webhook",
+    "table_event": "Événement de table",
+    "extension_event": "Événement d'extension",
+    "tracker_completed": "Sur la tâche en amont terminée"
+  },
+  "scope": {
+    "all": "Tout"
+  },
+  "detail": {
+    "loading": "Chargement…",
+    "empty": "Tâche introuvable",
+    "retry": "Réessayer",
+    "noRuns": "Aucune course pour l'instant",
+    "nextRun": "Prochaine exécution",
+    "instructions": "Instructions",
+    "noInstructions": "Pas encore d'instructions",
+    "description": "Note de liste",
+    "taskInfo": "Informations sur la tâche",
+    "workspace": "Espace de travail",
+    "agent": "Agent d'exécution",
+    "runHistory": "Historique d'exécution",
+    "scheduleActive": "{{schedule}}",
+    "schedulePaused": "{{schedule}} · En pause",
+    "openRunSession": "Ouvrir le chat de cette course",
+    "openRunSessionFailed": "Échec de l'ouverture du chat de cette exécution. Veuillez réessayer.",
+    "refreshRuns": "Actualiser",
+    "health": {
+      "disabled": "En pause – reprendre pour continuer à fonctionner",
+      "missedSkipped": "La dernière exécution manquée a été ignorée comme configuré ({{time}}). Total {{count}} ignoré."
+    },
+    "resultSummary": "Résultat",
+    "errorDetail": "Détails de l'échec",
+    "cancelDetail": "Motif d'annulation",
+    "runStatus": {
+      "completed": "Terminé",
+      "failed": "Échec",
+      "running": "Courir",
+      "pending": "En attente",
+      "cancelled": "Annulé",
+      "waiting_device": "En attente de l'appareil"
+    },
+    "actions": {
+      "edit": "Modifier",
+      "activate": "Activer",
+      "activateDraft": "Activer et démarrer la planification",
+      "activateDraftManual": "Activer pour autoriser le déclenchement manuel",
+      "draftHint": "Les brouillons ne seront pas déclenchés. Activez l'exécution automatique de vos règles.",
+      "pause": "Pause",
+      "trigger": "Courez maintenant",
+      "triggerDisabledActiveRun": "Une course est déjà en cours. Attendez qu'il se termine ou annulez-le d'abord.",
+      "delete": "Supprimer",
+      "confirmDelete": "Confirmer la suppression",
+      "confirmDeleteTitle": "Supprimer la tâche planifiée",
+      "confirmDeleteHint": "La fiche de tâche sera supprimée de la liste d'automatisation. Si l'historique d'exécution existe, son nom de tâche et les entrées d'exécution restent dans la barre latérale.",
+      "resume": "CV",
+      "paused": "En pause",
+      "resumed": "Reprise",
+      "triggered": "Déclenché",
+      "deleted": "Supprimé",
+      "cancelRun": "Annuler cette course",
+      "runCancelled": "Cette course a été annulée"
+    },
+    "more": {
+      "title": "Plus",
+      "note": "Remarque",
+      "noNote": "Aucune remarque",
+      "catchup": "Politique relative aux exécutions manquées",
+      "authorization": "Autorisation"
+    },
+    "frequencyLabel": "Fréquence",
+    "highFrequencyToast": "Activé · {{summary}}. Mettez-le en pause à partir de la page de détails pour le modifier."
+  },
+  "frequencyHint": {
+    "manual": "Déclenché manuellement uniquement – ne fonctionnera pas tout seul",
+    "cronCustom": "Fonctionne selon un calendrier personnalisé",
+    "cronHourly": "Fonctionne toutes les heures (~ 24 fois par jour)",
+    "cronDaily": "Fonctionne quotidiennement à {{at}}",
+    "cronWeekdays": "Fonctionne chaque jour de la semaine à {{at}}",
+    "cronWeekly": "Fonctionne tous les lundis à {{at}}",
+    "intervalUnknown": "Fonctionne à un intervalle de temps fixe",
+    "intervalSummary": "{{unit}} (~{{count}} fois par jour)",
+    "atOnce": "S'exécute une fois à {{at}}",
+    "atUnknown": "S'exécute une fois à l'heure prévue",
+    "unitSeconds": "toutes les {{n}} secondes",
+    "unitMinutes": "~toutes les {{n}} minutes",
+    "unitHours": "~toutes les {{n}} heures",
+    "webhook": "Déclenché par des webhooks entrants – le tarif dépend de l'appelant",
+    "tableEvent": "Déclenché par des événements de table (ligne créée/mise à jour/supprimée)",
+    "extensionEvent": "Déclenché par des événements d'extension",
+    "trackerCompleted": "Déclenché lorsqu'une tâche d'automatisation en amont se termine"
+  },
+  "createDialog": {
+    "title": "Nouvelle tâche d'automatisation",
+    "editTitle": "Modifier la tâche d'automatisation",
+    "sections": {
+      "what": "Contenu de la tâche",
+      "when": "Calendrier"
+    },
+    "cancel": "Annuler",
+    "submit": "Créer",
+    "save": "Enregistrer",
+    "moreOptions": "Plus d'options",
+    "createModeLabel": "Créer une méthode",
+    "tabs": {
+      "manual": "Manuel",
+      "agent": "Création d'agent"
+    },
+    "agentTab": {
+      "hint": "Après l'envoi, l'agent dans le chat secondaire le créera et l'activera.",
+      "requestLabel": "Quelle tâche d'automatisation l'agent doit-il créer ?",
+      "placeholder": "par ex. Tous les jours à 9h, lister les PR GitHub de plus de 24h dans ma file d'attente de révision et les publier dans la boîte de réception",
+      "submit": "Envoyer pour discuter",
+      "submitting": "Ouverture du chat…"
+    },
+    "fields": {
+      "name": "Nom de la tâche",
+      "nameHint": "Affiché dans la liste des tâches afin que vous puissiez reconnaître cette tâche.",
+      "title": "Titre",
+      "description": "Note de liste (facultatif)",
+      "instructions": "Instructions",
+      "instructionsHint": "Envoyé à l'agent à chaque exécution. L'agent choisira lui-même une compétence appropriée selon ses besoins.",
+      "agent": "Agent d'exécution",
+      "workspace": "Agent d'exécution",
+      "activateOnCreate": "Activer immédiatement après la création",
+      "activateOnCreateHint": "Commence la planification immédiatement après la création. Les tâches manuelles nécessitent toujours Exécuter maintenant.",
+      "schedule": "Calendrier",
+      "atTime": "À",
+      "frequency": "Fréquence",
+      "runTime": "Temps d'exécution",
+      "firstRunTime": "Première exécution (facultatif)",
+      "intervalEvery": "Fréquence d'exécution",
+      "hours": "heures",
+      "skillLabel": "Compétence liée (facultatif)",
+      "skillHint": "Choisissez une compétence que l'agent devra utiliser ; laissez vide pour laisser l'agent décider.",
+      "recurrenceDays": "Répétez sur",
+      "intervalMinutes": "Toutes les N minutes",
+      "intervalPrefix": "Chaque",
+      "intervalSuffix": "minutes",
+      "onceAt": "Date et heure d'exécution",
+      "catchup": "Si une course est manquée",
+      "table": "Sélectionnez un tableau",
+      "tableEvents": "Événements déclencheurs",
+      "tableConditionNote": "Correspond actuellement à toutes les modifications de ce tableau ; des filtres basés sur le champ seront bientôt disponibles."
+    },
+    "schedule": {
+      "manual": "Manuel",
+      "recurring": "Récurrent",
+      "interval": "Intervalle"
+    },
+    "permissionNotice": {
+      "hint": "Cette tâche s'exécute automatiquement dans les délais prévus sans demande à chaque étape. Vous pouvez le mettre en pause à tout moment."
+    },
+    "schedulePresets": {
+      "manual": "Manuel",
+      "hourly": "Horaire",
+      "daily": "Quotidiennement",
+      "weekdays": "En semaine",
+      "weekly": "Hebdomadaire",
+      "interval": "Intervalle",
+      "at": "Une fois",
+      "table_event": "Au changement de table"
+    },
+    "schedulePresetHints": {
+      "manual": "S'exécute uniquement lorsque vous appuyez sur \"Exécuter maintenant\".",
+      "hourly": "S'exécute une fois en début de chaque heure.",
+      "daily": "S'exécute une fois par jour à l'heure spécifiée.",
+      "weekdays": "Fonctionne du lundi au vendredi à l'heure spécifiée.",
+      "weekly": "S'exécute tous les lundis à l'heure spécifiée.",
+      "interval": "S'exécute automatiquement à un intervalle de temps fixe.",
+      "at": "S'exécute une fois à la date et à l'heure que vous choisissez, puis s'arrête.",
+      "table_event": "S'exécute automatiquement lorsque la table sélectionnée change."
+    },
+    "tableEventTypes": {
+      "record_created": "Ligne ajoutée",
+      "record_updated": "Ligne mise à jour",
+      "record_deleted": "Ligne supprimée"
+    },
+    "recurrence": {
+      "daily": "Quotidiennement",
+      "weekly": "Hebdomadaire",
+      "monthly": "Mensuel",
+      "day": {
+        "MO": "Mo",
+        "TU": "Tu",
+        "WE": "Nous",
+        "TH": "e",
+        "FR": "Fr",
+        "SA": "Sa",
+        "SU": "Su"
+      }
+    },
+    "placeholders": {
+      "name": "par ex. Synchronisation quotidienne des données",
+      "nameTitle": "Entrez le nom de la tâche",
+      "title": "Titre de la tâche",
+      "description": "par ex. une note pour les coéquipiers - facultatif",
+      "instructions": "par ex. Résumez le courrier non lu d'hier en trois puces et publiez-le dans la boîte de réception",
+      "agent": "Sélectionnez un agent",
+      "workspace": "Sélectionnez un espace",
+      "agentDefault": "Par défaut (agent de chat actuel)",
+      "workspaceDefault": "Par défaut (Espace actuel)",
+      "agentLoading": "Agents de chargement...",
+      "workspaceLoading": "Espaces de chargement...",
+      "skillKeyFriendly": "Laisser vide = L'agent sélectionne automatiquement",
+      "table": "Sélectionnez une table à regarder",
+      "tableLoading": "Chargement…",
+      "tableEmpty": "Aucune table dans cet espace pour l'instant"
+    },
+    "errors": {
+      "nameRequired": "Veuillez saisir un nom.",
+      "instructionsRequired": "Veuillez saisir les instructions sur ce que l'agent doit faire.",
+      "agentCreateFailed": "Impossible de démarrer une discussion. Veuillez réessayer.",
+      "noOrganization": "Impossible de déterminer l'organisation. Veuillez réessayer.",
+      "submitFailed": "Échec de la création. Veuillez réessayer ou contacter votre administrateur.",
+      "intervalRequired": "Veuillez saisir un intervalle valide en minutes (≥ 1).",
+      "onceAtRequired": "Veuillez choisir une date et une heure pour courir.",
+      "onceAtMustBeFuture": "Le temps d'exécution doit être dans le futur. Veuillez choisir une heure ultérieure.",
+      "tableRequired": "Veuillez sélectionner une table à regarder.",
+      "tableEventsRequired": "Veuillez sélectionner au moins un événement déclencheur."
+    },
+    "lockedTrigger": {
+      "cronValue": "Règle de planification personnalisée ({{expression}})",
+      "hint": "Le déclencheur de cette tâche ne peut pas être modifié ici. L’enregistrement conservera le déclencheur d’origine inchangé."
+    },
+    "catchup": {
+      "run_once": "Rattraper une fois",
+      "skip": "Passer les courses manquées",
+      "hint": "Si l'ordinateur est éteint ou si l'application n'est pas en cours d'exécution, une exécution peut manquer l'heure prévue. Choisissez ce qui se passe après la récupération.",
+      "run_onceHint": "Exécuté une fois automatiquement après la récupération : idéal pour les rapports et les résumés à ne pas manquer.",
+      "skipHint": "Évitez la course manquée et attendez le cycle suivant – idéal pour les rappels qui perdent leur sens une fois le temps écoulé."
+    },
+    "intentSnapshot": {
+      "title": "Intention de création",
+      "empty": "Aucune intention initiale n'a été enregistrée (cette tâche d'automatisation peut avoir été créée plus tôt).",
+      "userUtterance": "Ce que tu as dit",
+      "agentProposal": "Proposition de l'agent",
+      "finalValues": "Valeurs finales",
+      "createdVia": "Créé via",
+      "via": {
+        "ui": "Formulaire d'interface utilisateur",
+        "cli": "Ligne de commande",
+        "agent": "Discussion avec les agents",
+        "command_palette": "Palette de commandes"
+      }
+    }
+  },
+  "home": {
+    "subtitle": "Créer et gérer des tâches d'automatisation d'agent qui s'exécutent selon un planning",
+    "viewAll": "Voir tout",
+    "nextRun": "Prochaine exécution",
+    "create": "Créer une tâche",
+    "loadFailed": "Échec du chargement"
+  },
+  "automation": {
+    "title": "Automatisation",
+    "subtitle": "Utilisez des tâches d'automatisation pour permettre aux agents de s'exécuter selon un planning"
+  },
+  "schedule": {
+    "prevWeek": "La semaine précédente",
+    "nextWeek": "La semaine prochaine",
+    "prevMonth": "Mois précédent",
+    "nextMonth": "Le mois prochain",
+    "today": "Aujourd'hui",
+    "weekView": "Semaine",
+    "monthView": "Mois",
+    "scopeOrganization": "Portée de l'organisation",
+    "scopeSpace": "Espace de travail actuel",
+    "scopeOrganizationShort": "Organisation",
+    "scopeSpaceShort": "Espace de travail",
+    "manage": "Gérer les tâches",
+    "truncatedHint": "Trop d'exécutions planifiées ; seule une partie de cette plage de dates est affichée.",
+    "loadError": "Échec du chargement du planning",
+    "emptyTitle": "Aucune course prévue au cours de cette période",
+    "emptyDescription": "Les exécutions futures apparaissent ici après avoir créé ou activé une tâche d'automatisation",
+    "narrowList": "Calendrier par date",
+    "pending": "En attente",
+    "weekGrid": "Calendrier hebdomadaire",
+    "monthGrid": "Calendrier mensuel",
+    "moreCount": "+{{count}}",
+    "moreAriaLabel": "{{date}}, {{count}} plus de tâches"
+  },
+  "toast": {
+    "activated": "Activé",
+    "createdAndActivated": "Créé et activé",
+    "createdAsDraft": "Créé",
+    "createdAsDraftHint": "Les brouillons ne s’exécuteront pas automatiquement. Cliquez sur « Activer » dans la vue détaillée pour démarrer les déclencheurs.",
+    "activateAfterCreateFailed": "Enregistré, mais l'activation a échoué : réessayez Activer dans la vue détaillée.",
+    "runCompleted": "Tâche d'automatisation terminée",
+    "runFailed": "La tâche d'automatisation a échoué",
+    "error": "L'opération a échoué"
+  },
+  "notification": {
+    "trackerCompletedBody": "Cliquez pour voir cette course",
+    "trackerFailedBody": "Cliquez pour voir l'échec"
+  },
+  "chatSidebar": {
+    "trackersSection": "Automatisation",
+    "openModule": "Module d'automatisation ouvert",
+    "newTracker": "+ Nouvelle tâche d'automatisation",
+    "emptyHint": "Créez votre première tâche d'automatisation",
+    "emptyForWorkspace": "Aucune tâche d'automatisation dans cet espace de travail",
+    "emptyCreate": "Nouvelle tâche d'automatisation",
+    "viewAll": "Tout afficher ({{count}})",
+    "openTaskDetail": "Ouvrir le détail de la tâche",
+    "archivedTask": "Tâche supprimée ; historique d'exécution conservé",
+    "deleteHistory": "Supprimer l'historique",
+    "deleteHistoryTitle": "Supprimer l'historique d'automatisation",
+    "deleteHistoryHint": "Cela supprime définitivement chaque enregistrement d'exécution et sa conversation. Cela ne peut pas être annulé.",
+    "deleteHistorySuccess": "Historique supprimé",
+    "deleteHistoryFailed": "Échec de la suppression. Essayer à nouveau.",
+    "expandRuns": "Développer l'historique des exécutions",
+    "collapseRuns": "Réduire l'historique des exécutions",
+    "runsLoading": "Chargement de l'historique des exécutions…",
+    "runsError": "Échec du chargement",
+    "runsRetry": "Réessayer",
+    "runsEmpty": "Aucune course pour l'instant",
+    "viewAllRuns": "Tout afficher ({{count}})"
+  },
+  "timeline": {
+    "today": "Aujourd'hui",
+    "tomorrow": "Demain",
+    "thisWeek": "Cette semaine",
+    "later": "Plus tard",
+    "noSchedule": "Non programmé",
+    "empty": "Aucune tâche d'automatisation à venir"
+  },
+  "kanban": {
+    "empty": "Aucune tâche d'automatisation",
+    "colEmpty": "Vide",
+    "colDraft": "Brouillon",
+    "colActive": "Actif",
+    "colPaused": "En pause",
+    "colDisabled": "Terminé"
+  }
+}

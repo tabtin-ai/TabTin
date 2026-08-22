@@ -1,0 +1,154 @@
+{
+  "$comment": "PRD 05 §6.2 硬底线规则 SSoT — TS (hardline.ts) 与 Python (apps/services/common/generated_hardline.py) 共同消费本文件。修改后必须跑 scripts/codegen-hardline.py 重新生成 Python 镜像，否则 CI check 失败。",
+  "version": 1,
+  "force_block": [
+    {
+      "name": "rm -rf /",
+      "pattern": "rm\\s+(-[a-zA-Z]*\\s+)*-r[a-zA-Z]*\\s+/(\\s|$)",
+      "flags": "",
+      "description": "Recursive remove of system root"
+    },
+    {
+      "name": "fork bomb",
+      "pattern": ":\\s*\\(\\s*\\)\\s*\\{",
+      "flags": "",
+      "description": "Bash fork bomb :(){:|:&};:"
+    },
+    {
+      "name": "mkfs format disk",
+      "pattern": "mkfs\\.",
+      "flags": "",
+      "description": "Format a filesystem"
+    },
+    {
+      "name": "dd to device",
+      "pattern": "dd\\s+if=.*of=/dev/",
+      "flags": "",
+      "description": "dd writing to a raw device"
+    },
+    {
+      "name": "redirect to raw disk",
+      "pattern": ">\\s*/dev/sd[a-z]",
+      "flags": "",
+      "description": "Shell redirect into raw disk device file"
+    },
+    {
+      "name": "chmod 777 /",
+      "pattern": "chmod\\s+(-[a-zA-Z]*\\s+)*0?777\\s+/(\\s|$)",
+      "flags": "",
+      "description": "Recursive chmod 777 on system root"
+    },
+    {
+      "name": "curl pipe to shell",
+      "pattern": "curl\\s.*\\|\\s*(ba)?sh\\b",
+      "flags": "",
+      "description": "curl payload piped into shell interpreter"
+    },
+    {
+      "name": "wget pipe to shell",
+      "pattern": "wget\\s.+\\|\\s*(ba)?sh\\b",
+      "flags": "",
+      "description": "wget payload piped into shell interpreter"
+    },
+    {
+      "name": "eval with $VAR",
+      "pattern": "\\beval\\s+[\"']?\\$[A-Za-z_]",
+      "flags": "",
+      "description": "eval expanding a variable"
+    }
+  ],
+  "force_confirm": [
+    {
+      "name": "write .env",
+      "pattern": "\\.env$",
+      "flags": "",
+      "description": "Touch .env file"
+    },
+    {
+      "name": "write .env variant",
+      "pattern": "\\.env\\.",
+      "flags": "",
+      "description": "Touch .env.local / .env.production etc"
+    },
+    {
+      "name": "touch .ssh directory",
+      "pattern": "\\.ssh/",
+      "flags": "",
+      "description": "Touch a file inside ~/.ssh"
+    },
+    {
+      "name": "touch PEM key",
+      "pattern": "\\.pem$",
+      "flags": "",
+      "description": "Touch a .pem key file"
+    },
+    {
+      "name": "touch key file",
+      "pattern": "\\.key$",
+      "flags": "",
+      "description": "Touch a .key file"
+    },
+    {
+      "name": "touch credentials file",
+      "pattern": "credentials\\.",
+      "flags": "",
+      "description": "Touch a credentials.* file"
+    },
+    {
+      "name": "touch secret file",
+      "pattern": "\\.secret$",
+      "flags": "",
+      "description": "Touch a .secret file"
+    },
+    {
+      "name": "touch token file",
+      "pattern": "\\.token$",
+      "flags": "",
+      "description": "Touch a .token file"
+    },
+    {
+      "name": "touch DSA private key",
+      "pattern": "id_dsa",
+      "flags": "",
+      "description": "Touch an SSH DSA private key (W7/B2 follow-up: rule_engine.py v1 force_confirm 与 v3 path_scan_rules 同步覆盖)"
+    },
+    {
+      "name": "touch ECDSA private key",
+      "pattern": "id_ecdsa",
+      "flags": "",
+      "description": "Touch an SSH ECDSA private key (W7/B2 follow-up: rule_engine.py v1 force_confirm 与 v3 path_scan_rules 同步覆盖)"
+    },
+    {
+      "name": "touch SSH private key",
+      "pattern": "id_rsa",
+      "flags": "",
+      "description": "Touch an SSH RSA private key"
+    },
+    {
+      "name": "touch Ed25519 private key",
+      "pattern": "id_ed25519",
+      "flags": "",
+      "description": "Touch an SSH Ed25519 private key"
+    }
+  ],
+  "sensitive_fields": [
+    "command",
+    "cmd",
+    "shell_command",
+    "shell",
+    "script",
+    "path",
+    "file_path",
+    "filepath",
+    "target_file",
+    "file",
+    "uri",
+    "destination",
+    "target",
+    "content",
+    "url",
+    "href",
+    "query",
+    "sql"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "protocol_version": "v2",
+  "min_compatible_version": "v2",
+  "trace_id": "trace_abc123",
+  "thread_id": "thread_xyz789",
+  "_seq": 100,
+  "event_type": "agent.stream.message_delta",
+  "message_id": "msg_01",
+  "delta": {
+    "stop_reason": "tool_use",
+    "stop_sequence": null
+  },
+  "usage": {
+    "input_tokens": 1234,
+    "output_tokens": 567,
+    "cache_read_input_tokens": 100
+  }
+}

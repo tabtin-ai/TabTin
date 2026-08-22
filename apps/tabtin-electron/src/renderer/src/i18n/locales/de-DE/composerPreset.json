@@ -1,0 +1,34 @@
+{
+  "validation": {
+    "required": "Dieses Feld ist erforderlich",
+    "invalidUrl": "Bitte geben Sie eine gültige URL ein",
+    "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "invalidFormat": "Ungültiges Format",
+    "minValue": "Das Minimum ist {{min}}",
+    "maxValue": "Maximum ist {{max}}",
+    "maxLength": "Höchstens {{max}} Zeichen"
+  },
+  "picker": {
+    "search": "Suchen...",
+    "noResults": "Keine passenden Ergebnisse",
+    "empty": "Keine KI-Tools verfügbar"
+  },
+  "blockCard": {
+    "presetTitle": "Übermittelte Parameter",
+    "askUserTitle": "Beantwortete Parameter",
+    "fallbackLabel": "Parameter"
+  },
+  "card": {
+    "expand": "Erweitern",
+    "collapse": "Zusammenbruch",
+    "remove": "Entfernen"
+  },
+  "upload": {
+    "clickToUpload": "Klicken Sie zum Hochladen",
+    "fileTooLarge": "Die Datei ist zu groß",
+    "addMore": "Hinzufügen"
+  },
+  "input": {
+    "presetPicker": "KI-Tools"
+  }
+}

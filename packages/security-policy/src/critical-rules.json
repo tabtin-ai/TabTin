@@ -1,0 +1,112 @@
+{
+  "$schema": "./critical-rules.schema.json",
+  "version": "1.0.0",
+  "description": "CRITICAL deny rules — cannot be bypassed by allowlist. SSOT for both TypeScript (terminal-core) and Python (orchestration backend).",
+  "rules": [
+    {
+      "name": "pipe-to-shell",
+      "pattern": "\\|\\s*(?:\\/(?:usr\\/(?:local\\/)?)?bin\\/)?(?:(?:ba)?sh|env\\s+(?:-\\S+\\s+)*(?:ba)?sh)\\b",
+      "flags": "i",
+      "category": "rce",
+      "preSplitOnly": true,
+      "description": "Pipe output to shell interpreter"
+    },
+    {
+      "name": "curl-pipe-exec",
+      "pattern": "\\b(curl|wget)\\b.*\\|\\s*(?:\\/(?:usr\\/(?:local\\/)?)?bin\\/)?(?:(?:ba)?sh|env\\s+(?:-\\S+\\s+)*(?:ba)?sh)\\b",
+      "flags": "i",
+      "category": "rce",
+      "preSplitOnly": true,
+      "description": "Download and execute via pipe"
+    },
+    {
+      "name": "process-substitution-shell",
+      "pattern": "(?:\\/(?:usr\\/(?:local\\/)?)?bin\\/)?(?:(?:ba)?sh|env\\s+(?:-\\S+\\s+)*(?:ba)?sh)\\s+<\\s*\\(",
+      "flags": "i",
+      "category": "rce",
+      "preSplitOnly": true,
+      "description": "Process substitution as shell input"
+    },
+    {
+      "name": "process-substitution-input",
+      "pattern": "<\\s*\\(\\s*(curl|wget|nc|ncat)\\b",
+      "flags": "i",
+      "category": "rce",
+      "preSplitOnly": true,
+      "description": "Process substitution with network commands"
+    },
+    {
+      "name": "process-substitution-output",
+      "pattern": ">\\s*\\(\\s*(?:\\/(?:usr\\/(?:local\\/)?)?bin\\/)?(?:(?:ba)?sh|env\\s+(?:-\\S+\\s+)*(?:ba)?sh)\\b",
+      "flags": "i",
+      "category": "rce",
+      "preSplitOnly": true,
+      "description": "Process substitution output to shell"
+    },
+    {
+      "name": "python-inline",
+      "pattern": "\\bpython3?\\s+-c\\b",
+      "flags": "i",
+      "category": "rce",
+      "preSplitOnly": false,
+      "description": "Python inline code execution"
+    },
+    {
+      "name": "node-inline",
+      "pattern": "\\bnode\\s+(-e|--eval)\\b",
+      "flags": "i",
+      "category": "rce",
+      "preSplitOnly": false,
+      "description": "Node.js inline code execution"
+    },
+    {
+      "name": "curl-write-file",
+      "pattern": "\\bcurl\\b.*\\s(-o\\s+|-O\\b|--output[\\s=])",
+      "flags": "i",
+      "category": "exfiltration",
+      "preSplitOnly": false,
+      "description": "curl writing to file"
+    },
+    {
+      "name": "curl-upload",
+      "pattern": "\\bcurl\\b.*\\s(-T\\s+|--upload-file[\\s=])",
+      "flags": "i",
+      "category": "exfiltration",
+      "preSplitOnly": false,
+      "description": "curl file upload"
+    },
+    {
+      "name": "curl-exfil",
+      "pattern": "\\bcurl\\b.*(-d\\s+@|--data[^\\s]*\\s+@|-F\\s+[^\\s]*@)",
+      "flags": "i",
+      "category": "exfiltration",
+      "preSplitOnly": false,
+      "description": "curl data exfiltration from file"
+    },
+    {
+      "name": "redirect-write",
+      "pattern": ">\\s*[^\\s&|]",
+      "flags": "",
+      "category": "file-write",
+      "preSplitOnly": false,
+      "description": "Shell redirect write to file",
+      "note": "May conflict with legitimate tabtin CLI pipe redirects — consider whitelisting tabtin prefix"
+    },
+    {
+      "name": "export-env-injection",
+      "pattern": "\\bexport\\s+(LD_PRELOAD|DYLD_INSERT_LIBRARIES|LD_LIBRARY_PATH|DYLD_LIBRARY_PATH|LD_AUDIT|LD_DEBUG|LD_PROFILE|BASH_ENV|ENV|SHELLOPTS|BASHOPTS|GLOBIGNORE|PROMPT_COMMAND)\\b",
+      "flags": "i",
+      "category": "privilege-escalation",
+      "preSplitOnly": false,
+      "description": "Dangerous environment variable injection"
+    },
+    {
+      "name": "export-path-hijack",
+      "pattern": "\\bexport\\s+PATH\\s*=\\s*[\"']?\\/(?:tmp|var\\/tmp|dev\\/shm)\\b",
+      "flags": "i",
+      "category": "privilege-escalation",
+      "preSplitOnly": false,
+      "description": "PATH hijack to temporary directory"
+    }
+  ]
+}

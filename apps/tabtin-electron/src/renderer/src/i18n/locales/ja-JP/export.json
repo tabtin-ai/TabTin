@@ -1,0 +1,23 @@
+{
+  "errors": {
+    "loadStatsFailed": "エクスポート統計のロードに失敗しました",
+    "exportFailed": "エクスポートに失敗しました。もう一度お試しください"
+  },
+  "success": {
+    "exported": "エクスポート済み {{filename}}",
+    "showInFolder": "フォルダー内に表示"
+  },
+  "stats": {
+    "sampledHint": "統計はサンプリングされた推定値です。実際のエクスポートには、選択されたすべての {{total}} レコードが含まれます"
+  },
+  "apiErrors": {
+    "exportFailedWithStatus": "エクスポートに失敗しました: HTTP {{status}}",
+    "unsupportedFormat": "サポートされていないエクスポート形式: {{format}}",
+    "unsupportedResponseType": "サポートされていない応答データ型: {{type}}",
+    "downloadBlobRequired": "downloadFile は BLOB を予期していましたが、受信しました: {{type}}",
+    "filenameRequired": "ファイル名は空ではない文字列である必要がありますが、次のメッセージを受け取りました: {{type}}"
+  },
+  "filename": {
+    "defaultTableName": "テーブル"
+  }
+}

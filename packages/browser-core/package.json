@@ -1,0 +1,38 @@
+{
+  "name": "@tabtin/browser-core",
+  "version": "0.1.0",
+  "description": "Browser operation core — unified BrowserContext abstraction for Electron and Daemon",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./url-policy": {
+      "source": "./src/url-policy/index.ts",
+      "types": "./dist/url-policy/index.d.ts",
+      "import": "./dist/url-policy/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@tabtin/crawl-contracts": "workspace:*",
+    "@tabtin/security-policy": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.2.2",
+    "vitest": "4.0.18"
+  },
+  "files": [
+    "dist"
+  ]
+}

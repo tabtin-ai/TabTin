@@ -1,0 +1,45 @@
+{
+  "name": "@tabtin/file-pipeline-errors",
+  "version": "0.1.0",
+  "description": "File pipeline error_kind SSoT — 14 类字符串 kind + i18n key + LLM-facing 文案模板，跨 agent-runtime / action-tools / local-docparse / Django 后端共享",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "codegen": "tsx codegen/generate.ts",
+    "codegen:verify": "tsx codegen/generate.ts --verify"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "5.7.2",
+    "vitest": "4.0.18",
+    "yaml": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "tabtin",
+    "file-pipeline",
+    "error-code",
+    "i18n"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT"
+}

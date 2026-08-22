@@ -1,0 +1,34 @@
+{
+  "name": "@tabtin/platform-adapter",
+  "version": "0.1.0",
+  "description": "Platform adapter interfaces for TabTin apps",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "tabtin",
+    "platform",
+    "adapter"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "5.7.2"
+  }
+}

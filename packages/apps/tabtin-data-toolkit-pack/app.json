@@ -1,0 +1,74 @@
+{
+  "id": "tabtin-data-toolkit-pack",
+  "name": "数据分析工具包",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "数据处理：数据质检、异常扫描、回归分析、A/B 测试评估。",
+  "icon": "chart-column",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "data",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 32
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/dataset-health-audit",
+    "skills/outlier-scan",
+    "skills/regression-insight",
+    "skills/split-test-evaluator"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "dataset-health-audit": {
+        "enabled": true
+      },
+      "outlier-scan": {
+        "enabled": true
+      },
+      "regression-insight": {
+        "enabled": true
+      },
+      "split-test-evaluator": {
+        "enabled": true
+      }
+    }
+  }
+}

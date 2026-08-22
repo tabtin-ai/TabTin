@@ -1,0 +1,32 @@
+{
+  "name": "@tabtin/smartsheet-adapter-web",
+  "version": "0.1.0",
+  "description": "Web platform adapter for TabTin applications",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "tabtin",
+    "adapter",
+    "web",
+    "platform"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "@tabtin/smartsheet": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "5.7.2"
+  },
+  "dependencies": {
+    "@tabtin/smartsheet": "workspace:*"
+  },
+  "files": [
+    "dist"
+  ]
+}

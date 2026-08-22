@@ -1,0 +1,53 @@
+{
+  "name": "@tabtin/file-pipeline",
+  "version": "0.1.0",
+  "description": "File pipeline 抽象层 — FileResolver + Parser 接口 + 5 mime parser (image/pdf/docx/xlsx/pptx) + EpubParser 验证抽象。让加新文件格式只动 parser 层、不动 4 个胶水点（临时通道 read_file / 持久通道 Host / 图装配 / cloud_first 死配置）。",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@tabtin/file-pipeline-errors": "workspace:*",
+    "@tabtin/local-docparse": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "5.7.2",
+    "vitest": "4.0.18"
+  },
+  "peerDependencies": {
+    "sharp": "^0.34.0"
+  },
+  "peerDependenciesMeta": {
+    "sharp": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "tabtin",
+    "file-pipeline",
+    "parser",
+    "abstraction"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT"
+}

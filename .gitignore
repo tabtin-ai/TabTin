@@ -1,0 +1,300 @@
+tools/daemon-control-deploy/
+.agents/local/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+# Electron packaging needs these resources tracked even though generic Python build/ is ignored.
+!apps/tabtin-electron/build/
+!apps/tabtin-electron/build/icon-source/
+!apps/tabtin-electron/build/icon-source/**
+!apps/tabtin-electron/build/dmg/
+!apps/tabtin-electron/build/dmg/**
+!apps/tabtin-electron/build/icons/
+!apps/tabtin-electron/build/icons/**
+!apps/tabtin-electron/build/entitlements.mac.plist
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+!packages/**/src/lib/
+!apps/**/src/lib/
+!packages/**/scripts/lib/
+!scripts/lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+support/SuperMode/
+.claude/worktrees/
+.claude/launch.json
+.claude/settings.local.json
+.preview-tmp/
+reference/FirmAgent/
+
+# Django
+*.log
+*.pot
+*.pyc
+db.sqlite3
+db.sqlite3-journal
+/staticfiles/
+/media/
+apps/tabtin_django/local-oss/
+celerybeat-schedule
+**/celerybeat-schedule.db
+celerybeat.pid
+
+# Environment variables: only audited example templates may be committed.
+.env
+.env.*
+!.env.example
+!**/.env.example
+!**/.env.*.example
+/apps/tabtin-electron/.env.opensource.local
+.env.backup.*
+.env.bak.*
+.env.*.db
+.env.*.db.*
+apps/tabtin_django/.env.local
+
+# Credentials and signing material must never enter the public repository.
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.mobileprovision
+credentials.local.*
+secrets.local.*
+
+# Database Backups
+backups/
+*.sql
+*.dump
+# Community 角色与窄能力边界是安装配置，不是数据库 dump。
+!community-assets/postgres/*.sql
+# 开发库快照不进 git（太大、含密钥）。需要数据走 IM 发 dump，本地放此目录后导入。
+dev-db-dumps/*.sql.gz
+dev-db-dumps/*.sql
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+TabTin-icon.png
+# git merge / rebase 自动生成的备份残留
+*.orig
+*.rej
+
+# OS
+Thumbs.db
+
+# Node
+node_modules/
+.pnpm-store/
+.pnpm-debug.log*
+packages/.tabtin-workspace-build.lock
+
+# 远程文书/数据 Skill 包不进入 Git；本地 hydrate 残留一并忽略。
+/packages/apps/.skill-bundles/
+/packages/apps/.skill-bundle-hydrate-*/
+/packages/apps/tabtin-data-ai-pack/
+/packages/apps/tabtin-document-ai-pack/
+
+# Build outputs
+*.tsbuildinfo
+.test-dist/
+out/
+# Swift Package Manager build artifacts (wire-codegen tests/swift/, etc.)
+.build/
+dist/
+# pnpm deploy staging root（build-packaged-app.sh 默认 $REPO_ROOT/.deploy-runs）
+.deploy-runs/
+apps/tabtin-electron/electron.vite.config.*.mjs
+
+# -----------------------------------------------------------------------------
+# Mobile / Native（Android、iOS 等：构建缓存、本机配置、安装包）
+# 各 app 目录下另有 .gitignore 时以该目录为准；此处为仓库级兜底。
+# -----------------------------------------------------------------------------
+**/.gradle/
+**/local.properties
+**/.cxx/
+**/captures/
+**/.externalNativeBuild/
+# 含 apps/tabtin-electron/resources/tabtin-android.apk：TabPhone 预热用本地包，
+# 不入库。需要时从 apps/tabtin-android 打 release 包拷到该路径；缺失则跳过安装。
+*.apk
+*.aab
+*.ap_
+*.aar
+*.ipa
+**/*.xcarchive/
+**/*.xcuserstate
+**/*.dSYM/
+**/*.dSYM.zip
+**/*.jks
+**/*.keystore
+
+
+# Test
+/tests/*
+!/tests/electron/
+!/tests/electron/**
+!/tests/mobile-contract/
+!/tests/mobile-contract/**
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Logs
+*.log
+logs/
+*.pid
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+/test/
+example/
+# 临时脚本和备份
+scripts/backup-*.sh
+
+open-source/
+
+# TabTin local index (per-project)
+.tabtin/
+
+# Project-specific AI agent rules (debug branch only)
+AGENTS.md
+venv
+
+# Local agent/runtime context and Multica workspace skills
+/.agent_context/
+/.multica/
+/.pi/skills/multica-*/
+
+# Cursor agent 会话与执行方案：本地过程产物，不纳入仓库
+/.cursor/chat/
+/.cursor/plans/
+
+
+# Centrifugo binary
+scripts/backend/bin/
+/scripts/bin/
+
+# Payment certificates & private keys (NEVER commit)
+apps/tabtin_django/apps/services/payment/cert/
+
+# Agent debug logs (large LLM request dumps, not documentation)
+docs/agentlog/
+docs/_archive/agentlog/
+# 外部档案导入验收截图（HTML 引用，不入库）
+docs/agent/pr7734-external-archive-acceptance-assets/
+dev-logs/
+
+# -----------------------------------------------------------------------------
+# reference/ 第三方镜像（本地 git clone，原以 gitlink 跟踪）
+# 已从索引移除：避免子仓库内未提交改动导致主仓持续显示 Modified。
+# 克隆主仓后若需要某镜像，请在 reference/ 下自行 clone；本仓仍保留
+# reference/ 内非 gitlink 的文档与脚本（如 libtv-skill）。
+# -----------------------------------------------------------------------------
+/reference/
+# tabwhiteboard v2 spike 临时产物（保留 spike 脚本本身，但忽略 node_modules
+# 与每次跑的 cpu profile / trace JSON 输出，避免几十 MB 进版本库）
+.cursor/plans/tabwhiteboard_v2/spikes/node_modules/
+.cursor/plans/tabwhiteboard_v2/spikes/profile-output/
+
+# 本人 Cursor 规则（软链自 work-brain/tabtin/user-personal-workspace.mdc，仅本机）
+.cursor/rules/user-personal-workspace.mdc
+
+# 验证 harness 本地截图（脚本入库，产物不入库）
+scripts/verification/**/*.png
+
+# 脚本/工具产物（dogfood / metrics / CLI binary）
+/outputs/
+/metrics/
+/apps/tabtin-android/.kotlin/
+/packages/tabtin-cli-go/tabtin-cli
+/packages/tabtin-cli-go/tabtin-cli-*
+
+# @tabtin/cli npm 包：本地生成的二进制与 pack 产物不入库（issue #5888 工作包二）
+/packages/tabtin-cli/binaries/*
+!/packages/tabtin-cli/binaries/.gitkeep
+/packages/tabtin-cli/*.tgz
+
+# pdf.js 资源（由 electron.vite copyPdfjsAssetsPlugin 从 pdfjs-dist 拷贝，构建产物）
+/apps/tabtin-electron/static/cmaps/
+/apps/tabtin-electron/static/standard_fonts/
+
+# vitest / istanbul coverage 报告（构建产物）
+coverage/
+**/coverage/
+!**/coverage/.gitkeep
+
+# 媒体能力脚本生成物（wav/mp4），不入库
+/packages/media-capabilities/test-output/
+
+# Cursor 计划截图（单张 bmp 约 10MB）
+.cursor/plans/*.bmp
+
+# 仓库根测试用音视频样例
+/test/demo.mp4
+/test/demo.m4a
+
+# Superpowers brainstorm companion mockups
+.superpowers/
+.mcp-chat/
+.pi/
+.superset/
+scripts/.cache/
+
+# Mini deployment source mirror (runtime cache; not TabTin source)
+tools/daemon-control-deploy/
+
+# 废弃 iOS 旧工程，不参与开源主客户端构建
+/apps/tabtin-ios/tabtin-ios-odd/
+
+# 闭源崩溃 SDK，不再随仓库分发
+/apps/tabtin-ios/Vendor/Bugly/
+
+# Agent 执行过程文档不入库
+/docs/*
+
+# 社区公开安装指南属于开源文档快照
+!/docs/development/
+!/docs/development/community-installation-guide.docx
+!/docs/development/assets/
+!/docs/development/assets/community-installation/
+!/docs/development/assets/community-installation/*.png
+
+# 产品支持材料不随开源快照分发
+/support/

@@ -1,0 +1,44 @@
+{
+  "name": "@tabtin/table-kernel-pglite",
+  "version": "0.1.0",
+  "description": "PGlite adapter for @tabtin/table-kernel — local PostgreSQL via WASM",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "tabtin",
+    "table",
+    "pglite",
+    "kernel",
+    "adapter"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "dependencies": {
+    "@tabtin/table-kernel": "workspace:*",
+    "@electric-sql/pglite": "^0.2.0",
+    "kysely": "^0.27.0"
+  },
+  "devDependencies": {
+    "typescript": "5.7.2",
+    "vitest": "^3.0.0"
+  }
+}

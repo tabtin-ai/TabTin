@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.5rem;
+    --success: 152 45% 42%;
+    --success-foreground: 0 0% 99%;
+    --warning: 38 70% 50%;
+    --warning-foreground: 0 0% 99%;
+    --info: 210 55% 52%;
+    --info-foreground: 0 0% 99%;
+
+    --type-ai: 270 60% 55%;
+    --type-ai-foreground: 0 0% 99%;
+
+    /* IDE 风格面板变量 */
+    --panel-header: 240 4.8% 98%;
+    --panel-border: 240 5.9% 90%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --success: 152 45% 55%;
+    --success-foreground: 0 0% 99%;
+    --warning: 38 60% 55%;
+    --warning-foreground: 0 0% 99%;
+    --info: 210 55% 62%;
+    --info-foreground: 0 0% 99%;
+
+    --type-ai: 270 55% 65%;
+    --type-ai-foreground: 0 0% 99%;
+
+    --panel-header: 240 3.7% 10%;
+    --panel-border: 240 3.7% 15.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .admin-page {
+    @apply space-y-6 p-6;
+  }
+
+  /* 平铺布局工具类 */
+  .panel-container {
+    @apply flex h-full flex-col overflow-hidden bg-background;
+  }
+
+  .panel-header {
+    @apply flex h-10 items-center justify-between border-b bg-muted/40 px-4 text-body font-medium;
+  }
+
+  .panel-toolbar {
+    @apply flex items-center gap-1 border-b p-2;
+  }
+
+  .panel-content {
+    @apply flex-1 overflow-auto;
+  }
+
+  .split-view {
+    @apply grid h-full grid-cols-[300px_1fr] divide-x;
+  }
+}

@@ -1,0 +1,88 @@
+[
+  {
+    "protocol_version": "v2",
+    "min_compatible_version": "v2",
+    "trace_id": "trace_abc123",
+    "thread_id": "thread_xyz789",
+    "_seq": 1,
+    "event_type": "agent.stream.message_start",
+    "message_id": "msg_01",
+    "role": "assistant",
+    "model_id": "claude-sonnet-4-7-20260321",
+    "model_name": "Claude Sonnet 4.7",
+    "started_at": "2026-05-10T22:00:00Z",
+    "run_id": "run_xyz",
+    "message_kind": "llm"
+  },
+  {
+    "protocol_version": "v2",
+    "min_compatible_version": "v2",
+    "trace_id": "trace_abc123",
+    "thread_id": "thread_xyz789",
+    "_seq": 2,
+    "event_type": "agent.stream.content_block_start",
+    "message_id": "msg_01",
+    "index": 0,
+    "block_id": "blk_001",
+    "block": {
+      "type": "text",
+      "text": ""
+    }
+  },
+  {
+    "protocol_version": "v2",
+    "min_compatible_version": "v2",
+    "trace_id": "trace_abc123",
+    "thread_id": "thread_xyz789",
+    "_seq": 3,
+    "event_type": "agent.stream.content_block_delta",
+    "message_id": "msg_01",
+    "index": 0,
+    "delta": {
+      "type": "text_delta",
+      "text": "Hello, "
+    }
+  },
+  {
+    "protocol_version": "v2",
+    "min_compatible_version": "v2",
+    "trace_id": "trace_abc123",
+    "thread_id": "thread_xyz789",
+    "_seq": 9,
+    "event_type": "agent.stream.content_block_stop",
+    "message_id": "msg_01",
+    "index": 0
+  },
+  {
+    "protocol_version": "v2",
+    "min_compatible_version": "v2",
+    "trace_id": "trace_abc123",
+    "thread_id": "thread_xyz789",
+    "_seq": 100,
+    "event_type": "agent.stream.message_delta",
+    "message_id": "msg_01",
+    "delta": {
+      "stop_reason": "tool_use",
+      "stop_sequence": null
+    },
+    "usage": {
+      "input_tokens": 1234,
+      "output_tokens": 567,
+      "cache_read_input_tokens": 100
+    }
+  },
+  {
+    "protocol_version": "v2",
+    "min_compatible_version": "v2",
+    "trace_id": "trace_abc123",
+    "thread_id": "thread_xyz789",
+    "_seq": 200,
+    "event_type": "agent.stream.message_stop",
+    "message_id": "msg_01",
+    "persisted_id": "chat_msg_db_id_xxx",
+    "block_id_overrides": {
+      "0": "blk_renamed_0",
+      "2": "blk_renamed_2"
+    }
+  }
+]

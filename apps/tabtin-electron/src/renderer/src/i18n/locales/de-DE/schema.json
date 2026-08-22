@@ -1,0 +1,21 @@
+{
+  "analyzing": {
+    "title": "KI analysiert...",
+    "modeFlash": "Flash-Modus – Schnelle Analyse",
+    "modeDeep": "Deep Mode – Eingehende Analyse",
+    "tasksTitle": "Analyseaufgaben",
+    "tip": "💡 KI analysiert die Seitenstruktur. Bitte warten...",
+    "tipDeepSuffix": "Der Deep Mode analysiert auch Detailseiten und kann länger dauern.",
+    "cancel": "Analyse abbrechen",
+    "phases": {
+      "initializing": "Initialisierung",
+      "detecting_pre_actions": "Vorabaktionen erkennen",
+      "identifying_region": "Identifizieren der Listenregion",
+      "analyzing_fields": "Analyse der Feldstruktur",
+      "analyzing_pagination": "Paginierung erkennen",
+      "exploring_detail": "Detaileintrag erkunden",
+      "building_schema": "Gebäudeschema",
+      "completed": "Abgeschlossen"
+    }
+  }
+}

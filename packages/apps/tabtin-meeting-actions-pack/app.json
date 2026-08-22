@@ -1,0 +1,74 @@
+{
+  "id": "tabtin-meeting-actions-pack",
+  "name": "Meeting Actions Pack",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "会议行动系列：纪要与行动项、会前议程、会后同步邮件、决策日志（升级会议场景）。",
+  "icon": "calendar-check",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "productivity",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 28
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/meeting-notes-actions",
+    "skills/meeting-agenda-builder",
+    "skills/meeting-sync-mail",
+    "skills/decision-log"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "meeting-notes-actions": {
+        "enabled": true
+      },
+      "meeting-agenda-builder": {
+        "enabled": true
+      },
+      "meeting-sync-mail": {
+        "enabled": true
+      },
+      "decision-log": {
+        "enabled": true
+      }
+    }
+  }
+}

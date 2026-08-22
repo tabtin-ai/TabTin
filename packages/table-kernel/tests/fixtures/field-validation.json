@@ -1,0 +1,74 @@
+{
+  "text": [
+    { "value": null, "valid": true, "formatted": "" },
+    { "value": "hello", "valid": true, "formatted": "hello" },
+    { "value": 123, "valid": false, "formatted": "123" }
+  ],
+  "number": [
+    { "value": null, "valid": true, "formatted": null },
+    { "value": 42, "valid": true, "formatted": 42 },
+    { "value": "123.45", "valid": true, "formatted": 123.45 },
+    { "value": "abc", "valid": false },
+    { "value": "Infinity", "valid": false }
+  ],
+  "percent": [
+    { "value": null, "valid": true, "formatted": null },
+    { "value": 0.12, "valid": true, "formatted": 0.12 },
+    { "value": "12", "valid": true, "formatted": 0.12 },
+    { "value": "12%", "valid": true, "formatted": 0.12 },
+    { "value": "12.5 %", "valid": true, "formatted": 0.125 },
+    { "value": "", "valid": true, "formatted": null },
+    { "value": "abc", "valid": false }
+  ],
+  "rating": [
+    { "value": null, "valid": true, "formatted": null },
+    { "value": 3, "valid": true, "formatted": 3, "options": { "max": 5 } },
+    { "value": 6, "valid": false, "options": { "max": 5 } },
+    { "value": -1, "valid": false },
+    { "value": 0, "valid": true, "formatted": 0 }
+  ],
+  "checkbox": [
+    { "value": null, "valid": true, "formatted": false },
+    { "value": true, "valid": true, "formatted": true },
+    { "value": false, "valid": true, "formatted": false },
+    { "value": "yes", "valid": false }
+  ],
+  "date": [
+    { "value": null, "valid": true, "formatted": null },
+    { "value": "2024-01-15", "valid": true },
+    { "value": "not-a-date", "valid": false },
+    { "value": "2024-13-01", "valid": false }
+  ],
+  "select": [
+    { "value": null, "valid": true, "formatted": null },
+    { "value": "option_a", "valid": true, "options": { "choices": ["option_a", "option_b"] } },
+    { "value": "option_c", "valid": false, "options": { "choices": ["option_a", "option_b"] } },
+    { "value": "anything", "valid": true }
+  ],
+  "multi_select": [
+    { "value": null, "valid": true, "formatted": [] },
+    { "value": ["a", "b"], "valid": true, "options": { "choices": ["a", "b", "c"] } },
+    { "value": ["a", "d"], "valid": false, "options": { "choices": ["a", "b", "c"] } },
+    { "value": "not_array", "valid": false }
+  ],
+  "email": [
+    { "value": null, "valid": true, "formatted": null },
+    { "value": "", "valid": true, "formatted": null },
+    { "value": "user@example.com", "valid": true, "formatted": "user@example.com" },
+    { "value": "not-an-email", "valid": false }
+  ],
+  "url": [
+    { "value": null, "valid": true, "formatted": null },
+    { "value": "", "valid": true, "formatted": null },
+    { "value": "https://example.com", "valid": true, "formatted": "https://example.com" },
+    { "value": "//cdn.example.com/img.png", "valid": true, "formatted": "https://cdn.example.com/img.png" },
+    { "value": "just-text", "valid": false }
+  ],
+  "link": [
+    { "value": null, "valid": true, "formatted": null },
+    { "value": { "id": "rec1", "title": "Record 1" }, "valid": true },
+    { "value": "rec_id_string", "valid": true },
+    { "value": [{ "id": "r1" }, { "id": "r2" }], "valid": true, "options": { "relationship": "ManyMany" } },
+    { "value": [{ "id": "r1" }, { "id": "r2" }], "valid": false, "options": { "relationship": "OneOne" } }
+  ]
+}

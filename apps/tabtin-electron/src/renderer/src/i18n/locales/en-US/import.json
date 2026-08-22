@@ -1,0 +1,31 @@
+{
+  "errors": {
+    "responseInvalid": "Invalid response format from server",
+    "missingStats": "Response is missing stats data",
+    "missingFieldMapping": "Response is missing field mapping data",
+    "previewFailed": "File preview failed. Please try again.",
+    "previewNetworkUnstable": "Network connection is unstable. Please retry and check your proxy/VPN.",
+    "importFailed": "Data import failed. Please try again.",
+    "importInFlight": "Import already in progress. Please wait.",
+    "templateDownloadFailed": "Template download failed. Please try again."
+  },
+  "apiErrors": {
+    "previewFailedWithStatus": "Preview failed: HTTP {{status}}",
+    "emptyResponse": "Server returned empty data",
+    "missingStats": "Server response missing stats field",
+    "missingFieldMapping": "Server response missing field_mapping field",
+    "csvImportFailedWithStatus": "CSV import failed: HTTP {{status}}",
+    "excelImportFailedWithStatus": "Excel import failed: HTTP {{status}}",
+    "jsonImportFailedWithStatus": "JSON import failed: HTTP {{status}}",
+    "templateDownloadFailedWithStatus": "Template download failed: HTTP {{status}}",
+    "unsupportedFileFormat": "Unsupported file format: {{format}}",
+    "fileEmpty": "File content is empty",
+    "fileReadFailed": "Failed to read file"
+  },
+  "template": {
+    "defaultTableName": "table",
+    "filenameExcel": "{{tableName}}_import_template.xlsx",
+    "filename": "{{tableName}}_import_template.csv",
+    "filenameJson": "{{tableName}}_import_template.json"
+  }
+}

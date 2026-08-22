@@ -1,0 +1,34 @@
+{
+  "name": "@tabtin/python-runtime-host",
+  "version": "0.1.0",
+  "description": "TabTin self-managed Python runtime host wiring (L1) — provisions via @tabtin/python-runtime and injects PATH/env into the host process. Ships with agent-runtime.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "build:dts": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@tabtin/python-runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.2.2",
+    "vitest": "4.0.18"
+  },
+  "files": [
+    "dist"
+  ]
+}

@@ -1,0 +1,20 @@
+{% if existing_notes and existing_notes.strip() %}
+已有记忆：
+{{ existing_notes }}
+
+{% endif %}
+请从以下对话中提取需要长期记住的信息，重点关注：
+- 用户偏好/限制
+- 已达成的决策/结论
+- 重要背景/身份/环境信息
+- 必须遵守的约束
+
+要求：
+- 用要点列表输出，每行以 `- ` 开头
+- 避免重复已有记忆
+- 保持简洁，单条不超过 30 字
+
+对话内容：
+{% for msg in messages %}
+{{ msg.role }}: {{ msg.content[:300] }}{% if msg.content|length > 300 %}...{% endif %}
+{% endfor %}

@@ -1,0 +1,64 @@
+/* PanelRangeSlider — track/thumb styling via pseudo-elements */
+
+.sui-range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  touch-action: none;
+}
+
+.sui-range-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: hsl(var(--muted, 220 14% 96%));
+}
+
+.sui-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: hsl(var(--accent, 218 84% 56%));
+  border: 2px solid hsl(var(--background, 0 0% 100%));
+  box-shadow: 0 0.5px 2px rgba(0, 0, 0, 0.18);
+  margin-top: -5px;
+  transition: transform 0.1s ease;
+}
+
+.sui-range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.sui-range-slider::-webkit-slider-thumb:active {
+  transform: scale(1.05);
+}
+
+.sui-range-slider:focus {
+  outline: none;
+}
+
+.sui-range-slider:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 2px hsl(var(--accent, 218 84% 56%) / 0.3);
+}
+
+/* Firefox */
+.sui-range-slider::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: hsl(var(--muted, 220 14% 96%));
+  border: none;
+}
+
+.sui-range-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: hsl(var(--accent, 218 84% 56%));
+  border: 2px solid hsl(var(--background, 0 0% 100%));
+  box-shadow: 0 0.5px 2px rgba(0, 0, 0, 0.18);
+}

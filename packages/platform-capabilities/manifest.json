@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-02-03T00:00:00Z",
+  "capabilities": [
+    {
+      "id": "tabweb",
+      "name": "TabWeb",
+      "description": "Web automation, page scraping, and browser control tools",
+      "contextTypes": ["tabweb"],
+      "enabled": true,
+      "kind": "capability"
+    },
+    {
+      "id": "terminal",
+      "name": "Terminal",
+      "description": "Local terminal sessions and command execution",
+      "contextTypes": ["terminal"],
+      "enabled": true,
+      "kind": "capability"
+    },
+    {
+      "id": "spacelayout",
+      "name": "Space Layout",
+      "description": "Context-space layout and tab management tools",
+      "contextTypes": ["project-settings"],
+      "enabled": true,
+      "kind": "capability"
+    },
+    {
+      "id": "tabfolder",
+      "name": "Directories",
+      "description": "Local directory explorer context",
+      "contextTypes": ["tabfolder"],
+      "enabled": true,
+      "uiOnly": true,
+      "kind": "capability"
+    }
+  ]
+}

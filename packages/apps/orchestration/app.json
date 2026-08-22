@@ -1,0 +1,59 @@
+{
+  "id": "orchestration",
+  "name": "Agent",
+  "version": "0.1.0",
+  "kind": "app",
+  "icon": "bot",
+  "description": "执行编排与可观测性，支持任务编排与自主执行",
+  "objectModel": {
+    "entities": ["agent", "task"],
+    "schema": {
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "executionTarget": "backend",
+  "uiRuntime": "localBundle",
+  "agentRuntime": "hostBackend",
+  "distribution": "builtin",
+  "surface": "collaborative",
+  "contextSources": [],
+  "permissions": ["orchestration"],
+  "requiredCapabilities": [],
+  "runtimeDependencies": [],
+  "runtimeSupport": {
+    "electron": { "mode": "full" },
+    "daemon": { "mode": "full" }
+  },
+  "skills": [],
+  "skillsConfig": {
+    "entries": {}
+  },
+  "lifecycleHooks": {},
+  "runtimeBindings": {
+    "uiProvider": "electron:context-space.orchestration",
+    "skillsProvider": "skills:local"
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "contextFields": [],
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "displayField": "",
+    "workspaceRootSource": "",
+    "isFrontendDependent": false,
+    "typeAliases": []
+  },
+  "catalog": {
+    "category": "intelligence",
+    "desktopGroup": "capabilities",
+    "canCreate": false,
+    "searchable": false,
+    "isDefaultEnabled": true,
+    "order": 10
+  }
+}

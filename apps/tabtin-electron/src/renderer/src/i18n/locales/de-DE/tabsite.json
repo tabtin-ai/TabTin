@@ -1,0 +1,73 @@
+{
+  "actions.create": "Neue Seite",
+  "actions.publish": "Veröffentlichen",
+  "actions.copyUrl": "URL kopieren",
+  "actions.urlCopied": "URL kopiert",
+  "actions.editCode": "Code bearbeiten",
+  "actions.refresh": "Aktualisieren",
+  "actions.rollback": "Rollback",
+  "actions.download": "Quelle herunterladen",
+  "status.draft": "Entwurf",
+  "status.published": "Veröffentlicht",
+  "status.archived": "Archiviert",
+  "stats.views": "{{count}} Ansichten",
+  "preview.empty": "Noch keine Vorschau. Veröffentlichen Sie, um Ihre Website zu sehen.",
+  "preview.desktop": "Desktop-Vorschau",
+  "preview.mobile": "Mobile Vorschau",
+  "sidebar.info": "Site-Info",
+  "sidebar.url": "URL",
+  "sidebar.framework": "Rahmen",
+  "sidebar.visibility": "Sichtbarkeit",
+  "sidebar.public": "Öffentlich",
+  "sidebar.private": "Privat",
+  "sidebar.versions": "Versionsverlauf",
+  "sidebar.noVersions": "Noch nicht veröffentlicht",
+  "version.current": "Aktuell",
+  "error.siteNotFound": "Website nicht gefunden",
+  "error.publishFailed": "Die Veröffentlichung ist fehlgeschlagen",
+  "error.noDistUrl": "Bitte erstellen und laden Sie zuerst Artefakte hoch",
+  "error.noDistUrlHint": "Führen Sie Build in TabCode aus oder verwenden Sie CLI: tabtin site build",
+  "actions.publishSuccess": "Erfolgreich veröffentlicht",
+  "publish.dialogTitle": "Website veröffentlichen",
+  "publish.messageLabel": "Versionshinweis",
+  "publish.messagePlaceholder": "Beschreiben Sie die Änderungen in dieser Version",
+  "empty.noSites": "Noch keine Websites. Erstellen Sie Ihre erste Lightweight-App.",
+  "home": {
+    "assetBrowser": {
+      "newTabsite": "Neue Seite",
+      "tabsiteEmpty": "Noch keine Websites",
+      "tabsiteUnavailable": "TabSite nicht verfügbar",
+      "tabsite": "Websites"
+    }
+  },
+  "label": {
+    "untitled": "Unbenannte Seite",
+    "untitledSite": "Unbenannte Seite"
+  },
+  "dialog": {
+    "createTitle": "Neue Seite",
+    "siteName": "Site-Name",
+    "siteNamePlaceholder": "Geben Sie den Site-Namen ein",
+    "selectTemplate": "Wählen Sie eine Vorlage",
+    "cancel": "Abbrechen",
+    "create": "Erstellen"
+  },
+  "guide": {
+    "initTitle": "Site-Projekt nicht initialisiert",
+    "initDescription": "Initialisieren Sie ein Vorlagenprojekt, um mit der Bearbeitung in TabCode zu beginnen",
+    "initButton": "Projekt initialisieren",
+    "linkButton": "Vorhandenes Verzeichnis verknüpfen",
+    "initSuccess": "Projekt erfolgreich initialisiert",
+    "initFailed": "Die Initialisierung ist fehlgeschlagen",
+    "linkSuccess": "Verzeichnis verlinkt",
+    "linkFailed": "Link fehlgeschlagen",
+    "linkWarning": "Keine package.json im Verzeichnis gefunden",
+    "linkWarningHint": "Der Build schlägt möglicherweise fehl. Stellen Sie sicher, dass dies das richtige Projektverzeichnis ist."
+  },
+  "template": {
+    "blank": "Leere Seite",
+    "blankDesc": "Reagieren + Vite + Rückenwind, von vorne beginnen",
+    "dashboard": "Armaturenbrett",
+    "dashboardDesc": "Datenvisualisierungspanel mit Unterstützung von TabData"
+  }
+}

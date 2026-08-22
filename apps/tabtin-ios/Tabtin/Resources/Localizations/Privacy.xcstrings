@@ -1,0 +1,202 @@
+{
+  "sourceLanguage" : "zh-Hans",
+  "strings" : {
+    "privacy.settingsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Privacy & Data" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "隐私与数据" } }
+      }
+    },
+    "privacy.aiConsentTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Third-Party AI Data Sharing" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "第三方 AI 数据共享" } }
+      }
+    },
+    "privacy.aiConsentSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "TabTin uses third-party AI services to generate responses. Before sending your data, please review what will be shared and with whom." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "TabTin 会调用第三方 AI 服务生成回复。在发送你的数据前，请了解将共享哪些内容、发送给谁。" } }
+      }
+    },
+    "privacy.aiDataSharedTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Data that may be sent" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "可能发送的数据" } }
+      }
+    },
+    "privacy.aiDataChatMessages" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Chat messages and conversation context you send to the Agent" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你发送给 Agent 的聊天消息与会话上下文" } }
+      }
+    },
+    "privacy.aiDataAttachments" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Images, files, and other attachments you include in a message" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你在消息中上传的图片、文件等附件" } }
+      }
+    },
+    "privacy.aiDataContextRefs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Referenced workspace content (documents, tables, etc.) you attach to a conversation" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你在对话中引用的工作区内容（文档、表格等）" } }
+      }
+    },
+    "privacy.aiDataVoiceTranscripts" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Voice audio you record and its transcripts when you use speech-to-text or capsule hold-to-talk" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "语音发指令或语音输入时上传的音频及其转写文本" } }
+      }
+    },
+    "privacy.aiVoiceConsentHoldAgain" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Consent saved. Hold the capsule again to start recording." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已记录同意。请再次按住胶囊开始录音。" } }
+      }
+    },
+    "privacy.aiDataProfileBasic" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Basic profile info needed to run the service (e.g. display name)" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "运行服务所需的基本资料（如昵称）" } }
+      }
+    },
+    "privacy.aiRecipientsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Who receives the data" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "数据接收方" } }
+      }
+    },
+    "privacy.aiRecipientTabTin" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "TabTin platform services (routing, safety, and delivery)" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "TabTin 平台服务（路由、安全与投递）" } }
+      }
+    },
+    "privacy.aiRecipientProvider" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This request will be sent through TabTin platform services to %@ (model: %@) to generate an AI response." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "本次请求将通过 TabTin 平台服务发送给 %@（模型：%@），用于生成 AI 回复。" } }
+      }
+    },
+    "privacy.aiRecipientProviders" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your request may be sent through TabTin platform services to third-party AI providers to generate a response." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你的请求可能会通过 TabTin 平台服务发送给第三方 AI 服务商，用于生成回复。" } }
+      }
+    },
+    "privacy.aiPurposeNote" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Data is used only to provide AI features you request. You can revoke consent anytime in Settings; without consent, AI chat cannot send messages." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "数据仅用于提供你请求的 AI 功能。你可随时在设置中撤回同意；撤回后将无法向 AI 发送消息。" } }
+      }
+    },
+    "privacy.viewPrivacyPolicy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "View Privacy Policy" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "查看隐私政策" } }
+      }
+    },
+    "privacy.aiConsentAgree" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Agree and Continue" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "同意并继续" } }
+      }
+    },
+    "privacy.aiConsentDecline" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Not Now" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂不同意" } }
+      }
+    },
+    "privacy.aiSharingStatus" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "AI data sharing" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "AI 数据共享" } }
+      }
+    },
+    "privacy.aiSharingEnabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enabled" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已同意" } }
+      }
+    },
+    "privacy.aiSharingDisabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Not enabled" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "未同意" } }
+      }
+    },
+    "privacy.aiSharingStatusFooter" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "When enabled, your chat content may be sent to third-party AI providers to generate responses." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "开启后，你的聊天内容可能会发送给第三方 AI 服务商以生成回复。" } }
+      }
+    },
+    "privacy.reviewAiConsent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Review AI sharing disclosure" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "查看 AI 共享说明" } }
+      }
+    },
+    "privacy.revokeAiConsent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Revoke consent" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "撤回同意" } }
+      }
+    },
+    "privacy.revokeAiConsentTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Revoke AI data sharing?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "撤回 AI 数据共享同意？" } }
+      }
+    },
+    "privacy.revokeAiConsentMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You will not be able to send messages to AI until you agree again." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "撤回后将无法向 AI 发送消息，直到你再次同意。" } }
+      }
+    },
+    "privacy.consentRequiredTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Consent Required" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "需要你的同意" } }
+      }
+    },
+    "privacy.consentRequiredMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Please review and agree to third-party AI data sharing before sending messages." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "发送消息前，请先阅读并同意第三方 AI 数据共享说明。" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

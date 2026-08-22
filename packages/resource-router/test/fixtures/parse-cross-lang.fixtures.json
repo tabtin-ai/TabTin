@@ -1,0 +1,473 @@
+{
+  "_doc": "双端 parse 字符级对齐测试 fixtures。TS 与 Python 镜像必须读这一份并产出 byte-equal 输出。新增样例时确保两端都能跑通。`expected.meta` 数组顺序无关——比对时按 key 排序。",
+  "samples": [
+    {
+      "name": "self_format_minimal_table",
+      "uri": "tabtin://resource/table/tbl_abc123",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "table",
+        "id": "tbl_abc123",
+        "raw": "tabtin://resource/table/tbl_abc123",
+        "hint": null
+      }
+    },
+    {
+      "name": "self_format_preprod_table_record",
+      "uri": "tabtin-preprod://resource/table/tbl_abc123?hint=tabdata&recordIds=rec_123",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "table",
+        "id": "tbl_abc123",
+        "raw": "tabtin-preprod://resource/table/tbl_abc123?hint=tabdata&recordIds=rec_123",
+        "hint": "tabdata",
+        "meta": { "recordIds": "rec_123" }
+      }
+    },
+    {
+      "name": "self_format_dev_table_record",
+      "uri": "tabtin-dev://resource/table/tbl_abc123?hint=tabdata&recordIds=rec_123",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "table",
+        "id": "tbl_abc123",
+        "raw": "tabtin-dev://resource/table/tbl_abc123?hint=tabdata&recordIds=rec_123",
+        "hint": "tabdata",
+        "meta": { "recordIds": "rec_123" }
+      }
+    },
+    {
+      "name": "self_format_with_hint",
+      "uri": "tabtin://resource/document/doc_xyz?hint=tabdoc",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "document",
+        "id": "doc_xyz",
+        "raw": "tabtin://resource/document/doc_xyz?hint=tabdoc",
+        "hint": "tabdoc"
+      }
+    },
+    {
+      "name": "self_format_with_hint_and_meta",
+      "uri": "tabtin://resource/document/doc_xyz?hint=tabdoc&title=%E9%A1%B9%E7%9B%AE%E6%96%B9%E6%A1%88",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "document",
+        "id": "doc_xyz",
+        "raw": "tabtin://resource/document/doc_xyz?hint=tabdoc&title=%E9%A1%B9%E7%9B%AE%E6%96%B9%E6%A1%88",
+        "hint": "tabdoc",
+        "meta": { "title": "项目方案" }
+      }
+    },
+    {
+      "name": "self_format_url_in_id",
+      "uri": "tabtin://resource/webpage/https%3A%2F%2Fexample.com%2Fa?hint=tabweb",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "webpage",
+        "id": "https://example.com/a",
+        "raw": "tabtin://resource/webpage/https%3A%2F%2Fexample.com%2Fa?hint=tabweb",
+        "hint": "tabweb"
+      }
+    },
+    {
+      "name": "self_format_path_in_id",
+      "uri": "tabtin://resource/code_file/%2FUsers%2Fdeveloper%2Freport.md?hint=tabcode",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "code_file",
+        "id": "/Users/developer/report.md",
+        "raw": "tabtin://resource/code_file/%2FUsers%2Fdeveloper%2Freport.md?hint=tabcode",
+        "hint": "tabcode"
+      }
+    },
+    {
+      "name": "self_format_no_hint_with_file",
+      "uri": "tabtin://resource/file/%2Ftmp%2Fout.json",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "file",
+        "id": "/tmp/out.json",
+        "raw": "tabtin://resource/file/%2Ftmp%2Fout.json",
+        "hint": null
+      }
+    },
+    {
+      "name": "self_format_field",
+      "uri": "tabtin://resource/field/fld_abc",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "field",
+        "id": "fld_abc",
+        "raw": "tabtin://resource/field/fld_abc",
+        "hint": null
+      }
+    },
+    {
+      "name": "self_format_table_selection_meta",
+      "uri": "tabtin://resource/table_selection/tbl_abc?hint=tabdata&row_id=row_42&col_id=col_x",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "table_selection",
+        "id": "tbl_abc",
+        "raw": "tabtin://resource/table_selection/tbl_abc?hint=tabdata&row_id=row_42&col_id=col_x",
+        "hint": "tabdata",
+        "meta": { "row_id": "row_42", "col_id": "col_x" }
+      }
+    },
+    {
+      "name": "self_format_email_thread",
+      "uri": "tabtin://resource/email_thread/msg_001?hint=tabmail",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "email_thread",
+        "id": "msg_001",
+        "raw": "tabtin://resource/email_thread/msg_001?hint=tabmail",
+        "hint": "tabmail"
+      }
+    },
+    {
+      "name": "self_format_memo",
+      "uri": "tabtin://resource/memo/mem_xyz",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "memo",
+        "id": "mem_xyz",
+        "raw": "tabtin://resource/memo/mem_xyz",
+        "hint": null
+      }
+    },
+    {
+      "name": "self_format_whiteboard",
+      "uri": "tabtin://resource/whiteboard/wb_001",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "whiteboard",
+        "id": "wb_001",
+        "raw": "tabtin://resource/whiteboard/wb_001",
+        "hint": null
+      }
+    },
+    {
+      "name": "self_format_slide",
+      "uri": "tabtin://resource/slide/sld_42?hint=tabslide",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "slide",
+        "id": "sld_42",
+        "raw": "tabtin://resource/slide/sld_42?hint=tabslide",
+        "hint": "tabslide"
+      }
+    },
+    {
+      "name": "self_format_video",
+      "uri": "tabtin://resource/video/vid_777",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "video",
+        "id": "vid_777",
+        "raw": "tabtin://resource/video/vid_777",
+        "hint": null
+      }
+    },
+    {
+      "name": "self_format_site",
+      "uri": "tabtin://resource/site/site_alpha?hint=tabsite",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "site",
+        "id": "site_alpha",
+        "raw": "tabtin://resource/site/site_alpha?hint=tabsite",
+        "hint": "tabsite"
+      }
+    },
+    {
+      "name": "self_format_agenda_event",
+      "uri": "tabtin://resource/agenda_event/evt_2026_05_10?hint=tabagenda",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "agenda_event",
+        "id": "evt_2026_05_10",
+        "raw": "tabtin://resource/agenda_event/evt_2026_05_10?hint=tabagenda",
+        "hint": "tabagenda"
+      }
+    },
+    {
+      "name": "self_format_folder",
+      "uri": "tabtin://resource/folder/%2FUsers%2Fdeveloper%2Fproject?hint=tabfolder",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "folder",
+        "id": "/Users/developer/project",
+        "raw": "tabtin://resource/folder/%2FUsers%2Fdeveloper%2Fproject?hint=tabfolder",
+        "hint": "tabfolder"
+      }
+    },
+    {
+      "name": "self_format_doc_selection",
+      "uri": "tabtin://resource/doc_selection/doc_xyz?anchor=para_3",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "doc_selection",
+        "id": "doc_xyz",
+        "raw": "tabtin://resource/doc_selection/doc_xyz?anchor=para_3",
+        "hint": null,
+        "meta": { "anchor": "para_3" }
+      }
+    },
+    {
+      "name": "self_format_unknown_type_passes_through",
+      "uri": "tabtin://resource/some_future_type/id_42?hint=tabXX",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "some_future_type",
+        "id": "id_42",
+        "raw": "tabtin://resource/some_future_type/id_42?hint=tabXX",
+        "hint": "tabXX"
+      }
+    },
+    {
+      "name": "self_format_empty_query_okay",
+      "uri": "tabtin://resource/table/tbl_x?",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "table",
+        "id": "tbl_x",
+        "raw": "tabtin://resource/table/tbl_x?",
+        "hint": null
+      }
+    },
+    {
+      "name": "self_format_hint_empty_means_none",
+      "uri": "tabtin://resource/table/tbl_x?hint=",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "table",
+        "id": "tbl_x",
+        "raw": "tabtin://resource/table/tbl_x?hint=",
+        "hint": null
+      }
+    },
+    {
+      "name": "industry_https_simple",
+      "uri": "https://example.com",
+      "expected": {
+        "scheme": "https",
+        "type": null,
+        "id": "https://example.com",
+        "raw": "https://example.com",
+        "hint": null
+      }
+    },
+    {
+      "name": "industry_http_with_path",
+      "uri": "http://example.com/foo/bar?q=1",
+      "expected": {
+        "scheme": "http",
+        "type": null,
+        "id": "http://example.com/foo/bar?q=1",
+        "raw": "http://example.com/foo/bar?q=1",
+        "hint": null
+      }
+    },
+    {
+      "name": "industry_file_absolute",
+      "uri": "file:///tmp/out.json",
+      "expected": {
+        "scheme": "file",
+        "type": null,
+        "id": "file:///tmp/out.json",
+        "raw": "file:///tmp/out.json",
+        "hint": null
+      }
+    },
+    {
+      "name": "industry_file_with_spaces_url_encoded",
+      "uri": "file:///Users/x/path%20with%20space/y.md",
+      "expected": {
+        "scheme": "file",
+        "type": null,
+        "id": "file:///Users/x/path%20with%20space/y.md",
+        "raw": "file:///Users/x/path%20with%20space/y.md",
+        "hint": null
+      }
+    },
+    {
+      "name": "industry_mailto_simple",
+      "uri": "mailto:a@b.com",
+      "expected": {
+        "scheme": "mailto",
+        "type": null,
+        "id": "mailto:a@b.com",
+        "raw": "mailto:a@b.com",
+        "hint": null
+      }
+    },
+    {
+      "name": "industry_mailto_with_subject",
+      "uri": "mailto:a@b.com?subject=Hello",
+      "expected": {
+        "scheme": "mailto",
+        "type": null,
+        "id": "mailto:a@b.com?subject=Hello",
+        "raw": "mailto:a@b.com?subject=Hello",
+        "hint": null
+      }
+    },
+    {
+      "name": "industry_tel_simple",
+      "uri": "tel:+1-555-0100",
+      "expected": {
+        "scheme": "tel",
+        "type": null,
+        "id": "tel:+1-555-0100",
+        "raw": "tel:+1-555-0100",
+        "hint": null
+      }
+    },
+    {
+      "name": "industry_tabtin_file_pass_through",
+      "uri": "tabtin-file:///user/sandbox/img.png",
+      "expected": {
+        "scheme": "tabtin-file",
+        "type": null,
+        "id": "tabtin-file:///user/sandbox/img.png",
+        "raw": "tabtin-file:///user/sandbox/img.png",
+        "hint": null
+      }
+    },
+    {
+      "name": "industry_weixin_unknown_to_us_but_parsed",
+      "uri": "weixin://dl/business/?ticket=t123",
+      "expected": {
+        "scheme": "weixin",
+        "type": null,
+        "id": "weixin://dl/business/?ticket=t123",
+        "raw": "weixin://dl/business/?ticket=t123",
+        "hint": null
+      }
+    },
+    {
+      "name": "industry_ssh_unknown_to_us",
+      "uri": "ssh://user@host:22",
+      "expected": {
+        "scheme": "ssh",
+        "type": null,
+        "id": "ssh://user@host:22",
+        "raw": "ssh://user@host:22",
+        "hint": null
+      }
+    },
+    {
+      "name": "edge_self_format_only_prefix_no_path",
+      "uri": "tabtin://resource/",
+      "expected": {
+        "scheme": "tabtin",
+        "type": null,
+        "id": "tabtin://resource/",
+        "raw": "tabtin://resource/",
+        "hint": null
+      }
+    },
+    {
+      "name": "edge_self_format_missing_id",
+      "uri": "tabtin://resource/table",
+      "expected": {
+        "scheme": "tabtin",
+        "type": null,
+        "id": "tabtin://resource/table",
+        "raw": "tabtin://resource/table",
+        "hint": null
+      }
+    },
+    {
+      "name": "edge_garbage_unknown",
+      "uri": "this is not a uri",
+      "expected": {
+        "scheme": "unknown",
+        "type": null,
+        "id": "this is not a uri",
+        "raw": "this is not a uri",
+        "hint": null
+      }
+    },
+    {
+      "name": "edge_empty_string",
+      "uri": "",
+      "expected": {
+        "scheme": "unknown",
+        "type": null,
+        "id": "",
+        "raw": "",
+        "hint": null
+      }
+    },
+    {
+      "name": "edge_self_format_double_hint_first_wins",
+      "uri": "tabtin://resource/document/doc_xyz?hint=tabdoc&hint=tabweb",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "document",
+        "id": "doc_xyz",
+        "raw": "tabtin://resource/document/doc_xyz?hint=tabdoc&hint=tabweb",
+        "hint": "tabdoc"
+      }
+    },
+    {
+      "name": "edge_self_format_meta_multivalue_collected",
+      "uri": "tabtin://resource/table/tbl_x?tag=a&tag=b",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "table",
+        "id": "tbl_x",
+        "raw": "tabtin://resource/table/tbl_x?tag=a&tag=b",
+        "hint": null,
+        "meta": { "tag": ["a", "b"] }
+      }
+    },
+    {
+      "name": "alias_type_doc_normalised_to_document",
+      "uri": "tabtin://resource/doc/doc_xyz?hint=tabdoc",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "document",
+        "id": "doc_xyz",
+        "raw": "tabtin://resource/doc/doc_xyz?hint=tabdoc",
+        "hint": "tabdoc"
+      }
+    },
+    {
+      "name": "alias_hint_document_normalised_to_tabdoc",
+      "uri": "tabtin://resource/document/doc_xyz?hint=document",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "document",
+        "id": "doc_xyz",
+        "raw": "tabtin://resource/document/doc_xyz?hint=document",
+        "hint": "tabdoc"
+      }
+    },
+    {
+      "name": "alias_both_type_and_hint_typos_normalised",
+      "uri": "tabtin://resource/doc/doc_xyz?hint=document",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "document",
+        "id": "doc_xyz",
+        "raw": "tabtin://resource/doc/doc_xyz?hint=document",
+        "hint": "tabdoc"
+      }
+    },
+    {
+      "name": "alias_hint_doc_shorthand_normalised_to_tabdoc",
+      "uri": "tabtin://resource/doc/doc_xyz?hint=doc",
+      "expected": {
+        "scheme": "tabtin",
+        "type": "document",
+        "id": "doc_xyz",
+        "raw": "tabtin://resource/doc/doc_xyz?hint=doc",
+        "hint": "tabdoc"
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 待办事项块 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="top"
+    android:paddingStart="@dimen/tt_spacing_lg">
+
+    <!-- 复选框 -->
+    <ImageView
+        android:id="@+id/checkbox"
+        android:layout_width="@dimen/tt_spacing_xxl"
+        android:layout_height="@dimen/tt_spacing_xxl"
+        android:layout_marginTop="@dimen/tt_spacing_xxs"
+        android:src="@drawable/doc_checkbox_selector"
+        android:contentDescription="@null" />
+
+    <com.tabtin.mobile.features.doc.editor.core.DocTextInputWidget
+        android:id="@+id/textContent"
+        style="@style/DocBlockCheckboxContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/tt_spacing_xs"
+        android:textColorHint="@color/doc_editor_text_tertiary" />
+</LinearLayout>

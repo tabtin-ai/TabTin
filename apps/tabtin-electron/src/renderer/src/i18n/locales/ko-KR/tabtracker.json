@@ -1,0 +1,404 @@
+{
+  "appName": "자동화",
+  "panel": {
+    "header": "자동화",
+    "overview": "개요",
+    "list": "목록",
+    "viewList": "목록",
+    "viewAgenda": "타임라인",
+    "viewKanban": "칸반",
+    "createTask": "새로운 자동화 작업",
+    "createAction": "새로운",
+    "search": "검색 자동화 작업…",
+    "filterAll": "모두",
+    "filterAllStatus": "모든 상태",
+    "filterStatus": "상태",
+    "filterType": "유형",
+    "loadMore": "더 로드하기",
+    "totalCount": "{{count}} 항목",
+    "emptyTitle": "아직 자동화 작업이 없습니다.",
+    "emptyDescription": "상담원에게 \"매일 아침 PR을 확인하세요\"라고 말하거나 직접 양식을 작성하세요.",
+    "emptyHint": "\"새 자동화 작업\" 사용 - 수동 또는 에이전트 생성",
+    "createFirst": "첫 번째 자동화 작업 만들기",
+    "selectSpace": "작업공간 선택",
+    "noResults": "일치하는 작업 없음",
+    "workspaceUnavailable": "작업공간을 사용할 수 없음",
+    "agentUnavailable": "에이전트를 사용할 수 없음",
+    "nextRunAt": "다음 {{time}}",
+    "noNextRun": "다음 실행 일정이 없습니다.",
+    "pausedPlan": "일시중지됨 — 자동으로 실행되지 않습니다.",
+    "openTaskDetail": "예약된 작업 \"{{name}}\" 열기",
+    "rowActions": {
+      "menu": "작업 동작"
+    },
+    "columns": {
+      "task": "작업",
+      "workspace": "작업공간",
+      "status": "상태",
+      "type": "유형",
+      "instructions": "지침",
+      "schedule": "다음/최근 실행",
+      "actions": "작업"
+    }
+  },
+  "overview": {
+    "attention": "주의가 필요함",
+    "summary": "{{total}} 작업 · {{attention}} 주의 필요 · {{active}} 활성",
+    "attentionEmpty": "모두 클리어",
+    "running": "달리기",
+    "runningEmpty": "실행 중인 작업 없음",
+    "scheduled": "예정됨",
+    "scheduledEmpty": "자동화 작업 없음",
+    "dormant": "초안 및 일시중지됨",
+    "view": "보기",
+    "runNow": "지금 실행",
+    "activate": "활성화",
+    "resume": "이력서"
+  },
+  "status": {
+    "draft": "초안",
+    "active": "활성",
+    "paused": "일시중지됨",
+    "disabled": "종료됨",
+    "archived": "보관됨"
+  },
+  "trigger": {
+    "manual": "매뉴얼",
+    "cron": "크론",
+    "interval": "간격",
+    "at": "일회성",
+    "webhook": "웹훅",
+    "table_event": "테이블 이벤트",
+    "extension_event": "확장 이벤트",
+    "tracker_completed": "업스트림 작업 완료됨"
+  },
+  "scope": {
+    "all": "모두"
+  },
+  "detail": {
+    "loading": "로드 중…",
+    "empty": "작업을 찾을 수 없습니다",
+    "retry": "재시도",
+    "noRuns": "아직 실행 없음",
+    "nextRun": "다음 실행",
+    "instructions": "지침",
+    "noInstructions": "아직 지침이 없습니다.",
+    "description": "메모 나열",
+    "taskInfo": "업무정보",
+    "workspace": "작업공간",
+    "agent": "실행 대리인",
+    "runHistory": "실행 기록",
+    "scheduleActive": "{{schedule}}",
+    "schedulePaused": "{{schedule}} · 일시중지됨",
+    "openRunSession": "이번 런의 채팅을 열어보세요",
+    "openRunSessionFailed": "이 실행의 채팅을 열지 못했습니다. 다시 시도해 주세요.",
+    "refreshRuns": "새로고침",
+    "health": {
+      "disabled": "일시중지됨 - 계속 실행하려면 재개",
+      "missedSkipped": "가장 최근에 놓친 실행이 구성된 대로 건너뛰었습니다({{time}}). 총 {{count}}을 건너뛰었습니다."
+    },
+    "resultSummary": "결과",
+    "errorDetail": "실패 세부정보",
+    "cancelDetail": "취소 사유",
+    "runStatus": {
+      "completed": "완료됨",
+      "failed": "실패",
+      "running": "달리기",
+      "pending": "보류 중",
+      "cancelled": "취소됨",
+      "waiting_device": "기기를 기다리는 중"
+    },
+    "actions": {
+      "edit": "편집",
+      "activate": "활성화",
+      "activateDraft": "예약 활성화 및 시작",
+      "activateDraftManual": "수동 트리거를 허용하려면 활성화하세요.",
+      "draftHint": "초안은 실행되지 않습니다. 규칙에 따라 자동으로 실행되도록 활성화합니다.",
+      "pause": "일시중지",
+      "trigger": "지금 실행",
+      "triggerDisabledActiveRun": "실행이 이미 진행 중입니다. 완료될 때까지 기다리거나 먼저 취소하세요.",
+      "delete": "삭제",
+      "confirmDelete": "삭제 확인",
+      "confirmDeleteTitle": "예약된 작업 삭제",
+      "confirmDeleteHint": "작업 카드가 자동화 목록에서 제거됩니다. 실행 기록이 있는 경우 해당 작업 이름과 실행 항목이 사이드바에 유지됩니다.",
+      "resume": "이력서",
+      "paused": "일시중지됨",
+      "resumed": "재개됨",
+      "triggered": "트리거됨",
+      "deleted": "삭제됨",
+      "cancelRun": "이 실행 취소",
+      "runCancelled": "이 실행이 취소되었습니다."
+    },
+    "more": {
+      "title": "더보기",
+      "note": "참고",
+      "noNote": "메모 없음",
+      "catchup": "누락된 실행 정책",
+      "authorization": "승인"
+    },
+    "frequencyLabel": "빈도",
+    "highFrequencyToast": "활성화됨 · {{summary}}. 변경하려면 세부정보 페이지에서 일시중지하세요."
+  },
+  "frequencyHint": {
+    "manual": "수동으로만 트리거됨 - 자체적으로 실행되지 않음",
+    "cronCustom": "맞춤 일정에 따라 실행됩니다.",
+    "cronHourly": "매시간 실행(하루 최대 24회)",
+    "cronDaily": "매일 {{at}}에 실행됩니다.",
+    "cronWeekdays": "매주 평일 {{at}}에 실행",
+    "cronWeekly": "매주 월요일 {{at}}에 실행됩니다.",
+    "intervalUnknown": "고정된 시간 간격으로 실행됩니다.",
+    "intervalSummary": "{{unit}} (하루에 ~{{count}} 회)",
+    "atOnce": "{{at}}에서 한 번 실행됩니다.",
+    "atUnknown": "예정된 시간에 한 번 실행됩니다.",
+    "unitSeconds": "{{n}}초마다",
+    "unitMinutes": "~매 {{n}}분마다",
+    "unitHours": "~매 {{n}}시간마다",
+    "webhook": "인바운드 웹후크에 의해 트리거됨 - 속도는 호출자에 따라 다름",
+    "tableEvent": "테이블 이벤트에 의해 트리거됨(행 생성/업데이트/삭제)",
+    "extensionEvent": "확장 이벤트에 의해 트리거됨",
+    "trackerCompleted": "업스트림 자동화 작업이 완료되면 트리거됩니다."
+  },
+  "createDialog": {
+    "title": "새로운 자동화 작업",
+    "editTitle": "자동화 작업 편집",
+    "sections": {
+      "what": "과제 내용",
+      "when": "일정"
+    },
+    "cancel": "취소",
+    "submit": "만들기",
+    "save": "저장",
+    "moreOptions": "추가 옵션",
+    "createModeLabel": "생성 방법",
+    "tabs": {
+      "manual": "매뉴얼",
+      "agent": "에이전트 생성"
+    },
+    "agentTab": {
+      "hint": "전송 후 사이드 채팅의 에이전트가 이를 생성하고 활성화합니다.",
+      "requestLabel": "에이전트는 어떤 자동화 작업을 생성해야 합니까?",
+      "placeholder": "예를 들어 매일 오전 9시에 검토 대기열에 24시간보다 오래된 GitHub PR을 나열하고 Inbox에 게시합니다.",
+      "submit": "채팅으로 보내기",
+      "submitting": "채팅을 여는 중…"
+    },
+    "fields": {
+      "name": "작업 이름",
+      "nameHint": "이 작업을 인식할 수 있도록 작업 목록에 표시됩니다.",
+      "title": "제목",
+      "description": "목록 메모(선택사항)",
+      "instructions": "지침",
+      "instructionsHint": "실행될 때마다 에이전트로 전송됩니다. 에이전트는 필요에 따라 적절한 스킬을 스스로 선택합니다.",
+      "agent": "실행 대리인",
+      "workspace": "실행 대리인",
+      "activateOnCreate": "생성 후 즉시 활성화",
+      "activateOnCreateHint": "생성 후 바로 스케줄링을 시작합니다. 수동 작업에는 여전히 지금 실행이 필요합니다.",
+      "schedule": "일정",
+      "atTime": "에",
+      "frequency": "빈도",
+      "runTime": "런타임",
+      "firstRunTime": "첫 번째 실행 시간(선택 사항)",
+      "intervalEvery": "실행 빈도",
+      "hours": "시간",
+      "skillLabel": "연계 스킬(선택)",
+      "skillHint": "에이전트가 사용할 스킬을 선택하세요. 에이전트가 결정하도록 하려면 비워 두세요.",
+      "recurrenceDays": "반복",
+      "intervalMinutes": "N분마다",
+      "intervalPrefix": "매",
+      "intervalSuffix": "분",
+      "onceAt": "실행 날짜 및 시간",
+      "catchup": "달리기를 놓친 경우",
+      "table": "테이블을 선택하세요",
+      "tableEvents": "이벤트 트리거",
+      "tableConditionNote": "현재 이 테이블의 모든 변경 사항과 일치합니다. 필드 기반 필터가 곧 제공될 예정입니다."
+    },
+    "schedule": {
+      "manual": "매뉴얼",
+      "recurring": "반복",
+      "interval": "간격"
+    },
+    "permissionNotice": {
+      "hint": "이 작업은 각 단계에서 묻지 않고 일정에 따라 자동으로 실행됩니다. 언제든지 일시중지할 수 있습니다."
+    },
+    "schedulePresets": {
+      "manual": "매뉴얼",
+      "hourly": "시간별",
+      "daily": "매일",
+      "weekdays": "평일",
+      "weekly": "주간",
+      "interval": "간격",
+      "at": "한 번",
+      "table_event": "테이블 변경 시"
+    },
+    "schedulePresetHints": {
+      "manual": "\"지금 실행\"을 누른 경우에만 실행됩니다.",
+      "hourly": "매시간 정각에 한 번씩 실행됩니다.",
+      "daily": "하루에 한 번 지정된 시간에 실행됩니다.",
+      "weekdays": "월요일부터 금요일까지 지정된 시간에 실행됩니다.",
+      "weekly": "매주 월요일 지정된 시간에 실행됩니다.",
+      "interval": "고정된 시간 간격으로 자동으로 실행됩니다.",
+      "at": "선택한 날짜 및 시간에 한 번 실행된 후 중지됩니다.",
+      "table_event": "선택한 테이블이 변경되면 자동으로 실행됩니다."
+    },
+    "tableEventTypes": {
+      "record_created": "행이 추가됨",
+      "record_updated": "행이 업데이트되었습니다.",
+      "record_deleted": "행이 삭제되었습니다."
+    },
+    "recurrence": {
+      "daily": "매일",
+      "weekly": "주간",
+      "monthly": "월간",
+      "day": {
+        "MO": "모",
+        "TU": "화",
+        "WE": "우리",
+        "TH": "목",
+        "FR": "금",
+        "SA": "사",
+        "SU": "수"
+      }
+    },
+    "placeholders": {
+      "name": "예를 들어 일일 데이터 동기화",
+      "nameTitle": "작업 이름을 입력하세요",
+      "title": "작업 제목",
+      "description": "예를 들어 팀원을 위한 메모 — 선택 사항",
+      "instructions": "예를 들어 어제 읽지 않은 메일을 글머리 기호 3개로 요약하여 받은 편지함에 게시",
+      "agent": "에이전트 선택",
+      "workspace": "공간을 선택하세요",
+      "agentDefault": "기본값(현재 채팅 상담원)",
+      "workspaceDefault": "기본값(현재 공간)",
+      "agentLoading": "에이전트 로드 중...",
+      "workspaceLoading": "공간 로드 중...",
+      "skillKeyFriendly": "비워두기 = 상담원이 자동 선택",
+      "table": "시청할 테이블을 선택하세요",
+      "tableLoading": "로드 중…",
+      "tableEmpty": "이 공간에는 아직 테이블이 없습니다."
+    },
+    "errors": {
+      "nameRequired": "이름을 입력하세요.",
+      "instructionsRequired": "상담원이 수행해야 할 작업에 대한 지침을 입력하세요.",
+      "agentCreateFailed": "채팅을 시작할 수 없습니다. 다시 시도해 주세요.",
+      "noOrganization": "조직을 확인할 수 없습니다. 다시 시도해 주세요.",
+      "submitFailed": "생성하지 못했습니다. 다시 시도하거나 관리자에게 문의하세요.",
+      "intervalRequired": "유효한 간격을 분 단위로 입력하십시오(≥ 1).",
+      "onceAtRequired": "실행할 날짜와 시간을 선택하세요.",
+      "onceAtMustBeFuture": "런타임은 미래 시간이어야 합니다. 나중에 시간을 선택해 주세요.",
+      "tableRequired": "시청할 테이블을 선택하세요.",
+      "tableEventsRequired": "트리거 이벤트를 하나 이상 선택하세요."
+    },
+    "lockedTrigger": {
+      "cronValue": "맞춤 일정 규칙({{expression}})",
+      "hint": "이 작업의 트리거는 여기에서 편집할 수 없습니다. 저장하면 원래 트리거가 변경되지 않은 상태로 유지됩니다."
+    },
+    "catchup": {
+      "run_once": "한번 따라잡으세요",
+      "skip": "놓친 실행 건너뛰기",
+      "hint": "컴퓨터가 꺼져 있거나 앱이 실행되고 있지 않으면 실행이 예정된 시간을 놓칠 수 있습니다. 복구 후 수행할 작업을 선택합니다.",
+      "run_onceHint": "복구 후 자동으로 한 번 실행 - 놓치지 말아야 할 보고서 및 다이제스트에 적합합니다.",
+      "skipHint": "놓친 실행을 건너뛰고 다음 주기를 기다립니다. 시간이 지나면 의미를 잃어버리는 알림에 적합합니다."
+    },
+    "intentSnapshot": {
+      "title": "창작의도",
+      "empty": "원래 의도는 기록되지 않았습니다(이 자동화 작업은 이전에 생성되었을 수 있음).",
+      "userUtterance": "당신이 말한 것",
+      "agentProposal": "대리인의 제안",
+      "finalValues": "최종 값",
+      "createdVia": "다음을 통해 생성됨",
+      "via": {
+        "ui": "UI 형태",
+        "cli": "명령줄",
+        "agent": "상담원 채팅",
+        "command_palette": "명령 팔레트"
+      }
+    }
+  },
+  "home": {
+    "subtitle": "일정에 따라 실행되는 에이전트 자동화 작업 생성 및 관리",
+    "viewAll": "모두 보기",
+    "nextRun": "다음 실행",
+    "create": "작업 생성",
+    "loadFailed": "로드하지 못했습니다."
+  },
+  "automation": {
+    "title": "자동화",
+    "subtitle": "자동화 작업을 사용하여 에이전트가 일정에 따라 실행되도록 함"
+  },
+  "schedule": {
+    "prevWeek": "지난 주",
+    "nextWeek": "다음 주",
+    "prevMonth": "지난달",
+    "nextMonth": "다음 달",
+    "today": "오늘",
+    "weekView": "주",
+    "monthView": "월",
+    "scopeOrganization": "조직 범위",
+    "scopeSpace": "현재 작업공간",
+    "scopeOrganizationShort": "조직",
+    "scopeSpaceShort": "작업공간",
+    "manage": "작업 관리",
+    "truncatedHint": "예약된 실행이 너무 많습니다. 이 날짜 범위의 일부만 표시됩니다.",
+    "loadError": "일정을 로드하지 못했습니다.",
+    "emptyTitle": "이 기간에는 예상 실행이 없습니다.",
+    "emptyDescription": "자동화 작업을 생성하거나 활성화하면 향후 실행이 여기에 표시됩니다.",
+    "narrowList": "날짜별 일정",
+    "pending": "보류 중",
+    "weekGrid": "주간 달력",
+    "monthGrid": "월간 달력",
+    "moreCount": "+{{count}}",
+    "moreAriaLabel": "{{date}}, {{count}} 추가 작업"
+  },
+  "toast": {
+    "activated": "활성화됨",
+    "createdAndActivated": "생성 및 활성화됨",
+    "createdAsDraft": "생성됨",
+    "createdAsDraftHint": "초안은 자동으로 실행되지 않습니다. 트리거를 시작하려면 세부정보 보기에서 '활성화'를 클릭하세요.",
+    "activateAfterCreateFailed": "저장되었지만 활성화에 실패했습니다. 세부정보 보기에서 활성화를 다시 시도하세요.",
+    "runCompleted": "자동화 작업 완료",
+    "runFailed": "자동화 작업 실패",
+    "error": "작업 실패"
+  },
+  "notification": {
+    "trackerCompletedBody": "이 실행을 보려면 클릭하세요.",
+    "trackerFailedBody": "실패를 보려면 클릭하세요."
+  },
+  "chatSidebar": {
+    "trackersSection": "자동화",
+    "openModule": "개방형 자동화 모듈",
+    "newTracker": "+ 새로운 자동화 작업",
+    "emptyHint": "첫 번째 자동화 작업 만들기",
+    "emptyForWorkspace": "이 작업공간에는 자동화 작업이 없습니다.",
+    "emptyCreate": "새로운 자동화 작업",
+    "viewAll": "모두 보기({{count}})",
+    "openTaskDetail": "작업 세부정보 열기",
+    "archivedTask": "삭제된 작업입니다. 실행 기록이 유지됨",
+    "deleteHistory": "기록 삭제",
+    "deleteHistoryTitle": "자동화 기록 삭제",
+    "deleteHistoryHint": "그러면 모든 실행 기록과 대화가 영구적으로 삭제됩니다. 이 작업은 취소할 수 없습니다.",
+    "deleteHistorySuccess": "기록이 삭제되었습니다.",
+    "deleteHistoryFailed": "삭제에 실패했습니다. 다시 시도해 보세요.",
+    "expandRuns": "실행 기록 펼치기",
+    "collapseRuns": "실행 기록 접기",
+    "runsLoading": "실행 기록 로드 중…",
+    "runsError": "로드하지 못했습니다.",
+    "runsRetry": "재시도",
+    "runsEmpty": "아직 실행 없음",
+    "viewAllRuns": "모두 보기({{count}})"
+  },
+  "timeline": {
+    "today": "오늘",
+    "tomorrow": "내일",
+    "thisWeek": "이번주",
+    "later": "나중에",
+    "noSchedule": "예정되지 않은",
+    "empty": "예정된 자동화 작업이 없습니다."
+  },
+  "kanban": {
+    "empty": "자동화 작업 없음",
+    "colEmpty": "비어 있음",
+    "colDraft": "초안",
+    "colActive": "활성",
+    "colPaused": "일시중지됨",
+    "colDisabled": "종료됨"
+  }
+}

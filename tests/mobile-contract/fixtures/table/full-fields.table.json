@@ -1,0 +1,345 @@
+{
+  "_meta": {
+    "name": "full-fields",
+    "description": "多维表全字段夹具：覆盖 table-kernel FieldType 全部 27 个类型、字段别名归一化、卡片投影、多条件筛选/排序/分组、新建预填。字段类型与别名真源为 packages/table-kernel/src/types/field.ts；卡片投影真源为 apps/tabtin-web/src/components/table/mobile/mobileTableProjection.ts；新建预填真源为 mobileTablePrimitives.ts 的 resolveMobilePrefillValues；形态策略真源为 tableRecordSurfacePolicy.ts。视图 viw-grid-0001 是默认全字段视图，其 is_not / is_greater 写在 config.filters.conditions，正好作「非预填算子 / 不读 config.filters」的反例，不要改它的筛选语义。viw-cards-0002 专为卡片投影鉴别力而设。viw-prefill-* 专为新建预填鉴别力而设——每条规则都有「实现返回空就会失败」的用例，target 由 scripts/check-mobile-prefill.mts 用 Web 正典实算校验。",
+    "frozenAt": "2026-08-15",
+    "batch": 0
+  },
+  "table": {
+    "id": "tbl-contract-0001",
+    "name": "契约验收表",
+    "fields": [
+      { "id": "fld-title", "name": "任务名称", "field_type": "text", "is_primary": true },
+      { "id": "fld-desc", "name": "详细说明", "field_type": "long_text" },
+      { "id": "fld-count", "name": "数量", "field_type": "number" },
+      { "id": "fld-progress", "name": "进度", "field_type": "percent" },
+      { "id": "fld-budget", "name": "预算", "field_type": "currency", "options": { "currency": "CNY" } },
+      { "id": "fld-priority", "name": "优先级", "field_type": "rating", "options": { "max": 5 } },
+      { "id": "fld-serial", "name": "编号", "field_type": "auto_number" },
+      { "id": "fld-status", "name": "状态", "field_type": "select", "options": { "choices": [
+        { "value": "todo", "label": "待处理", "color": "#4299E1" },
+        { "value": "doing", "label": "进行中", "color": "#ED8936" },
+        { "value": "done", "label": "已完成", "color": "#48BB78" }
+      ] } },
+      { "id": "fld-tags", "name": "标签", "field_type": "multi_select", "options": { "choices": [
+        { "value": "urgent", "label": "紧急", "color": "#F56565" },
+        { "value": "review", "label": "待评审", "color": "#9F7AEA" },
+        { "value": "mobile", "label": "移动端", "color": "#38B2AC" }
+      ] } },
+      { "id": "fld-done", "name": "已验收", "field_type": "checkbox" },
+      { "id": "fld-due", "name": "截止日期", "field_type": "date" },
+      { "id": "fld-remind", "name": "提醒时间", "field_type": "datetime" },
+      { "id": "fld-created-at", "name": "创建时间", "field_type": "created_time" },
+      { "id": "fld-updated-at", "name": "最后修改", "field_type": "last_modified_time" },
+      { "id": "fld-link-url", "name": "相关链接", "field_type": "url" },
+      { "id": "fld-mail", "name": "联系邮箱", "field_type": "email" },
+      { "id": "fld-phone", "name": "联系电话", "field_type": "phone" },
+      { "id": "fld-owner", "name": "负责人", "field_type": "user" },
+      { "id": "fld-creator", "name": "创建人", "field_type": "created_by" },
+      { "id": "fld-modifier", "name": "修改人", "field_type": "last_modified_by" },
+      { "id": "fld-spec", "name": "需求文档", "field_type": "attachment" },
+      { "id": "fld-cover", "name": "示意图", "field_type": "media" },
+      { "id": "fld-score", "name": "综合得分", "field_type": "formula", "options": { "expression": "{fld-progress} * {fld-priority}" } },
+      { "id": "fld-total", "name": "子任务汇总", "field_type": "rollup" },
+      { "id": "fld-project", "name": "所属项目", "field_type": "link", "options": { "relationship": "ManyOne", "foreignTableId": "tbl-contract-0002" } },
+      { "id": "fld-project-name", "name": "项目名称", "field_type": "lookup", "options": { "linkFieldId": "fld-project", "lookupFieldId": "fld-title" } },
+      { "id": "fld-steps", "name": "执行步骤", "field_type": "nested_list" }
+    ],
+    "records": [
+      {
+        "id": "rec-0001",
+        "version": 3,
+        "data": {
+          "fld-title": "修复 Android 上下标丢失",
+          "fld-desc": "安全策略放行但渲染转换丢弃，需要补解析与渲染双端链路。",
+          "fld-count": 2,
+          "fld-progress": 0.4,
+          "fld-budget": 12000.5,
+          "fld-priority": 4,
+          "fld-serial": "AUTO-0001",
+          "fld-status": "doing",
+          "fld-tags": ["urgent", "mobile"],
+          "fld-done": false,
+          "fld-due": "2026-08-20",
+          "fld-remind": "2026-08-19T09:30:00+08:00",
+          "fld-created-at": "2026-08-10T10:00:00+08:00",
+          "fld-updated-at": "2026-08-14T18:00:00+08:00",
+          "fld-link-url": "https://tabtin.example.com/issues/10061",
+          "fld-mail": "dev@tabtin.example.com",
+          "fld-phone": "+86-138-0000-0000",
+          "fld-owner": "usr-0001",
+          "fld-creator": "usr-0002",
+          "fld-modifier": "usr-0001",
+          "fld-spec": [
+            { "fileId": "file-a-0001", "name": "修复方案.pdf", "mimeType": "application/pdf", "size": 204800, "url": "https://oss.example.com/file-a-0001" }
+          ],
+          "fld-cover": [
+            { "fileId": "file-m-0001", "name": "对比图.png", "mimeType": "image/png", "size": 102400, "url": "https://oss.example.com/file-m-0001.png" }
+          ],
+          "fld-score": "1.6",
+          "fld-total": "7",
+          "fld-project": ["rec-1001"],
+          "fld-project-name": "移动端能力同步",
+          "fld-steps": "1. 补解析\n2. 补渲染\n3. 加往返测试"
+        }
+      },
+      {
+        "id": "rec-0002",
+        "version": 1,
+        "data": {
+          "fld-title": "统一字段别名",
+          "fld-desc": "single_select 等别名统一归一化到 table-kernel 契约。",
+          "fld-count": 12,
+          "fld-progress": 0.1,
+          "fld-budget": 3000,
+          "fld-priority": 2,
+          "fld-serial": "AUTO-0002",
+          "fld-status": "todo",
+          "fld-tags": ["mobile"],
+          "fld-done": false,
+          "fld-due": "2026-08-25",
+          "fld-remind": "2026-08-24T09:00:00+08:00",
+          "fld-created-at": "2026-08-12T10:00:00+08:00",
+          "fld-updated-at": "2026-08-12T10:00:00+08:00",
+          "fld-link-url": null,
+          "fld-mail": null,
+          "fld-phone": null,
+          "fld-owner": "usr-0002",
+          "fld-creator": "usr-0001",
+          "fld-modifier": "usr-0001",
+          "fld-spec": [],
+          "fld-cover": [],
+          "fld-score": "0.2",
+          "fld-total": "0",
+          "fld-project": ["rec-1001"],
+          "fld-project-name": "移动端能力同步",
+          "fld-steps": ""
+        }
+      },
+      {
+        "id": "rec-0003",
+        "version": 8,
+        "data": {
+          "fld-title": "版本历史移动端入口",
+          "fld-desc": "版本列表与恢复，走既有保存/冲突状态机。",
+          "fld-count": 5,
+          "fld-progress": 1,
+          "fld-budget": 8000,
+          "fld-priority": 5,
+          "fld-serial": "AUTO-0003",
+          "fld-status": "done",
+          "fld-tags": ["review"],
+          "fld-done": true,
+          "fld-due": "2026-08-14",
+          "fld-remind": "2026-08-13T20:00:00+08:00",
+          "fld-created-at": "2026-08-01T10:00:00+08:00",
+          "fld-updated-at": "2026-08-14T12:00:00+08:00",
+          "fld-link-url": "https://tabtin.example.com/docs/history",
+          "fld-mail": "pm@tabtin.example.com",
+          "fld-phone": null,
+          "fld-owner": "usr-0001",
+          "fld-creator": "usr-0002",
+          "fld-modifier": "usr-0002",
+          "fld-spec": [],
+          "fld-cover": [],
+          "fld-score": "5",
+          "fld-total": "3",
+          "fld-project": [],
+          "fld-project-name": null,
+          "fld-steps": "已完成"
+        }
+      }
+    ],
+    "users": [
+      { "id": "usr-0001", "displayName": "林小满", "avatarUrl": "https://oss.example.com/avatar/usr-0001.png" },
+      { "id": "usr-0002", "displayName": "陈以宁", "avatarUrl": null }
+    ],
+    "views": [
+      {
+        "id": "viw-grid-0001",
+        "name": "全部任务",
+        "view_type": "grid",
+        "config": {
+          "card_title_field": "fld-title",
+          "card_cover_field": "fld-cover",
+          "hidden_fields": ["fld-steps"],
+          "filters": {
+            "conjunction": "and",
+            "conditions": [
+              { "field": "fld-status", "operator": "is_not", "value": "done" },
+              { "field": "fld-priority", "operator": "is_greater", "value": 1 }
+            ]
+          },
+          "filter_groups": {
+            "conjunction": "or",
+            "groups": [
+              { "conjunction": "and", "conditions": [
+                { "field": "fld-status", "operator": "is", "value": "doing" },
+                { "field": "fld-owner", "operator": "is", "value": "usr-0001" }
+              ] },
+              { "conjunction": "and", "conditions": [
+                { "field": "fld-tags", "operator": "contains", "value": "urgent" }
+              ] }
+            ]
+          },
+          "sorts": [
+            { "field": "fld-priority", "order": "desc" },
+            { "field": "fld-due", "order": "asc" }
+          ],
+          "groups": [
+            { "field": "fld-status", "order": "asc", "collapsed": ["done"] }
+          ]
+        }
+      },
+      {
+        "id": "viw-cards-0002",
+        "name": "卡片投影验收",
+        "view_type": "grid",
+        "field_order": ["fld-status", "fld-count", "fld-cover", "fld-title", "fld-desc", "fld-tags", "fld-priority", "fld-owner"],
+        "visible_fields": ["fld-title", "fld-cover", "fld-tags", "fld-desc", "fld-count", "fld-status", "fld-priority"],
+        "groups": [
+          { "field_id": "fld-status", "order": "asc" }
+        ],
+        "config": { "hidden_fields": ["fld-count"] }
+      },
+      {
+        "id": "viw-prefill-0001",
+        "name": "进行中（可预填）",
+        "view_type": "grid",
+        "filters": [
+          { "id": "flt-status", "field_id": "fld-status", "operator": "is", "value": "doing", "enabled": true },
+          { "id": "flt-owner", "field_id": "fld-owner", "operator": "equals", "value": "usr-0001", "enabled": true },
+          { "id": "flt-due", "field_id": "fld-due", "operator": "IS", "value": "2026-08-20", "enabled": true },
+          { "id": "flt-progress-by-name", "field_id": "进度", "operator": "equals", "value": 0.4, "enabled": true },
+          { "id": "flt-done-missing-enabled", "field_id": "fld-done", "operator": "is", "value": true },
+          { "id": "flt-priority-disabled", "field_id": "fld-priority", "operator": "equals", "value": 5, "enabled": false }
+        ],
+        "groups": [{ "field_id": "fld-status", "direction": "asc" }],
+        "filter": {
+          "conjunction": "and",
+          "filterSet": [
+            { "field_id": "fld-title", "operator": "equals", "value": "TRAP-FROM-NESTED-FILTER" }
+          ]
+        },
+        "config": {
+          "filter_logic": "and",
+          "filters": {
+            "conjunction": "and",
+            "conditions": [
+              { "field": "fld-status", "operator": "is", "value": "todo" },
+              { "field": "fld-title", "operator": "is", "value": "TRAP-FROM-CONFIG-FILTERS" }
+            ]
+          },
+          "groups": [{ "field": "fld-priority", "order": "asc" }],
+          "filter_groups": {
+            "conjunction": "and",
+            "groups": [
+              { "conjunction": "and", "conditions": [
+                { "field": "fld-tags", "operator": "is", "value": "review" }
+              ] }
+            ]
+          }
+        }
+      },
+      {
+        "id": "viw-prefill-or-0001",
+        "name": "或逻辑（筛选跳过）",
+        "view_type": "grid",
+        "filters": [
+          { "id": "flt-or-status", "field_id": "fld-status", "operator": "is", "value": "doing", "enabled": true },
+          { "id": "flt-or-owner", "field_id": "fld-owner", "operator": "equals", "value": "usr-0001", "enabled": true }
+        ],
+        "groups": [{ "field_id": "fld-tags", "direction": "asc" }],
+        "config": { "filter_logic": "or" }
+      },
+      {
+        "id": "viw-prefill-conflict-0001",
+        "name": "同字段冲突",
+        "view_type": "grid",
+        "filters": [
+          { "id": "flt-conflict-status-a", "field_id": "fld-status", "operator": "is", "value": "doing", "enabled": true },
+          { "id": "flt-conflict-owner", "field_id": "fld-owner", "operator": "equals", "value": "usr-0001", "enabled": true },
+          { "id": "flt-conflict-status-b", "field_id": "fld-status", "operator": "is", "value": "todo", "enabled": true }
+        ],
+        "groups": [{ "field_id": "fld-status", "direction": "asc" }],
+        "config": { "filter_logic": "and" }
+      },
+      {
+        "id": "viw-prefill-array-0001",
+        "name": "单元素数组算子",
+        "view_type": "grid",
+        "filters": [
+          { "id": "flt-tags-one", "field_id": "fld-tags", "operator": "  IS_ANY_OF  ", "value": ["urgent"], "enabled": true },
+          { "id": "flt-status-in", "field_id": "fld-status", "operator": "in", "value": ["doing"], "enabled": true }
+        ],
+        "config": { "filter_logic": "and" }
+      },
+      {
+        "id": "viw-prefill-array-multi-0001",
+        "name": "多元素数组不产出",
+        "view_type": "grid",
+        "filters": [
+          { "id": "flt-tags-two", "field_id": "fld-tags", "operator": "is_any_of", "value": ["urgent", "review"], "enabled": true },
+          { "id": "flt-status-in-two", "field_id": "fld-status", "operator": "in", "value": ["doing", "todo"], "enabled": true },
+          { "id": "flt-owner-keep", "field_id": "fld-owner", "operator": "equals", "value": "usr-0001", "enabled": true }
+        ],
+        "config": { "filter_logic": "and" }
+      },
+      {
+        "id": "viw-prefill-negation-0001",
+        "name": "非预填算子",
+        "view_type": "grid",
+        "filters": [
+          { "id": "flt-not", "field_id": "fld-status", "operator": "is_not", "value": "done", "enabled": true },
+          { "id": "flt-gt", "field_id": "fld-priority", "operator": "is_greater", "value": 1, "enabled": true },
+          { "id": "flt-contains", "field_id": "fld-tags", "operator": "contains", "value": "urgent", "enabled": true },
+          { "id": "flt-title-exactly", "field_id": "fld-title", "operator": "is_exactly", "value": "契约验收标题", "enabled": true }
+        ],
+        "config": { "filter_logic": "and" }
+      },
+      {
+        "id": "viw-prefill-readonly-0001",
+        "name": "不可写字段不预填",
+        "view_type": "grid",
+        "filters": [
+          { "id": "flt-formula", "field_id": "fld-score", "operator": "equals", "value": "1.6", "enabled": true },
+          { "id": "flt-created", "field_id": "fld-created-at", "operator": "is", "value": "2026-08-10T10:00:00+08:00", "enabled": true },
+          { "id": "flt-lookup", "field_id": "fld-project-name", "operator": "equals", "value": "移动端能力同步", "enabled": true },
+          { "id": "flt-auto", "field_id": "fld-serial", "operator": "equals", "value": "AUTO-0001", "enabled": true },
+          { "id": "flt-rollup", "field_id": "fld-total", "operator": "equals", "value": "7", "enabled": true },
+          { "id": "flt-created-by", "field_id": "fld-creator", "operator": "equals", "value": "usr-0002", "enabled": true },
+          { "id": "flt-link", "field_id": "fld-project", "operator": "equals", "value": ["rec-1001"], "enabled": true },
+          { "id": "flt-attach", "field_id": "fld-spec", "operator": "equals", "value": "file-a-0001", "enabled": true }
+        ],
+        "config": { "filter_logic": "and" }
+      },
+      { "id": "viw-list-0001", "name": "清单", "view_type": "list", "config": {} },
+      {
+        "id": "viw-kanban-0001",
+        "name": "状态看板",
+        "view_type": "kanban",
+        "config": { "group_field": "fld-status" }
+      },
+      { "id": "viw-calendar-0001", "name": "排期日历", "view_type": "calendar", "config": { "date_field": "fld-due" } },
+      { "id": "viw-gallery-0001", "name": "封面画廊", "view_type": "gallery", "config": {} },
+      { "id": "viw-future-0001", "name": "甘特图", "view_type": "gantt", "config": { "start_field": "fld-created-at", "end_field": "fld-due" } }
+    ]
+  },
+  "aliasCases": [
+    { "input": "single_select", "canonical": "select" },
+    { "input": "multiple_select", "canonical": "multi_select" },
+    { "input": "multiselect", "canonical": "multi_select" },
+    { "input": "string", "canonical": "text" },
+    { "input": "textarea", "canonical": "long_text" },
+    { "input": "integer", "canonical": "number" },
+    { "input": "float", "canonical": "number" },
+    { "input": "bool", "canonical": "checkbox" },
+    { "input": "boolean", "canonical": "checkbox" },
+    { "input": "file", "canonical": "attachment" },
+    { "input": "image", "canonical": "media" },
+    { "input": "timestamp", "canonical": "datetime" },
+    { "input": "enum", "canonical": "select" },
+    { "input": " Single_Select ", "canonical": "select", "note": "strip().lower() 后查表" },
+    { "input": "never_seen_type", "canonical": "never_seen_type", "note": "未知类型原样透传，按只读处理，禁止崩溃或丢弃" }
+  ]
+}

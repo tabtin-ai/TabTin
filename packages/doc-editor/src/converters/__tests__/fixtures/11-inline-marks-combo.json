@@ -1,0 +1,26 @@
+{
+  "name": "inline-marks-combo",
+  "description": "Bold + italic + code combination in a single text run",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          { "type": "text", "text": "before " },
+          {
+            "type": "text",
+            "text": "combo",
+            "marks": [
+              { "type": "code" },
+              { "type": "bold" },
+              { "type": "italic" }
+            ]
+          },
+          { "type": "text", "text": " after" }
+        ]
+      }
+    ]
+  },
+  "expectedMarkdown": "before ***`combo`*** after"
+}

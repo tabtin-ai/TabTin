@@ -1,0 +1,46 @@
+{
+  "name": "@tabtin/table-kernel",
+  "version": "0.1.0",
+  "description": "Pure TypeScript table kernel — field validation, filter matching, dependency graphs",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc && tsc -p tsconfig.cjs.json && node -e \"require('node:fs').writeFileSync('dist/cjs/package.json', '{\\\"type\\\":\\\"commonjs\\\"}')\"",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src"
+  },
+  "keywords": [
+    "tabtin",
+    "table",
+    "kernel",
+    "field-validation",
+    "filter"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "8.57.0",
+    "@typescript-eslint/parser": "8.57.0",
+    "eslint": "^9.0.0",
+    "typescript": "5.7.2",
+    "typescript-eslint": "8.57.0",
+    "vitest": "^3.0.0"
+  }
+}

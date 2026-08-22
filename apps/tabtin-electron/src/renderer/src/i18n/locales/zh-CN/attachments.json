@@ -1,0 +1,68 @@
+{
+  "actions": {
+    "upload": "上传附件",
+    "uploading": "上传中...",
+    "reuse": "复用附件",
+    "reuseLoading": "复用中...",
+    "cancel": "取消",
+    "remove": "移除",
+    "removeAll": "移除全部",
+    "removingAll": "移除中...",
+    "download": "下载",
+    "downloadAll": "全部下载"
+  },
+  "labels": {
+    "reuseSection": "复用已有附件",
+    "uploadingList": "正在上传",
+    "attachmentList": "附件列表",
+    "unknownType": "未知类型",
+    "empty": "暂无附件"
+  },
+  "placeholders": {
+    "reuseFileId": "输入已有附件文件ID"
+  },
+  "tips": {
+    "uploadHelp": "支持上传多个文件。完成后自动保存为附件引用。",
+    "saveBeforeUpload": "请先保存记录后再上传附件。",
+    "reuseHelp": "输入现有附件的 file_id，将其引用到当前记录。",
+    "syncing": "同步附件列表中...",
+    "uploadDropHint": "点击、粘贴或拖拽文件到这里"
+  },
+  "errors": {
+    "fetchFailed": "获取附件列表失败",
+    "uploadFailed": "附件上传失败",
+    "abortFailed": "取消上传失败",
+    "removeFailed": "删除附件失败",
+    "reuseNeedSave": "请先保存记录后再复用附件",
+    "reuseMissingId": "请输入文件 ID",
+    "reuseFailed": "复用附件失败",
+    "removeAllFailed": "批量删除附件失败",
+    "fileTooLarge": "超过 {{limit}}MB 大小限制",
+    "fileTypeNotAllowed": "不支持的文件类型",
+    "fileRejectedSingle": "文件 {{name}} 被跳过：{{reason}}",
+    "fileRejectedMultiple": "{{count}} 个文件被跳过"
+  },
+  "apiErrors": {
+    "emptyFileList": "文件列表不能为空",
+    "batchUploadFailed": "批量上传失败",
+    "batchUploadFailedWithReason": "批量上传失败: {{message}}",
+    "uploadFailed": "上传失败",
+    "createUploadTaskFailed": "创建附件上传任务失败",
+    "uploadPartFailed": "上传附件分片失败",
+    "uploadPartInvalid": "上传分片响应格式不正确",
+    "completeUploadFailed": "完成附件上传失败",
+    "abortUploadFailed": "取消附件上传失败",
+    "reuseFailed": "复用附件失败",
+    "removeReferenceFailed": "删除附件引用失败",
+    "convertFieldFailed": "字段类型转换失败",
+    "uploadTaskEmpty": "附件上传任务响应为空",
+    "uploadTaskMissingItem": "未找到附件 {{name}} 的上传任务信息"
+  },
+  "status": {
+    "pending": "等待上传",
+    "uploading": "上传中",
+    "completed": "已完成",
+    "error": "上传失败",
+    "cancelled": "已取消"
+  }
+}

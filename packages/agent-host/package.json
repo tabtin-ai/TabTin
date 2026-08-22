@@ -1,0 +1,148 @@
+{
+  "name": "@tabtin/agent-host",
+  "version": "0.1.0",
+  "description": "Shared TabTin host orchestration for Agent runtimes",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./conversation": {
+      "source": "./src/conversation/index.ts",
+      "types": "./dist/conversation/index.d.ts",
+      "import": "./dist/conversation/index.js"
+    },
+    "./runtime": {
+      "source": "./src/runtime/index.ts",
+      "types": "./dist/runtime/index.d.ts",
+      "import": "./dist/runtime/index.js"
+    },
+    "./interaction": {
+      "source": "./src/interaction/index.ts",
+      "types": "./dist/interaction/index.d.ts",
+      "import": "./dist/interaction/index.js"
+    },
+    "./realtime": {
+      "source": "./src/realtime/index.ts",
+      "types": "./dist/realtime/index.d.ts",
+      "import": "./dist/realtime/index.js"
+    },
+    "./delivery": {
+      "source": "./src/delivery/index.ts",
+      "types": "./dist/delivery/index.d.ts",
+      "import": "./dist/delivery/index.js"
+    },
+    "./delivery/usage-metadata-projection": {
+      "source": "./src/delivery/usage-metadata-projection.ts",
+      "types": "./dist/delivery/usage-metadata-projection.d.ts",
+      "import": "./dist/delivery/usage-metadata-projection.js"
+    },
+    "./configuration": {
+      "source": "./src/configuration/index.ts",
+      "types": "./dist/configuration/index.d.ts",
+      "import": "./dist/configuration/index.js"
+    },
+    "./credentials": {
+      "source": "./src/credentials/index.ts",
+      "types": "./dist/credentials/index.d.ts",
+      "import": "./dist/credentials/index.js"
+    },
+    "./policy": {
+      "source": "./src/policy/index.ts",
+      "types": "./dist/policy/index.d.ts",
+      "import": "./dist/policy/index.js"
+    },
+    "./state": {
+      "source": "./src/state/index.ts",
+      "types": "./dist/state/index.d.ts",
+      "import": "./dist/state/index.js"
+    },
+    "./capabilities": {
+      "source": "./src/capabilities/index.ts",
+      "types": "./dist/capabilities/index.d.ts",
+      "import": "./dist/capabilities/index.js"
+    },
+    "./hooks": {
+      "source": "./src/hooks/index.ts",
+      "types": "./dist/hooks/index.d.ts",
+      "import": "./dist/hooks/index.js"
+    },
+    "./tools": {
+      "source": "./src/tools/index.ts",
+      "types": "./dist/tools/index.d.ts",
+      "import": "./dist/tools/index.js"
+    },
+    "./prompt": {
+      "source": "./src/prompt/index.ts",
+      "types": "./dist/prompt/index.d.ts",
+      "import": "./dist/prompt/index.js"
+    },
+    "./native": {
+      "source": "./src/native/index.ts",
+      "types": "./dist/native/index.d.ts",
+      "import": "./dist/native/index.js"
+    },
+    "./skills": {
+      "source": "./src/skills/index.ts",
+      "types": "./dist/skills/index.d.ts",
+      "import": "./dist/skills/index.js"
+    },
+    "./tracker": {
+      "source": "./src/tracker/index.ts",
+      "types": "./dist/tracker/index.d.ts",
+      "import": "./dist/tracker/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc",
+    "check:boundary": "node ../../scripts/check-agent-boundary.mjs",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "lint": "eslint src",
+    "check:no-module-maps": "node scripts/check-no-module-maps.mjs",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tabtin/action-tools": "workspace:*",
+    "@tabtin/agent-modes": "workspace:*",
+    "@tabtin/agent-prompt": "workspace:*",
+    "@tabtin/agent-runtime": "workspace:*",
+    "@tabtin/agent-wire": "workspace:*",
+    "@tabtin/lsp-runtime": "workspace:*",
+    "@tabtin/search": "workspace:*",
+    "@tabtin/security-policy": "workspace:*",
+    "@tabtin/terminal-core": "workspace:*",
+    "@tabtin/file-pipeline": "workspace:*",
+    "@tabtin/local-docparse": "workspace:*",
+    "@tabtin/file-pipeline-errors": "workspace:*",
+    "@tabtin/os-errors": "workspace:*",
+    "@tabtin/safe-fs": "workspace:*",
+    "@tabtin/tool-errors": "workspace:*",
+    "chokidar": "^5.0.0"
+  },
+  "devDependencies": {
+    "@tabtin/browser-core": "workspace:*",
+    "@types/node": "^20.0.0",
+    "typescript": "5.7.2",
+    "vitest": "^1.6.1",
+    "sharp": "0.34.5"
+  },
+  "peerDependencies": {
+    "sharp": "0.34.5"
+  },
+  "peerDependenciesMeta": {
+    "sharp": {
+      "optional": true
+    }
+  }
+}

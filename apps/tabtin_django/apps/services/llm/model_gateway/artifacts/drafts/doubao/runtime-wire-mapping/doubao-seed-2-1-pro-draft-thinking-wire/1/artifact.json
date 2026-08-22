@@ -1,0 +1,99 @@
+{
+  "capability_ref": {
+    "expected_hash": "sha256:5a3bfb3bcac06b12f58626df131e9c5f58b93424da02ca79a47b8da6727d691c",
+    "key": "doubao-seed-2-1-pro-draft-capability",
+    "kind": "model-capability",
+    "revision": "1"
+  },
+  "identity": {
+    "canonical_hash": "sha256:7966e90a9da1a99e424d07ad99e77206362cc910bf98e661fc5ad80d00fc757f",
+    "key": "doubao-seed-2-1-pro-draft-thinking-wire",
+    "kind": "runtime-wire-mapping",
+    "revision": "1"
+  },
+  "mapping_role": "runtime-extension",
+  "patches": [
+    {
+      "namespace": "protocol.request.body",
+      "operations": [
+        {
+          "input_value": "off",
+          "operation": "set",
+          "schema_version": "1",
+          "source": null,
+          "target": "thinking.type",
+          "value": "disabled",
+          "when": null
+        },
+        {
+          "input_value": "low",
+          "operation": "set",
+          "schema_version": "1",
+          "source": null,
+          "target": "thinking.type",
+          "value": "enabled",
+          "when": null
+        },
+        {
+          "input_value": "medium",
+          "operation": "set",
+          "schema_version": "1",
+          "source": null,
+          "target": "thinking.type",
+          "value": "enabled",
+          "when": null
+        },
+        {
+          "input_value": "high",
+          "operation": "set",
+          "schema_version": "1",
+          "source": null,
+          "target": "thinking.type",
+          "value": "enabled",
+          "when": null
+        }
+      ],
+      "schema_version": "1"
+    },
+    {
+      "namespace": "protocol.request.body",
+      "operations": [
+        {
+          "input_value": "low",
+          "operation": "set",
+          "schema_version": "1",
+          "source": null,
+          "target": "reasoning_effort",
+          "value": "low",
+          "when": null
+        },
+        {
+          "input_value": "medium",
+          "operation": "set",
+          "schema_version": "1",
+          "source": null,
+          "target": "reasoning_effort",
+          "value": "medium",
+          "when": null
+        },
+        {
+          "input_value": "high",
+          "operation": "set",
+          "schema_version": "1",
+          "source": null,
+          "target": "reasoning_effort",
+          "value": "high",
+          "when": null
+        }
+      ],
+      "schema_version": "1"
+    }
+  ],
+  "product_mapping_ref": {
+    "expected_hash": "sha256:7bbfc9a15dabb0a049a2f62d53cf7170eff685035caefe60741e2fd47b72bedf",
+    "key": "doubao-seed-2-1-pro-draft-thinking-control",
+    "kind": "product-control-mapping",
+    "revision": "1"
+  },
+  "schema_version": "1"
+}

@@ -1,0 +1,84 @@
+{
+  "actions": {
+    "useful": "Useful",
+    "correct": "Correct",
+    "forget": "Forget",
+    "cancel": "Cancel",
+    "retry": "Retry",
+    "loadMore": "Load more"
+  },
+  "errors": {
+    "loadFailed": "Failed to load, please retry",
+    "loadMoreFailed": "Failed to load more, please retry",
+    "actionFailed": "Action failed",
+    "correctFailed": "Failed to correct",
+    "exportFailed": "Export failed"
+  },
+  "toast": {
+    "corrected": "Memory corrected"
+  },
+  "types": {
+    "about_you": "About you",
+    "insight": "Insight",
+    "task_summary": "Collaboration summary",
+    "diary": "Diary"
+  },
+  "emotions": {
+    "happy": "Happy",
+    "curious": "Curious",
+    "frustrated": "Frustrated",
+    "relieved": "Relieved",
+    "surprised": "Surprised",
+    "reflective": "Reflective",
+    "neutral": "Note"
+  },
+  "time": {
+    "justNow": "Just now",
+    "minutesAgo": "{{count}} min ago",
+    "hoursAgo": "{{count}} h ago",
+    "daysAgo": "{{count}} d ago",
+    "today": "Today",
+    "yesterday": "Yesterday"
+  },
+  "importanceTitle": "Importance {{count}}",
+  "exportDoc": {
+    "title": "{{name}}'s memories",
+    "organization": "Organization: {{name}}",
+    "exportedAt": "Exported: {{time}}",
+    "count": "{{count}} memories total",
+    "importanceLabel": "Importance"
+  },
+  "diary": {
+    "title": "{{name}}'s growth log",
+    "subtitle": "What they noted while working with you",
+    "loadFailedTitle": "Failed to load the growth log",
+    "selectAgent": "Select an AI avatar to view its growth log",
+    "emptyTitle": "No growth log yet",
+    "emptyHint": "After you collaborate, work diaries will show up here",
+    "forgetTitle": "Have this AI avatar forget this entry?",
+    "forgetDesc": "Once forgotten, the AI avatar won't use this memory again and it won't appear here. This action cannot be undone."
+  },
+  "governance": {
+    "tabs": {
+      "overview": "Overview",
+      "records": "All records"
+    },
+    "filters": {
+      "all": "All"
+    },
+    "records": {
+      "hint": "After you correct or forget an entry, the overview summary updates on the next distill.",
+      "loadFailedTitle": "Failed to load memories",
+      "emptyTitle": "This AI avatar has no memory records yet",
+      "emptyHint": "Records will appear here after you collaborate"
+    },
+    "forgetTitle": "Have this AI avatar forget this memory?",
+    "disabledNotice": "Memory recording is currently off. The AI avatar no longer records, recalls, or shows memories. Turn it back on in Memory → Memory preferences → Let Agent take notes.",
+    "export": {
+      "nothing": "This AI avatar has no memories to export yet",
+      "disabledEmpty": "Memory recording is off, so there's nothing to export. Turn it back on in Memory → Memory preferences → Let Agent take notes.",
+      "filenameMemory": "memory",
+      "done": "Exported {{count}} memories"
+    }
+  }
+}

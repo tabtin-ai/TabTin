@@ -1,0 +1,41 @@
+{
+  "_comment": "ESLint 输出 baseline，按 severity × ruleId 分桶。CI 跑 `pnpm lint:baseline:check`：任意规则当前 error/warning > baseline 即 fail。修复一些后跑 `pnpm lint:baseline:update` 收紧 baseline。治理只能单向收紧，不许放宽。详见 eslint-rules/BASELINE.md。",
+  "_schema_version": 1,
+  "generated_at": "2026-05-15T08:29:15.672Z",
+  "totals": {
+    "errors": 1296,
+    "warnings": 17634
+  },
+  "rules": {
+    "errors": {
+      "@typescript-eslint/ban-types": 2,
+      "@typescript-eslint/no-duplicate-enum-values": 65,
+      "@typescript-eslint/no-namespace": 1,
+      "@typescript-eslint/no-non-null-asserted-optional-chain": 8,
+      "@typescript-eslint/no-wrapper-object-types": 4,
+      "__no_rule__": 1,
+      "jsx-a11y/click-events-have-key-events": 3,
+      "jsx-a11y/no-noninteractive-tabindex": 1,
+      "jsx-a11y/no-static-element-interactions": 7,
+      "no-var": 1081,
+      "react-hooks/rules-of-hooks": 97,
+      "redos-detector/no-unsafe-regex": 1,
+      "sonarjs/cognitive-complexity": 21,
+      "tabtin/use-virtualizer-stable-callbacks": 4
+    },
+    "warnings": {
+      "@typescript-eslint/ban-ts-comment": 11,
+      "@typescript-eslint/no-empty-object-type": 185,
+      "@typescript-eslint/no-explicit-any": 8018,
+      "@typescript-eslint/no-this-alias": 79,
+      "@typescript-eslint/no-unsafe-function-type": 69,
+      "@typescript-eslint/no-unused-expressions": 4889,
+      "@typescript-eslint/no-unused-vars": 1717,
+      "__no_rule__": 99,
+      "prefer-const": 2048,
+      "react-hooks/exhaustive-deps": 288,
+      "tabtin/no-chat-design-violations": 75,
+      "tabtin/prefer-scoped-activity-effects": 156
+    }
+  }
+}

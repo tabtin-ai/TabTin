@@ -1,0 +1,24 @@
+{
+  "name": "image-with-dimensions",
+  "description": "Image with width/height uses HTML img tag (D3 decision)",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "image",
+            "attrs": {
+              "src": "https://img.example.com/photo.png",
+              "alt": "Sized photo",
+              "width": 300,
+              "height": 200
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "expectedMarkdown": "<img src=\"https://img.example.com/photo.png\" alt=\"Sized photo\" width=\"300\" height=\"200\">"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "@tabtin/wire-codegen",
+  "version": "0.1.0",
+  "description": "TabTin wire-protocol codegen toolchain (Anthropic Messages API alignment, Wave 1)",
+  "type": "module",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "scripts",
+    "fixtures",
+    "patch-templates"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "codegen": "tsx scripts/00_codegen_all.ts",
+    "codegen:json-schema": "tsx scripts/01_emit_json_schema.ts",
+    "codegen:fixtures": "tsx scripts/02_emit_fixtures.ts",
+    "codegen:python": "tsx scripts/03_gen_python.ts",
+    "codegen:swift": "tsx scripts/04_gen_swift.ts",
+    "codegen:kotlin": "tsx scripts/05_gen_kotlin.ts",
+    "codegen:typescript": "tsx scripts/06_gen_typescript.ts",
+    "codegen:vendor-in": "tsx scripts/07_vendor_in.ts",
+    "codegen:check": "tsx scripts/08_check.ts",
+    "roundtrip:python": "./scripts/roundtrip-python.sh",
+    "roundtrip:swift": "./scripts/roundtrip-swift.sh",
+    "roundtrip:kotlin": "./scripts/roundtrip-kotlin.sh"
+  },
+  "dependencies": {
+    "@tabtin/agent-wire": "workspace:*",
+    "zod": "^3.25.76",
+    "zod-to-json-schema": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "5.7.2",
+    "vitest": "^1.6.1"
+  }
+}

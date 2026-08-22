@@ -1,0 +1,131 @@
+{
+  "title": "プロフィール",
+  "description": "基本情報、連絡先情報、アカウント設定などのプロフィールを表示および編集します",
+  "saved": "プロフィールを更新しました",
+  "validation": {
+    "usernameLength": "ユーザー名は 3 ～ 20 文字である必要があります",
+    "usernameFormat": "ユーザー名には文字、数字、アンダースコアのみを含めることができ、文字で始める必要があります",
+    "nicknameLength": "ニックネームは50文字を超えることはできません",
+    "bioLength": "自己紹介は 500 文字を超えることはできません"
+  },
+  "errors": {
+    "updateFailed": "アップデートに失敗しました。後でもう一度お試しください",
+    "verificationFailed": "確認コードの送信に失敗しました",
+    "logoutFailed": "ログアウトに失敗しました"
+  },
+  "labels": {
+    "nickname": "ニックネーム",
+    "username": "ユーザー名",
+    "userId": "ユーザーID",
+    "phone": "電話",
+    "email": "電子メール",
+    "bio": "略歴",
+    "contact": "お問い合わせ",
+    "accountInfo": "アカウント情報",
+    "registeredAt": "参加しました",
+    "loginCount": "ログイン数",
+    "lastLogin": "最終ログイン",
+    "buildVersion": "ビルドバージョン"
+  },
+  "placeholders": {
+    "nickname": "ニックネームを入力してください",
+    "username": "ユーザー名を入力してください",
+    "bio": "あなた自身について教えてください..."
+  },
+  "empty": {
+    "nickname": "ニックネームなし",
+    "username": "ユーザー名なし",
+    "bio": "このユーザーはプロフィールを書いていません...",
+    "contact": "連絡先情報がありません",
+    "email": "電子メールのバインドはありません"
+  },
+  "actions": {
+    "editProfile": "プロフィールの編集",
+    "accountSettings": "アカウント設定",
+    "copyId": "IDをコピーする",
+    "copied": "コピーされました",
+    "logout": "ログアウト",
+    "avatarComingSoon": "アバターのアップロードは近日開始予定",
+    "logoutConfirmTitle": "アカウントからログアウトしますか?",
+    "logoutConfirmDesc": "このデバイス上で保存されていない作業はすべて失われます",
+    "openStorageManager": "ストレージマネージャー",
+    "openStorageManagerHint": "TabTin がマシンに保存したものを確認し、クリーンアップまたはエクスポートします",
+    "changePassword": "パスワードを変更する",
+    "bindEmail": "電子メールをバインドする"
+  },
+  "avatar": {
+    "cropTitle": "作物のアバター",
+    "saved": "アバターが保存されました",
+    "saveFailed": "アバターの保存に失敗しました",
+    "removeUnsupported": "アバターの削除はまだサポートされていません"
+  },
+  "alt": {
+    "avatar": "アバター"
+  },
+  "stats": {
+    "loginCount": "{{value}}回"
+  },
+  "changePassword": {
+    "title": "パスワードを変更する",
+    "descChange": "現在のパスワードを入力して新しいパスワードを設定します。",
+    "descReset": "確認コードが {{identifier}} に送信されます。新しいパスワードを設定するにはそれを確認してください。",
+    "descResetNoContact": "このアカウントには電子メールや電話がバインドされていないため、コードベースのリセットは利用できません。",
+    "labels": {
+      "oldPassword": "現在のパスワード",
+      "verificationCode": "認証コード",
+      "newPassword": "新しいパスワード",
+      "confirmPassword": "新しいパスワードを確認します"
+    },
+    "placeholders": {
+      "oldPassword": "現在のパスワードを入力してください",
+      "verificationCode": "6桁のコードを入力してください",
+      "newPassword": "新しいパスワードを設定する",
+      "confirmPassword": "新しいパスワードを再入力してください"
+    },
+    "capsLockHint": "Caps Lock がオンになっている",
+    "actions": {
+      "sendCode": "コードを送信する",
+      "submit": "パスワードを更新する",
+      "forgotOld": "現在のパスワードをお忘れですか?コードでリセットする",
+      "useOldPassword": "現在のパスワードの使用に戻る"
+    },
+    "codeSent": "認証コードが送信されました",
+    "success": "パスワードが更新されました",
+    "successRelogin": "新しいパスワードで再度ログインしてください",
+    "errors": {
+      "oldRequired": "現在のパスワードを入力してください",
+      "codeInvalid": "6桁のコードを入力してください",
+      "newNoWhitespace": "新しいパスワードにはスペースを含めることはできません。スペースが削除されました",
+      "newNoCjk": "パスワードに CJK 文字を含めることはできません。他のコンテンツを貼り付けないでください",
+      "newTooShort": "新しいパスワードは 8 文字以上である必要があります",
+      "newNotComplex": "新しいパスワードには、大文字、小文字、数字、特殊文字のうち少なくとも 3 つを含める必要があります",
+      "mismatch": "パスワードが一致しません",
+      "sendCodeFailed": "コードを送信できませんでした。後でもう一度お試しください。",
+      "failed": "パスワードを更新できませんでした。入力を確認して再試行してください。"
+    }
+  },
+  "bindEmail": {
+    "title": "電子メールをバインドする",
+    "description": "ログイン、パスワード回復、組織の残高不足アラートに使用します。",
+    "labels": {
+      "email": "電子メール",
+      "verificationCode": "認証コード"
+    },
+    "placeholders": {
+      "email": "名前@example.com",
+      "verificationCode": "6桁のコードを入力してください"
+    },
+    "actions": {
+      "sendCode": "コードを送信する",
+      "submit": "電子メールをバインドする"
+    },
+    "codeSent": "認証コードが送信されました",
+    "success": "電子メールが正常にバインドされました",
+    "errors": {
+      "emailInvalid": "有効なメールアドレスを入力してください",
+      "codeInvalid": "6桁のコードを入力してください",
+      "sendCodeFailed": "コードを送信できませんでした。後でもう一度お試しください。",
+      "failed": "電子メールをバインドできませんでした。入力を確認して再試行してください。"
+    }
+  }
+}

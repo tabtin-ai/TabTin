@@ -1,0 +1,58 @@
+{
+  "errors": {
+    "noTable": "Aucune table sélectionnée",
+    "submitFailed": "L'action a échoué",
+    "loadHistoryFailed": "Échec du chargement de l'historique",
+    "tryAgainLater": "Veuillez réessayer plus tard"
+  },
+  "comments": {
+    "recoverableSubmitFailed": "Le commentaire n'a pas été envoyé car la connexion réseau a échoué ou la demande a expiré. Votre brouillon a été conservé. Vérifiez votre connexion et réessayez.",
+    "title": "Commentaires",
+    "toggle": "Ouvrir les commentaires",
+    "placeholder": "Ajouter un commentaire, saisissez @ pour mentionner des membres",
+    "submit": "Publier le commentaire",
+    "delete": "Supprimer",
+    "deleting": "Suppression...",
+    "retry": "Réessayer",
+    "loading": "Chargement des commentaires...",
+    "noMentionResults": "Aucun membre correspondant",
+    "loadMore": "Charger les commentaires précédents",
+    "loadingMore": "Chargement...",
+    "reply": "Répondre",
+    "replyingTo": "Réponse à",
+    "cancelReply": "Annuler la réponse",
+    "deletedComment": "Commentaire d'origine supprimé",
+    "filterOpen": "Ouvert",
+    "filterResolved": "Résolu",
+    "filterAll": "Tout",
+    "resolveThread": "Résoudre",
+    "reopenThread": "Réouvrir",
+    "updatingThread": "Mise à jour...",
+    "empty": "Pas de commentaires",
+    "countUnit": "fils de discussion"
+  },
+  "systemFields": {
+    "parentRecord": {
+      "name": "Enregistrement parent",
+      "description": "Champ d'enregistrement parent pour la hiérarchie des sous-enregistrements"
+    }
+  },
+  "apiErrors": {
+    "fetchTrashFailed": "Échec de la récupération des enregistrements supprimés",
+    "restoreFromTrashFailed": "Échec de la restauration de l'enregistrement",
+    "restoreBatchFromTrashFailed": "Échec de la restauration des enregistrements par lots"
+  },
+  "dialog": {
+    "createTitle": "Ajouter un enregistrement à \"{{name}}\"",
+    "editTitle": "Modifier l'enregistrement",
+    "viewTitle": "Afficher l'enregistrement",
+    "createDescription": "Remplissez le formulaire pour créer un nouvel enregistrement. Les champs marqués * sont obligatoires.",
+    "editDescription": "Mettez à jour le dossier. Le champ principal est modifiable ; garder les identifiants uniques."
+  },
+  "incrementalSync": {
+    "errors": {
+      "aiTimeout": "Le traitement de l'IA a expiré. Veuillez actualiser la page.",
+      "networkError": "Erreur réseau. Veuillez actualiser la page."
+    }
+  }
+}

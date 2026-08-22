@@ -1,0 +1,36 @@
+{
+  "name": "@tabtin/doc-renderer",
+  "version": "0.1.0",
+  "description": "Host-agnostic markdown rendering utilities for TabTin Tabdoc",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "tabtin",
+    "tabdoc",
+    "markdown",
+    "renderer"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "5.7.2"
+  }
+}
+

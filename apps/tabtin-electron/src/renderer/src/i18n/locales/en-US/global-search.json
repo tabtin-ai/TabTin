@@ -1,0 +1,129 @@
+{
+  "dialogLabel": "Unified Search",
+  "inputLabel": "Search keyword",
+  "placeholder": "Search messages, resources, agents, spaces, memos, IM...",
+  "placeholderScoped": "Search in \"{{name}}\"...",
+  "clearScope": "Clear space scope",
+  "clearAgentScope": "Clear agent filter",
+  "selfLabel": "you",
+  "typeFilterLabel": "Type filter",
+  "resourceSubtypeLabel": "Resource type",
+  "creatorFilterLabel": "Creator filter",
+  "resultsLabel": "Search results",
+  "retry": "Retry",
+  "cancel": "Cancel",
+  "slowHint": "Search is slow, please wait...",
+  "resultsTotal": "{{total}} results in total",
+  "tookMs": "{{ms}}ms",
+  "tabs": {
+    "all": "All",
+    "messages": "Messages",
+    "resources": "Resources",
+    "agents": "Agents",
+    "spaces": "Spaces",
+    "memos": "Memos",
+    "im": "IM"
+  },
+  "resourceSubtype": {
+    "all": "All types"
+  },
+  "resultType": {
+    "message": "Message",
+    "resource": "Resource",
+    "agent": "Agent",
+    "space": "Workspace",
+    "memo": "Memo",
+    "im": "IM"
+  },
+  "logicalIndex": {
+    "messages": "Message search",
+    "resources": "Resource search",
+    "agents": "Agent search",
+    "spaces": "Workspace search",
+    "memos": "Memo search",
+    "im": "IM search"
+  },
+  "creatorFilter": {
+    "any": "All",
+    "userOnly": "Only my messages",
+    "agentOnly": "Only Agent's",
+    "r2_11Hint": "Agent filter only applies precisely to Messages/Agents types"
+  },
+  "picker": {
+    "agentTitle": "Pick Agent to filter by",
+    "typeTitle": "Pick a type filter",
+    "spaceTitle": "Pick a Workspace to scope to",
+    "noAgents": "No matching Agent",
+    "noTypes": "No matching type",
+    "noSpaces": "No matching Workspace",
+    "resourceSubtypeBadge": "resource subtype"
+  },
+  "navigate": {
+    "imNotFound": "This IM conversation is not in the current list (still loading or deleted)",
+    "spaceNotFound": "This Workspace is not in the current list (still loading or no access)",
+    "agentNoSpace": "This Agent has no Workspace to enter",
+    "agentSpaceNotFound": "This Agent's main Workspace is not in the current list"
+  },
+  "notice": {
+    "noAccessibleSpacesTitle": "No accessible Workspaces in this Organization",
+    "noAccessibleSpacesHint": "Empty results are due to no Workspace access in this Organization, not because data is missing. Ask an admin to add you to the relevant Workspaces, or check your login identity."
+  },
+  "degraded": {
+    "engine_disabled": "Search engine not enabled; falling back to basic search (resources / memos only)",
+    "health_red": "Search service unavailable; falling back to basic search",
+    "circuit_open": "Search circuit breaker open; falling back to basic search, please retry later",
+    "error_rate_breach": "Search error rate elevated; falling back to basic search",
+    "opensearch_unavailable": "Search service degraded; only basic search supported (CJK tokenization is coarse)",
+    "partial_failure": "Some result types are temporarily unavailable; showing other types",
+    "partial_failure_with_indices": "{{indices}} temporarily unavailable; showing other types",
+    "rate_limited": "Too many queries in degraded mode; please wait",
+    "auth_missing": "Authentication missing; please re-login",
+    "internal_error": "Internal search error; please retry later",
+    "unknown": "Search service partially degraded"
+  },
+  "group": {
+    "openTabs": "Open tabs",
+    "viewAll": "View all {{count}} results"
+  },
+  "empty": {
+    "noResults": "No results for \"{{query}}\"",
+    "didYouMean": "Did you mean:",
+    "recentSearches": "Recent searches:",
+    "tipsTitle": "Tips:",
+    "tip1": "\"exact phrase\"  ·  in:Workspace  ·  #type"
+  },
+  "initial": {
+    "title": "Search messages, documents, tables, memos, agents...",
+    "recentOpened": "Recently opened",
+    "clearRecentOpened": "Clear",
+    "untitled": "(untitled)",
+    "recentSearches": "Recent searches",
+    "clearHistory": "Clear",
+    "tipsTitle": "Tips:",
+    "tip1": "@ Agent  ·  # type  ·  in:Workspace  ·  \"exact phrase\"",
+    "tipCli": "Command mode: tracker new \"name\" --schedule daily --at 09:00"
+  },
+  "cli": {
+    "execute": "Run (Enter)",
+    "trackerNewWithName": "Create Automation Task: \"{{name}}\"",
+    "trackerNewNoName": "Create Automation Task (name required)",
+    "trackerNewManualDesc": "Manual trigger",
+    "trackerNewHourlyDesc": "Runs at the top of every hour",
+    "trackerNewTimedDesc": "{{schedule}} at {{at}}",
+    "trackerList": "View automation task list",
+    "editAfterTip": "We'll open a form to confirm before creating",
+    "unknown": "Unknown command",
+    "schedule": {
+      "manual": "Manual",
+      "hourly": "Hourly",
+      "daily": "Daily",
+      "weekdays": "Weekdays",
+      "weekly": "Weekly"
+    }
+  },
+  "shortcut": {
+    "close": "Close",
+    "clearScope": "Clear space scope",
+    "openSearch": "Open search"
+  }
+}

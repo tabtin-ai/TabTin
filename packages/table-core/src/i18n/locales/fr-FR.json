@@ -1,0 +1,29 @@
+{
+  "apiErrors": {
+    "fetchListFailed": "Échec de la récupération des enregistrements",
+    "fetchDetailFailed": "Échec de la récupération des détails de l'enregistrement",
+    "createFailed": "Échec de la création de l'enregistrement",
+    "updateFailed": "Échec de la mise à jour de l'enregistrement",
+    "deleteFailed": "Échec de la suppression de l'enregistrement",
+    "bulkCreateFailed": "Échec de la création groupée d'enregistrements",
+    "bulkUpdateFailed": "Échec de la mise à jour groupée des enregistrements",
+    "bulkDeleteFailed": "Échec de la suppression groupée des enregistrements"
+  },
+  "logs": {
+    "fetchDetailSuccess": "Détails de l'enregistrement récupérés",
+    "createSuccess": "Enregistrement créé",
+    "bulkUpdateMissingRecord": "Enregistrement cible manquant dans le résultat de la mise à jour groupée",
+    "deleteSuccess": "Enregistrement supprimé",
+    "bulkProgress": "Progression de l'opération en masse",
+    "bulkCreateSuccess": "Création groupée terminée",
+    "bulkCreatePartialFailed": "La création groupée a partiellement échoué",
+    "bulkUpdateSuccess": "Mise à jour groupée terminée",
+    "bulkUpdatePartialFailed": "La mise à jour groupée a partiellement échoué",
+    "syncViewRecordsSuccess": "Afficher les enregistrements synchronisés",
+    "syncViewRecordsFailed": "Échec de la synchronisation des enregistrements de vue",
+    "bulkDeleteSuccess": "Suppression groupée terminée",
+    "bulkDeletePartialFailed": "La suppression groupée a partiellement échoué",
+    "mergeIncremental": "Enregistrements incrémentiels {{count}} fusionnés, nouvelle version : {{version}}",
+    "removeByIds": "Enregistrements supprimés"
+  }
+}

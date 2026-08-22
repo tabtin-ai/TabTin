@@ -1,0 +1,109 @@
+{
+  "client": {
+    "token": {
+      "hmac_secret_key": "tabtin-centrifugo-token-dev-secret"
+    },
+    "allowed_origins": [
+      "http://localhost:5174",
+      "http://127.0.0.1:5174",
+      "http://localhost:5175",
+      "http://127.0.0.1:5175",
+      "tabtin-file://app"
+    ],
+    "proxy": {
+      "connect": {
+        "enabled": true,
+        "endpoint": "http://127.0.0.1:6060/api/im/centrifugo/connect",
+        "timeout": "5s",
+        "http": {
+          "static_headers": {
+            "X-Centrifugo-Proxy-Secret": "tabtin-centrifugo-proxy-dev-secret"
+          }
+        }
+      },
+      "refresh": {
+        "enabled": true,
+        "endpoint": "http://127.0.0.1:6060/api/im/centrifugo/refresh",
+        "timeout": "5s",
+        "http": {
+          "static_headers": {
+            "X-Centrifugo-Proxy-Secret": "tabtin-centrifugo-proxy-dev-secret"
+          }
+        }
+      }
+    },
+    "user_connection_limit": 20
+  },
+  "http_api": {
+    "key": "tabtin-centrifugo-dev-api-key"
+  },
+  "health": {
+    "enabled": true
+  },
+  "admin": {
+    "enabled": true,
+    "password": "dev_admin_pass",
+    "secret": "dev_admin_secret"
+  },
+  "engine": {
+    "type": "redis",
+    "redis": {
+      "address": "redis://127.0.0.1:6379/10"
+    }
+  },
+  "channel": {
+    "proxy": {
+      "subscribe": {
+        "endpoint": "http://127.0.0.1:6060/api/im/centrifugo/subscribe",
+        "timeout": "3s",
+        "http": {
+          "static_headers": {
+            "X-Centrifugo-Proxy-Secret": "tabtin-centrifugo-proxy-dev-secret"
+          }
+        }
+      },
+      "publish": {
+        "endpoint": "http://127.0.0.1:6060/api/im/centrifugo/publish",
+        "timeout": "2s",
+        "http": {
+          "static_headers": {
+            "X-Centrifugo-Proxy-Secret": "tabtin-centrifugo-proxy-dev-secret"
+          }
+        }
+      }
+    },
+    "namespaces": [
+      {
+        "name": "chat",
+        "history_size": 200,
+        "history_ttl": "720h",
+        "force_recovery": true,
+        "presence": true,
+        "join_leave": true,
+        "force_push_join_leave": true,
+        "subscribe_proxy_enabled": true,
+        "publish_proxy_enabled": true,
+        "allow_history_for_subscriber": true,
+        "allow_presence_for_subscriber": true,
+        "allow_publish_for_subscriber": true
+      },
+      {
+        "name": "personal",
+        "history_size": 50,
+        "history_ttl": "168h",
+        "force_recovery": true,
+        "presence": false,
+        "subscribe_proxy_enabled": true,
+        "publish_proxy_enabled": true
+      },
+      {
+        "name": "space",
+        "presence": true,
+        "join_leave": true,
+        "force_push_join_leave": true,
+        "subscribe_proxy_enabled": true,
+        "allow_presence_for_subscriber": true
+      }
+    ]
+  }
+}

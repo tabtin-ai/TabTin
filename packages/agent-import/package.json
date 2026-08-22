@@ -1,0 +1,29 @@
+{
+  "name": "@tabtin/agent-import",
+  "version": "0.1.0",
+  "description": "External agent tool data import — adapters for Cursor / Codex / Claude Code / WorkBuddy local session data, translated to TabTin ContentBlock format",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "build": "tsup && node scripts/assert-dist-node-sqlite.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.2.2",
+    "vitest": "4.0.18"
+  }
+}

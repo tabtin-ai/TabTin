@@ -1,0 +1,84 @@
+{
+  "actions": {
+    "useful": "Utile",
+    "correct": "Correct",
+    "forget": "Oublier",
+    "cancel": "Annuler",
+    "retry": "Réessayer",
+    "loadMore": "Charger plus"
+  },
+  "errors": {
+    "loadFailed": "Échec du chargement, veuillez réessayer",
+    "loadMoreFailed": "Échec du chargement supplémentaire, veuillez réessayer",
+    "actionFailed": "L'action a échoué",
+    "correctFailed": "Échec de la correction",
+    "exportFailed": "Échec de l'exportation"
+  },
+  "toast": {
+    "corrected": "Mémoire corrigée"
+  },
+  "types": {
+    "about_you": "À propos de vous",
+    "insight": "Aperçu",
+    "task_summary": "Résumé de la collaboration",
+    "diary": "Journal"
+  },
+  "emotions": {
+    "happy": "Heureux",
+    "curious": "Curieux",
+    "frustrated": "Frustré",
+    "relieved": "Soulagé",
+    "surprised": "Surpris",
+    "reflective": "Réfléchissant",
+    "neutral": "Remarque"
+  },
+  "time": {
+    "justNow": "Juste maintenant",
+    "minutesAgo": "il y a {{count}} min",
+    "hoursAgo": "{{count}} il y a h",
+    "daysAgo": "il y a {{count}} j",
+    "today": "Aujourd'hui",
+    "yesterday": "Hier"
+  },
+  "importanceTitle": "Importance : {{count}}",
+  "exportDoc": {
+    "title": "Les souvenirs de {{name}}",
+    "organization": "Organisation : {{name}}",
+    "exportedAt": "Exporté : {{time}}",
+    "count": "{{count}} souvenirs totaux",
+    "importanceLabel": "Importance"
+  },
+  "diary": {
+    "title": "Journal de croissance de {{name}}",
+    "subtitle": "Ce qu'ils ont noté en travaillant avec vous",
+    "loadFailedTitle": "Échec du chargement du journal de croissance",
+    "selectAgent": "Sélectionnez un avatar IA pour afficher son journal de croissance",
+    "emptyTitle": "Pas encore de journal de croissance",
+    "emptyHint": "Après votre collaboration, les journaux de travail s'afficheront ici",
+    "forgetTitle": "Cet avatar IA a-t-il oublié cette entrée ?",
+    "forgetDesc": "Une fois oublié, l'avatar IA n'utilisera plus cette mémoire et elle n'apparaîtra pas ici. Cette action ne peut pas être annulée."
+  },
+  "governance": {
+    "tabs": {
+      "overview": "Aperçu",
+      "records": "Tous les enregistrements"
+    },
+    "filters": {
+      "all": "Tout"
+    },
+    "records": {
+      "hint": "Après avoir corrigé ou oublié une entrée, le résumé est mis à jour sur la distillation suivante.",
+      "loadFailedTitle": "Échec du chargement des mémoires",
+      "emptyTitle": "Cet avatar IA n'a pas encore d'enregistrement de mémoire",
+      "emptyHint": "Les enregistrements apparaîtront ici après votre collaboration"
+    },
+    "forgetTitle": "Cet avatar IA a-t-il oublié ce souvenir ?",
+    "disabledNotice": "L'enregistrement en mémoire est actuellement désactivé. L'avatar IA n'enregistre, ne rappelle plus ou n'affiche plus de souvenirs. Réactivez-le dans Mémoire → Préférences de mémoire → Laisser l'agent prendre des notes.",
+    "export": {
+      "nothing": "Cet avatar IA n'a pas encore de souvenirs à exporter",
+      "disabledEmpty": "L'enregistrement en mémoire est désactivé, il n'y a donc rien à exporter. Réactivez-le dans Mémoire → Préférences de mémoire → Laisser l'agent prendre des notes.",
+      "filenameMemory": "mémoire",
+      "done": "Mémoires {{count}} exportées"
+    }
+  }
+}

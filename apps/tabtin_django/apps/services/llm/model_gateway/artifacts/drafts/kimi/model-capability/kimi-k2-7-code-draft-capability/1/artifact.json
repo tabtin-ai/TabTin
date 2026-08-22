@@ -1,0 +1,153 @@
+{
+  "capabilities": [
+    {
+      "budget": null,
+      "conditions": [],
+      "default_value": null,
+      "deployment_tags": [],
+      "eligible_rate_card_refs": [],
+      "evidence": [
+        {
+          "locator": "OpenAI-compatible stream_supported legacy configuration",
+          "source": "migrations 0040 and 0053"
+        }
+      ],
+      "factual_values": [],
+      "fallback_policy": null,
+      "family": "streaming",
+      "mime_types": [],
+      "name": "streaming",
+      "native_state": null,
+      "preprocessing_ref": null,
+      "preprocessing_state": null,
+      "profile_capability_refs": [],
+      "retention_ref": null,
+      "runtime_mapping_ref": null,
+      "schema_version": "1",
+      "selection_refs": [],
+      "shape": null,
+      "state": "supported",
+      "transports": [],
+      "user_controllable": false
+    },
+    {
+      "budget": null,
+      "conditions": [],
+      "default_value": null,
+      "deployment_tags": [],
+      "eligible_rate_card_refs": [],
+      "evidence": [
+        {
+          "locator": "legacy supports_function_calling configuration",
+          "source": "migrations 0040 and 0053"
+        }
+      ],
+      "factual_values": [],
+      "fallback_policy": null,
+      "family": "tools",
+      "mime_types": [],
+      "name": "tool-calling",
+      "native_state": null,
+      "preprocessing_ref": null,
+      "preprocessing_state": null,
+      "profile_capability_refs": [],
+      "retention_ref": null,
+      "runtime_mapping_ref": null,
+      "schema_version": "1",
+      "selection_refs": [],
+      "shape": null,
+      "state": "supported",
+      "transports": [],
+      "user_controllable": false
+    },
+    {
+      "budget": null,
+      "conditions": [
+        {
+          "children": [],
+          "field": "request.input_tokens",
+          "operator": "present",
+          "value": null
+        }
+      ],
+      "default_value": null,
+      "deployment_tags": [],
+      "eligible_rate_card_refs": [],
+      "evidence": [
+        {
+          "locator": "synthetic usage fixture; no upstream probe",
+          "source": "PR0 Golden"
+        }
+      ],
+      "factual_values": [],
+      "fallback_policy": null,
+      "family": "usage",
+      "mime_types": [],
+      "name": "usage",
+      "native_state": null,
+      "preprocessing_ref": null,
+      "preprocessing_state": null,
+      "profile_capability_refs": [],
+      "retention_ref": null,
+      "runtime_mapping_ref": null,
+      "schema_version": "1",
+      "selection_refs": [],
+      "shape": null,
+      "state": "conditional",
+      "transports": [],
+      "user_controllable": false
+    },
+    {
+      "budget": null,
+      "conditions": [],
+      "default_value": "on",
+      "deployment_tags": [],
+      "eligible_rate_card_refs": [],
+      "evidence": [
+        {
+          "locator": "forced legacy profile; both product values collapse to on",
+          "source": "migrations 0040 and 0053"
+        }
+      ],
+      "factual_values": [
+        {
+          "evidence": [
+            {
+              "locator": "legacy runtime thinking profile",
+              "source": "migrations 0040 and 0053"
+            }
+          ],
+          "key": "on",
+          "order": 0
+        }
+      ],
+      "fallback_policy": null,
+      "family": "thinking",
+      "mime_types": [],
+      "name": "thinking",
+      "native_state": null,
+      "preprocessing_ref": null,
+      "preprocessing_state": null,
+      "profile_capability_refs": [],
+      "retention_ref": null,
+      "runtime_mapping_ref": null,
+      "schema_version": "1",
+      "selection_refs": [],
+      "shape": "forced",
+      "state": "forced",
+      "transports": [],
+      "user_controllable": false
+    }
+  ],
+  "context_window": 262144,
+  "identity": {
+    "canonical_hash": "sha256:3797ed9d5f7e094d9193ce24b420292a343648cef03d279846327a14821205a5",
+    "key": "kimi-k2-7-code-draft-capability",
+    "kind": "model-capability",
+    "revision": "1"
+  },
+  "max_output_tokens": 32768,
+  "modality": "multimodal",
+  "model_family": "kimi-k2-7-code",
+  "schema_version": "1"
+}

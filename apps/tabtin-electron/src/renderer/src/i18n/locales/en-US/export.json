@@ -1,0 +1,23 @@
+{
+  "errors": {
+    "loadStatsFailed": "Failed to load export stats",
+    "exportFailed": "Export failed, please try again"
+  },
+  "success": {
+    "exported": "Exported {{filename}}",
+    "showInFolder": "Show in Folder"
+  },
+  "stats": {
+    "sampledHint": "Stats are sampled estimates; the actual export includes all {{total}} selected records"
+  },
+  "apiErrors": {
+    "exportFailedWithStatus": "Export failed: HTTP {{status}}",
+    "unsupportedFormat": "Unsupported export format: {{format}}",
+    "unsupportedResponseType": "Unsupported response data type: {{type}}",
+    "downloadBlobRequired": "downloadFile expects a Blob, but received: {{type}}",
+    "filenameRequired": "filename must be a non-empty string, but received: {{type}}"
+  },
+  "filename": {
+    "defaultTableName": "table"
+  }
+}

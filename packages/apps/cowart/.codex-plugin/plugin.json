@@ -1,0 +1,14 @@
+{
+  "id": "cowart",
+  "name": "Cowart",
+  "description": "Official Personal Plugin for a local infinite canvas, visual planning, and annotation-guided image workflows.",
+  "version": "0.1.2",
+  "scripts": ["start-canvas.sh", "start-mcp.sh"],
+  "localServices": [
+    {
+      "id": "canvas",
+      "command": "bash ./scripts/start-canvas.sh",
+      "url": "http://127.0.0.1:43217/"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "errors": {
+    "loadStatsFailed": "Exportstatistiken konnten nicht geladen werden",
+    "exportFailed": "Der Export ist fehlgeschlagen. Bitte versuchen Sie es erneut"
+  },
+  "success": {
+    "exported": "Exportiert {{filename}}",
+    "showInFolder": "Im Ordner anzeigen"
+  },
+  "stats": {
+    "sampledHint": "Statistiken sind Stichprobenschätzungen; Der eigentliche Export umfasst alle {{total}} ausgewählten Datensätze"
+  },
+  "apiErrors": {
+    "exportFailedWithStatus": "Export fehlgeschlagen: HTTP {{status}}",
+    "unsupportedFormat": "Nicht unterstütztes Exportformat: {{format}}",
+    "unsupportedResponseType": "Nicht unterstützter Antwortdatentyp: {{type}}",
+    "downloadBlobRequired": "downloadFile erwartet einen Blob, hat aber Folgendes erhalten: {{type}}",
+    "filenameRequired": "Dateiname muss eine nicht leere Zeichenfolge sein, aber empfangen wird: {{type}}"
+  },
+  "filename": {
+    "defaultTableName": "Tisch"
+  }
+}

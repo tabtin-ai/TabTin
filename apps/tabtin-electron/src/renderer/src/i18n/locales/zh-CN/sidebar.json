@@ -1,0 +1,177 @@
+{
+  "primaryNav": {
+    "newTask": "新任务",
+    "apps": "工作台",
+    "automation": "自动化",
+    "importData": "导入数据",
+    "importDataDetected": "导入数据（检测到可导入的历史）",
+    "externalHistory": "外部历史",
+    "agents": "AI 分身",
+    "skills": "技能和连接器",
+    "collaboration": "协作",
+    "messages": "消息"
+  },
+  "rail": {
+    "tasks": "任务",
+    "messages": "消息",
+    "cloudDocs": "云文档",
+    "projects": "项目",
+    "more": "更多",
+    "customerSupport": "客服",
+    "customerSupportTitle": "联系客服",
+    "customerSupportHint": "微信扫码添加企业微信",
+    "customerSupportQrAlt": "企业微信客服二维码"
+  },
+  "cloudDocs": {
+    "browse": {
+      "label": "云文档浏览",
+      "all": "全部",
+      "recent": "最近",
+      "shared": "分享给我",
+      "recentHint": "按访问时间排序的历史记录，不限于当前是否还开着",
+      "sharedHint": "他人分享给你的文档、表格与文件"
+    },
+    "openTabs": {
+      "label": "当前打开",
+      "count": "{{count}}",
+      "close": "关闭 {{title}}",
+      "hint": "正在编辑区打开的文档、表格与文件"
+    },
+    "tree": {
+      "empty": "还没有文档或表格",
+      "emptyFolder": "内无页面",
+      "searchPlaceholder": "搜索文档与表格…",
+      "searchResults": "搜索结果",
+      "newChildDoc": "新建子文档",
+      "newChildTable": "新建子表格",
+      "moveTo": "移动到…",
+      "foldersRetired": "已改用文档/表格树，不再支持新建文件夹",
+      "loadingChildren": "加载中…",
+      "maxNestingDepth": "最多嵌套 4 层，无法继续添加子文档"
+    }
+  },
+  "appHome": {
+    "aiAgents": "AI 分身",
+    "aiAgentsSubtitle": "管理组织内的 AI 分身：新建、改名、设定人设与技能携带集。",
+    "skillLibrary": "技能和连接器",
+    "collaborationSubtitle": "选择一个 Project 进入团队协作；任务、资产和讨论都按 Project 分开。"
+  },
+  "filter": "筛选...",
+  "personalOrganization": "个人",
+  "emptyTables": "暂无表格",
+  "emptyHint": "进入工作空间后创建表格",
+  "actions": {
+    "agentOrganization": "工作空间",
+    "shellTest": "Shell 测试",
+    "taskExecution": "任务执行"
+  },
+  "plugins": {
+    "taskExecution": {
+      "description": "手动输入 Schema 的直接执行模式"
+    }
+  },
+  "tooltips": {
+    "collapse": "收起侧边栏 (⌘B)",
+    "expand": "展开侧边栏 (⌘B)",
+    "newAgent": "新建工作空间"
+  },
+  "theme": {
+    "lightToggle": "浅色模式 (点击切换)",
+    "darkToggle": "深色模式 (点击切换)",
+    "systemToggle": "跟随系统 (点击切换)",
+    "light": "浅色模式",
+    "dark": "深色模式",
+    "system": "跟随系统"
+  },
+  "search": {
+    "tooltip": "搜索 (⌘K)"
+  },
+  "organizationFallback": "组织",
+  "loadingOrganizations": "加载组织...",
+  "loadingAgents": "正在加载工作空间...",
+  "personalIdentity": "个人身份",
+  "teamGroup": "组织",
+  "newTeam": "创建组织",
+  "newOrganization": "新建组织",
+  "personalSettings": "个人设置",
+  "organizationSettings": "组织设置",
+  "memberManagement": "成员管理",
+  "loadFailed": "加载失败",
+  "deviceOnline": "在线",
+  "deviceBusy": "忙碌",
+  "deviceOffline": "离线",
+  "deviceLocal": "本机",
+  "deviceDraining": "暂停接单",
+  "deviceUnknown": "状态未知",
+  "unknownDevice": "未知设备",
+  "unboundDevice": "未绑定执行设备",
+  "deviceNeedsWorkspace": "需先在该设备创建 Workspace",
+  "sharedFrom": "来自 {{name}} 的共享",
+  "memo": "碎片笔记",
+  "moreAgents": "更多工作空间...",
+  "filterAgents": "筛选工作空间...",
+  "currentWorkspace": "当前工作空间",
+  "pinAgent": "固定工作空间",
+  "unpinAgent": "取消固定",
+  "workingDirMeta": "执行根：{{name}}",
+  "workingDirTitle": "工作目录：{{dir}}",
+  "tabConversations": "任务",
+  "tabDesktop": "应用",
+  "tabMessages": "消息",
+  "aiAvatars": "AI 分身",
+  "skillLibrary": "技能和连接器",
+  "mainNav": {
+    "im": "私信",
+    "agent": "工作空间",
+    "memo": "记忆",
+    "me": "我的",
+    "openIMWindow": "打开私信窗口",
+    "openSettings": "打开设置",
+    "unreadLabel": "{{label}}（{{count}} 条未读）",
+    "pendingInviteLabel": "{{label}}（{{count}} 条待加入）"
+  },
+  "conversations": {
+    "title": "所有对话",
+    "back": "返回工作空间列表",
+    "new": "新任务",
+    "search": "搜索对话...",
+    "empty": "暂无对话",
+    "emptyHint": "创建工作空间开始对话",
+    "today": "今天",
+    "yesterday": "昨天",
+    "thisWeek": "本周",
+    "earlier": "更早",
+    "agentDeleted": "工作空间已删除",
+    "agentWorking": "执行中...",
+    "unread": "新回复",
+    "sharedFrom": "来自 {{name}}",
+    "selectAgent": "选择工作空间",
+    "importAgentHistory": "导入外部 Agent 历史",
+    "newTopic": "新任务",
+    "searchAgent": "搜索工作空间...",
+    "noAgents": "暂无可用工作空间",
+    "filteringAgent": "筛选: {{name}}",
+    "filteringOrganization": "筛选组织：{{name}}",
+    "clearFilter": "清除筛选",
+    "justNow": "刚刚",
+    "minutesAgo": "{{count}}分钟前",
+    "hoursAgo": "{{count}}小时前",
+    "daysAgo": "{{count}}天前",
+    "untitledSession": "{{agent}} 的对话",
+    "spaceNotFound": "该对话所属工作空间不存在或已归档",
+    "noResults": "未找到匹配的对话",
+    "noResultsHint": "尝试更换搜索词或清除筛选条件",
+    "createFailed": "创建对话失败，请重试",
+    "openFailed": "打开对话失败，请重试",
+    "personalIdentity": "个人身份"
+  },
+  "space": {
+    "emptyTitle": "开始工作",
+    "emptyHint": "创建一个工作空间、群聊或私信来开始",
+    "loginHint": "登录开始",
+    "newAgent": "新建工作空间",
+    "newGroup": "新建群聊",
+    "newDM": "发起私信"
+  },
+  "untitled": "未命名用户"
+}

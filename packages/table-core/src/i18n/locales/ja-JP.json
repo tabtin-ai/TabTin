@@ -1,0 +1,29 @@
+{
+  "apiErrors": {
+    "fetchListFailed": "レコードの取得に失敗しました",
+    "fetchDetailFailed": "レコードの詳細を取得できませんでした",
+    "createFailed": "レコードの作成に失敗しました",
+    "updateFailed": "レコードの更新に失敗しました",
+    "deleteFailed": "レコードの削除に失敗しました",
+    "bulkCreateFailed": "レコードの一括作成に失敗しました",
+    "bulkUpdateFailed": "レコードの一括更新に失敗しました",
+    "bulkDeleteFailed": "レコードの一括削除に失敗しました"
+  },
+  "logs": {
+    "fetchDetailSuccess": "取得されたレコードの詳細",
+    "createSuccess": "レコードが作成されました",
+    "bulkUpdateMissingRecord": "一括更新結果にターゲットレコードがありません",
+    "deleteSuccess": "記録が削除されました",
+    "bulkProgress": "一括操作の進行状況",
+    "bulkCreateSuccess": "一括作成が完了しました",
+    "bulkCreatePartialFailed": "一括作成が部分的に失敗しました",
+    "bulkUpdateSuccess": "一括アップデートが完了しました",
+    "bulkUpdatePartialFailed": "一括更新が部分的に失敗しました",
+    "syncViewRecordsSuccess": "同期されたレコードを表示する",
+    "syncViewRecordsFailed": "ビューレコードの同期に失敗しました",
+    "bulkDeleteSuccess": "一括削除が完了しました",
+    "bulkDeletePartialFailed": "一括削除が部分的に失敗しました",
+    "mergeIncremental": "マージされた {{count}} 増分レコード、新しいバージョン: {{version}}",
+    "removeByIds": "記録が削除されました"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "actions": {
+    "useful": "Nützlich",
+    "correct": "Richtig",
+    "forget": "Vergessen",
+    "cancel": "Abbrechen",
+    "retry": "Versuchen Sie es noch einmal",
+    "loadMore": "Mehr laden"
+  },
+  "errors": {
+    "loadFailed": "Das Laden ist fehlgeschlagen. Bitte versuchen Sie es erneut",
+    "loadMoreFailed": "Es konnten keine weiteren Dateien geladen werden. Bitte versuchen Sie es erneut",
+    "actionFailed": "Aktion fehlgeschlagen",
+    "correctFailed": "Korrektur fehlgeschlagen",
+    "exportFailed": "Der Export ist fehlgeschlagen"
+  },
+  "toast": {
+    "corrected": "Speicher korrigiert"
+  },
+  "types": {
+    "about_you": "Über dich",
+    "insight": "Einblick",
+    "task_summary": "Zusammenfassung der Zusammenarbeit",
+    "diary": "Tagebuch"
+  },
+  "emotions": {
+    "happy": "Glücklich",
+    "curious": "Neugierig",
+    "frustrated": "Frustriert",
+    "relieved": "Erleichtert",
+    "surprised": "Überrascht",
+    "reflective": "Reflektierend",
+    "neutral": "Hinweis"
+  },
+  "time": {
+    "justNow": "Gerade eben",
+    "minutesAgo": "Vor {{count}} Minuten",
+    "hoursAgo": "Vor {{count}} h",
+    "daysAgo": "Vor {{count}} d",
+    "today": "Heute",
+    "yesterday": "Gestern"
+  },
+  "importanceTitle": "Bedeutung {{count}}",
+  "exportDoc": {
+    "title": "{{name}}s Erinnerungen",
+    "organization": "Organisation: {{name}}",
+    "exportedAt": "Exportiert: {{time}}",
+    "count": "{{count}} Speicher insgesamt",
+    "importanceLabel": "Bedeutung"
+  },
+  "diary": {
+    "title": "{{name}}s Wachstumsprotokoll",
+    "subtitle": "Was sie bei der Zusammenarbeit mit Ihnen bemerkt haben",
+    "loadFailedTitle": "Das Wachstumsprotokoll konnte nicht geladen werden",
+    "selectAgent": "Wählen Sie einen KI-Avatar aus, um sein Wachstumsprotokoll anzuzeigen",
+    "emptyTitle": "Noch kein Wachstumsprotokoll",
+    "emptyHint": "Nach der Zusammenarbeit werden hier Arbeitstagebücher angezeigt",
+    "forgetTitle": "Hat dieser KI-Avatar diesen Eintrag vergessen?",
+    "forgetDesc": "Einmal vergessen, wird der KI-Avatar diesen Speicher nicht mehr verwenden und er wird hier nicht angezeigt. Diese Aktion kann nicht rückgängig gemacht werden."
+  },
+  "governance": {
+    "tabs": {
+      "overview": "Übersicht",
+      "records": "Alle Aufzeichnungen"
+    },
+    "filters": {
+      "all": "Alle"
+    },
+    "records": {
+      "hint": "Nachdem Sie einen Eintrag korrigiert oder vergessen haben, wird die Übersichtszusammenfassung beim nächsten Destillieren aktualisiert.",
+      "loadFailedTitle": "Speicher konnten nicht geladen werden",
+      "emptyTitle": "Dieser KI-Avatar hat noch keine Speicheraufzeichnungen",
+      "emptyHint": "Nach der Zusammenarbeit werden hier Datensätze angezeigt"
+    },
+    "forgetTitle": "Hat dieser KI-Avatar diese Erinnerung vergessen?",
+    "disabledNotice": "Die Speicheraufzeichnung ist derzeit deaktiviert. Der KI-Avatar zeichnet keine Erinnerungen mehr auf, ruft sie ab oder zeigt sie nicht mehr an. Schalten Sie es unter „Speicher“ → „Speichereinstellungen“ → „Agent Notizen machen lassen“ wieder ein.",
+    "export": {
+      "nothing": "Dieser KI-Avatar hat noch keine Erinnerungen zum Exportieren",
+      "disabledEmpty": "Die Speicheraufzeichnung ist deaktiviert, es gibt also nichts zu exportieren. Schalten Sie es unter „Speicher“ → „Speichereinstellungen“ → „Agent Notizen machen lassen“ wieder ein.",
+      "filenameMemory": "Erinnerung",
+      "done": "Exportierte {{count}}-Speicher"
+    }
+  }
+}

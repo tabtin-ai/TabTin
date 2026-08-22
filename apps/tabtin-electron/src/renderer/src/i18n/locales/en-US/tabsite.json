@@ -1,0 +1,73 @@
+{
+  "actions.create": "New Site",
+  "actions.publish": "Publish",
+  "actions.copyUrl": "Copy URL",
+  "actions.urlCopied": "URL Copied",
+  "actions.editCode": "Edit Code",
+  "actions.refresh": "Refresh",
+  "actions.rollback": "Rollback",
+  "actions.download": "Download Source",
+  "status.draft": "Draft",
+  "status.published": "Published",
+  "status.archived": "Archived",
+  "stats.views": "{{count}} views",
+  "preview.empty": "No preview yet. Publish to see your site.",
+  "preview.desktop": "Desktop Preview",
+  "preview.mobile": "Mobile Preview",
+  "sidebar.info": "Site Info",
+  "sidebar.url": "URL",
+  "sidebar.framework": "Framework",
+  "sidebar.visibility": "Visibility",
+  "sidebar.public": "Public",
+  "sidebar.private": "Private",
+  "sidebar.versions": "Version History",
+  "sidebar.noVersions": "Not published yet",
+  "version.current": "Current",
+  "error.siteNotFound": "Site not found",
+  "error.publishFailed": "Publish failed",
+  "error.noDistUrl": "Please build and upload artifacts first",
+  "error.noDistUrlHint": "Run build in TabCode or use CLI: tabtin site build",
+  "actions.publishSuccess": "Published successfully",
+  "publish.dialogTitle": "Publish Site",
+  "publish.messageLabel": "Version Note",
+  "publish.messagePlaceholder": "Describe changes in this release",
+  "empty.noSites": "No sites yet. Create your first lightweight app.",
+  "home": {
+    "assetBrowser": {
+      "newTabsite": "New Site",
+      "tabsiteEmpty": "No sites yet",
+      "tabsiteUnavailable": "TabSite unavailable",
+      "tabsite": "Sites"
+    }
+  },
+  "label": {
+    "untitled": "Untitled Site",
+    "untitledSite": "Untitled Site"
+  },
+  "dialog": {
+    "createTitle": "New Site",
+    "siteName": "Site Name",
+    "siteNamePlaceholder": "Enter site name",
+    "selectTemplate": "Choose a Template",
+    "cancel": "Cancel",
+    "create": "Create"
+  },
+  "guide": {
+    "initTitle": "Site project not initialized",
+    "initDescription": "Initialize a template project to start editing in TabCode",
+    "initButton": "Initialize Project",
+    "linkButton": "Link Existing Directory",
+    "initSuccess": "Project initialized successfully",
+    "initFailed": "Initialization failed",
+    "linkSuccess": "Directory linked",
+    "linkFailed": "Link failed",
+    "linkWarning": "No package.json found in directory",
+    "linkWarningHint": "Build may fail. Make sure this is the correct project directory."
+  },
+  "template": {
+    "blank": "Blank Site",
+    "blankDesc": "React + Vite + Tailwind, start from scratch",
+    "dashboard": "Dashboard",
+    "dashboardDesc": "Data visualization panel powered by TabData"
+  }
+}

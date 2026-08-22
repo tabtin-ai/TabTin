@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="drawer_open">Open drawer</string>
+    <string name="drawer_close">Close drawer</string>
+    <string name="account_drawer_open_menu">Open menu</string>
+    <string name="account_drawer_title">Account</string>
+    <string name="account_drawer_notifications_hint">View recent updates</string>
+    <string name="account_drawer_settings">Settings</string>
+    <string name="drawer_all_conversations">All Conversations</string>
+    <string name="drawer_agents_header">WORKSPACES</string>
+    <string name="drawer_profile">Profile</string>
+    <string name="drawer_new_agent">New Workspace</string>
+    <string name="drawer_search_placeholder">Search chats or Workspaces</string>
+    <string name="drawer_all_empty_title">No conversations yet</string>
+    <string name="drawer_all_empty_hint">Pick a Workspace from Work to start chatting</string>
+    <string name="chat_workbench">Workbench</string>
+</resources>

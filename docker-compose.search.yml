@@ -1,0 +1,77 @@
+# TabTin 统一搜索引擎本地开发栈
+#
+# 职责：提供本地 Elasticsearch 8.x（与生产阿里云 ES 托管服务同构），
+# 含 analysis-icu 插件（中文分词基础，见 PRD 4.5）。
+#
+# 启动：bash scripts/backend/fts-dev.sh up      或 docker compose -f docker-compose.search.yml up -d
+# 停止：bash scripts/backend/fts-dev.sh down    或 docker compose -f docker-compose.search.yml down
+# 日志：bash scripts/backend/fts-dev.sh logs    或 docker compose -f docker-compose.search.yml logs -f
+#
+# 健康：curl http://localhost:9200/_cluster/health
+#
+# 安全：本地禁用 xpack.security（方便开发），生产走阿里云 VPC + 账号鉴权（见 settings SEARCH_ES_HTTP_AUTH）。
+
+services:
+  elasticsearch:
+    build:
+      context: ./deployment/search
+      dockerfile: Dockerfile
+    image: tabtin-elasticsearch:8.13.4-icu
+    container_name: tabtin-elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - cluster.name=tabtin-local
+      - node.name=tabtin-es-local
+      - xpack.security.enabled=false
+      - xpack.security.enrollment.enabled=false
+      - xpack.security.http.ssl.enabled=false
+      - xpack.security.transport.ssl.enabled=false
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms512m -Xmx1g
+      - ingest.geoip.downloader.enabled=false
+      - action.destructive_requires_name=true
+    ports:
+      - "9200:9200"
+    volumes:
+      - tabtin-es-data:/usr/share/elasticsearch/data
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    mem_limit: 1500m
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+    networks:
+      - tabtin-search
+
+  # 可选：Kibana（默认注释；取消注释后 open http://localhost:5601）
+  # kibana:
+  #   image: docker.elastic.co/kibana/kibana:8.13.4
+  #   container_name: tabtin-kibana
+  #   depends_on:
+  #     elasticsearch:
+  #       condition: service_healthy
+  #   environment:
+  #     - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+  #     - xpack.security.enabled=false
+  #   ports:
+  #     - "5601:5601"
+  #   networks:
+  #     - tabtin-search
+
+networks:
+  tabtin-search:
+    name: tabtin-search
+    driver: bridge
+
+volumes:
+  tabtin-es-data:
+    name: tabtin-es-data

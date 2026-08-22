@@ -1,0 +1,151 @@
+{
+  "name": "@tabtin/agent-runtime",
+  "version": "0.1.0",
+  "description": "Unified agent execution runtime \u2014 local ReAct engine + external agent bridge",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./engine": {
+      "source": "./src/engine/index.ts",
+      "types": "./dist/engine/index.d.ts",
+      "import": "./dist/engine/index.js"
+    },
+    "./engine/message-normalizer": {
+      "source": "./src/engine/context/message-normalizer.ts",
+      "types": "./dist/engine/context/message-normalizer.d.ts",
+      "import": "./dist/engine/context/message-normalizer.js"
+    },
+    "./engine/user-context-wrapper": {
+      "source": "./src/engine/context/user-context-wrapper.ts",
+      "types": "./dist/engine/context/user-context-wrapper.d.ts",
+      "import": "./dist/engine/context/user-context-wrapper.js"
+    },
+    "./compact": {
+      "source": "./src/compact/index.ts",
+      "types": "./dist/compact/index.d.ts",
+      "import": "./dist/compact/index.js"
+    },
+    "./capability": {
+      "source": "./src/capability/index.ts",
+      "types": "./dist/capability/index.d.ts",
+      "import": "./dist/capability/index.js"
+    },
+    "./capability/native": {
+      "source": "./src/capability/native/index.ts",
+      "types": "./dist/capability/native/index.d.ts",
+      "import": "./dist/capability/native/index.js"
+    },
+    "./runtime-defaults": {
+      "source": "./src/runtime-defaults.ts",
+      "types": "./dist/runtime-defaults.d.ts",
+      "import": "./dist/runtime-defaults.js"
+    },
+    "./tools": {
+      "source": "./src/tools/index.ts",
+      "types": "./dist/tools/index.d.ts",
+      "import": "./dist/tools/index.js"
+    },
+    "./permissions": {
+      "source": "./src/permissions/index.ts",
+      "types": "./dist/permissions/index.d.ts",
+      "import": "./dist/permissions/index.js"
+    },
+    "./skills": {
+      "source": "./src/skills/index.ts",
+      "types": "./dist/skills/index.d.ts",
+      "import": "./dist/skills/index.js"
+    },
+    "./skills/workspace-skill-merge": {
+      "source": "./src/skills/workspace-skill-merge.ts",
+      "types": "./dist/skills/workspace-skill-merge.d.ts",
+      "import": "./dist/skills/workspace-skill-merge.js"
+    },
+    "./paths": {
+      "source": "./src/paths/index.ts",
+      "types": "./dist/paths/index.d.ts",
+      "import": "./dist/paths/index.js"
+    },
+    "./official-plugins": {
+      "source": "./src/official-plugins/index.ts",
+      "types": "./dist/official-plugins/index.d.ts",
+      "import": "./dist/official-plugins/index.js"
+    },
+    "./plugins": {
+      "source": "./src/plugins/index.ts",
+      "types": "./dist/plugins/index.d.ts",
+      "import": "./dist/plugins/index.js"
+    },
+    "./history": {
+      "source": "./src/history/index.ts",
+      "types": "./dist/history/index.d.ts",
+      "import": "./dist/history/index.js"
+    },
+    "./todo": {
+      "source": "./src/todo/todo-state-machine.ts",
+      "types": "./dist/todo/todo-state-machine.d.ts",
+      "import": "./dist/todo/todo-state-machine.js"
+    },
+    "./subagent-intent": {
+      "source": "./src/subagent/agent-tool-intent.ts",
+      "types": "./dist/subagent/agent-tool-intent.d.ts",
+      "import": "./dist/subagent/agent-tool-intent.js"
+    },
+    "./agent-mode-contract.json": "./agent-mode-contract.json"
+  },
+  "files": [
+    "dist",
+    "agent-mode-contract.json"
+  ],
+  "scripts": {
+    "prebuild": "node scripts/generate-worker-section.mjs",
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "check:tool-error-contract": "node scripts/check-tool-error-contract.mjs",
+    "check:tool-error-hygiene": "node scripts/check-tool-error-contract.mjs --hygiene",
+    "check:engine-layering": "node scripts/check-engine-layering.mjs",
+    "lint": "eslint src tests scripts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.1",
+    "jsdom": "29.1.0",
+    "mermaid": "11.12.3",
+    "uuid": "11.1.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@tabtin/action-tools": "workspace:*",
+    "@tabtin/agent-modes": "workspace:*",
+    "@tabtin/agent-wire": "workspace:*",
+    "@tabtin/browser-core": "workspace:*",
+    "@tabtin/file-pipeline-errors": "workspace:*",
+    "@tabtin/os-errors": "workspace:*",
+    "@tabtin/prompt-contract": "workspace:*",
+    "@tabtin/safe-fs": "workspace:*",
+    "@tabtin/security-policy": "workspace:*",
+    "@tabtin/terminal-core": "workspace:*",
+    "@tabtin/ws-gateway-client": "workspace:*",
+    "@types/js-yaml": "^4.0.9",
+    "@types/jsdom": "28.0.1",
+    "@types/node": "^20.0.0",
+    "sharp": "0.34.5",
+    "typescript": "5.7.2",
+    "vitest": "^1.6.1"
+  },
+  "peerDependencies": {
+    "sharp": "0.34.5"
+  },
+  "peerDependenciesMeta": {
+    "sharp": {
+      "optional": true
+    }
+  }
+}

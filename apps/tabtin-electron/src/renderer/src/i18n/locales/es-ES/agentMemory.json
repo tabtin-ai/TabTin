@@ -1,0 +1,84 @@
+{
+  "actions": {
+    "useful": "Útil",
+    "correct": "Correcto",
+    "forget": "olvidar",
+    "cancel": "Cancelar",
+    "retry": "Reintentar",
+    "loadMore": "Cargar más"
+  },
+  "errors": {
+    "loadFailed": "No se pudo cargar, por favor vuelva a intentarlo",
+    "loadMoreFailed": "No se pudo cargar más, vuelva a intentarlo",
+    "actionFailed": "La acción falló",
+    "correctFailed": "No se pudo corregir",
+    "exportFailed": "Exportación fallida"
+  },
+  "toast": {
+    "corrected": "Memoria corregida"
+  },
+  "types": {
+    "about_you": "Sobre ti",
+    "insight": "Perspectiva",
+    "task_summary": "Resumen de colaboración",
+    "diary": "diario"
+  },
+  "emotions": {
+    "happy": "feliz",
+    "curious": "curioso",
+    "frustrated": "frustrado",
+    "relieved": "aliviado",
+    "surprised": "Sorprendido",
+    "reflective": "Reflectante",
+    "neutral": "Nota"
+  },
+  "time": {
+    "justNow": "Justo ahora",
+    "minutesAgo": "{{count}} hace minutos",
+    "hoursAgo": "Hace {{count}}h",
+    "daysAgo": "Hace {{count}} d",
+    "today": "hoy",
+    "yesterday": "ayer"
+  },
+  "importanceTitle": "Importancia {{count}}",
+  "exportDoc": {
+    "title": "Los recuerdos de {{name}}",
+    "organization": "Organización: {{name}}",
+    "exportedAt": "Exportado: {{time}}",
+    "count": "{{count}} recuerdos totales",
+    "importanceLabel": "Importancia"
+  },
+  "diary": {
+    "title": "Registro de crecimiento de {{name}}",
+    "subtitle": "Lo que notaron mientras trabajaban contigo",
+    "loadFailedTitle": "No se pudo cargar el registro de crecimiento",
+    "selectAgent": "Seleccione un avatar de IA para ver su registro de crecimiento",
+    "emptyTitle": "Aún no hay registro de crecimiento",
+    "emptyHint": "Después de colaborar, los diarios de trabajo aparecerán aquí.",
+    "forgetTitle": "¿Este avatar de IA ha olvidado esta entrada?",
+    "forgetDesc": "Una vez olvidado, el avatar de IA no volverá a utilizar esta memoria y no aparecerá aquí. Esta acción no se puede deshacer."
+  },
+  "governance": {
+    "tabs": {
+      "overview": "Descripción general",
+      "records": "Todos los registros"
+    },
+    "filters": {
+      "all": "Todos"
+    },
+    "records": {
+      "hint": "Después de corregir u olvidar una entrada, el resumen general se actualiza en el siguiente destilado.",
+      "loadFailedTitle": "No se pudieron cargar los recuerdos",
+      "emptyTitle": "Este avatar de IA aún no tiene registros de memoria.",
+      "emptyHint": "Los registros aparecerán aquí después de colaborar."
+    },
+    "forgetTitle": "¿Este avatar de IA ha olvidado este recuerdo?",
+    "disabledNotice": "La grabación de memoria está actualmente desactivada. El avatar de IA ya no graba, recuerda ni muestra recuerdos. Vuelva a activarlo en Memoria → Preferencias de memoria → Permitir que el Agente tome notas.",
+    "export": {
+      "nothing": "Este avatar de IA aún no tiene recuerdos para exportar",
+      "disabledEmpty": "La grabación de memoria está desactivada, por lo que no hay nada que exportar. Vuelva a activarlo en Memoria → Preferencias de memoria → Permitir que el Agente tome notas.",
+      "filenameMemory": "memoria",
+      "done": "Memorias {{count}} exportadas"
+    }
+  }
+}

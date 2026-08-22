@@ -1,0 +1,18 @@
+{
+  "name": "hard-break",
+  "description": "Hard line break within a paragraph (D4 decision)",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          { "type": "text", "text": "Line 1" },
+          { "type": "hardBreak" },
+          { "type": "text", "text": "Line 2" }
+        ]
+      }
+    ]
+  },
+  "expectedMarkdown": "Line 1  \nLine 2"
+}

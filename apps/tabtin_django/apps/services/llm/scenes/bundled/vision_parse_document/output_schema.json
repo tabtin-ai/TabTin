@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "required": ["blocks"],
+  "properties": {
+    "blocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "content", "bbox"],
+        "properties": {
+          "type": { "type": "string", "enum": ["heading", "paragraph", "table", "image", "list", "field", "note"] },
+          "content": { "type": "string" },
+          "bbox": { "type": "array", "items": { "type": "number" }, "minItems": 4, "maxItems": 4 },
+          "heading_level": { "type": ["integer", "null"] },
+          "children": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": { "type": "string" },
+                "value": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

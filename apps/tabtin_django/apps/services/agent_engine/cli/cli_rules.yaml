@@ -1,0 +1,111 @@
+# CLI 治理层默认规则集（PRD-v3 §5.1 第 3 项）
+#
+# ⚠️ 适用范围收窄：tabtin 自家命令的风险档 SSoT 是 Go CommandDef.Risk
+# （经 scripts/gen-tabtin-cli-risk.mjs 生成 tabtin_command_risk.generated.json，
+# parser 优先查表）。本 yaml 对 tabtin 命令仅作 fallback（新命令未复跑 codegen /
+# 生成表不可用时），主要服务：marketplace App 独立 binary、未登记 domain.verb、
+# 解析兜底。给 tabtin 命令改风险档请改 Go 侧 CommandDef.Risk 并复跑 codegen，
+# 不要在这里加规则。
+#
+# Schema：
+# - version: 数值，bumps when 规则结构破坏性变更
+# - rules: 列表，按顺序匹配（命中即停 / first-match-wins）
+#   - pattern:    "<domain>.<verb>"，支持通配符 "*"
+#   - risk_level: "safe" | "review" | "strict"
+#   - reason:     可选，便于审计日志反查
+# - default:     兜底 risk_level（解析成功但无规则命中时使用）
+#
+# 词表与 apps.capabilities.models.RiskLevel 三档完全对齐（K8 决议）。
+# 任何修改必须同步：
+#   1. apps/services/agent_engine/cli/spec.py 的 RISK_LEVELS 常量
+#   2. apps/capabilities/models.py 的 RiskLevel.CHOICES
+#   3. 前端 RiskLevel 类型（Wave B-B2 收口删除 'low' 兼容路径后）
+
+version: 1
+
+rules:
+  # ──── 通配符默认策略 ────
+  # 任何 App 的删除动作触发 HITL
+  - pattern: "*.delete"
+    risk_level: review
+    reason: "删除动作可能不可逆，HITL 确认"
+
+  - pattern: "*.archive"
+    risk_level: review
+    reason: "归档动作改变可见性，HITL 确认"
+
+  # 生产环境写动作强制阻断（命名约定 verb 后缀 _in_prod）
+  - pattern: "*.create_in_prod"
+    risk_level: strict
+    reason: "生产环境写动作强制 HITL 阻断"
+
+  - pattern: "*.deploy_in_prod"
+    risk_level: strict
+    reason: "生产部署强制 HITL 阻断"
+
+  # 一般创建动作直通
+  - pattern: "*.create"
+    risk_level: safe
+    reason: "非生产创建动作直通"
+
+  # 查询/列表类直通
+  - pattern: "*.query"
+    risk_level: safe
+    reason: "查询类直通"
+
+  - pattern: "*.list"
+    risk_level: safe
+    reason: "列表类直通"
+
+  - pattern: "*.read"
+    risk_level: safe
+    reason: "读取类直通"
+
+  - pattern: "*.info"
+    risk_level: safe
+    reason: "查看详情类直通"
+
+  - pattern: "*.search"
+    risk_level: safe
+    reason: "搜索类直通"
+
+  - pattern: "*.status"
+    risk_level: safe
+    reason: "状态查询直通"
+
+  # ──── tabtin phone（Android 真机/模拟器， CLI-first）────
+  # 读类直通；连接/模拟器起停/镜像/操控/导入走 review（与原 FC riskLevel 对齐）
+  - pattern: "phone.list-devices"
+    risk_level: safe
+    reason: "设备列表只读"
+
+  - pattern: "phone.list-emulators"
+    risk_level: safe
+    reason: "AVD 列表只读"
+
+  - pattern: "phone.screenshot"
+    risk_level: safe
+    reason: "设备截屏只读（adb screencap）"
+
+  - pattern: "phone.sms"
+    risk_level: safe
+    reason: "短信读取只读"
+
+  - pattern: "phone.contacts"
+    risk_level: safe
+    reason: "通讯录读取只读"
+
+  - pattern: "phone.call-log"
+    risk_level: safe
+    reason: "通话记录读取只读"
+
+  - pattern: "phone.photos"
+    risk_level: safe
+    reason: "相册浏览只读"
+
+  - pattern: "phone.*"
+    risk_level: review
+    reason: "设备连接/模拟器起停/镜像/触控输入/媒体导入改变设备状态，HITL 确认"
+
+# 解析成功但所有规则都未命中时的兜底（PRD §5.1 第 3 项默认策略表第 7 行）
+default: review

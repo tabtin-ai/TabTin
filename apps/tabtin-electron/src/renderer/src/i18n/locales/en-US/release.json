@@ -1,0 +1,42 @@
+{
+  "saga": {
+    "in_progress": "Bulk operation in progress…",
+    "failed": "Bulk operation failed and has been rolled back",
+    "completed": "Bulk operation completed",
+    "partial": "Bulk operation partially completed ({{success}}/{{total}})",
+    "timeout": "Bulk operation timed out. Please verify results before retrying."
+  },
+  "a3": {
+    "disabled": "Update-by-filter (A3) is disabled",
+    "enabled": "Update-by-filter (A3) is enabled"
+  },
+  "c1": {
+    "restore_disabled": "Field undo/restore has been temporarily disabled by admin. Please use Version History to recover."
+  },
+  "grayscale": {
+    "enrolled": "This organization has been enrolled in the {{feature}} beta",
+    "unenrolled": "This organization has been removed from the {{feature}} beta"
+  },
+  "incident": {
+    "title": "[{{severity}}] {{service}} Service Incident",
+    "body": "Impact: {{scope}}. Started at: {{startTime}}. Our team is actively investigating.",
+    "update": "[Update] {{service}}: {{message}}",
+    "resolution": "Incident resolved. Duration: {{duration}}. Root cause: {{rootCause}}. Follow-up improvements have been scheduled."
+  },
+  "maintenance": {
+    "start": "Scheduled maintenance begins at {{time}}, expected duration {{duration}}. Some features may be unavailable.",
+    "end": "Scheduled maintenance is complete. All services are back to normal."
+  },
+  "changelog": {
+    "title": "Changelog",
+    "version": "Version {{version}}",
+    "newFeatures": "New Features",
+    "improvements": "Improvements",
+    "bugFixes": "Bug Fixes"
+  },
+  "notification": {
+    "dismiss": "Got it",
+    "learnMore": "Learn more",
+    "doNotShowAgain": "Don't show again"
+  }
+}

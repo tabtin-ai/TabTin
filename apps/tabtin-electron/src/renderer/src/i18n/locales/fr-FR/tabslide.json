@@ -1,0 +1,984 @@
+{
+  "title": "Présentation TabSlide",
+  "untitled": "Présentation sans titre",
+  "preset": {
+    "ppt": "Présentation (1920×1080)",
+    "xiaohongshu": "Note Xiaohongshu (1080 × 1440)",
+    "poster": "Affiche",
+    "custom": "Taille personnalisée"
+  },
+  "toolbar": {
+    "font": "Police",
+    "fontSize": "Taille de la police",
+    "fontColor": "Couleur du texte",
+    "bold": "Audacieux",
+    "italic": "Italique",
+    "underline": "Souligner",
+    "strikethrough": "Barré",
+    "link": "Lien",
+    "alignLeft": "Aligner à gauche",
+    "alignCenter": "Centre",
+    "alignRight": "Aligner à droite",
+    "alignJustify": "Justifier",
+    "lineHeight": "Hauteur de ligne",
+    "letterSpacing": "Espacement des lettres",
+    "bulletList": "Liste à puces",
+    "orderedList": "Liste numérotée",
+    "indent": "Augmenter le retrait",
+    "outdent": "Diminuer le retrait",
+    "superscript": "Exposant",
+    "subscript": "Indice",
+    "backgroundColor": "Mettre en surbrillance",
+    "themeColor": "Couleur du thème"
+  },
+  "font": {
+    "default": "Par défaut",
+    "system": "Polices système",
+    "document": "Documenter",
+    "chinese": "Chinois",
+    "sansSerif": "Sans empattements",
+    "serif": "Serif",
+    "monospace": "Monospace"
+  },
+  "color": {
+    "default": "Par défaut",
+    "themeColors": "Couleurs du thème",
+    "textColors": "Couleurs du texte",
+    "highlightColors": "Couleurs de surbrillance",
+    "red": "Rouge",
+    "orange": "Orange",
+    "yellow": "Jaune",
+    "green": "Vert",
+    "blue": "Bleu",
+    "purple": "Violet",
+    "pink": "Rose",
+    "gray": "Gris",
+    "black": "Noir",
+    "white": "Blanc",
+    "none": "Aucun",
+    "dark1": "Sombre 1",
+    "light1": "Lumière 1",
+    "accent1": "Accent 1",
+    "accent2": "Accent 2",
+    "accent3": "Accent 3",
+    "accent4": "Accent 4",
+    "accent5": "Accent 5",
+    "accent6": "Accent 6",
+    "dark2": "Sombre 2",
+    "light2": "Lumière 2",
+    "background1": "Contexte 1",
+    "background2": "Contexte 2",
+    "text1": "Texte 1",
+    "text2": "Texte 2"
+  },
+  "link": {
+    "placeholder": "https://... ou page-2",
+    "confirm": "Confirmer",
+    "remove": "Supprimer"
+  },
+  "letterSpacing": {
+    "default": "Par défaut",
+    "tight": "Serré"
+  },
+  "canvas": {
+    "zoomIn": "Zoomer",
+    "zoomOut": "Zoom arrière",
+    "fitToScreen": "Ajuster à l'écran",
+    "fit": "Ajustement",
+    "reset100": "Réinitialiser à 100 %",
+    "noData": "Aucune donnée de diapositive disponible",
+    "dropImage": "Déposer pour insérer une image"
+  },
+  "versionHistory": "Historique des versions",
+  "slideshow": {
+    "prev": "Précédent",
+    "next": "Suivant",
+    "exit": "Quitter le diaporama",
+    "start": "Présent",
+    "endTitle": "Fin de la présentation",
+    "endSubtitle": "Cliquez n'importe où ou appuyez sur ESC pour quitter",
+    "hintNavigate": "Parcourir les diapositives",
+    "hintNext": "Étape suivante",
+    "hintExit": "Quitter",
+    "autoplayRestricted": "Lecture automatique restreinte",
+    "autoplayMuted": "Lecture automatique en sourdine",
+    "clickToPlay": "Cliquez pour jouer",
+    "unmute": "Activer le son"
+  },
+  "image": {
+    "crop": "Recadrer",
+    "cropCircle": "Recadrer en cercle",
+    "removeCrop": "Supprimer le recadrage",
+    "replace": "Remplacer l'image",
+    "delete": "Supprimer",
+    "confirm": "Confirmer",
+    "cancel": "Annuler",
+    "reset": "Réinitialiser",
+    "loadFailed": "L'image n'a pas pu être chargée"
+  },
+  "export": {
+    "title": "Exporter",
+    "format": "Format d'exportation",
+    "pptx": "Exporter en PPTX",
+    "pdf": "Exporter au format PDF",
+    "image": "Images",
+    "images": "Exporter sous forme d'images",
+    "exporting": "Exportation...",
+    "success": "Exportation réussie",
+    "failed": "Échec de l'exportation"
+  },
+  "import": {
+    "title": "Importer",
+    "pptx": "Importer PPTX",
+    "importing": "Importation...",
+    "success": "Importation réussie",
+    "failed": "Échec de l'importation"
+  },
+  "label": {
+    "user": "Utilisateur"
+  },
+  "host": {
+    "loading": "Chargement de la présentation...",
+    "reload": "Recharger",
+    "preset": {
+      "title": "Créer une présentation",
+      "description": "Choisissez un rapport de canevas pour démarrer ou importez un fichier PPTX existant.",
+      "or": "ou",
+      "importButton": "Importer le fichier PPTX",
+      "option": {
+        "widescreen": {
+          "label": "Écran large 16:9",
+          "description": "1920 × 1080"
+        },
+        "classic": {
+          "label": "4:3 Classique",
+          "description": "1024 × 768"
+        },
+        "xiaohongshu": {
+          "label": "Xiaohongshu",
+          "description": "1080 × 1440"
+        }
+      }
+    },
+    "importing": {
+      "title": "Importation du fichier PPTX...",
+      "description": "Analyse du contenu de la diapositive, veuillez patienter."
+    },
+    "import": {
+      "successWithStats": "Importé avec succès : diapositives {{slides}}, éléments {{elements}}.",
+      "failedWithReason": "Échec de l'importation : {{reason}}"
+    },
+    "export": {
+      "failedWithReason": "Échec de l'exportation : {{reason}}"
+    },
+    "exportWarning": {
+      "imagePlaceholderFallback": "Les images distantes {{count}} n'ont pas pu être intégrées et ont été remplacées par des espaces réservés.",
+      "imageProxyFailed": "Le proxy d'image a échoué pour les images {{count}} ; ils peuvent apparaître vides dans le PPTX exporté.",
+      "imageProxyNormalized": "La normalisation du proxy d'origine croisée a réussi pour les images distantes {{count}}.",
+      "imageRasterizeFailed": "Les images {{count}} n'ont pas pu être rastérisées et ont été remplacées par des espaces réservés."
+    },
+    "error": {
+      "saveMissingContext": "L'enregistrement a échoué. En attente de récupération du contexte de l'organisation/de l'agent...",
+      "saveRetryExceeded": "L'enregistrement a échoué après le nombre maximal de tentatives. Veuillez vérifier votre réseau et actualiser.",
+      "loadFailedRetry": "Échec du chargement. Veuillez actualiser et réessayer.",
+      "uploadEmptyUrl": "Le téléchargement a réussi, mais aucune URL d'image n'a été renvoyée.",
+      "uploadValidation": "Échec de la validation du fichier : type non pris en charge ou taille dépassée.",
+      "imageTooLarge": "Le fichier image est trop volumineux (max {{maxSize}})",
+      "imageTypeNotSupported": "Format d'image non pris en charge.",
+      "imageUploadFallback": "Image insérée. Sera téléchargé automatiquement une fois en ligne.",
+      "imageLoadFailed": "Échec du chargement de l'image."
+    },
+    "reupload": {
+      "success": "{{count}} image(s) hors ligne téléchargée(s) sur le cloud",
+      "failed": "{{count}} Les images hors ligne n'ont pas pu être téléchargées. Nous réessayerons la prochaine fois.",
+      "partialFailed": "{{success}} image(s) téléchargée(s), {{failed}} a échoué"
+    },
+    "longOfflineWarning": "Vous êtes hors ligne depuis longtemps",
+    "longOfflineWarningDesc": "Nous vous recommandons de vérifier la cohérence du contenu de votre présentation. Les modifications effectuées hors ligne ont été automatiquement fusionnées.",
+    "versionRestored": "Version restaurée avec succès",
+    "versionRestoreFailed": "Échec de la restauration de la version",
+    "collabSyncWarning": "Version restaurée, mais certains collaborateurs en ligne peuvent ne pas être synchronisés. Veuillez leur demander d'actualiser la page.",
+    "versionMigrationNotice": "Les anciennes versions sont en cours de migration et peuvent temporairement ne pas être visibles",
+    "storeFailedWarning": "Échec de l'enregistrement du contenu, veuillez vérifier votre connexion réseau",
+    "concurrentEditWarning": "Un autre collaborateur est également en train de modifier cet élément, les modifications peuvent être écrasées"
+  },
+  "history": {
+    "title": "Historique des versions",
+    "restore": "Restaurer cette version",
+    "createVersion": "Créer une version nommée",
+    "versionName": "Nom de la version",
+    "unnamed": "Version sans nom",
+    "restoreSuccess": "Version restaurée avec succès",
+    "restoreFailed": "Échec de la restauration de la version"
+  },
+  "error": {
+    "projectNotFound": "Présentation introuvable",
+    "loadFailed": "Échec du chargement",
+    "saveFailed": "Échec de l'enregistrement",
+    "versionConflict": "Conflit de version, veuillez actualiser et réessayer",
+    "exportFailed": "Échec de l'exportation",
+    "importFailed": "Échec de l'importation"
+  },
+  "message": {
+    "saved": "Enregistré",
+    "saving": "Sauvegarde...",
+    "autoSave": "Sauvegarde automatique",
+    "unsavedChanges": "Modifications non enregistrées",
+    "editing": "Édition",
+    "saveError": "Échec de l'enregistrement"
+  },
+  "common": {
+    "cancel": "Annuler",
+    "delete": "Supprimer"
+  },
+  "file": {
+    "title": "Fichier",
+    "importPptx": "Importer PPTX",
+    "exportPptx": "Exporter en PPTX",
+    "exportPdf": "Exporter au format PDF",
+    "versionHistory": "Historique des versions"
+  },
+  "page": {
+    "title": "Pages",
+    "totalCount": "{{count}} pages au total",
+    "addFirst": "Ajouter la première page",
+    "addAfterCurrent": "Ajouter une nouvelle page après la page actuelle",
+    "expandList": "Développer la liste des pages",
+    "dropHere": "Déposez ici",
+    "insertHere": "Insérer la diapositive ici",
+    "context": {
+      "duplicateCurrent": "Dupliquer la page actuelle",
+      "addAfter": "Ajouter une page après",
+      "addRemark": "Ajouter une remarque",
+      "copyToClipboard": "Copier dans le presse-papier",
+      "cut": "Page coupée",
+      "pasteAfter": "Coller après cette page",
+      "delete": "Supprimer la page"
+    },
+    "deleteConfirm": {
+      "title": "Supprimer la page {{index}} ?",
+      "desc": "Cette page a du contenu. Vous pouvez le récupérer via Annuler (Ctrl/Cmd+Z)."
+    },
+    "addSlide": "Ajouter une diapositive"
+  },
+  "align": {
+    "left": "Aligner à gauche",
+    "horizontalCenter": "Aligner le centre horizontal",
+    "right": "Aligner à droite",
+    "top": "Aligner en haut",
+    "verticalCenter": "Aligner le centre vertical",
+    "bottom": "Aligner en bas",
+    "distributeH": "Répartir horizontalement",
+    "distributeV": "Distribuer verticalement",
+    "enableSmartGuides": "Activer la capture de guide intelligent",
+    "disableSmartGuides": "Désactiver la capture du guide intelligent",
+    "enableGridSnap": "Activer l'accrochage à la grille",
+    "disableGridSnap": "Désactiver l'accrochage à la grille",
+    "showGrid": "Afficher la grille",
+    "hideGrid": "Masquer la grille",
+    "tidyUp": "Ranger"
+  },
+  "contextMenu": {
+    "copy": "Copier",
+    "cut": "Couper",
+    "paste": "Coller",
+    "duplicate": "Dupliquer",
+    "selectAll": "Tout sélectionner",
+    "layer": "Calque",
+    "bringToFront": "Mettre au premier plan",
+    "bringForward": "Faire avancer",
+    "sendBackward": "Envoyer en arrière",
+    "sendToBack": "Envoyer à l'arrière",
+    "group": "Groupe",
+    "ungroup": "Dissocier",
+    "lock": "Verrouiller",
+    "unlock": "Déverrouiller",
+    "lockSelected": "Verrouillage sélectionné",
+    "unlockSelected": "Déverrouiller la sélection",
+    "show": "Afficher",
+    "hide": "Masquer",
+    "showSelected": "Afficher la sélection",
+    "hideSelected": "Masquer la sélection",
+    "delete": "Supprimer",
+    "align": "Aligner"
+  },
+  "moveable": {
+    "partialLocked": "Certains éléments sont verrouillés"
+  },
+  "animation": {
+    "title": "Animations",
+    "add": "Ajouter une animation",
+    "empty": "Sélectionnez un élément, puis ajoutez un effet d'animation.",
+    "emptyWithSelection": "Sélectionnez un effet avec '+ Ajouter une animation' pour animer les éléments sélectionnés.",
+    "delete": "Supprimer l'animation",
+    "elementDeleted": "(Supprimé)",
+    "effect": {
+      "fadeIn": "Fondu entrant",
+      "fadeInDown": "Fondu entrant vers le bas",
+      "fadeInUp": "Fondu entrant",
+      "fadeInLeft": "Fondu entrant à gauche",
+      "fadeInRight": "Fondu entrant à droite",
+      "zoomIn": "Zoomer",
+      "zoomInDown": "Zoom avant vers le bas",
+      "zoomInUp": "Zoomer vers le haut",
+      "zoomInLeft": "Zoomer à gauche",
+      "zoomInRight": "Zoomer à droite",
+      "bounceIn": "Rebondir",
+      "bounceInDown": "Rebondir vers le bas",
+      "bounceInUp": "Rebondir",
+      "bounceInLeft": "Rebondir à gauche",
+      "bounceInRight": "Rebondir à droite",
+      "slideInDown": "Glissez vers le bas",
+      "slideInUp": "Glissez vers le haut",
+      "slideInLeft": "Glisser vers la gauche",
+      "slideInRight": "Glisser vers la droite",
+      "rotateIn": "Rotation vers l'intérieur",
+      "rotateInDownLeft": "Faire pivoter vers le bas à gauche",
+      "rotateInDownRight": "Faire pivoter vers le bas à droite",
+      "rotateInUpLeft": "Faire pivoter vers le haut à gauche",
+      "rotateInUpRight": "Faire pivoter vers la droite",
+      "flipInX": "Retourner en X",
+      "flipInY": "Retourner Y",
+      "backInDown": "De retour en bas",
+      "backInUp": "De retour",
+      "backInLeft": "De retour à gauche",
+      "backInRight": "De retour à droite",
+      "lightSpeedInRight": "Vitesse de la lumière à droite",
+      "lightSpeedInLeft": "Vitesse de la lumière à gauche",
+      "fadeOut": "Fondu",
+      "fadeOutDown": "Fondu vers le bas",
+      "fadeOutUp": "Fondu vers le haut",
+      "fadeOutLeft": "Fondu à gauche",
+      "fadeOutRight": "Fondu à droite",
+      "zoomOut": "Zoom arrière",
+      "zoomOutDown": "Zoom arrière vers le bas",
+      "zoomOutUp": "Zoom arrière vers le haut",
+      "zoomOutLeft": "Zoom arrière à gauche",
+      "zoomOutRight": "Zoom arrière à droite",
+      "bounceOut": "Rebondir",
+      "bounceOutDown": "Rebondir vers le bas",
+      "bounceOutUp": "Rebondir",
+      "bounceOutLeft": "Rebondir à gauche",
+      "bounceOutRight": "Rebondissez à droite",
+      "slideOutDown": "Glisser vers le bas",
+      "slideOutUp": "Glisser vers le haut",
+      "slideOutLeft": "Glisser vers la gauche",
+      "slideOutRight": "Glisser vers la droite",
+      "bounce": "Rebondir",
+      "shakeX": "Secouer X",
+      "shakeY": "Secouer Y",
+      "wobble": "Osciller",
+      "swing": "Balançoire",
+      "headShake": "Secousse de tête",
+      "jello": "Gelée",
+      "rubberBand": "Élastique",
+      "tada": "Tada",
+      "flash": "Flash",
+      "pulse": "Pouls",
+      "heartBeat": "Battement de coeur",
+      "flip": "Retourner"
+    },
+    "triggerLabel": "Déclencheur",
+    "duration": "Durée",
+    "type": {
+      "in": "Entrée",
+      "out": "Quitter",
+      "attention": "Accentuation"
+    },
+    "trigger": {
+      "click": "Au clic",
+      "meantime": "Avec le précédent",
+      "auto": "Après le précédent"
+    },
+    "group": {
+      "fade": "Fondu",
+      "zoom": "Zoomer",
+      "bounce": "Rebondir",
+      "slide": "Diapositive",
+      "rotate": "Rotation",
+      "flip": "Retourner",
+      "shake": "Secouer",
+      "other": "Autre"
+    },
+    "effectLabel": "Effet"
+  },
+  "element": {
+    "type": {
+      "text": "Texte",
+      "image": "Images",
+      "shape": "Forme",
+      "line": "Ligne",
+      "chart": "Graphique",
+      "table": "Tableau",
+      "latex": "Formule",
+      "video": "Vidéo",
+      "audio": "Audio"
+    }
+  },
+  "insert": {
+    "defaultText": "Double-cliquez pour modifier le texte",
+    "text": "Texte",
+    "image": "Médias",
+    "shape": "Forme",
+    "line": {
+      "title": "Ligne",
+      "presets": {
+        "straight": "Droit",
+        "singleArrow": "Flèche unique",
+        "doubleArrow": "Double flèche",
+        "diamondArrow": "Flèche de diamant",
+        "stealthArrow": "Flèche furtive",
+        "dotEnd": "Fin du point",
+        "dashed": "En pointillés",
+        "dashedArrow": "Flèche pointillée",
+        "dotted": "Pointillé",
+        "curve": "Courbe",
+        "broken": "Ligne brisée",
+        "broken2": "Double ligne brisée",
+        "cubic": "Courbe cubique"
+      },
+      "category": {
+        "basic": "De base",
+        "arrows": "Flèches",
+        "paths": "Chemins"
+      }
+    },
+    "table": {
+      "chooseSize": "Choisissez la taille du tableau",
+      "preview": "Tableau {{rows}} × {{cols}}",
+      "title": "Tableau"
+    },
+    "chart": {
+      "title": "Graphique",
+      "types": {
+        "bar": {
+          "label": "Graphique à barres",
+          "desc": "Comparaison des barres verticales"
+        },
+        "column": {
+          "label": "Graphique à colonnes",
+          "desc": "Comparaison des barres horizontales"
+        },
+        "line": {
+          "label": "Graphique linéaire",
+          "desc": "Changements de tendance"
+        },
+        "area": {
+          "label": "Graphique en aires",
+          "desc": "Tendance et volume"
+        },
+        "pie": {
+          "label": "Graphique circulaire",
+          "desc": "Rapport de composition"
+        },
+        "ring": {
+          "label": "Graphique en beignet",
+          "desc": "Rapport de composition (creux)"
+        },
+        "radar": {
+          "label": "Carte radar",
+          "desc": "Comparaison multidimensionnelle"
+        },
+        "scatter": {
+          "label": "Graphique à nuages de points",
+          "desc": "Distribution de corrélation"
+        }
+      },
+      "default": {
+        "pieTitle": "Partager l’analyse",
+        "ringTitle": "Analyse de la composition",
+        "lineTitle": "Analyse des tendances",
+        "areaTitle": "Tendance de la zone",
+        "compareTitle": "Comparaison des données",
+        "radarTitle": "Comparaison des dimensions",
+        "scatterTitle": "Distribution de dispersion",
+        "labels": {
+          "a": "Catégorie A",
+          "b": "Catégorie B",
+          "c": "Catégorie C",
+          "d": "Catégorie D"
+        },
+        "legendShare": "Partager",
+        "series1": "Série 1",
+        "series2": "Série 2",
+        "dimension1": "Cote 1",
+        "dimension2": "Cote 2",
+        "dimension3": "Cote 3",
+        "dimension4": "Dimension 4",
+        "dimension5": "Cote 5",
+        "sampleA": "Échantillon A",
+        "sampleB": "Échantillon B"
+      }
+    },
+    "latex": {
+      "title": "Formule",
+      "placeholder": "Entrez LaTeX, par exemple. x=\\\\frac{-b\\\\pm\\\\sqrt{b^2-4ac}}{2a}",
+      "color": "Couleur",
+      "submit": "Insérer une formule",
+      "processing": "Traitement...",
+      "previewUnavailable": "Aperçu de la formule indisponible",
+      "presets": {
+        "quadratic": "Formule quadratique",
+        "gaussian": "Distribution gaussienne",
+        "euler": "Identité d'Euler"
+      },
+      "errors": {
+        "empty": "Veuillez saisir une formule.",
+        "renderFailed": "Échec du rendu de la formule. Veuillez vérifier la syntaxe."
+      }
+    },
+    "title": "Insérer"
+  },
+  "chart": {
+    "noData": "Aucune donnée"
+  },
+  "name": {
+    "editHint": "Cliquez ou double-cliquez pour modifier le nom"
+  },
+  "property": {
+    "toolbar": {
+      "page": "Pages",
+      "position": "Poste",
+      "transform": "Transformer",
+      "layer": "Calques"
+    },
+    "multiSelection": "{{count}} éléments sélectionnés",
+    "page": "Pages",
+    "collapse": "Réduire",
+    "pageLayout": {
+      "title": "Mise en page",
+      "unbound": "Non lié",
+      "index": "Indice : {{index}}",
+      "noOriginMeta": "Les métadonnées de mise en page d'origine ne sont pas disponibles pour cette page.",
+      "noSnapshots": "Aucun instantané de mise en page disponible.",
+      "unnamed": "Disposition sans nom",
+      "master": "Maître : {{name}}",
+      "layoutIndex": "Disposition {{index}}"
+    },
+    "pageTransition": {
+      "title": "Transition des diapositives",
+      "option": {
+        "no": "Aucun",
+        "fade": "Fondu",
+        "slideX": "Glisser horizontalement",
+        "slideY": "Glisser verticalement",
+        "slideX3D": "Glisser horizontalement (3D)",
+        "slideY3D": "Glisser verticalement (3D)",
+        "rotate": "Rotation",
+        "scaleY": "Développer verticalement",
+        "scaleX": "Développer horizontalement",
+        "scale": "Zoomer",
+        "scaleReverse": "Zoom arrière",
+        "random": "Aléatoire"
+      }
+    },
+    "pageBackground": {
+      "title": "Arrière-plan de la page",
+      "themeKey": "Clé du thème",
+      "resolvedColor": "Couleur résolue",
+      "themePalette": "Palette de thèmes",
+      "switchToNormal": "Passer à un arrière-plan uni",
+      "imageFit": "Ajustement de l'image",
+      "imageFitCover": "Couverture (peut recadrer)",
+      "imageFitContain": "Contenir",
+      "imageFitRepeat": "Répéter",
+      "useTheme": "Utiliser l'arrière-plan du thème",
+      "typeImage": "Images",
+      "typeGradient": "Dégradé"
+    },
+    "themeFont": {
+      "title": "Polices de thème",
+      "heading": "Police de titre",
+      "headingPlaceholder": "Entrez la famille de polices du titre",
+      "body": "Police du corps",
+      "bodyPlaceholder": "Entrez la famille de polices du corps"
+    },
+    "canvasAssist": {
+      "title": "Aide à la toile",
+      "snapToGuides": "Capture de guide intelligent",
+      "snapToGrid": "Capture de grille",
+      "showGrid": "Afficher la grille"
+    },
+    "currentValue": "Actuel : {{value}}",
+    "default": "Par défaut",
+    "remark": "Remarques",
+    "remarkPlaceholder": "Ajouter des notes de conférencier pour cette page…",
+    "positionSize": "Position et taille",
+    "transform": "Transformer",
+    "rotate": "Rotation",
+    "opacity": "Opacité",
+    "flipHorizontal": "Retourner horizontalement",
+    "flipVertical": "Retourner verticalement",
+    "fixedRatio": "Rapport de verrouillage",
+    "elementName": "Nom de l'élément",
+    "lock": "Verrouiller",
+    "unlock": "Déverrouiller",
+    "show": "Afficher",
+    "hide": "Masquer",
+    "color": "Couleur",
+    "font": "Police",
+    "none": "Aucun",
+    "enabled": "Activé",
+    "apply": "Postuler",
+    "clear": "Effacer",
+    "layer": {
+      "action": {
+        "toFront": "Mettre au premier plan",
+        "forward": "Faire avancer",
+        "backward": "Envoyer en arrière",
+        "toBack": "Envoyer vers l'arrière",
+        "hideAll": "Masquer tout",
+        "showAll": "Afficher tout",
+        "lockAll": "Verrouiller tout",
+        "unlockAll": "Tout débloquer",
+        "lockedHint": "Le calque est verrouillé"
+      },
+      "empty": "Aucun élément",
+      "show": "Afficher",
+      "hide": "Masquer",
+      "lock": "Verrouiller",
+      "unlock": "Déverrouiller",
+      "group": {
+        "defaultName": "Groupe ({{count}})",
+        "collapse": "Réduire le groupe",
+        "expand": "Agrandir le groupe",
+        "placeholder": "Entrez le nom du groupe",
+        "renameHint": "Appuyez sur Entrée pour enregistrer",
+        "show": "Afficher le groupe",
+        "hide": "Masquer le groupe",
+        "hidePartial": "Masquer les éléments visibles",
+        "lock": "Groupe de verrouillage",
+        "lockPartial": "Verrouiller les éléments déverrouillés",
+        "unlock": "Déverrouiller le groupe"
+      }
+    },
+    "style": {
+      "chart": {
+        "title": "Graphique"
+      },
+      "fill": {
+        "title": "Remplir",
+        "modeSolid": "Solide",
+        "modeGradient": "Dégradé",
+        "modeImage": "Images",
+        "opacity": "Opacité",
+        "gradientType": "Tapez",
+        "gradientTypeLinear": "Linéaire",
+        "gradientTypeRadial": "Radiale",
+        "angle": "Angle",
+        "positionPercent": "Poste %",
+        "addStop": "+ Arrêter",
+        "removeStop": "- Arrêtez",
+        "selectImage": "Sélectionnez une image",
+        "uploadLocalImage": "Télécharger une image locale",
+        "inputImageUrl": "Ou entrez l'URL de l'image"
+      },
+      "themeColor": "Couleur du thème",
+      "corners": {
+        "title": "Rayon de coin (4 coins)",
+        "topLeft": "En haut à gauche",
+        "topRight": "En haut à droite",
+        "bottomRight": "En bas à droite",
+        "bottomLeft": "En bas à gauche"
+      },
+      "shapeText": {
+        "title": "Texte de forme",
+        "content": "Contenu du texte",
+        "fontFamily": "Famille de polices",
+        "fontFamilyPlaceholder": "par ex. Microsoft YaHei",
+        "fontSize": "Taille de la police (pt)",
+        "color": "Couleur du texte",
+        "align": "Alignement horizontal",
+        "alignLeft": "L",
+        "alignCenter": "C",
+        "alignRight": "R.",
+        "verticalAlign": "Alignement vertical",
+        "verticalAlignTop": "T",
+        "verticalAlignMiddle": "M",
+        "verticalAlignBottom": "B"
+      },
+      "image": {
+        "src": "URL de l'image",
+        "altText": "Texte alternatif",
+        "altTextPlaceholder": "Description de l'image pour l'accessibilité",
+        "radius": "Rayon de coin",
+        "effects": {
+          "title": "Effets d'image",
+          "fitMode": "Mode d'ajustement",
+          "fit": {
+            "cover": "Couverture (peut recadrer)",
+            "contain": "Contenir",
+            "fill": "Remplir (étirer)"
+          },
+          "colorMask": "Masque de couleur",
+          "enableMask": "Activer le masque",
+          "filters": "Filtres",
+          "filterBrightness": "Luminosité",
+          "filterContrast": "Contraste",
+          "filterSaturation": "Saturation",
+          "filterBlur": "Flou",
+          "filterGrayscale": "Niveaux de gris",
+          "filterInvert": "Inverser",
+          "filterHueRotate": "Rotation de la teinte",
+          "filterSepia": "Sépia",
+          "cropHint": "Double-cliquez sur l'image pour passer en mode recadrage (rect/cercle).",
+          "resetFilters": "Réinitialiser les filtres"
+        }
+      },
+      "textDefault": {
+        "title": "Style de texte",
+        "defaultColor": "Couleur du texte",
+        "background": "Fond de texte",
+        "fontFamily": "Famille de polices",
+        "fontFamilyPlaceholder": "par ex. Microsoft YaHei",
+        "fontSize": "Taille de la police (pt)",
+        "lineHeight": "Hauteur de ligne",
+        "lineHeightPlaceholder": "Multiplicateur, par ex. 1,5",
+        "wordSpace": "Espacement des lettres",
+        "paragraphSpace": "Espacement des paragraphes",
+        "verticalAlign": "Alignement vertical",
+        "verticalAlignTop": "Haut",
+        "verticalAlignMiddle": "Milieu",
+        "verticalAlignBottom": "En bas",
+        "verticalText": "Texte vertical",
+        "autoFit": "Ajustement du texte",
+        "autoFitNone": "Aucun",
+        "autoFitShrink": "Réduire le texte",
+        "autoFitResize": "Redimensionner la boîte",
+        "margin": "Rembourrage",
+        "marginTop": "Haut",
+        "marginRight": "À droite",
+        "marginBottom": "En bas",
+        "marginLeft": "Gauche"
+      },
+      "link": {
+        "title": "Lien d'élément",
+        "type": {
+          "web": "Lien externe",
+          "slide": "Saut de page"
+        },
+        "placeholder": {
+          "web": "https://exemple.com",
+          "slide": "page-2 / 2 / slide2.xml"
+        },
+        "save": "Enregistrer le lien",
+        "remove": "Supprimer le lien",
+        "noTarget": "Aucune cible de lien",
+        "pageLabel": "Pages"
+      },
+      "tableRichText": {
+        "title": "Texte enrichi du tableau",
+        "tip": "Double-cliquez sur une cellule du tableau pour modifier le texte enrichi, puis contrôlez la police, la couleur et l'alignement ici.",
+        "align": {
+          "left": "L",
+          "center": "C",
+          "right": "R.",
+          "justify": "J."
+        },
+        "fontSize": "Taille de la police (pt)",
+        "fontPlaceholder": "par ex. Microsoft YaHei",
+        "unorderedList": "Liste à puces",
+        "orderedList": "Liste numérotée",
+        "linkPrompt": "Entrez le lien (prend en charge https://... ou page-2)",
+        "linkPlaceholder": "https://... ou page-2",
+        "link": "Lien",
+        "unlink": "Dissocier",
+        "cellBg": "Fond de cellule",
+        "cellVerticalAlign": "Alignement vertical",
+        "clearFormatting": "Effacer le formatage"
+      },
+      "tableTheme": {
+        "title": "Thème du tableau",
+        "color": "Couleur du thème",
+        "headerRow": "Ligne d'en-tête",
+        "headerCol": "Première colonne",
+        "footerRow": "Ligne de pied de page",
+        "lastCol": "Dernière colonne",
+        "stripedRows": "Rangées en bandes",
+        "stripedCols": "Colonnes en bandes"
+      },
+      "tableBorders": {
+        "title": "Bordures de tableau",
+        "top": "Haut",
+        "bottom": "En bas",
+        "left": "Gauche",
+        "right": "À droite",
+        "insideH": "À l'intérieur de H",
+        "insideV": "À l'intérieur de V"
+      },
+      "latex": {
+        "title": "Formule",
+        "placeholder": "Entrez la formule LaTeX",
+        "stroke": "Accident vasculaire cérébral",
+        "hintApply": "Ctrl/Cmd + Entrée pour appliquer",
+        "rendering": "Rendu…",
+        "errorEmpty": "La formule ne peut pas être vide.",
+        "errorRenderFailed": "Échec du rendu de la formule."
+      },
+      "line": {
+        "title": "Style de ligne",
+        "width": "Largeur",
+        "style": "Style",
+        "styleOptions": {
+          "solid": "Solide",
+          "dashed": "En pointillés",
+          "dotted": "Pointillé",
+          "dashDot": "Point de tiret",
+          "longDash": "Long tiret",
+          "longDashDot": "Point long"
+        },
+        "type": "Type de ligne",
+        "typeOptions": {
+          "straight": "Droit",
+          "broken": "Cassé",
+          "broken2": "Double Cassé",
+          "curve": "Courbe quadratique",
+          "cubic": "Courbe cubique"
+        },
+        "startCap": "Casquette de départ",
+        "endCap": "Embout",
+        "cap": {
+          "none": "Aucun",
+          "arrow": "Flèche",
+          "triangle": "Triangle",
+          "stealth": "Furtif",
+          "diamond": "Diamant",
+          "dot": "Point"
+        }
+      },
+      "outline": {
+        "title": "Aperçu",
+        "none": "Pas de contour",
+        "width": "Largeur",
+        "style": "Style"
+      },
+      "shadow": {
+        "title": "Ombre",
+        "none": "Pas d'ombre",
+        "offsetX": "Décalage X",
+        "offsetY": "Décalage Y",
+        "blur": "Flou",
+        "colorPlaceholder": "rgba(0,0,0,0.15)"
+      },
+      "video": {
+        "title": "Vidéo",
+        "src": "URL de la vidéo",
+        "poster": "Affiche",
+        "posterPlaceholder": "URL de l’image de l’affiche (facultatif)",
+        "autoplay": "Lecture automatique"
+      },
+      "audio": {
+        "title": "Audio",
+        "src": "URL audio",
+        "iconColor": "Couleur de l'icône",
+        "autoplay": "Lecture automatique",
+        "loop": "Boucle"
+      }
+    },
+    "chart": {
+      "type": "Tapez",
+      "title": "Titre",
+      "titlePlaceholder": "Titre du graphique",
+      "labelsField": "Étiquettes de catégorie (séparées par des virgules)",
+      "labelsFieldScatter": "Valeurs de l'axe X (série par défaut/première, séparées par des virgules)",
+      "labelsPlaceholder": "T1, T2, T3, T4",
+      "labelsPlaceholderScatter": "1, 2, 3, 4",
+      "legendsField": "Noms de légende (séparés par des virgules)",
+      "legendsFieldPie": "Nom de la série (seul le premier est utilisé)",
+      "legendsPlaceholder": "Série 1, série 2",
+      "legendsPlaceholderPie": "Partager",
+      "seriesField": "Série de données (une série par ligne, séparées par des virgules)",
+      "seriesFieldPie": "Valeurs (une seule ligne, séparées par des virgules)",
+      "xSeriesField": "Valeurs X par série (une série par ligne, facultatif)",
+      "xSeriesPlaceholder": "1, 2, 3, 4\n10, 20, 30, 40",
+      "xSeriesHint": "Si vide, les valeurs ci-dessus seront utilisées et alignées sur chaque longueur de série.",
+      "pieHint": "Pie/Donut utilise uniquement la première ligne de données et le premier nom de légende.",
+      "showLegend": "Afficher la légende",
+      "legendPosition": "Position de la légende",
+      "legendPositionBottom": "En bas",
+      "legendPositionTop": "Haut",
+      "legendPositionLeft": "Gauche",
+      "legendPositionRight": "À droite",
+      "showDataLabel": "Afficher les étiquettes de données",
+      "stack": "Pile",
+      "smooth": "Courbe douce",
+      "smoothScatter": "Ligne lisse",
+      "radarFilled": "Zone de remplissage",
+      "themeMapping": "Cartographie des couleurs du thème",
+      "themeMappingHint": "Liez les séries aux clés de thème afin que les couleurs suivent automatiquement les changements de thème.",
+      "resetByTheme": "Réinitialiser par thème",
+      "removeColor": "Supprimer la couleur",
+      "customColor": "Couleur personnalisée",
+      "addColor": "+ Couleur",
+      "chartFillColor": "Fond de graphique",
+      "axisTextColor": "Couleur du texte de l'axe",
+      "gridLineColor": "Couleur de la ligne de grille",
+      "defaultCategory": "Catégorie {{index}}",
+      "defaultLegendShare": "Partager",
+      "defaultSeries": "Série {{index}}"
+    },
+    "noSelection": "Sélectionnez un élément pour commencer l'édition",
+    "slideStyle": "Style de diapositive",
+    "pageProperties": "Propriétés des pages"
+  },
+  "tab": {
+    "slide": "Diapositive",
+    "design": "Conception",
+    "properties": "Propriétés",
+    "layers": "Calques",
+    "insert": "Insérer",
+    "edit": "Modifier",
+    "animation": "Animations"
+  },
+  "colorPicker": {
+    "themeColors": "Couleurs du thème",
+    "documentColors": "Couleurs des documents"
+  },
+  "present": {
+    "title": "Présent",
+    "fromBeginning": "Depuis le début",
+    "fromCurrent": "À partir de la diapositive actuelle"
+  },
+  "insertShape": {
+    "category": {
+      "rect": "Rectangulaires",
+      "basic": "Formes de base",
+      "basic2": "Formes de base 2",
+      "arrows": "Flèches",
+      "stars": "Étoiles"
+    },
+    "presets": {
+      "rect": "Rectangulaire",
+      "roundRect": "Rectangle arrondi",
+      "roundRectSingle": "Rectangle à coin arrondi unique",
+      "cutRect": "Couper le rectangle",
+      "ellipse": "Ellipses",
+      "circle": "Cercle",
+      "triangle": "Triangle",
+      "diamond": "Diamant",
+      "parallelogram": "Parallélogramme",
+      "trapezoid": "Trapèze",
+      "pentagon": "Pentagone",
+      "hexagon": "Hexagone",
+      "octagon": "Octogone",
+      "cross": "Croix",
+      "rightTriangle": "Triangle rectangle",
+      "heart": "Coeur",
+      "lightning": "Foudre",
+      "cloud": "Nuage",
+      "chevron": "Chevrons",
+      "callout": "Légende",
+      "roundCallout": "Légende arrondie",
+      "rightArrow": "Flèche droite",
+      "leftArrow": "Flèche gauche",
+      "upArrow": "Flèche vers le haut",
+      "downArrow": "Flèche vers le bas",
+      "leftRightArrow": "Flèche gauche-droite",
+      "upDownArrow": "Flèche haut-bas",
+      "notchedRightArrow": "Flèche droite crantée",
+      "star5": "Étoile à 5 branches",
+      "star4": "Étoile à 4 branches",
+      "star6": "Étoile à 6 branches"
+    }
+  }
+}

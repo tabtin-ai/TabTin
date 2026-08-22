@@ -1,0 +1,90 @@
+{
+  "id": "cowart",
+  "name": "Cowart",
+  "kind": "app",
+  "version": "0.1.2",
+  "description": "Official Personal Plugin for a local infinite canvas, visual planning, and annotation-guided image workflows.",
+  "icon": "palette",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "surface": "local",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "officialPluginRelease": {
+    "releaseId": "tabtin-official:cowart:0.1.2",
+    "pluginId": "cowart",
+    "displayName": "Cowart",
+    "channel": "stable",
+    "acceptanceStatus": "accepted",
+    "source": {
+      "type": "github",
+      "origin": "https://github.com/zhongerxin/cowart",
+      "ref": "v0.1.2",
+      "pinnedRevision": "v0.1.2"
+    },
+    "adapter": {
+      "id": "tabtin-cowart-adapter",
+      "version": "0.1.0",
+      "kind": "tabtin-official-plugin-adapter",
+      "runtime": "prepared-local-web-service",
+      "skillsProvider": "skills:local",
+      "mcpConfig": ".mcp.json"
+    }
+  },
+  "preparedRuntime": {
+    "type": "bundled-directory",
+    "path": "prepared-runtime",
+    "dependencyInstallRequired": false,
+    "entrypoints": {
+      "manifest": "prepared-runtime/runtime-manifest.json"
+    }
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "creation",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 21
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": ["skills", "mcp", "localService"]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": ["skills", "mcp", "localService"]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/cowart-open-canvas",
+    "skills/cowart-image-gen",
+    "skills/cowart-image-edit"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "cowart-open-canvas": { "enabled": true },
+      "cowart-image-gen": { "enabled": true },
+      "cowart-image-edit": { "enabled": true }
+    }
+  }
+}

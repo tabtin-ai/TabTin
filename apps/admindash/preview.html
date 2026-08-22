@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AdminDash - 预览</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+      .container {
+        max-width: 800px;
+        width: 100%;
+      }
+      .card {
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        padding: 3rem;
+        text-align: center;
+      }
+      h1 {
+        font-size: 2.5rem;
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+      }
+      .subtitle {
+        font-size: 1.25rem;
+        color: ;
+        margin-bottom: 2rem;
+      }
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+        text-align: left;
+      }
+      .feature {
+        padding: 1.5rem;
+        background: #f8f9fa;
+        border-radius: 0.5rem;
+        border-left: 4px solid #667eea;
+      }
+      .feature-title {
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 0.5rem;
+      }
+      .feature-desc {
+        font-size: 0.9rem;
+        color: ;
+      }
+      .button {
+        display: inline-block;
+        margin-top: 2rem;
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+      }
+      .tech-stack {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid #e0e0e0;
+      }
+      .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        margin-top: 1rem;
+      }
+      .tech-tag {
+        padding: 0.5rem 1rem;
+        background: #667eea;
+        color: white;
+        border-radius: 2rem;
+        font-size: 0.875rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1>🚀 AdminDash</h1>
+        <p class="subtitle">Agent 调试与管理平台</p>
+        <p style="color: ;">
+          为 TabTin 项目打造的现代化管理后台，提供强大的 Agent 思维链可视化调试和用户管理功能。
+        </p>
+
+        <div class="features">
+          <div class="feature">
+            <div class="feature-title">🧠 Agent 调试</div>
+            <div class="feature-desc">实时追踪 Agent 的思维链、决策流程和执行步骤</div>
+          </div>
+          <div class="feature">
+            <div class="feature-title">👥 用户管理</div>
+            <div class="feature-desc">完整的用户管理系统，支持角色和权限控制</div>
+          </div>
+          <div class="feature">
+            <div class="feature-title">📊 系统监控</div>
+            <div class="feature-desc">实时监控系统性能指标和运行状态</div>
+          </div>
+        </div>
+
+        <a href="#" class="button" onclick="alert('请运行 pnpm dev 启动开发服务器'); return false;">
+          开始使用
+        </a>
+
+        <div class="tech-stack">
+          <div style="color: ; font-weight: 600; margin-bottom: 1rem;">技术栈</div>
+          <div class="tech-tags">
+            <span class="tech-tag">React 18</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Vite</span>
+            <span class="tech-tag">Tailwind CSS</span>
+            <span class="tech-tag">Radix UI</span>
+            <span class="tech-tag">React Router</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

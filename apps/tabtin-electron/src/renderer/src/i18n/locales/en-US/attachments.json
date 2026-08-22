@@ -1,0 +1,68 @@
+{
+  "actions": {
+    "upload": "Upload attachment",
+    "uploading": "Uploading...",
+    "reuse": "Reuse attachment",
+    "reuseLoading": "Reusing...",
+    "cancel": "Cancel",
+    "remove": "Remove",
+    "removeAll": "Remove all",
+    "removingAll": "Removing...",
+    "download": "Download",
+    "downloadAll": "Download all"
+  },
+  "labels": {
+    "reuseSection": "Reuse existing attachment",
+    "uploadingList": "Uploading",
+    "attachmentList": "Attachments",
+    "unknownType": "Unknown type",
+    "empty": "No attachments"
+  },
+  "placeholders": {
+    "reuseFileId": "Enter existing attachment file ID"
+  },
+  "tips": {
+    "uploadHelp": "You can upload multiple files. They will be saved as attachment references.",
+    "saveBeforeUpload": "Save the record before uploading attachments.",
+    "reuseHelp": "Enter an existing attachment file_id to reference it in this record.",
+    "syncing": "Syncing attachments...",
+    "uploadDropHint": "Click, paste, or drag files here"
+  },
+  "errors": {
+    "fetchFailed": "Failed to load attachments",
+    "uploadFailed": "Failed to upload attachments",
+    "abortFailed": "Failed to cancel upload",
+    "removeFailed": "Failed to delete attachment",
+    "reuseNeedSave": "Save the record before reusing attachments",
+    "reuseMissingId": "Please enter the file ID",
+    "reuseFailed": "Failed to reuse attachment",
+    "removeAllFailed": "Failed to remove attachments",
+    "fileTooLarge": "Exceeds {{limit}}MB size limit",
+    "fileTypeNotAllowed": "Unsupported file type",
+    "fileRejectedSingle": "File {{name}} skipped: {{reason}}",
+    "fileRejectedMultiple": "{{count}} files skipped"
+  },
+  "apiErrors": {
+    "emptyFileList": "File list cannot be empty",
+    "batchUploadFailed": "Batch upload failed",
+    "batchUploadFailedWithReason": "Batch upload failed: {{message}}",
+    "uploadFailed": "Upload failed",
+    "createUploadTaskFailed": "Failed to create attachment upload task",
+    "uploadPartFailed": "Failed to upload attachment chunk",
+    "uploadPartInvalid": "Invalid upload chunk response",
+    "completeUploadFailed": "Failed to complete attachment upload",
+    "abortUploadFailed": "Failed to cancel attachment upload",
+    "reuseFailed": "Failed to reuse attachment",
+    "removeReferenceFailed": "Failed to remove attachment reference",
+    "convertFieldFailed": "Failed to convert field type",
+    "uploadTaskEmpty": "Attachment upload task returned no files",
+    "uploadTaskMissingItem": "Missing upload task info for attachment {{name}}"
+  },
+  "status": {
+    "pending": "Queued",
+    "uploading": "Uploading",
+    "completed": "Completed",
+    "error": "Upload failed",
+    "cancelled": "Cancelled"
+  }
+}

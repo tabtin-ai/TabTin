@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.TabTin" parent="Theme.AppCompat.DayNight.NoActionBar" />
+    <style name="Theme.TabTin.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <!-- 系统层呈现动效首帧；首个内容帧绘制后由 MainActivity 交叉接棒。 -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_tin</item>
+        <item name="postSplashScreenTheme">@style/Theme.TabTin</item>
+    </style>
+</resources>

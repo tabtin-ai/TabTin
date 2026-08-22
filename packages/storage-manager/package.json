@@ -1,0 +1,41 @@
+{
+  "name": "@tabtin/storage-manager",
+  "version": "0.1.0",
+  "description": "TabTin 本地存储统一注册中心 + 类型 + IPC bridges。各业务模块通过 registerStorageBucket 暴露 size/list/clear/export 能力，UI 通过统一协议聚合渲染。本包不做实际 IO。",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "tabtin",
+    "storage",
+    "registry",
+    "ipc"
+  ],
+  "author": "TabTin",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@vitest/coverage-v8": "^1.6.1",
+    "typescript": "5.7.2",
+    "vitest": "^1.6.1"
+  }
+}

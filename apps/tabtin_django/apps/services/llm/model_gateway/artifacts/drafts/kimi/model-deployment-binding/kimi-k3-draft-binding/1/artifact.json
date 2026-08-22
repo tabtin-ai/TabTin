@@ -1,0 +1,29 @@
+{
+  "capability_ref": {
+    "expected_hash": "sha256:780bdbaa41cd0540b298d4e81b4302c1fdb39cb4fb2054d1319d6bb11f842803",
+    "key": "kimi-k3-draft-capability",
+    "kind": "model-capability",
+    "revision": "1"
+  },
+  "deployment_ref": {
+    "expected_hash": "sha256:ad2eb97e0e591ee49e7451516aca1e3c3850b40b084b8f7a97788cb52d3f0c9b",
+    "key": "moonshot",
+    "kind": "deployment-profile",
+    "revision": "1"
+  },
+  "identity": {
+    "canonical_hash": "sha256:2dcd2395c1ed41af9a7ac42ae8274ec120f6d8f90ced340c60e657a5344036ca",
+    "key": "kimi-k3-draft-binding",
+    "kind": "model-deployment-binding",
+    "revision": "1"
+  },
+  "model_key": "kimi-k3",
+  "rollout_ref": {
+    "expected_hash": "sha256:0d1c5195c2f732ac38f57f7233d5d21695b8a0e1ad473362cbf63a7aab6d0930",
+    "key": "kimi-draft-zero-traffic",
+    "kind": "rollout-policy",
+    "revision": "1"
+  },
+  "schema_version": "1",
+  "upstream_model_id": "kimi-k3"
+}

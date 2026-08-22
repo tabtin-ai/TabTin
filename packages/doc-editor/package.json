@@ -1,0 +1,81 @@
+{
+  "name": "@tabtin/doc-editor",
+  "version": "0.1.0",
+  "description": "Host-agnostic document editor core for TabTin",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@tiptap/core": "^2.26.1",
+    "@tiptap/extension-collaboration": "^2.10.0",
+    "@tiptap/extension-collaboration-cursor": "^2.10.0",
+    "@tiptap/extension-link": "^2.26.1",
+    "@tiptap/extension-table": "^2.26.1",
+    "@tiptap/extension-table-cell": "^2.26.1",
+    "@tiptap/extension-table-header": "^2.26.1",
+    "@tiptap/extension-table-row": "^2.26.1",
+    "@tiptap/extension-task-item": "^2.26.1",
+    "@tiptap/extension-task-list": "^2.26.1",
+    "@tiptap/extension-underline": "^2.26.1",
+    "@tiptap/extension-unique-id": "^2.10.0",
+    "@tiptap/pm": "^2.27.2",
+    "@tiptap/starter-kit": "^2.26.1",
+    "tiptap-markdown": "^0.8.10",
+    "y-prosemirror": "^1.3.0",
+    "yjs": "^13.6.29"
+  },
+  "peerDependencies": {
+    "@tiptap/extension-collaboration": "^2.10.0",
+    "@tiptap/extension-collaboration-cursor": "^2.10.0",
+    "@tiptap/extension-unique-id": "^2.10.0",
+    "y-prosemirror": "^1.3.0",
+    "yjs": "^13.6.29"
+  },
+  "peerDependenciesMeta": {
+    "yjs": {
+      "optional": true
+    },
+    "y-prosemirror": {
+      "optional": true
+    },
+    "@tiptap/extension-collaboration": {
+      "optional": true
+    },
+    "@tiptap/extension-collaboration-cursor": {
+      "optional": true
+    },
+    "@tiptap/extension-unique-id": {
+      "optional": true
+    }
+  },
+  "keywords": [
+    "tabtin",
+    "tabdoc",
+    "editor"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "5.7.2",
+    "vitest": "4.0.18"
+  }
+}

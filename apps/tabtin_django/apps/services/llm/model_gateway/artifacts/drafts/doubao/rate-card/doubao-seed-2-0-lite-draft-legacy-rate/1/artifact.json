@@ -1,0 +1,42 @@
+{
+  "binding_ref": {
+    "expected_hash": "sha256:567ba6875430b77b911b59b70356935e2f8ca5187bc8b97c6b6d884b8391d8c0",
+    "key": "doubao-seed-2-0-lite-draft-binding",
+    "kind": "model-deployment-binding",
+    "revision": "1"
+  },
+  "deployment_ref": {
+    "expected_hash": "sha256:4c1fdf992e2ccf5a5a27db80f6f6dcb2bd3eba9dd451488d459ba8016f63a64b",
+    "key": "volcengine",
+    "kind": "deployment-profile",
+    "revision": "1"
+  },
+  "identity": {
+    "canonical_hash": "sha256:0ebe1bd7ccb06aeeb43b72298883f37211ccfc04ea5b811623a183480974b0f8",
+    "key": "doubao-seed-2-0-lite-draft-legacy-rate",
+    "kind": "rate-card",
+    "revision": "1"
+  },
+  "non_billed_reason": null,
+  "pricing_scheme": "metered",
+  "rates": [
+    {
+      "amount": "0.000090",
+      "currency": "CNY",
+      "schema_version": "1",
+      "unit": "input-token"
+    },
+    {
+      "amount": "0.000510",
+      "currency": "CNY",
+      "schema_version": "1",
+      "unit": "output-token"
+    }
+  ],
+  "schema_version": "1",
+  "service_profile": null,
+  "validity": {
+    "valid_from": "2026-08-06T00:00:00Z",
+    "valid_until": null
+  }
+}

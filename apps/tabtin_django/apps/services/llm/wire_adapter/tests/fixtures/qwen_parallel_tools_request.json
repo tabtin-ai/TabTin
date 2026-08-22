@@ -1,0 +1,36 @@
+{
+  "model": "qwen-max",
+  "stream": true,
+  "messages": [
+    {
+      "role": "user",
+      "content": "What's the weather in Beijing and Shanghai?"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_weather",
+        "description": "Get weather for a city",
+        "parameters": {
+          "type": "object",
+          "properties": {"city": {"type": "string"}}
+        }
+      }
+    }
+  ],
+  "response_format": {
+    "type": "json_schema",
+    "json_schema": {
+      "name": "weather_summary",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "summary": {"type": "string"}
+        },
+        "required": ["summary"]
+      }
+    }
+  }
+}

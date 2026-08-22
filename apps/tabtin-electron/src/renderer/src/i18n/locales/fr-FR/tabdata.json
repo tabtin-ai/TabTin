@@ -1,0 +1,252 @@
+{
+  "rewind": {
+    "recordHistoryMissing": "\"{{tableName}}\" ne peut pas être entièrement restauré : les lignes {{count}} sont devenues obsolètes. Le rembobinage s'est arrêté et les données sont inchangées. Actions suggérées : (1) choisissez un point de restauration plus récent ou (2) demandez à votre administrateur de restaurer à partir d'une sauvegarde si vous devez utiliser ce point.",
+    "outboxDiscarded": "Les calculs d'arrière-plan {{count}} sur \"{{tableName}}\" ont été rejetés en raison du rembobinage. Toutes les colonnes de formules sont en cours de recalcul (ETA : {{etaSeconds}}s). Certaines cellules peuvent afficher « Calcul en cours… » en attendant."
+  },
+  "field": {
+    "typeConvertFailed": "Impossible de changer \"{{fieldName}}\" de {{oldType}} à {{newType}} : la valeur de la ligne {{rowNo}} \"{{sample}}\" ne peut pas être convertie. Le changement a été annulé. Actions suggérées : (1) exporter la colonne et la nettoyer en externe ; (2) utilisez la « Mise à jour groupée » pour normaliser d'abord les mauvaises valeurs ; (3) demandez à un administrateur de vous aider à gérer les lignes affectées par {{count}}.",
+    "renameConflict": "Impossible de renommer \"{{oldName}}\" en \"{{newName}}\" : un champ portant ce nom existe déjà, ou il est référencé par un ou plusieurs champs de formule/de recherche {{count}}. Cochez d'abord « Dépendances de champ » ou choisissez un autre nom.",
+    "deleteReferenced": "\"{{fieldName}}\" ne peut pas être supprimé : il est référencé par le(s) champ(s) de formule/de recherche {{count}}. Forcer la suppression brisera ces champs. Supprimez d'abord les dépendances ou cochez \"Dépendances de champ\" avant de décider.",
+    "primaryFieldDeleteForbidden": "Impossible de supprimer \"{{fieldName}}\" : c'est le champ principal. Le supprimer directement peut corrompre les données existantes ou les colonnes associées. Modifiez d'abord le champ principal dans les paramètres du tableau.",
+    "deleteImpactDialog": {
+      "warningHigh": "Ce champ est référencé par d'autres champs ou vues ; le supprimer brisera les champs en aval. Nous vous recommandons de revoir la chaîne complète dans « Dépendances de champ » avant de continuer.",
+      "warningMedium": "Ce champ est référencé par certaines vues ; ces configurations de vue seront nettoyées automatiquement après la suppression.",
+      "warningLow": "Ce champ n'a aucune dépendance en aval et peut être supprimé en toute sécurité.",
+      "noImpactSafe": "Supprimer le champ \"{{name}}\" ? Il n'a pas de dépendances en aval, il peut donc être supprimé en toute sécurité. Consultez l'astuce ci-dessous pour savoir si cette suppression est annulable.",
+      "undoSimpleHint": "Annulable : appuyez sur Ctrl+Z (⌘Z) juste après la suppression pour restaurer le champ et sa structure historique.",
+      "undoComplexHint": "Annulable : appuyez sur Ctrl+Z (⌘Z) juste après la suppression pour restaurer le champ. Le graphique des dépendances sera reconstruit et les valeurs recalculées automatiquement (cela peut prendre quelques secondes). Si un champ de dépendance obligatoire a été supprimé, vous verrez un message d'erreur spécifique.",
+      "undoNotInWaveHint": "Ne peut pas être annulé : ce type de champ ne figure pas dans la liste autorisée d'annulation rapide de cette version. Pour récupérer, restaurez à partir de « Historique des versions » ou contactez l'administrateur de votre organisation.",
+      "undoUnknownHint": "Annulation irréversible : type de champ inconnu. Veuillez contacter l'administrateur de votre organisation.",
+      "openVersionHistory": "Ouvrir l'historique des versions",
+      "fetchErrorFallback": "Échec du chargement de l'analyse des dépendances. Vous pouvez toujours poursuivre la suppression, mais veuillez vérifier l'état de la table immédiatement après."
+    },
+    "batchRestore": {
+      "title": "Certains champs n'ont pas pu être annulés à cette étape",
+      "summary": "Dans cette étape d'annulation : {{restorableCount}} les champs simples peuvent être restaurés individuellement avec Ctrl+Z ; Les champs complexes {{unrestorableCount}} doivent être restaurés à partir de « Historique des versions ».",
+      "restorableSection": "Peut être annulé individuellement ({{count}})",
+      "unrestorableSection": "Besoin d'un historique des versions ({{count}})",
+      "openVersionHistory": "Ouvrir l'historique des versions",
+      "complexFieldHint": "Les champs de formule/recherche/lien impliquent la reconstruction du graphique de dépendances en aval. La restauration peut prendre quelques secondes.",
+      "close": "D'accord"
+    }
+  },
+  "table": {
+    "deleteReferenced": "\"{{tableName}}\" ne peut pas être supprimé : {{skillCount}} Compétence(s) et {{viewCount}} vue(s) tableau croisé(s) en dépendent. Forcer la suppression brisera ces compétences ou videra ces vues. Cochez « Dépendances de champ » ou archivez d'abord la table pour permettre aux personnes à charge de migrer.",
+    "trashedBanner": {
+      "title": "\"{{tableName}}\" déplacé vers la corbeille",
+      "description": "Les calculs en arrière-plan sont arrêtés ; Les règles de compétence et les vues croisées qui dépendent de cette table sont automatiquement mises en pause. Vous pouvez restaurer la table à partir de « Paramètres de l'organisation · Corbeille des ressources » dans un délai de 30 jours.",
+      "restoreAction": "Restaurer le tableau",
+      "viewTrash": "Ouvrir la corbeille",
+      "dismiss": "Je l'ai compris"
+    },
+    "deletedBanner": {
+      "title": "\"{{tableName}}\" supprimé",
+      "description": "Tous les calculs en arrière-plan sur cette table sont arrêtés et les règles de compétences/vues de tables croisées qui en dépendent sont suspendues. La table ne peut pas être restaurée après une suppression définitive ; contactez l'administrateur de votre organisation pour récupérer les données historiques à partir de la sauvegarde si nécessaire."
+    }
+  },
+  "bulk": {
+    "checkpointCreating": "L'action de l'IA sur \"{{tableName}}\" affecte les lignes {{count}}. Création d'un point de restauration automatique... Une fois prêt, vous pouvez \"Annuler cette action IA\" en un clic depuis le chat.",
+    "quotaExceeded": "Cette mise à jour consommera {{tokens}} jetons d'organisation, dépassant les {{remaining}} restants. Le vol en amont s'est arrêté ; les données sont inchangées. Suggestions : (1) rétrécir le filtre ; (2) attendre la réinitialisation mensuelle des quotas ; (3) demandez à l'administrateur de votre organisation de procéder à la mise à niveau.",
+    "affectedRecords_one": "{{count}} enregistrement affecté",
+    "affectedRecords_other": "{{count}} enregistrements concernés",
+    "updateByFilter": {
+      "previewTitle": "Aperçu de la mise à jour groupée",
+      "matchedRows": "{{count}} lignes correspondantes",
+      "samplePreview": "Aperçu (jusqu'à 20 exemples de lignes)",
+      "riskLow": "Faible risque",
+      "riskLowDesc": "Peu de lignes affectées ; continuer en toute sécurité.",
+      "riskMedium": "Risque moyen",
+      "riskMediumDesc": "{{count}} lignes affectées. Un point de restauration sera créé automatiquement.",
+      "riskHigh": "Risque élevé",
+      "riskHighDesc": "{{count}} lignes affectées. Tapez « CONFIRMER » pour continuer.",
+      "highRiskConfirmText": "CONFIRMER",
+      "highRiskInputPlaceholder": "Tapez « CONFIRMER » pour continuer",
+      "estimatedDuration": "Estimation des ~{{seconds}}s",
+      "estimatedDurationLong": "Les ~{{seconds}} estimés peuvent continuer en arrière-plan",
+      "checkpointHint": "Un point de restauration sera créé ; tu peux revenir en arrière à tout moment",
+      "confirm": "Confirmer",
+      "cancel": "Annuler",
+      "committing": "Exécution de la mise à jour groupée…",
+      "commitSuccess": "Mise à jour groupée terminée : lignes {{count}} mises à jour.",
+      "preflightFailed": "Échec du contrôle en amont de la mise à jour groupée : {{reason}}. Les données sont inchangées. Veuillez réessayer plus tard ; contactez l'administrateur de votre organisation si le problème persiste.",
+      "commitFailed": "Échec de la validation de la mise à jour groupée : {{reason}}. Les données sont inchangées. Veuillez réessayer plus tard ; contactez l'administrateur de votre organisation si le problème persiste.",
+      "rejected": "Dépasse la limite de mise à jour unique",
+      "rejectedDesc": "{{count}} lignes correspondent, dépassant la limite de 10 000 lignes de mise à jour unique. Affinez le filtre pour traiter par lots plus petits ou contactez un administrateur.",
+      "driftWarning": "Les lignes mises à jour réelles diffèrent du contrôle en amont de {{ratio}} % (attendu {{expected}}, réel {{actual}}). Veuillez vérifier vos données.",
+      "driftDismiss": "Je l'ai compris",
+      "errorListTitle": "Les enregistrements {{count}} n'ont pas pu être mis à jour",
+      "errorItem": "Enregistrer {{recordId}} : {{reason}}",
+      "showMore": "Afficher {{count}} plus",
+      "showLess": "Afficher moins"
+    }
+  },
+  "compute": {
+    "divisionByZero": "Le calcul automatique a échoué sur la ligne \"{{fieldName}}\" {{rowNo}} : la formule divise par 0. Cette cellule restera vide sans affecter les autres lignes. Ajustez les entrées (par exemple \"{{relatedColumn}}\") et il recalculera automatiquement lors de la sauvegarde.",
+    "typeMismatch": "Le calcul automatique a échoué sur la ligne \"{{fieldName}}\" {{rowNo}} : la formule attend un nombre mais \"{{columnName}}\" dans cette ligne n'en est pas un. La cellule ne peut pas être calculée pour l'instant. Corrigez les données de cette ligne ou ajustez la formule.",
+    "lookupTargetDeleted": "\"{{fieldName}}\" dépend de \"{{targetTable}}.{{targetColumn}}\", qui a été supprimé ou n'est pas disponible. Cette colonne mettra en pause la mise à jour automatique ; les données plus anciennes peuvent ne plus être exactes. Ouvrez les paramètres du champ et reliez à nouveau la table et la colonne cible.",
+    "circularDependency": "Dépendance circulaire dans \"{{fieldName}}\" : {{path}}. Le champ est désactivé et exclu des calculs. Ouvrez l'éditeur de formule et rompez n'importe quel maillon de la chaîne à corriger.",
+    "recalc": {
+      "queued": "En file d'attente : {{total}} le(s) champ(s) calculé(s) commenceront à recalculer.",
+      "progress": "Recalcul des champs calculés {{percentage}}% ({{done}}/{{total}})",
+      "completed": "{{total}} champ(s) calculé(s) recalculé(s).",
+      "failedSummary": "Le(s) champ(s) {{failed}} n'ont pas pu être recalculés : {{names}}. Les autres champs {{succeeded}} ont réussi. Ouvrez les paramètres du champ pour vérifier les dépendances ou réessayez plus tard.",
+      "dismiss": "Ignorer la notification de progression"
+    },
+    "outboxWorker": {
+      "recomputing": "Résultats du tableau mis à jour"
+    }
+  },
+  "lookup": {
+    "targetTimeout": "La recherche sur \"{{fieldName}}\" a expiré pour récupérer depuis \"{{targetTable}}\" : la table cible est trop grande ou le réseau est occupé. Le résultat réussi précédent est affiché. Réessayez plus tard ou demandez à un administrateur de vérifier les index de la table cible."
+  },
+  "view": {
+    "filterInvalid": "Le filtre de cette vue n'est plus valide : le champ référencé \"{{fieldName}}\" a été supprimé. La vue affiche désormais tous les enregistrements sans filtrage. Ouvrez les paramètres d’affichage pour reconfigurer."
+  },
+  "record": {
+    "concurrentEditConflict": "Cet enregistrement vient d'être modifié par {{collaboratorName}} : vos modifications ne sont pas encore enregistrées. Votre saisie est conservée : actualisez pour continuer la modification sur la dernière version, ou cliquez sur \"Je confirme, écraser\" pour forcer l'enregistrement.",
+    "restoreConflict": "Impossible de restaurer cet enregistrement à son emplacement d'origine : {{reason}}. Continuer peut créer des données en double ou mal alignées. Vérifiez la dernière structure du tableau ou utilisez plutôt \"Dupliquer comme nouvelle ligne\".",
+    "trash": {
+      "panelTitle": "Enregistrer la corbeille",
+      "description": "Les enregistrements supprimés au cours des 30 derniers jours peuvent être restaurés dans le tableau ici.",
+      "expiryHint": "Les enregistrements datant de plus de 30 jours ont été définitivement effacés et ne peuvent pas être restaurés ici. Pour les données plus anciennes, contactez l'administrateur de votre organisation pour récupérer à partir d'une sauvegarde.",
+      "empty": "La corbeille est vide. Aucun enregistrement n'a été supprimé au cours des 30 derniers jours.",
+      "loading": "Chargement des enregistrements supprimés…",
+      "loadFailed": "Échec du chargement de la corbeille. Veuillez réessayer plus tard. Contactez l'administrateur de votre organisation si l'échec persiste.",
+      "trashedAt": "Supprimé à {{time}}",
+      "restore": "Restaurer dans la table",
+      "restoreSelected": "Restaurer la sélection ({{count}})",
+      "restoreAll": "Tout restaurer",
+      "selectAll": "Tout sélectionner",
+      "clearSelection": "Effacer la sélection",
+      "refresh": "Actualiser",
+      "close": "Fermer",
+      "untitled": "(Sans titre)",
+      "restoreSuccess": "Restauration d'un enregistrement dans la table.",
+      "restoreSuccessBatch": "Enregistrements {{count}} restaurés dans la table.",
+      "restoreFailed": "Échec de la restauration : temporairement impossible d'atteindre le serveur. Veuillez réessayer plus tard. Contactez l'administrateur de votre organisation si l'échec persiste.",
+      "restoreBatchPartial": "Enregistrements {{restored}} restaurés, {{failed}} a échoué : {{firstError}}.",
+      "batchLimit": "Jusqu'à 1 000 enregistrements peuvent être restaurés par lot. Divisez-vous en petits groupes."
+    },
+    "degraded": {
+      "badgeLabel": "Données dégradées",
+      "badgeTooltip": "La structure des lignes de cet enregistrement a été restaurée, mais ses valeurs de champ sont devenues obsolètes et ne peuvent pas être récupérées ; les cellules apparaissent vides.",
+      "toastSingle": "1 enregistrement a été restauré, mais ses valeurs de champ sont devenues obsolètes et ne peuvent pas être récupérées ; les cellules apparaissent vides. Contactez votre administrateur pour restaurer à partir d'une sauvegarde si vous avez besoin de toutes les données.",
+      "toastBatch": "Enregistrements {{restored}} restaurés, dont {{degraded}} ont uniquement leur structure restaurée car leurs valeurs sont sorties de l'histoire ; leurs cellules apparaissent vides. Contactez votre administrateur pour restaurer à partir d'une sauvegarde si vous avez besoin de toutes les données.",
+      "rowAriaLabel": "Ligne dégradée : les valeurs des champs ont expiré et ne peuvent pas être restaurées."
+    }
+  },
+  "import": {
+    "fieldUnmapped": "Importez les colonnes {{count}} trouvées en amont sans mappage de champ cible (par exemple \"{{exampleColumn}}\"). Ces colonnes seront ignorées sans affecter les autres. Mappez-les explicitement dans « Mappage de champ » ou cochez « Ignorer les colonnes non mappées » pour continuer.",
+    "failed": "L'importation a échoué à la ligne {{rowNo}} : colonne \"{{columnName}}\" {{expected}}, mais le fichier contient \"{{actualValue}}\". L'importation s'est arrêtée ; les lignes déjà importées suivent le dernier indice. Corrigez le mappage des cellules ou des colonnes et réimportez ; pour les problèmes volumineux, essayez un fichier plus petit."
+  },
+  "undo": {
+    "failed": "Impossible d'annuler la dernière action : {{reason}}. Le contenu du tableau reste inchangé. Actualisez et réessayez ; si cela échoue toujours, vous pouvez essayer de récupérer à partir de l'historique des versions ou de la corbeille."
+  },
+  "admin": {
+    "outbox": {
+      "title": "Administrateur de file d'attente calculée",
+      "description": "Affichez et gérez l’état des tâches de calcul en arrière-plan.",
+      "summaryTab": "Résumé",
+      "tasksTab": "Tâches",
+      "grayscaleTab": "Niveaux de gris",
+      "loading": "Chargement…",
+      "loadFailed": "Échec du chargement. Veuillez réessayer plus tard.",
+      "retry": "Réessayer",
+      "noData": "Aucune tâche de calcul",
+      "refresh": "Actualiser",
+      "exportCsv": "Exporter au format CSV",
+      "summary": {
+        "title": "Résumé de la file d'attente",
+        "pending": "En attente",
+        "processing": "Traitement",
+        "succeeded": "Réussi (24h)",
+        "failed": "Échec (24h)",
+        "dlq": "Échec répété",
+        "cancelled": "Annulé",
+        "oldestPending": "Le plus ancien en attente"
+      },
+      "hotspots": {
+        "title": "Points chauds de défaillance (24h)",
+        "table": "Tableau",
+        "count": "Échecs",
+        "lastError": "Dernière erreur",
+        "empty": "Aucun échec au cours des dernières 24 heures"
+      },
+      "task": {
+        "status": "Statut",
+        "table": "Tableau",
+        "createdAt": "Créé à",
+        "updatedAt": "Mis à jour à",
+        "actions": "Actions",
+        "retryAction": "Réessayer",
+        "cancelAction": "Annuler",
+        "pauseAction": "Pause",
+        "retrySuccess": "Tâche en file d'attente pour nouvelle tentative",
+        "retryFailed": "Échec de la nouvelle tentative : {{reason}}",
+        "cancelSuccess": "Tâche annulée",
+        "cancelFailed": "Échec de l'annulation : {{reason}}",
+        "pauseSuccess": "Tâche suspendue",
+        "pauseFailed": "Échec de la pause : {{reason}}",
+        "statusPending": "En attente",
+        "statusProcessing": "Traitement",
+        "statusSucceeded": "Réussi",
+        "statusFailed": "Échec",
+        "statusCancelled": "Annulé",
+        "statusDlq": "DLQ"
+      },
+      "grayscale": {
+        "title": "Configuration des niveaux de gris",
+        "mode": "Mode actuel",
+        "modeDisabled": "Désactivé",
+        "modeGlobal": "Activé à l'échelle mondiale",
+        "modeAllowlist": "Liste verte",
+        "allowlist": "Liste verte",
+        "allowlistEmpty": "La liste d'autorisation est vide",
+        "description": "Contrôlez la portée du moteur de calcul asynchrone de la boîte d'envoi. Les changements n'affectent que le processus en cours ; les modifications à l'échelle du cluster nécessitent des variables d'environnement + un redémarrage progressif.",
+        "warning": "La configuration actuelle des niveaux de gris diffère de celle par défaut. Les changements n'affectent que ce processus."
+      },
+      "filterAll": "Tout",
+      "pagination": {
+        "prev": "Précédent",
+        "next": "Suivant",
+        "pageInfo": "Page {{page}}"
+      }
+    },
+    "fieldRecycleBin": {
+      "title": "Champs supprimés",
+      "description": "Les champs supprimés pendant la période de conservation peuvent être restaurés ici. Les champs sont définitivement supprimés après {{days}} jours.",
+      "empty": "Aucun champ supprimé",
+      "loading": "Chargement…",
+      "loadFailed": "Échec du chargement. Veuillez réessayer plus tard.",
+      "fieldName": "Nom du champ",
+      "fieldType": "Tapez",
+      "deletedAt": "Supprimé à",
+      "daysRemaining": "Jours restants",
+      "daysRemainingValue": "{{days}} jours",
+      "actions": "Actions",
+      "restoreAction": "Champ de restauration",
+      "restoreSuccess": "Champ \"{{name}}\" restauré.",
+      "restoreFailed": "Échec de la restauration : {{reason}}",
+      "refresh": "Actualiser",
+      "close": "Fermer",
+      "ttlHint": "Les champs supprimés sont conservés pendant {{days}} jours, puis définitivement supprimés."
+    },
+    "integrity": {
+      "title": "Contrôle d'intégrité",
+      "checkAction": "Vérifier",
+      "repairAction": "Réparation",
+      "checking": "Vérification…",
+      "repairing": "Réparation…",
+      "noDrift": "Aucune dérive trouvée",
+      "driftFound": "{{count}} dérive(s) trouvée(s)",
+      "autoFixable": "Réparable automatiquement",
+      "manualFix": "Correction manuelle requise"
+    }
+  },
+  "banner": {
+    "cascadeComputing": "La table est informatique…",
+    "cascadeComputingDesc": "Les champs calculés en arrière-plan sont en cours de recalcul. Les résultats seront mis à jour automatiquement.",
+    "dlqWarning": "{{count}} échec du ou des calculs",
+    "dlqWarningDesc": "{{count}} Les tâches de calcul en arrière-plan ont échoué. Contactez votre administrateur pour plus de détails."
+  }
+}

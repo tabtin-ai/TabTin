@@ -1,0 +1,46 @@
+{
+  "name": "@tabtin/security-policy",
+  "version": "0.1.0",
+  "description": "Unified security policy engine for TabTin — SSOT for authorization across all runtimes",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./hardline-v3-rules.json": {
+      "source": "./src/hardline-v3-rules.json",
+      "import": "./dist/hardline-v3-rules.json",
+      "default": "./dist/hardline-v3-rules.json"
+    },
+    "./approval-contract": {
+      "source": "./src/approval-contract.ts",
+      "types": "./dist/approval-contract.d.ts",
+      "import": "./dist/approval-contract.js",
+      "default": "./dist/approval-contract.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "build:dts": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@tabtin/agent-modes": "workspace:*",
+    "@tabtin/terminal-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@vitest/coverage-v8": "4.0.18",
+    "tsup": "^8.0.0",
+    "typescript": "^5.2.2",
+    "vitest": "4.0.18"
+  },
+  "files": [
+    "dist"
+  ]
+}

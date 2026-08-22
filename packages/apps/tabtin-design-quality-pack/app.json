@@ -1,0 +1,74 @@
+{
+  "id": "tabtin-design-quality-pack",
+  "name": "Design Quality Pack",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "设计质量：去 AI 味界面、视觉走查、演示视觉润色、生图 Brief。",
+  "icon": "palette",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "design",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 25
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/ui-anti-slop",
+    "skills/visual-qa-pass",
+    "skills/slide-visual-polish",
+    "skills/image-brief-for-gen"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "ui-anti-slop": {
+        "enabled": true
+      },
+      "visual-qa-pass": {
+        "enabled": true
+      },
+      "slide-visual-polish": {
+        "enabled": true
+      },
+      "image-brief-for-gen": {
+        "enabled": true
+      }
+    }
+  }
+}

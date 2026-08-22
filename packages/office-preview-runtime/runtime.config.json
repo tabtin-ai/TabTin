@@ -1,0 +1,39 @@
+{
+  "version": "2026.07.09",
+  "archiveName": "office-preview-runtime.tar.gz",
+  "platforms": {
+    "darwin-arm64": {
+      "url": "https://tabtin-cn-dev.oss-cn-shanghai.aliyuncs.com/desktop-updates/office-preview-runtime-darwin-arm64.tar.gz",
+      "sha256": "90506c6e439eb5c23bd3e861ee8940f76eef332c7c13286248c6b2d17ae67548",
+      "size": 287927070,
+      "tools": {
+        "soffice": "bin/soffice",
+        "pdftoppm": "bin/pdftoppm"
+      }
+    },
+    "darwin-x64": {
+      "url": "https://tabtin-cn-dev.oss-cn-shanghai.aliyuncs.com/desktop-updates/office-preview-runtime-darwin-x64.tar.gz",
+      "sha256": "fa4199b49e06a10d2066f4c690f4c61f7da83025967c24e08203f26ae1f990c7",
+      "size": 299065607,
+      "tools": {
+        "soffice": "bin/soffice",
+        "pdftoppm": "bin/pdftoppm"
+      }
+    },
+    "win32-x64": {
+      "url": "https://tabtin-cn-dev.oss-cn-shanghai.aliyuncs.com/desktop-updates/office-preview-runtime.tar.gz",
+      "sha256": "7f710df7724f47f43899a01a8a8cc0299c9ffb24794841afbd9898b9c59685e9",
+      "size": 512457014,
+      "tools": {
+        "soffice": "native/libreoffice-headless/program/soffice.exe",
+        "pdftoppm": "native/poppler/bin/pdftoppm.exe"
+      }
+    },
+    "win32-arm64": {
+      "tools": {
+        "soffice": "native/libreoffice-headless/program/soffice.exe",
+        "pdftoppm": "native/poppler/bin/pdftoppm.exe"
+      }
+    }
+  }
+}

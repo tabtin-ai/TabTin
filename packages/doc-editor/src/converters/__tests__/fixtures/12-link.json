@@ -1,0 +1,22 @@
+{
+  "name": "link-with-target",
+  "description": "Link with href and target attributes",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          { "type": "text", "text": "Visit " },
+          {
+            "type": "text",
+            "text": "TabTin",
+            "marks": [{ "type": "link", "attrs": { "href": "https://www.example.com", "target": "_blank" } }]
+          },
+          { "type": "text", "text": " for more" }
+        ]
+      }
+    ]
+  },
+  "expectedMarkdown": "Visit [TabTin](https://www.example.com) for more"
+}

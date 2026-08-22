@@ -1,0 +1,253 @@
+{
+  "appTitle": "TabTin - Creative Workspace",
+  "close": "Close",
+  "delete": "Delete",
+  "up": "Move up",
+  "down": "Move down",
+  "save": "Save",
+  "cancel": "Cancel",
+  "edit": "Edit",
+  "logout": "Log out",
+  "loading": "Loading",
+  "userFallback": "User",
+  "loadingEllipsis": "Loading...",
+  "errorTitle": "Error",
+  "countdown": "{{count}}s",
+  "theme": "Toggle theme",
+  "switchLanguage": "中文",
+  "reload": "Reload",
+  "home": {
+    "title": "Welcome to TabTin",
+    "subtitle": "{{name}}, the web version is under construction. More features coming soon."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "back": "Back to home"
+  },
+  "errorBoundary": {
+    "title": "Something went wrong",
+    "description": "The application encountered an unexpected error. Please try reloading."
+  },
+  "errors": {
+    "requestFailed": "Request failed",
+    "networkError": "Network error",
+    "networkErrorDetail": "Network error, please check your connection",
+    "loginFailed": "Login failed",
+    "registerFailed": "Registration failed"
+  },
+  "apiErrors": {
+    "VALIDATION_ERROR": "Invalid input, please check and try again",
+    "RATE_LIMITED": "Too many requests, please try again later",
+    "UNAUTHORIZED": "Authentication failed, please log in again",
+    "ACCOUNT_LOCKED": "Account locked, please contact support",
+    "NOT_FOUND": "Requested resource not found",
+    "FORBIDDEN": "You do not have permission to perform this action",
+    "INTERNAL_ERROR": "Internal server error, please try again later"
+  },
+  "toast": {
+    "registerSuccess": "Registration successful, please log in",
+    "resetPasswordSuccess": "Password reset successful, please log in again"
+  },
+  "webModules": {
+    "previewBadge": "Web Preview",
+    "backToSpace": "Back to Space",
+    "doc": {
+      "invalidIdTitle": "Invalid document ID",
+      "invalidIdDesc": "Please open a document from a space.",
+      "loadFailedTitle": "Failed to load document",
+      "loadFailedDesc": "The document content is unavailable right now. Please try again later.",
+      "editorTitle": "Document Editor",
+      "untitled": "Untitled document",
+      "versionLabel": "Version {{version}}",
+      "updatedAtLabel": "Updated: {{value}}",
+      "tagsCount": "{{count}} tags",
+      "noTags": "No tags",
+      "tagsTitle": "Document tags",
+      "emptyContent": "This document does not have any content yet"
+    },
+    "slide": {
+      "invalidIdTitle": "Invalid presentation ID",
+      "invalidIdDesc": "Please open a presentation from a space.",
+      "loadFailedTitle": "Failed to load presentation",
+      "loadFailedDesc": "The presentation is unavailable right now. Please try again later.",
+      "readonlyHint": "This round provides a read-only preview first. The full editor shell will be connected to web after host decoupling.",
+      "untitled": "Untitled presentation",
+      "pageCountLabel": "{{count}} pages",
+      "canvasSizeLabel": "Canvas {{width}} × {{height}}",
+      "updatedAtLabel": "Updated: {{value}}",
+      "noPages": "This presentation does not have any pages yet",
+      "pageListTitle": "Pages",
+      "pageLabel": "Page {{index}}",
+      "currentPage": "Current"
+    }
+  },
+  "share": {
+    "dialog": {
+      "title": "Share \"{{title}}\"",
+      "untitled": "Untitled",
+      "close": "Close",
+      "apply": "Apply",
+      "copy": "Copy link",
+      "refresh": "Refresh link",
+      "refreshWarning": "Refreshing immediately invalidates the old link. Proceed with care.",
+      "refreshConfirm": "Refreshing will immediately invalidate the old link. Continue?",
+      "refreshConfirmTitle": "Refresh share link",
+      "cancel": "Cancel",
+      "retry": "Retry",
+      "passwordSwitchWarning": "Password field is empty. Changing visibility or permission will clear the existing password — re-enter to keep it.",
+      "password": "Password protection (optional)",
+      "passwordPlaceholder": "Optional. Leave empty to skip password.",
+      "passwordSetPlaceholder": "Set (leave empty to clear)",
+      "visitCount": "Visits",
+      "readOnlyHint": "Your role cannot invite or modify collaborators. Read-only view.",
+      "collaborators": {
+        "section": "Invite collaborators",
+        "sectionReadOnly": "Collaborators",
+        "confirmRemoveTitle": "Remove collaborator",
+        "search": "Search teammates by nickname…",
+        "invite": "Invite",
+        "noSelection": "Pick a member first.",
+        "inviteSuccess": "Invited {{count}} collaborator(s)",
+        "invitePartial": "Some invitations were skipped",
+        "inviteFailed": "Invitation failed",
+        "permissionUpdated": "Permission updated",
+        "permissionUpdateFailed": "Permission update failed",
+        "confirmRemove": "Remove {{name}} from collaborators?",
+        "remove": "Remove",
+        "removeSuccess": "Collaborator removed",
+        "removeFailed": "Remove failed",
+        "noResults": "No matching members",
+        "loadFailed": "Failed to load collaborators",
+        "empty": "No collaborators yet",
+        "ownerBadge": "Owner"
+      },
+      "permission": {
+        "viewer": "Viewer",
+        "editor": "Editor",
+        "admin": "Admin"
+      },
+      "publicLink": {
+        "section": "Public link",
+        "scope": "Link visibility",
+        "scopeOption": {
+          "public": "Anyone",
+          "organization": "Organization only"
+        },
+        "scopeHint": {
+          "public": "Anyone with the link can access.",
+          "organization": "Only signed-in organization members can access via this link."
+        },
+        "permission": "Permission",
+        "permissionOption": {
+          "view": "View",
+          "comment": "Comment",
+          "edit": "Edit"
+        },
+        "enabledToast": "Public link enabled",
+        "disabledToast": "Public link disabled",
+        "toggleFailed": "Operation failed",
+        "scopeUpdated": "Link visibility updated",
+        "scopeNarrowedToast": "Switched to organization only; the previous public link is now invalid",
+        "scopeUpdateFailed": "Update failed",
+        "permissionUpdated": "Permission updated",
+        "permissionUpdateFailed": "Update failed",
+        "passwordUpdated": "Password updated",
+        "passwordUpdateFailed": "Update failed",
+        "copyFailed": "Copy failed",
+        "refreshedToast": "Link regenerated",
+        "refreshFailed": "Refresh failed",
+        "disabledHint": "Enabled links default to organization members only. Switching to Anyone requires confirmation.",
+        "disabledForRole": "Only owners can manage",
+        "publicConfirmTitle": "Make this link accessible to anyone?",
+        "publicConfirmDescription": "This is a high-risk change: anyone with the link can access the content without joining the organization. It takes effect immediately.",
+        "publicConfirmAction": "Confirm public access"
+      },
+      "skipped": {
+        "notInOrganization": "Not in the organization",
+        "isOwner": "Already the owner",
+        "self": "You cannot invite yourself"
+      },
+      "permissionUpgrade": "upgraded to",
+      "permissionDowngrade": "downgraded to"
+    },
+    "toast": {
+      "noLongerAccessible": "You no longer have access",
+      "summaryNoNavigate": "Summary notification — see list for details"
+    },
+    "editor": {
+      "removed": {
+        "title": "You have been removed from \"{{title}}\"",
+        "titleAuto": "You can no longer access \"{{title}}\" — you left the organization",
+        "hint": "Recent edits are kept locally but will not be uploaded.",
+        "cta": "Return to space"
+      },
+      "permissionChanged": {
+        "toast": "Your permission was changed to {{permission}}; editor switched to read-only"
+      }
+    },
+    "permission": {
+      "viewerLabel": "View",
+      "editorLabel": "Edit",
+      "adminLabel": "Manage"
+    }
+  },
+  "notification": {
+    "title": "Notifications",
+    "markAllRead": "Mark all read",
+    "loading": "Loading…",
+    "empty": "No notifications",
+    "navigateFailed": "Failed to navigate",
+    "navigateOrganizationNotFound": "Organization not found or access denied",
+    "types": {
+      "resource_shared": "Resource Shared",
+      "unknown": "Notification",
+      "invite_received": "Invitation Received",
+      "invite_accepted": "Invitation Accepted",
+      "member_added": "Member Added",
+      "member_removed": "Member Removed",
+      "owner_reassigned_summary": "Member Removed",
+      "role_changed": "Role Changed",
+      "ownership_transfer": "Ownership Transfer",
+      "quota_warning": "Quota Warning",
+      "balance_low": "Balance Alert",
+      "trash_expiry_warning": "Trash expiry warning",
+      "system": "System",
+      "extension_event": "Extension Event",
+      "organization.invitation": "Organization invitation",
+      "organization.invitation.cancelled": "Invitation cancelled",
+      "organization.invitation.responded": "Invitation responded",
+      "organization.invitation.sync": "Invitation sync",
+      "agent": {
+        "hitl": {
+          "waiting": "Waiting for confirmation"
+        },
+        "task": {
+          "completed": "Task completed",
+          "error": "Task error",
+          "interrupted": "Task interrupted"
+        }
+      },
+      "tabdoc": {
+        "comment": {
+          "mention": "Comment mention"
+        }
+      },
+      "tabdata": {
+        "record": {
+          "user_assigned": "Member field assignment"
+        }
+      },
+      "tracker": {
+        "run": {
+          "started": "Automation task started",
+          "completed": "Automation task completed",
+          "failed": "Automation task failed"
+        },
+        "health_alert": "Automation task health alert",
+        "trigger": {
+          "filtered": "Trigger condition not matched"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "title": "통",
+  "installedCount": "{{count}} 설치됨",
+  "section": {
+    "installed": "설치됨",
+    "available": "가능"
+  },
+  "action": {
+    "install": "설치",
+    "uninstall": "제거",
+    "enable": "활성화",
+    "disable": "비활성화",
+    "pin": "핀",
+    "unpin": "고정 해제",
+    "edit": "편집",
+    "retry": "재시도",
+    "saveAll": "모두 저장"
+  },
+  "confirm": {
+    "uninstall": "\"{{name}}\"을(를) 제거하시겠습니까?",
+    "delete": "정말로 '{{name}}'을 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.",
+    "unsavedChanges": "저장되지 않은 변경사항이 있습니다. 정말 떠나시겠어요?"
+  },
+  "empty": {
+    "title": "아직 통이 없습니다",
+    "description": "수행하려는 작업을 에이전트에 알리면 Tin을 생성하고 설치할 수 있습니다. 팀원이 게시한 Tin은 아래 사용 가능 목록에 표시됩니다.",
+    "askAgent": "상담원에게 Tin 생성을 요청하세요.",
+    "agentPrompt": "Tin 플러그인을 만드는 데 도움을 주세요. 먼저 어떤 시나리오를 해결하고 싶은지 물어본 후(예: 페이지 자동 강조 표시, 정보 추출, 브라우저 도우미) 이 작업 공간에 만들고 설치하세요.",
+    "errorNoSession": "지금은 채팅을 시작할 수 없습니다. 다시 시도해 주세요.",
+    "openPanel": "오픈 틴스 패널"
+  },
+  "sidePanel": {
+    "emptyTitle": "주석이 설치되지 않음",
+    "emptyDescription": "Tins는 탐색 중에 활성화되고 도우미 기능을 제공하는 스마트 플러그인입니다.",
+    "openPanel": "주석 설치"
+  },
+  "home": {
+    "loading": "로드 중...",
+    "viewAll": "{{count}} 통 모두 보기...",
+    "activeCount": "{{count}} 주석 활성",
+    "loadError": "통을 로드하지 못했습니다.",
+    "retry": "재시도"
+  },
+  "activated": "활성화됨",
+  "editor": {
+    "tabs": {
+      "panelHtml": "UI 패널",
+      "contentScript": "콘텐츠 스크립트",
+      "backgroundScript": "배경 스크립트",
+      "agentInstructions": "에이전트 지침"
+    },
+    "placeholder": {
+      "panelHtml": "<!-- 여기에 Tin UI 패널 HTML을 작성하세요 -->\n<!-- CDN 라이브러리를 사용하고 window.tin API를 통해 호스트와 통신합니다 -->",
+      "contentScript": "// 탐색된 페이지에 스크립트가 삽입되었습니다.\n// 페이지 DOM에 액세스하고 수정할 수 있습니다.",
+      "backgroundScript": "// 기본 프로세스 샌드박스에서 실행되는 백그라운드 스크립트",
+      "agentInstructions": "# 에이전트 지침\n\n이 Tin의 기능과 상호 작용 방법을 설명하세요."
+    },
+    "lang": {
+      "html": "HTML",
+      "javascript": "자바스크립트",
+      "markdown": "마크다운"
+    },
+    "charCount": "{{count}} 문자"
+  },
+  "toast": {
+    "installSuccess": "\"{{name}}\"이(가) 성공적으로 설치되었습니다",
+    "installFailed": "설치 실패",
+    "uninstallSuccess": "'{{name}}'이 제거됨",
+    "uninstallFailed": "제거 실패",
+    "activateSuccess": "\"{{name}}\" 활성화됨",
+    "activateFailed": "활성화 실패",
+    "disableSuccess": "\"{{name}}\" 비활성화됨",
+    "disableFailed": "비활성화 실패",
+    "deleteSuccess": "'{{name}}'이 삭제되었습니다.",
+    "deleteFailed": "삭제 실패",
+    "enableFailed": "활성화 실패",
+    "pinFailed": "핀 작업 실패",
+    "loadFailed": "로드 실패",
+    "saveSuccess": "저장 성공",
+    "saveFailed": "저장 실패",
+    "persistVarFailed": "변수를 저장하지 못했습니다."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "apiErrors": {
+    "fetchListFailed": "No se pudieron recuperar los registros",
+    "fetchDetailFailed": "No se pudieron recuperar los detalles del registro",
+    "createFailed": "No se pudo crear el registro",
+    "updateFailed": "No se pudo actualizar el registro",
+    "deleteFailed": "No se pudo eliminar el registro",
+    "bulkCreateFailed": "No se pudieron crear registros de forma masiva",
+    "bulkUpdateFailed": "No se pudieron actualizar registros de forma masiva",
+    "bulkDeleteFailed": "No se pudieron eliminar registros de forma masiva"
+  },
+  "logs": {
+    "fetchDetailSuccess": "Detalles del registro obtenidos",
+    "createSuccess": "Registro creado",
+    "bulkUpdateMissingRecord": "Falta el registro de destino en el resultado de la actualización masiva",
+    "deleteSuccess": "Registro eliminado",
+    "bulkProgress": "Progreso de la operación masiva",
+    "bulkCreateSuccess": "Creación masiva completada",
+    "bulkCreatePartialFailed": "La creación masiva falló parcialmente",
+    "bulkUpdateSuccess": "Actualización masiva completada",
+    "bulkUpdatePartialFailed": "La actualización masiva falló parcialmente",
+    "syncViewRecordsSuccess": "Ver registros sincronizados",
+    "syncViewRecordsFailed": "No se pudieron sincronizar los registros de vista",
+    "bulkDeleteSuccess": "Eliminación masiva completada",
+    "bulkDeletePartialFailed": "La eliminación masiva falló parcialmente",
+    "mergeIncremental": "Registros incrementales {{count}} fusionados, nueva versión: {{version}}",
+    "removeByIds": "Registros eliminados"
+  }
+}

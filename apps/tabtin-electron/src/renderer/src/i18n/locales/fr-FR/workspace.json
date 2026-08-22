@@ -1,0 +1,468 @@
+{
+  "welcomeTitle": "Bienvenue sur TabTin",
+  "welcomeSubtitle": "Plateforme de travail IA unifiée. Créez un nouvel espace de travail ou choisissez-en un à gauche.",
+  "welcomeSubtitleGuest": "Connectez-vous pour créer des espaces de travail et commencer à collaborer.",
+  "welcome": {
+    "title": "TabTin",
+    "tagline": "Votre plateforme de travail IA",
+    "conceptIntro": "Dans TabTin, un espace de travail est un site de travail persistant lié à un périphérique d'exécution et à un répertoire de travail. Il regroupe les conversations, les applications, les ressources et le contexte d'exécution afin que les agents puissent aider dans ces limites.",
+    "loginCta": "Se connecter / S'inscrire",
+    "learnMore": "En savoir plus →",
+    "readyTitle": "Tout est prêt !",
+    "readyDesc": "Créez votre premier espace de travail pour commencer. Un espace de travail lie un périphérique d'exécution et un répertoire de travail, conservant ensemble les conversations, les applications, les ressources et le contexte d'exécution.",
+    "defaultAgentName": "Espace de travail par défaut",
+    "createFirstAgent": "Créez votre premier espace de travail",
+    "creating": "Création...",
+    "orCollaborate": "ou collaborer avec d'autres",
+    "createGroupRoom": "Créer une salle de groupe d'agents",
+    "createDM": "Démarrer un DM",
+    "createFailed": "Échec de la création de l'espace de travail",
+    "noOrganization": "Veuillez d'abord sélectionner une organisation",
+    "moreApps": "Plus des vidéos, des toiles, des mémos, des objectifs, des e-mails et bien plus encore.",
+    "apps": {
+      "tabdata": "TabData",
+      "tabdataDesc": "Tables intelligentes alimentées par l'IA",
+      "tabdoc": "TabDoc",
+      "tabdocDesc": "Documents collaboratifs",
+      "tabslide": "TabSlide",
+      "tabslideDesc": "Créateur de présentations",
+      "browser": "Navigateur",
+      "browserDesc": "Navigation Web intelligente",
+      "tabcode": "TabCode",
+      "tabcodeDesc": "Code et borne"
+    }
+  },
+  "actions": {
+    "createAgent": "Créer un espace de travail",
+    "loginToStart": "Connectez-vous pour commencer",
+    "viewDocs": "Afficher les documents"
+  },
+  "selector": {
+    "loginRequired": "Veuillez vous connecter",
+    "placeholder": "Sélectionnez une organisation",
+    "defaultBadge": "Par défaut",
+    "empty": "Aucune organisation pour l'instant",
+    "pendingInvitations": "Invitations en attente",
+    "invitedAs": "Invité en tant que {{role}}",
+    "actions": {
+      "create": "Créer une organisation",
+      "settings": "Paramètres de l'organisation",
+      "members": "Gestion des membres"
+    }
+  },
+  "invitationResponse": {
+    "title": "Invitation à l'organisation",
+    "description": "Vous avez été invité à rejoindre une organisation",
+    "workspaceName": "Organisation",
+    "invitedBy": "Invité par {{name}}",
+    "role": "Rôle",
+    "expiresAt": "Expire",
+    "accept": "Accepter",
+    "reject": "Refuser",
+    "accepting": "Rejoindre...",
+    "rejecting": "En déclin...",
+    "accepted": "Organisation rejointe \"{{name}}\"",
+    "rejected": "Invitation refusée"
+  },
+  "invitationList": {
+    "title": "Invitations en attente",
+    "description": "Vous avez {{count}} des invitations d'organisation en attente",
+    "from": "De {{name}}"
+  },
+  "create": {
+    "errors": {
+      "failed": "La création a échoué"
+    }
+  },
+  "views": {
+    "newTab": "Nouvel onglet"
+  },
+  "settings": {
+    "title": "Paramètres de l'organisation",
+    "tabs": {
+      "general": "Général",
+      "llm": "Paramètres du modèle"
+    },
+    "validation": {
+      "nameRequired": "Le nom de l'organisation est requis",
+      "nameMismatch": "Le nom de l'organisation ne correspond pas",
+      "nameTooLong": "Le nom de l'organisation doit comporter 100 caractères maximum"
+    },
+    "errors": {
+      "updateFailed": "La mise à jour a échoué",
+      "deleteFailed": "Échec de la suppression",
+      "leaveFailed": "Le congé a échoué"
+    },
+    "fields": {
+      "icon": "Icône",
+      "avatar": "Avatar de l'organisation",
+      "name": "Nom",
+      "namePlaceholder": "Nom de l'organisation",
+      "nameHint": "{{count}}/100 caractères",
+      "description": "Description (facultatif)",
+      "descriptionPlaceholder": "Décrire l'organisation",
+      "descriptionHint": "{{count}}/500 caractères"
+    },
+    "avatar": {
+      "pendingSave": "Avatar recadré ; enregistrer le profil de l'organisation pour postuler",
+      "pendingRemove": "L'avatar sera supprimé après avoir enregistré",
+      "hint": "JPG, PNG, GIF ou WebP jusqu'à 5 Mo. Les GIF deviennent des images fixes.",
+      "cropTitle": "Avatar de l'organisation des cultures"
+    },
+    "actions": {
+      "save": "Enregistrer les modifications",
+      "saving": "Sauvegarde...",
+      "saved": "Enregistré",
+      "delete": "Supprimer l'organisation",
+      "leave": "Quitter l'organisation",
+      "cancel": "Annuler",
+      "confirmDelete": "Supprimer",
+      "deleting": "Suppression...",
+      "transfer": "Transfert"
+    },
+    "danger": {
+      "title": "Zone dangereuse",
+      "deleteTitle": "Supprimer l'organisation",
+      "deleteDefault": "L'organisation par défaut ne peut pas être supprimée",
+      "deleteDesc": "Cela supprimera définitivement l'organisation et toutes ses données",
+      "leaveTitle": "Quitter l'organisation",
+      "leaveDesc": "Vous perdrez l'accès et aurez besoin d'une nouvelle invitation pour vous réinscrire.",
+      "transferTitle": "Transférer la propriété",
+      "transferDesc": "Transfert à un membre existant"
+    },
+    "confirm": {
+      "title": "Confirmer la suppression de l'organisation ?",
+      "subtitle": "Cela supprimera définitivement :",
+      "items": {
+        "organization": "Organisation \"{{name}}\"",
+        "spaces": "Tous les agents et tables",
+        "records": "Tous les enregistrements",
+        "members": "Toutes les relations avec les membres"
+      },
+      "warning": "⚠️ Cette action est irréversible !",
+      "inputLabel": "Saisissez le nom de l'organisation pour confirmer la suppression :"
+    },
+    "permissions": {
+      "ownerOnly": "💡 Seul le propriétaire de l'organisation peut modifier les paramètres"
+    }
+  },
+  "llm": {
+    "defaultConfig": {
+      "title": "Configuration du modèle par défaut",
+      "subtitle": "Lorsque les membres de l'équipe ne choisissent pas de modèle, cette valeur par défaut est utilisée en premier.",
+      "configured": "Configuré",
+      "notConfigured": "Non configuré",
+      "currentModel": "Modèle par défaut actuel",
+      "pickHint": "Sélectionnez un modèle par défaut",
+      "unavailableCurrent": "Actuellement indisponible",
+      "selectHelp": "Le modèle par défaut est utilisé pour les nouvelles sessions et tâches sans modèle spécifié."
+    },
+    "presetSection": {
+      "title": "Modèles prédéfinis TabTin",
+      "subtitle": "Modèles de plateforme intégrés. Prêt à l'emploi par défaut : aucune configuration de canal n'est requise.",
+      "collapse": "Réduire les modèles prédéfinis",
+      "expandHint": "{{count}} plus de modèles de plateforme. Développez pour tout voir."
+    },
+    "providers": {
+      "title": "Canaux des fournisseurs",
+      "desc": "Ajouter des canaux de modèle cloud (compatible OpenAI)",
+      "provider": "Fournisseur",
+      "providerKey": "Touche de chaîne",
+      "displayName": "Nom d'affichage",
+      "baseUrl": "URL de base de l'API",
+      "apiKey": "Clé API",
+      "scope": "Visibilité",
+      "scopeOrganization": "Organisation",
+      "scopeUser": "Personnel",
+      "scopeHint": "Votre rôle ne peut créer que des chaînes personnelles",
+      "save": "Enregistrer les modifications",
+      "cancel": "Annuler",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "enable": "Activer",
+      "disable": "Désactiver",
+      "validate": "Tester la connexion",
+      "validating": "Test...",
+      "validateSuccess": "Connexion OK",
+      "validateFailed": "La connexion a échoué",
+      "statusEnabled": "Activé",
+      "statusDisabled": "Désactivé",
+      "create": "Ajouter une chaîne",
+      "creating": "Création...",
+      "empty": "Aucune chaîne pour l'instant",
+      "modelCount": "Modèles {{count}}",
+      "createSuccess": "Chaîne ajoutée",
+      "updateSuccess": "Chaîne mise à jour",
+      "deleteSuccess": "Chaîne supprimée",
+      "enableSuccess": "Canal activé",
+      "disableSuccess": "Chaîne désactivée",
+      "confirmDelete": "Supprimer la chaîne « {{name}} » ?",
+      "validation": {
+        "required": "Veuillez remplir l'URL de base et la clé API",
+        "providerKeyInvalid": "Format de clé de chaîne invalide"
+      }
+    },
+    "models": {
+      "title": "Modèles",
+      "desc": "Ajouter des modèles sous une chaîne",
+      "provider": "Chaîne",
+      "providerPlaceholder": "Sélectionnez une chaîne",
+      "searchKeyword": "Modèles de recherche (LiteLLM)",
+      "searchPlaceholder": "par ex. gpt-4o, claude-3.5",
+      "search": "Rechercher",
+      "searching": "Recherche...",
+      "clearSearch": "Effacer",
+      "searchResults": "Résultats (cliquez pour remplir)",
+      "searchValidation": "Entrez un mot-clé de recherche",
+      "searchEmpty": "Aucun modèle correspondant",
+      "modelName": "Nom du modèle",
+      "displayName": "Nom d'affichage",
+      "maxTokens": "Longueur du contexte",
+      "supportsVision": "Vision",
+      "supportsStreaming": "Diffusion en continu",
+      "save": "Enregistrer les modifications",
+      "cancel": "Annuler",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "enable": "Activer",
+      "disable": "Désactiver",
+      "statusEnabled": "Activé",
+      "statusDisabled": "Désactivé",
+      "statusReady": "Prêt",
+      "statusProviderDisabled": "Chaîne désactivée",
+      "statusNotReady": "Pas prêt",
+      "globalOnly": "Système",
+      "organizationOnly": "Organisation",
+      "providerDisabled": "Fournisseur désactivé, modèle indisponible",
+      "create": "Ajouter un modèle",
+      "creating": "Création...",
+      "empty": "Aucun modèle pour l'instant",
+      "userOnly": "Personnel",
+      "createSuccess": "Modèle ajouté",
+      "updateSuccess": "Modèle mis à jour",
+      "deleteSuccess": "Modèle supprimé",
+      "enableSuccess": "Modèle activé",
+      "disableSuccess": "Modèle désactivé",
+      "confirmDelete": "Supprimer le modèle \"{{name}}\" ?",
+      "validation": {
+        "required": "Veuillez remplir les champs obligatoires",
+        "providerRequired": "Sélectionnez d'abord une chaîne",
+        "maxTokens": "Entrez une longueur de contexte valide"
+      }
+    },
+    "default": {
+      "title": "Modèle par défaut",
+      "desc": "Modèle par défaut pour les nouvelles sessions",
+      "select": "Sélectionnez le modèle par défaut",
+      "save": "Définir par défaut",
+      "saving": "Sauvegarde...",
+      "current": "Valeur par défaut actuelle : {{name}}"
+    },
+    "errors": {
+      "loadProvidersFailed": "Échec du chargement des chaînes",
+      "loadModelsFailed": "Échec du chargement des modèles",
+      "createProviderFailed": "Échec de la création de la chaîne",
+      "updateProviderFailed": "Échec de la mise à jour de la chaîne",
+      "deleteProviderFailed": "Échec de la suppression de la chaîne",
+      "validateProviderFailed": "Échec de la validation du canal",
+      "createModelFailed": "Échec de la création du modèle",
+      "updateModelFailed": "Échec de la mise à jour du modèle",
+      "deleteModelFailed": "Échec de la suppression du modèle",
+      "searchModelFailed": "Échec de la recherche de modèles",
+      "setDefaultModelFailed": "Échec de la définition du modèle par défaut"
+    }
+  },
+  "trashedSpaces": {
+    "title": "Corbeille de l'espace de travail",
+    "subtitle": "Les espaces de travail dans la corbeille peuvent être restaurés pendant la période de conservation, puis supprimés définitivement",
+    "empty": "La corbeille est vide",
+    "emptyHint": "Aucun espace de travail à la poubelle",
+    "trashedAt": "Supprimé le {{date}}",
+    "daysLeft": "Suppressions automatiques dans {{days}} jours",
+    "restore": "Restaurer",
+    "restoring": "Restauration...",
+    "restoreSuccess": "Espace de travail restauré \"{{name}}\"",
+    "restoreFailed": "La restauration a échoué",
+    "permanentDelete": "Supprimer définitivement",
+    "deleteConfirmTitle": "Supprimer définitivement l'espace de travail",
+    "deleteConfirm": "Supprimer définitivement « {{name}} » ? Cela ne peut pas être annulé.",
+    "deleteSuccess": "Espace de travail supprimé définitivement \"{{name}}\"",
+    "deleteFailed": "Échec de la suppression définitive",
+    "loading": "Chargement...",
+    "loadFailed": "Échec du chargement des espaces de travail supprimés",
+    "count": "Espaces de travail {{count}}"
+  },
+  "apiErrors": {
+    "listNoResponse": "Échec de la récupération des organisations : aucune réponse",
+    "listHttpFailed": "Échec de la récupération des organisations : HTTP {{status}}",
+    "listFailed": "Échec de la récupération des organisations",
+    "listInvalid": "Échec de la récupération des organisations : réponse non valide",
+    "detailFailed": "Échec de la récupération de l'organisation",
+    "detailInvalid": "Échec de la récupération de l'organisation : réponse non valide",
+    "createFailed": "Échec de la création de l'organisation",
+    "createInvalid": "Échec de la création de l'organisation : réponse non valide",
+    "updateFailed": "Échec de la mise à jour de l'organisation",
+    "updateInvalid": "Échec de la mise à jour de l'organisation : réponse non valide",
+    "deleteFailed": "Échec de la suppression de l'organisation",
+    "leaveFailed": "Impossible de quitter l'organisation",
+    "healthUnknownStatus": "Statut inconnu",
+    "healthUnexpected": "Le bilan de santé a renvoyé une réponse inattendue",
+    "healthUnavailable": "Service indisponible"
+  },
+  "members": {
+    "title": "Gestion des membres",
+    "subtitle": "Membres {{name}} · {{count}}",
+    "actions": {
+      "add": "Ajouter un membre",
+      "addTitle": "Ajouter un membre",
+      "cancel": "Annuler",
+      "confirmAdd": "Ajouter",
+      "sendInvitation": "Envoyer une invitation",
+      "adding": "Ajout...",
+      "setViewer": "Définir comme spectateur",
+      "setEditor": "Définir comme éditeur",
+      "remove": "Supprimer un membre",
+      "invite": "Inviter",
+      "changeRole": "Rôle",
+      "cancelInvitation": "Annuler l'invitation"
+    },
+    "fields": {
+      "userId": "Identifiant utilisateur",
+      "userIdPlaceholder": "Collez leur identifiant",
+      "userIdHint": "Ils peuvent copier leur identifiant utilisateur depuis Paramètres → Profil",
+      "role": "Rôle"
+    },
+    "roles": {
+      "owner": "Propriétaire",
+      "admin": "Administrateur",
+      "editor": "Éditeur",
+      "viewer": "Visionneuse"
+    },
+    "roleDescriptions": {
+      "owner": "Contrôle total",
+      "admin": "Peut gérer les membres et les paramètres de l'organisation",
+      "editor": "Peut modifier",
+      "viewer": "Visualisation uniquement"
+    },
+    "errors": {
+      "loadFailed": "Échec du chargement des membres",
+      "loadInvalid": "Échec du chargement des membres : réponse non valide",
+      "userIdRequired": "L'ID utilisateur est requis",
+      "roleInvalid": "Le rôle doit être éditeur ou lecteur",
+      "addFailed": "Échec de l'ajout d'un membre",
+      "addInvalid": "Échec de l'ajout du membre : réponse non valide",
+      "updateRoleFailed": "Échec de la mise à jour du rôle",
+      "removeFailed": "Échec de la suppression du membre",
+      "cancelInvitationFailed": "Échec de l'annulation de l'invitation",
+      "permissionDenied": "Vous n'êtes pas autorisé à accéder à cette organisation"
+    },
+    "pendingInvitations": "Invitations en attente ({{count}})",
+    "linkInvitations": "Liens d'invitation ({{count}})",
+    "linkInvitation": "Invitation de lien",
+    "linkInvitationActive": "Actif",
+    "linkInvitationUsed": "{{count}} a rejoint",
+    "directInvitation": "ID utilisateur {{userId}}",
+    "phoneInvitation": "Téléphone {{phone}}",
+    "statusPending": "En attente",
+    "expiresAt": "Expire {{date}}",
+    "confirmRemove": "Supprimer ce membre ?",
+    "ownerSection": "Propriétaire",
+    "memberSection": "Membres ({{count}})",
+    "you": "Vous",
+    "joinedAt": "A rejoint {{date}}",
+    "empty": {
+      "title": "Aucun autre membre pour l'instant",
+      "hint": "Utilisez le bouton ci-dessus pour ajouter des membres"
+    },
+    "permissions": {
+      "ownerOnly": "💡 Seul le propriétaire de l'organisation peut gérer les membres"
+    }
+  },
+  "search": {
+    "placeholder": "Rechercher TabData, TabDoc, TabSlide...",
+    "all": "Tout",
+    "tables": "TabData",
+    "documents": "TabDoc",
+    "presentations": "TabSlide",
+    "code": "TabCode",
+    "videos": "TabVideo",
+    "canvases": "OngletTableau Blanc",
+    "memos": "TabMémo",
+    "sites": "OngletSite",
+    "functions": "Fonctions",
+    "searching": "Recherche...",
+    "error": "La recherche a échoué, veuillez réessayer",
+    "noResults": "Aucun résultat correspondant",
+    "hint": "Saisissez des mots-clés pour rechercher des ressources parmi tous les agents",
+    "navigate": "Naviguer",
+    "open": "Ouvert",
+    "close": "Fermer",
+    "results": "résultats",
+    "shortcutHint": "Ouvrir la recherche",
+    "dialogLabel": "Recherche globale",
+    "inputLabel": "Rechercher des mots-clés",
+    "typeFilter": "Type de filtre",
+    "resultsList": "Résultats de la recherche",
+    "shortcuts": "Raccourcis clavier",
+    "navigateFailedTitle": "Impossible d'ouvrir la ressource",
+    "navigateFailedSpace": "L'espace de travail cible n'est pas chargé. Veuillez d'abord le sélectionner dans la barre latérale.",
+    "navigateFailedType": "Type de ressource non pris en charge",
+    "clearScope": "Rechercher tous les projets",
+    "scopedPlaceholder": "Rechercher dans \"{{name}}\"...",
+    "scopedHint": "Recherche dans \"{{name}}\". Appuyez sur Retour arrière pour passer à la recherche globale.",
+    "globalMode": "Recherche globale"
+  },
+  "logs": {
+    "loadListSuccess": "✅ Liste des organisations chargée :",
+    "loadListFailed": "❌ Échec du chargement des organisations :",
+    "selectSuccess": "✅ Organisation sélectionnée :",
+    "selectFailed": "❌ Échec de la sélection de l'organisation :",
+    "createSuccess": "✅ Organisation créée :",
+    "createFailed": "❌ Échec de la création de l'organisation :",
+    "updateSuccess": "✅Organisation mise à jour :",
+    "updateFailed": "❌ Échec de la mise à jour de l'organisation :",
+    "deleteSuccess": "✅ Organisation supprimée",
+    "deleteFailed": "❌ Échec de la suppression de l'organisation :",
+    "leaveSuccess": "✅ Quitte l'organisation",
+    "leaveFailed": "❌ Impossible de quitter l'organisation :",
+    "membersLoadSuccess": "✅ Membres chargés :",
+    "membersLoadFailed": "❌ Échec du chargement des membres :",
+    "memberAddSuccess": "✅ Membre ajouté",
+    "memberAddFailed": "❌ Échec de l'ajout du membre :",
+    "memberRoleUpdateSuccess": "✅ Rôle de membre mis à jour",
+    "memberRoleUpdateFailed": "❌ Échec de la mise à jour du rôle de membre :",
+    "memberRemoveSuccess": "✅ Membre supprimé",
+    "memberRemoveFailed": "❌ Échec de la suppression du membre :",
+    "memberRoleFetchFailed": "❌ Échec de la récupération du rôle utilisateur :",
+    "getDefaultFailed": "❌ Échec de l'obtention de l'organisation par défaut :",
+    "healthCheckFailed": "❌ Échec du contrôle de santé de l'organisation :",
+    "cleared": "✅ Données de l'organisation effacées"
+  },
+  "invitation": {
+    "errors": {
+      "sendFailed": "Échec de l'envoi de l'invitation",
+      "createLinkFailed": "Échec de la création du lien d'invitation",
+      "listFailed": "Échec du chargement des invitations",
+      "cancelFailed": "Échec de l'annulation de l'invitation",
+      "notFound": "Invitation introuvable",
+      "acceptFailed": "Échec de l'acceptation de l'invitation",
+      "respondFailed": "Impossible de répondre à l'invitation",
+      "rateLimited": "Trop d'invitations créées, veuillez réessayer plus tard"
+    },
+    "accept": {
+      "title": "Invitation à l'organisation",
+      "confirm": "Accepter l'invitation",
+      "accepting": "Rejoindre...",
+      "invalid": "Cette invitation n'est plus valable",
+      "success": "Rejoindre l'organisation avec succès",
+      "successDesc": "Vous avez rejoint \"{{organization}}\"",
+      "goToOrganization": "Aller à l'organisation",
+      "loginRequired": "Veuillez d'abord vous connecter pour accepter cette invitation",
+      "status": {
+        "expired": "L'invitation a expiré",
+        "accepted": "L'invitation a déjà été utilisée",
+        "cancelled": "L'invitation a été annulée"
+      }
+    }
+  }
+}

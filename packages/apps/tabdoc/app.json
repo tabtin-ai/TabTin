@@ -1,0 +1,181 @@
+{
+  "id": "tabdoc",
+  "name": "Docs",
+  "version": "0.1.0",
+  "description": "Organization project document management and knowledge search",
+  "objectModel": {
+    "entities": [
+      "document",
+      "revision",
+      "permission"
+    ],
+    "schema": {
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "executionTarget": "backend",
+  "uiRuntime": "localBundle",
+  "agentRuntime": "hostBackend",
+  "distribution": "builtin",
+  "surface": "collaborative",
+  "uiHints": {
+    "panel": true,
+    "icon": "file-text",
+    "iconAsset": {
+      "default": "assets/icon.svg",
+      "presentation": "selfContained"
+    }
+  },
+  "uiOnly": false,
+  "contextSources": [
+    "tabdoc"
+  ],
+  "permissions": [
+    "tabdoc"
+  ],
+  "requiredCapabilities": [],
+  "runtimeDependencies": [],
+  "runtimeSupport": {
+    "electron": {
+      "mode": "full"
+    },
+    "daemon": {
+      "mode": "full"
+    },
+    "mobile": {
+      "mode": "full"
+    }
+  },
+  "skills": [
+    "skills/tabdoc-operator"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "tabdoc-operator": {
+        "enabled": true
+      }
+    }
+  },
+  "lifecycleHooks": {},
+  "kind": "app",
+  "runtimeBindings": {
+    "toolProvider": "django:toolhub.tabdoc",
+    "uiProvider": "web:context-space.tabdoc",
+    "skillsProvider": "skills:local"
+  },
+  "tools": [],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false
+  },
+  "agentIntegration": {
+    "contextType": "tabdoc",
+    "contextFields": [
+      {
+        "name": "current_doc_id",
+        "label": "doc_id",
+        "isResourceId": true
+      },
+      {
+        "name": "current_doc_title",
+        "label": "title",
+        "isResourceId": false
+      }
+    ],
+    "toolDomains": [
+      "tabdoc"
+    ],
+    "hasPromptSection": true,
+    "displayField": "",
+    "workspaceRootSource": "",
+    "isFrontendDependent": false,
+    "typeAliases": []
+  },
+  "opens": {
+    "types": [
+      {
+        "type": "document",
+        "priority": 100
+      },
+      {
+        "type": "doc_selection",
+        "priority": 100
+      }
+    ]
+  },
+  "catalog": {
+    "category": "creation",
+    "desktopGroup": "cloudResources",
+    "canCreate": true,
+    "searchable": true,
+    "isDefaultEnabled": true,
+    "order": 2
+  },
+  "events": [
+    {
+      "key": "tabdoc.document.published",
+      "label": "文档发布",
+      "description": "用户把文档从草稿发布为公开版本（charter v1.8 §6.3 业务事件）",
+      "payload_schema": {
+        "fields": [
+          {
+            "name": "doc_id",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "author_id",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "tags",
+            "type": "string_array",
+            "required": false
+          }
+        ]
+      },
+      "filterable_fields": [
+        "title",
+        "tags",
+        "author_id"
+      ],
+      "ai_filterable": true
+    },
+    {
+      "key": "tabdoc.document.commented",
+      "label": "文档收到评论",
+      "description": "其他成员在文档里发表了评论",
+      "payload_schema": {
+        "fields": [
+          {
+            "name": "doc_id",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "comment_author_id",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "mention_user_ids",
+            "type": "string_array",
+            "required": false
+          }
+        ]
+      },
+      "filterable_fields": [
+        "comment_author_id",
+        "mention_user_ids"
+      ],
+      "ai_filterable": true
+    }
+  ]
+}

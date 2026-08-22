@@ -1,0 +1,38 @@
+{
+  "name": "@tabtin/connector-brand-icons",
+  "version": "0.1.0",
+  "description": "Compliant brand icon registry + resolver for TabTin connector marketplace",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./manifest.json": "./manifest.json",
+    "./icons/*": "./icons/*",
+    "./POLICY.md": "./POLICY.md"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "icons",
+    "manifest.json",
+    "POLICY.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "icons:colorize": "node scripts/apply-brand-colors.mjs",
+    "icons:raster": "node scripts/rasterize-pngs.mjs"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "2.6.2",
+    "tsup": "^8.0.0",
+    "typescript": "^5.7.2",
+    "vitest": "4.0.18"
+  }
+}

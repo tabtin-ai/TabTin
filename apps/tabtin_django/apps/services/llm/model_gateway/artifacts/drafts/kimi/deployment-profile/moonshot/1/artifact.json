@@ -1,0 +1,35 @@
+{
+  "credential_pool_ref": {
+    "pool_key": "kimi-legacy-opaque-pool"
+  },
+  "credential_type": "bearer",
+  "deployment_tags": [
+    "draft-only",
+    "runtime-disabled"
+  ],
+  "endpoint_key": "moonshot",
+  "endpoint_policy_ref": {
+    "expected_hash": "sha256:0509e1a0ecece0258bf9b0e91dada0843a2afe90c1a49229125b89a9d3f6c978",
+    "key": "kimi-draft-endpoint-safety",
+    "kind": "platform-safety-policy",
+    "revision": "1"
+  },
+  "endpoint_url": "https://api.moonshot.cn/v1",
+  "identity": {
+    "canonical_hash": "sha256:ad2eb97e0e591ee49e7451516aca1e3c3850b40b084b8f7a97788cb52d3f0c9b",
+    "key": "moonshot",
+    "kind": "deployment-profile",
+    "revision": "1"
+  },
+  "lifecycle": "draft",
+  "protocol_readiness_ref": {
+    "expected_hash": "sha256:a6b0481d6078a11d036b9db3782c9e555fbc31a21e4d10f338437748f103d527",
+    "key": "kimi-openai-chat-draft-readiness",
+    "kind": "protocol-readiness",
+    "revision": "1"
+  },
+  "region": "cn",
+  "replacement_ref": null,
+  "schema_version": "1",
+  "sunset_at": null
+}

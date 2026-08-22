@@ -1,0 +1,228 @@
+{
+  "_meta": {
+    "name": "user-directory",
+    "description": "人员字段目录解析期望。target 一栏同时记录 Web 正典输出与移动端目标输出 —— 两者在兜底文案上有意不同，见 intentionalDeviations。解析优先级真源：packages/table-engine-canvas/src/userDisplayName.ts 的 resolveUserDisplayName 与 apps/tabtin-electron/src/renderer/src/components/table/controller/userDisplayNameMap.ts 的 buildUserDisplayNameById。",
+    "frozenAt": "2026-08-18",
+    "batch": 3.2,
+    "refs": ["#10123", "#11001"]
+  },
+  "resolutionOrder": {
+    "description": "客户端解析一个用户 ID 时的优先级链，双端必须一致，顺序与 Web 正典同序。Web 把「在职成员」与「离组快照」合并进同一个 map（buildUserDisplayNameById：先写 snapshots，再用 currentMembers 覆盖同 ID），该 map 整体优先于字段值里内嵌的姓名（resolveUserDisplayName 第 14 行的 resolvedNameById 在第 17 行的 embeddedName 之前返回）。所以目录里认得的人跟随目录最新姓名，内嵌姓名只兜住目录认不出的人 —— 内嵌姓名往往是导入时的旧快照，不能盖掉目录现名。",
+    "chain": [
+      { "layer": "currentMember", "source": "组织成员列表 / batch-profiles", "note": "在职成员，姓名 + 头像都有。优先级最高：目录现名比值里内嵌的旧名新" },
+      { "layer": "identitySnapshot", "source": "identity-snapshots", "note": "已离组成员，只有历史姓名，没有头像" },
+      { "layer": "embeddedName", "source": "字段值对象里的 name / display_name", "note": "跨组织成员唯一可用来源 —— 两个目录接口都查不到他，但值里带了姓名" },
+      { "layer": "unknown", "source": "无", "note": "四层都没命中，走「未知」文案，且绝不能回落成原始 ID" }
+    ]
+  },
+  "cases": [
+    {
+      "name": "在职成员：姓名 + 头像",
+      "record": "rec-udir-active",
+      "field": "fld-owner",
+      "resolvedVia": "currentMember",
+      "target": {
+        "kind": "member",
+        "displayName": "林小满",
+        "avatarUrl": "https://oss.example.com/avatar/lin-xiaoman.png"
+      },
+      "webCanon": { "displayName": "林小满", "note": "与移动端一致" }
+    },
+    {
+      "name": "在职成员无头像：姓名照常，头像位走首字母兜底",
+      "record": "rec-udir-active-noavatar",
+      "field": "fld-owner",
+      "resolvedVia": "currentMember",
+      "target": {
+        "kind": "member",
+        "displayName": "陈以宁",
+        "avatarUrl": null
+      },
+      "webCanon": { "displayName": "陈以宁", "note": "与移动端一致" }
+    },
+    {
+      "name": "已离组成员：快照姓名 + 已离职后缀",
+      "record": "rec-udir-departed",
+      "field": "fld-owner",
+      "resolvedVia": "identitySnapshot",
+      "target": {
+        "kind": "departed",
+        "displayName": "周叙（已离职）",
+        "avatarUrl": null
+      },
+      "webCanon": {
+        "displayName": "周叙",
+        "note": "Web 把离组快照姓名写进了 userDisplayNameById，所以这里命中的是快照姓名、走不到 fallbackUserName。但 Web 不加任何离职标记 —— 用户看到「周叙」会以为人还在职。移动端加「（已离职）」，见 intentionalDeviations"
+      }
+    },
+    {
+      "name": "跨组织成员：用值内嵌姓名，不回落 ID",
+      "record": "rec-udir-external",
+      "field": "fld-owner",
+      "resolvedVia": "embeddedName",
+      "target": {
+        "kind": "external",
+        "displayName": "外部-赵珂",
+        "avatarUrl": null
+      },
+      "webCanon": { "displayName": "外部-赵珂", "note": "与移动端一致，Web embeddedName 同样优先于组织目录" }
+    },
+    {
+      "name": "脏数据：四层全 miss，显示未知且不漏 ID",
+      "record": "rec-udir-unknown",
+      "field": "fld-owner",
+      "resolvedVia": "unknown",
+      "target": {
+        "kind": "unknown",
+        "displayName": "未知",
+        "avatarUrl": null
+      },
+      "webCanon": {
+        "displayName": "已离开成员(c05d8e27)",
+        "note": "四层全 miss 时 Web 才走 fallbackUserName，露出 ID 前 8 位，并把「查不到的脏数据」说成「已离开成员」—— 这个 ID 可能从来没对应过任何人。移动端说「未知」，见 intentionalDeviations"
+      }
+    },
+    {
+      "name": "多选混合四态：顺序保持字段值原序，逐个独立解析",
+      "record": "rec-udir-mixed",
+      "field": "fld-reviewers",
+      "target": [
+        { "kind": "member", "displayName": "林小满", "avatarUrl": "https://oss.example.com/avatar/lin-xiaoman.png" },
+        { "kind": "departed", "displayName": "周叙（已离职）", "avatarUrl": null },
+        { "kind": "external", "displayName": "外部-赵珂", "avatarUrl": null },
+        { "kind": "unknown", "displayName": "未知", "avatarUrl": null }
+      ],
+      "webCanon": {
+        "note": "Web 多选同样保持原序；兜底两条文案不同，同上"
+      }
+    },
+    {
+      "name": "空人员字段：不显示任何姓名，也不显示未知",
+      "record": "rec-udir-empty",
+      "field": "fld-owner",
+      "target": [],
+      "webCanon": { "note": "Web 空值走 emptyDisplay（—），移动端沿用各自的空值占位" }
+    },
+    {
+      "name": "created_by 与人员字段同一套解析",
+      "record": "rec-udir-departed",
+      "field": "fld-creator",
+      "resolvedVia": "identitySnapshot",
+      "target": {
+        "kind": "departed",
+        "displayName": "周叙（已离职）",
+        "avatarUrl": null
+      },
+      "webCanon": { "note": "Web 的 created_by / last_modified_by 与 user 共用同一 case 分支" }
+    },
+    {
+      "name": "last_modified_by 与人员字段同一套解析",
+      "record": "rec-udir-unknown",
+      "field": "fld-modifier",
+      "resolvedVia": "unknown",
+      "target": {
+        "kind": "unknown",
+        "displayName": "未知",
+        "avatarUrl": null
+      },
+      "webCanon": { "note": "同上" }
+    },
+    {
+      "name": "优先级鉴别：目录认得的人跟随目录现名，不用值里内嵌的旧名",
+      "record": "rec-udir-stale-embedded",
+      "field": "fld-owner",
+      "resolvedVia": "currentMember",
+      "discriminates": "把 embeddedName 错放到优先级第一位的实现会在这里显示「林小满-导入时旧名」而挂掉。这是本夹具唯一能区分两种优先级顺序的 case —— 其余 case 里跨组织成员都不在目录中，两种顺序结果相同、测不出差别。",
+      "target": {
+        "kind": "member",
+        "displayName": "林小满",
+        "avatarUrl": "https://oss.example.com/avatar/lin-xiaoman.png"
+      },
+      "webCanon": { "displayName": "林小满", "note": "与移动端一致：Web 的 resolvedNameById 同样优先于 embeddedName" }
+    },
+    {
+      "name": "优先级鉴别（多选）：在职跟目录现名，离组跟快照姓名，内嵌旧名都不生效",
+      "record": "rec-udir-stale-embedded",
+      "field": "fld-reviewers",
+      "target": [
+        { "kind": "member", "displayName": "陈以宁", "avatarUrl": null },
+        { "kind": "departed", "displayName": "周叙（已离职）", "avatarUrl": null }
+      ],
+      "discriminates": "离组成员这条同时验证两件事：快照姓名压过内嵌旧名，且离职后缀照常拼上。",
+      "webCanon": { "note": "Web 同样两条都跟目录/快照姓名；离职后缀是移动端有意新增" }
+    }
+  ],
+  "current": {
+    "ios": {
+      "resolvesDirectory": false,
+      "showsAvatar": false,
+      "note": "displayText(for:) 里 hidesInternalIdentity 命中 .user/.createdBy/.lastModifiedBy 后返回空串，但 looksLikeInternalId 只匹配 usr-/rec-/tbl-/viw- 前缀，裸 UUID 匹配不上，所以线上人员字段实际直接显示裸 UUID"
+    },
+    "android": {
+      "resolvesDirectory": false,
+      "showsAvatar": false,
+      "note": "displayText() 的 looksLikeInternalId 同样只认 usr- 这类前缀，裸 UUID 原样输出到详情行与卡片摘要"
+    }
+  },
+  "knownGaps": [
+    {
+      "path": "/cases",
+      "platforms": ["ios", "android"],
+      "reason": "双端均未接组织成员目录：identity-snapshots 与 batch-profiles 两个接口客户端都没有封装，人员字段无法从 UUID 解析到姓名，也没有头像位",
+      "ref": "#10123"
+    }
+  ],
+  "intentionalDeviations": [
+    {
+      "path": "/cases/2/target/displayName",
+      "platforms": ["ios", "android"],
+      "webCanon": "周叙（快照姓名，无任何离职标记）",
+      "mobile": "周叙（已离职）",
+      "reason": "Web 能显示离组成员的历史姓名，但不标注这人已经离开，用户看到「周叙」会以为还能 @ 到他、还能派活给他。移动端保留姓名并加「（已离职）」后缀，让状态可见。已开 issue 推动 Web 反向收口到这套口径。",
+      "ref": "#11001"
+    },
+    {
+      "path": "/cases/4/target/displayName",
+      "platforms": ["ios", "android"],
+      "webCanon": "已离开成员(前8位)",
+      "mobile": "未知",
+      "reason": "Web 对四层全 miss 的 ID 说「已离开成员」并露出 ID 前 8 位。但这个 ID 可能从来没对应过任何用户（脏数据、误写、跨组织残留），说成「已离开成员」是编造事实；露 ID 片段又把内部标识暴露给用户。移动端说「未知」，既不编造也不泄漏。",
+      "ref": "#11001"
+    }
+  ],
+  "leakPolicy": {
+    "description": "人员字段渲染结果里绝不允许出现原始用户 ID。forbiddenSubstrings 列的是本夹具用到的完整 UUID；forbiddenPatterns 兜住任意裸 UUID 与 ID 前缀片段 —— 后者专门用来挡住 Web 那种「露出前 8 位」的兜底写法被照搬到移动端。",
+    "forbiddenSubstrings": [
+      "3f2a9c14-8b7d-4e51-9a06-1c5d2e8f47b3",
+      "7d1e5b42-6c93-4a08-b5f7-2e9a3d4c8f16",
+      "a4c8f01d-3e92-4b76-8d15-6f2b7c9e4a83",
+      "e91b7d3a-5f04-42c8-9e67-1a8d3b5c7f20",
+      "c05d8e27-4a16-4f93-b8c2-9d7e1f3a6b45",
+      "3f2a9c14",
+      "7d1e5b42",
+      "a4c8f01d",
+      "e91b7d3a",
+      "c05d8e27",
+      "tbl-user-dir-0001",
+      "viw-udir-grid-0001",
+      "rec-udir-active",
+      "rec-udir-active-noavatar",
+      "rec-udir-departed",
+      "rec-udir-external",
+      "rec-udir-unknown",
+      "rec-udir-mixed",
+      "rec-udir-empty",
+      "rec-udir-stale-embedded"
+    ],
+    "forbiddenPatterns": [
+      {
+        "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
+        "reason": "任意裸 UUID 都不得出现在人员字段的可见文本里"
+      }
+    ],
+    "current": {
+      "ios": { "leaksUserIdInDisplay": true, "note": "裸 UUID 直接显示，见 /current/ios/note" },
+      "android": { "leaksUserIdInDisplay": true, "note": "同上" }
+    }
+  }
+}

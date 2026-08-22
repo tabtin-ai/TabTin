@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+  <defs>
+    <linearGradient id="device" x1="4" y1="4" x2="16" y2="16.75" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14AAC3"/>
+      <stop offset="1" stop-color="#315ECC"/>
+    </linearGradient>
+    <linearGradient id="code" x1="6.1" y1="7.15" x2="13.9" y2="11.75" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset=".65" stop-color="#F2FAFF"/>
+      <stop offset="1" stop-color="#D4E9FF"/>
+    </linearGradient>
+  </defs>
+  <rect x=".5" y=".5" width="19" height="19" rx="4.5" fill="#FFF"/>
+  <rect x=".75" y=".75" width="18.5" height="18.5" rx="4.25" stroke="#E5E7EB" stroke-width=".5"/>
+  <rect x="3.5" y="3.75" width="13" height="13" rx="3.25" fill="url(#device)"/>
+  <path d="M3.5 13h13" stroke="#FFF" stroke-width=".55" stroke-opacity=".32"/>
+  <path d="m7.75 7.3-1.65 2.15 1.65 2.15M12.25 7.3l1.65 2.15-1.65 2.15" stroke="url(#code)" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m10.45 7.15-.9 4.6" stroke="#B5F7F5" stroke-width=".85" stroke-linecap="round"/>
+  <rect x="6" y="14.25" width="8" height="1.4" rx=".7" fill="#104694" fill-opacity=".75"/>
+</svg>

@@ -1,0 +1,268 @@
+{
+  "$schema": "./manifest.schema.json",
+  "version": 1,
+  "policy": "Identification-only brand marks for connector marketplace UI. Do not imply partnership. See POLICY.md.",
+  "brands": {
+    "github": {
+      "status": "approved",
+      "title": "GitHub",
+      "file": "github.svg",
+      "source": "https://github.com/logos",
+      "guidelines": "https://github.com/logos",
+      "vendorNote": "Icon mark vendored via gilbarbara/logos (github-icon); GitHub brand guidelines.",
+      "match": {
+        "ids": [
+          "github"
+        ],
+        "hosts": [
+          "api.githubcopilot.com",
+          "github.com",
+          "api.github.com"
+        ],
+        "names": [
+          "github"
+        ],
+        "npm": [
+          "@modelcontextprotocol/server-github",
+          "github-mcp-server"
+        ]
+      },
+      "color": "#181717"
+    },
+    "vercel": {
+      "status": "approved",
+      "title": "Vercel",
+      "file": "vercel.svg",
+      "source": "https://vercel.com/geist/brands",
+      "guidelines": "https://vercel.com/geist/brands",
+      "vendorNote": "Icon mark vendored via gilbarbara/logos (vercel-icon); Vercel brand kit.",
+      "match": {
+        "ids": [
+          "vercel"
+        ],
+        "hosts": [
+          "mcp.vercel.com",
+          "vercel.com"
+        ],
+        "names": [
+          "vercel"
+        ],
+        "npm": []
+      },
+      "color": "#000000"
+    },
+    "stripe": {
+      "status": "approved",
+      "title": "Stripe",
+      "file": "stripe.svg",
+      "source": "https://stripe.com/newsroom/information",
+      "guidelines": null,
+      "vendorNote": "Mark geometry via Simple Icons with official Stripe hex #635BFF; Stripe press kit.",
+      "match": {
+        "ids": [
+          "stripe"
+        ],
+        "hosts": [
+          "mcp.stripe.com",
+          "stripe.com"
+        ],
+        "names": [
+          "stripe"
+        ],
+        "npm": []
+      },
+      "color": "#635BFF"
+    },
+    "notion": {
+      "status": "approved",
+      "title": "Notion",
+      "file": "notion.svg",
+      "source": "https://www.notion.so",
+      "guidelines": null,
+      "vendorNote": "Official Notion mark via gilbarbara/logos (notion-icon), white plate removed for marketplace chip compositing.",
+      "match": {
+        "ids": [
+          "notion"
+        ],
+        "hosts": [
+          "mcp.notion.com",
+          "notion.so",
+          "www.notion.so"
+        ],
+        "names": [
+          "notion"
+        ],
+        "npm": [
+          "@notionhq/notion-mcp-server"
+        ]
+      },
+      "color": "#000000"
+    },
+    "supabase": {
+      "status": "approved",
+      "title": "Supabase",
+      "file": "supabase.svg",
+      "source": "https://supabase.com/brand-assets",
+      "guidelines": null,
+      "vendorNote": "Icon mark vendored via gilbarbara/logos (supabase-icon).",
+      "match": {
+        "ids": [
+          "supabase"
+        ],
+        "hosts": [
+          "supabase.com"
+        ],
+        "names": [
+          "supabase"
+        ],
+        "npm": [
+          "@supabase/mcp-server-supabase"
+        ]
+      },
+      "color": "#3ECF8E"
+    },
+    "neon": {
+      "status": "approved",
+      "title": "Neon",
+      "file": "neon.svg",
+      "source": "https://neon.com/brand",
+      "guidelines": "https://neon.com/brand",
+      "vendorNote": "Icon mark vendored via gilbarbara/logos (neon-icon); Neon brand page.",
+      "match": {
+        "ids": [
+          "neon"
+        ],
+        "hosts": [
+          "neon.tech",
+          "console.neon.tech",
+          "neon.com"
+        ],
+        "names": [
+          "neon"
+        ],
+        "npm": [
+          "@neondatabase/mcp-server-neon"
+        ]
+      },
+      "color": "#00E699"
+    },
+    "cloudflare": {
+      "status": "approved",
+      "title": "Cloudflare",
+      "file": "cloudflare.svg",
+      "source": "https://www.cloudflare.com/logo/",
+      "guidelines": "https://www.cloudflare.com/trademark/",
+      "vendorNote": "Mark geometry via Simple Icons with official Cloudflare orange; Cloudflare trademark page.",
+      "match": {
+        "ids": [
+          "cloudflare"
+        ],
+        "hosts": [
+          "mcp.cloudflare.com",
+          "cloudflare.com"
+        ],
+        "names": [
+          "cloudflare"
+        ],
+        "npm": []
+      },
+      "color": "#F38020"
+    },
+    "canva": {
+      "status": "deferred",
+      "title": "Canva",
+      "file": null,
+      "source": null,
+      "guidelines": "https://www.canva.com/policies/brand-guidelines/",
+      "vendorNote": "No redistributable mark cleared yet; marketplace keeps Plug.",
+      "match": {
+        "ids": [
+          "canva"
+        ],
+        "hosts": [
+          "mcp.canva.com",
+          "canva.com"
+        ],
+        "names": [
+          "canva"
+        ],
+        "npm": []
+      }
+    },
+    "dingtalk": {
+      "status": "approved",
+      "title": "钉钉",
+      "file": "dingtalk.svg",
+      "source": "https://open.dingtalk.com/",
+      "guidelines": "https://open.dingtalk.com/document/design",
+      "vendorNote": "Official mark SVG from open.dingtalk.com site assets (favicon/logo). Identification use in connector marketplace only.",
+      "match": {
+        "ids": [
+          "dingtalk"
+        ],
+        "hosts": [
+          "dingtalk.com",
+          "open.dingtalk.com",
+          "open-dev.dingtalk.com"
+        ],
+        "names": [
+          "钉钉",
+          "dingtalk"
+        ],
+        "npm": [
+          "dingtalk-mcp"
+        ]
+      },
+      "color": "#007FFF"
+    },
+    "tianyancha": {
+      "status": "approved",
+      "title": "天眼查",
+      "file": "tianyancha.svg",
+      "source": "https://www.tianyancha.com/",
+      "guidelines": null,
+      "vendorNote": "Official app icon from cdn.tianyancha.com (icon-hires-192x192). Identification use in connector marketplace only.",
+      "match": {
+        "ids": [
+          "tianyancha"
+        ],
+        "hosts": [
+          "mcp.tianyancha.com",
+          "tianyancha.com",
+          "ai.tianyancha.com"
+        ],
+        "names": [
+          "天眼查",
+          "tianyancha"
+        ],
+        "npm": []
+      },
+      "color": "#0084FF"
+    },
+    "hithink-a-share": {
+      "status": "approved",
+      "title": "同花顺 · A股数据",
+      "file": "hithink-a-share.svg",
+      "source": "https://m.10jqka.com.cn/",
+      "guidelines": null,
+      "vendorNote": "Official mobile apple-touch icon from s.thsi.cn (thsicon.png) linked by m.10jqka.com.cn. Identification use in connector marketplace only.",
+      "match": {
+        "ids": [
+          "hithink-a-share"
+        ],
+        "hosts": [
+          "fuyao.aicubes.cn",
+          "10jqka.com.cn",
+          "m.10jqka.com.cn"
+        ],
+        "names": [
+          "同花顺",
+          "hithink",
+          "a股数据"
+        ],
+        "npm": []
+      },
+      "color": "#E60012"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "id": "tabtin-marketing-pack",
+  "name": "Marketing Copy Pack",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "营销文案：落地页文案、SEO 审计、内容日历、社媒短文批量、活动 Brief。",
+  "icon": "megaphone",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "marketing",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 24
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/landing-copy",
+    "skills/seo-page-audit",
+    "skills/content-calendar",
+    "skills/social-post-batch",
+    "skills/campaign-brief"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "landing-copy": {
+        "enabled": true
+      },
+      "seo-page-audit": {
+        "enabled": true
+      },
+      "content-calendar": {
+        "enabled": true
+      },
+      "social-post-batch": {
+        "enabled": true
+      },
+      "campaign-brief": {
+        "enabled": true
+      }
+    }
+  }
+}

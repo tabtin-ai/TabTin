@@ -1,0 +1,35 @@
+{
+  "theme": {
+    "toggle": "切换主题",
+    "light": "浅色模式",
+    "dark": "深色模式",
+    "system": "跟随系统"
+  },
+  "colorScheme": {
+    "toggle": "切换配色风格",
+    "options": {
+      "orange": "活力橙",
+      "teal": "深青蓝",
+      "crimson": "赤橙",
+      "slate": "商务灰",
+      "emerald": "翠绿",
+      "blue": "商务蓝",
+      "carbon": "朴素黑",
+      "rose": "玫红",
+      "violet": "雅紫",
+      "sky": "清爽蓝"
+    },
+    "descriptions": {
+      "orange": "温暖活力，创新高效",
+      "teal": "专业沉稳，数据商务",
+      "crimson": "热情行动，快速响应",
+      "slate": "中性专业，严肃正式",
+      "emerald": "清新高效，成长协作",
+      "blue": "经典商务，企业正式",
+      "carbon": "极简低调，专注内容",
+      "rose": "活力时尚，创意表达",
+      "violet": "沉静优雅，低调内敛",
+      "sky": "纯净清爽，轻盈明快"
+    }
+  }
+}

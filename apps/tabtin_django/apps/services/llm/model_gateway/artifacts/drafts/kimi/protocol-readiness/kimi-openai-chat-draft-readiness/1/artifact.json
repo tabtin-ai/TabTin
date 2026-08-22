@@ -1,0 +1,31 @@
+{
+  "adapter_key": "openai-chat-completions",
+  "adapter_version": "draft-v1",
+  "allowlist_ref": {
+    "expected_hash": "sha256:a345bdf85de59a136f9b2af7285cf8f1697ffe2e38d88364fce8ec3f4d64e960",
+    "key": "kimi-openai-chat-draft-extensions",
+    "kind": "extension-target-allowlist",
+    "revision": "1"
+  },
+  "contract_evidence_ref": {
+    "expected_hash": "sha256:ea1ae488fc69215c50cf5aa3954dfdf537e9b6f38613133cfad4f70c4bd18929",
+    "key": "kimi-draft-contract-evidence",
+    "kind": "projection-metadata",
+    "revision": "1"
+  },
+  "evidence_keys": [
+    "kimi-pr0-golden",
+    "openai-sse-synthetic-fixture"
+  ],
+  "executable": false,
+  "identity": {
+    "canonical_hash": "sha256:a6b0481d6078a11d036b9db3782c9e555fbc31a21e4d10f338437748f103d527",
+    "key": "kimi-openai-chat-draft-readiness",
+    "kind": "protocol-readiness",
+    "revision": "1"
+  },
+  "protocol_options_schema": "openai-chat-completions-v1",
+  "protocol_type": "openai-compatible",
+  "readiness": "conditional",
+  "schema_version": "1"
+}

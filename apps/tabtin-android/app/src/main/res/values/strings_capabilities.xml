@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="capabilities_title">设备能力</string>
+    <string name="capabilities_l1_title">标准权限</string>
+    <string name="capabilities_l1_subtitle">授权后 Agent 可读取手机数据</string>
+    <string name="capabilities_l2_title">开发者能力</string>
+    <string name="capabilities_l2_subtitle">需要开发者模式，支持屏幕自动化</string>
+    <string name="capabilities_granted">已授权</string>
+    <string name="capabilities_denied">未授权</string>
+    <string name="capabilities_request">授权</string>
+    <string name="capabilities_go_settings">前往设置</string>
+    <string name="capabilities_contacts">通讯录</string>
+    <string name="capabilities_sms">短信读取</string>
+    <string name="capabilities_sms_send">短信发送</string>
+    <string name="capabilities_call_log">通话记录</string>
+    <string name="capabilities_phone">拨打电话</string>
+    <string name="capabilities_calendar">日历</string>
+    <string name="capabilities_location">定位</string>
+    <string name="capabilities_notification">通知</string>
+    <string name="capabilities_notification_listener">通知监听</string>
+    <string name="capabilities_media">照片/图片</string>
+    <string name="capabilities_media_video">视频</string>
+    <string name="capabilities_l2_connected">特权进程运行中</string>
+    <string name="capabilities_l2_disconnected">未连接</string>
+    <string name="capabilities_l2_setup">配置开发者模式</string>
+    <string name="capabilities_l2_start">启动特权进程</string>
+    <string name="capabilities_l2_stop">停止</string>
+    <string name="capabilities_l2_starting">启动中…</string>
+    <string name="capabilities_l2_not_supported">当前设备不支持（需要 Android 11+）</string>
+    <string name="capabilities_l2_not_supported_harmony">当前系统不支持无线调试（HarmonyOS NEXT），可联系官方了解最新支持情况</string>
+    <string name="capabilities_l2_screen_auto">屏幕截图、UI 树、触控输入</string>
+    <string name="capabilities_l2_app_mgmt">应用启动/停止、系统设置</string>
+    <string name="capabilities_l2_step1_title">第一步：开启开发者选项</string>
+    <string name="capabilities_l2_step2_title">第二步：输入配对码</string>
+    <string name="capabilities_l2_step2_hint">在无线调试页面点击「使用配对码配对设备」获取 6 位配对码</string>
+    <string name="capabilities_l2_pair_code_label">配对码</string>
+    <string name="capabilities_l2_pair_btn">配对并连接</string>
+    <string name="capabilities_l2_reconnect_btn">重新连接</string>
+    <string name="capabilities_l2_pairing">配对中…</string>
+    <string name="capabilities_l2_discovering">发现设备中，可能需要 30 秒…</string>
+    <string name="capabilities_l2_connecting">连接中…</string>
+    <string name="capabilities_l2_adb_connected">ADB 已连接</string>
+    <string name="capabilities_l2_warning">注意</string>
+    <string name="capabilities_l2_guide_expand">查看 %s</string>
+    <string name="capabilities_l2_guide_collapse">收起 %s</string>
+    <string name="capabilities_l2_restart_privileged">重新启动特权进程</string>
+    <string name="capabilities_l2_auto_recovering">正在恢复设备控制能力…</string>
+    <string name="capabilities_l2_auto_recover_succeeded">设备控制能力已恢复</string>
+    <string name="capabilities_l2_auto_recover_failed">自动恢复失败</string>
+    <string name="capabilities_l2_recover_wireless_off">无线调试未开启，无法自动恢复</string>
+    <string name="capabilities_l2_open_wireless_settings">打开无线调试设置</string>
+    <string name="capabilities_l2_recover_max_attempts">自动恢复重试次数已用尽</string>
+    <string name="capabilities_l2_auto_pairing">已检测到配对码，正在自动配对…</string>
+    <string name="capabilities_l2_awaiting_approval">请在设备上点击「允许」以授权连接…</string>
+    <string name="capabilities_l2_xiaomi_wait_days">小米/Redmi 新设备首次开启开发者选项后需等待 %d 天才能使用无线调试</string>
+    <string name="capabilities_l2_background_settings">该品牌设备需要额外配置后台保活，请参考上方指南中的提示</string>
+
+    <!-- 错误本地化 -->
+    <string name="capabilities_error_discover_pairing">未发现配对服务，请确认已开启无线调试</string>
+    <string name="capabilities_error_discover_wireless">未发现无线调试服务，请确认已开启无线调试</string>
+    <string name="capabilities_error_invalid_pairing_code">配对码无效，请重新输入</string>
+    <string name="capabilities_error_pairing_failed">配对失败，请检查配对码</string>
+    <string name="capabilities_error_privileged_timeout">特权进程响应超时</string>
+    <string name="capabilities_error_privileged_not_connected">特权进程未连接</string>
+    <string name="capabilities_error_max_reconnect">重连次数已用尽</string>
+    <string name="capabilities_error_requires_android11">需要 Android 11 及以上版本</string>
+    <string name="capabilities_error_connection_failed">连接失败</string>
+    <string name="capabilities_error_communication">通信异常</string>
+    <string name="capabilities_error_shell_failed">Shell 命令执行失败</string>
+    <string name="capabilities_error_pairing_expired">配对码可能已过期（超过 55 秒），请重新获取配对码</string>
+    <string name="capabilities_error_pairing_unsupported">当前设备不支持无线配对功能</string>
+
+    <!-- Device-action security confirm (Agent remote drive) -->
+    <string name="capabilities_security_confirm_title">Agent 权限请求</string>
+    <string name="capabilities_security_confirm_allow_once">仅本次允许</string>
+    <string name="capabilities_security_confirm_allow_session">本会话不再询问</string>
+    <string name="capabilities_security_confirm_deny">拒绝</string>
+</resources>

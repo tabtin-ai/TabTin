@@ -1,0 +1,29 @@
+{
+  "group": {
+    "ungrouped": "Ungrouped",
+    "unclassified": "Unclassified",
+    "loadedOfTotal": "{{loaded}} of {{total}} loaded"
+  },
+  "attachments": {
+    "missingRequired": "Required attachments missing"
+  },
+  "record": {
+    "createMissingTableTitle": "Cannot create record",
+    "createMissingTableDesc": "Missing table information. Please reselect the table and try again.",
+    "createFailedTitle": "Create failed",
+    "createFailedDesc": "Failed to create the record. Please try again later.",
+    "createFailedFallback": "Unable to create record. Please try again later.",
+    "createPatchFailedTitle": "Additional edits were not saved",
+    "createPatchFailedDesc": "The record was created, but the latest edits after save were not applied. Please retry.",
+    "createdTitle": "Created",
+    "createdHiddenDesc": "{{count}} new record(s) are not currently visible in this view.",
+    "createdHiddenAction": "Reveal by clearing filters"
+  },
+  "error": {
+    "cellUpdateFailed": "Failed to update cell. Please try again."
+  },
+  "autoFill": {
+    "createdTimeHint": "This field is auto-filled when the record is created",
+    "lastModifiedTimeHint": "This field is auto-updated on every record modification"
+  }
+}

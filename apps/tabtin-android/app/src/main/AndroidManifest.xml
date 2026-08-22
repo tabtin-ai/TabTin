@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- L1: Standard permission capabilities for Agent -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+
+    <!-- ADB broadcast 绕过 permission 检查，但同签名应用可发送，第三方应用被阻止 -->
+    <permission
+        android:name="com.tabtin.permission.DAEMON_ACTIVATE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.tabtin.permission.DAEMON_ACTIVATE" />
+
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <application
+        android:name=".TabTinApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:localeConfig="@xml/locales_config"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TabTin"
+        android:usesCleartextTraffic="false"
+        tools:replace="android:usesCleartextTraffic">
+
+        <!--
+            issue #3299：Sentry 走 TabTinApp.onCreate 里 SentryReporter.init() 程序化初始化
+            （DSN/environment/release/beforeSend 都在代码里配，方便测试环境覆盖），
+            关掉 sentry-android 自带的 manifest 自动初始化，否则会跑出一个没有脱敏
+            beforeSend 的"裸" SDK 实例，PII 直接出境。
+        -->
+        <meta-data android:name="io.sentry.auto-init" android:value="false" />
+
+        <!--
+            Persist AppCompat application locales on Android 12 and below.
+            Android 13+ delegates this to the platform LocaleManager, while older versions need
+            AppCompat's opt-in store so an explicit language choice survives a cold start.
+        -->
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.TabTin.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tabtin" android:host="invite" />
+                <data android:scheme="tabtin-preprod" android:host="invite" />
+            </intent-filter>
+            <!--
+                Wave 3 (X3): rich_content resource_ref 点击 → 跳转资源详情。
+                URL 格式：tabtin://resource/<resource_type>/<resource_id>，与 iOS 同 scheme。
+                同一 scheme 复用之前 invite 的 BROWSABLE 权限，外部链接（聊天里粘贴 URL）
+                也能被本应用拦截。当前 Wave 没有真正的资源详情页，DeepLinkHandler 暂走
+                "即将支持"提示——见 ConversationViewModel 失败反思 Y1。
+            -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tabtin" android:host="resource" />
+            </intent-filter>
+        </activity>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+        <!-- Daemon: headless 受控端 -->
+        <receiver
+            android:name=".daemon.DaemonReceiver"
+            android:exported="true"
+            android:permission="com.tabtin.permission.DAEMON_ACTIVATE">
+            <intent-filter>
+                <action android:name="com.tabtin.daemon.ACTIVATE" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name=".daemon.DaemonService"
+            android:exported="false"
+            android:foregroundServiceType="connectedDevice" />
+
+        <service
+            android:name=".data.automation.handlers.l1.TabTinNotificationListener"
+            android:exported="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

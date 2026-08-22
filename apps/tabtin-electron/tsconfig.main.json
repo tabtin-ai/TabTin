@@ -1,0 +1,30 @@
+{
+  "//": "Main 进程独立 typecheck 配置（dogfood 4d2108a2 第 7 轮 工程改进）",
+  "//1": "—— 让 vite-plugin-checker 在 dev 时仅校验 main / preload / shared 三处，",
+  "//2": "—— 不被 renderer 历史债（10 个未清扫错误）阻塞 dev 启动。",
+  "//3": "Renderer typecheck 待历史债清扫专题完成后，再考虑同模式接入 checker（split tsconfig.renderer.json）。",
+  "//4": "本配置 extends 根 tsconfig 全部 compilerOptions，仅缩小 include 范围。",
+  "//5": "不启用 `source` customCondition：避免 tsc 沿 source 入口拉到 tabvideo 等",
+  "//6": "包内的 src（带 `@/*` 包内 alias，外部 tsc 解析不到）。dist d.ts 已由各包 build 产出。",
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/main/**/*",
+    "src/preload/**/*",
+    "src/shared/**/*",
+    "src/vendor-modules.d.ts",
+    "src/types/**/*.d.ts",
+    "../../packages/*/src/**/*.d.ts",
+    "electron.vite.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "out",
+    "dist",
+    "dist-app",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/__tests__/**",
+    "src/**/*.spec.ts",
+    "src/**/*.spec.tsx"
+  ]
+}

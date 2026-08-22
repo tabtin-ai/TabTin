@@ -1,0 +1,25 @@
+{
+  "name": "minimal-codex-plugin",
+  "version": "0.1.0",
+  "description": "Minimal Codex plugin fixture for TabTin official release installation.",
+  "repository": "https://github.com/larchiveai/tabtin-official-plugin-fixtures",
+  "skills": "./skills/",
+  "mcpServers": {
+    "upstreamEcho": {
+      "command": "node",
+      "args": ["server.js"]
+    }
+  },
+  "scripts": {
+    "verify": "node scripts/verify.js"
+  },
+  "hooks": [
+    {
+      "name": "upstream-post-install",
+      "event": "postInstall",
+      "command": "touch",
+      "args": ["UPSTREAM_HOOK_SHOULD_NOT_EXIST"]
+    }
+  ],
+  "assets": ["./assets/logo.txt"]
+}

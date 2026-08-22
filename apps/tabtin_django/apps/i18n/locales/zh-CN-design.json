@@ -1,0 +1,41 @@
+{
+  "design": {
+    "project": {
+      "notFound": "设计项目不存在",
+      "createSuccess": "设计项目创建成功",
+      "updateSuccess": "设计项目更新成功",
+      "deleteSuccess": "设计项目删除成功"
+    },
+    "file": {
+      "notFound": "设计文件不存在",
+      "createSuccess": "设计文件创建成功",
+      "saveSuccess": "设计文件保存成功",
+      "revisionConflict": "版本冲突，请刷新后重试"
+    },
+    "export": {
+      "success": "导出成功",
+      "failed": "导出失败: {{detail}}",
+      "formatNotSupported": "不支持的导出格式: {{format}}",
+      "pngExportFailed": "PNG 导出失败",
+      "svgExportFailed": "SVG 导出失败",
+      "pptxExportFailed": "PPTX 导出失败"
+    },
+    "import": {
+      "htmlImportFailed": "HTML 导入失败: {{detail}}",
+      "invalidHtml": "无效的 HTML 内容",
+      "parseError": "解析失败"
+    },
+    "validation": {
+      "invalidFileId": "无效的文件 ID",
+      "invalidProjectId": "无效的项目 ID",
+      "missingRequiredFields": "缺少必填字段",
+      "invalidFileData": "无效的文件数据"
+    },
+    "errors": {
+      "unknown": "未知错误",
+      "internalError": "内部服务器错误",
+      "permissionDenied": "权限不足",
+      "resourceNotFound": "资源不存在"
+    }
+  }
+}

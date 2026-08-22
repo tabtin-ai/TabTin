@@ -1,0 +1,83 @@
+{
+  "title": "Tins",
+  "installedCount": "{{count}} 已安装",
+  "section": {
+    "installed": "已安装",
+    "available": "可安装"
+  },
+  "action": {
+    "install": "安装",
+    "uninstall": "卸载",
+    "enable": "启用",
+    "disable": "停用",
+    "pin": "钉选",
+    "unpin": "取消钉选",
+    "edit": "编辑",
+    "retry": "重试",
+    "saveAll": "保存全部"
+  },
+  "confirm": {
+    "uninstall": "确定要卸载「{{name}}」吗？",
+    "delete": "确定要删除「{{name}}」吗？此操作不可恢复。",
+    "unsavedChanges": "有未保存的更改，确定要离开吗？"
+  },
+  "empty": {
+    "title": "还没有 Tin",
+    "description": "告诉 Agent 你想解决什么场景，它会帮你创建并安装 Tin。组织成员发布的 Tin 也会出现在下方「可安装」列表。",
+    "askAgent": "让 Agent 创建 Tin",
+    "agentPrompt": "帮我创建一个 Tin 智能插件。请先问我具体想解决什么场景（例如：浏览某类网页时自动高亮、提取信息、辅助操作等），确认需求后再创建并安装到这个工作空间。",
+    "errorNoSession": "暂时无法发起对话，请稍后再试",
+    "openPanel": "打开 Tins 面板"
+  },
+  "sidePanel": {
+    "emptyTitle": "尚未安装 Tin",
+    "emptyDescription": "Tin 是智能插件，可以在浏览网页时自动激活并提供辅助功能。",
+    "openPanel": "前往安装"
+  },
+  "home": {
+    "loading": "加载中...",
+    "viewAll": "查看全部 {{count}} 个 Tin...",
+    "activeCount": "{{count}} 个 Tin 已激活",
+    "loadError": "加载 Tins 失败",
+    "retry": "重试"
+  },
+  "activated": "已激活",
+  "editor": {
+    "tabs": {
+      "panelHtml": "UI 面板",
+      "contentScript": "页面脚本",
+      "backgroundScript": "后台脚本",
+      "agentInstructions": "Agent 指令"
+    },
+    "placeholder": {
+      "panelHtml": "<!-- 在这里编写 Tin 的 UI 面板 HTML -->\n<!-- 可以使用 CDN 库，通过 window.tin API 与宿主通信 -->",
+      "contentScript": "// 注入到浏览页面的脚本\n// 可以访问和修改页面 DOM",
+      "backgroundScript": "// 在主进程沙箱中运行的后台脚本",
+      "agentInstructions": "# Agent 指令\n\n描述这个 Tin 的用途和交互方式..."
+    },
+    "lang": {
+      "html": "HTML",
+      "javascript": "JavaScript",
+      "markdown": "Markdown"
+    },
+    "charCount": "{{count}} 字符"
+  },
+  "toast": {
+    "installSuccess": "「{{name}}」安装成功",
+    "installFailed": "安装失败",
+    "uninstallSuccess": "「{{name}}」已卸载",
+    "uninstallFailed": "卸载失败",
+    "activateSuccess": "「{{name}}」已激活",
+    "activateFailed": "激活失败",
+    "disableSuccess": "「{{name}}」已停用",
+    "disableFailed": "停用失败",
+    "deleteSuccess": "「{{name}}」已删除",
+    "deleteFailed": "删除失败",
+    "enableFailed": "启用失败",
+    "pinFailed": "钉选操作失败",
+    "loadFailed": "加载失败",
+    "saveSuccess": "保存成功",
+    "saveFailed": "保存失败",
+    "persistVarFailed": "变量保存失败"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "title": "Tins",
+  "installedCount": "{{count}} installed",
+  "section": {
+    "installed": "Installed",
+    "available": "Available"
+  },
+  "action": {
+    "install": "Install",
+    "uninstall": "Uninstall",
+    "enable": "Enable",
+    "disable": "Disable",
+    "pin": "Pin",
+    "unpin": "Unpin",
+    "edit": "Edit",
+    "retry": "Retry",
+    "saveAll": "Save All"
+  },
+  "confirm": {
+    "uninstall": "Are you sure you want to uninstall \"{{name}}\"?",
+    "delete": "Are you sure you want to delete \"{{name}}\"? This action cannot be undone.",
+    "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?"
+  },
+  "empty": {
+    "title": "No Tins yet",
+    "description": "Tell Agent what you want to accomplish—it can create and install a Tin for you. Tins published by teammates will appear in the Available list below.",
+    "askAgent": "Ask Agent to create a Tin",
+    "agentPrompt": "Help me create a Tin plugin. First ask what scenario I want to solve (e.g. auto-highlighting pages, extracting info, or browser helpers), then create and install it in this Workspace.",
+    "errorNoSession": "Unable to start a chat right now. Please try again.",
+    "openPanel": "Open Tins Panel"
+  },
+  "sidePanel": {
+    "emptyTitle": "No Tin installed",
+    "emptyDescription": "Tins are smart plugins that activate while browsing and provide helper features.",
+    "openPanel": "Install Tin"
+  },
+  "home": {
+    "loading": "Loading...",
+    "viewAll": "View all {{count}} Tins...",
+    "activeCount": "{{count}} Tin(s) active",
+    "loadError": "Failed to load Tins",
+    "retry": "Retry"
+  },
+  "activated": "Activated",
+  "editor": {
+    "tabs": {
+      "panelHtml": "UI Panel",
+      "contentScript": "Content Script",
+      "backgroundScript": "Background Script",
+      "agentInstructions": "Agent Instructions"
+    },
+    "placeholder": {
+      "panelHtml": "<!-- Write your Tin UI panel HTML here -->\n<!-- Use CDN libraries and communicate with host via window.tin API -->",
+      "contentScript": "// Script injected into browsed pages\n// Can access and modify page DOM",
+      "backgroundScript": "// Background script running in main process sandbox",
+      "agentInstructions": "# Agent Instructions\n\nDescribe what this Tin does and how to interact with it..."
+    },
+    "lang": {
+      "html": "HTML",
+      "javascript": "JavaScript",
+      "markdown": "Markdown"
+    },
+    "charCount": "{{count}} chars"
+  },
+  "toast": {
+    "installSuccess": "\"{{name}}\" installed successfully",
+    "installFailed": "Installation failed",
+    "uninstallSuccess": "\"{{name}}\" uninstalled",
+    "uninstallFailed": "Uninstall failed",
+    "activateSuccess": "\"{{name}}\" activated",
+    "activateFailed": "Activation failed",
+    "disableSuccess": "\"{{name}}\" disabled",
+    "disableFailed": "Disable failed",
+    "deleteSuccess": "\"{{name}}\" deleted",
+    "deleteFailed": "Delete failed",
+    "enableFailed": "Enable failed",
+    "pinFailed": "Pin operation failed",
+    "loadFailed": "Load failed",
+    "saveSuccess": "Save successful",
+    "saveFailed": "Save failed",
+    "persistVarFailed": "Failed to save variable"
+  }
+}

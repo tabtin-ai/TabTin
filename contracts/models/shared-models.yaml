@@ -1,0 +1,953 @@
+# TabTin 跨端共享数据模型
+# JSON Schema Draft 2020-12
+# 被 OpenAPI 和 AsyncAPI 通过 $ref 引用
+#
+# 维护规则：
+# - 新增跨端共享模型时必须在此定义
+# - 字段名使用 snake_case（与后端一致）
+# - 各端代码生成时自动转换为平台命名风格（camelCase / PascalCase）
+# - required 数组仅列出保证存在的字段
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://api.example.com/contracts/models/shared-models.yaml"
+
+$defs:
+
+  # ==================== 通用 ====================
+
+  ApiEnvelope:
+    type: object
+    description: 统一 REST API 响应信封
+    required: [success, code, message]
+    properties:
+      success:
+        type: boolean
+        description: 请求是否成功
+      code:
+        type: string
+        description: "业务状态码：SUCCESS, VALIDATION_ERROR, UNAUTHORIZED, FORBIDDEN, NOT_FOUND, RATE_LIMITED, INTERNAL_ERROR 等"
+        examples: ["SUCCESS", "VALIDATION_ERROR"]
+      message:
+        type: string
+        description: 人类可读的响应消息（支持国际化）
+      data:
+        description: 业务数据（成功时存在，失败时为 null）
+      pagination:
+        $ref: "#/$defs/Pagination"
+
+  Pagination:
+    type: object
+    description: 分页信息
+    required: [total, page, page_size, total_pages]
+    properties:
+      total:
+        type: integer
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total_pages:
+        type: integer
+
+  # ==================== 用户与认证 ====================
+
+  UserInfo:
+    type: object
+    description: 用户信息
+    required: [id, is_verified_email, is_verified_phone, date_joined, login_count]
+    properties:
+      id:
+        type: string
+        format: uuid
+      username:
+        type: string
+        nullable: true
+      email:
+        type: string
+        format: email
+        nullable: true
+      phone:
+        type: string
+        nullable: true
+      nickname:
+        type: string
+        nullable: true
+      avatar:
+        type: string
+        nullable: true
+      bio:
+        type: string
+        nullable: true
+      is_verified_email:
+        type: boolean
+      is_verified_phone:
+        type: boolean
+      date_joined:
+        type: string
+        format: date-time
+      last_login:
+        type: string
+        format: date-time
+        nullable: true
+      login_count:
+        type: integer
+
+  LoginResponse:
+    type: object
+    description: 登录/Token 刷新响应
+    required: [access_token, refresh_token, token_type, expires_in]
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+      token_type:
+        type: string
+        default: "Bearer"
+      expires_in:
+        type: integer
+        description: Access Token 有效期（秒）
+      user:
+        $ref: "#/$defs/UserInfo"
+
+  # ==================== 团队 (Organization) ====================
+
+  Organization:
+    type: object
+    description: 团队（Organization）
+    required: [id, name]
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+      description:
+        type: string
+        nullable: true
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+
+  # ==================== Space ====================
+
+  Space:
+    type: object
+    description: Space
+    required: [id, name]
+    properties:
+      id:
+        type: string
+        format: uuid
+      organization_id:
+        type: string
+        format: uuid
+      name:
+        type: string
+      description:
+        type: string
+        nullable: true
+      icon:
+        type: string
+        nullable: true
+      color:
+        type: string
+        nullable: true
+      goal:
+        type: string
+        nullable: true
+      keywords:
+        type: string
+        nullable: true
+      tags:
+        type: array
+        items:
+          type: string
+        nullable: true
+      status:
+        type: string
+        enum: [active, archived, deleted]
+      table_count:
+        type: integer
+        default: 0
+      order:
+        type: integer
+        default: 0
+      is_archived:
+        type: boolean
+        default: false
+      is_default:
+        type: boolean
+        default: false
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+
+  # ==================== 会话 ====================
+
+  ChatSession:
+    type: object
+    description: 聊天会话
+    required: [id, title, status, organization_id, created_at, updated_at]
+    properties:
+      id:
+        type: string
+        format: uuid
+      title:
+        type: string
+      status:
+        type: string
+        enum: [active, completed, archived]
+      organization_id:
+        type: string
+        format: uuid
+      space_id:
+        type: string
+        format: uuid
+        nullable: true
+      thread_id:
+        type: string
+        nullable: true
+      current_model_id:
+        type: string
+        nullable: true
+      current_model_name:
+        type: string
+        nullable: true
+      default_model_id:
+        type: string
+        nullable: true
+      default_model_name:
+        type: string
+        nullable: true
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+      last_message_at:
+        type: string
+        format: date-time
+        nullable: true
+      message_count:
+        type: integer
+        nullable: true
+      input_tokens:
+        type: integer
+        default: 0
+      output_tokens:
+        type: integer
+        default: 0
+      total_tokens:
+        type: integer
+        default: 0
+      context_tokens:
+        type: integer
+        default: 0
+      compaction_count:
+        type: integer
+        default: 0
+      is_reverted:
+        type: boolean
+        default: false
+
+  # ==================== 消息 ====================
+
+  ChatMessage:
+    type: object
+    description: 聊天消息
+    required: [id, role, content, created_at]
+    properties:
+      id:
+        type: string
+        format: uuid
+      role:
+        type: string
+        enum: [user, assistant, system]
+      content:
+        type: string
+      blocks_json:
+        type: array
+        items:
+          $ref: "#/$defs/MessageBlock"
+        nullable: true
+      attachments_json:
+        type: array
+        items:
+          type: object
+        nullable: true
+      agent_type:
+        type: string
+        nullable: true
+      intent:
+        type: string
+        nullable: true
+      trace_id:
+        type: string
+        nullable: true
+      model_id:
+        type: string
+        nullable: true
+      model_name:
+        type: string
+        nullable: true
+      checkpoint_hash:
+        type: string
+        nullable: true
+      checkpoint_state_index:
+        type: integer
+        nullable: true
+      created_at:
+        type: string
+        format: date-time
+
+  MessageBlock:
+    type: object
+    description: "v2 消息块（多模态输入）"
+    required: [type]
+    properties:
+      type:
+        type: string
+        enum: [text, image, file, doc_selection, table_selection]
+      text:
+        type: string
+        nullable: true
+      file_id:
+        type: string
+        nullable: true
+      filename:
+        type: string
+        nullable: true
+      mime_type:
+        type: string
+        nullable: true
+      size:
+        type: integer
+        nullable: true
+      url:
+        type: string
+        nullable: true
+      preview_url:
+        type: string
+        nullable: true
+      doc_id:
+        type: string
+        nullable: true
+      block_ids:
+        type: array
+        items:
+          type: string
+        nullable: true
+      table_id:
+        type: string
+        nullable: true
+      record_ids:
+        type: array
+        items:
+          type: string
+        nullable: true
+      field_ids:
+        type: array
+        items:
+          type: string
+        nullable: true
+      preview:
+        type: string
+        nullable: true
+
+  # ==================== Agent 步骤 ====================
+
+  AgentStep:
+    type: object
+    description: Agent 执行步骤
+    required: [id, type, status]
+    properties:
+      id:
+        type: string
+      type:
+        type: string
+        enum: [tool_call, step, subagent, reasoning]
+      name:
+        type: string
+        nullable: true
+        description: 工具名称或步骤名称
+      status:
+        type: string
+        enum: [running, completed, failed]
+      input:
+        type: string
+        nullable: true
+        description: 工具调用参数（JSON 字符串）
+      output:
+        type: string
+        nullable: true
+        description: 工具调用结果（JSON 字符串）
+
+  # ==================== 流式事件 ====================
+
+  AgentPhase:
+    type: string
+    description: Agent 执行阶段
+    enum: [idle, planning, executing, done, error]
+
+  StreamEventPayload:
+    description: "agent.stream.* 事件的 payload 结构，按 type 区分"
+    oneOf:
+      - $ref: "#/$defs/StreamLifecyclePayload"
+      - $ref: "#/$defs/StreamChunkPayload"
+      - $ref: "#/$defs/StreamReasoningPayload"
+      - $ref: "#/$defs/StreamToolPayload"
+      - $ref: "#/$defs/StreamStepPayload"
+      - $ref: "#/$defs/StreamDonePayload"
+      - $ref: "#/$defs/StreamMessagePersistedPayload"
+      - $ref: "#/$defs/StreamSubagentPayload"
+
+  UserEventPayload:
+    description: |
+      agent.user.* 事件的 payload 结构。W1 用户级事件治理：取代旧的
+      `agent.stream.title_updated` / `notifications.{user_id}` 投递路径。
+      由 publish_to_user(user_id, envelope) 实时投递到 `user.{user_id}` group。
+      离线/重连不补送（2026-05 删除 inbox 兜底机制）。
+    oneOf:
+      - $ref: "#/$defs/UserTitleUpdatedPayload"
+      - $ref: "#/$defs/UserNotificationNewPayload"
+      - $ref: "#/$defs/UserPermissionChangedPayload"
+
+  StreamLifecyclePayload:
+    type: object
+    description: "agent.stream.lifecycle - 运行生命周期变化"
+    properties:
+      phase:
+        $ref: "#/$defs/AgentPhase"
+      run_id:
+        type: string
+      model_name:
+        type: string
+
+  StreamChunkPayload:
+    type: object
+    description: "agent.stream.chunk - 文本增量"
+    required: [content]
+    properties:
+      content:
+        type: string
+      finish_reason:
+        type: string
+        nullable: true
+
+  StreamReasoningPayload:
+    type: object
+    description: "agent.stream.reasoning - 推理文本增量"
+    required: [content]
+    properties:
+      content:
+        type: string
+
+  StreamToolPayload:
+    type: object
+    description: "agent.stream.tool - 工具调用"
+    required: [tool_name, status]
+    properties:
+      tool_name:
+        type: string
+      tool_call_id:
+        type: string
+      status:
+        type: string
+        enum: [started, completed, failed]
+      arguments:
+        type: string
+        nullable: true
+      result:
+        type: string
+        nullable: true
+
+  StreamStepPayload:
+    type: object
+    description: "agent.stream.step - 步骤更新"
+    properties:
+      step:
+        $ref: "#/$defs/AgentStep"
+
+  StreamDonePayload:
+    type: object
+    description: "agent.stream.done - 流结束"
+    properties:
+      reason:
+        type: string
+        nullable: true
+      usage:
+        type: object
+        properties:
+          input_tokens:
+            type: integer
+          output_tokens:
+            type: integer
+          total_tokens:
+            type: integer
+
+  StreamMessagePersistedPayload:
+    type: object
+    description: "agent.stream.message_persisted - 消息已持久化"
+    required: [message_id]
+    properties:
+      message_id:
+        type: string
+      temp_id:
+        type: string
+        nullable: true
+
+  StreamSubagentPayload:
+    type: object
+    description: "agent.stream.subagent_* - 子 Agent 事件"
+    properties:
+      subagent_id:
+        type: string
+      subagent_name:
+        type: string
+      status:
+        type: string
+        enum: [started, completed, failed]
+
+  # ==================== 用户级广播事件（W1 用户级事件治理）====================
+  # 后端入口：apps/services/common/ws/bus.publish_to_user(user_id, envelope)
+  # 投递通道：user.{user_id} group（auth.ok 时自动 join）实时 group_send。
+  # 2026-05 删除 inbox 兜底机制：离线/重连不补送，由各模块"打开拉最新"自洽。
+
+  UserTitleUpdatedPayload:
+    type: object
+    description: |
+      agent.user.title_updated - LLM 生成对话标题就绪。后端
+      ChatStreamPublisher.publish_title_update 在 spawn_title_thread 完成后投递。
+      取代废弃的 `agent.stream.title_updated`（stream done 后客户端 slot 已 cleanup
+      会丢标题）。
+    required: [session_id, title]
+    properties:
+      session_id:
+        type: string
+        format: uuid
+        description: 标题更新所属的会话 ID
+      title:
+        type: string
+        description: 新标题（LLM 生成或回退默认值）
+
+  UserNotificationNewPayload:
+    type: object
+    description: |
+      agent.user.notification.new - 用户通知到达。前端按 `type` 字段二级分发
+      （如 `organization.invitation` → 拉取邀请收件箱；其它通知由 NotificationService 处理）。
+    required: [type]
+    properties:
+      type:
+        type: string
+        description: |
+          通知子类型（业务侧定义，常见值：`organization.invitation`、
+          `organization.invitation.accepted`、`task.completed` 等）
+      notification_id:
+        type: string
+        nullable: true
+        description: 通知唯一 ID（前端去重 / 标记已读用）
+      title:
+        type: string
+        nullable: true
+      body:
+        type: string
+        nullable: true
+      data:
+        type: object
+        nullable: true
+        description: 子类型相关的额外字段（业务自定义）
+
+  UserPermissionChangedPayload:
+    type: object
+    description: |
+      agent.user.permission.changed - 用户角色 / Space 权限变更，前端按 organization_id /
+      space_id 决定刷新粒度。后端入口：BaseService.broadcast_permission_changed
+      （organization_service / access_service 在改成员角色 / 转让所有权 / 改 SpaceMembership 时调）。
+
+      易混淆命名：本事件是**前端缓存刷新信号**；与 daemon 侧的 `agent.permission.*`
+      （PromptForwardEvent.PERMISSION_RESPONSE，单次工具调用的权限决策应答）不是
+      同一回事。
+    required: [organization_id]
+    properties:
+      organization_id:
+        type: string
+        format: uuid
+        description: 发生权限变更的 organization ID
+      space_id:
+        type: string
+        description: |
+          发生权限变更的 space ID（仅 access_service 改 SpaceMembership 角色时
+          填充；其它场景如 organization 角色变更 / 所有权转让传空字符串）。
+          Electron SpaceAccessPanel 用本字段精准刷新本 Space 的成员/共享/委托面板。
+        default: ''
+
+  # ==================== 会员体系 ====================
+
+  MembershipTier:
+    type: object
+    description: 会员等级
+    required: [id, tier_type, name, description, price, duration_months, max_tables, max_records_per_table, max_api_calls_per_day, max_crawl_tasks_per_day, features, sort_order, is_active]
+    properties:
+      id:
+        type: string
+      tier_type:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      price:
+        type: string
+        description: Decimal 金额
+      duration_months:
+        type: integer
+      max_tables:
+        type: integer
+      max_records_per_table:
+        type: integer
+      max_api_calls_per_day:
+        type: integer
+      max_crawl_tasks_per_day:
+        type: integer
+      llm_token_quota_per_month:
+        type: integer
+        deprecated: true
+        description: 已废弃，请使用 included_llm_credits_monthly
+      included_storage_bytes:
+        type: integer
+        default: 0
+      included_llm_credits_monthly:
+        type: string
+        default: "0"
+      features:
+        type: object
+      sort_order:
+        type: integer
+      is_active:
+        type: boolean
+
+  MembershipStatus:
+    type: object
+    description: 用户会员状态
+    required: [is_member, is_expired, quotas, features]
+    properties:
+      is_member:
+        type: boolean
+      tier:
+        type: object
+        nullable: true
+      end_date:
+        type: string
+        format: date-time
+        nullable: true
+      is_expired:
+        type: boolean
+      days_until_expiry:
+        type: integer
+        nullable: true
+      auto_renew:
+        type: boolean
+        default: false
+      quotas:
+        type: object
+      features:
+        type: object
+
+  OrganizationMembershipStatus:
+    type: object
+    description: 团队会员状态
+    required: [organization_id, is_member, is_expired, quotas, features]
+    properties:
+      organization_id:
+        type: string
+      is_member:
+        type: boolean
+      tier:
+        type: object
+        nullable: true
+      end_date:
+        type: string
+        format: date-time
+        nullable: true
+      is_expired:
+        type: boolean
+      days_until_expiry:
+        type: integer
+        nullable: true
+      auto_renew:
+        type: boolean
+        default: false
+      purchased_by:
+        type: string
+        default: ""
+      quotas:
+        type: object
+      features:
+        type: object
+
+  # ==================== 计费中心 ====================
+
+  BillingSummary:
+    type: object
+    description: 团队计费摘要
+    properties:
+      organization_id:
+        type: string
+      window_days:
+        type: integer
+      policy:
+        type: object
+      entitlement:
+        type: object
+      llm_month_budget:
+        type: object
+      storage_snapshot:
+        type: object
+      usage_summary:
+        type: object
+      latest_events:
+        type: array
+        items:
+          type: object
+
+  BillingPolicy:
+    type: object
+    description: 计费策略
+    properties:
+      organization_id:
+        type: string
+      storage_billing_mode:
+        type: string
+      llm_billing_mode:
+        type: string
+      currency:
+        type: string
+      is_active:
+        type: boolean
+      metadata:
+        type: object
+      is_default:
+        type: boolean
+      updated_at:
+        type: string
+        format: date-time
+        nullable: true
+
+  BillingEntitlement:
+    type: object
+    description: 计费权益
+    properties:
+      organization_id:
+        type: string
+      included_storage_bytes:
+        type: integer
+      purchased_storage_bytes:
+        type: integer
+      included_llm_credits_monthly:
+        type: string
+      effective_from:
+        type: string
+        format: date-time
+        nullable: true
+      effective_to:
+        type: string
+        format: date-time
+        nullable: true
+      is_active:
+        type: boolean
+      updated_at:
+        type: string
+        format: date-time
+        nullable: true
+
+  BillingInvoice:
+    type: object
+    description: 账单
+    required: [id, invoice_no, organization_id, status]
+    properties:
+      id:
+        type: string
+      invoice_no:
+        type: string
+      organization_id:
+        type: string
+      period_start:
+        type: string
+        format: date
+      period_end:
+        type: string
+        format: date
+      status:
+        type: string
+        enum: [draft, open, paid, void]
+      currency:
+        type: string
+      subtotal_amount:
+        type: string
+      discount_amount:
+        type: string
+      total_amount:
+        type: string
+      issued_at:
+        type: string
+        format: date-time
+        nullable: true
+      paid_at:
+        type: string
+        format: date-time
+        nullable: true
+      metadata:
+        type: object
+      collection:
+        type: object
+      lines:
+        type: array
+        items:
+          type: object
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+
+  UsageDashboard:
+    type: object
+    description: 用量仪表盘
+    required:
+      - organization_id
+      - period_days
+      - window_start
+      - current_month_total_credits
+      - last_month_total_credits
+      - month_over_month_pct
+      - today_total_credits
+      - today_aggregated_amount
+      - by_meter
+      - by_model
+      - daily_trend
+    properties:
+      organization_id:
+        type: string
+      period_days:
+        type: integer
+      window_start:
+        type: string
+        format: date
+      current_month_total_credits:
+        type: string
+      last_month_total_credits:
+        type: string
+      month_over_month_pct:
+        type: number
+        nullable: true
+      today_total_credits:
+        type: string
+      today_aggregated_amount:
+        type: string
+      by_meter:
+        type: array
+        items:
+          type: object
+          required: [meter_key, total_credits, total_quantity]
+          properties:
+            meter_key:
+              type: string
+            total_credits:
+              type: string
+            total_quantity:
+              type: string
+      by_model:
+        type: array
+        items:
+          type: object
+          required: [model_name, total_credits, call_count]
+          properties:
+            model_name:
+              type: string
+            total_credits:
+              type: string
+            call_count:
+              type: integer
+      daily_trend:
+        type: array
+        items:
+          type: object
+          required: [date, total_credits, llm_credits, storage_credits, is_realtime]
+          properties:
+            date:
+              type: string
+              format: date
+            total_credits:
+              type: string
+            llm_credits:
+              type: string
+            storage_credits:
+              type: string
+            is_realtime:
+              type: boolean
+
+  # ==================== WebSocket 信封 ====================
+
+  GatewayEnvelope:
+    type: object
+    description: WebSocket 网关统一信封格式
+    required: [v, type, request_id, ts, device_id, role, payload]
+    properties:
+      v:
+        type: integer
+        const: 1
+        description: 协议版本
+      type:
+        type: string
+        description: 消息类型
+      request_id:
+        type: string
+        description: 请求 ID（客户端生成，用于请求-响应匹配）
+      ts:
+        type: integer
+        description: Unix 时间戳（秒）
+      device_id:
+        type: string
+        description: "设备指纹（格式: {platform}-{uuid}，如 electron-xxx、android-xxx）"
+      role:
+        type: string
+        enum: [electron, mobile, admin, backend, channel, daemon, device_runtime, open_api]
+        description: 客户端角色
+      payload:
+        type: object
+        description: 业务负载（按 type 不同结构不同）
+      event_id:
+        type: string
+        nullable: true
+        description: 服务端事件 ID（Redis Stream ID，用于 resume）
+      reply_to:
+        type: string
+        nullable: true
+      thread_id:
+        type: string
+        nullable: true
+        description: 会话/线程 ID
+      trace_id:
+        type: string
+        nullable: true
+      organization_id:
+        type: string
+        nullable: true
+      session_id:
+        type: string
+        nullable: true
+      table_id:
+        type: string
+        nullable: true
+      instance_id:
+        type: string
+        nullable: true

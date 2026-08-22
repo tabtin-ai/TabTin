@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 认证错误 -->
+    <string name="error_invalid_phone">请输入邮箱或手机号</string>
+    <string name="error_send_code_failed">发送验证码失败</string>
+    <string name="error_login_failed">登录失败</string>
+    <string name="error_session_expired">登录已过期，请重新登录</string>
+    <string name="error_session_expired_toast">登录会话已过期，请重新登录</string>
+    <string name="organization_access_revoked_title">已被移出组织</string>
+    <string name="organization_access_revoked_message">你已被移出组织「%1$s」，当前内容无法继续访问。</string>
+    <string name="organization_access_revoked_message_generic">你已被移出当前组织，当前内容无法继续访问。</string>
+    <string name="organization_access_revoked_switch_default">切换到默认组织</string>
+    <string name="organization_access_revoked_acknowledge">知道了</string>
+
+    <!-- 对话错误 -->
+    <string name="error_load_messages_failed">加载消息失败</string>
+    <string name="error_session_not_loaded">会话未加载，请稍后重试</string>
+    <string name="error_not_logged_in">未登录，请重新登录</string>
+    <string name="error_wait_upload">请等待附件上传完成</string>
+    <string name="error_all_attachments_failed">所有附件上传失败，请重试后发送</string>
+    <string name="error_stream_exception">流式通信异常</string>
+    <string name="error_prefix">错误：%s</string>
+
+    <!-- 附件错误 -->
+    <string name="error_attachment_limit">附件数量已达上限（最多 %d 个）</string>
+    <string name="error_cannot_read_file_info">无法读取文件信息</string>
+    <string name="error_unsupported_file_type">不支持的文件类型：%s</string>
+    <string name="error_file_too_large">文件大小超出限制（最大 %dMB）</string>
+    <string name="error_upload_failed">上传失败</string>
+    <string name="error_cannot_read_file">无法读取文件</string>
+    <string name="error_camera_image_failed">无法处理相机图片</string>
+
+    <!-- 网络错误 -->
+    <string name="error_ws_timeout">WebSocket 连接超时</string>
+    <string name="error_subscribe_failed">订阅失败</string>
+    <string name="error_subscribe_timeout">订阅会话流超时，请检查网络后重试</string>
+    <string name="error_subscribe_disconnected">连接已中断，恢复网络后可重试</string>
+    <string name="error_subscribe_denied">无权订阅此会话，请返回后重新进入</string>
+    <string name="error_subscribe_rejected">会话订阅被服务端拒绝，请稍后重试</string>
+    <string name="error_agent_start_timeout">Agent 启动超时，未收到任何响应</string>
+    <string name="error_send_failed">发送消息失败</string>
+    <string name="error_agent_timeout">Agent 响应超时</string>
+    <string name="error_reconnect_timeout">连接恢复超时，请重试</string>
+    <string name="error_agent_execution">Agent 执行出错</string>
+    <string name="error_no_workspace">未选择组织</string>
+    <string name="error_request_failed">请求失败</string>
+    <string name="error_rate_limited">请求过于频繁，请稍后再试</string>
+
+    <!-- 图片错误 -->
+    <string name="error_image_load_failed">图片加载失败</string>
+    <string name="error_image_format_unsupported">图片格式不支持</string>
+    <string name="error_save_failed">保存失败</string>
+    <string name="error_save_failed_detail">保存失败: %s</string>
+
+    <!-- OSS 上传错误 -->
+    <string name="error_instant_no_file_id">秒传结果缺少 file_id</string>
+    <string name="error_missing_presigned_url">缺少 presigned_url</string>
+    <string name="error_missing_object_key">缺少 object_key</string>
+    <string name="error_oss_put_failed">上传文件到 OSS 失败 (%1$d)</string>
+
+    <!-- ApiEnvelope unwrap 错误标签 -->
+    <string name="error_label_login">登录</string>
+    <string name="error_label_fetch_config">获取上传配置</string>
+    <string name="error_label_get_presign">获取上传签名</string>
+    <string name="error_label_confirm_upload">确认上传</string>
+    <string name="error_label_load_agents">加载 Agent</string>
+    <string name="error_label_load_sessions">加载会话列表</string>
+    <string name="error_label_create_session">创建会话</string>
+    <string name="error_label_load_messages">加载消息</string>
+    <string name="error_label_submit_answer">提交回答</string>
+    <string name="error_label_submit_permission">提交权限决策</string>
+    <string name="error_label_fork_session">分叉会话</string>
+
+    <!-- 无效 URL -->
+    <string name="error_invalid_url">无效的 URL</string>
+    <string name="error_server_error">服务器错误 (%d)</string>
+    <string name="error_decoding_failed">数据解析失败: %s</string>
+    <string name="error_file_empty_or_unreadable">文件为空或无法读取</string>
+
+    <!-- 通用错误（ErrorClassifier 使用） -->
+    <string name="error_network">网络连接异常，请稍后再试</string>
+    <string name="error_server">服务端异常，请稍后再试</string>
+    <string name="error_unknown">操作失败，请稍后再试</string>
+    <string name="error_forbidden">无权限执行此操作</string>
+
+    <!-- WebView 渲染进程被系统回收后的降级提示（见 ui/web/WebViewRenderProcessGuard.kt）。
+         真崩溃与系统回收对用户是同一种体验（内容没了、重试能好），文案不区分；
+         区分只体现在上报口径上。 -->
+    <string name="error_webview_render_gone">内容加载失败：页面被系统回收了（通常是内存紧张所致），点击重试重新加载。</string>
+</resources>

@@ -1,0 +1,333 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "packages/tabtin-cli-go/cmd/browser/browser.go (via TestExportBrowserContractToFile)",
+  "note": "BR-7 Browser Runtime Contract 的机器可读投影（CLI 侧）。请勿手改：跑 scripts/generate-browser-contract.py 重新生成。",
+  "commands": [
+    {
+      "id": "act",
+      "method": "POST",
+      "path": "/browser/act",
+      "risk": "write",
+      "policyRisk": "high-risk-write"
+    },
+    {
+      "id": "batch",
+      "method": "POST",
+      "path": "/browser/batch",
+      "risk": "write",
+      "policyRisk": "high-risk-write"
+    },
+    {
+      "id": "capabilities",
+      "selfDescribe": true,
+      "method": "POST",
+      "path": "/browser/capabilities",
+      "risk": "read",
+      "idempotent": true
+    },
+    {
+      "id": "clear-session",
+      "method": "POST",
+      "path": "/browser/clear-session",
+      "risk": "write",
+      "policyRisk": "high-risk-write"
+    },
+    {
+      "id": "console",
+      "method": "POST",
+      "path": "/browser/console",
+      "risk": "read"
+    },
+    {
+      "id": "context",
+      "selfDescribe": true,
+      "method": "POST",
+      "path": "/browser/context",
+      "risk": "read",
+      "idempotent": true
+    },
+    {
+      "id": "cookies.clear",
+      "method": "POST",
+      "path": "/browser/cookies",
+      "risk": "write",
+      "policyRisk": "high-risk-write",
+      "fixedFields": {
+        "action": "clear"
+      }
+    },
+    {
+      "id": "cookies.get",
+      "method": "POST",
+      "path": "/browser/cookies",
+      "risk": "read",
+      "fixedFields": {
+        "action": "get"
+      }
+    },
+    {
+      "id": "cookies.set",
+      "method": "POST",
+      "path": "/browser/cookies",
+      "risk": "write",
+      "fixedFields": {
+        "action": "set"
+      }
+    },
+    {
+      "id": "doctor",
+      "diagnostic": true,
+      "risk": "read",
+      "idempotent": true
+    },
+    {
+      "id": "eval",
+      "method": "POST",
+      "path": "/browser/eval",
+      "risk": "write",
+      "policyRisk": "high-risk-write"
+    },
+    {
+      "id": "glance",
+      "method": "POST",
+      "path": "/browser/glance",
+      "risk": "read"
+    },
+    {
+      "id": "home",
+      "method": "POST",
+      "path": "/browser/home",
+      "risk": "read"
+    },
+    {
+      "id": "job.cancel",
+      "method": "POST",
+      "path": "/browser/job/cancel",
+      "risk": "write"
+    },
+    {
+      "id": "job.status",
+      "method": "POST",
+      "path": "/browser/job/status",
+      "risk": "read"
+    },
+    {
+      "id": "nav",
+      "method": "POST",
+      "path": "/browser/nav",
+      "risk": "write",
+      "policyRisk": "read"
+    },
+    {
+      "id": "network",
+      "method": "POST",
+      "path": "/browser/network",
+      "risk": "read"
+    },
+    {
+      "id": "network.to-api",
+      "method": "POST",
+      "path": "/browser/network/to-api",
+      "risk": "read"
+    },
+    {
+      "id": "open",
+      "method": "POST",
+      "path": "/browser/open",
+      "risk": "write",
+      "policyRisk": "read"
+    },
+    {
+      "id": "print",
+      "method": "POST",
+      "path": "/browser/print",
+      "risk": "read"
+    },
+    {
+      "id": "random-ua",
+      "method": "POST",
+      "path": "/browser/random-ua",
+      "risk": "read"
+    },
+    {
+      "id": "record.start",
+      "method": "POST",
+      "path": "/browser/record/start",
+      "risk": "write"
+    },
+    {
+      "id": "record.status",
+      "method": "POST",
+      "path": "/browser/record/status",
+      "risk": "read"
+    },
+    {
+      "id": "record.stop",
+      "method": "POST",
+      "path": "/browser/record/stop",
+      "risk": "write"
+    },
+    {
+      "id": "replay.list",
+      "method": "POST",
+      "path": "/browser/replay/list",
+      "risk": "read"
+    },
+    {
+      "id": "replay.run",
+      "method": "POST",
+      "path": "/browser/replay/run",
+      "risk": "write",
+      "policyRisk": "high-risk-write"
+    },
+    {
+      "id": "resource.capture",
+      "method": "POST",
+      "path": "/browser/resource/capture",
+      "risk": "read"
+    },
+    {
+      "id": "resource.download",
+      "method": "POST",
+      "path": "/browser/resource/download",
+      "risk": "read"
+    },
+    {
+      "id": "resource.inspect",
+      "method": "POST",
+      "path": "/browser/resource/inspect",
+      "risk": "read"
+    },
+    {
+      "id": "resource.list",
+      "method": "POST",
+      "path": "/browser/resources",
+      "risk": "read"
+    },
+    {
+      "id": "resource.probe",
+      "method": "POST",
+      "path": "/browser/resource/probe",
+      "risk": "read"
+    },
+    {
+      "id": "resource.smart-download",
+      "method": "POST",
+      "path": "/browser/resource/smart-download",
+      "risk": "read"
+    },
+    {
+      "id": "route",
+      "method": "POST",
+      "path": "/browser/route",
+      "risk": "write",
+      "policyRisk": "high-risk-write"
+    },
+    {
+      "id": "route-list",
+      "method": "POST",
+      "path": "/browser/route-list",
+      "risk": "read"
+    },
+    {
+      "id": "session.close",
+      "method": "POST",
+      "path": "/browser/session/close",
+      "risk": "write"
+    },
+    {
+      "id": "session.close-all",
+      "method": "POST",
+      "path": "/browser/session/close-all",
+      "risk": "write",
+      "policyRisk": "high-risk-write"
+    },
+    {
+      "id": "session.create",
+      "method": "POST",
+      "path": "/browser/session/create",
+      "risk": "write"
+    },
+    {
+      "id": "session.list",
+      "method": "POST",
+      "path": "/browser/session/list",
+      "risk": "read"
+    },
+    {
+      "id": "session.load",
+      "method": "POST",
+      "path": "/browser/session/load",
+      "risk": "write",
+      "policyRisk": "high-risk-write"
+    },
+    {
+      "id": "session.save",
+      "method": "POST",
+      "path": "/browser/session/save",
+      "risk": "write"
+    },
+    {
+      "id": "session.switch",
+      "method": "POST",
+      "path": "/browser/session/switch",
+      "risk": "write"
+    },
+    {
+      "id": "stream.download",
+      "method": "POST",
+      "path": "/browser/stream/download",
+      "risk": "read"
+    },
+    {
+      "id": "stream.info",
+      "method": "POST",
+      "path": "/browser/stream/info",
+      "risk": "read"
+    },
+    {
+      "id": "stream.parse",
+      "method": "POST",
+      "path": "/browser/stream/parse",
+      "risk": "read"
+    },
+    {
+      "id": "tab.close",
+      "method": "POST",
+      "path": "/browser/tab-close",
+      "risk": "write"
+    },
+    {
+      "id": "tab.list",
+      "method": "POST",
+      "path": "/browser/tabs",
+      "risk": "read"
+    },
+    {
+      "id": "tab.state",
+      "method": "POST",
+      "path": "/browser/tab-state",
+      "risk": "read"
+    },
+    {
+      "id": "tab.switch",
+      "method": "POST",
+      "path": "/browser/tab-switch",
+      "risk": "write",
+      "policyRisk": "read"
+    },
+    {
+      "id": "unroute",
+      "method": "POST",
+      "path": "/browser/unroute",
+      "risk": "write",
+      "policyRisk": "high-risk-write"
+    },
+    {
+      "id": "wait",
+      "method": "POST",
+      "path": "/browser/wait",
+      "risk": "read"
+    }
+  ]
+}

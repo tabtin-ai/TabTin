@@ -1,0 +1,29 @@
+{
+  "group": {
+    "ungrouped": "グループ化されていない",
+    "unclassified": "未分類",
+    "loadedOfTotal": "{{total}} の {{loaded}} がロードされました"
+  },
+  "attachments": {
+    "missingRequired": "必要な添付ファイルがありません"
+  },
+  "record": {
+    "createMissingTableTitle": "レコードを作成できません",
+    "createMissingTableDesc": "テーブル情報がありません。テーブルを選択し直して再試行してください。",
+    "createFailedTitle": "作成に失敗しました",
+    "createFailedDesc": "レコードの作成に失敗しました。後でもう一度試してください。",
+    "createFailedFallback": "レコードを作成できません。後でもう一度試してください。",
+    "createPatchFailedTitle": "追加の編集は保存されませんでした",
+    "createPatchFailedDesc": "レコードは作成されましたが、保存後の最新の編集は適用されませんでした。再試行してください。",
+    "createdTitle": "作成されました",
+    "createdHiddenDesc": "{{count}} 新しいレコードは現在このビューに表示されません。",
+    "createdHiddenAction": "フィルターをクリアすると表示されます"
+  },
+  "error": {
+    "cellUpdateFailed": "セルの更新に失敗しました。もう一度試してください。"
+  },
+  "autoFill": {
+    "createdTimeHint": "このフィールドはレコードの作成時に自動入力されます",
+    "lastModifiedTimeHint": "このフィールドはレコードが変更されるたびに自動更新されます"
+  }
+}

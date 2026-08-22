@@ -1,0 +1,53 @@
+# TabDesktop @tabtin/desktop-native · CMake 工程模板（模块零 v2.1 占位）
+#
+# 用途：模块二 / 模块四执行 Agent 启用 native 编译时复制本文件 →
+# native/CMakeLists.txt，按需取消注释下方各能力段。
+#
+# 模块零阶段：本文件名带 .template 后缀 → 不会被 cmake-js 自动发现。
+# 这样可以保证 `pnpm install` 在没有 swift / xcode-select 的环境（Linux CI）
+# 下也能正常完成，不引入构建时依赖。
+#
+# 启用步骤（详见 ../README.md "升级路径"段）：
+# 1. cp native/CMakeLists.txt.template native/CMakeLists.txt
+# 2. 取消下面对应能力段注释
+# 3. 把对应的 Swift 实现文件加进 native/swift/
+# 4. 修改 src/index.ts 的 loadNativeBinding() 接入真 .node
+# 5. 调整 package.json scripts 与依赖
+
+cmake_minimum_required(VERSION 3.15)
+project(tabtin_desktop_native LANGUAGES C CXX)
+
+# CMAKE_JS_INC / CMAKE_JS_SRC / CMAKE_JS_LIB 由 cmake-js 注入
+include_directories(${CMAKE_JS_INC})
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# -- Swift 子工程（macOS only，模块二/四启用） -------------------------------
+# enable_language(Swift)
+# set(SWIFT_SOURCES
+#   swift/EscCGEventTap.swift       # 模块二 ESC PI 防御
+#   swift/SCContentFilter.swift     # 模块二 合成器级截图过滤
+#   swift/AXTree.swift              # 模块四 AXUIElement Accessibility Tree
+# )
+
+# -- N-API binding 入口 ------------------------------------------------------
+# add_library(${PROJECT_NAME} SHARED
+#   src/binding.cc
+#   ${SWIFT_SOURCES}
+# )
+# set_target_properties(${PROJECT_NAME} PROPERTIES
+#   PREFIX ""
+#   SUFFIX ".node"
+# )
+# target_link_libraries(${PROJECT_NAME} PRIVATE ${CMAKE_JS_LIB})
+
+# -- macOS framework 链接（模块二/四启用） -----------------------------------
+# if (APPLE)
+#   target_link_libraries(${PROJECT_NAME} PRIVATE
+#     "-framework Foundation"
+#     "-framework CoreGraphics"
+#     "-framework ApplicationServices"     # AXUIElement
+#     "-framework ScreenCaptureKit"        # SCContentFilter
+#   )
+# endif()

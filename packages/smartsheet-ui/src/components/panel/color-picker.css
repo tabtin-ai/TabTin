@@ -1,0 +1,60 @@
+/* HSV saturation/brightness area — gradient overlays can't be expressed in Tailwind */
+.sui-cp-sv-area {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.4;
+  border-radius: 4px;
+  cursor: crosshair;
+  overflow: hidden;
+}
+.sui-cp-sv-white {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, #fff, transparent);
+}
+.sui-cp-sv-black {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #000, transparent);
+}
+.sui-cp-sv-cursor {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(0,0,0,0.4);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Hue rainbow bar */
+.sui-cp-hue-bar {
+  position: relative;
+  height: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: linear-gradient(to right, #f00, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00);
+}
+
+/* Opacity bar */
+.sui-cp-opacity-bar {
+  position: relative;
+  height: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  background-size: 16px 16px;
+}
+
+/* Slider thumb (shared by hue + opacity) */
+.sui-cp-slider-thumb {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}

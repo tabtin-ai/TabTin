@@ -1,0 +1,73 @@
+{
+  "actions.create": "Nuevo sitio",
+  "actions.publish": "Publicar",
+  "actions.copyUrl": "Copiar URL",
+  "actions.urlCopied": "URL copiada",
+  "actions.editCode": "Editar código",
+  "actions.refresh": "Actualizar",
+  "actions.rollback": "Revertir",
+  "actions.download": "Descargar fuente",
+  "status.draft": "Borrador",
+  "status.published": "Publicado",
+  "status.archived": "Archivado",
+  "stats.views": "{{count}} vistas",
+  "preview.empty": "Aún no hay vista previa. Publica para ver tu sitio.",
+  "preview.desktop": "Vista previa de escritorio",
+  "preview.mobile": "Vista previa móvil",
+  "sidebar.info": "Información del sitio",
+  "sidebar.url": "URL",
+  "sidebar.framework": "Marco",
+  "sidebar.visibility": "Visibilidad",
+  "sidebar.public": "Público",
+  "sidebar.private": "Privado",
+  "sidebar.versions": "Historial de versiones",
+  "sidebar.noVersions": "Aún no publicado",
+  "version.current": "Actual",
+  "error.siteNotFound": "Sitio no encontrado",
+  "error.publishFailed": "Error de publicación",
+  "error.noDistUrl": "Primero cree y cargue artefactos.",
+  "error.noDistUrlHint": "Ejecute la compilación en TabCode o use CLI: compilación del sitio tabtin",
+  "actions.publishSuccess": "Publicado exitosamente",
+  "publish.dialogTitle": "Publicar sitio",
+  "publish.messageLabel": "Nota de versión",
+  "publish.messagePlaceholder": "Describir los cambios en esta versión.",
+  "empty.noSites": "Aún no hay sitios. Crea tu primera aplicación ligera.",
+  "home": {
+    "assetBrowser": {
+      "newTabsite": "Nuevo sitio",
+      "tabsiteEmpty": "Aún no hay sitios",
+      "tabsiteUnavailable": "TabSitio no disponible",
+      "tabsite": "Sitios"
+    }
+  },
+  "label": {
+    "untitled": "Sitio sin título",
+    "untitledSite": "Sitio sin título"
+  },
+  "dialog": {
+    "createTitle": "Nuevo sitio",
+    "siteName": "Nombre del sitio",
+    "siteNamePlaceholder": "Introduzca el nombre del sitio",
+    "selectTemplate": "Elija una plantilla",
+    "cancel": "Cancelar",
+    "create": "crear"
+  },
+  "guide": {
+    "initTitle": "Proyecto del sitio no inicializado",
+    "initDescription": "Inicialice un proyecto de plantilla para comenzar a editar en TabCode",
+    "initButton": "Inicializar proyecto",
+    "linkButton": "Vincular directorio existente",
+    "initSuccess": "Proyecto inicializado exitosamente",
+    "initFailed": "La inicialización falló",
+    "linkSuccess": "Directorio vinculado",
+    "linkFailed": "Enlace fallido",
+    "linkWarning": "No se encontró ningún paquete.json en el directorio",
+    "linkWarningHint": "La construcción puede fallar. Asegúrese de que este sea el directorio del proyecto correcto."
+  },
+  "template": {
+    "blank": "Sitio en blanco",
+    "blankDesc": "React + Vite + Tailwind, empieza desde cero",
+    "dashboard": "Panel de control",
+    "dashboardDesc": "Panel de visualización de datos impulsado por TabData"
+  }
+}

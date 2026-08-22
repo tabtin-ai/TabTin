@@ -1,0 +1,34 @@
+{
+  "validation": {
+    "required": "This field is required",
+    "invalidUrl": "Please enter a valid URL",
+    "invalidEmail": "Please enter a valid email",
+    "invalidFormat": "Invalid format",
+    "minValue": "Minimum is {{min}}",
+    "maxValue": "Maximum is {{max}}",
+    "maxLength": "At most {{max}} characters"
+  },
+  "picker": {
+    "search": "Search...",
+    "noResults": "No matching results",
+    "empty": "No AI tools available"
+  },
+  "blockCard": {
+    "presetTitle": "Submitted parameters",
+    "askUserTitle": "Answered parameters",
+    "fallbackLabel": "Parameters"
+  },
+  "card": {
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "remove": "Remove"
+  },
+  "upload": {
+    "clickToUpload": "Click to upload",
+    "fileTooLarge": "File is too large",
+    "addMore": "Add"
+  },
+  "input": {
+    "presetPicker": "AI Tools"
+  }
+}

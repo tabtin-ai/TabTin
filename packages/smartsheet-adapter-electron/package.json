@@ -1,0 +1,49 @@
+{
+  "name": "@tabtin/smartsheet-adapter-electron",
+  "version": "0.1.0",
+  "description": "Electron platform adapter for TabTin applications",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./renderer": {
+      "source": "./src/api-adapter.ts",
+      "types": "./dist/api-adapter.d.ts",
+      "import": "./dist/api-adapter.mjs",
+      "default": "./dist/api-adapter.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsc && node build-esm.js",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "tabtin",
+    "adapter",
+    "electron",
+    "platform"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "@tabtin/smartsheet": "workspace:*",
+    "electron": "^41.0.0"
+  },
+  "dependencies": {
+    "@tabtin/smartsheet": "workspace:*",
+    "@types/node": "^22.10.6"
+  },
+  "devDependencies": {
+    "electron": "^41.0.0",
+    "typescript": "5.7.2"
+  },
+  "files": [
+    "dist"
+  ]
+}

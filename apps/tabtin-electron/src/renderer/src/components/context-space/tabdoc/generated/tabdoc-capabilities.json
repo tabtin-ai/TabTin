@@ -1,0 +1,474 @@
+{
+  "version": 1,
+  "groups": [
+    {
+      "id": "browse",
+      "label": "浏览与搜索",
+      "order": 1
+    },
+    {
+      "id": "create_edit",
+      "label": "创建与整篇编辑",
+      "order": 2
+    },
+    {
+      "id": "blocks",
+      "label": "块级精准编辑",
+      "order": 3
+    },
+    {
+      "id": "organize",
+      "label": "组织与生命周期",
+      "order": 4
+    },
+    {
+      "id": "version",
+      "label": "版本历史",
+      "order": 5
+    },
+    {
+      "id": "collab",
+      "label": "协作者",
+      "order": 6
+    },
+    {
+      "id": "share",
+      "label": "分享",
+      "order": 7
+    },
+    {
+      "id": "import_export",
+      "label": "导入与导出",
+      "order": 8
+    }
+  ],
+  "commands": [
+    {
+      "name": "doc chunks",
+      "short": "分块读取大文档内容（按需加载）",
+      "long": "按块分页读取一篇大文档的内容（GET /documents/{id}/chunks）。\n超大文档不必一次拉全文——用 --start / --limit 翻块拉取；每块含 chunk_index / chunk_key /\nplaintext_preview / blob_b64 等字段。只读操作，需对文档有 viewer 权限。",
+      "group": "browse",
+      "group_label": "浏览与搜索"
+    },
+    {
+      "name": "doc list",
+      "short": "列出文档",
+      "long": "列出当前 Space 下的文档（按更新时间倒序）。\n默认由后端返回 200 条，用 --page/--page-size 翻页；全局 --space-id/--organization-id 跨空间查询。\n返回每条文档的 id/title/status/parent_id/latest_version，配合 doc read 取正文。",
+      "group": "browse",
+      "group_label": "浏览与搜索"
+    },
+    {
+      "name": "doc read",
+      "short": "读取文档详情",
+      "long": "读取单篇文档的完整详情（含正文 Markdown 与元数据）。\n返回 latest_version，写回时作为 doc save-content/update 的 --base-version 做并发保护。\n正文较长时建议先用 doc list-blocks 看大纲省 token，再决定是否全量读。",
+      "group": "browse",
+      "group_label": "浏览与搜索"
+    },
+    {
+      "name": "doc search",
+      "short": "搜索 TabDoc 文档（按关键词全文搜）",
+      "long": "按关键词全文搜索当前 Space 下的文档。\n匹配标题与正文，返回命中文档列表（含 id/title/摘要）。\n适合先搜定位、再用 doc read/list-blocks 深入；--limit 控制返回条数。",
+      "group": "browse",
+      "group_label": "浏览与搜索"
+    },
+    {
+      "name": "doc create",
+      "short": "创建 / 新建 TabDoc 文档",
+      "long": "在当前 Organization 下创建一篇文档，返回新文档 id。\n可只建元数据（标题/父节点），也可用 --markdown 一步带入初始正文（服务端把 Markdown 转\nProseMirror，存入文档内容；首次打开协作时迁移生成 binary）——免去再跑一次 doc save-content。\n长文请先把正文落到 .agent-drafts/<slug>.md，再用 --markdown @.agent-drafts/<slug>.md；\n用户已有本地 Markdown 才直接 @ 任意路径。易错元数据（icon/cover/parent/tags）优先建后再\ndoc update，避免参数失败逼着重传正文。\ntitle 必填。两套「父」参数语义不同，勿混用名：\n  --parent-item-id  → 知识库树 ContextItem.parent（侧栏可见的父子资源；要挂子文档/子表格用这个）\n  --parent-id       → Document.parent（文档内页树，与知识库 UI 无关）\n不传二者时资源落在知识库根级。--icon/--cover-image 设置文档元数据。\n（标签 tags 是 update 端能力，建文档后用 doc update <id> --tags ... 设置。）",
+      "risk": "write",
+      "group": "create_edit",
+      "group_label": "创建与整篇编辑"
+    },
+    {
+      "name": "doc save-content",
+      "short": "保存文档 Markdown 内容",
+      "long": "保存文档 Markdown 内容（替换式）。\n\n--markdown 走默认输入抽象：可直接传文本、`@路径` 从文件读、`-` 从 stdin 读。\n推荐传 --base-version（从 `tabtin doc read` 返回值的 latest_version\n拿）做并发保护——其他人/进程同时改了文档时返回 409 VERSION_CONFLICT。\n裸路径字符串（如 C:\\\\...\\\\a.md / ./a.md）会被拒绝——那是把路径当正文的常见脚枪；\n从文件读请加 @，导出到本地请用 doc export --output。\n多行正文与含 $a/$x 的公式请用 @文件或 stdin：双引号里写 \\\\n 不会变成真实换行，\n且 PowerShell/zsh 会展开 $变量破坏公式源文。",
+      "risk": "write",
+      "group": "create_edit",
+      "group_label": "创建与整篇编辑"
+    },
+    {
+      "name": "doc append",
+      "short": "在文档末尾追加一段 Markdown（不重写全文）",
+      "long": "在文档末尾追加一段 Markdown——**只加这一段**，不必先 read 全文再整篇 save-content 覆盖。\n等价于 `doc insert-block` 不带 --after；--markdown 走默认输入抽象（文本 / @文件 / - stdin）。\n适合\"在文末加一段\"的高频场景；要插到中间用 doc insert-block --after，要替换某段用 doc update-block。\n多行正文（标题 + 有序/无序列表等）以及含 $a/$x 的公式**必须**用 @文件或 stdin——\n双引号里写 \\n 不会变成真实换行；PowerShell/zsh 双引号还会把 $变量展开为空。\nCLI 也不解码字面 \\n；那样会把有序列表静默写成带 \\n 的单行段落。",
+      "risk": "write",
+      "group": "blocks",
+      "group_label": "块级精准编辑"
+    },
+    {
+      "name": "doc delete-block",
+      "short": "删除单个 block（精准单块，不重写全文）",
+      "long": "删除文档中指定的顶层 block——**只删这一块**，相邻 block 顺序保持不变，不重写全文。\n<block-id> 取自 `tabtin doc list-blocks`；删除经后端 save_content 落库，可在版本历史里回滚。\n是\"删掉某一段\"的正路：比读全文 → 本地删 → 整篇 save-content 覆盖更省 token、冲突面更小。",
+      "risk": "write",
+      "group": "blocks",
+      "group_label": "块级精准编辑"
+    },
+    {
+      "name": "doc embed-table",
+      "short": "把已有 TabData 嵌入文档为 tabdataBlock（不是 markdown 管道表）",
+      "long": "把一张已存在的 TabData 多维表嵌入到 TabDoc，生成可解析的 tabdataBlock。\n\n这与普通 markdown 管道表（| a | b |）完全不同：\n- 管道表 → 普通 table block（静态单元格）\n- embed-table → :::tabdata{tableId=\"...\"} → tabdataBlock（关联真实多维表）\n\nCLI 会正确转义双引号属性；table-id/view-id 含 CR/LF/控制字符时硬失败；\ntitle 的换行、Tab、控制字符会归一为空格并折叠连续空白，保证 directive 不被拆行。\n--table-id 为空时硬失败，不会静默落成「未关联表格」。\n等价于 insert-block 写入一段合法 :::tabdata，但免去手写 directive。\n本命令不校验 table 是否存在/同组织可读（服务端资源权限校验另见  未覆盖项）。",
+      "risk": "write",
+      "group": "blocks",
+      "group_label": "块级精准编辑"
+    },
+    {
+      "name": "doc format-text",
+      "short": "配置精确文本的粗斜体、颜色、背景色或链接（不重写原文）",
+      "long": "按 TabDoc 编辑器文字工具栏的能力，配置已定位 block 内唯一文本范围：粗体、斜体、下划线、删除线、行内代码、文字颜色、背景色和链接。\n\n先用 read-block 确认完整原文，再原样传给 --text。每个格式 flag 都是局部补丁：未传的格式保持不变；--bold/--italic 等传 set 或 unset；颜色传 default 会清除该颜色；--remove-link 删除链接。\n不要把 <mark>...</mark>、==高亮==、HTML 或 CSS 写进 Markdown 后再 update-block：那不是 TabDoc 富文本输入契约，可能不渲染或在转码时破坏原有格式。目标文本必须在该 block 内唯一匹配。",
+      "risk": "write",
+      "group": "blocks",
+      "group_label": "块级精准编辑"
+    },
+    {
+      "name": "doc highlight-text",
+      "short": "给 block 内精确文本添加背景高亮（保留原文与现有格式）",
+      "long": "给已定位 block 内的一段原文添加 TabDoc 原生背景高亮。先用 read-block 确认原文，再原样传给 --text。\n\n这是富文本格式操作，不要把 <mark>...</mark>、==高亮== 或 CSS 写进 Markdown 后再 update-block：那些写法不属于 TabDoc 的 Markdown 输入契约，可能不渲染，也可能在转码时破坏原有格式。\n目标文本必须在该 block 内唯一匹配；存在多个相同片段时命令会拒绝写入，避免错误标记到其他位置。",
+      "risk": "write",
+      "group": "blocks",
+      "group_label": "块级精准编辑"
+    },
+    {
+      "name": "doc insert-block",
+      "short": "在文档指定位置插入新 block（精准插入，不重写全文）",
+      "long": "在文档指定位置插入一段新 Markdown——**只插这一段**，不重写全文。\n--at-start 插到文档顶部；--after 指定锚点 block（取自 doc list-blocks）；二者都不传则追加到文档末尾（等价于 doc append）。\n--markdown 走默认输入抽象（文本 / @文件 / - stdin）；推荐 --base-version 做并发保护（别人同时改返回 409）。",
+      "risk": "write",
+      "group": "blocks",
+      "group_label": "块级精准编辑"
+    },
+    {
+      "name": "doc insert-html",
+      "short": "上传 HTML 文件并作为 HTML 块插入文档（上传→拼块两步编排）",
+      "long": "把一份本地自包含 HTML 文件私有上传到 OSS，并作为 HTML 嵌入块插入文档——一条命令完成\"上传→拼块\"两步。\n适合 Agent 产出交互式内容（架构图 / 脑暴板 / 原型 / 数据可视化，单文件 HTML）后放进文档：块在文档里以沙箱 iframe 在线渲染，权限跟随所属文档。\n--file 是本地 .html 路径（须在 $HOME 或 /tmp 下，单文件上限 100MB）；--title 缺省用文件名（去扩展名），--height 缺省 480；--after 指定插到某 block 之后，缺省追加到文档末尾。\n底层先 POST /oss/upload（is_public=false）拿 file_id，再拼 :::htmlblock{fileId=... src=\"\" ...} markdown 走 insert-block 链路插块；新块不写永久公开 URL。上传成功但插块失败时，错误里保留 file_id 以便重试（无需重新上传）。",
+      "risk": "write",
+      "group": "blocks",
+      "group_label": "块级精准编辑"
+    },
+    {
+      "name": "doc insert-image",
+      "short": "上传本地图片并作为标准 Markdown 图片插入文档（上传→拼块两步编排）",
+      "long": "把一张本地图片上传到 OSS，并作为标准 Markdown 图片插入文档——一条命令完成\"上传→拼块\"两步。\n适合 Agent 把本地生成 / 下载的图片（截图、图表、照片）放进正文：生成的是标准 `![alt](url)`，渲染层原生支持，不是自定义块。\n--file 是本地图片路径（须在 $HOME 或 /tmp 下，支持 png/jpg/jpeg/gif/webp/svg，单文件上限 100MB）；--alt 缺省用文件名（去扩展名）；--at-start 插到文档顶部，--after 插到某 block 之后，二者都不传则追加末尾。\n底层先 POST /oss/upload 拿 file_id + url，再拼 ![alt](url) markdown 走 insert-block 链路插块；上传成功但插块失败时，错误里保留 file_id 以便重试（无需重新上传）。\n已有现成的公开图片 URL（不需要上传本地文件）时，直接在 --markdown 里写 ![alt](url) 走 insert-block / append 即可，不必用这条命令。",
+      "risk": "write",
+      "group": "blocks",
+      "group_label": "块级精准编辑"
+    },
+    {
+      "name": "doc list-blocks",
+      "short": "列出文档 Block 大纲（省 token）",
+      "long": "列出文档顶层 block 结构（id/type/level/preview/index）。\n比 `tabtin doc read` 取完整内容省 token——LLM 看完大纲后再决定读哪个段落。\n返回的 block id 可作为后续按段落精读/定位的锚点。",
+      "group": "blocks",
+      "group_label": "块级精准编辑"
+    },
+    {
+      "name": "doc read-block",
+      "short": "读取单个 block 的 Markdown（精准单块，省 token）",
+      "long": "读取文档中某个顶层 block 的 Markdown 内容——精准单块，不拉全文，省 token。\n<block-id> 取自 `tabtin doc list-blocks` 返回的 block id（缺 blockId 的旧块回退 auto_N）。\n典型用法：list-blocks 看大纲定位 → read-block 看准这一块 → 再 update/insert/delete-block 改它。",
+      "group": "blocks",
+      "group_label": "块级精准编辑"
+    },
+    {
+      "name": "doc read-section",
+      "short": "读整章（heading 锚点起到下一个同级/更高级标题前，省 token）",
+      "long": "读取以某个标题 block 为锚点的完整章节——标题本身 + 其后正文，直到遇到下一个**同级或更高级**标题为止，一条命令拿到整章。\n<heading-block-id> 取自 `tabtin doc list-blocks` 返回的 heading 行（type=heading；缺 blockId 的旧块回退 auto_N）。\n边界规则：H2 不会吞下一个 H2/H1；H1 自然含其下 H2/H3；最后一节收到文末。锚点不是 heading 会报错（要读单块用 read-block）。\n典型用法：list-blocks 看大纲定位某标题 → read-section 读整章确认边界 → 再 insert/update-block 精准改。",
+      "group": "blocks",
+      "group_label": "块级精准编辑"
+    },
+    {
+      "name": "doc search-blocks",
+      "short": "在文档内搜索 block（返回可操作 block-id）",
+      "long": "在单篇文档的顶层 block 内按关键词搜索，返回 block_id / index / snippet。\n这个命令把\"搜到正文\"和\"精准读写某一块\"接起来，避免先 list-blocks 再靠 80 字 preview 猜段落。\n它只搜索顶层 block；如果要跨文档找候选文档，先用 doc search，再拿目标文档 id 调本命令。",
+      "group": "blocks",
+      "group_label": "块级精准编辑"
+    },
+    {
+      "name": "doc update-block",
+      "short": "用 Markdown 替换单个 block（精准单块，不重写全文）",
+      "long": "用一段 Markdown 替换指定 block——**只动这一块**，其余 block 原样不动，是\"改一段\"的正路。\n--markdown 走默认输入抽象：直接传文本 / `@路径` 从文件读 / `-` 从 stdin 读；仅支持替换为单个顶层 block。\n推荐传 --base-version（从 `tabtin doc read` 的 latest_version 拿）做并发保护——别人同时改了返回 409。",
+      "risk": "write",
+      "group": "blocks",
+      "group_label": "块级精准编辑"
+    },
+    {
+      "name": "doc update-html",
+      "short": "用新 HTML 文件替换某个 HTML 块（读→上传→替换三步编排）",
+      "long": "用一份新的本地 HTML 文件替换文档里已有的 HTML 块——AI 编辑 HTML 块的正路：读现有块 → 授权下载 → 本地改 → 上传新文件 → 替换引用。\n先 GET 现有块拿到 markdown（含 fileId），用授权端点 GET /api/tabdoc/documents/<id>/html-artifacts/<fileId> 下载现有 HTML（ 私有化后禁止匿名 curl src）；目标块不是 HTML 块时直接报错退出。\n--file 是新的本地 .html 路径（同 insert-html 的路径白名单 + 大小限制）；<block-id> 取自 doc list-blocks / read-block。\n底层三步：读现有块 → POST /oss/upload 传新文件 → PATCH 块为新的 :::htmlblock{...}（新 fileId/src + 沿用或覆盖的 title/height）。上传成功但替换失败时，错误里保留新 file_id 以便重试。",
+      "risk": "write",
+      "group": "blocks",
+      "group_label": "块级精准编辑"
+    },
+    {
+      "name": "doc delete",
+      "short": "归档文档",
+      "long": "归档文档（软删除，可恢复）——把文档状态置为 archived。\n不是物理删除：归档后仍可通过 doc update --status active 恢复。\n归档会让文档从默认 doc list 结果中消失，但不影响其子文档。",
+      "risk": "write",
+      "group": "organize",
+      "group_label": "组织与生命周期"
+    },
+    {
+      "name": "doc move",
+      "short": "在知识库树中移动文档",
+      "long": "把已有文档挂到知识库侧栏的新父资源下，或移到根级。\n设计理由：create --parent-item-id 只覆盖新建；改挂走 ContextItem.parent\n（PATCH /api/context/context-items/{id}）。本命令用 document-id 反查 ContextItem，\n免去 Agent 手查 item id。\n常见陷阱：与 doc update --parent-id（Document 内页树）无关；--parent-item-id\n传的是父 ContextItem ID。落根用 --root。需全局 --organization-id。",
+      "risk": "write",
+      "group": "organize",
+      "group_label": "组织与生命周期"
+    },
+    {
+      "name": "doc restore",
+      "short": "从回收站恢复文档",
+      "long": "把回收站中的文档恢复回原状态（trashed → 之前的 active/archived）。\n这是 doc trash 的逆操作，命中后端 POST /restore-from-trash 端点。\n注意：与\"恢复到某个历史版本\"是两回事——版本回滚走的是另一条版本端点，不是本命令。",
+      "risk": "write",
+      "group": "organize",
+      "group_label": "组织与生命周期"
+    },
+    {
+      "name": "doc trash",
+      "short": "移入回收站（可恢复）",
+      "long": "把文档移入回收站——比归档（doc delete）更进一步的软删除，仍可恢复。\n状态流转：active/archived → trashed；用 doc restore 从回收站恢复，或 doc permanent-delete 永久删。\n回收站文档会从默认 doc list 消失、释放存储计量（FileUsage deactivate），但数据未物理删除。",
+      "risk": "write",
+      "group": "organize",
+      "group_label": "组织与生命周期"
+    },
+    {
+      "name": "doc unarchive",
+      "short": "从归档恢复文档（解档）",
+      "long": "把已归档文档恢复为活跃状态（archived → active）——doc delete（归档）的逆操作。\n仅对 status=archived 的文档有效；非归档文档调用会被后端拒绝（VALIDATION_ERROR）。\n与 doc restore 区分：unarchive 处理\"归档\"层，restore 处理\"回收站\"层，是两级不同的软删。",
+      "risk": "write",
+      "group": "organize",
+      "group_label": "组织与生命周期"
+    },
+    {
+      "name": "doc update",
+      "short": "更新文档元数据（标题/状态/父文档/图标/封面/标签）",
+      "long": "更新文档元数据：title / status / parent-id / icon / cover-image /\ncover-position / tags（仅传的字段才会更新）。\n\n注：仅改元数据，不改正文。改 Markdown 内容请用 `tabtin doc save-content`——\nHTTP 层就是分两个端点（PATCH /documents/{id} vs POST /documents/{id}/content），\n拆成两个命令边界更清晰。\n\n至少传 title/status/parent-id/icon/cover-image/cover-position/tags 之一，否则报错。\n--cover-position 是封面纵向焦点 0~1（服务端会 clamp 到 [0,1]）；--tags 整组替换式覆盖。",
+      "risk": "write",
+      "group": "organize",
+      "group_label": "组织与生命周期"
+    },
+    {
+      "name": "doc version list",
+      "short": "列出文档版本历史",
+      "long": "列出文档的版本历史记录（V3 collab.VersionHistory，按创建时间倒序）。\n返回每条记录的 id/is_named/name/is_snapshot/editor_type/created_at 等；其中 id\n可直接作为 doc version preview/restore/rename/rm 的 <history-id>/<version-id>（同一 id 空间）。\n默认返回 50 条，用 --limit/--offset 翻页；只读操作，不改文档。",
+      "group": "version",
+      "group_label": "版本历史"
+    },
+    {
+      "name": "doc version preview",
+      "short": "预览某版本的 Markdown 内容",
+      "long": "解析指定版本的内容快照，返回该版本的 Markdown 文本供预览（不改当前文档）。\n<history-id> 取自 doc version list 返回的 id；对 Y.js binary 快照后端会即时转 Markdown。\n只读操作：先 preview 看清要不要回滚，再用 doc version restore 真正恢复。",
+      "group": "version",
+      "group_label": "版本历史"
+    },
+    {
+      "name": "doc version rename",
+      "short": "重命名命名版本",
+      "long": "修改一个命名版本的名称（仅命名版本可改；非命名快照会被后端拒绝）。\n<version-id> 与 list/preview/restore 的 history-id 是同一 id 空间（均取自 doc version list）。\n后端把 path 上的 version_id 当 history_id 解析；name 走 body，最长 200 字符。",
+      "risk": "write",
+      "group": "version",
+      "group_label": "版本历史"
+    },
+    {
+      "name": "doc version restore",
+      "short": "恢复文档到指定版本",
+      "long": "把文档内容恢复到指定历史版本（命中 tabdoc 自有的 POST /restore-history）。\n\n恢复是协同完备路径：与 collab 共享恢复锁、清理 pending DocUpdate、best-effort 同步\ncollab-live、断开在线协作连接，避免在线用户用旧状态覆盖。<history-id> 取自 doc version list。\n推荐传 --base-version（从 doc read 的 latest_version 拿）做并发保护——别人同时改了会返回 409。",
+      "risk": "write",
+      "group": "version",
+      "group_label": "版本历史"
+    },
+    {
+      "name": "doc version save",
+      "short": "把当前内容存为命名版本",
+      "long": "把文档当前内容手动保存为一个命名版本（永久保留，不受 TTL/降采样回收）。\n--name 可选（不传则存为无名快照）；后端每文档命名版本上限 50 个，超出报 VALIDATION_ERROR。\n推荐传 --base-version（从 doc read 的 latest_version 拿）做并发保护——内容被改过会返回 409。",
+      "risk": "write",
+      "group": "version",
+      "group_label": "版本历史"
+    },
+    {
+      "name": "doc collaborator invite",
+      "short": "邀请协作者（批量，按 user-id）",
+      "long": "批量邀请协作者并授予统一权限（POST /collaborators）。\n--user-ids 可重复传多个（--user-ids u1 --user-ids u2 …），单次上限 50（超出 RATE_LIMIT_EXCEEDED）；\n--role 是 viewer/editor/admin 之一，所有被邀请人授同一权限。需 owner 或 admin 角色。\n幂等：已是该权限的沉默跳过；被邀请人须是同 organization 成员，否则在返回 skipped 标 not_in_organization\n（其余原因：self 邀请自己 / is_owner 邀请 owner）。返回 {notified, skipped:[{user_id, reason}]}。",
+      "risk": "write",
+      "group": "collab",
+      "group_label": "协作者"
+    },
+    {
+      "name": "doc collaborator list",
+      "short": "列出文档协作者（含 owner）",
+      "long": "列出某文档的全部协作者，外加文档 owner（GET /collaborators）。\n返回 {owner, collaborators:[...]}——owner 单独一项，collaborators 每条含 user_id/nickname/\nemail（后端已脱敏）/permission/created_at；其中 user_id 可直接喂给 collaborator update/rm。\n只读操作，需 viewer 及以上权限（无权限返回 403 PERMISSION_DENIED）。",
+      "group": "collab",
+      "group_label": "协作者"
+    },
+    {
+      "name": "doc collaborator rm",
+      "short": "移除协作者（软删，可重新邀请）",
+      "long": "移除一个协作者，收回其对文档的访问（DELETE /collaborators/{user_id}）。\n后端是软删（置 DocumentPermission.is_active=False），不物理删除——之后用 collaborator invite\n可重新激活旧记录，故定级 RiskWrite（不强制 --yes），不是 RiskDestructive。\nowner 不可移除（返回 CANNOT_REMOVE_OWNER）；目标不是现有协作者返回 COLLABORATOR_NOT_FOUND。需 owner 或 admin 角色。",
+      "risk": "write",
+      "group": "collab",
+      "group_label": "协作者"
+    },
+    {
+      "name": "doc collaborator update",
+      "short": "修改协作者权限",
+      "long": "修改某个已有协作者的权限（PATCH /collaborators/{user_id}）。\n<user-id> 取自 collaborator list 返回的 user_id；--role 是 viewer/editor/admin 之一。需 owner 或 admin 角色。\nowner 的权限不可改（返回 CANNOT_MODIFY_OWNER）；目标不是现有协作者返回 COLLABORATOR_NOT_FOUND；\n权限与现状相同则沉默不发通知。返回更新后的该协作者记录。",
+      "risk": "write",
+      "group": "collab",
+      "group_label": "协作者"
+    },
+    {
+      "name": "doc comment create",
+      "short": "新增文档评论",
+      "long": "在文档下新增一条评论（不改文档正文）。\n设计理由：批注与正文分离，适合 Agent 审阅后留痕；可选 selected_text 锚定原文片段。\n常见陷阱：--body 必填；组织资源写封锁时会 403。",
+      "risk": "write",
+      "group": "collab",
+      "group_label": "协作者"
+    },
+    {
+      "name": "doc comment list",
+      "short": "列出文档评论",
+      "long": "列出文档下全部评论（作者、正文、选中文本、时间）。\n设计理由：Agent 审阅链路先 list 再决定回复或清理；只读，不改文档正文。\n常见陷阱：需要至少 viewer；回收站文档可能仍可读评论，取决于后端权限。",
+      "group": "collab",
+      "group_label": "协作者"
+    },
+    {
+      "name": "doc comment rm",
+      "short": "删除文档评论",
+      "long": "删除一条文档评论。\n设计理由：清理过期批注；不触及文档正文与版本历史。\n常见陷阱：需具备写权限；评论不存在返回 404。",
+      "risk": "write",
+      "group": "collab",
+      "group_label": "协作者"
+    },
+    {
+      "name": "doc share get",
+      "short": "查看文档当前分享设置",
+      "long": "查看某文档当前的分享设置（GET /share）。\n省略 --share-type 时返回当前唯一有效分享（与后端空 share_type 语义一致）；\n也可显式传 --share-type public|organization 查询指定类型。\n未开启分享时返回 {share: null, enabled: false}；已开启返回分享详情（share_id 短链 / 权限 /\n是否有密码 / 过期时间 / 下载·复制开关 / 访问次数等）。只读操作，不改分享状态。",
+      "group": "share",
+      "group_label": "分享"
+    },
+    {
+      "name": "doc share off",
+      "short": "关闭文档分享（软删，可重开；public / organization）",
+      "long": "关闭文档分享，让分享链接立即失效（DELETE /share）。\n后端是软删（置 is_active=False，不物理删除），返回 {disabled_count}；之后用 doc share set\n可重新开启分享。故定级 RiskWrite（不强制 --yes），不是 RiskDestructive。\n\n省略 --share-type 时关闭当前有效分享；也可显式传 public|organization。",
+      "risk": "write",
+      "group": "share",
+      "group_label": "分享"
+    },
+    {
+      "name": "doc share refresh",
+      "short": "轮换文档分享短链（旧链接立即失效；public / organization）",
+      "long": "轮换文档分享的短链 token（POST /share/refresh）。\n重新生成 share_id 短链——**旧链接立即失效**，需把新链重发给访问者；分享本身及其余配置\n（权限 / 密码 / 过期 / 下载开关）保持不变，不会关闭分享。适合\"链接疑似泄露需作废重发\"。\n无生效分享时返回 active_share_not_found。\n\n省略 --share-type 时轮换当前有效分享；也可显式传 public|organization。",
+      "risk": "write",
+      "group": "share",
+      "group_label": "分享"
+    },
+    {
+      "name": "doc share set",
+      "short": "开启或更新文档分享（create-or-update）",
+      "long": "开启或更新文档的分享设置（POST /share，互斥 create-or-update）。\n同一文档同时最多一个 active 分享：切到目标 --share-type 时会停用另一类型；\n目标类型已有生效分享则原地改配置，否则新建。返回分享详情（含 share_id 短链）。\n\n--share-type（必填，显式选 public / organization）：\n  public    免登录链接：任何拿到 share_id 的人都能访问。安全警示——这是**全网可达**的，\n            敏感文档请改用 organization，或务必加 --password / --expire-hours 限制。\n            首次（或从 organization）扩到 public 时必须加 --acknowledge-public-exposure，\n            否则后端返回 409 PUBLIC_EXPOSURE_ACK_REQUIRED。已有 active public 时仅改\n            权限/密码等配置无需重复确认。\n  organization  组织限定：仅目标 organization 成员登录后可访问；目标组织用**全局 --organization-id** 指定\n            （注意不是命令级 flag——见下）；缺组织 id 时后端会尝试从文档归属推导，仍失败则 400。\n\n可选配置：\n  --permission     view / comment / edit（默认 view）——访问者拿到的权限级别。\n  --password       访问密码。三态语义：不传=保留旧密码不动；传 \"\"=清空密码；传非空=设新密码。\n  --expire-hours   有效期小时数（>0 生效，到点失效）；不传或 <=0 = 永不过期。\n  --allow-download 是否允许下载（默认允许；传 --allow-download=false 禁止）。\n  --allow-copy     是否允许复制内容（默认允许；传 --allow-copy=false 禁止）。\n  --acknowledge-public-exposure  确认接受公网暴露风险（仅扩到 public 时需要）。\n\n关于 organization 目标组织：CLI **不提供** --organization-id 命令级 flag（它是全局 persistent flag，\n命令级会撞名）。要建 organization 分享，用全局 --organization-id 指定目标组织，例如：\n  tabtin doc share set doc_xxx --share-type organization --organization-id wt_yyy",
+      "risk": "write",
+      "group": "share",
+      "group_label": "分享"
+    },
+    {
+      "name": "doc shared-with-me",
+      "short": "列出分享给我的文档（资源级协作发现入口）",
+      "long": "列出当前用户具备有效 DocumentPermission、但本人非 owner 的活跃文档\n（GET /api/tabdoc/shared-with-me）。\n\nAgent 私有化后协作者无法进入他人 bot Space，本命令是独立访问发现入口——\n与 table share shared-with-me / drive shared-with-me 对称。\n组织过滤用**全局 --organization-id**（命令级不声明，避免撞 persistent flag）。",
+      "group": "share",
+      "group_label": "分享"
+    },
+    {
+      "name": "doc export",
+      "short": "导出文档内容",
+      "long": "把文档正文导出为指定格式：markdown / html / txt / docx / pdf（默认 markdown）。\n导出是只读操作，不改文档；大文档导出可能较慢，docx/pdf 涉及格式转换（PDF 经 Playwright 渲染）更慢。\n\n写本地文件用全局 --output：\n  markdown/html/txt 是文本格式，写 raw 正文（不会把 JSON 信封写入文件）；\n  docx/pdf 是二进制格式，**必须**带 --output 才能拿到可打开的文件——不加 --output 只会\n  在终端打印 base64 信封，直接吞进 UTF-8 解析会把二进制弄坏。\n不要用 save-content 冒充导出——save-content 是整篇替换云端正文。",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "doc import file",
+      "short": "把已上传的 PDF/Word 交给异步 Import Job（兼容入口）",
+      "long": "把已上传到 OSS 的 PDF/Word 提交为异步导入任务（POST /import/file → 202）。\n后端内部转 create_import_job；响应含 data.job（id/status/...），**不直接返回草稿**。\n用 doc import job status 轮询，就绪后 doc import job result 取 markdown/pm_json，再\ndoc create / save-content 落库。--file-record-id 须属当前 organization。",
+      "risk": "write",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "doc import job cancel",
+      "short": "取消进行中的 import job",
+      "long": "取消尚未完成的导入任务。\n设计理由：Agent 发现传错文件时可止损，避免空转占用 worker。\n常见陷阱：已完成任务无法取消；取消后 result 不可用。",
+      "risk": "write",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "doc import job result",
+      "short": "获取 import job 结果草稿",
+      "long": "任务完成后取草稿（markdown/pm_json/plaintext/title 等）。\n设计理由：与同步时代 import file 返回草稿对齐；未就绪时后端 409 IMPORT_JOB_NOT_READY。\n常见陷阱：先 status 看 result_available；取到草稿后仍需 doc create / save-content 落库。",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "doc import job retry",
+      "short": "重试失败的 import job",
+      "long": "对失败/可重试的导入任务再次投递（202）。\n设计理由：解析偶发失败时不必重新 oss upload；返回新的或同一 job 视图。\n常见陷阱：仅对允许 retry 的状态有效；成功任务调用会被拒绝。",
+      "risk": "write",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "doc import job status",
+      "short": "查询 import job 状态",
+      "long": "查询导入任务进度（status/stage/processed_pages/result_available 等）。\n设计理由：异步 import 的 poll 入口；Agent 应循环 status 直至 completed/failed。\n常见陷阱：job_id 来自 import file / import/jobs 的 data.job.id，不是 file_record_id。",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "doc import markdown",
+      "short": "把 Markdown 转成草稿（pm_json）",
+      "long": "把一段 Markdown 转成 TabDoc 草稿结构（POST /import/markdown）。\n返回 {pm_json, markdown, plaintext}——markdown→ProseMirror pm_json 的转换结果，**不落库**。\n--markdown 默认支持 @文件 / -(stdin) / 直传字符串（FlagString 输入抽象），正合导入文件内容。\n需当前 Space 的 editor 角色；上限 5MB。拿到 pm_json 后用 doc create / doc save-content 落库。",
+      "risk": "write",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    }
+  ],
+  "featured": [
+    {
+      "key": "create",
+      "commands": [
+        "doc create",
+        "doc save-content"
+      ],
+      "title": "搭一篇新文档",
+      "description": "说个主题，让 AI 先搭好结构和大纲",
+      "prompt": "帮我新建一篇文档。我给你主题，你先搭好整体结构、列出大纲，再逐节把内容写出来。"
+    },
+    {
+      "key": "summarize",
+      "commands": [
+        "doc search",
+        "doc read"
+      ],
+      "title": "汇总多篇文档",
+      "description": "把相关文档整理成一篇综述",
+      "prompt": "把这个空间里相关的几篇文档梳理、汇总成一篇结构清晰的综述文档。先搜一下有哪些相关文档，再告诉我你的整合思路。"
+    },
+    {
+      "key": "report",
+      "commands": [
+        "doc create",
+        "doc save-content"
+      ],
+      "title": "用数据生成报告",
+      "description": "根据多维表数据写一份分析文档",
+      "prompt": "根据这个空间里的多维表数据，生成一份分析报告文档，并把关键数据表嵌进文档里。先看看有哪些表可用。"
+    },
+    {
+      "key": "polish",
+      "commands": [
+        "doc list",
+        "doc search-blocks",
+        "doc read-block",
+        "doc update-block"
+      ],
+      "title": "润色与校对",
+      "description": "找出表达不清、错漏处并改好",
+      "prompt": "帮我检查并润色一篇现有文档：找出表达不清、啰嗦或有错漏的地方，逐处改好并说明改动理由。先列一下空间里的文档让我选。"
+    }
+  ]
+}

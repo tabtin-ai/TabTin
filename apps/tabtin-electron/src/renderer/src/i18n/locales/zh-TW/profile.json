@@ -1,0 +1,131 @@
+{
+  "title": "個人資料",
+  "description": "查看和編輯您的個人資料信息，包括基本資訊、聯絡資訊和帳戶設置",
+  "saved": "個人資料已更新",
+  "validation": {
+    "usernameLength": "使用者名稱長度應為3-20個字符",
+    "usernameFormat": "使用者名稱只能包含字母、數字、底線，且以字母開頭",
+    "nicknameLength": "暱稱不能超過50個字符",
+    "bioLength": "個人簡介不能超過500個字符"
+  },
+  "errors": {
+    "updateFailed": "更新失敗，請稍後重試",
+    "verificationFailed": "發送驗證碼失敗",
+    "logoutFailed": "登出登入失敗"
+  },
+  "labels": {
+    "nickname": "暱稱",
+    "username": "使用者名稱",
+    "userId": "使用者 ID",
+    "phone": "手機號",
+    "email": "信箱",
+    "bio": "個人簡介",
+    "contact": "聯絡方式",
+    "accountInfo": "帳號資訊",
+    "registeredAt": "註冊時間",
+    "loginCount": "登入次數",
+    "lastLogin": "最後登入",
+    "buildVersion": "建置版本"
+  },
+  "placeholders": {
+    "nickname": "請輸入暱稱",
+    "username": "請輸入使用者名稱",
+    "bio": "介紹一下自己..."
+  },
+  "empty": {
+    "nickname": "未設定暱稱",
+    "username": "未設定使用者名稱",
+    "bio": "這個人很懶，什麼都沒留下...",
+    "contact": "暫無聯絡方式",
+    "email": "未綁定信箱"
+  },
+  "actions": {
+    "editProfile": "編輯資料",
+    "accountSettings": "帳戶設定",
+    "copyId": "複製 ID",
+    "copied": "已複製",
+    "logout": "登出登入",
+    "avatarComingSoon": "頭像上傳即將推出",
+    "logoutConfirmTitle": "確定要登出登入嗎？",
+    "logoutConfirmDesc": "退出後目前裝置的未儲存工作將會遺失",
+    "openStorageManager": "儲存管理",
+    "openStorageManagerHint": "看見 TabTin 在你電腦上存了什麼，依需求清理或匯出",
+    "changePassword": "修改密碼",
+    "bindEmail": "綁定信箱"
+  },
+  "avatar": {
+    "cropTitle": "裁剪頭像",
+    "saved": "頭像已儲存",
+    "saveFailed": "頭像保存失敗",
+    "removeUnsupported": "暫不支援移除頭像"
+  },
+  "alt": {
+    "avatar": "頭像"
+  },
+  "stats": {
+    "loginCount": "{{value}} 次"
+  },
+  "changePassword": {
+    "title": "修改密碼",
+    "descChange": "輸入目前密碼以設定新密碼。",
+    "descReset": "驗證碼將發送至 {{identifier}}，驗證後即可設定新密碼。",
+    "descResetNoContact": "目前帳號未綁定信箱或手機號，無法用驗證碼重設。",
+    "labels": {
+      "oldPassword": "目前密碼",
+      "verificationCode": "驗證碼",
+      "newPassword": "新密碼",
+      "confirmPassword": "確認新密碼"
+    },
+    "placeholders": {
+      "oldPassword": "請輸入目前密碼",
+      "verificationCode": "請輸入 6 位元驗證碼",
+      "newPassword": "請設定新密碼",
+      "confirmPassword": "請再次輸入新密碼"
+    },
+    "capsLockHint": "偵測到大寫鎖定（Caps Lock）已開啟",
+    "actions": {
+      "sendCode": "發送驗證碼",
+      "submit": "確認修改",
+      "forgotOld": "忘記當前密碼？用驗證碼重置",
+      "useOldPassword": "返回用當前密碼修改"
+    },
+    "codeSent": "驗證碼已發送",
+    "success": "密碼修改成功",
+    "successRelogin": "請用新密碼重新登入",
+    "errors": {
+      "oldRequired": "請輸入目前密碼",
+      "codeInvalid": "請輸入 6 位數字驗證碼",
+      "newNoWhitespace": "新密碼不能包含空格，已將空格過濾",
+      "newNoCjk": "密碼不能包含中日韓文字，請勿貼上其他內容",
+      "newTooShort": "新密碼至少 8 位",
+      "newNotComplex": "新密碼須包含大寫字母、小寫字母、數字、特殊字元中的至少 3 種",
+      "mismatch": "兩次輸入的密碼不一致",
+      "sendCodeFailed": "驗證碼發送失敗，請稍後重試",
+      "failed": "密碼修改失敗，請檢查輸入後重試"
+    }
+  },
+  "bindEmail": {
+    "title": "綁定信箱",
+    "description": "綁定後可用於登入、找回密碼，以及接收組織餘額低預警等通知。",
+    "labels": {
+      "email": "信箱",
+      "verificationCode": "驗證碼"
+    },
+    "placeholders": {
+      "email": "name@example.com",
+      "verificationCode": "請輸入 6 位元驗證碼"
+    },
+    "actions": {
+      "sendCode": "發送驗證碼",
+      "submit": "確認綁定"
+    },
+    "codeSent": "驗證碼已發送",
+    "success": "郵箱綁定成功",
+    "errors": {
+      "emailInvalid": "請輸入有效的郵箱地址",
+      "codeInvalid": "請輸入 6 位數字驗證碼",
+      "sendCodeFailed": "驗證碼發送失敗，請稍後重試",
+      "failed": "綁定失敗，請檢查輸入後重試"
+    }
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "name": "@tabtin/tabdoc-ui",
+  "version": "0.1.0",
+  "description": "Shared TabDoc editor UI, host contexts, API client, and panel hooks",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./api-client": {
+      "source": "./src/api-client.ts",
+      "types": "./dist/api-client.d.ts",
+      "import": "./dist/api-client.js"
+    },
+    "./find-request": {
+      "source": "./src/docFindRequest.ts",
+      "types": "./dist/docFindRequest.d.ts",
+      "import": "./dist/docFindRequest.js"
+    },
+    "./rehype-sanitize-schema": {
+      "source": "./src/rehypeSanitizeSchema.ts",
+      "types": "./dist/rehypeSanitizeSchema.d.ts",
+      "import": "./dist/rehypeSanitizeSchema.js"
+    },
+    "./use-doc-list": {
+      "source": "./src/useDocList.ts",
+      "types": "./dist/useDocList.d.ts",
+      "import": "./dist/useDocList.js"
+    },
+    "./use-doc-editor": {
+      "source": "./src/useDocEditor.ts",
+      "types": "./dist/useDocEditor.d.ts",
+      "import": "./dist/useDocEditor.js"
+    },
+    "./use-collaborative-doc-editor": {
+      "source": "./src/useCollaborativeDocEditor.ts",
+      "types": "./dist/useCollaborativeDocEditor.d.ts",
+      "import": "./dist/useCollaborativeDocEditor.js"
+    },
+    "./editor": {
+      "source": "./src/editor/index.ts",
+      "types": "./dist/editor/index.d.ts",
+      "import": "./dist/editor/index.js"
+    },
+    "./ports": {
+      "source": "./src/ports.ts",
+      "types": "./dist/ports.d.ts",
+      "import": "./dist/ports.js"
+    },
+    "./locales": {
+      "source": "./src/locales/index.ts",
+      "types": "./dist/locales/index.d.ts",
+      "import": "./dist/locales/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "pnpm run clean && tsc && node ../../scripts/shared/copy-static-assets.mjs src dist css",
+    "dev": "tsc --watch",
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "test:dist": "node scripts/verify-static-assets.mjs",
+    "test": "vitest run",
+    "test:ci": "vitest run",
+    "test:debt": "vitest run src/__tests__/offlineCache.test.ts src/__tests__/editor-selectors/link-selector.test.ts"
+  },
+  "dependencies": {
+    "@floating-ui/react": "0.27.16",
+    "@tabtin/app-host-sdk": "workspace:*",
+    "@tabtin/collab-core": "workspace:*",
+    "@tabtin/doc-editor": "workspace:*",
+    "@tabtin/smartsheet-ui": "workspace:*",
+    "@tabtin/storage-manager": "workspace:*",
+    "@tiptap/core": "^2.27.2",
+    "@tiptap/extension-collaboration": "^2.10.0",
+    "@tiptap/extension-collaboration-cursor": "^2.10.0",
+    "@tiptap/extension-table": "^2.26.1",
+    "@tiptap/extension-table-cell": "^2.26.1",
+    "@tiptap/extension-table-header": "^2.26.1",
+    "@tiptap/extension-table-row": "^2.26.1",
+    "@tiptap/extension-subscript": "^2.27.2",
+    "@tiptap/extension-superscript": "^2.27.2",
+    "@tiptap/extension-text-align": "^2.27.2",
+    "@tiptap/extension-unique-id": "^2.10.0",
+    "@tiptap/pm": "^2.27.2",
+    "@tiptap/react": "^2.10.0",
+    "class-variance-authority": "^0.7.0",
+    "lowlight": "^3.0.0",
+    "lucide-react": "^0.469.0",
+    "katex": "^0.16.20",
+    "novel": "^1.0.0",
+    "react-markdown": "^10.1.0",
+    "react-i18next": "^15.4.0",
+    "rehype-sanitize": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "tiptap-markdown": "^0.8.10",
+    "yjs": "^13.6.29",
+    "zustand": "^5.0.0"
+  },
+  "peerDependencies": {
+    "@hocuspocus/provider": "^2.0.0",
+    "@tabtin/table-core": "workspace:*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@hocuspocus/provider": {
+      "optional": true
+    },
+    "@tabtin/table-core": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.1.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "hast-util-sanitize": "^5.0.2",
+    "jsdom": "29.0.0",
+    "typescript": "5.7.2",
+    "vitest": "4.1.0"
+  }
+}

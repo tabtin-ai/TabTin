@@ -1,0 +1,404 @@
+{
+  "appName": "Automatización",
+  "panel": {
+    "header": "Automatización",
+    "overview": "Descripción general",
+    "list": "Lista",
+    "viewList": "Lista",
+    "viewAgenda": "Línea de tiempo",
+    "viewKanban": "Kanban",
+    "createTask": "Nueva tarea de automatización",
+    "createAction": "Nuevo",
+    "search": "Tareas de automatización de búsqueda…",
+    "filterAll": "Todos",
+    "filterAllStatus": "Todos los estados",
+    "filterStatus": "Estado",
+    "filterType": "Tipo",
+    "loadMore": "Cargar más",
+    "totalCount": "{{count}} artículos",
+    "emptyTitle": "Aún no hay tareas de automatización",
+    "emptyDescription": "Dígale al Agente que \"verifique las relaciones públicas todas las mañanas\" o complete el formulario usted mismo.",
+    "emptyHint": "Utilice “Nueva tarea de automatización”: creación manual o de agente",
+    "createFirst": "Crea tu primera tarea de automatización",
+    "selectSpace": "Seleccione un espacio de trabajo",
+    "noResults": "No hay tareas coincidentes",
+    "workspaceUnavailable": "Espacio de trabajo no disponible",
+    "agentUnavailable": "Agente no disponible",
+    "nextRunAt": "Siguiente {{time}}",
+    "noNextRun": "No hay próxima ejecución programada",
+    "pausedPlan": "En pausa: no se ejecutará automáticamente",
+    "openTaskDetail": "Abrir tarea programada \"{{name}}\"",
+    "rowActions": {
+      "menu": "Acciones de tarea"
+    },
+    "columns": {
+      "task": "Tarea",
+      "workspace": "Espacio de trabajo",
+      "status": "Estado",
+      "type": "Tipo",
+      "instructions": "Instrucciones",
+      "schedule": "Ejecución siguiente/reciente",
+      "actions": "Acciones"
+    }
+  },
+  "overview": {
+    "attention": "necesita atencion",
+    "summary": "{{total}} tareas · {{attention}} necesitan atención · {{active}} activo",
+    "attentionEmpty": "Todo claro",
+    "running": "corriendo",
+    "runningEmpty": "No hay tareas en ejecución",
+    "scheduled": "Programado",
+    "scheduledEmpty": "Sin tareas de automatización",
+    "dormant": "Borradores y pausados",
+    "view": "Ver",
+    "runNow": "Corre ahora",
+    "activate": "Habilitar",
+    "resume": "Currículum"
+  },
+  "status": {
+    "draft": "Borrador",
+    "active": "Activo",
+    "paused": "En pausa",
+    "disabled": "Terminado",
+    "archived": "Archivado"
+  },
+  "trigger": {
+    "manual": "manuales",
+    "cron": "cron",
+    "interval": "Intervalo",
+    "at": "una sola vez",
+    "webhook": "gancho web",
+    "table_event": "Evento de mesa",
+    "extension_event": "Evento de extensión",
+    "tracker_completed": "En tarea ascendente completada"
+  },
+  "scope": {
+    "all": "Todos"
+  },
+  "detail": {
+    "loading": "Cargando…",
+    "empty": "Tarea no encontrada",
+    "retry": "Reintentar",
+    "noRuns": "Aún no hay carreras",
+    "nextRun": "Próxima ejecución",
+    "instructions": "Instrucciones",
+    "noInstructions": "Aún no hay instrucciones",
+    "description": "nota de lista",
+    "taskInfo": "Información de la tarea",
+    "workspace": "Espacio de trabajo",
+    "agent": "Agente de ejecución",
+    "runHistory": "Historial de ejecución",
+    "scheduleActive": "{{schedule}}",
+    "schedulePaused": "{{schedule}} · En pausa",
+    "openRunSession": "Abrir el chat de esta carrera",
+    "openRunSessionFailed": "No se pudo abrir el chat de esta carrera. Por favor inténtalo de nuevo.",
+    "refreshRuns": "Actualizar",
+    "health": {
+      "disabled": "En pausa: reanudar para seguir funcionando",
+      "missedSkipped": "La última ejecución perdida se omitió según lo configurado ({{time}}). Se omitió {{count}} en total."
+    },
+    "resultSummary": "Resultado",
+    "errorDetail": "Detalles del fallo",
+    "cancelDetail": "Motivo de cancelación",
+    "runStatus": {
+      "completed": "Completado",
+      "failed": "Fallido",
+      "running": "corriendo",
+      "pending": "Pendiente",
+      "cancelled": "Cancelado",
+      "waiting_device": "Esperando dispositivo"
+    },
+    "actions": {
+      "edit": "Editar",
+      "activate": "Habilitar",
+      "activateDraft": "Habilitar y comenzar a programar",
+      "activateDraftManual": "Habilitar para permitir el disparo manual",
+      "draftHint": "No se activarán borradores. Habilite la ejecución de sus reglas automáticamente.",
+      "pause": "Pausa",
+      "trigger": "Corre ahora",
+      "triggerDisabledActiveRun": "Ya hay una carrera en marcha. Espere a que termine o cancélelo primero.",
+      "delete": "Eliminar",
+      "confirmDelete": "Confirmar eliminación",
+      "confirmDeleteTitle": "Eliminar tarea programada",
+      "confirmDeleteHint": "La tarjeta de tarea se eliminará de la lista de Automatización. Si existe un historial de ejecución, el nombre de la tarea y las entradas de ejecución permanecen en la barra lateral.",
+      "resume": "Currículum",
+      "paused": "En pausa",
+      "resumed": "Reanudado",
+      "triggered": "Activado",
+      "deleted": "Eliminado",
+      "cancelRun": "Cancelar esta ejecución",
+      "runCancelled": "Esta carrera fue cancelada"
+    },
+    "more": {
+      "title": "Más",
+      "note": "Nota",
+      "noNote": "Sin nota",
+      "catchup": "Política de ejecución fallida",
+      "authorization": "Autorización"
+    },
+    "frequencyLabel": "Frecuencia",
+    "highFrequencyToast": "Habilitado · {{summary}}. Pauselo desde la página de detalles para cambiar."
+  },
+  "frequencyHint": {
+    "manual": "Se activa solo manualmente; no se ejecuta por sí solo",
+    "cronCustom": "Se ejecuta en un horario personalizado",
+    "cronHourly": "Se ejecuta cada hora (~24 veces por día)",
+    "cronDaily": "Funciona diariamente en {{at}}",
+    "cronWeekdays": "Funciona todos los días laborables en {{at}}",
+    "cronWeekly": "Funciona todos los lunes en {{at}}",
+    "intervalUnknown": "Se ejecuta en un intervalo de tiempo fijo",
+    "intervalSummary": "{{unit}} (~{{count}} veces por día)",
+    "atOnce": "Se ejecuta una vez en {{at}}",
+    "atUnknown": "Se ejecuta una vez a la hora programada.",
+    "unitSeconds": "cada {{n}} segundos",
+    "unitMinutes": "~cada {{n}} minutos",
+    "unitHours": "~cada {{n}} horas",
+    "webhook": "Activado por webhooks entrantes: la tarifa depende de la persona que llama",
+    "tableEvent": "Activado por eventos de tabla (fila creada/actualizada/eliminada)",
+    "extensionEvent": "Activado por eventos de extensión",
+    "trackerCompleted": "Se activa cuando finaliza una tarea de automatización ascendente"
+  },
+  "createDialog": {
+    "title": "Nueva tarea de automatización",
+    "editTitle": "Editar tarea de automatización",
+    "sections": {
+      "what": "Contenido de la tarea",
+      "when": "Horario"
+    },
+    "cancel": "Cancelar",
+    "submit": "crear",
+    "save": "Guardar",
+    "moreOptions": "Más opciones",
+    "createModeLabel": "Crear método",
+    "tabs": {
+      "manual": "manuales",
+      "agent": "Agente crear"
+    },
+    "agentTab": {
+      "hint": "Después del envío, el Agente en el chat lateral lo creará y lo habilitará.",
+      "requestLabel": "¿Qué tarea de automatización debería crear el Agente?",
+      "placeholder": "por ej. Todos los días a las 9 a. m., incluya los PR de GitHub con más de 24 h en mi cola de revisión y publíquelos en la Bandeja de entrada",
+      "submit": "enviar al chat",
+      "submitting": "Abriendo chat…"
+    },
+    "fields": {
+      "name": "Nombre de la tarea",
+      "nameHint": "Se muestra en la lista de tareas para que pueda reconocer esta tarea.",
+      "title": "Título",
+      "description": "Nota de lista (opcional)",
+      "instructions": "Instrucciones",
+      "instructionsHint": "Enviado al Agente en cada ejecución. El Agente elegirá por sí solo una Habilidad adecuada según sea necesario.",
+      "agent": "Agente de ejecución",
+      "workspace": "Agente de ejecución",
+      "activateOnCreate": "Habilitar inmediatamente después de la creación",
+      "activateOnCreateHint": "Comienza a programar inmediatamente después de la creación. Las tareas manuales aún requieren Ejecutar ahora.",
+      "schedule": "Horario",
+      "atTime": "en",
+      "frequency": "Frecuencia",
+      "runTime": "tiempo de ejecución",
+      "firstRunTime": "Primer tiempo de ejecución (opcional)",
+      "intervalEvery": "Frecuencia de ejecución",
+      "hours": "horas",
+      "skillLabel": "Habilidad vinculada (opcional)",
+      "skillHint": "Elija una habilidad para que la use el agente; déjelo vacío para que el Agente decida.",
+      "recurrenceDays": "repetir en",
+      "intervalMinutes": "Cada N minutos",
+      "intervalPrefix": "cada",
+      "intervalSuffix": "minutos",
+      "onceAt": "Fecha y hora de ejecución",
+      "catchup": "Si se pierde una carrera",
+      "table": "Seleccione una mesa",
+      "tableEvents": "Eventos desencadenantes",
+      "tableConditionNote": "Actualmente coincide con todos los cambios en esta tabla; Los filtros basados ​​en el campo estarán disponibles próximamente."
+    },
+    "schedule": {
+      "manual": "manuales",
+      "recurring": "recurrente",
+      "interval": "Intervalo"
+    },
+    "permissionNotice": {
+      "hint": "Esta tarea se ejecuta automáticamente según lo programado sin preguntar en cada paso. Puedes pausarlo en cualquier momento."
+    },
+    "schedulePresets": {
+      "manual": "manuales",
+      "hourly": "Por hora",
+      "daily": "Diariamente",
+      "weekdays": "Días laborables",
+      "weekly": "Semanal",
+      "interval": "Intervalo",
+      "at": "una vez",
+      "table_event": "En cambio de mesa"
+    },
+    "schedulePresetHints": {
+      "manual": "Se ejecuta solo cuando presionas \"Ejecutar ahora\".",
+      "hourly": "Se ejecuta una vez al principio de cada hora.",
+      "daily": "Se ejecuta una vez al día a la hora especificada.",
+      "weekdays": "Funciona de lunes a viernes en el horario especificado.",
+      "weekly": "Se ejecuta todos los lunes a la hora especificada.",
+      "interval": "Se ejecuta automáticamente en un intervalo de tiempo fijo.",
+      "at": "Se ejecuta una vez en la fecha y hora que elijas y luego se detiene.",
+      "table_event": "Se ejecuta automáticamente cuando cambia la tabla seleccionada."
+    },
+    "tableEventTypes": {
+      "record_created": "Fila agregada",
+      "record_updated": "Fila actualizada",
+      "record_deleted": "Fila eliminada"
+    },
+    "recurrence": {
+      "daily": "Diariamente",
+      "weekly": "Semanal",
+      "monthly": "Mensual",
+      "day": {
+        "MO": "Mo",
+        "TU": "Tu",
+        "WE": "nosotros",
+        "TH": "Th",
+        "FR": "fr",
+        "SA": "sa",
+        "SU": "Su"
+      }
+    },
+    "placeholders": {
+      "name": "por ej. Sincronización de datos diaria",
+      "nameTitle": "Introduzca el nombre de la tarea",
+      "title": "Título de la tarea",
+      "description": "por ej. una nota para los compañeros de equipo – opcional",
+      "instructions": "por ej. Resuma el correo no leído de ayer en tres viñetas y publíquelo en la Bandeja de entrada",
+      "agent": "Seleccione un agente",
+      "workspace": "Seleccione un espacio",
+      "agentDefault": "Predeterminado (agente de chat actual)",
+      "workspaceDefault": "Predeterminado (espacio actual)",
+      "agentLoading": "Cargando agentes...",
+      "workspaceLoading": "Cargando espacios...",
+      "skillKeyFriendly": "Dejar vacío = El agente selecciona automáticamente",
+      "table": "Selecciona una mesa para ver",
+      "tableLoading": "Cargando…",
+      "tableEmpty": "Aún no hay mesas en este espacio."
+    },
+    "errors": {
+      "nameRequired": "Por favor ingrese un nombre.",
+      "instructionsRequired": "Ingrese instrucciones sobre lo que debe hacer el Agente.",
+      "agentCreateFailed": "No se pudo iniciar un chat. Por favor inténtalo de nuevo.",
+      "noOrganization": "No se pudo determinar la organización. Por favor inténtalo de nuevo.",
+      "submitFailed": "No se pudo crear. Vuelva a intentarlo o comuníquese con su administrador.",
+      "intervalRequired": "Introduzca un intervalo válido en minutos (≥ 1).",
+      "onceAtRequired": "Elija una fecha y hora para ejecutar.",
+      "onceAtMustBeFuture": "El tiempo de ejecución debe ser en el futuro. Elija un momento posterior.",
+      "tableRequired": "Por favor seleccione una mesa para ver.",
+      "tableEventsRequired": "Seleccione al menos un evento desencadenante."
+    },
+    "lockedTrigger": {
+      "cronValue": "Regla de programación personalizada ({{expression}})",
+      "hint": "El desencadenante de esta tarea no se puede editar aquí. Al guardar se mantendrá el disparador original sin cambios."
+    },
+    "catchup": {
+      "run_once": "Ponte al día una vez",
+      "skip": "Saltar carreras perdidas",
+      "hint": "Si la computadora está apagada o la aplicación no se está ejecutando, es posible que una ejecución no llegue a su hora programada. Elija lo que sucede después de la recuperación.",
+      "run_onceHint": "Ejecútelo una vez automáticamente después de la recuperación: es bueno para informes y resúmenes que no deben perderse.",
+      "skipHint": "Omita la carrera perdida y espere el siguiente ciclo; es bueno para los recordatorios que pierden significado una vez que ha pasado el tiempo."
+    },
+    "intentSnapshot": {
+      "title": "Intención de creación",
+      "empty": "No se registró ninguna intención original (es posible que esta tarea de automatización se haya creado antes).",
+      "userUtterance": "lo que dijiste",
+      "agentProposal": "propuesta del agente",
+      "finalValues": "Valores finales",
+      "createdVia": "Creado a través de",
+      "via": {
+        "ui": "formulario de interfaz de usuario",
+        "cli": "línea de comando",
+        "agent": "Chat de agente",
+        "command_palette": "paleta de comandos"
+      }
+    }
+  },
+  "home": {
+    "subtitle": "Cree y administre tareas de automatización de agentes que se ejecuten según un cronograma",
+    "viewAll": "Ver todo",
+    "nextRun": "Próxima ejecución",
+    "create": "Crear tarea",
+    "loadFailed": "No se pudo cargar"
+  },
+  "automation": {
+    "title": "Automatización",
+    "subtitle": "Utilice tareas de automatización para permitir que los agentes se ejecuten según una programación"
+  },
+  "schedule": {
+    "prevWeek": "Semana anterior",
+    "nextWeek": "La próxima semana",
+    "prevMonth": "Mes anterior",
+    "nextMonth": "El próximo mes",
+    "today": "hoy",
+    "weekView": "Semana",
+    "monthView": "Mes",
+    "scopeOrganization": "Alcance de la organización",
+    "scopeSpace": "Espacio de trabajo actual",
+    "scopeOrganizationShort": "Organización",
+    "scopeSpaceShort": "Espacio de trabajo",
+    "manage": "Administrar tareas",
+    "truncatedHint": "Demasiadas ejecuciones programadas; sólo se muestra una parte de este rango de fechas.",
+    "loadError": "No se pudo cargar el cronograma",
+    "emptyTitle": "No se esperan ejecuciones en este período.",
+    "emptyDescription": "Las ejecuciones futuras aparecen aquí después de crear o habilitar una tarea de automatización.",
+    "narrowList": "Agendar por fecha",
+    "pending": "Pendiente",
+    "weekGrid": "calendario semanal",
+    "monthGrid": "calendario mensual",
+    "moreCount": "+{{count}}",
+    "moreAriaLabel": "{{date}}, {{count}} más tareas"
+  },
+  "toast": {
+    "activated": "Habilitado",
+    "createdAndActivated": "Creado y habilitado",
+    "createdAsDraft": "Creado",
+    "createdAsDraftHint": "Los borradores no se ejecutarán automáticamente. Haga clic en 'Activar' en la vista detallada para iniciar los activadores.",
+    "activateAfterCreateFailed": "Se guardó, pero no se pudo habilitar: intente habilitar nuevamente en la vista detallada.",
+    "runCompleted": "Tarea de automatización completada",
+    "runFailed": "Error en la tarea de automatización",
+    "error": "Operación fallida"
+  },
+  "notification": {
+    "trackerCompletedBody": "Haga clic para ver esta carrera",
+    "trackerFailedBody": "Haga clic para ver el fallo"
+  },
+  "chatSidebar": {
+    "trackersSection": "Automatización",
+    "openModule": "Abrir módulo de automatización",
+    "newTracker": "+ Nueva tarea de automatización",
+    "emptyHint": "Crea tu primera tarea de automatización",
+    "emptyForWorkspace": "No hay tareas de automatización en este espacio de trabajo",
+    "emptyCreate": "Nueva tarea de automatización",
+    "viewAll": "Ver todo ({{count}})",
+    "openTaskDetail": "Abrir detalle de tarea",
+    "archivedTask": "Tarea eliminada; historial de ejecución retenido",
+    "deleteHistory": "Eliminar historial",
+    "deleteHistoryTitle": "Eliminar el historial de automatización",
+    "deleteHistoryHint": "Esto elimina permanentemente cada registro de ejecución y su conversación. Esto no se puede deshacer.",
+    "deleteHistorySuccess": "Historial eliminado",
+    "deleteHistoryFailed": "Error al eliminar. Intentar otra vez.",
+    "expandRuns": "Ampliar el historial de ejecución",
+    "collapseRuns": "Contraer historial de ejecución",
+    "runsLoading": "Cargando historial de ejecución...",
+    "runsError": "No se pudo cargar",
+    "runsRetry": "Reintentar",
+    "runsEmpty": "Aún no hay carreras",
+    "viewAllRuns": "Ver todo ({{count}})"
+  },
+  "timeline": {
+    "today": "hoy",
+    "tomorrow": "mañana",
+    "thisWeek": "esta semana",
+    "later": "Más tarde",
+    "noSchedule": "no programado",
+    "empty": "No hay tareas de automatización próximas"
+  },
+  "kanban": {
+    "empty": "Sin tareas de automatización",
+    "colEmpty": "vacio",
+    "colDraft": "Borrador",
+    "colActive": "Activo",
+    "colPaused": "En pausa",
+    "colDisabled": "Terminado"
+  }
+}

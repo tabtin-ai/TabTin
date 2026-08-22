@@ -1,0 +1,468 @@
+{
+  "welcomeTitle": "Welcome to TabTin",
+  "welcomeSubtitle": "Unified AI work platform. Create a new Workspace or pick one from the left.",
+  "welcomeSubtitleGuest": "Sign in to create Workspaces and start collaborating.",
+  "welcome": {
+    "title": "TabTin",
+    "tagline": "Your AI work platform",
+    "conceptIntro": "In TabTin, a Workspace is a persistent work site bound to an execution device and working directory. It keeps conversations, apps, resources, and execution context together so Agents can help within that boundary.",
+    "loginCta": "Sign in / Register",
+    "learnMore": "Learn more →",
+    "readyTitle": "All set!",
+    "readyDesc": "Create your first Workspace to get started. A Workspace binds an execution device and working directory, keeping conversations, apps, resources, and execution context together.",
+    "defaultAgentName": "Default Workspace",
+    "createFirstAgent": "Create your first Workspace",
+    "creating": "Creating...",
+    "orCollaborate": "or collaborate with others",
+    "createGroupRoom": "Create Agent group room",
+    "createDM": "Start a DM",
+    "createFailed": "Failed to create Workspace",
+    "noOrganization": "Please select a organization first",
+    "moreApps": "Plus video, canvas, memos, goals, email and more",
+    "apps": {
+      "tabdata": "TabData",
+      "tabdataDesc": "AI-powered smart tables",
+      "tabdoc": "TabDoc",
+      "tabdocDesc": "Collaborative documents",
+      "tabslide": "TabSlide",
+      "tabslideDesc": "Presentation maker",
+      "browser": "Browser",
+      "browserDesc": "Smart web browsing",
+      "tabcode": "TabCode",
+      "tabcodeDesc": "Code & terminal"
+    }
+  },
+  "actions": {
+    "createAgent": "Create Workspace",
+    "loginToStart": "Sign in to start",
+    "viewDocs": "View docs"
+  },
+  "selector": {
+    "loginRequired": "Please sign in",
+    "placeholder": "Select organization",
+    "defaultBadge": "Default",
+    "empty": "No organizations yet",
+    "pendingInvitations": "Pending Invitations",
+    "invitedAs": "Invited as {{role}}",
+    "actions": {
+      "create": "Create organization",
+      "settings": "Organization settings",
+      "members": "Member management"
+    }
+  },
+  "invitationResponse": {
+    "title": "Organization Invitation",
+    "description": "You have been invited to join an organization",
+    "workspaceName": "Organization",
+    "invitedBy": "Invited by {{name}}",
+    "role": "Role",
+    "expiresAt": "Expires",
+    "accept": "Accept",
+    "reject": "Decline",
+    "accepting": "Joining...",
+    "rejecting": "Declining...",
+    "accepted": "Joined organization \"{{name}}\"",
+    "rejected": "Invitation declined"
+  },
+  "invitationList": {
+    "title": "Pending Invitations",
+    "description": "You have {{count}} pending organization invitations",
+    "from": "From {{name}}"
+  },
+  "create": {
+    "errors": {
+      "failed": "Creation failed"
+    }
+  },
+  "views": {
+    "newTab": "New tab"
+  },
+  "settings": {
+    "title": "Organization settings",
+    "tabs": {
+      "general": "General",
+      "llm": "Model settings"
+    },
+    "validation": {
+      "nameRequired": "Organization name is required",
+      "nameMismatch": "Organization name does not match",
+      "nameTooLong": "Organization name must be 100 characters or fewer"
+    },
+    "errors": {
+      "updateFailed": "Update failed",
+      "deleteFailed": "Delete failed",
+      "leaveFailed": "Leave failed"
+    },
+    "fields": {
+      "icon": "Icon",
+      "avatar": "Organization avatar",
+      "name": "Name",
+      "namePlaceholder": "Organization name",
+      "nameHint": "{{count}}/100 characters",
+      "description": "Description (optional)",
+      "descriptionPlaceholder": "Describe the organization",
+      "descriptionHint": "{{count}}/500 characters"
+    },
+    "avatar": {
+      "pendingSave": "Avatar cropped; save organization profile to apply",
+      "pendingRemove": "Avatar will be removed after you save",
+      "hint": "JPG, PNG, GIF, or WebP up to 5MB. GIFs become still images.",
+      "cropTitle": "Crop organization avatar"
+    },
+    "actions": {
+      "save": "Save changes",
+      "saving": "Saving...",
+      "saved": "Saved",
+      "delete": "Delete organization",
+      "leave": "Leave organization",
+      "cancel": "Cancel",
+      "confirmDelete": "Delete",
+      "deleting": "Deleting...",
+      "transfer": "Transfer"
+    },
+    "danger": {
+      "title": "Danger zone",
+      "deleteTitle": "Delete organization",
+      "deleteDefault": "The default organization cannot be deleted",
+      "deleteDesc": "This will permanently delete the organization and all its data",
+      "leaveTitle": "Leave organization",
+      "leaveDesc": "You will lose access and need a new invite to rejoin",
+      "transferTitle": "Transfer ownership",
+      "transferDesc": "Transfer to an existing member"
+    },
+    "confirm": {
+      "title": "Confirm organization deletion?",
+      "subtitle": "This will permanently delete:",
+      "items": {
+        "organization": "Organization \"{{name}}\"",
+        "spaces": "All Agents and tables",
+        "records": "All records",
+        "members": "All member relationships"
+      },
+      "warning": "⚠️ This action cannot be undone!",
+      "inputLabel": "Enter the organization name to confirm deletion:"
+    },
+    "permissions": {
+      "ownerOnly": "💡 Only the organization owner can edit settings"
+    }
+  },
+  "llm": {
+    "defaultConfig": {
+      "title": "Default model configuration",
+      "subtitle": "When team members don't pick a model, this default is used first.",
+      "configured": "Configured",
+      "notConfigured": "Not configured",
+      "currentModel": "Current default model",
+      "pickHint": "Select a default model",
+      "unavailableCurrent": "Currently unavailable",
+      "selectHelp": "The default model is used for new sessions and tasks without a specified model."
+    },
+    "presetSection": {
+      "title": "TabTin preset models",
+      "subtitle": "Built-in platform models. Ready to use as the default—no channel setup required.",
+      "collapse": "Collapse preset models",
+      "expandHint": "{{count}} more platform models. Expand to see all."
+    },
+    "providers": {
+      "title": "Provider channels",
+      "desc": "Add cloud model channels (OpenAI compatible)",
+      "provider": "Provider",
+      "providerKey": "Channel key",
+      "displayName": "Display name",
+      "baseUrl": "API base URL",
+      "apiKey": "API key",
+      "scope": "Visibility",
+      "scopeOrganization": "Organization",
+      "scopeUser": "Personal",
+      "scopeHint": "Your role can only create personal channels",
+      "save": "Save changes",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "enable": "Enable",
+      "disable": "Disable",
+      "validate": "Test connection",
+      "validating": "Testing...",
+      "validateSuccess": "Connection OK",
+      "validateFailed": "Connection failed",
+      "statusEnabled": "Enabled",
+      "statusDisabled": "Disabled",
+      "create": "Add channel",
+      "creating": "Creating...",
+      "empty": "No channels yet",
+      "modelCount": "{{count}} models",
+      "createSuccess": "Channel added",
+      "updateSuccess": "Channel updated",
+      "deleteSuccess": "Channel deleted",
+      "enableSuccess": "Channel enabled",
+      "disableSuccess": "Channel disabled",
+      "confirmDelete": "Delete channel \"{{name}}\"?",
+      "validation": {
+        "required": "Please fill Base URL and API Key",
+        "providerKeyInvalid": "Invalid channel key format"
+      }
+    },
+    "models": {
+      "title": "Models",
+      "desc": "Add models under a channel",
+      "provider": "Channel",
+      "providerPlaceholder": "Select a channel",
+      "searchKeyword": "Search models (LiteLLM)",
+      "searchPlaceholder": "e.g. gpt-4o, claude-3.5",
+      "search": "Search",
+      "searching": "Searching...",
+      "clearSearch": "Clear",
+      "searchResults": "Results (click to fill)",
+      "searchValidation": "Enter a search keyword",
+      "searchEmpty": "No matching models",
+      "modelName": "Model name",
+      "displayName": "Display name",
+      "maxTokens": "Context length",
+      "supportsVision": "Vision",
+      "supportsStreaming": "Streaming",
+      "save": "Save changes",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "enable": "Enable",
+      "disable": "Disable",
+      "statusEnabled": "Enabled",
+      "statusDisabled": "Disabled",
+      "statusReady": "Ready",
+      "statusProviderDisabled": "Channel disabled",
+      "statusNotReady": "Not ready",
+      "globalOnly": "System",
+      "organizationOnly": "Organization",
+      "providerDisabled": "Provider disabled, model unavailable",
+      "create": "Add model",
+      "creating": "Creating...",
+      "empty": "No models yet",
+      "userOnly": "Personal",
+      "createSuccess": "Model added",
+      "updateSuccess": "Model updated",
+      "deleteSuccess": "Model deleted",
+      "enableSuccess": "Model enabled",
+      "disableSuccess": "Model disabled",
+      "confirmDelete": "Delete model \"{{name}}\"?",
+      "validation": {
+        "required": "Please fill required fields",
+        "providerRequired": "Select a channel first",
+        "maxTokens": "Enter a valid context length"
+      }
+    },
+    "default": {
+      "title": "Default model",
+      "desc": "Default model for new sessions",
+      "select": "Select default model",
+      "save": "Set default",
+      "saving": "Saving...",
+      "current": "Current default: {{name}}"
+    },
+    "errors": {
+      "loadProvidersFailed": "Failed to load channels",
+      "loadModelsFailed": "Failed to load models",
+      "createProviderFailed": "Failed to create channel",
+      "updateProviderFailed": "Failed to update channel",
+      "deleteProviderFailed": "Failed to delete channel",
+      "validateProviderFailed": "Failed to validate channel",
+      "createModelFailed": "Failed to create model",
+      "updateModelFailed": "Failed to update model",
+      "deleteModelFailed": "Failed to delete model",
+      "searchModelFailed": "Failed to search models",
+      "setDefaultModelFailed": "Failed to set default model"
+    }
+  },
+  "trashedSpaces": {
+    "title": "Workspace trash",
+    "subtitle": "Workspaces in trash can be restored within the retention period, then permanently deleted",
+    "empty": "Trash is empty",
+    "emptyHint": "No workspaces in trash",
+    "trashedAt": "Deleted on {{date}}",
+    "daysLeft": "Auto-deletes in {{days}} days",
+    "restore": "Restore",
+    "restoring": "Restoring...",
+    "restoreSuccess": "Restored workspace \"{{name}}\"",
+    "restoreFailed": "Restore failed",
+    "permanentDelete": "Delete permanently",
+    "deleteConfirmTitle": "Permanently delete workspace",
+    "deleteConfirm": "Permanently delete \"{{name}}\"? This cannot be undone.",
+    "deleteSuccess": "Permanently deleted workspace \"{{name}}\"",
+    "deleteFailed": "Failed to permanently delete",
+    "loading": "Loading...",
+    "loadFailed": "Failed to load trashed workspaces",
+    "count": "{{count}} workspaces"
+  },
+  "apiErrors": {
+    "listNoResponse": "Failed to fetch organizations: no response",
+    "listHttpFailed": "Failed to fetch organizations: HTTP {{status}}",
+    "listFailed": "Failed to fetch organizations",
+    "listInvalid": "Failed to fetch organizations: invalid response",
+    "detailFailed": "Failed to fetch organization",
+    "detailInvalid": "Failed to fetch organization: invalid response",
+    "createFailed": "Failed to create organization",
+    "createInvalid": "Failed to create organization: invalid response",
+    "updateFailed": "Failed to update organization",
+    "updateInvalid": "Failed to update organization: invalid response",
+    "deleteFailed": "Failed to delete organization",
+    "leaveFailed": "Failed to leave organization",
+    "healthUnknownStatus": "Unknown status",
+    "healthUnexpected": "Health check returned unexpected response",
+    "healthUnavailable": "Service unavailable"
+  },
+  "members": {
+    "title": "Member management",
+    "subtitle": "{{name}} · {{count}} members",
+    "actions": {
+      "add": "Add member",
+      "addTitle": "Add member",
+      "cancel": "Cancel",
+      "confirmAdd": "Add",
+      "sendInvitation": "Send Invitation",
+      "adding": "Adding...",
+      "setViewer": "Set as viewer",
+      "setEditor": "Set as editor",
+      "remove": "Remove member",
+      "invite": "Invite",
+      "changeRole": "Role",
+      "cancelInvitation": "Cancel invitation"
+    },
+    "fields": {
+      "userId": "User ID",
+      "userIdPlaceholder": "Paste their User ID",
+      "userIdHint": "They can copy their User ID from Settings → Profile",
+      "role": "Role"
+    },
+    "roles": {
+      "owner": "Owner",
+      "admin": "Admin",
+      "editor": "Editor",
+      "viewer": "Viewer"
+    },
+    "roleDescriptions": {
+      "owner": "Full control",
+      "admin": "Can manage members and organization settings",
+      "editor": "Can edit",
+      "viewer": "View only"
+    },
+    "errors": {
+      "loadFailed": "Failed to load members",
+      "loadInvalid": "Failed to load members: invalid response",
+      "userIdRequired": "User ID is required",
+      "roleInvalid": "Role must be editor or viewer",
+      "addFailed": "Failed to add member",
+      "addInvalid": "Failed to add member: invalid response",
+      "updateRoleFailed": "Failed to update role",
+      "removeFailed": "Failed to remove member",
+      "cancelInvitationFailed": "Failed to cancel invitation",
+      "permissionDenied": "You don't have permission to access this organization"
+    },
+    "pendingInvitations": "Pending invitations ({{count}})",
+    "linkInvitations": "Invite links ({{count}})",
+    "linkInvitation": "Link invitation",
+    "linkInvitationActive": "Active",
+    "linkInvitationUsed": "{{count}} joined",
+    "directInvitation": "User ID {{userId}}",
+    "phoneInvitation": "Phone {{phone}}",
+    "statusPending": "Pending",
+    "expiresAt": "Expires {{date}}",
+    "confirmRemove": "Remove this member?",
+    "ownerSection": "Owner",
+    "memberSection": "Members ({{count}})",
+    "you": "You",
+    "joinedAt": "Joined {{date}}",
+    "empty": {
+      "title": "No other members yet",
+      "hint": "Use the button above to add members"
+    },
+    "permissions": {
+      "ownerOnly": "💡 Only the organization owner can manage members"
+    }
+  },
+  "search": {
+    "placeholder": "Search TabData, TabDoc, TabSlide...",
+    "all": "All",
+    "tables": "TabData",
+    "documents": "TabDoc",
+    "presentations": "TabSlide",
+    "code": "TabCode",
+    "videos": "TabVideo",
+    "canvases": "TabWhiteboard",
+    "memos": "TabMemo",
+    "sites": "TabSite",
+    "functions": "Functions",
+    "searching": "Searching...",
+    "error": "Search failed, please try again",
+    "noResults": "No matching results",
+    "hint": "Type keywords to search resources across all Agents",
+    "navigate": "Navigate",
+    "open": "Open",
+    "close": "Close",
+    "results": "results",
+    "shortcutHint": "Open search",
+    "dialogLabel": "Global Search",
+    "inputLabel": "Search keywords",
+    "typeFilter": "Type filter",
+    "resultsList": "Search results",
+    "shortcuts": "Keyboard shortcuts",
+    "navigateFailedTitle": "Cannot open resource",
+    "navigateFailedSpace": "Target Workspace is not loaded. Please select it from the sidebar first.",
+    "navigateFailedType": "Unsupported resource type",
+    "clearScope": "Search all projects",
+    "scopedPlaceholder": "Search in \"{{name}}\"...",
+    "scopedHint": "Searching in \"{{name}}\". Press Backspace to switch to global search.",
+    "globalMode": "Global search"
+  },
+  "logs": {
+    "loadListSuccess": "✅ Organization list loaded:",
+    "loadListFailed": "❌ Failed to load organizations:",
+    "selectSuccess": "✅ Organization selected:",
+    "selectFailed": "❌ Failed to select organization:",
+    "createSuccess": "✅ Organization created:",
+    "createFailed": "❌ Failed to create organization:",
+    "updateSuccess": "✅ Organization updated:",
+    "updateFailed": "❌ Failed to update organization:",
+    "deleteSuccess": "✅ Organization deleted",
+    "deleteFailed": "❌ Failed to delete organization:",
+    "leaveSuccess": "✅ Left organization",
+    "leaveFailed": "❌ Failed to leave organization:",
+    "membersLoadSuccess": "✅ Members loaded:",
+    "membersLoadFailed": "❌ Failed to load members:",
+    "memberAddSuccess": "✅ Member added",
+    "memberAddFailed": "❌ Failed to add member:",
+    "memberRoleUpdateSuccess": "✅ Member role updated",
+    "memberRoleUpdateFailed": "❌ Failed to update member role:",
+    "memberRemoveSuccess": "✅ Member removed",
+    "memberRemoveFailed": "❌ Failed to remove member:",
+    "memberRoleFetchFailed": "❌ Failed to fetch user role:",
+    "getDefaultFailed": "❌ Failed to get default organization:",
+    "healthCheckFailed": "❌ Organization health check failed:",
+    "cleared": "✅ Organization data cleared"
+  },
+  "invitation": {
+    "errors": {
+      "sendFailed": "Failed to send invitation",
+      "createLinkFailed": "Failed to create invitation link",
+      "listFailed": "Failed to load invitations",
+      "cancelFailed": "Failed to cancel invitation",
+      "notFound": "Invitation not found",
+      "acceptFailed": "Failed to accept invitation",
+      "respondFailed": "Failed to respond to invitation",
+      "rateLimited": "Too many invitations created, please try again later"
+    },
+    "accept": {
+      "title": "Organization Invitation",
+      "confirm": "Accept Invitation",
+      "accepting": "Joining...",
+      "invalid": "This invitation is no longer valid",
+      "success": "Successfully joined organization",
+      "successDesc": "You have joined \"{{organization}}\"",
+      "goToOrganization": "Go to Organization",
+      "loginRequired": "Please log in first to accept this invitation",
+      "status": {
+        "expired": "Invitation has expired",
+        "accepted": "Invitation has already been used",
+        "cancelled": "Invitation has been cancelled"
+      }
+    }
+  }
+}

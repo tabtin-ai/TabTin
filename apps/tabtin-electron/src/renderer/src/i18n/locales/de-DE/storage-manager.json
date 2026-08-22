@@ -1,0 +1,241 @@
+{
+  "panel": {
+    "title": "Lagerung",
+    "subtitle": "Was TabTin auf Ihrem Computer speichert.",
+    "totalLine": "TabTin verwendet {{size}} auf diesem Mac",
+    "totalLineLoading": "Speicher messen…",
+    "refresh": "Neu berechnen",
+    "refreshHint": "Messen Sie alle Datengrößen erneut",
+    "loadErrorTitle": "Laden fehlgeschlagen"
+  },
+  "health": {
+    "healthy": {
+      "label": "Viel Platz",
+      "tagline": "Sie sind für eine Weile bereit – erstellen Sie weiter."
+    },
+    "attention": {
+      "label": "Stetig",
+      "tagline": "Normaler Gebrauch, kein Grund zur Sorge."
+    },
+    "heavy": {
+      "label": "Es wird satt",
+      "tagline": "Es häuft sich ziemlich viel – gibt es darunter irgendetwas, das es wert ist, aufgeräumt zu werden?"
+    },
+    "critical": {
+      "label": "Zeit zum Putzen",
+      "tagline": "TabTin nimmt viel Platz ein. Zeit, einige ungenutzte Daten zu löschen."
+    }
+  },
+  "metrics": {
+    "totalUsed": {
+      "label": "Gebraucht",
+      "sub": "{{count}} Artikel"
+    },
+    "largest": {
+      "label": "Größter Artikel"
+    },
+    "cache": {
+      "label": "Temporärer Cache",
+      "tooLow": "Alles optimiert",
+      "clean": "Sauber",
+      "cleaning": "Reinigung"
+    }
+  },
+  "section": {
+    "topItemsTitle": "Nimmt den meisten Platz ein"
+  },
+  "topItems": {
+    "loading": "Messung Ihrer Arbeitsplatzdaten…",
+    "empty": "Noch keine Daten. Kommen Sie zurück, nachdem Sie TabTin eine Weile verwendet haben.",
+    "itemCount": "{{count}} Artikel",
+    "showAll": "Andere {{count}}-Artikel anzeigen",
+    "collapseAll": "Zusammenbruch",
+    "conversation": {
+      "label": "Gesprächsgeschichte",
+      "subtitle_one": "Ab 1 Arbeitsplatz",
+      "subtitle_other": "Aus {{count}}-Arbeitsbereichen",
+      "unscopedLabel": "Andere Konversationsdaten",
+      "otherLabel": "Andere Arbeitsbereiche"
+    },
+    "checkpoint": {
+      "label": "Schnappschüsse des Projektbetriebs",
+      "subtitle": "{{count}} Projekte · Agent macht Snapshots rückgängig",
+      "otherLabel": "Nicht zugewiesene Rückgängig-Daten"
+    },
+    "browserEnv": {
+      "label": "Browser-Anmeldeumgebungen",
+      "subtitle": "{{count}}-Umgebungen · Site-Anmeldungen und Offline-Daten",
+      "otherLabel": "Andere Umgebungen"
+    },
+    "agentDownload": {
+      "label": "Downloads von Agent-Tools",
+      "subtitle": "{{count}} Arbeitsbereiche · Vom Agenten abgerufene Dateien",
+      "otherLabel": "Andere Arbeitsbereiche"
+    },
+    "appBundle": {
+      "label": "Installierte Apps",
+      "subtitle": "{{count}} Arten lokaler App-Daten"
+    },
+    "appProject": {
+      "otherLabel": "Andere {{count}}",
+      "tabvideo": {
+        "subtitle": "{{count}} TabVideo-Projekte"
+      },
+      "tabdoc": {
+        "subtitle": "{{count}} TabDoc-Entwürfe"
+      },
+      "tabwhiteboard": {
+        "subtitle": "{{count}} Whiteboard-Assets"
+      },
+      "tabslide": {
+        "subtitle": "{{count}} TabSlide-Entwürfe"
+      }
+    },
+    "cache": {
+      "label": "Temporärer Cache",
+      "subtitle": "Baut sich bei der nächsten Verwendung selbst wieder auf"
+    }
+  },
+  "userGroup": {
+    "conversations": {
+      "title": "Gespräche und Geschichte",
+      "description": "Ihre Gespräche mit Agenten und Betriebsmomentaufnahmen"
+    },
+    "browser": {
+      "title": "Eingebettete Browserseiten",
+      "description": "Websites, bei denen Sie sich angemeldet haben (Feishu, Notion, ChatGPT usw.)"
+    },
+    "media": {
+      "title": "Medien & Downloads",
+      "description": "Aufnahmen, Screenshots, PDFs, Downloads"
+    },
+    "apps": {
+      "title": "App-Daten",
+      "description": "TabDoc-Entwürfe, installierte Apps usw."
+    },
+    "voice": {
+      "title": "Sprach-Hotwords und Regeln",
+      "description": "Ihre Anpassungen der Spracheingabe"
+    }
+  },
+  "bucketDisplay": {
+    "checkpoint:shadow-git": {
+      "title": "Schnappschüsse des Projektbetriebs",
+      "description": "Snapshots, mit denen Sie Agentenvorgänge in jedem Projekt rückgängig machen können"
+    },
+    "agent:checkpoints": {
+      "title": "Schnappschüsse des Projektbetriebs",
+      "description": "Snapshots, mit denen Sie Agentenvorgänge in jedem Projekt rückgängig machen können"
+    },
+    "browser:http-cache-aggregate": {
+      "title": "Eingebetteter Site-Cache",
+      "description": "Bild-/Skript-/Schriftart-Cache für eingebettete Websites wie Feishu, Notion, ChatGPT."
+    },
+    "browser:bookmarks": {
+      "title": "Browser-Lesezeichen",
+      "description": "Lesezeichen, die Sie im eingebetteten Browser von TabTin gespeichert haben"
+    },
+    "browser:browsing-history": {
+      "title": "Browserverlauf",
+      "description": "Seiten, die Sie im eingebetteten Browser von TabTin besucht haben"
+    },
+    "tin:sandboxes": {
+      "title": "Sandbox-App-Daten",
+      "description": "Lokale Daten und Cache von Tin-Sandbox-Apps"
+    },
+    "marketplace:apps": {
+      "title": "Marktplatz-Apps",
+      "description": "Ausführbare Dateien und Konfigurationen für vom Marketplace installierte Tools"
+    },
+    "mcp:local-connections": {
+      "title": "Externe KI-Tool-Konfiguration",
+      "description": "Konfigurationen für die Verbindung von Claude Desktop / Cursor / Windsurf (fortgeschrittene Benutzer)"
+    },
+    "media:recordings": {
+      "title": "Aufnahmen",
+      "description": "Aufzeichnen von Dateien über den eingebetteten Browser"
+    },
+    "media:screenshots": {
+      "title": "Screenshots",
+      "description": "Screenshots werden unter ~/.tabtin/screenshots gespeichert"
+    },
+    "media:exports-pdf": {
+      "title": "PDF-Exporte",
+      "description": "PDF-Exportdateien werden in ~/.tabtin/exports gespeichert"
+    },
+    "download:user-downloads": {
+      "title": "Verlauf herunterladen",
+      "description": "Verlauf der durch TabTin ausgelösten Downloads (nur Aufzeichnungen)"
+    },
+    "download:agent-sandbox-downloads": {
+      "title": "Downloads von Agent-Tools",
+      "description": "Von Agent-Tools in jedem Arbeitsbereich heruntergeladene Dateien"
+    },
+    "media:tabvideo-render-tmp": {
+      "title": "Video-Rendering-Reste",
+      "description": "Temporäre Dateien aus Video-Rendering, Export, Widget-Snapshots"
+    },
+    "media:stream-download-tmp": {
+      "title": "Download-Blöcke streamen",
+      "description": "Temporäre Teile von HLS/DASH-Video-Downloads"
+    },
+    "voice:hotwords-rules": {
+      "title": "Sprach-Hotwords und Regeln",
+      "description": "Ihre Spracheingabeanpassungen (kein Cloud-Backup, bitte regelmäßig exportieren)"
+    },
+    "system:voice-settings": {
+      "title": "Sprach-Hotwords und Regeln",
+      "description": "Ihre Spracheingabeanpassungen (kein Cloud-Backup, bitte regelmäßig exportieren)"
+    }
+  },
+  "totalUsage": "{{size}}",
+  "itemCount": "{{count}} Artikel",
+  "groupSummary": "{{size}} · {{count}} Elemente",
+  "actions": {
+    "manage": "Verwalten",
+    "collapse": "Zusammenbruch",
+    "listItems": "Artikel",
+    "export": "Exportieren",
+    "exporting": "Exportieren…",
+    "clear": "Klar",
+    "cancel": "Abbrechen",
+    "confirmClear": "Bestätigen Sie das Löschen",
+    "confirmDestroy": "Bestätigen Sie das Löschen",
+    "clearing": "Löschen…",
+    "acknowledgePartial": "Okay"
+  },
+  "errors": {
+    "clearFailed": "Löschen ist fehlgeschlagen",
+    "listFailed": "Die Liste konnte nicht geladen werden",
+    "scanFailed": "Der Scan ist fehlgeschlagen"
+  },
+  "dialog": {
+    "willFree": "Wird frei",
+    "warningsTitle": "Nach dem Löschen verlierst du:",
+    "typeNameLabel": "Geben Sie zur Bestätigung „{{name}}“ ein",
+    "fillName": "Füllen",
+    "acknowledgeLabel": "Ich verstehe und akzeptiere, dass dies nicht rückgängig gemacht werden kann",
+    "partialFailureTitle": "Teilweises Löschen fehlgeschlagen ({{count}}-Elemente)",
+    "partialFailureHint": "Einige Elemente wurden nicht freigegeben (in Verwendung / Erlaubnis verweigert). Klicken Sie auf „OK“, um den Vorgang zu schließen und es später noch einmal zu versuchen.",
+    "L1": {
+      "title": "{{name}} löschen",
+      "subtitle": "Wird beim nächsten Ladevorgang neu erstellt. Es gehen keine Daten verloren."
+    },
+    "L2": {
+      "title": "{{name}} löschen",
+      "subtitle": "Der nächste Ladevorgang ist möglicherweise langsamer, es gehen jedoch keine Assets verloren."
+    },
+    "L3-soft": {
+      "title": "{{name}} löschen",
+      "subtitle": "Hierbei handelt es sich um Benutzerdaten. Kann nicht rückgängig gemacht werden."
+    },
+    "L3-hard": {
+      "title": "{{name}} löschen",
+      "subtitle": "Hierbei handelt es sich um kritische Benutzerdaten. Geben Sie den Namen ein und aktivieren Sie das Kontrollkästchen zur Bestätigung."
+    },
+    "L4": {
+      "title": "Klar {{name}} (hohes Risiko)",
+      "subtitle": "Bitte bestätigen Sie sorgfältig – es handelt sich um Konto- oder Geräteidentitätsdaten."
+    }
+  }
+}

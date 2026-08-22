@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cloud_drive_redesign_search_hint">Search files, folders, and content</string>
+    <string name="cloud_drive_redesign_recent_title">Recently opened</string>
+    <string name="cloud_drive_redesign_library_title">Team Drive</string>
+    <string name="cloud_drive_redesign_all_content">All content</string>
+    <string name="cloud_drive_redesign_type_filter">Type</string>
+    <string name="cloud_drive_redesign_type_filter_title">Filter by type</string>
+    <string name="cloud_drive_redesign_more_actions">More actions for %1$s</string>
+    <string name="cloud_drive_redesign_folder_count">%1$d items</string>
+    <string name="cloud_drive_redesign_continue_open">Continue opening</string>
+    <string name="cloud_drive_redesign_later">Later</string>
+    <string name="cloud_drive_redesign_empty_title">Nothing here yet</string>
+    <string name="cloud_drive_redesign_empty_body">Upload a file or create a folder to organize team resources.</string>
+    <string name="cloud_drive_redesign_type_cloud_doc">Cloud doc</string>
+    <string name="cloud_drive_redesign_type_cloud_table">Table</string>
+    <string name="cloud_drive_redesign_type_image">Image</string>
+    <string name="cloud_drive_redesign_type_pdf">PDF</string>
+    <string name="cloud_drive_redesign_type_document">Document</string>
+    <string name="cloud_drive_redesign_type_spreadsheet">Spreadsheet</string>
+    <string name="cloud_drive_redesign_type_presentation">Presentation</string>
+    <string name="cloud_drive_redesign_type_text">Text &amp; code</string>
+    <string name="cloud_drive_redesign_type_audio">Audio</string>
+    <string name="cloud_drive_redesign_type_video">Video</string>
+    <string name="cloud_drive_redesign_type_archive">Archive</string>
+    <string name="cloud_drive_redesign_type_generic">File</string>
+    <string name="cloud_drive_redesign_preview_document_empty">Open to view the full content</string>
+    <string name="cloud_drive_redesign_preview_table_empty">No table summary</string>
+    <string name="cloud_drive_redesign_preview_image_hint">Image preview</string>
+    <string name="cloud_drive_redesign_preview_audio_hint">Audio waveform</string>
+    <string name="cloud_drive_redesign_preview_video_hint">Video frame</string>
+    <string name="cloud_drive_redesign_preview_archive_hint">Archived files</string>
+    <string name="cloud_drive_redesign_root_label">Drive</string>
+</resources>

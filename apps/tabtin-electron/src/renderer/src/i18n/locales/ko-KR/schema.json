@@ -1,0 +1,21 @@
+{
+  "analyzing": {
+    "title": "AI 분석 중...",
+    "modeFlash": "플래시 모드 - 빠른 분석",
+    "modeDeep": "딥 모드 - 심층 분석",
+    "tasksTitle": "분석 작업",
+    "tip": "💡 AI가 페이지 구조를 분석하고 있습니다. 기다려 주세요...",
+    "tipDeepSuffix": "딥 모드에서는 세부 정보 페이지도 분석하므로 시간이 더 오래 걸릴 수 있습니다.",
+    "cancel": "분석 취소",
+    "phases": {
+      "initializing": "초기화 중",
+      "detecting_pre_actions": "사전 조치 감지",
+      "identifying_region": "목록 영역 식별",
+      "analyzing_fields": "필드 구조 분석",
+      "analyzing_pagination": "페이지 매김 감지",
+      "exploring_detail": "세부 항목 탐색",
+      "building_schema": "스키마 구축",
+      "completed": "완료됨"
+    }
+  }
+}

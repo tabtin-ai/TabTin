@@ -1,0 +1,9 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Only explicit documentation placeholders are allowed"
+regexTarget = "match"
+regexes = [
+  '''(?i)(?:example|dummy|test|dev-placeholder)[-_][a-z0-9_-]+''',
+]

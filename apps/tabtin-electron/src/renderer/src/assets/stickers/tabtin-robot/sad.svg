@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+  <g stroke="#111111" stroke-linecap="round" stroke-linejoin="round">
+    <!-- stubby antenna -->
+    <path d="M64 18v14" stroke-width="6"/>
+    <circle cx="64" cy="16" r="9" fill="#111111" stroke="none"/>
+    <circle cx="61" cy="13" r="2.8" fill="#FFFFFF" stroke="none"/>
+    <path d="M48 22l-5 6" stroke-width="4.5"/>
+    <path d="M80 22l5 6" stroke-width="4.5"/>
+    <!-- squishy TV head -->
+    <rect x="18" y="34" width="92" height="78" rx="28" ry="28" fill="#FFFFFF" stroke-width="7"/>
+    <!-- soft puppy eyes -->
+    <circle cx="46" cy="72" r="9" fill="#111111" stroke="none"/>
+    <circle cx="82" cy="72" r="9" fill="#111111" stroke="none"/>
+    <circle cx="49" cy="68.5" r="3" fill="#FFFFFF" stroke="none"/>
+    <circle cx="85" cy="68.5" r="3" fill="#FFFFFF" stroke="none"/>
+    <!-- soft droopy lids -->
+    <path d="M36 62c4 2 12 2 16 0" stroke-width="3.5" fill="none"/>
+    <path d="M76 62c4 2 12 2 16 0" stroke-width="3.5" fill="none"/>
+    <!-- tiny sweat drop -->
+    <path d="M100 52c0 0 6 8 0 12c-4-2-4-8 0-12z" fill="#111111" stroke="none" opacity="0.85"/>
+    <!-- soft frown -->
+    <path d="M52 96c3-5 21-5 24 0" stroke-width="4.5" fill="none"/>
+  </g>
+</svg>

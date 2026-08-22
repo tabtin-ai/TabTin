@@ -1,0 +1,135 @@
+{
+  "$defs": {
+    "ArtifactIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical_hash": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Canonical Hash",
+          "type": "string"
+        },
+        "key": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "model-capability",
+            "product-control-mapping",
+            "runtime-wire-mapping",
+            "protocol-readiness",
+            "extension-target-allowlist",
+            "deployment-profile",
+            "model-deployment-binding",
+            "rate-card",
+            "platform-safety-policy",
+            "rollout-policy",
+            "projection-metadata"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^[1-9][0-9]*$",
+          "title": "Revision",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "key",
+        "revision",
+        "canonical_hash"
+      ],
+      "title": "ArtifactIdentity",
+      "type": "object"
+    },
+    "ExactRef": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_hash": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Expected Hash",
+          "type": "string"
+        },
+        "key": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "model-capability",
+            "product-control-mapping",
+            "runtime-wire-mapping",
+            "protocol-readiness",
+            "extension-target-allowlist",
+            "deployment-profile",
+            "model-deployment-binding",
+            "rate-card",
+            "platform-safety-policy",
+            "rollout-policy",
+            "projection-metadata"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^[1-9][0-9]*$",
+          "title": "Revision",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "key",
+        "revision",
+        "expected_hash"
+      ],
+      "title": "ExactRef",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "capability_ref": {
+      "$ref": "#/$defs/ExactRef"
+    },
+    "deployment_ref": {
+      "$ref": "#/$defs/ExactRef"
+    },
+    "identity": {
+      "$ref": "#/$defs/ArtifactIdentity"
+    },
+    "model_key": {
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "title": "Model Key",
+      "type": "string"
+    },
+    "rollout_ref": {
+      "$ref": "#/$defs/ExactRef"
+    },
+    "schema_version": {
+      "const": "1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "upstream_model_id": {
+      "title": "Upstream Model Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "identity",
+    "model_key",
+    "upstream_model_id",
+    "capability_ref",
+    "deployment_ref",
+    "rollout_ref"
+  ],
+  "title": "ModelDeploymentBinding",
+  "type": "object"
+}

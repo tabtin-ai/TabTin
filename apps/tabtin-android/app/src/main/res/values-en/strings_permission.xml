@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="perm_read_sms">Read SMS</string>
+    <string name="perm_send_sms">Send SMS</string>
+    <string name="perm_read_contacts">Read Contacts</string>
+    <string name="perm_write_contacts">Write Contacts</string>
+    <string name="perm_read_call_log">Read Call Log</string>
+    <string name="perm_call_phone">Make Phone Calls</string>
+    <string name="perm_read_calendar">Read Calendar</string>
+    <string name="perm_write_calendar">Write Calendar</string>
+    <string name="perm_fine_location">Precise Location</string>
+    <string name="perm_coarse_location">Approximate Location</string>
+    <string name="perm_camera">Camera</string>
+    <string name="perm_record_audio">Microphone</string>
+    <string name="perm_post_notifications">Notifications</string>
+    <string name="perm_read_media_images">Read Images</string>
+    <string name="perm_read_media_video">Read Videos</string>
+    <string name="perm_read_media_audio">Read Audio</string>
+    <string name="perm_read_storage">Read Storage</string>
+    <string name="perm_write_storage">Write Storage</string>
+    <string name="perm_background_location">Background Location</string>
+    <string name="perm_bluetooth_connect">Bluetooth Connection</string>
+    <string name="perm_bluetooth_scan">Bluetooth Scanning</string>
+    <string name="perm_nearby_wifi">Nearby Wi-Fi Devices</string>
+
+    <string name="perm_required_template">The \"%s\" permission is required. Please grant it in the TabTin app settings.</string>
+</resources>

@@ -1,0 +1,12 @@
+{
+  "identity": {
+    "canonical_hash": "sha256:0300f15676466a9dd146bdb9bb29201e8cda5bd9c19f5ae21edce4381307aff6",
+    "key": "doubao-draft-contract-evidence",
+    "kind": "projection-metadata",
+    "revision": "1"
+  },
+  "projected_at": "2026-08-06T00:00:00Z",
+  "projector_version": "pr5-draft-authoring-1",
+  "schema_version": "1",
+  "source_refs": []
+}

@@ -1,0 +1,82 @@
+{
+  "id": "tabtin-demo-app",
+  "name": "Simple Todo (Demo)",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "GitHub Issue 管理演示 App — 验证 marketplace 零主仓改动接入模式（N-6 样板，不进生产）",
+  "icon": "check-circle",
+  "distribution": "marketplace",
+  "installScope": "device",
+  "surface": "local",
+  "executionTarget": "cli",
+  "uiRuntime": "none",
+  "agentRuntime": "clientBridge",
+  "runtimeBindings": {
+    "toolProvider": "cli:tabtin-demo-app",
+    "uiProvider": null,
+    "skillsProvider": null
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "integration",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": false,
+    "isDefaultEnabled": false,
+    "order": 99
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "platforms": ["darwin", "win32", "linux"],
+      "capabilities": ["cli", "agentTools"]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": ["cli", "agentTools"],
+      "note": "CLI-only demo, no Web UI"
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": [],
+      "note": "Demo App 不支持移动端"
+    }
+  },
+  "embeddedWeb": null,
+  "cli": {
+    "binary": "tabtin-demo-app",
+    "version": "0.1.0",
+    "checksums": {}
+  },
+  "cliGrammar": {
+    "rules": [
+      {
+        "pattern": "tabtin-demo-issue.create",
+        "risk_level": "review",
+        "reason": "创建 GitHub Issue 属于写入操作"
+      },
+      {
+        "pattern": "tabtin-demo-issue.list",
+        "risk_level": "safe",
+        "reason": "列出 GitHub Issue 为只读查询"
+      },
+      {
+        "pattern": "tabtin-demo-issue.get",
+        "risk_level": "safe",
+        "reason": "查看单个 GitHub Issue 为只读查询"
+      },
+      {
+        "pattern": "tabtin-demo-issue.close",
+        "risk_level": "review",
+        "reason": "关闭 GitHub Issue 属于状态变更"
+      }
+    ]
+  },
+  "skills": null
+}

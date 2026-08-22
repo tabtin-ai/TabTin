@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "groups": [
+    {
+      "id": "create",
+      "label": "创建自动化任务",
+      "order": 1
+    },
+    {
+      "id": "inspect",
+      "label": "查看与执行记录",
+      "order": 2
+    },
+    {
+      "id": "control",
+      "label": "启停与触发",
+      "order": 3
+    },
+    {
+      "id": "verify",
+      "label": "试运行与删除",
+      "order": 4
+    }
+  ],
+  "commands": [
+    {
+      "name": "tracker new",
+      "short": "创建自动化任务",
+      "long": "创建一个自动化任务。\n\n用 --schedule 指定 5 档预设之一（manual/hourly/daily/weekdays/weekly），\n配合 --at HH:MM 指定时刻。CLI 内部翻译为 cron 表达式，避免暴露 cron 语法。\n未来只跑一次的任务用 --once-at；可传 ISO 8601，也可传“明天上午十点”这类\n今天/明天/后天相对时间。\n\n默认走纯 Agent 模式：只要传 --instructions，Agent 会在运行时自助选择 Skill。\n只有明确要固定某个 Skill 方法论时才传 --skill。\n\n执行现场：服务端要求 body.workspace_id。CLI 会把全局 --workspace-id /\n当前 profile 的 Workspace 写入创建请求体；未配置时在本地直接报错。",
+      "risk": "write",
+      "group": "create",
+      "group_label": "创建自动化任务"
+    },
+    {
+      "name": "tracker list",
+      "short": "列出自动化任务",
+      "long": "",
+      "group": "inspect",
+      "group_label": "查看与执行记录"
+    },
+    {
+      "name": "tracker run-show",
+      "short": "查看单次执行详情",
+      "long": "",
+      "group": "inspect",
+      "group_label": "查看与执行记录"
+    },
+    {
+      "name": "tracker runs",
+      "short": "查看自动化任务历次执行",
+      "long": "",
+      "group": "inspect",
+      "group_label": "查看与执行记录"
+    },
+    {
+      "name": "tracker show",
+      "short": "查看自动化任务详情",
+      "long": "",
+      "group": "inspect",
+      "group_label": "查看与执行记录"
+    },
+    {
+      "name": "tracker activate",
+      "short": "启用自动化任务（draft → active）",
+      "long": "启用 draft 状态的自动化任务，使其进入调度。无 skill_key 时按纯 Agent 模式执行。\n\n如果任务已是 active/paused，请用 `resume` 而非 `activate`。",
+      "risk": "write",
+      "group": "control",
+      "group_label": "启停与触发"
+    },
+    {
+      "name": "tracker cancel-run",
+      "short": "取消进行中的本次执行",
+      "long": "",
+      "risk": "write",
+      "group": "control",
+      "group_label": "启停与触发"
+    },
+    {
+      "name": "tracker pause",
+      "short": "暂停自动化任务",
+      "long": "",
+      "risk": "write",
+      "group": "control",
+      "group_label": "启停与触发"
+    },
+    {
+      "name": "tracker resume",
+      "short": "恢复自动化任务",
+      "long": "",
+      "risk": "write",
+      "group": "control",
+      "group_label": "启停与触发"
+    },
+    {
+      "name": "tracker trigger",
+      "short": "立即执行自动化任务（创建一次 Run）",
+      "long": "",
+      "risk": "write",
+      "group": "control",
+      "group_label": "启停与触发"
+    },
+    {
+      "name": "tracker delete",
+      "short": "删除自动化任务",
+      "long": "",
+      "risk": "high-risk-write",
+      "group": "verify",
+      "group_label": "试运行与删除"
+    },
+    {
+      "name": "tracker dry-run",
+      "short": "试运行：回放近 N 个事件评估触发条件（不真执行）",
+      "long": "",
+      "group": "verify",
+      "group_label": "试运行与删除"
+    }
+  ],
+  "featured": [
+    {
+      "key": "create",
+      "commands": [
+        "tracker new"
+      ],
+      "title": "建一个自动化任务",
+      "description": "说清多久跑一次、做什么，让 AI 帮你建好",
+      "prompt": "帮我创建一个自动化任务。"
+    },
+    {
+      "key": "inspect",
+      "commands": [
+        "tracker list",
+        "tracker runs"
+      ],
+      "title": "看任务跑得怎么样",
+      "description": "汇总当前自动化任务和它们的执行记录",
+      "prompt": "帮我看看当前 Space 下都有哪些自动化任务、各自跑得怎么样。先用 `tabtin tracker list` 列出来，挑出最近有执行的，再用 `tabtin tracker runs` 看它们的执行记录，把状态和结果整理成一份简报给我。"
+    },
+    {
+      "key": "control",
+      "commands": [
+        "tracker pause",
+        "tracker resume"
+      ],
+      "title": "暂停 / 恢复某个任务",
+      "description": "先确认是哪一个，再启停它",
+      "prompt": "帮我暂停或恢复一个自动化任务。先用 `tabtin tracker list` 列出来让我确认是哪一个，再用 `tabtin tracker pause` 暂停或 `tabtin tracker resume` 恢复，操作完告诉我它现在的状态。"
+    },
+    {
+      "key": "verify",
+      "commands": [
+        "tracker dry-run"
+      ],
+      "title": "试运行验证触发",
+      "description": "回放最近事件看触发条件是否命中（不真执行）",
+      "prompt": "帮我试运行一个事件触发型的自动化任务，确认它的触发条件是否符合预期（不要真的执行 Skill）。先用 `tabtin tracker list` 确认是哪一个，再用 `tabtin tracker dry-run` 回放最近几个事件，把命中情况讲给我听。"
+    }
+  ]
+}

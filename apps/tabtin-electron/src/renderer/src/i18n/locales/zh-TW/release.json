@@ -1,0 +1,58 @@
+{
+  "outbox": {
+    "banner": {
+      "title": "Outbox 已上線",
+      "body": "非同步級聯重算引擎已啟用，跨表 lookup/rollup/formula 寫入將透過 Outbox 佇列非同步執行，大批量更新效能顯著提升。"
+    },
+    "rollback": {
+      "title": "Outbox 已緊急回退",
+      "body": "Outbox 非同步級聯引擎已暫時關閉，所有級聯重算恢復為同步模式。如有延遲請刷新頁面。"
+    },
+    "status": {
+      "healthy": "Outbox 運作正常",
+      "degraded": "Outbox 處於降級模式",
+      "paused": "Outbox 已暫停",
+      "disabled": "Outbox 已關閉"
+    }
+  },
+  "saga": {
+    "in_progress": "批次操作執行中…",
+    "failed": "批次操作失敗，已自動回滾",
+    "completed": "批量操作已完成",
+    "partial": "批量操作部分完成（{{success}}/{{total}}）",
+    "timeout": "批次操作逾時，請檢查結果後重試"
+  },
+  "a3": {
+    "disabled": "批次依條件更新（A3）已關閉",
+    "enabled": "批次依條件更新（A3）已啟用"
+  },
+  "c1": {
+    "restore_disabled": "欄位撤銷復原已被運維暫時關閉，請透過「版本歷史」還原"
+  },
+  "grayscale": {
+    "enrolled": "目前組織已加入灰階：{{feature}}",
+    "unenrolled": "目前組織已退出灰階：{{feature}}"
+  },
+  "incident": {
+    "title": "[{{severity}}] {{service}} 服務異常",
+    "body": "影響範圍：{{scope}}。開始時間：{{startTime}}。我們正在緊急處理。",
+    "update": "[進展] {{service}}：{{message}}",
+    "resolution": "事故已解決。持續時間：{{duration}}。根因：{{rootCause}}。後續改進措施已安排。"
+  },
+  "maintenance": {
+    "start": "系統維護將於 {{time}} 開始，預計持續 {{duration}}，屆時部分功能無法使用。",
+    "end": "系統維護已完成，所有功能恢復正常。"
+  },
+  "changelog": {
+    "title": "更新日誌",
+    "version": "版本 {{version}}",
+    "newFeatures": "新功能",
+    "improvements": "優化改進",
+    "bugFixes": "問題修復"
+  },
+  "notification": {
+    "dismiss": "知道了",
+    "learnMore": "了解詳情",
+    "doNotShowAgain": "不再提示"
+  }
+}

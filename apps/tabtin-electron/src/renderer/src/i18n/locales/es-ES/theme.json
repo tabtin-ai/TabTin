@@ -1,0 +1,35 @@
+{
+  "theme": {
+    "toggle": "Alternar tema",
+    "light": "Luz",
+    "dark": "oscuro",
+    "system": "Sistema"
+  },
+  "colorScheme": {
+    "toggle": "Cambiar esquema de color",
+    "options": {
+      "orange": "Naranja vivo",
+      "teal": "Verde azulado intenso",
+      "crimson": "carmesí",
+      "slate": "Gris empresarial",
+      "emerald": "Esmeralda",
+      "blue": "Azul de negocios",
+      "carbon": "Negro de carbón",
+      "rose": "rosa",
+      "violet": "violeta",
+      "sky": "azul cielo"
+    },
+    "descriptions": {
+      "orange": "Cálido y enérgico",
+      "teal": "Profesional y estable",
+      "crimson": "Audaz y receptivo",
+      "slate": "Neutral y formal",
+      "emerald": "Fresco y colaborativo",
+      "blue": "Clásico y empresarial",
+      "carbon": "Mínimo y enfocado",
+      "rose": "Vibrante y creativo",
+      "violet": "Tranquilo y elegante",
+      "sky": "Puro y refrescante"
+    }
+  }
+}

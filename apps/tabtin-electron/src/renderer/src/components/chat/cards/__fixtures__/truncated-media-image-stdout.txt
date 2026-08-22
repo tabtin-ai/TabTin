@@ -1,0 +1,20 @@
+      "size": "1024*1024"
+    },
+    "prompt": "A red apple product photography, professional commercial shot, single glossy red apple on a clean minimal surface, soft studio lighting, subtle reflections, high-end advertising style, 8K, photorealistic",
+    "provider_task_id": "96bf8798-8691-4c8b-b618-e9fda0fe0571",
+    "result_metadata": {
+      "effective_size": "1024x1024",
+      "request_id": "96bf8798-8691-4c8b-b618-e9fda0fe0571",
+      "result_urls": [
+        "https://ark-acg-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-5-0-pro/2b46fce5c2d5d01d5709b43a28b8cefb2a2a9c845661171487120/Image/2101514875/021784171166548c9a2a2bfec8b82a34b9075d10d5d2c5ecf64b2.jpeg?X-Tos-Algorithm=TOS4-HMAC-SHA256\u0026X-Tos-Credential=AKLTYWJkZTExNjA1ZDUyNDc3YzhjNTM5OGIyNjBhNDcyOTQ%2F20260716%2Fcn-beijing%2Ftos%2Frequest\u0026X-Tos-Date=20260716T030706Z\u0026X-Tos-Expires=86400\u0026X-Tos-Signature=b1fb0b6d291c1688cb6b534ffac3562ca892d2563b8941a2e582d203a138dd61\u0026X-Tos-SignedHeaders=host"
+      ]
+    },
+    "result_urls": [
+      "https://ark-acg-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-5-0-pro/2b46fce5c2d5d01d5709b43a28b8cefb2a2a9c845661171487120/Image/2101514875/021784171166548c9a2a2bfec8b82a34b9075d10d5d2c5ecf64b2.jpeg?X-Tos-Algorithm=TOS4-HMAC-SHA256\u0026X-Tos-Credential=AKLTYWJkZTExNjA1ZDUyNDc3YzhjNTM5OGIyNjBhNDcyOTQ%2F20260716%2Fcn-beijing%2Ftos%2Frequest\u0026X-Tos-Date=20260716T030706Z\u0026X-Tos-Expires=86400\u0026X-Tos-Signature=b1fb0b6d291c1688cb6b534ffac3562ca892d2563b8941a2e582d203a138dd61\u0026X-Tos-SignedHeaders=host"
+    ],
+    "status": "succeeded",
+    "stored_urls": [],
+    "task_id": "37a5f752-f3b5-4743-8ddf-d390e14548d0",
+    "task_type": "text2image"
+  }
+}

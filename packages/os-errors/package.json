@@ -1,0 +1,31 @@
+{
+  "name": "@tabtin/os-errors",
+  "version": "0.1.0",
+  "description": "TabTin OS access error abstraction — classifies platform-specific errno/error codes (TCC / NTFS ACL / AV / cloud placeholder) into structured Agent-consumable errors with localized guidance",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "5.7.2",
+    "vitest": "^1.6.1"
+  }
+}

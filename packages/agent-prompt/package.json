@@ -1,0 +1,36 @@
+{
+  "name": "@tabtin/agent-prompt",
+  "version": "0.1.0",
+  "description": "System Prompt SSoT — Markdown source + codegen + buildSystemPrompt(config) for all agent hosts",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "node scripts/generate-content.mjs",
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "dump": "node scripts/dump-prompt.mjs"
+  },
+  "dependencies": {
+    "@tabtin/agent-modes": "workspace:*",
+    "@tabtin/agent-runtime": "workspace:*",
+    "@tabtin/prompt-contract": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "5.7.2",
+    "vitest": "^3.1.1"
+  }
+}

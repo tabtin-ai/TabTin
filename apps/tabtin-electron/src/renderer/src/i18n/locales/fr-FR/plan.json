@@ -1,0 +1,27 @@
+{
+  "proposal": {
+    "headerTitle": "Ébauche de plan",
+    "summaryLabel": "Résumé",
+    "todosLabel": "Tous ({{count}})",
+    "todosEmpty": "Aucune tâche",
+    "expandButton": "Afficher le plan complet",
+    "collapseButton": "Réduire",
+    "openDocButton": "Ouvrir le document",
+    "executeButton": "Exécuter",
+    "executingButton": "Exécution…",
+    "executedButton": "Exécuté",
+    "todoStatus": {
+      "pending": "En attente",
+      "in_progress": "En cours",
+      "completed": "Terminé",
+      "cancelled": "Annulé",
+      "unknown": "Inconnu"
+    },
+    "executeSuccess": "J'ai commencé à exécuter \"{{name}}\"",
+    "executeSuccessNoName": "J'ai commencé à exécuter ce plan",
+    "executeErrorNoSession": "Aucune session active : impossible d'exécuter le plan.",
+    "executeErrorSend": "Échec de l'envoi de l'exécution du plan : veuillez réessayer.",
+    "executeError": "Échec de l'exécution : {{message}}",
+    "executeErrorUnknown": "Erreur inconnue"
+  }
+}

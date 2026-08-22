@@ -1,0 +1,11 @@
+{
+  "version": "3.12.13",
+  "archives": {
+    "darwin-arm64": "tabtin-python-runtime.tar.gz",
+    "darwin-x64": "tabtin-python-runtime-darwin-x64.tar.gz",
+    "win32-x64": "tabtin-python-runtime-win32-x64.tar.gz",
+    "win32-arm64": "tabtin-python-runtime-win32-arm64.tar.gz",
+    "linux-x64": "tabtin-python-runtime-linux-x64.tar.gz",
+    "linux-arm64": "tabtin-python-runtime-linux-arm64.tar.gz"
+  }
+}

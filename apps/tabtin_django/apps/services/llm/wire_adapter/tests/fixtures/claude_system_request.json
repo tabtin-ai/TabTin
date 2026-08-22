@@ -1,0 +1,28 @@
+{
+  "model": "claude-3-7-sonnet-20250219",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant."
+    },
+    {
+      "role": "user",
+      "content": "Hello"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_weather",
+        "description": "Get weather",
+        "parameters": {
+          "type": "object",
+          "properties": {"city": {"type": "string"}}
+        }
+      }
+    }
+  ],
+  "tool_choice": "required"
+}

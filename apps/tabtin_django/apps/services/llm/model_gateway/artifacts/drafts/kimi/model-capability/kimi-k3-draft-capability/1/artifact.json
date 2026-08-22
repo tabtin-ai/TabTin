@@ -1,0 +1,173 @@
+{
+  "capabilities": [
+    {
+      "budget": null,
+      "conditions": [],
+      "default_value": null,
+      "deployment_tags": [],
+      "eligible_rate_card_refs": [],
+      "evidence": [
+        {
+          "locator": "OpenAI-compatible stream_supported legacy configuration",
+          "source": "migrations 0051 and 0053"
+        }
+      ],
+      "factual_values": [],
+      "fallback_policy": null,
+      "family": "streaming",
+      "mime_types": [],
+      "name": "streaming",
+      "native_state": null,
+      "preprocessing_ref": null,
+      "preprocessing_state": null,
+      "profile_capability_refs": [],
+      "retention_ref": null,
+      "runtime_mapping_ref": null,
+      "schema_version": "1",
+      "selection_refs": [],
+      "shape": null,
+      "state": "supported",
+      "transports": [],
+      "user_controllable": false
+    },
+    {
+      "budget": null,
+      "conditions": [],
+      "default_value": null,
+      "deployment_tags": [],
+      "eligible_rate_card_refs": [],
+      "evidence": [
+        {
+          "locator": "legacy supports_function_calling configuration",
+          "source": "migrations 0051 and 0053"
+        }
+      ],
+      "factual_values": [],
+      "fallback_policy": null,
+      "family": "tools",
+      "mime_types": [],
+      "name": "tool-calling",
+      "native_state": null,
+      "preprocessing_ref": null,
+      "preprocessing_state": null,
+      "profile_capability_refs": [],
+      "retention_ref": null,
+      "runtime_mapping_ref": null,
+      "schema_version": "1",
+      "selection_refs": [],
+      "shape": null,
+      "state": "supported",
+      "transports": [],
+      "user_controllable": false
+    },
+    {
+      "budget": null,
+      "conditions": [
+        {
+          "children": [],
+          "field": "request.input_tokens",
+          "operator": "present",
+          "value": null
+        }
+      ],
+      "default_value": null,
+      "deployment_tags": [],
+      "eligible_rate_card_refs": [],
+      "evidence": [
+        {
+          "locator": "synthetic usage fixture; no upstream probe",
+          "source": "PR0 Golden"
+        }
+      ],
+      "factual_values": [],
+      "fallback_policy": null,
+      "family": "usage",
+      "mime_types": [],
+      "name": "usage",
+      "native_state": null,
+      "preprocessing_ref": null,
+      "preprocessing_state": null,
+      "profile_capability_refs": [],
+      "retention_ref": null,
+      "runtime_mapping_ref": null,
+      "schema_version": "1",
+      "selection_refs": [],
+      "shape": null,
+      "state": "conditional",
+      "transports": [],
+      "user_controllable": false
+    },
+    {
+      "budget": null,
+      "conditions": [],
+      "default_value": "max",
+      "deployment_tags": [],
+      "eligible_rate_card_refs": [],
+      "evidence": [
+        {
+          "locator": "always-thinking reasoning_effort legacy profile",
+          "source": "migrations 0051 and 0053"
+        }
+      ],
+      "factual_values": [
+        {
+          "evidence": [
+            {
+              "locator": "legacy runtime thinking profile",
+              "source": "migrations 0051 and 0053"
+            }
+          ],
+          "key": "low",
+          "order": 0
+        },
+        {
+          "evidence": [
+            {
+              "locator": "legacy runtime thinking profile",
+              "source": "migrations 0051 and 0053"
+            }
+          ],
+          "key": "high",
+          "order": 1
+        },
+        {
+          "evidence": [
+            {
+              "locator": "legacy runtime thinking profile",
+              "source": "migrations 0051 and 0053"
+            }
+          ],
+          "key": "max",
+          "order": 2
+        }
+      ],
+      "fallback_policy": null,
+      "family": "thinking",
+      "mime_types": [],
+      "name": "thinking",
+      "native_state": null,
+      "preprocessing_ref": null,
+      "preprocessing_state": null,
+      "profile_capability_refs": [],
+      "retention_ref": null,
+      "runtime_mapping_ref": null,
+      "schema_version": "1",
+      "selection_refs": [],
+      "shape": "effort_ladder",
+      "state": "forced",
+      "transports": [],
+      "user_controllable": false
+    }
+  ],
+  "context_window": 1048576,
+  "identity": {
+    "canonical_hash": "sha256:780bdbaa41cd0540b298d4e81b4302c1fdb39cb4fb2054d1319d6bb11f842803",
+    "key": "kimi-k3-draft-capability",
+    "kind": "model-capability",
+    "revision": "1"
+  },
+  "max_output_tokens": 131072,
+  "modality": "multimodal",
+  "model_family": "kimi-k3",
+  "schema_version": "1"
+}

@@ -1,0 +1,279 @@
+{
+  "tools": [
+    {
+      "name": "read_file",
+      "description": "按绝对路径或相对工作目录根的路径读本地文件。源代码 / 纯文本（txt、md、json、csv、yaml、ts、py 等）返回带行号的文本内容。大文本文件支持可选的 offset 和 limit。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "文件路径（绝对路径或相对工作目录根的路径；不要加 workspace/ 前缀）。"
+          },
+          "offset": {
+            "type": "number",
+            "description": "起始行（从 1 开始；负数 = 从末尾倒数）。"
+          },
+          "limit": {
+            "type": "number",
+            "description": "最多读多少行。"
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "appId": "tabcode",
+      "executionTarget": "frontend",
+      "riskLevel": "safe",
+      "tags": [
+        "code",
+        "file",
+        "readonly"
+      ],
+      "headless": true,
+      "optional": false
+    },
+    {
+      "name": "glob_search",
+      "description": "在工作目录内按 glob 模式搜文件。按修改时间排序返回匹配的文件路径。按文件名模式找文件时用本工具。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "glob_pattern": {
+            "type": "string",
+            "description": "glob 模式。"
+          },
+          "target_directory": {
+            "type": "string",
+            "description": "搜索目录。"
+          },
+          "include_ignored": {
+            "type": "boolean",
+            "description": "包含被 .gitignore 忽略的文件（rg --no-ignore）。"
+          }
+        },
+        "required": [
+          "glob_pattern"
+        ]
+      },
+      "appId": "tabcode",
+      "executionTarget": "frontend",
+      "riskLevel": "safe",
+      "tags": [
+        "code",
+        "search"
+      ],
+      "headless": true,
+      "optional": false
+    },
+    {
+      "name": "grep_search",
+      "description": "用 ripgrep 搜文件内容，支持完整 regex 语法。可用 glob 参数过滤文件或限定子目录。输出模式：「content」（匹配行）/「files_with_matches」（仅路径）/「count」（匹配次数）。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "pattern": {
+            "type": "string",
+            "description": "要搜索的 regex 模式。"
+          },
+          "path": {
+            "type": "string",
+            "description": "搜索路径（文件或目录）。"
+          },
+          "glob": {
+            "type": "string",
+            "description": "文件过滤 glob，譬如 `*.ts` / `*.{ts,tsx}`。"
+          },
+          "type": {
+            "type": "string",
+            "description": "文件类型过滤（rg --type），譬如 `js` / `py` / `rust`。"
+          },
+          "case_insensitive": {
+            "type": "boolean",
+            "description": "大小写不敏感搜索（rg -i）。",
+            "default": false
+          },
+          "context_lines": {
+            "type": "number",
+            "description": "每个匹配前后的上下文行数（rg -C）。"
+          },
+          "after_context": {
+            "type": "number",
+            "description": "每个匹配后的行数（rg -A）。"
+          },
+          "before_context": {
+            "type": "number",
+            "description": "每个匹配前的行数（rg -B）。"
+          },
+          "multiline": {
+            "type": "boolean",
+            "description": "启用多行匹配（rg -U，让 `.` 也匹配换行）。",
+            "default": false
+          },
+          "output_mode": {
+            "type": "string",
+            "enum": [
+              "content",
+              "files_with_matches",
+              "count"
+            ],
+            "description": "输出模式。默认 `files_with_matches`，只返回命中文件路径；`content` 返回文件路径、行号和命中行内容；`count` 只返回每个文件的匹配次数。需要查看命中行文本时必须传 `content`。"
+          },
+          "max_results": {
+            "type": "number",
+            "description": "每个文件最多返回多少匹配。"
+          }
+        },
+        "required": [
+          "pattern"
+        ],
+        "additionalProperties": false
+      },
+      "appId": "tabcode",
+      "executionTarget": "frontend",
+      "riskLevel": "safe",
+      "tags": [
+        "code",
+        "search"
+      ],
+      "headless": true,
+      "optional": false
+    },
+    {
+      "name": "execute_in_terminal",
+      "description": "Execute a command in a persistent PTY shell session. State (cwd, env) persists across calls. Supports background mode via block_until_ms and auto_respond for interactive prompts. When block_until_ms=0, the command runs in background: returns immediately with backgrounded=true, output=\"\" and exitCode=null. Use read_terminal_output to poll for actual output and completion status. IMPORTANT: \"success\" means the command was submitted to the terminal, NOT that it exited with code 0. Check \"command_succeeded\" (true/false/null) to know if the command itself succeeded (exit_code==0). command_succeeded is null when the command is still running in background. Result includes timed_out: true if the command exceeded block_until_ms. When timed_out + backgrounded=true, the command continues in background (use read_terminal_output to poll). When timed_out + backgrounded=false, the command was killed (kill_on_timeout was true).",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "command": {
+            "type": "string",
+            "description": "Shell command to execute"
+          },
+          "session_id": {
+            "type": "string",
+            "description": "Reuse an existing session. Omit to auto-create a new agent session."
+          },
+          "block_until_ms": {
+            "type": "number",
+            "description": "Max wait time in ms before moving to background (default 30000). Set to 0 for immediate background.",
+            "default": 30000
+          },
+          "working_directory": {
+            "type": "string",
+            "description": "Override working directory for this command"
+          },
+          "auto_respond": {
+            "type": "array",
+            "description": "Auto-respond rules for interactive prompts. Each rule matches output (case-insensitive substring) and sends a response. Rules are consumed in order, each matching once.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string",
+                  "description": "Substring to match in terminal output (case-insensitive)"
+                },
+                "response": {
+                  "type": "string",
+                  "description": "Data to send when pattern matches. Use \\n for Enter."
+                }
+              },
+              "required": [
+                "pattern",
+                "response"
+              ]
+            }
+          },
+          "kill_on_timeout": {
+            "type": "boolean",
+            "description": "Whether to send Ctrl+C to kill the command when it exceeds block_until_ms. Defaults to true. Set to false to let long-running commands continue in background without interruption.",
+            "default": true
+          }
+        },
+        "required": [
+          "command"
+        ]
+      },
+      "appId": "core",
+      "executionTarget": "frontend",
+      "riskLevel": "review",
+      "headless": true,
+      "optional": false,
+      "llm_facing": false
+    },
+    {
+      "name": "read_terminal_output",
+      "description": "Read recent output from a PTY terminal session. Returns output text plus metadata: cwd, is_running, last_exit_code (of last completed command), has_pending_command (whether a command is still in progress). Use to poll background commands.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "description": "PTY session ID to read output from. Falls back to thread context when omitted."
+          },
+          "tail": {
+            "type": "number",
+            "description": "Number of recent output chunks to retrieve (optional)"
+          }
+        },
+        "required": []
+      },
+      "appId": "core",
+      "executionTarget": "frontend",
+      "riskLevel": "review",
+      "headless": true,
+      "optional": false,
+      "llm_facing": false
+    },
+    {
+      "name": "list_terminal_sessions",
+      "description": "List all active PTY terminal sessions with their IDs, PIDs, current working directories, and running status.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "appId": "core",
+      "executionTarget": "frontend",
+      "riskLevel": "review",
+      "headless": true,
+      "optional": false,
+      "llm_facing": false
+    },
+    {
+      "name": "write_to_terminal",
+      "description": "Write raw data to a PTY session. Use for responding to interactive prompts (y/n), sending Ctrl+C (\\x03), or providing stdin input.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "description": "PTY session ID to write to. Falls back to thread context when omitted."
+          },
+          "data": {
+            "type": "string",
+            "description": "Data to write. Use \\x03 for Ctrl+C, \\n for Enter."
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "appId": "core",
+      "executionTarget": "frontend",
+      "riskLevel": "review",
+      "headless": true,
+      "optional": false,
+      "llm_facing": false
+    }
+  ],
+  "toolCapabilityMap": {
+    "read_file": "code",
+    "glob_search": "code_search",
+    "grep_search": "code_search",
+    "execute_in_terminal": "execution",
+    "read_terminal_output": "execution",
+    "list_terminal_sessions": "execution",
+    "write_to_terminal": "execution"
+  }
+}

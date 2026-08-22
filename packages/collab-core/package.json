@@ -1,0 +1,47 @@
+{
+  "name": "@tabtin/collab-core",
+  "version": "0.1.0",
+  "description": "TabTin 实时协作底座 — Provider 状态机、重连、IndexedDB、Stateless 事件",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@hocuspocus/provider": "^2.15.2",
+    "@tabtin/config": "workspace:*",
+    "@tabtin/shared": "workspace:*",
+    "react": ">=18",
+    "y-indexeddb": "^9.0.12",
+    "yjs": "^13.6.29"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/react-hooks": "8.0.1",
+    "@types/node": "25.5.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "jsdom": "29.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "4.1.0"
+  },
+  "files": [
+    "dist"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "actions.create": "새 사이트",
+  "actions.publish": "게시",
+  "actions.copyUrl": "URL 복사",
+  "actions.urlCopied": "URL이 복사되었습니다",
+  "actions.editCode": "코드 편집",
+  "actions.refresh": "새로고침",
+  "actions.rollback": "롤백",
+  "actions.download": "소스 다운로드",
+  "status.draft": "초안",
+  "status.published": "게시됨",
+  "status.archived": "보관됨",
+  "stats.views": "{{count}} 조회수",
+  "preview.empty": "아직 미리보기가 없습니다. 사이트를 보려면 게시하세요.",
+  "preview.desktop": "데스크탑 미리보기",
+  "preview.mobile": "모바일 미리보기",
+  "sidebar.info": "사이트 정보",
+  "sidebar.url": "URL",
+  "sidebar.framework": "프레임워크",
+  "sidebar.visibility": "가시성",
+  "sidebar.public": "공개",
+  "sidebar.private": "비공개",
+  "sidebar.versions": "버전 기록",
+  "sidebar.noVersions": "아직 게시되지 않음",
+  "version.current": "현재",
+  "error.siteNotFound": "사이트를 찾을 수 없습니다",
+  "error.publishFailed": "게시 실패",
+  "error.noDistUrl": "먼저 아티팩트를 빌드하고 업로드하세요.",
+  "error.noDistUrlHint": "TabCode에서 빌드를 실행하거나 CLI를 사용하세요: tabtin site build",
+  "actions.publishSuccess": "성공적으로 게시되었습니다",
+  "publish.dialogTitle": "사이트 게시",
+  "publish.messageLabel": "버전 참고",
+  "publish.messagePlaceholder": "이번 릴리스의 변경사항 설명",
+  "empty.noSites": "아직 사이트가 없습니다. 첫 번째 경량 앱을 만들어보세요.",
+  "home": {
+    "assetBrowser": {
+      "newTabsite": "새 사이트",
+      "tabsiteEmpty": "아직 사이트가 없습니다.",
+      "tabsiteUnavailable": "TabSite를 사용할 수 없음",
+      "tabsite": "사이트"
+    }
+  },
+  "label": {
+    "untitled": "제목 없는 사이트",
+    "untitledSite": "제목 없는 사이트"
+  },
+  "dialog": {
+    "createTitle": "새 사이트",
+    "siteName": "사이트 이름",
+    "siteNamePlaceholder": "사이트 이름을 입력하세요",
+    "selectTemplate": "템플릿 선택",
+    "cancel": "취소",
+    "create": "만들기"
+  },
+  "guide": {
+    "initTitle": "사이트 프로젝트가 초기화되지 않았습니다.",
+    "initDescription": "TabCode에서 편집을 시작하려면 템플릿 프로젝트를 초기화하세요.",
+    "initButton": "프로젝트 초기화",
+    "linkButton": "기존 디렉터리 연결",
+    "initSuccess": "프로젝트가 성공적으로 초기화되었습니다.",
+    "initFailed": "초기화 실패",
+    "linkSuccess": "디렉터리가 연결됨",
+    "linkFailed": "링크 실패",
+    "linkWarning": "디렉터리에 package.json이 없습니다.",
+    "linkWarningHint": "빌드가 실패할 수 있습니다. 이것이 올바른 프로젝트 디렉토리인지 확인하십시오."
+  },
+  "template": {
+    "blank": "빈 사이트",
+    "blankDesc": "React + Vite + Tailwind, 처음부터 시작하세요",
+    "dashboard": "대시보드",
+    "dashboardDesc": "TabData로 구동되는 데이터 시각화 패널"
+  }
+}

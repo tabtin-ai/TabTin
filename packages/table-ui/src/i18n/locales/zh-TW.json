@@ -1,0 +1,29 @@
+{
+  "group": {
+    "ungrouped": "未分組",
+    "unclassified": "未歸類",
+    "loadedOfTotal": "已載入 {{loaded}} / 共 {{total}}"
+  },
+  "attachments": {
+    "missingRequired": "必填附件缺失"
+  },
+  "record": {
+    "createMissingTableTitle": "無法建立記錄",
+    "createMissingTableDesc": "缺少表格信息，請重新選擇表格後再試。",
+    "createFailedTitle": "創建失敗",
+    "createFailedDesc": "記錄建立失敗，請稍後重試。",
+    "createFailedFallback": "無法建立記錄，請稍後重試。",
+    "createPatchFailedTitle": "補充輸入未儲存",
+    "createPatchFailedDesc": "記錄已創建，但剛剛補充輸入的內容未能保存，請重試。",
+    "createdTitle": "已創建",
+    "createdHiddenDesc": "有 {{count}} 筆新記錄目前未顯示在此檢視中。",
+    "createdHiddenAction": "清空篩選並定位"
+  },
+  "error": {
+    "cellUpdateFailed": "單元格更新失敗，請重試"
+  },
+  "autoFill": {
+    "createdTimeHint": "此欄位由系統在建立記錄時自動填入",
+    "lastModifiedTimeHint": "此欄位由系統在每次修改記錄時自動更新"
+  }
+}

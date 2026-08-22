@@ -1,0 +1,98 @@
+{
+  "labels": {
+    "strategy": "ユーザーエージェント戦略",
+    "recommended": "おすすめ",
+    "highestRealism": "💯 最高のリアリズム: {{system}}",
+    "mobileDeviceHint": "📱 42 台以上の実デバイスからランダムに選択",
+    "desktopPoolHint": "🎲 20 以上のデスクトップ UA からランダムに選択され、Chrome バージョン追跡がサポートされています",
+    "platform": "プラットフォーム",
+    "browser": "ブラウザ",
+    "preview": "ライブプレビュー",
+    "uaPreview": "ユーザーエージェントのプレビュー",
+    "refreshRandom": "ランダムな UA を更新する",
+    "refreshOne": "別のものを選択してください",
+    "previewDesktopPool": "🎲 デスクトップ プールの例: {{platform}} + {{browser}} プールからランダムに選択",
+    "previewMobile": "📱 モバイルの例: {{device}} デバイス プールからの重み付きランダム",
+    "previewAuto": "✅ 最大限のリアリズムを得るためにシステム UA を使用する",
+    "consistencyTitle": "プラットフォームの整合性チェック",
+    "consistencyLine": "現在のシステム: {{current}} → ターゲットプラットフォーム: {{target}}",
+    "fingerprintTitle": "スマート指紋プレビュー",
+    "gpuVendor": "GPUベンダー",
+    "renderer": "レンダラー",
+    "platformInfo": "プラットフォーム情報",
+    "clientHints": "クライアントヒントヘッダーは自動適応されます",
+    "advancedSettings": "詳細設定",
+    "customPlaceholder": "モジラ/5.0 ..."
+  },
+  "mode": {
+    "auto": {
+      "label": "自動検出",
+      "description": "システム環境を使用してネイティブ GPU とクライアント ヒントのフィンガープリントを保持し、最高のリアリズムを実現します"
+    },
+    "mobile": {
+      "label": "モバイルシミュレーション",
+      "description": "実際のデバイス プロファイルを使用してモバイル デバイスをシミュレート (42 個以上のデバイス、GPU と解像度を自動調整)"
+    },
+    "desktop_pool": {
+      "label": "デスクトップ UA プール",
+      "description": "20 以上のデスクトップ UA からランダムに選択します。一貫性を保つためにデフォルトで現在のプラットフォームが使用されます。オプションのクロスプラットフォーム シミュレーションとプラットフォーム/ブラウザー フィルターも使用できます。"
+    },
+    "custom": {
+      "label": "カスタム UA",
+      "description": "特別なニーズに合わせて UA 文字列を完全にカスタマイズする"
+    }
+  },
+  "platforms": {
+    "current": "現在のプラットフォーム (ネイティブのまま)",
+    "windows": "窓",
+    "macos": "macOS",
+    "linux": "Linux"
+  },
+  "browsers": {
+    "chrome": "クロム",
+    "edge": "エッジ",
+    "firefox": "Firefox",
+    "safari": "サファリ"
+  },
+  "mobileDevices": {
+    "iphone": "iPhone（人気モデルをランダムに）",
+    "android": "Android（人気モデルはランダム）",
+    "ipad": "iPad（人気モデルをランダムに）"
+  },
+  "mobileDevicesShort": {
+    "iphone": "iPhone",
+    "android": "アンドロイド",
+    "ipad": "iPad"
+  },
+  "platformNames": {
+    "macOS": "macOS",
+    "Windows": "窓",
+    "Linux": "Linux",
+    "iOS": "iOS",
+    "iPadOS": "iPadOS",
+    "Android": "アンドロイド",
+    "Unknown": "不明"
+  },
+  "fingerprint": {
+    "mobileSummary": "📱 モバイルシミュレーション: {{device}} ({{os}} {{version}}) + {{gpu}}",
+    "androidSummary": "📱 モバイルシミュレーション: {{device}} + {{gpu}}",
+    "mac": {
+      "consistent": "✅ プラットフォームの一致: ネイティブの Apple GPU フィンガープリントを維持",
+      "cross": "⚠️ クロスプラットフォーム シミュレーション: Apple GPU フィンガープリントを使用"
+    },
+    "windows": {
+      "macToWindows": "⚠️ クロスプラットフォーム シミュレーション: Mac → Windows、GPU は NVIDIA として偽装されます (ランタイム インジェクション)",
+      "consistent": "✅ プラットフォームの一致: ネイティブ NVIDIA/AMD/Intel GPU フィンガープリントを維持",
+      "cross": "⚠️ クロスプラットフォーム シミュレーション: NVIDIA GPU フィンガープリントを使用"
+    },
+    "linux": {
+      "consistent": "✅ プラットフォームの一致: ネイティブ GPU フィンガープリントを維持",
+      "cross": "⚠️ クロスプラットフォーム シミュレーション: Intel GPU フィンガープリントを使用"
+    },
+    "unknown": "⚠️ 認識されない UA、デフォルトの Intel GPU フィンガープリントを使用"
+  },
+  "consistency": {
+    "best": "✅ 最高のセットアップ!プラットフォームの一貫性を維持すると、ネイティブ GPU フィンガープリントが可能になりますが、これは検出が最も困難です",
+    "cross": "⚠️ クロスプラットフォーム シミュレーションでは GPU フィンガープリントが変更されます。プラットフォームの一貫性を保つために「スマート モード」を検討する"
+  }
+}

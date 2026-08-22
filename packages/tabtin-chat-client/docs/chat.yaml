@@ -1,0 +1,72 @@
+openapi: 3.0.3
+info:
+  title: Tabtin Chat Agent API (WS-first)
+  description: |
+    # Tabtin Chat Agent API 文档（WS-first）
+
+    > **版本**: v2.1
+    > **职责**: 会话管理 + WS 流式输出 + 前端动作
+    > **最后更新**: 2026-01-27
+
+    ---
+
+    ## 架构概览
+
+    - **WS**: `/ws/v1/gateway`
+      - `langgraph.stream.{thread_id}`：流式输出
+      - `langgraph.action.{thread_id}`：前端动作请求
+    - **HTTP**: 会话/消息/模型管理
+
+    ## WS 连接示例
+    ```json
+    {
+      "v": 1,
+      "type": "auth",
+      "request_id": "req_auth",
+      "ts": 1730000000,
+      "device_id": "electron-main",
+      "role": "electron",
+      "payload": {
+        "access_token": "jwt_xxx",
+        "organization_id": "wt_xxx",
+        "capabilities": ["langgraph.stream", "langgraph.action"]
+      }
+    }
+    ```
+
+    ## 相关文档
+    - `apps/tabtin_django/docs/api/conversation.yaml`
+    - `apps/tabtin_django/docs/api/orchestration-action.yaml`
+    - `apps/tabtin_django/docs/api/orchestration-context.yaml`
+servers:
+  - url: https://api-preprod.example.com
+    description: 开发环境
+  - url: https://api-preprod.example.com
+    description: 生产环境
+paths:
+  /ws/v1/gateway:
+    get:
+      summary: WebSocket Gateway
+      description: |
+        WS 入口，连接后发送 `auth`，再 `subscribe`。
+      responses:
+        '101':
+          description: Switching Protocols
+  /api/chat/sessions:
+    post:
+      summary: 创建会话
+      responses:
+        '200':
+          description: OK
+  /api/chat/sessions/{session_id}/messages:
+    post:
+      summary: 发送消息（同步）
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK

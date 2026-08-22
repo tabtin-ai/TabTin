@@ -1,0 +1,27 @@
+{
+  "proposal": {
+    "headerTitle": "計画案",
+    "summaryLabel": "概要",
+    "todosLabel": "トドス ({{count}})",
+    "todosEmpty": "Todo はありません",
+    "expandButton": "完全なプランを表示",
+    "collapseButton": "崩壊する",
+    "openDocButton": "開いた文書",
+    "executeButton": "実行する",
+    "executingButton": "実行中…",
+    "executedButton": "実行されました",
+    "todoStatus": {
+      "pending": "保留中",
+      "in_progress": "進行中",
+      "completed": "完了",
+      "cancelled": "キャンセルされました",
+      "unknown": "不明"
+    },
+    "executeSuccess": "「{{name}}」の実行を開始しました",
+    "executeSuccessNoName": "この計画の実行を開始しました",
+    "executeErrorNoSession": "アクティブなセッションがありません - プランを実行できません。",
+    "executeErrorSend": "計画実行の送信に失敗しました — 再試行してください。",
+    "executeError": "実行に失敗しました: {{message}}",
+    "executeErrorUnknown": "不明なエラー"
+  }
+}

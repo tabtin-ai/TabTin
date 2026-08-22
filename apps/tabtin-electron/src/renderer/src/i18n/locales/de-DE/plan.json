@@ -1,0 +1,27 @@
+{
+  "proposal": {
+    "headerTitle": "Planentwurf",
+    "summaryLabel": "Zusammenfassung",
+    "todosLabel": "Todos ({{count}})",
+    "todosEmpty": "Keine Aufgaben",
+    "expandButton": "Vollständigen Plan anzeigen",
+    "collapseButton": "Zusammenbruch",
+    "openDocButton": "Dokument öffnen",
+    "executeButton": "Ausführen",
+    "executingButton": "Ausführen…",
+    "executedButton": "Ausgeführt",
+    "todoStatus": {
+      "pending": "Ausstehend",
+      "in_progress": "In Bearbeitung",
+      "completed": "Abgeschlossen",
+      "cancelled": "Abgesagt",
+      "unknown": "Unbekannt"
+    },
+    "executeSuccess": "Mit der Ausführung von „{{name}}“ begonnen",
+    "executeSuccessNoName": "Ich habe mit der Ausführung dieses Plans begonnen",
+    "executeErrorNoSession": "Keine aktive Sitzung – der Plan kann nicht ausgeführt werden.",
+    "executeErrorSend": "Die Planausführung konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
+    "executeError": "Ausführung fehlgeschlagen: {{message}}",
+    "executeErrorUnknown": "Unbekannter Fehler"
+  }
+}

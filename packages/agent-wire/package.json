@@ -1,0 +1,41 @@
+{
+  "name": "@tabtin/agent-wire",
+  "version": "0.1.0",
+  "description": "Shared wire protocol definitions for TabTin external Agent communication",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "tabtin",
+    "agent",
+    "wire",
+    "protocol"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "dependencies": {
+    "@tabtin/contracts": "workspace:*",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "typescript": "5.7.2",
+    "vitest": "^1.6.1"
+  }
+}

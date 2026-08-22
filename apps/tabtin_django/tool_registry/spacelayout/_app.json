@@ -1,0 +1,12 @@
+{
+  "id": "spacelayout",
+  "name": "Space Layout",
+  "icon": "layout",
+  "description": "Context Space 布局管理",
+  "capability_summary": "控制标签页、分屏面板的打开、关闭和布局",
+  "tool_hints": "",
+  "skill_name": "",
+  "execution_env": "frontend",
+  "status": "active",
+  "order": 99
+}

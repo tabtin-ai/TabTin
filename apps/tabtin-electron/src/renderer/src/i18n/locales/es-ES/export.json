@@ -1,0 +1,23 @@
+{
+  "errors": {
+    "loadStatsFailed": "No se pudieron cargar las estadísticas de exportación",
+    "exportFailed": "Error al exportar, inténtelo de nuevo"
+  },
+  "success": {
+    "exported": "Exportado {{filename}}",
+    "showInFolder": "Mostrar en carpeta"
+  },
+  "stats": {
+    "sampledHint": "Las estadísticas son estimaciones muestreadas; la exportación real incluye todos los {{total}} registros seleccionados"
+  },
+  "apiErrors": {
+    "exportFailedWithStatus": "Error al exportar: HTTP {{status}}",
+    "unsupportedFormat": "Formato de exportación no admitido: {{format}}",
+    "unsupportedResponseType": "Tipo de datos de respuesta no admitido: {{type}}",
+    "downloadBlobRequired": "downloadFile espera un Blob, pero recibió: {{type}}",
+    "filenameRequired": "El nombre del archivo debe ser una cadena que no esté vacía, pero recibido: {{type}}"
+  },
+  "filename": {
+    "defaultTableName": "mesa"
+  }
+}

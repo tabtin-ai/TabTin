@@ -1,0 +1,64 @@
+{
+  "title": "Terminal",
+  "exitCode": "Exit-Code: {{code}}",
+  "restart": "Neustart",
+  "scrollToBottom": "Scrollen Sie nach unten",
+  "errors": {
+    "createSessionFailed": "[Fehler] Terminalsitzung kann nicht erstellt werden",
+    "ptyUnavailable": "Die PTY-API ist nicht verfügbar"
+  },
+  "status": {
+    "processExited": "Prozess beendet, Exit-Code: {{code}}",
+    "idle": "Leerlauf",
+    "running": "Laufen",
+    "exited": "Ausgegangen"
+  },
+  "restore": {
+    "title": "Vorherige Ausgabe wiederhergestellt (Prozess getrennt)",
+    "restored": "Historische Ausgabe wiederhergestellt",
+    "startShell": "Starten Sie die Shell neu",
+    "dismiss": "Entlassen"
+  },
+  "split": {
+    "splitRight": "Rechts teilen",
+    "splitDown": "Aufteilen",
+    "maximize": "Maximieren",
+    "restore": "Wiederherstellen",
+    "close": "Fenster schließen",
+    "maxPanesReached": "Maximale Anzahl an Fenstern erreicht ({{max}})",
+    "equalize": "Alle Bereiche ausgleichen",
+    "doubleClickToEqualize": "Zum Ausgleich doppelklicken"
+  },
+  "contextMenu": {
+    "copy": "Kopieren",
+    "paste": "Einfügen",
+    "search": "Suchen",
+    "scrollToBottom": "Scrollen Sie nach unten",
+    "clear": "Terminal löschen",
+    "splitRight": "Rechts teilen",
+    "splitDown": "Aufteilen",
+    "equalize": "Alle Bereiche ausgleichen",
+    "maximize": "Maximieren",
+    "restore": "Wiederherstellen",
+    "close": "Fenster schließen"
+  },
+  "search": {
+    "placeholder": "Suchterminal…",
+    "noMatch": "Keine Übereinstimmung",
+    "matchFound": "Gefunden",
+    "caseSensitive": "Groß- und Kleinschreibung beachten",
+    "previous": "Zurück",
+    "next": "Als nächstes",
+    "close": "Suche schließen"
+  },
+  "imagePaste": {
+    "saving": "Bild wird gespeichert…",
+    "saved": "Bild gespeichert",
+    "failed": "Das Einfügen des Bildes ist fehlgeschlagen",
+    "tooLarge": "Bild zu groß ({{size}}MB), maximal 10 MB"
+  },
+  "dragDrop": {
+    "hint": "Drop, um den Dateipfad einzufügen",
+    "pathError": "Dateipfad kann nicht gelesen werden"
+  }
+}

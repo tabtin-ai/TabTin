@@ -1,0 +1,177 @@
+{
+  "primaryNav": {
+    "newTask": "Nueva tarea",
+    "apps": "Banco de trabajo",
+    "automation": "Automatización",
+    "importData": "Importar datos",
+    "importDataDetected": "Importar datos (historial detectado)",
+    "externalHistory": "Historia externa",
+    "agents": "Avatares de IA",
+    "skills": "Habilidades y conectores",
+    "collaboration": "Colaboración",
+    "messages": "Mensajes"
+  },
+  "rail": {
+    "tasks": "Tareas",
+    "messages": "Mensajes",
+    "cloudDocs": "Documentos en la nube",
+    "projects": "Proyectos",
+    "more": "Más",
+    "customerSupport": "Soporte",
+    "customerSupportTitle": "Contactar con soporte",
+    "customerSupportHint": "Escanee con WeChat para agregarnos a WeCom",
+    "customerSupportQrAlt": "Código QR de atención al cliente de WeCom"
+  },
+  "cloudDocs": {
+    "browse": {
+      "label": "Explorar documentos en la nube",
+      "all": "Todos",
+      "recent": "Reciente",
+      "shared": "compartido conmigo",
+      "recentHint": "Historia ordenada por última visita, no solo por lo que está abierto ahora",
+      "sharedHint": "Documentos, tablas y archivos compartidos con usted"
+    },
+    "openTabs": {
+      "label": "Abierto ahora",
+      "count": "{{count}}",
+      "close": "Cerrar {{title}}",
+      "hint": "Documentos, tablas y archivos abiertos en el editor."
+    },
+    "tree": {
+      "empty": "Aún no hay documentos ni tablas.",
+      "emptyFolder": "No hay páginas dentro",
+      "searchPlaceholder": "Buscar documentos y tablas…",
+      "searchResults": "Resultados de la búsqueda",
+      "newChildDoc": "Nuevo subdocumento",
+      "newChildTable": "Nueva subtabla",
+      "moveTo": "Mover a…",
+      "foldersRetired": "Las carpetas se retiran: en su lugar, se anidan documentos y tablas",
+      "loadingChildren": "Cargando…",
+      "maxNestingDepth": "El anidamiento máximo es de 4 niveles; No se pueden agregar más subdocumentos."
+    }
+  },
+  "appHome": {
+    "aiAgents": "Avatares de IA",
+    "aiAgentsSubtitle": "Administre avatares de IA en su organización: cree, cambie el nombre, establezca paquetes de habilidades y personas.",
+    "skillLibrary": "Habilidades y conectores",
+    "collaborationSubtitle": "Elija un proyecto para colaborar como equipo: las tareas, los activos y los debates permanecen dentro del alcance de ese proyecto."
+  },
+  "filter": "Filtrar...",
+  "personalOrganization": "personales",
+  "emptyTables": "Sin mesas",
+  "emptyHint": "Abrir un espacio de trabajo para crear una tabla",
+  "actions": {
+    "agentOrganization": "Espacio de trabajo",
+    "shellTest": "prueba de concha",
+    "taskExecution": "Ejecución de tareas"
+  },
+  "plugins": {
+    "taskExecution": {
+      "description": "Modo de ejecución directa con entrada manual de esquema"
+    }
+  },
+  "tooltips": {
+    "collapse": "Contraer barra lateral (⌘B)",
+    "expand": "Expandir barra lateral (⌘B)",
+    "newAgent": "Nuevo espacio de trabajo"
+  },
+  "theme": {
+    "lightToggle": "Modo de luz (haga clic para alternar)",
+    "darkToggle": "Modo oscuro (haga clic para alternar)",
+    "systemToggle": "Sistema (haga clic para alternar)",
+    "light": "Modo de luz",
+    "dark": "modo oscuro",
+    "system": "Sistema"
+  },
+  "search": {
+    "tooltip": "Buscar (⌘K)"
+  },
+  "organizationFallback": "Organización",
+  "loadingOrganizations": "Cargando organizaciones...",
+  "loadingAgents": "Cargando espacios de trabajo...",
+  "personalIdentity": "personales",
+  "teamGroup": "Organizaciones",
+  "newTeam": "Crear organización",
+  "newOrganization": "Nueva organización",
+  "personalSettings": "Configuraciones personales",
+  "organizationSettings": "Configuración de la organización",
+  "memberManagement": "Gestión de miembros",
+  "loadFailed": "Error de carga",
+  "deviceOnline": "En línea",
+  "deviceBusy": "Ocupado",
+  "deviceOffline": "Sin conexión",
+  "deviceLocal": "este dispositivo",
+  "deviceDraining": "No aceptar tareas",
+  "deviceUnknown": "Estado desconocido",
+  "unknownDevice": "Dispositivo desconocido",
+  "unboundDevice": "Sin dispositivo de ejecución",
+  "deviceNeedsWorkspace": "Primero crea un espacio de trabajo en este dispositivo",
+  "sharedFrom": "Compartido desde {{name}}",
+  "memo": "notas",
+  "moreAgents": "Más espacios de trabajo...",
+  "filterAgents": "Filtrar espacios de trabajo...",
+  "currentWorkspace": "Espacio de trabajo actual",
+  "pinAgent": "Anclar espacio de trabajo",
+  "unpinAgent": "Desanclar",
+  "workingDirMeta": "Raíz: {{name}}",
+  "workingDirTitle": "Directorio de trabajo: {{dir}}",
+  "tabConversations": "Tareas",
+  "tabDesktop": "Aplicaciones",
+  "tabMessages": "Mensajes",
+  "aiAvatars": "Avatares de IA",
+  "skillLibrary": "Habilidades y conectores",
+  "mainNav": {
+    "im": "Mensajes",
+    "agent": "Espacios",
+    "memo": "Memoria",
+    "me": "Yo",
+    "openIMWindow": "Abrir ventana de mensajes",
+    "openSettings": "Abrir configuración",
+    "unreadLabel": "{{label}} ({{count}} sin leer)",
+    "pendingInviteLabel": "{{label}} ({{count}} invitaciones pendientes)"
+  },
+  "conversations": {
+    "title": "Todas las conversaciones",
+    "back": "Volver a espacios de trabajo",
+    "new": "Nueva tarea",
+    "search": "Buscar conversaciones...",
+    "empty": "Aún no hay conversaciones",
+    "emptyHint": "Crea un espacio de trabajo para comenzar a chatear",
+    "today": "hoy",
+    "yesterday": "ayer",
+    "thisWeek": "Esta semana",
+    "earlier": "Antes",
+    "agentDeleted": "Espacio de trabajo eliminado",
+    "agentWorking": "Trabajando...",
+    "unread": "Nueva respuesta",
+    "sharedFrom": "De {{name}}",
+    "selectAgent": "Seleccione un espacio de trabajo",
+    "importAgentHistory": "Importar historial de agentes externos",
+    "newTopic": "Nueva tarea",
+    "searchAgent": "Buscar espacios...",
+    "noAgents": "No hay espacios disponibles",
+    "filteringAgent": "Filtro: {{name}}",
+    "filteringOrganization": "Filtro de organización: {{name}}",
+    "clearFilter": "Limpiar filtro",
+    "justNow": "Justo ahora",
+    "minutesAgo": "Hace {{count}}m",
+    "hoursAgo": "Hace {{count}}h",
+    "daysAgo": "Hace {{count}}d",
+    "untitledSession": "Conversación de {{agent}}",
+    "spaceNotFound": "El espacio de trabajo de la conversación ya no existe o ha sido archivado",
+    "noResults": "No se encontraron conversaciones coincidentes",
+    "noResultsHint": "Pruebe diferentes palabras clave o borre el filtro",
+    "createFailed": "No se pudo crear la conversación, inténtalo de nuevo.",
+    "openFailed": "No se pudo abrir la conversación, inténtalo de nuevo.",
+    "personalIdentity": "personales"
+  },
+  "space": {
+    "emptyTitle": "Comienza tu viaje",
+    "emptyHint": "Cree un espacio de trabajo, un chat grupal o un mensaje directo para comenzar",
+    "loginHint": "Iniciar sesión",
+    "newAgent": "Nuevo espacio de trabajo",
+    "newGroup": "Nuevo chat grupal",
+    "newDM": "Nuevo mensaje directo"
+  },
+  "untitled": "Usuario anónimo"
+}

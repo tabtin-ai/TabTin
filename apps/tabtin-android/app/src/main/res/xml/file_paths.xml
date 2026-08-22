@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <cache-path name="camera_photos" path="camera/" />
+    <cache-path name="diagnostic_exports" path="diagnostic-exports/" />
+</paths>

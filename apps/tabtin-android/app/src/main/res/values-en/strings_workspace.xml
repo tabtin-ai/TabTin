@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ws_title">Organization</string>
+    <string name="ws_settings">Organization Settings</string>
+    <string name="ws_create">Create Organization</string>
+    <string name="ws_create_name_hint">Organization name</string>
+    <string name="ws_create_desc_hint">Description (optional)</string>
+    <string name="ws_create_icon_hint">Icon emoji (optional)</string>
+    <string name="ws_name">Name</string>
+    <string name="ws_description">Description</string>
+    <string name="ws_icon">Icon</string>
+    <string name="ws_default_tag">Default</string>
+    <string name="ws_member_count">%d members</string>
+    <string name="ws_workspace_count">%d Workspaces / Projects</string>
+
+    <string name="ws_personal_identity">Personal</string>
+    <string name="ws_team_group">Organizations</string>
+    <string name="workspace_switch_organization">Switch organization</string>
+
+    <string name="ws_basic_info">Basic Info</string>
+    <string name="ws_edit_info">Edit Info</string>
+    <string name="ws_edit_name">Name</string>
+    <string name="ws_edit_desc">Description</string>
+    <string name="ws_edit_icon">Icon</string>
+    <string name="ws_change_avatar">Change organization avatar</string>
+    <string name="ws_avatar_hint">Tap to change. JPG, PNG, GIF, or WebP, up to 5 MB.</string>
+    <string name="ws_avatar_owner_only">Only the organization owner can change the avatar.</string>
+    <string name="ws_avatar_updated">Organization avatar updated</string>
+    <string name="ws_avatar_upload_failed">Could not upload the organization avatar. Try again.</string>
+    <string name="ws_saving">Saving…</string>
+
+    <string name="ws_members">Members</string>
+    <string name="ws_member_count_title">Members (%d)</string>
+    <string name="ws_add_member">Add Member</string>
+    <string name="ws_add_member_hint">Enter user ID</string>
+    <string name="ws_search_user_hint">Search by nickname, email, or username</string>
+    <string name="ws_search_no_results">No matching users found</string>
+    <string name="ws_remove_member">Remove Member</string>
+    <string name="ws_remove_member_confirm">Remove member %s?</string>
+    <string name="ws_change_role">Change Role</string>
+    <string name="ws_member_actions">Member actions</string>
+
+    <string name="ws_role_owner">Owner</string>
+    <string name="ws_role_admin">Admin</string>
+    <string name="ws_role_editor">Editor</string>
+    <string name="ws_role_viewer">Viewer</string>
+
+    <string name="ws_invite">Invite</string>
+    <string name="ws_invite_email">Email Invitation</string>
+    <string name="ws_invite_phone">Phone number</string>
+    <string name="ws_invite_phone_hint">Only registered TabTin users can be invited by phone</string>
+    <string name="ws_invite_phone_role_hint">Phone invitations join the organization as editors</string>
+    <string name="ws_invite_phone_send">Send phone invitation</string>
+    <string name="ws_invite_link">Link Invitation</string>
+    <string name="ws_invite_email_hint">Enter email address</string>
+    <string name="ws_invite_role">Invitation role</string>
+    <string name="ws_invite_send">Send Invitation</string>
+    <string name="ws_invite_generate_link">Generate Invite Link</string>
+    <string name="ws_invite_link_copied">Invite link copied</string>
+    <string name="ws_invite_pending">Pending Invitations</string>
+    <string name="ws_invite_cancel">Cancel Invitation</string>
+    <string name="ws_invite_sent">Invitation sent</string>
+    <string name="ws_invite_type_link">Link</string>
+    <string name="ws_invite_status_pending">Pending</string>
+    <string name="ws_invite_status_accepted">Accepted</string>
+    <string name="ws_invite_status_expired">Expired</string>
+    <string name="ws_invite_status_cancelled">Cancelled</string>
+
+    <string name="ws_danger_zone">Danger Zone</string>
+    <string name="ws_leave">Leave Organization</string>
+    <string name="ws_leave_confirm">Are you sure you want to leave organization \"%s\"? You will lose access to its contents.</string>
+    <string name="ws_delete">Delete Organization</string>
+    <string name="ws_delete_confirm">Are you sure you want to delete organization \"%s\"? This action cannot be undone and all data will be permanently deleted.</string>
+    <string name="ws_transfer">Transfer Ownership</string>
+    <string name="ws_transfer_hint">Enter new owner\'s user ID</string>
+    <string name="ws_transfer_confirm">Transfer ownership of organization \"%s\" to this user?</string>
+    <string name="ws_cannot_delete_default">Cannot delete the default organization</string>
+
+    <string name="agent_create">New Workspace</string>
+    <string name="agent_create_name_hint">Workspace name</string>
+    <string name="agent_create_desc_hint">Description (optional)</string>
+    <string name="agent_delete">Delete Workspace</string>
+    <string name="agent_delete_confirm">Delete Workspace "%s"? This cannot be undone.</string>
+    <string name="agent_archive">Archive Workspace</string>
+    <string name="agent_archive_confirm">Archive Workspace "%s"?</string>
+    <string name="agent_edit">Edit Workspace</string>
+
+    <string name="agent_edit_title">Edit Workspace</string>
+    <string name="agent_edit_name_hint">Workspace name</string>
+    <string name="agent_updated">Workspace updated</string>
+
+    <string name="agent_archived_title">Archived Workspaces</string>
+    <string name="agent_archived_empty">No archived Workspaces</string>
+    <string name="agent_restore">Restore</string>
+    <string name="agent_restored">Workspace restored</string>
+    <string name="agent_archived_count">Archived (%d)</string>
+
+    <string name="agent_new_conversation">New Conversation</string>
+    <string name="agent_conversation_history">Conversation History</string>
+    <string name="agent_message_count">%d messages</string>
+    <string name="agent_empty">No Agents</string>
+    <string name="agent_empty_description">Create a Workspace on desktop\nand it will appear here automatically</string>
+
+    <string name="agent_long_press_hint">Long-press a Workspace to edit, archive, or delete</string>
+
+    <!-- Space list: Space / Agent / Device are rendered as independent objects -->
+    <string name="space_list_empty">No Workspaces</string>
+    <string name="space_list_empty_description">Create and bind a local execution environment on desktop first</string>
+    <string name="space_list_long_press_hint">Long-press a Workspace to edit, archive, or delete. Create new Workspaces in TabTin for desktop.</string>
+    <string name="space_list_primary_agent">Primary Agent: %s</string>
+    <string name="space_list_primary_agent_unassigned">Primary Agent: Not set</string>
+    <string name="space_list_primary_agent_loading">Primary Agent: Loading…</string>
+    <string name="space_list_primary_agent_unavailable">Primary Agent: Unavailable</string>
+    <string name="space_list_execution_device">Device: %1$s · %2$s</string>
+    <string name="space_list_execution_device_unbound">Device: Not connected</string>
+    <string name="space_list_execution_device_loading">Device: Loading…</string>
+    <string name="space_list_execution_device_unavailable">Device: Unavailable</string>
+    <string name="space_list_unnamed_device">Unnamed device</string>
+    <string name="space_list_device_online">Online</string>
+    <string name="space_list_device_busy">Busy</string>
+    <string name="space_list_device_offline">Offline</string>
+    <string name="space_list_device_unknown">Unknown</string>
+
+    <string name="agent_view_all_sessions">View all conversations</string>
+    <string name="agent_no_sessions">No Conversations</string>
+    <string name="agent_unnamed_session">Untitled Conversation</string>
+
+    <!-- Space detail page (resource entry bar + conversations) -->
+    <string name="agent_resources_section">Resources</string>
+    <string name="agent_conversations_section">Conversations</string>
+    <string name="agent_resource_not_openable">Not openable here yet</string>
+    <string name="agent_no_resources_of_type">No %s resources yet</string>
+
+    <string name="ws_invite_no_permission">Only admins can manage invitations</string>
+    <string name="ws_invite_accept_title">Accept Invitation</string>
+    <string name="ws_invite_accept_desc">You have been invited to join an organization</string>
+    <string name="ws_invite_accept_role">Role: %s</string>
+    <string name="ws_invite_accept">Accept Invitation</string>
+    <string name="ws_invite_decline">Decline</string>
+    <string name="ws_invite_accepted">Joined organization</string>
+    <string name="ws_invite_invalid">Invitation link is invalid or expired</string>
+    <string name="ws_invite_error_generic">Unable to process this invitation</string>
+    <string name="ws_invite_loading">Loading invitation info…</string>
+
+    <string name="invite_by_user_id">User ID</string>
+    <string name="send_invitation">Send Invitation</string>
+    <string name="user_id_hint">They can copy their User ID from Settings → Profile</string>
+    <string name="pending_invitations_label">Pending</string>
+    <string name="invitation_accepted">Joined organization</string>
+    <string name="reject_invitation">Decline</string>
+    <string name="invited_by_user">Invited by %s</string>
+    <string name="accept_invitation">Accept</string>
+    <string name="invitation_response_title">Organization Invitation</string>
+    <string name="organization_invitations_title">Organization Invitations</string>
+    <string name="organization_invitations_empty">No pending organization invitations</string>
+    <string name="organization_invitations_load_failed">Unable to load organization invitations. Try again.</string>
+    <string name="organization_invitations_action_failed">Unable to handle this invitation. Try again.</string>
+
+    <string name="ws_created">Organization created</string>
+    <string name="ws_updated">Saved</string>
+    <string name="ws_deleted">Organization deleted</string>
+    <string name="ws_left">Left organization</string>
+    <string name="ws_transferred">Ownership transferred</string>
+    <string name="agent_created">Workspace created</string>
+    <string name="agent_deleted">Workspace deleted</string>
+    <string name="agent_archived">Workspace archived</string>
+    <string name="ws_member_me">(me)</string>
+    <string name="ws_ai_capabilities">AI Settings</string>
+    <string name="ws_ai_model_label">Default Model</string>
+    <string name="ws_ai_model_default">Follow system default</string>
+    <string name="ws_ai_tools_label">Enable Tools</string>
+    <string name="ws_ai_tools_desc">Allow Space to use external tools (search, code execution, etc.)</string>
+
+    <string name="ws_finance">Billing</string>
+    <string name="ws_wallet">Wallet</string>
+    <string name="ws_wallet_transactions_subtitle">View balance and transaction details</string>
+    <string name="ws_wallet_balance">Balance</string>
+    <string name="ws_wallet_balance_placeholder">—</string>
+    <string name="ws_wallet_available">Available</string>
+    <string name="ws_wallet_frozen">Reserved</string>
+    <string name="ws_wallet_frozen_info_title">Reserved Credits</string>
+    <string name="ws_wallet_frozen_info_body">Reserved credits are held for ongoing AI conversations. They will be automatically released or settled when the conversation ends. Available = Total - Reserved.</string>
+    <string name="ws_wallet_recharge_hint">Please top up on desktop</string>
+    <string name="ws_wallet_recharge_button">Top up</string>
+    <string name="ws_wallet_empty">No transactions yet</string>
+    <string name="ws_wallet_all">All</string>
+    <string name="ws_wallet_consumption">Spend</string>
+    <string name="ws_wallet_recharge">Top up</string>
+    <string name="ws_wallet_other">Other</string>
+    <string name="ws_usage">Usage</string>
+    <string name="ws_usage_current_month">This month</string>
+    <string name="ws_usage_credits_value">%1$s credits</string>
+    <string name="ws_usage_last_month">Last month</string>
+    <string name="ws_usage_month_over_month">MoM</string>
+    <string name="ws_usage_today_total">Today total</string>
+    <string name="ws_usage_today_aggregated">Aggregated today</string>
+    <string name="ws_usage_meter_distribution">Usage by meter</string>
+    <string name="ws_usage_model_top">Model usage</string>
+    <string name="ws_usage_empty">No usage data</string>
+    <string name="ws_models_title">Models</string>
+    <string name="ws_models_loading">Loading models…</string>
+    <string name="ws_models_empty">No models available</string>
+    <string name="ws_models_default">Default</string>
+    <string name="ws_models_set_default">Set as default</string>
+    <string name="ws_models_provider">Provider</string>
+    <string name="ws_models_byok_badge">BYOK</string>
+    <string name="ws_models_byok_organization_tooltip">Organization BYOK channel — applies only to main chat. Auxiliary scenes (titles, embeddings, vision, ASR, TTS, media) still bill the organization wallet at platform pricing.</string>
+    <string name="ws_models_byok_user_tooltip">Personal BYOK channel — applies only to main chat. Auxiliary scenes still bill the organization wallet at platform pricing.</string>
+    <string name="ws_models_byok_info_title">BYOK Channel Scope</string>
+    <string name="ws_load_failed">Failed to load</string>
+    <string name="ws_load_failed_retry">Failed to load, tap to retry</string>
+    <string name="ws_usage_refresh_failed_banner">Couldn\'t refresh usage; showing last loaded data</string>
+    <string name="space_formal_agents">Formal Agents</string>
+</resources>

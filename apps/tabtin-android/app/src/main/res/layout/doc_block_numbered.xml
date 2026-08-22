@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 有序列表块 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:baselineAligned="true"
+    android:gravity="top"
+    android:paddingStart="@dimen/tt_spacing_lg">
+
+    <!-- 序号 -->
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/tt_spacing_xxl"
+        android:gravity="center"
+        android:textColor="@color/doc_editor_text_secondary"
+        android:textSize="@dimen/tt_font_body" />
+
+    <com.tabtin.mobile.features.doc.editor.core.DocTextInputWidget
+        android:id="@+id/textContent"
+        style="@style/DocBlockNumberedContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/tt_spacing_xs"
+        android:textColorHint="@color/doc_editor_text_tertiary" />
+</LinearLayout>

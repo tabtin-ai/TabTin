@@ -1,0 +1,74 @@
+{
+  "id": "tabtin-docs-factory-pack",
+  "name": "Docs Factory Pack",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "文档工厂：长文共创、导出 Word/PDF、生成数据表文件、大纲生成演示稿。",
+  "icon": "file-text",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "writing",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 22
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/coauthor-longform",
+    "skills/export-word-pdf",
+    "skills/build-spreadsheet",
+    "skills/deck-from-outline"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "coauthor-longform": {
+        "enabled": true
+      },
+      "export-word-pdf": {
+        "enabled": true
+      },
+      "build-spreadsheet": {
+        "enabled": true
+      },
+      "deck-from-outline": {
+        "enabled": true
+      }
+    }
+  }
+}

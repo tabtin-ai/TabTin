@@ -1,0 +1,902 @@
+{
+  "_meta": {
+    "name": "full-fields 期望处置表",
+    "description": "与 full-fields.table.json 对应。三端（Web 移动端 / iOS / Android）对同一张表必须产出相同的字段处置、卡片投影、形态决策和筛选排序分组结果。字段可编辑性真源为能力矩阵 capability-matrix.md。current / knownGaps / releaseGate 必须由生产探测派生。批次 3.1 已对齐别名归一化、date/datetime 保守只读与用户 ID 不上屏；3.2 已按  裁定以 mobileTableProjection.ts 为卡片投影正典（分组字段照常进摘要、不读 config.hidden_fields），表面/筛选/排序仍为后续批次。卡片投影的可证伪用例见 projectionCases（视图 viw-cards-0002），其 target 由 scripts/check-mobile-card-projection.mts 用 Web 正典实算校验，不是手写。新建预填的可证伪用例见 prefillCases（视图 viw-prefill-*），其 target 由 scripts/check-mobile-prefill.mts 用 resolveMobilePrefillValues 实算校验；Android / iOS current 均已接线生产函数。",
+    "frozenAt": "2026-08-15",
+    "auditedAt": "2026-08-17",
+    "batch": 3
+  },
+  "fieldDispositions": {
+    "editable": [
+      "text",
+      "long_text",
+      "number",
+      "currency",
+      "percent",
+      "rating",
+      "select",
+      "multi_select",
+      "checkbox",
+      "date",
+      "datetime",
+      "url",
+      "email",
+      "phone",
+      "user",
+      "attachment"
+    ],
+    "readonly_display": [
+      "auto_number",
+      "created_time",
+      "last_modified_time",
+      "created_by",
+      "last_modified_by",
+      "formula",
+      "rollup",
+      "link",
+      "lookup",
+      "media",
+      "nested_list"
+    ],
+    "notes": {
+      "user": "可编辑（选人）；任何场景显示姓名+头像，禁止退化为用户 ID",
+      "attachment": "可编辑（上传/删除走带外 API）；media 本轮只读展示",
+      "formula/rollup/lookup/link": "正确展示计算结果/关联摘要；定义与配置交完整编辑器",
+      "unknown_field_type": "只读展示原始值的文本形态，禁止崩溃、禁止静默丢列"
+    },
+    "current": {
+      "ios": {
+        "editable": [
+          "text",
+          "long_text",
+          "number",
+          "currency",
+          "percent",
+          "rating",
+          "select",
+          "multi_select",
+          "checkbox",
+          "date",
+          "datetime",
+          "url",
+          "email",
+          "phone",
+          "user"
+        ],
+        "readonly_display": [
+          "auto_number",
+          "created_time",
+          "last_modified_time",
+          "created_by",
+          "last_modified_by",
+          "formula",
+          "rollup",
+          "link",
+          "lookup",
+          "media",
+          "nested_list",
+          "attachment"
+        ]
+      },
+      "android": {
+        "editable": [
+          "text",
+          "long_text",
+          "number",
+          "currency",
+          "percent",
+          "rating",
+          "select",
+          "multi_select",
+          "checkbox",
+          "date",
+          "datetime",
+          "url",
+          "email",
+          "phone",
+          "user"
+        ],
+        "readonly_display": [
+          "auto_number",
+          "created_time",
+          "last_modified_time",
+          "created_by",
+          "last_modified_by",
+          "formula",
+          "rollup",
+          "link",
+          "lookup",
+          "media",
+          "nested_list",
+          "attachment"
+        ]
+      }
+    }
+  },
+  "aliasNormalization": {
+    "notes": "目标服从 packages/table-kernel/src/types/field.ts 的 FIELD_TYPE_ALIASES；current 记录生产实际归一化结果。",
+    "current": {
+      "ios": {
+        "single_select": "select",
+        "multiple_select": "multi_select",
+        "multiselect": "multi_select",
+        "string": "text",
+        "textarea": "long_text",
+        "integer": "number",
+        "float": "number",
+        "bool": "checkbox",
+        "boolean": "checkbox",
+        "file": "attachment",
+        "image": "media",
+        "timestamp": "datetime",
+        "enum": "select",
+        " Single_Select ": "select",
+        "never_seen_type": "never_seen_type"
+      },
+      "android": {
+        "single_select": "select",
+        "multiple_select": "multi_select",
+        "multiselect": "multi_select",
+        "string": "text",
+        "textarea": "long_text",
+        "integer": "number",
+        "float": "number",
+        "bool": "checkbox",
+        "boolean": "checkbox",
+        "file": "attachment",
+        "image": "media",
+        "timestamp": "datetime",
+        "enum": "select",
+        " Single_Select ": "select",
+        "never_seen_type": "never_seen_type"
+      }
+    }
+  },
+  "cardProjection": {
+    "view": "viw-grid-0001",
+    "titleField": "fld-title",
+    "coverField": "fld-cover",
+    "bodyFields": [
+      "fld-desc",
+      "fld-count",
+      "fld-progress",
+      "fld-budget"
+    ],
+    "rules": [
+      "标题字段：视图配置 card_title_field/title_field → is_primary → 第一个可见字段（不挑类型）",
+      "封面字段：视图配置 card_cover_field/cover_field → 第一个 attachment/media 可见字段",
+      "摘要：可见字段排除标题/封面后前 4 个；分组字段照常参与（Web 正典只排除标题与封面）",
+      "config.hidden_fields 不是契约的一部分：Web 正典不读它，可见性只走 is_hidden/visible_fields/column_meta（裁定见 ）",
+      "空标题显示「未命名记录」，禁止显示记录 ID",
+      "新建记录预填：按当前视图筛选/分组值回填（resolveMobilePrefillValues 同规则）"
+    ],
+    "intentionalDeviations": [
+      {
+        "rule": "摘要跳过空值字段，取前 4 个有值的；Web 保留空位并渲染「—」",
+        "appliesTo": [
+          "ios",
+          "android"
+        ],
+        "reason": "手机屏幕窄，占位行挤掉真实信息；经产品裁定保留双端行为，不按 Web 对齐"
+      },
+      {
+        "rule": "配置的封面字段仍须是 attachment/media，否则不作封面",
+        "appliesTo": [
+          "ios",
+          "android"
+        ],
+        "reason": "Web 会把任意配置字段的字符串值直接当图片地址取用，一处 url 字段配置就能让卡片去拉任意外链；移动端收紧不跟随"
+      }
+    ],
+    "records": [
+      {
+        "id": "rec-0001",
+        "title": "修复 Android 上下标丢失",
+        "coverUrl": "https://oss.example.com/file-m-0001.png"
+      },
+      {
+        "id": "rec-0002",
+        "title": "统一字段别名",
+        "coverUrl": null
+      },
+      {
+        "id": "rec-0003",
+        "title": "版本历史移动端入口",
+        "coverUrl": null
+      }
+    ],
+    "current": {
+      "ios": {
+        "titleField": "fld-title",
+        "coverField": "fld-cover",
+        "bodyFields": [
+          "fld-desc",
+          "fld-count",
+          "fld-progress",
+          "fld-budget"
+        ],
+        "excludesGroupField": false,
+        "excludesCoverField": true,
+        "skipsBlankSummaryFields": true,
+        "supportsPrefill": false,
+        "untitledUsesRecordId": false
+      },
+      "android": {
+        "titleField": "fld-title",
+        "coverField": "fld-cover",
+        "bodyFields": [
+          "fld-desc",
+          "fld-count",
+          "fld-progress",
+          "fld-budget"
+        ],
+        "excludesGroupField": false,
+        "excludesCoverField": true,
+        "skipsBlankSummaryFields": true,
+        "supportsPrefill": false,
+        "untitledUsesRecordId": false
+      }
+    }
+  },
+  "projectionCases": [
+    {
+      "id": "discriminating-cards",
+      "view": "viw-cards-0002",
+      "record": "rec-0001",
+      "purpose": "viw-grid-0001 对卡片投影的多条规则没有鉴别力——分组字段、hidden_fields 目标字段都排在摘要前 4 的射程之外，实现反了夹具照样全绿。这个用例把每条规则的关键字段都摆进射程，任何一条实现跑偏都会改变投影结果。target 由 scripts/check-mobile-card-projection.mts 用 Web 正典实算校验，不是手写。",
+      "discriminates": [
+        "分组字段照常进摘要：fld-status 是 view.groups 的分组字段且排摘要首位，实现若排除分组字段，bodyFields 首项就变",
+        "不读 config.hidden_fields：fld-count 被 hidden_fields 点名却必须留在摘要，实现若读它，bodyFields 会少一项",
+        "primary 优先于首个可见字段：fld-title 是 primary 但只排可见第 4 位，实现若直接取首个可见字段，标题会变成 fld-status",
+        "封面按类型回落并移出摘要：视图未配置 card_cover_field，fld-cover（media）须自动成为封面且不出现在 bodyFields",
+        "摘要上限 4：fld-priority 是第 7 个可见字段，上限放宽就会冒出来",
+        "visible_fields 决定可见性：fld-owner 在 field_order 里但不在 visible_fields 里，出现即漏过滤",
+        "field_order 决定顺序：visible_fields 的排列与 field_order 刻意不同，把 visible_fields 当顺序用会得到 [fld-tags, fld-desc, fld-count, fld-status]"
+      ],
+      "target": {
+        "titleField": "fld-title",
+        "coverField": "fld-cover",
+        "bodyFields": [
+          "fld-status",
+          "fld-count",
+          "fld-desc",
+          "fld-tags"
+        ]
+      },
+      "current": {
+        "ios": {
+          "titleField": "fld-title",
+          "coverField": "fld-cover",
+          "bodyFields": [
+            "fld-status",
+            "fld-count",
+            "fld-desc",
+            "fld-tags"
+          ]
+        },
+        "android": {
+          "titleField": "fld-title",
+          "coverField": "fld-cover",
+          "bodyFields": [
+            "fld-status",
+            "fld-count",
+            "fld-desc",
+            "fld-tags"
+          ]
+        }
+      }
+    }
+  ],
+  "prefillCases": [
+    {
+      "id": "basic-filters",
+      "view": "viw-prefill-0001",
+      "groupValues": {},
+      "purpose": "无 groupValues 时，顶层 filters 按字段名产出。视图里埋了 config.filters / config.groups / filter_groups / 顶层 filter（嵌套 FilterSet）四条陷阱，读错位置就会多出或改掉字段。",
+      "discriminates": [
+        "只读顶层 filters：config.filters.conditions 把状态写成 todo、标题写成陷阱值，读它就会改结果",
+        "不读顶层 filter（嵌套 FilterSet）：Android 模型注释写「新 FilterSet 优先」，读它会多出任务名称",
+        "不读 filter_groups：陷阱值是标签=review，出现即读错位置",
+        "field_id 先按 id 再按 name：进度这条的 field_id 是中文名「进度」，只查 id 就会丢这个字段",
+        "算子大小写不敏感：截止日期用的是 IS，只认小写 is 就会丢这个字段",
+        "enabled 缺省视为启用：已验收没有 enabled 键，当成禁用就会丢这个字段",
+        "enabled === false 跳过：优先级=5 被禁用，出现即没跳过",
+        "结果 key 是字段名：出现 fld-status / fld-owner 即用了 id 当 key",
+        "user / date 可写：负责人和截止日期必须出现"
+      ],
+      "target": {
+        "状态": "doing",
+        "负责人": "usr-0001",
+        "截止日期": "2026-08-20",
+        "进度": 0.4,
+        "已验收": true
+      },
+      "current": {
+        "ios": {
+          "状态": "doing",
+          "负责人": "usr-0001",
+          "截止日期": "2026-08-20",
+          "进度": 0.4,
+          "已验收": true
+        },
+        "android": {
+          "状态": "doing",
+          "负责人": "usr-0001",
+          "截止日期": "2026-08-20",
+          "进度": 0.4,
+          "已验收": true
+        }
+      }
+    },
+    {
+      "id": "group-overrides-filter",
+      "view": "viw-prefill-0001",
+      "groupValues": {
+        "状态": "todo",
+        "优先级": 3
+      },
+      "purpose": "分组循环在筛选之后，groupValues[字段名] 覆盖筛选值；config.groups 点名的优先级即使给了 groupValues 也不能写入。",
+      "discriminates": [
+        "分组覆盖筛选：状态必须从 doing 变成 todo，仍是 doing 就是没走分组",
+        "不读 config.groups：优先级=3 只写在 groupValues 里给 config.groups 的陷阱字段，出现即读了 config.groups",
+        "其它筛选值保留：负责人 / 截止日期 / 进度 / 已验收必须还在"
+      ],
+      "target": {
+        "状态": "todo",
+        "负责人": "usr-0001",
+        "截止日期": "2026-08-20",
+        "进度": 0.4,
+        "已验收": true
+      },
+      "current": {
+        "ios": {
+          "状态": "todo",
+          "负责人": "usr-0001",
+          "截止日期": "2026-08-20",
+          "进度": 0.4,
+          "已验收": true
+        },
+        "android": {
+          "状态": "todo",
+          "负责人": "usr-0001",
+          "截止日期": "2026-08-20",
+          "进度": 0.4,
+          "已验收": true
+        }
+      }
+    },
+    {
+      "id": "empty-group-value-keeps-filter",
+      "view": "viw-prefill-0001",
+      "groupValues": {
+        "状态": ""
+      },
+      "purpose": "分组值是空字符串时不覆盖筛选值。",
+      "discriminates": [
+        "空字符串不写入：状态必须仍是 doing；变成空串就是用了 value != null 而没排除 ''"
+      ],
+      "target": {
+        "状态": "doing",
+        "负责人": "usr-0001",
+        "截止日期": "2026-08-20",
+        "进度": 0.4,
+        "已验收": true
+      },
+      "current": {
+        "ios": {
+          "状态": "doing",
+          "负责人": "usr-0001",
+          "截止日期": "2026-08-20",
+          "进度": 0.4,
+          "已验收": true
+        },
+        "android": {
+          "状态": "doing",
+          "负责人": "usr-0001",
+          "截止日期": "2026-08-20",
+          "进度": 0.4,
+          "已验收": true
+        }
+      }
+    },
+    {
+      "id": "or-skips-filters",
+      "view": "viw-prefill-or-0001",
+      "groupValues": {
+        "标签": "urgent"
+      },
+      "purpose": "filter_logic 为 or 时整段筛选跳过，只留下分组。筛选字段和分组字段故意不同，避免分组覆盖把筛选举报藏住。",
+      "discriminates": [
+        "or 跳过筛选：状态 / 负责人出现即仍处理了筛选段",
+        "分组仍写入：标签=urgent 必须在；整段跳过连分组也跳了就会变成空"
+      ],
+      "target": {
+        "标签": "urgent"
+      },
+      "current": {
+        "ios": {
+          "标签": "urgent"
+        },
+        "android": {
+          "标签": "urgent"
+        }
+      }
+    },
+    {
+      "id": "conflict-clears-all-filters",
+      "view": "viw-prefill-conflict-0001",
+      "groupValues": {
+        "状态": "done"
+      },
+      "purpose": "同一字段被两条筛选赋了不同值，清空整个筛选结果（含已经写入的负责人），分组仍写入。",
+      "discriminates": [
+        "冲突清空全部筛选：负责人若还在，就是只清了冲突字段或改成 last-write-wins",
+        "分组不受冲突影响：状态必须是分组值 done"
+      ],
+      "target": {
+        "状态": "done"
+      },
+      "current": {
+        "ios": {
+          "状态": "done"
+        },
+        "android": {
+          "状态": "done"
+        }
+      }
+    },
+    {
+      "id": "single-element-array",
+      "view": "viw-prefill-array-0001",
+      "groupValues": {},
+      "purpose": "is_any_of / in 只在 value 是长度恰好为 1 的数组时取 value[0]；算子带空白和大小写。",
+      "discriminates": [
+        "is_any_of 单元素取 [0]：标签必须是 urgent 而不是 [urgent]",
+        "in 单元素取 [0]：状态必须是 doing",
+        "算子 trim + 小写：IS_ANY_OF 两边有空格，认不出就会丢标签"
+      ],
+      "target": {
+        "标签": "urgent",
+        "状态": "doing"
+      },
+      "current": {
+        "ios": {
+          "标签": "urgent",
+          "状态": "doing"
+        },
+        "android": {
+          "标签": "urgent",
+          "状态": "doing"
+        }
+      }
+    },
+    {
+      "id": "multi-element-array-skipped",
+      "view": "viw-prefill-array-multi-0001",
+      "groupValues": {},
+      "purpose": "数组算子长度不为 1 时该字段不产出；旁边留一条标量筛选，避免整段变空后被「永远返回空」假绿。",
+      "discriminates": [
+        "is_any_of 两个元素不产出：标签出现（尤其是 urgent）就是误取了 value[0]",
+        "in 两个元素不产出：状态出现即同样误取",
+        "其它标量筛选仍在：负责人必须在，整段变空就没有鉴别力"
+      ],
+      "target": {
+        "负责人": "usr-0001"
+      },
+      "current": {
+        "ios": {
+          "负责人": "usr-0001"
+        },
+        "android": {
+          "负责人": "usr-0001"
+        }
+      }
+    },
+    {
+      "id": "non-prefill-operators",
+      "view": "viw-prefill-negation-0001",
+      "groupValues": {},
+      "purpose": "is_not / is_greater / contains 不产出；is_exactly 作为可产出标量算子留下非空结果。viw-grid-0001 的同类算子写在 config.filters 里，不能单独承担这条——读错位置也产不出值。",
+      "discriminates": [
+        "is_not 不产出：状态出现即把非预填算子当预填",
+        "is_greater 不产出：优先级出现即同样跑偏",
+        "contains 不产出：标签出现即同样跑偏",
+        "is_exactly 产出：任务名称必须是契约验收标题，整段变空就没有鉴别力"
+      ],
+      "target": {
+        "任务名称": "契约验收标题"
+      },
+      "current": {
+        "ios": {
+          "任务名称": "契约验收标题"
+        },
+        "android": {
+          "任务名称": "契约验收标题"
+        }
+      }
+    },
+    {
+      "id": "unwritable-skipped-writable-specials",
+      "view": "viw-prefill-readonly-0001",
+      "groupValues": {},
+      "purpose": "formula / created_time / lookup / auto_number / rollup / created_by 不产出；link / attachment 算可写，必须出现。",
+      "discriminates": [
+        "formula 不产出：综合得分出现即没拦不可写类型",
+        "created_time 不产出：创建时间出现即同样跑偏",
+        "lookup 不产出：项目名称出现即同样跑偏",
+        "auto_number 不产出：编号出现即同样跑偏",
+        "rollup 不产出：子任务汇总出现即同样跑偏",
+        "created_by 不产出：创建人出现即把系统人员字段当成可写 user",
+        "link 可写：所属项目必须是 [rec-1001]",
+        "attachment 可写：需求文档必须是 file-a-0001"
+      ],
+      "target": {
+        "所属项目": [
+          "rec-1001"
+        ],
+        "需求文档": "file-a-0001"
+      },
+      "current": {
+        "ios": {
+          "所属项目": [
+            "rec-1001"
+          ],
+          "需求文档": "file-a-0001"
+        },
+        "android": {
+          "所属项目": [
+            "rec-1001"
+          ],
+          "需求文档": "file-a-0001"
+        }
+      }
+    }
+  ],
+  "surfacePolicy": [
+    {
+      "device": "phone",
+      "orientation": "portrait",
+      "surface": "cards",
+      "showSwitcher": true,
+      "current": {
+        "ios": {
+          "surface": "cards",
+          "showSwitcher": false
+        },
+        "android": {
+          "surface": "cards",
+          "showSwitcher": false
+        }
+      }
+    },
+    {
+      "device": "phone",
+      "orientation": "landscape",
+      "surface": "cards",
+      "showSwitcher": true,
+      "current": {
+        "ios": {
+          "surface": "cards",
+          "showSwitcher": false
+        },
+        "android": {
+          "surface": "cards",
+          "showSwitcher": false
+        }
+      }
+    },
+    {
+      "device": "tablet",
+      "orientation": "portrait",
+      "surface": "cards",
+      "showSwitcher": true,
+      "columns": 2,
+      "current": {
+        "ios": {
+          "surface": "cards",
+          "showSwitcher": false,
+          "columns": 1
+        },
+        "android": {
+          "surface": "cards",
+          "showSwitcher": false,
+          "columns": 1
+        }
+      }
+    },
+    {
+      "device": "tablet",
+      "orientation": "landscape",
+      "surface": "grid",
+      "showSwitcher": true,
+      "current": {
+        "ios": {
+          "surface": "cards",
+          "showSwitcher": false
+        },
+        "android": {
+          "surface": "cards",
+          "showSwitcher": false
+        }
+      }
+    },
+    {
+      "device": "tablet",
+      "orientation": "unknown",
+      "layout": "compact",
+      "surface": "cards",
+      "showSwitcher": true,
+      "current": {
+        "ios": {
+          "surface": "cards",
+          "showSwitcher": false
+        },
+        "android": {
+          "surface": "cards",
+          "showSwitcher": false
+        }
+      }
+    },
+    {
+      "device": "tablet",
+      "orientation": "unknown",
+      "layout": "expanded",
+      "surface": "grid",
+      "showSwitcher": true,
+      "current": {
+        "ios": {
+          "surface": "cards",
+          "showSwitcher": false
+        },
+        "android": {
+          "surface": "cards",
+          "showSwitcher": false
+        }
+      }
+    }
+  ],
+  "viewDispositions": {
+    "native": [
+      "grid",
+      "list",
+      "kanban"
+    ],
+    "degraded": {
+      "calendar": "显示本地化名称「日历」+ 完整编辑器入口",
+      "gallery": "显示本地化名称「画廊」+ 完整编辑器入口",
+      "flashcard": "显示本地化名称「闪卡」+ 完整编辑器入口",
+      "form": "显示本地化名称「表单」+ 完整编辑器入口"
+    },
+    "unknown": "如 gantt：显示视图自身名称（「甘特图」）+ 完整编辑器入口；禁止崩溃、禁止显示原始类型串给非技术用户场景外的任何位置",
+    "current": {
+      "ios": {
+        "native": [
+          "grid",
+          "list",
+          "kanban"
+        ],
+        "fullEditor": [
+          "calendar",
+          "gallery",
+          "form",
+          "flashcard",
+          "pivot",
+          "gantt"
+        ]
+      },
+      "android": {
+        "native": [
+          "grid",
+          "list",
+          "kanban"
+        ],
+        "fullEditor": [
+          "calendar",
+          "gallery",
+          "form",
+          "flashcard",
+          "pivot",
+          "gantt"
+        ]
+      }
+    }
+  },
+  "filterExpectations": {
+    "view": "viw-grid-0001",
+    "flatFilterResult": [
+      "rec-0001",
+      "rec-0002"
+    ],
+    "groupedFilterResult": [
+      "rec-0001"
+    ],
+    "notes": [
+      "flatFilterResult：status != done 且 priority > 1 → rec-0001、rec-0002（rec-0003 被排除）",
+      "groupedFilterResult：(status=doing 且 owner=usr-0001) 或 tags 含 urgent → rec-0001",
+      "多条件 + 与/或嵌套为双端统一能力；两端当前均为扁平 AND/OR 与每字段一条条件，不能表达嵌套组"
+    ],
+    "current": {
+      "ios": {
+        "maxConditions": "flat_one_per_field",
+        "nestedGroups": false,
+        "conjunctions": [
+          "and",
+          "or"
+        ],
+        "operators": [
+          "contains",
+          "equals",
+          "not_equals",
+          "greater_than",
+          "less_than"
+        ]
+      },
+      "android": {
+        "maxConditions": "flat_one_per_field",
+        "nestedGroups": false,
+        "conjunctions": [
+          "and",
+          "or"
+        ],
+        "operators": [
+          "contains",
+          "equals",
+          "not_equals",
+          "greater_than",
+          "less_than"
+        ]
+      }
+    }
+  },
+  "sortExpectations": {
+    "view": "viw-grid-0001",
+    "order": [
+      "rec-0003",
+      "rec-0001",
+      "rec-0002"
+    ],
+    "notes": [
+      "priority 降序：rec-0003(5) → rec-0001(4) → rec-0002(2)；并列时按 fld-due 升序（本夹具无并列）"
+    ],
+    "current": {
+      "ios": {
+        "maxConditions": 1
+      },
+      "android": {
+        "maxConditions": 1
+      }
+    }
+  },
+  "groupExpectations": {
+    "view": "viw-grid-0001",
+    "groups": [
+      {
+        "label": "待处理",
+        "count": 1,
+        "collapsed": false
+      },
+      {
+        "label": "进行中",
+        "count": 1,
+        "collapsed": false
+      },
+      {
+        "label": "已完成",
+        "count": 1,
+        "collapsed": true
+      }
+    ],
+    "notes": [
+      "按 fld-status 分组；done 组在配置中标记 collapsed",
+      "未分组时显示「未分组」"
+    ]
+  },
+  "leakPolicy": {
+    "forbiddenSubstrings": [
+      "rec-0001",
+      "rec-0002",
+      "rec-0003",
+      "usr-0001",
+      "usr-0002",
+      "tbl-contract-0001",
+      "viw-grid-0001",
+      "gantt",
+      "single_select",
+      "whiteboard",
+      "tabdataBlock"
+    ],
+    "current": {
+      "ios": {
+        "leaksUserIdInDisplay": false,
+        "leaksRecordIdInTitle": false,
+        "leaksRawViewType": false
+      },
+      "android": {
+        "leaksUserIdInDisplay": false,
+        "leaksRecordIdInTitle": false,
+        "leaksRawViewType": false
+      }
+    }
+  },
+  "knownGaps": {
+    "ios": [
+      {
+        "path": "/fieldDispositions/attachment",
+        "aspect": "disposition",
+        "batch": 3,
+        "issue": 10459,
+        "reason": "附件字段只读，尚未开放上传/删除"
+      },
+      {
+        "path": "/cardProjection",
+        "aspect": "presentation",
+        "batch": 3,
+        "issue": 10459,
+        "reason": "无新建预填；supportsPrefill 仍为 false"
+      },
+      {
+        "path": "/surfacePolicy",
+        "aspect": "disposition",
+        "batch": 3,
+        "issue": 10459,
+        "reason": "无 size class / 设备形态策略，固定单列卡片且无切换器"
+      },
+      {
+        "path": "/filterExpectations",
+        "aspect": "disposition",
+        "batch": 3,
+        "issue": 10459,
+        "reason": "仅扁平 AND/OR 与每字段一条条件，不能表达嵌套组"
+      },
+      {
+        "path": "/sortExpectations",
+        "aspect": "disposition",
+        "batch": 3,
+        "issue": 10459,
+        "reason": "交互排序仅单字段"
+      }
+    ],
+    "android": [
+      {
+        "path": "/fieldDispositions/attachment",
+        "aspect": "disposition",
+        "batch": 3,
+        "issue": 10459,
+        "reason": "附件字段只读占位，尚未开放上传/删除"
+      },
+      {
+        "path": "/cardProjection",
+        "aspect": "presentation",
+        "batch": 3,
+        "issue": 10459,
+        "reason": "没有新建预填；supportsPrefill 仍为 false"
+      },
+      {
+        "path": "/surfacePolicy",
+        "aspect": "disposition",
+        "batch": 3,
+        "issue": 10459,
+        "reason": "无平板横屏 Grid 表面与切换器，固定卡片"
+      },
+      {
+        "path": "/filterExpectations",
+        "aspect": "disposition",
+        "batch": 3,
+        "issue": 10459,
+        "reason": "仅扁平 AND/OR 与每字段一条条件，不能表达嵌套组"
+      },
+      {
+        "path": "/sortExpectations",
+        "aspect": "disposition",
+        "batch": 3,
+        "issue": 10459,
+        "reason": "setSort 只保留一条排序"
+      }
+    ]
+  },
+  "releaseGate": {
+    "requireDispositionParity": true,
+    "requireKnownGapsEmpty": true,
+    "releaseReadiness": "blocked"
+  }
+}

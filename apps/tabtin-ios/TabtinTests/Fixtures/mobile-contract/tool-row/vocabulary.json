@@ -1,0 +1,879 @@
+{
+  "version": 1,
+  "generic": {
+    "labelKey": "generic_tool",
+    "icon": "Wrench",
+    "summaryKind": "generic"
+  },
+  "labelKeys": {
+    "terminal": {
+      "zh": "执行命令",
+      "en": "Run command"
+    },
+    "ssh": {
+      "zh": "SSH",
+      "en": "SSH"
+    },
+    "read_file": {
+      "zh": "读取文件",
+      "en": "Read file"
+    },
+    "write_file": {
+      "zh": "写入文件",
+      "en": "Write file"
+    },
+    "edit_file": {
+      "zh": "编辑文件",
+      "en": "Edit file"
+    },
+    "delete_file": {
+      "zh": "删除文件",
+      "en": "Delete file"
+    },
+    "sql": {
+      "zh": "查询",
+      "en": "Query"
+    },
+    "web_search": {
+      "zh": "网络搜索",
+      "en": "Web search"
+    },
+    "web_fetch": {
+      "zh": "抓取网页",
+      "en": "Fetch page"
+    },
+    "code_search": {
+      "zh": "代码搜索",
+      "en": "Search code"
+    },
+    "git_status": {
+      "zh": "查看 Git 状态",
+      "en": "Git status"
+    },
+    "git_diff": {
+      "zh": "查看 Git 差异",
+      "en": "Git diff"
+    },
+    "todo": {
+      "zh": "更新清单",
+      "en": "Update todos"
+    },
+    "subagent": {
+      "zh": "派发子任务",
+      "en": "Delegate task"
+    },
+    "ask_user": {
+      "zh": "询问用户",
+      "en": "Ask user"
+    },
+    "memory_write": {
+      "zh": "写入记忆",
+      "en": "Write memory"
+    },
+    "memory_delete": {
+      "zh": "删除记忆",
+      "en": "Delete memory"
+    },
+    "show_widget": {
+      "zh": "展示组件",
+      "en": "Show widget"
+    },
+    "present_to_user": {
+      "zh": "呈现结果",
+      "en": "Present result"
+    },
+    "generic_tool": {
+      "zh": "工具调用",
+      "en": "Tool call"
+    },
+    "device_info": {
+      "zh": "读取设备信息",
+      "en": "Read device info"
+    },
+    "battery_info": {
+      "zh": "读取电池信息",
+      "en": "Read battery info"
+    },
+    "network_info": {
+      "zh": "读取网络信息",
+      "en": "Read network info"
+    },
+    "contacts": {
+      "zh": "读取联系人",
+      "en": "Read contacts"
+    },
+    "sms_read": {
+      "zh": "读取短信",
+      "en": "Read SMS"
+    },
+    "sms_send": {
+      "zh": "发送短信",
+      "en": "Send SMS"
+    },
+    "call_log": {
+      "zh": "读取通话记录",
+      "en": "Read call log"
+    },
+    "make_call": {
+      "zh": "拨打电话",
+      "en": "Make call"
+    },
+    "calendar": {
+      "zh": "读取日历",
+      "en": "Read calendar"
+    },
+    "notifications": {
+      "zh": "读取通知",
+      "en": "Read notifications"
+    },
+    "installed_apps": {
+      "zh": "读取应用列表",
+      "en": "List apps"
+    },
+    "media": {
+      "zh": "读取媒体",
+      "en": "Read media"
+    },
+    "location": {
+      "zh": "读取位置",
+      "en": "Read location"
+    },
+    "screen_capture": {
+      "zh": "截取屏幕",
+      "en": "Capture screen"
+    },
+    "screen_snapshot": {
+      "zh": "读取屏幕",
+      "en": "Read screen"
+    },
+    "screen_ui_tree": {
+      "zh": "读取界面结构",
+      "en": "Read UI tree"
+    },
+    "screen_tap": {
+      "zh": "点击屏幕",
+      "en": "Tap screen"
+    },
+    "screen_swipe": {
+      "zh": "滑动屏幕",
+      "en": "Swipe screen"
+    },
+    "screen_long_press": {
+      "zh": "长按屏幕",
+      "en": "Long press"
+    },
+    "screen_find": {
+      "zh": "查找界面元素",
+      "en": "Find UI element"
+    },
+    "screen_type": {
+      "zh": "输入文本",
+      "en": "Type text"
+    },
+    "screen_type_secret": {
+      "zh": "输入敏感文本",
+      "en": "Type secret"
+    },
+    "screen_key": {
+      "zh": "发送按键",
+      "en": "Send key"
+    },
+    "screen_wait": {
+      "zh": "等待界面",
+      "en": "Wait for UI"
+    },
+    "screen_open_app": {
+      "zh": "打开应用",
+      "en": "Open app"
+    },
+    "screen_force_stop": {
+      "zh": "停止应用",
+      "en": "Stop app"
+    },
+    "system_setting": {
+      "zh": "系统设置",
+      "en": "System settings"
+    },
+    "stealth_mode": {
+      "zh": "隐身模式",
+      "en": "Stealth mode"
+    },
+    "launch_intent": {
+      "zh": "打开链接",
+      "en": "Open link"
+    },
+    "save_to_device": {
+      "zh": "保存到设备",
+      "en": "Save to device"
+    },
+    "automation_status": {
+      "zh": "读取自动化状态",
+      "en": "Read automation status"
+    },
+    "tab_search": {
+      "zh": "查找内容",
+      "en": "Find content"
+    },
+    "tab_remove": {
+      "zh": "移除内容",
+      "en": "Remove content"
+    },
+    "tab_restore": {
+      "zh": "恢复内容",
+      "en": "Restore content"
+    },
+    "tab_create": {
+      "zh": "创建内容",
+      "en": "Create content"
+    },
+    "tab_update": {
+      "zh": "更新内容",
+      "en": "Update content"
+    },
+    "tab_publish": {
+      "zh": "发布内容",
+      "en": "Publish content"
+    },
+    "tab_doc": {
+      "zh": "处理文档",
+      "en": "Process document"
+    },
+    "tab_memo": {
+      "zh": "处理笔记",
+      "en": "Process note"
+    },
+    "tab_site": {
+      "zh": "处理站点",
+      "en": "Process site"
+    },
+    "tab_data": {
+      "zh": "处理表格",
+      "en": "Process table"
+    }
+  },
+  "families": [
+    {
+      "names": [
+        "bash",
+        "shell",
+        "execute_command",
+        "terminal_execute",
+        "run_terminal_command",
+        "execute_in_terminal",
+        "exec_command",
+        "write_stdin",
+        "read_thread_terminal",
+        "terminal_open",
+        "terminal_write",
+        "terminal_read",
+        "terminal_list",
+        "run_command"
+      ],
+      "labelKey": "terminal",
+      "icon": "Terminal",
+      "summaryKind": "command",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "ssh_execute",
+        "ssh",
+        "remote_execute"
+      ],
+      "labelKey": "ssh",
+      "icon": "Server",
+      "summaryKind": "command",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "file_read",
+        "read_file",
+        "read",
+        "document_read",
+        "parse_document",
+        "cat_file",
+        "view_file"
+      ],
+      "labelKey": "read_file",
+      "icon": "FileText",
+      "summaryKind": "path",
+      "timelineStyle": "compact"
+    },
+    {
+      "names": [
+        "file_write",
+        "write_file",
+        "create_file",
+        "write"
+      ],
+      "labelKey": "write_file",
+      "icon": "FileText",
+      "summaryKind": "path",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "file_edit",
+        "apply_diff",
+        "edit_file",
+        "edit",
+        "multiedit",
+        "apply_patch",
+        "str_replace",
+        "str_replace_editor",
+        "patch"
+      ],
+      "labelKey": "edit_file",
+      "icon": "FilePenLine",
+      "summaryKind": "path",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "file_delete",
+        "delete_file",
+        "remove_file",
+        "rm_file"
+      ],
+      "labelKey": "delete_file",
+      "icon": "FileX2",
+      "summaryKind": "path",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "execute_sql",
+        "sql_execute",
+        "sql_query",
+        "table_query",
+        "query_sql",
+        "run_sql"
+      ],
+      "labelKey": "sql",
+      "icon": "Database",
+      "summaryKind": "sql",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "web_search",
+        "search",
+        "websearch",
+        "search_web",
+        "google_search"
+      ],
+      "labelKey": "web_search",
+      "icon": "Search",
+      "summaryKind": "query",
+      "timelineStyle": "compact"
+    },
+    {
+      "names": [
+        "web_fetch",
+        "fetch_url",
+        "webfetch",
+        "browse_url",
+        "tabs_info"
+      ],
+      "labelKey": "web_fetch",
+      "icon": "Globe",
+      "summaryKind": "url",
+      "timelineStyle": "compact"
+    },
+    {
+      "names": [
+        "grep",
+        "glob",
+        "code_search",
+        "semantic_search",
+        "code_grep",
+        "greptool",
+        "globtool",
+        "searchfiles",
+        "code_glob",
+        "code_semantic_search",
+        "list_files",
+        "skills_read",
+        "skills_search",
+        "rag_search",
+        "memory_search",
+        "ripgrep",
+        "search_code",
+        "find_code"
+      ],
+      "labelKey": "code_search",
+      "icon": "Search",
+      "summaryKind": "query",
+      "timelineStyle": "compact"
+    },
+    {
+      "names": [
+        "git_status"
+      ],
+      "labelKey": "git_status",
+      "icon": "GitBranch",
+      "summaryKind": "path",
+      "timelineStyle": "compact"
+    },
+    {
+      "names": [
+        "git_diff"
+      ],
+      "labelKey": "git_diff",
+      "icon": "GitCompare",
+      "summaryKind": "path",
+      "timelineStyle": "compact"
+    },
+    {
+      "names": [
+        "todo_read",
+        "todo_write"
+      ],
+      "labelKey": "todo",
+      "icon": "CheckCircle2",
+      "summaryKind": "none",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "task",
+        "dispatch",
+        "dispatch_agent",
+        "delegate_task",
+        "subagent",
+        "subagent_run",
+        "agent"
+      ],
+      "labelKey": "subagent",
+      "icon": "Bot",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "ask_user",
+        "ask_form",
+        "request_approval"
+      ],
+      "labelKey": "ask_user",
+      "icon": "HelpCircle",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "memory_write"
+      ],
+      "labelKey": "memory_write",
+      "icon": "NotebookPen",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "memory_delete"
+      ],
+      "labelKey": "memory_delete",
+      "icon": "Trash2",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "show_widget"
+      ],
+      "labelKey": "show_widget",
+      "icon": "LayoutTemplate",
+      "summaryKind": "generic",
+      "timelineStyle": "compact"
+    },
+    {
+      "names": [
+        "present_to_user"
+      ],
+      "labelKey": "present_to_user",
+      "icon": "Sparkles",
+      "summaryKind": "generic",
+      "timelineStyle": "compact"
+    },
+    {
+      "names": [
+        "get_device_info"
+      ],
+      "labelKey": "device_info",
+      "icon": "Smartphone",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "get_battery_info"
+      ],
+      "labelKey": "battery_info",
+      "icon": "Battery",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "get_network_info"
+      ],
+      "labelKey": "network_info",
+      "icon": "Wifi",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "read_contacts",
+        "search_contacts"
+      ],
+      "labelKey": "contacts",
+      "icon": "ContactRound",
+      "summaryKind": "query",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "read_sms"
+      ],
+      "labelKey": "sms_read",
+      "icon": "MessageSquare",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "send_sms"
+      ],
+      "labelKey": "sms_send",
+      "icon": "Send",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "read_call_log"
+      ],
+      "labelKey": "call_log",
+      "icon": "Phone",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "make_call"
+      ],
+      "labelKey": "make_call",
+      "icon": "PhoneCall",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "read_calendar"
+      ],
+      "labelKey": "calendar",
+      "icon": "Calendar",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "read_notifications"
+      ],
+      "labelKey": "notifications",
+      "icon": "Bell",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "list_installed_apps"
+      ],
+      "labelKey": "installed_apps",
+      "icon": "AppWindow",
+      "summaryKind": "query",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "read_media"
+      ],
+      "labelKey": "media",
+      "icon": "Images",
+      "summaryKind": "path",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "get_location"
+      ],
+      "labelKey": "location",
+      "icon": "MapPin",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "screen_capture"
+      ],
+      "labelKey": "screen_capture",
+      "icon": "ScanLine",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "screen_snapshot"
+      ],
+      "labelKey": "screen_snapshot",
+      "icon": "MonitorSmartphone",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "screen_ui_tree"
+      ],
+      "labelKey": "screen_ui_tree",
+      "icon": "Network",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "screen_tap",
+        "screen_tap_area",
+        "screen_tap_element"
+      ],
+      "labelKey": "screen_tap",
+      "icon": "MousePointerClick",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "screen_swipe"
+      ],
+      "labelKey": "screen_swipe",
+      "icon": "MoveHorizontal",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "screen_long_press",
+        "screen_long_press_element"
+      ],
+      "labelKey": "screen_long_press",
+      "icon": "Hand",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "screen_find_element",
+        "screen_get_context"
+      ],
+      "labelKey": "screen_find",
+      "icon": "Search",
+      "summaryKind": "query",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "screen_type_in_element",
+        "screen_type_text"
+      ],
+      "labelKey": "screen_type",
+      "icon": "Keyboard",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "screen_type_secret"
+      ],
+      "labelKey": "screen_type_secret",
+      "icon": "Lock",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "screen_key_event"
+      ],
+      "labelKey": "screen_key",
+      "icon": "Command",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "screen_wait_for_idle",
+        "screen_wait_for_element"
+      ],
+      "labelKey": "screen_wait",
+      "icon": "Hourglass",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "screen_open_app",
+        "screen_launch_app"
+      ],
+      "labelKey": "screen_open_app",
+      "icon": "AppWindow",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "screen_force_stop"
+      ],
+      "labelKey": "screen_force_stop",
+      "icon": "Square",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "set_system_setting",
+        "get_system_setting"
+      ],
+      "labelKey": "system_setting",
+      "icon": "Settings",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "set_stealth_mode"
+      ],
+      "labelKey": "stealth_mode",
+      "icon": "EyeOff",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "launch_intent"
+      ],
+      "labelKey": "launch_intent",
+      "icon": "ExternalLink",
+      "summaryKind": "url",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "save_to_device"
+      ],
+      "labelKey": "save_to_device",
+      "icon": "HardDriveDownload",
+      "summaryKind": "path",
+      "timelineStyle": "card"
+    },
+    {
+      "names": [
+        "get_automation_status"
+      ],
+      "labelKey": "automation_status",
+      "icon": "Activity",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    }
+  ],
+  "prefixRules": [
+    {
+      "prefix": "tab",
+      "match": "contains_search_or_get_or_list",
+      "labelKey": "tab_search",
+      "icon": "Search",
+      "summaryKind": "query",
+      "timelineStyle": "compact"
+    },
+    {
+      "prefix": "tab",
+      "match": "contains_delete_or_archive_or_trash",
+      "labelKey": "tab_remove",
+      "icon": "Trash2",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "prefix": "tab",
+      "match": "contains_restore_or_rollback",
+      "labelKey": "tab_restore",
+      "icon": "RefreshCw",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "prefix": "tab",
+      "match": "contains_create_or_insert_or_add",
+      "labelKey": "tab_create",
+      "icon": "PlusCircle",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "prefix": "tab",
+      "match": "contains_update_or_edit_or_write",
+      "labelKey": "tab_update",
+      "icon": "FilePenLine",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "prefix": "tab",
+      "match": "contains_publish_or_share_or_grant",
+      "labelKey": "tab_publish",
+      "icon": "Sparkles",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "prefix": "tabdoc_",
+      "match": "any",
+      "labelKey": "tab_doc",
+      "icon": "FileText",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "prefix": "tabmemo_",
+      "match": "any",
+      "labelKey": "tab_memo",
+      "icon": "FileText",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "prefix": "tabsite_",
+      "match": "any",
+      "labelKey": "tab_site",
+      "icon": "Globe",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "prefix": "tabdata_",
+      "match": "any",
+      "labelKey": "tab_data",
+      "icon": "Database",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    },
+    {
+      "prefix": "tab",
+      "match": "any",
+      "labelKey": "generic_tool",
+      "icon": "Wrench",
+      "summaryKind": "generic",
+      "timelineStyle": "card"
+    }
+  ]
+}

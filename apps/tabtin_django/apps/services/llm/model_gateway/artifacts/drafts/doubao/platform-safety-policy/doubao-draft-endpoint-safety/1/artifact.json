@@ -1,0 +1,29 @@
+{
+  "blocked_extension_targets": [
+    "protocol.request.headers.authorization"
+  ],
+  "commercial_tier_limit": null,
+  "evidence": [
+    {
+      "locator": "endpoint policy remains separately trusted and non-publishable",
+      "source": "PR5 draft boundary"
+    }
+  ],
+  "identity": {
+    "canonical_hash": "sha256:79a24d10dbe0577385a923fef1a3ba811572f154b8ad213984e77ee71e65efc5",
+    "key": "doubao-draft-endpoint-safety",
+    "kind": "platform-safety-policy",
+    "revision": "1"
+  },
+  "platform_ceiling": null,
+  "platform_ceiling_enforceable": false,
+  "platform_ceiling_verified": false,
+  "policy_keys": [
+    "draft-only",
+    "no-secrets",
+    "offline-validation-required"
+  ],
+  "provider_maximum": null,
+  "provider_maximum_verified": false,
+  "schema_version": "1"
+}

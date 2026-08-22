@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "icons": {
+    "cloud-resources": {
+      "default": "assets/app-icons/cloud-resources.svg",
+      "presentation": "selfContained"
+    },
+    "desktop_home": {
+      "default": "assets/app-icons/workbench.svg",
+      "presentation": "selfContained"
+    },
+    "desktop-apps": {
+      "default": "assets/app-icons/app-grid.svg",
+      "presentation": "selfContained"
+    }
+  }
+}

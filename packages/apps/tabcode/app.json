@@ -1,0 +1,101 @@
+{
+  "id": "tabcode",
+  "name": "Code",
+  "version": "0.1.0",
+  "description": "Agent 工作目录的代码协作视角 — 文件树 + Diff + Git + Agent 上下文投喂（单根契约：以 agent.working_dir 为唯一项目根）",
+  "kind": "app",
+  "executionTarget": "hybrid",
+  "uiRuntime": "localBundle",
+  "agentRuntime": "hostBackend",
+  "distribution": "builtin",
+  "surface": "builtin",
+  "contextSources": [
+    "tabcode"
+  ],
+  "permissions": [
+    "tabcode"
+  ],
+  "skills": [
+    "skills/tabcode-operator"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "tabcode-operator": {
+        "enabled": true
+      }
+    }
+  },
+  "icon": "code",
+  "uiHints": {
+    "iconAsset": {
+      "default": "assets/icon.svg",
+      "presentation": "selfContained",
+      "aliases": [
+        "code",
+        "IDE"
+      ]
+    }
+  },
+  "runtimeBindings": {
+    "toolProvider": "action-tools:tabcode",
+    "uiProvider": "electron:context-space.tabcode",
+    "skillsProvider": "skills:local"
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "full"
+    },
+    "daemon": {
+      "mode": "full"
+    }
+  },
+  "agentIntegration": {
+    "contextType": "tabcode",
+    "contextFields": [
+      {
+        "name": "current_code_project_path",
+        "label": "project_path",
+        "isResourceId": true
+      },
+      {
+        "name": "current_code_file",
+        "label": "current_file",
+        "isResourceId": false
+      },
+      {
+        "name": "current_git_branch",
+        "label": "git_branch",
+        "isResourceId": false
+      },
+      {
+        "name": "current_git_changed_files",
+        "label": "git_changed_files",
+        "isResourceId": false
+      }
+    ],
+    "toolDomains": [],
+    "hasPromptSection": true,
+    "displayField": "path",
+    "workspaceRootSource": "current_code_project_path",
+    "isFrontendDependent": false,
+    "typeAliases": []
+  },
+  "opens": {
+    "types": [
+      {
+        "type": "code_file",
+        "priority": 100
+      },
+      {
+        "type": "code_selection",
+        "priority": 100
+      }
+    ]
+  },
+  "catalog": {
+    "category": "development",
+    "canCreate": false,
+    "searchable": false,
+    "isDefaultEnabled": true
+  }
+}

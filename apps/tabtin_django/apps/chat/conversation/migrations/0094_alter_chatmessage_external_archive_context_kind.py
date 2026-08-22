@@ -1,0 +1,37 @@
+from django.db import migrations, models
+
+
+class Migration(migrations.Migration):
+    dependencies = [
+        ("conversation", "0093_backfill_remaining_system_authored_roles"),
+    ]
+
+    operations = [
+        migrations.AlterField(
+            model_name="chatmessage",
+            name="message_kind",
+            field=models.CharField(
+                choices=[
+                    ("llm", "LLM Output"),
+                    ("tool_artifact", "Tool Artifact"),
+                    ("error_envelope", "Error Envelope"),
+                    ("environment_context", "Environment Context"),
+                    ("agent_profile_context", "Agent Profile Context"),
+                    ("system_prompt_context", "System Prompt Context"),
+                    ("compaction_summary", "Compaction Summary"),
+                    ("hitl_interaction", "HITL Interaction"),
+                    ("external_archive_context", "External Archive Context"),
+                ],
+                default="llm",
+                help_text=(
+                    "ChatMessage 语义类型——区分 LLM 输出 / 工具产物气泡 / 错误文案。"
+                    "替换原来用 model_id 字面量 + synthetic 隐式判别的协议层 hack。"
+                    "daemon 主循环 push 的 role=user + 含 tool_result block 的合成消息"
+                    "走合并路径，不会作为独立 ChatMessage 落表（在 reassembler 层合并到"
+                    "对应 LLM 消息）。"
+                ),
+                max_length=24,
+                verbose_name="消息语义类型",
+            ),
+        ),
+    ]

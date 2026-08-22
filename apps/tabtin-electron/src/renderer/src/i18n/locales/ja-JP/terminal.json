@@ -1,0 +1,64 @@
+{
+  "title": "ターミナル",
+  "exitCode": "終了コード: {{code}}",
+  "restart": "再起動",
+  "scrollToBottom": "一番下までスクロール",
+  "errors": {
+    "createSessionFailed": "[エラー] ターミナルセッションを作成できません",
+    "ptyUnavailable": "PTY API は使用できません"
+  },
+  "status": {
+    "processExited": "プロセスが終了しました。終了コード: {{code}}",
+    "idle": "アイドル状態",
+    "running": "ランニング",
+    "exited": "終了しました"
+  },
+  "restore": {
+    "title": "以前の出力を復元しました (プロセスが切断されました)",
+    "restored": "履歴出力が復元されました",
+    "startShell": "シェルを再起動します",
+    "dismiss": "解雇する"
+  },
+  "split": {
+    "splitRight": "右に分割",
+    "splitDown": "スプリットダウン",
+    "maximize": "最大化する",
+    "restore": "復元",
+    "close": "ペインを閉じる",
+    "maxPanesReached": "最大ペインに達しました ({{max}})",
+    "equalize": "すべてのペインを均等化する",
+    "doubleClickToEqualize": "ダブルクリックして均等化します"
+  },
+  "contextMenu": {
+    "copy": "コピー",
+    "paste": "ペースト",
+    "search": "検索",
+    "scrollToBottom": "一番下までスクロール",
+    "clear": "クリアターミナル",
+    "splitRight": "右に分割",
+    "splitDown": "スプリットダウン",
+    "equalize": "すべてのペインを均等化する",
+    "maximize": "最大化する",
+    "restore": "復元",
+    "close": "ペインを閉じる"
+  },
+  "search": {
+    "placeholder": "端末を検索…",
+    "noMatch": "一致しません",
+    "matchFound": "見つかりました",
+    "caseSensitive": "大文字と小文字を区別する",
+    "previous": "前へ",
+    "next": "次へ",
+    "close": "検索を閉じる"
+  },
+  "imagePaste": {
+    "saving": "画像を保存中…",
+    "saved": "画像を保存しました",
+    "failed": "画像の貼り付けに失敗しました",
+    "tooLarge": "画像が大きすぎます ({{size}}MB)、最大 10MB"
+  },
+  "dragDrop": {
+    "hint": "ドロップしてファイルパスを挿入",
+    "pathError": "ファイルパスを読み取れません"
+  }
+}

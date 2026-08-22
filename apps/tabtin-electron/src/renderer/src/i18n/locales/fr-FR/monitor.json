@@ -1,0 +1,84 @@
+{
+  "status": {
+    "running": "Courir",
+    "stopped": "Arrêté",
+    "streamEnded": "Flux terminé",
+    "failed": "Échec"
+  },
+  "stop": "Arrêter le moniteur",
+  "failReason": {
+    "spawnPtyFailed": "Le moniteur n'a pas pu démarrer (occupé ou limite atteinte). Réessayez plus tard.",
+    "writePtyFailed": "Échec de l'exécution de la commande de surveillance. Veuillez réessayer.",
+    "invalidRegex": "Modèle de filtre non valide. Vérifiez la règle et réessayez.",
+    "alreadyRunning": "Ce moniteur est déjà en cours d'exécution.",
+    "unknownAction": "Action de surveillance inconnue."
+  },
+  "emitInterrupted": "Rapports de surveillance interrompus (authentification expirée). Les données peuvent être incomplètes. Vérifiez l'état de connexion.",
+  "resourceMonitor": {
+    "severity": {
+      "healthy": "Détendu",
+      "attention": "Bien",
+      "heavy": "Lourd"
+    },
+    "tagline": {
+      "healthy": "Tout est calme : créez en toute simplicité",
+      "attention": "Fonctionnement fluide : suivez votre inspiration",
+      "heavy": "Vous vous sentez lourd : essayez de fermer les onglets inutilisés ?"
+    },
+    "current": "Actuel",
+    "browser": "Navigateur",
+    "browserReclaim": {
+      "checkTitle": "Vérifier la création de la vue du navigateur",
+      "available": "{{count}} Les navigateurs inactifs peuvent être récupérés",
+      "noneIdle": "Aucun navigateur inactif à récupérer pour le moment",
+      "noBrowsers": "Aucune vue du navigateur suivie",
+      "reclaimMany": "{{reason}}. Récupérez d'abord les navigateurs inactifs détachés {{count}}, puis vérifiez si l'utilisation globale diminue.",
+      "reclaimOne": "{{reason}}. Fermez d'abord le navigateur inactif détaché {{title}}, puis vérifiez si l'utilisation globale diminue.",
+      "overview": "{{reason}}. Il existe actuellement {{total}} vues du navigateur, {{share}} du total.",
+      "retained": "{{count}} Les vues du navigateur détachées ou en aperçu sont toujours en cours d'utilisation ou de chargement. Ils ne seront pas récupérés pour éviter d'interrompre les travaux.",
+      "metricAvailable": "{{count}} récupérable",
+      "metricNoneIdle": "Aucun inactif",
+      "metricNoBrowsers": "Aucun",
+      "action": "Récupérer les navigateurs inactifs",
+      "actionUnavailable": "Aucun article récupérable",
+      "actionShort": "Récupérer",
+      "boundaryNote": "Récupère uniquement les navigateurs inactifs détachés ou en aperçu non utilisés dans la fenêtre principale. Les onglets normaux de la fenêtre principale ne sont pas fermés."
+    },
+    "spaceSection": "Espace",
+    "resourcesSection": "Ressources",
+    "systemOverhead": "Frais généraux du système",
+    "uiEngine": "Moteur d'interface utilisateur",
+    "uiEngineDetail": "{{cpu}} · Mémoire partagée pour le moteur de rendu de page",
+    "appHost": "Hôte de l'application",
+    "appHostDetail": "{{cpu}} · Mémoire de base pour l'application TabTin elle-même",
+    "unassigned": "Non attribué",
+    "unassignedDetail": "{{cpu}} · Ressources non encore attribuées à un Espace",
+    "background": "Contexte",
+    "cpu": "Processeur",
+    "cpuCores": "Noyaux {{count}}",
+    "memory": "Mémoire",
+    "ramShare": "{{percent}} de RAM",
+    "tabs": "Onglets",
+    "currentTabs": "Onglets actuels",
+    "allSessionTabs": "{{count}} onglets totaux",
+    "closeAllTabs": "Fermez tous les onglets de chaque session non archivée",
+    "panes": "Volets {{count}}",
+    "tabCount": "Onglets {{count}}",
+    "runCount": "{{count}} s'exécute",
+    "appCount": "{{label}} × {{count}}",
+    "appBreakdownSeparator": ",",
+    "notCollected": "Non collecté",
+    "refresh": "Actualiser",
+    "refreshLoading": "Chargement",
+    "trend": {
+      "memoryUp": "Mémoire augmentée {{delta}}",
+      "memoryDown": "Mémoire en panne {{delta}}",
+      "cpuUp": "Processeur en hausse {{delta}}",
+      "cpuDown": "Processeur en panne {{delta}}",
+      "stale": "Données retardées {{duration}}"
+    },
+    "viewDetails": "Afficher les détails",
+    "indicatorTitle": "Performances",
+    "openSettingsAria": "Ouvrir les paramètres de l'analyseur de performances"
+  }
+}

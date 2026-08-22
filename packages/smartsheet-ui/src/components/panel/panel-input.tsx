@@ -1,0 +1,37 @@
+/**
+ * PanelInput — compact text input for property panels.
+ *
+ * Borderless design with subtle background, matches NumberInput styling.
+ */
+
+import React, { forwardRef, memo } from 'react'
+import { cn } from '../../utils/cn'
+
+export interface PanelInputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+  error?: boolean
+}
+
+export const PanelInput = memo(
+  forwardRef<HTMLInputElement, PanelInputProps>(function PanelInput(
+    { className, error, ...props },
+    ref,
+  ) {
+    return (
+      <input
+        ref={ref}
+        className={cn(
+          'h-7 w-full rounded bg-muted/40 px-1.5 text-body text-foreground outline-none',
+          'border-none transition-colors',
+          'hover:bg-muted/60',
+          'focus:bg-muted/60 focus:ring-1 focus:ring-inset focus:ring-accent/40',
+          'placeholder:text-muted-foreground/60',
+          'disabled:pointer-events-none disabled:opacity-40',
+          error && 'ring-1 ring-destructive/50',
+          className,
+        )}
+        {...props}
+      />
+    )
+  }),
+)

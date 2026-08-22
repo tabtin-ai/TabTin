@@ -1,0 +1,23 @@
+{
+  "adapter_key": "openai-chat-completions",
+  "adapter_version": "draft-v1",
+  "identity": {
+    "canonical_hash": "sha256:473d7520366cbdfc53beb7c49dac9363b208ee00d5ec7f141cc8e8ff358ccb47",
+    "key": "doubao-openai-chat-draft-extensions",
+    "kind": "extension-target-allowlist",
+    "revision": "1"
+  },
+  "mapping_role": "runtime-extension",
+  "mapping_schema_ref": {
+    "expected_hash": "sha256:0300f15676466a9dd146bdb9bb29201e8cda5bd9c19f5ae21edce4381307aff6",
+    "key": "doubao-draft-contract-evidence",
+    "kind": "projection-metadata",
+    "revision": "1"
+  },
+  "protocol_type": "openai-compatible",
+  "schema_version": "1",
+  "targets": [
+    "thinking.type",
+    "reasoning_effort"
+  ]
+}

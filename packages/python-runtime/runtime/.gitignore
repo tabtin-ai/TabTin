@@ -1,0 +1,4 @@
+# 构建产物（tar.gz + manifest.json）不入库；目录本体保留占位。
+*
+!.gitkeep
+!.gitignore

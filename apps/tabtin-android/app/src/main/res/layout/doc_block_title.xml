@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 文档标题块 -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/titleInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:hint="@string/doc_untitled"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLines="5"
+        android:textColor="@color/doc_editor_text_primary"
+        android:textColorHint="@color/doc_editor_text_tertiary" />
+</FrameLayout>

@@ -1,0 +1,14 @@
+{
+  "model": "MiniMax-Text-01",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是一个有用的助手。"
+    },
+    {
+      "role": "user",
+      "content": "你好"
+    }
+  ]
+}

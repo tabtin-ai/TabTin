@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 无白底内容字形，对齐 iOS AppGlyphTabdoc / packages tabdoc glyph。 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="20"
+    android:viewportHeight="20">
+    <group android:translateX="0.375">
+        <path android:pathData="M6,3.25h5.375L16,7.875V14.5a2.75,2.75 0,0 1,-2.75 2.75H6a2.75,2.75 0,0 1,-2.75 -2.75V6A2.75,2.75 0,0 1,6 3.25Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:startX="4.5"
+                    android:startY="3.5"
+                    android:endX="15"
+                    android:endY="17"
+                    android:type="linear">
+                    <item android:offset="0" android:color="#FF0746D7" />
+                    <item android:offset="0.52" android:color="#FF086BE4" />
+                    <item android:offset="1" android:color="#FF168FEA" />
+                </gradient>
+            </aapt:attr>
+        </path>
+        <path android:pathData="M11.375,3.25v2.375a2.25,2.25 0,0 0,2.25 2.25H16l-4.625,-4.625Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:startX="11.5"
+                    android:startY="3.5"
+                    android:endX="15.5"
+                    android:endY="8"
+                    android:type="linear">
+                    <item android:offset="0" android:color="#FF719BFF" />
+                    <item android:offset="1" android:color="#FF8FC2FF" />
+                </gradient>
+            </aapt:attr>
+        </path>
+        <path
+            android:pathData="M6.25,9.5H12"
+            android:strokeWidth="1"
+            android:strokeColor="#F5FFFFFF"
+            android:strokeLineCap="round"
+            android:fillColor="#00000000" />
+        <path
+            android:pathData="M6.25,11.75H13"
+            android:strokeWidth="1"
+            android:strokeColor="#E0FFFFFF"
+            android:strokeLineCap="round"
+            android:fillColor="#00000000" />
+        <path
+            android:pathData="M6.25,14h4.5"
+            android:strokeWidth="1"
+            android:strokeColor="#CCFFFFFF"
+            android:strokeLineCap="round"
+            android:fillColor="#00000000" />
+    </group>
+</vector>

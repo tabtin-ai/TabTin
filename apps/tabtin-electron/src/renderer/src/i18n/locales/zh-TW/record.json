@@ -1,0 +1,58 @@
+{
+  "errors": {
+    "noTable": "未選擇表格",
+    "submitFailed": "操作失敗",
+    "loadHistoryFailed": "載入歷史記錄失敗",
+    "tryAgainLater": "請稍後重試"
+  },
+  "comments": {
+    "recoverableSubmitFailed": "網路連線失敗或要求逾時，評論未發送，草稿已保留。請檢查網路後重試。",
+    "title": "評論",
+    "toggle": "開啟評論",
+    "placeholder": "新增評論，輸入 @ 提及成員",
+    "submit": "發送評論",
+    "delete": "刪除",
+    "deleting": "正在刪除...",
+    "retry": "重試",
+    "loading": "正在載入評論...",
+    "noMentionResults": "沒有匹配的成員",
+    "loadMore": "載入更早評論",
+    "loadingMore": "正在載入...",
+    "reply": "回覆",
+    "replyingTo": "回覆",
+    "cancelReply": "取消回覆",
+    "deletedComment": "原評論已刪除",
+    "filterOpen": "未解決",
+    "filterResolved": "已解決",
+    "filterAll": "全部",
+    "resolveThread": "標記已解決",
+    "reopenThread": "重新開啟",
+    "updatingThread": "正在更新...",
+    "empty": "暫無評論",
+    "countUnit": "條線"
+  },
+  "systemFields": {
+    "parentRecord": {
+      "name": "父記錄",
+      "description": "子記錄層級關係的父記錄欄位"
+    }
+  },
+  "apiErrors": {
+    "fetchTrashFailed": "取得回收站記錄失敗",
+    "restoreFromTrashFailed": "恢復記錄失敗",
+    "restoreBatchFromTrashFailed": "批次恢復記錄失敗"
+  },
+  "dialog": {
+    "createTitle": "新增記錄到 \"{{name}}\"",
+    "editTitle": "編輯記錄",
+    "viewTitle": "查看記錄",
+    "createDescription": "填寫表單建立新記錄。標記 * 的欄位為必填項。",
+    "editDescription": "修改記錄資訊。主欄位也可編輯，請確保唯一識別不重複。"
+  },
+  "incrementalSync": {
+    "errors": {
+      "aiTimeout": "AI 處理逾時，請重新整理頁面",
+      "networkError": "網路錯誤，請重新整理頁面"
+    }
+  }
+}

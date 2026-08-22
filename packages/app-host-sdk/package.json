@@ -1,0 +1,51 @@
+{
+  "name": "@tabtin/app-host-sdk",
+  "version": "0.1.0",
+  "description": "Unified SDK for App Host UI integration — provides context injection for builtin (in-process) and marketplace (WebContentsView) Apps",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./host": {
+      "source": "./src/host/index.ts",
+      "types": "./dist/host/index.d.ts",
+      "import": "./dist/host/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist .test-dist",
+    "build:test": "tsc -p tsconfig.test.json",
+    "test": "pnpm run build:test && node -e \"require('node:fs').writeFileSync('.test-dist/package.json', '{\\\"type\\\":\\\"commonjs\\\"}')\" && node --test .test-dist/tests/*.test.js"
+  },
+  "keywords": [
+    "tabtin",
+    "app-host",
+    "sdk"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.1",
+    "react": "^19.0.0",
+    "typescript": "5.7.2"
+  }
+}

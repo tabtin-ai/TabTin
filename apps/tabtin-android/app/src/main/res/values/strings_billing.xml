@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 计费 WebSocket 事件通知文案 -->
+    <string name="billing_balance_low">余额不足提醒</string>
+    <string name="billing_balance_low_detail">当前余额 %1$s credits，低于阈值 %2$s</string>
+    <string name="billing_blocked_desc">服务已暂停，请充值后继续使用</string>
+    <string name="billing_unblocked">服务已恢复</string>
+    <string name="billing_quota_exhausted">本月配额已用完</string>
+    <string name="billing_credits_recharged">充值成功</string>
+    <string name="billing_membership_activated">会员已激活</string>
+    <string name="billing_budget_warning">预算使用警告</string>
+    <string name="billing_budget_critical">预算即将耗尽</string>
+    <string name="billing_budget_resolved">预算已恢复正常</string>
+    <string name="billing_budget_usage_pct_limit">已使用 %1$d%%，预算上限 %2$s credits</string>
+    <string name="billing_budget_usage_pct">已使用 %1$d%%</string>
+    <string name="billing_membership_expiring">会员即将到期</string>
+    <string name="billing_membership_expiring_days">会员将在 %d 天后到期</string>
+    <string name="billing_membership_expired">会员已到期</string>
+    <string name="billing_auto_renew_failed">自动续费失败</string>
+    <string name="billing_auto_renew_failed_balance">自动续费失败：余额不足</string>
+    <string name="billing_membership_downgraded">会员已降级，%d 项超出限额</string>
+    <string name="billing_invoice_refunded">退款成功</string>
+    <string name="billing_invoice_collection_succeeded">账单扣款成功</string>
+    <string name="billing_invoice_collection_failed">账单扣款失败，请检查支付方式</string>
+    <string name="billing_platform_refund_completed">平台退款已完成</string>
+    <string name="billing_platform_refund_failed">平台退款失败，请稍后重试或联系客服</string>
+    <string name="billing_refund_partial_failure">部分退款失败，请检查退款记录</string>
+    <string name="billing_storage_warning">存储空间已使用 %1$s%%，请及时清理或扩容</string>
+    <string name="billing_storage_critical">存储空间已使用 %1$s%%，服务可能受影响</string>
+    <string name="billing_storage_resolved">存储空间已恢复正常</string>
+    <string name="billing_storage_package_expiring">存储套餐将在 %1$s 天后到期</string>
+    <string name="billing_storage_auto_renew_failed">存储套餐自动续费失败，请检查余额或支付方式</string>
+    <string name="billing_renewal_cancelled">已取消自动续费</string>
+    <string name="billing_degradation_alert">服务降级：%s</string>
+
+    <!-- 成员级费用管控 WS 事件 -->
+    <string name="billing_member_budget_monthly_warning">你的月度额度已使用 %d%%，请注意控制用量</string>
+    <string name="billing_member_budget_daily_warning">你的日度额度已使用 %d%%，请注意控制用量</string>
+    <string name="billing_member_budget_monthly_exhausted">你的月度额度已用完，请联系管理员</string>
+    <string name="billing_member_budget_daily_exhausted">你的日度额度已用完，请联系管理员</string>
+    <string name="billing_member_budget_resolved">额度已恢复</string>
+</resources>

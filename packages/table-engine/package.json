@@ -1,0 +1,76 @@
+{
+  "name": "@tabtin/table-engine",
+  "version": "0.1.0",
+  "description": "Engine contracts and resolver for TabTin table grid renderers",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./collab/ydoc-schema": {
+      "source": "./src/collab/ydoc-schema.ts",
+      "types": "./dist/collab/ydoc-schema.d.ts",
+      "import": "./dist/collab/ydoc-schema.js"
+    },
+    "./collab/record-position": {
+      "source": "./src/collab/record-position.ts",
+      "types": "./dist/collab/record-position.d.ts",
+      "import": "./dist/collab/record-position.js"
+    },
+    "./collab/table-record-order": {
+      "source": "./src/collab/table-record-order.ts",
+      "types": "./dist/collab/table-record-order.d.ts",
+      "import": "./dist/collab/table-record-order.js"
+    },
+    "./collab": {
+      "source": "./src/collab/index.ts",
+      "types": "./dist/collab/index.d.ts",
+      "import": "./dist/collab/index.js"
+    },
+    "./sync": {
+      "source": "./src/sync/index.ts",
+      "types": "./dist/sync/index.d.ts",
+      "import": "./dist/sync/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "tabtin",
+    "table",
+    "engine",
+    "contracts"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "@tabtin/table-core": "workspace:*",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.1",
+    "react": "^19.0.0",
+    "typescript": "5.7.2",
+    "vitest": "4.1.0"
+  },
+  "dependencies": {
+    "@tabtin/collab-core": "workspace:*",
+    "@tabtin/table-core": "workspace:*",
+    "fractional-indexing": "3.2.0",
+    "yjs": "^13.6.29"
+  }
+}

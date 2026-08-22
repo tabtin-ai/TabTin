@@ -1,0 +1,393 @@
+# Tool-layer error_kind literals (agent-runtime TOOL_ERROR_KINDS, excluding
+# file-pipeline kinds which remain re-exported from @tabtin/file-pipeline-errors).
+#
+# Order is stable SSoT — must match historical TOOL_ERROR_KINDS prefix order.
+# include_in_tool_error_kinds defaults to true.
+
+kinds:
+  - enum: MISSING_REQUIRED_PARAM
+    kind: missing_required_param
+    i18n_key: missing_required_param
+    description: Required parameter missing
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: INVALID_PARAM_FORMAT
+    kind: invalid_param_format
+    i18n_key: invalid_param_format
+    description: Parameter format invalid
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: PARAM_TOO_LARGE
+    kind: param_too_large
+    i18n_key: param_too_large
+    description: Parameter exceeds tool limit
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: MUTUALLY_EXCLUSIVE_PARAMS
+    kind: mutually_exclusive_params
+    i18n_key: mutually_exclusive_params
+    description: Mutually exclusive parameters co-specified
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: NO_UI_SESSION
+    kind: no_ui_session
+    i18n_key: no_ui_session
+    description: Host lacks UI session for the tool
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: RUNTIME_MISCONFIG
+    kind: runtime_misconfig
+    i18n_key: runtime_misconfig
+    description: Runtime assembly missing required context
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: HOST_UNSUPPORTED
+    kind: host_unsupported
+    i18n_key: host_unsupported
+    description: Current host mode does not support the tool
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: NETWORK_FAILED
+    kind: network_failed
+    i18n_key: network_failed
+    description: Network / IPC request failed
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: REQUEST_TIMEOUT
+    kind: request_timeout
+    i18n_key: request_timeout
+    description: Request timed out
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: AUTH_FAILED
+    kind: auth_failed
+    i18n_key: auth_failed
+    description: Authentication failed (HTTP 401)
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: PERMISSION_DENIED
+    kind: permission_denied
+    i18n_key: permission_denied
+    description: Authenticated but unauthorized
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: RESOURCE_NOT_FOUND
+    kind: resource_not_found
+    i18n_key: resource_not_found
+    description: Target resource missing (HTTP 404/410)
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: DOCUMENT_NOT_READY
+    kind: document_not_ready
+    i18n_key: document_not_ready
+    description: Uploaded document still parsing
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: false
+      userInitiated: false
+
+  - enum: RATE_LIMITED
+    kind: rate_limited
+    i18n_key: rate_limited
+    description: Upstream rate limited (HTTP 429)
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: UPSTREAM_ERROR
+    kind: upstream_error
+    i18n_key: upstream_error
+    description: Upstream business / 5xx error
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: SKILL_UNSUPPORTED_PREFIX
+    kind: skill_unsupported_prefix
+    i18n_key: skill_unsupported_prefix
+    description: Skill prefix only available online
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: false
+      userInitiated: false
+
+  - enum: SKILL_NOT_FOUND
+    kind: skill_not_found
+    i18n_key: skill_not_found
+    description: Skill key not found
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: SKILL_DISABLED
+    kind: skill_disabled
+    i18n_key: skill_disabled
+    description: Skill exists but is disabled for the current Agent
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: SKILL_NOT_READY
+    kind: skill_not_ready
+    i18n_key: skill_not_ready
+    description: Skill enablement snapshot is not ready for this run
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: false
+      userInitiated: false
+
+  - enum: SKILL_NOT_INSTALLED
+    kind: skill_not_installed
+    i18n_key: skill_not_installed
+    description: Skill is registered but not installed locally
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: VERSION_CONFLICT
+    kind: version_conflict
+    i18n_key: version_conflict
+    description: TabDoc version conflict
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: TOOL_STALE_READ
+    kind: tool_stale_read
+    i18n_key: tool_stale_read
+    description: File snapshot stale after external modify
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: false
+      userInitiated: false
+
+  # Present in TOOL_ERROR_KINDS historically but absent from Electron catalog
+  # before Wave 2 — preserve fallback UX (translatable=false) when adding defaults.
+  - enum: OLD_STRING_NOT_FOUND
+    kind: old_string_not_found
+    i18n_key: old_string_not_found
+    description: edit_file old_string not found
+    catalog:
+      soft: false
+      translatable: false
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: OLD_STRING_NOT_UNIQUE
+    kind: old_string_not_unique
+    i18n_key: old_string_not_unique
+    description: edit_file old_string matched multiple times
+    catalog:
+      soft: false
+      translatable: false
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: COMMAND_BLOCKED_BY_POLICY
+    kind: command_blocked_by_policy
+    i18n_key: command_blocked_by_policy
+    description: Hardline security policy blocked command
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: COMMAND_DENIED_BY_VALIDATOR
+    kind: command_denied_by_validator
+    i18n_key: command_denied_by_validator
+    description: CommandValidator denylist rejected command
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: MODE_RESTRICTED
+    kind: mode_restricted
+    i18n_key: mode_restricted
+    description: Current agent mode rejected a otherwise-legal command
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: false
+      userInitiated: false
+
+  - enum: CWD_NOT_FOUND
+    kind: cwd_not_found
+    i18n_key: cwd_not_found
+    description: Shell cwd path does not exist
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  # Same as old_string_*: was in TOOL_ERROR_KINDS but missing from catalog —
+  # defaults mirror prior helper fallbacks (translatable=false).
+  - enum: SPAWN_FAILURE
+    kind: spawn_failure
+    i18n_key: spawn_failure
+    description: Shell spawn / bridge failure
+    catalog:
+      soft: false
+      translatable: false
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: OS_ACCESS_ERROR
+    kind: os_access_error
+    i18n_key: os_access_error
+    description: OS access error (TCC / ACL / EPERM)
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: WIDGET_RENDER_FAILED
+    kind: widget_render_failed
+    i18n_key: widget_render_failed
+    description: Widget compile / render failed
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  - enum: INTERNAL_ERROR
+    kind: internal_error
+    i18n_key: internal_error
+    description: Tool internal catch-all
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false
+
+  # Mode-switch control-flow outcomes are expected, recoverable states rather
+  # than runtime anomalies. Keep fallback copy until locale strings are added.
+  - enum: REQUIRES_CLIENT_APPROVAL
+    kind: requires_client_approval
+    i18n_key: requires_client_approval
+    description: Mode switch requires an interactive client approval surface
+    catalog:
+      soft: true
+      translatable: false
+      countsAsAnomaly: false
+      userInitiated: false
+
+  - enum: ALREADY_PENDING
+    kind: already_pending
+    i18n_key: already_pending
+    description: A mode switch proposal is already awaiting user action
+    catalog:
+      soft: true
+      translatable: false
+      countsAsAnomaly: false
+      userInitiated: false
+
+  # Todo lifecycle CRUD
+  - enum: TODO_LIST_ALREADY_OPEN
+    kind: todo_list_already_open
+    i18n_key: todo_list_already_open
+    description: A todo list is already open; close before opening another
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: false
+      userInitiated: false
+
+  - enum: TODO_LIST_NOT_OPEN
+    kind: todo_list_not_open
+    i18n_key: todo_list_not_open
+    description: No open todo list; open one first
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: false
+      userInitiated: false
+
+  - enum: TODO_ITEM_FROZEN
+    kind: todo_item_frozen
+    i18n_key: todo_item_frozen
+    description: Completed todo item cannot be modified
+    catalog:
+      soft: true
+      translatable: true
+      countsAsAnomaly: false
+      userInitiated: false
+
+  - enum: TODO_INVALID_ITEMS
+    kind: todo_invalid_items
+    i18n_key: todo_invalid_items
+    description: Todo items payload invalid
+    catalog:
+      soft: false
+      translatable: true
+      countsAsAnomaly: true
+      userInitiated: false

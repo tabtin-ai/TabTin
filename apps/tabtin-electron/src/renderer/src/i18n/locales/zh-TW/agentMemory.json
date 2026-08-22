@@ -1,0 +1,84 @@
+{
+  "actions": {
+    "useful": "有用",
+    "correct": "修正",
+    "forget": "忘記",
+    "cancel": "取消",
+    "retry": "重試",
+    "loadMore": "加載更多"
+  },
+  "errors": {
+    "loadFailed": "加載失敗，請重試",
+    "loadMoreFailed": "加載更多失敗，請重試",
+    "actionFailed": "操作失敗",
+    "correctFailed": "修正失敗",
+    "exportFailed": "匯出失敗"
+  },
+  "toast": {
+    "corrected": "已更正這條記憶"
+  },
+  "types": {
+    "about_you": "關於你",
+    "insight": "洞察",
+    "task_summary": "協作小結",
+    "diary": "日記"
+  },
+  "emotions": {
+    "happy": "開心",
+    "curious": "好奇",
+    "frustrated": "受挫",
+    "relieved": "釋然",
+    "surprised": "驚訝",
+    "reflective": "反思",
+    "neutral": "記錄"
+  },
+  "time": {
+    "justNow": "剛剛",
+    "minutesAgo": "{{count}} 分鐘前",
+    "hoursAgo": "{{count}} 小時前",
+    "daysAgo": "{{count}} 天前",
+    "today": "今天",
+    "yesterday": "昨天"
+  },
+  "importanceTitle": "重要度 {{count}}",
+  "exportDoc": {
+    "title": "{{name}} 的記憶",
+    "organization": "組織：{{name}}",
+    "exportedAt": "導出時間：{{time}}",
+    "count": "共 {{count}} 條",
+    "importanceLabel": "重要度"
+  },
+  "diary": {
+    "title": "{{name}} 的成長記錄",
+    "subtitle": "TA 在和你協作裡記下的所思所想",
+    "loadFailedTitle": "加載成長記錄失敗",
+    "selectAgent": "選擇一個 AI 分身看成長紀錄",
+    "emptyTitle": "還沒成長紀錄",
+    "emptyHint": "和 TA 協作後，工作日記會自動出現在這裡",
+    "forgetTitle": "讓這個 AI 分身忘記這筆紀錄？",
+    "forgetDesc": "忘記後，TA 之後不會再用到這條記憶，也不會在這裡顯示。此操作不可撤銷。"
+  },
+  "governance": {
+    "tabs": {
+      "overview": "概覽",
+      "records": "全部記錄"
+    },
+    "filters": {
+      "all": "全部"
+    },
+    "records": {
+      "hint": "修正或忘記條目後，「概覽」裡的綜合理解會在下次整理時更新。",
+      "loadFailedTitle": "載入記憶失敗",
+      "emptyTitle": "這個 AI 分身還沒有記憶紀錄",
+      "emptyHint": "和 TA 協作後，記錄會自動出現在這裡"
+    },
+    "forgetTitle": "讓這個 AI 分身忘記這條記憶？",
+    "disabledNotice": "記憶記錄目前已關閉，AI 分身不再記錄、回想或展示記憶。可在「記憶」App →「記憶偏好」→「讓 Agent 記筆記」重新開啟。",
+    "export": {
+      "nothing": "這個 AI 分身還沒有可導出的記憶",
+      "disabledEmpty": "記憶記錄已關閉，暫無可匯出內容。可在「記憶」App →「記憶偏好」→「讓 Agent 記筆記」重新開啟。",
+      "filenameMemory": "記憶",
+      "done": "已匯出 {{count}} 條記憶"
+    }
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "$defs": {
+    "ArtifactIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical_hash": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Canonical Hash",
+          "type": "string"
+        },
+        "key": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "model-capability",
+            "product-control-mapping",
+            "runtime-wire-mapping",
+            "protocol-readiness",
+            "extension-target-allowlist",
+            "deployment-profile",
+            "model-deployment-binding",
+            "rate-card",
+            "platform-safety-policy",
+            "rollout-policy",
+            "projection-metadata"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^[1-9][0-9]*$",
+          "title": "Revision",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "key",
+        "revision",
+        "canonical_hash"
+      ],
+      "title": "ArtifactIdentity",
+      "type": "object"
+    },
+    "ConditionNode": {
+      "additionalProperties": false,
+      "properties": {
+        "children": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ConditionNode"
+          },
+          "title": "Children",
+          "type": "array"
+        },
+        "field": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Field"
+        },
+        "operator": {
+          "enum": [
+            "all",
+            "any",
+            "not",
+            "equals",
+            "present"
+          ],
+          "title": "Operator",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        }
+      },
+      "required": [
+        "operator"
+      ],
+      "title": "ConditionNode",
+      "type": "object"
+    },
+    "ExactRef": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_hash": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Expected Hash",
+          "type": "string"
+        },
+        "key": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "model-capability",
+            "product-control-mapping",
+            "runtime-wire-mapping",
+            "protocol-readiness",
+            "extension-target-allowlist",
+            "deployment-profile",
+            "model-deployment-binding",
+            "rate-card",
+            "platform-safety-policy",
+            "rollout-policy",
+            "projection-metadata"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^[1-9][0-9]*$",
+          "title": "Revision",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "key",
+        "revision",
+        "expected_hash"
+      ],
+      "title": "ExactRef",
+      "type": "object"
+    },
+    "LifecycleState": {
+      "enum": [
+        "draft",
+        "active",
+        "deprecated",
+        "retired"
+      ],
+      "title": "LifecycleState",
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "conditions": {
+      "items": {
+        "$ref": "#/$defs/ConditionNode"
+      },
+      "title": "Conditions",
+      "type": "array"
+    },
+    "identity": {
+      "$ref": "#/$defs/ArtifactIdentity"
+    },
+    "lifecycle": {
+      "$ref": "#/$defs/LifecycleState"
+    },
+    "percentage_basis_points": {
+      "title": "Percentage Basis Points",
+      "type": "integer"
+    },
+    "replacement_ref": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ExactRef"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "schema_version": {
+      "const": "1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sunset_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sunset At"
+    }
+  },
+  "required": [
+    "schema_version",
+    "identity",
+    "lifecycle",
+    "conditions",
+    "percentage_basis_points"
+  ],
+  "title": "RolloutPolicy",
+  "type": "object"
+}

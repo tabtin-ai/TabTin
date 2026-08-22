@@ -1,0 +1,30 @@
+{
+  "workspaceFallback": "Workspace",
+  "loadingWorkspaces": "Loading workspaces...",
+  "personalIdentity": "Personal",
+  "teamGroup": "Organizations",
+  "newTeam": "Create Organization",
+  "newWorkspace": "New Workspace",
+  "workspaceSettings": "Workspace Settings",
+  "loadFailed": "Failed to load",
+  "retryLoad": "Retry",
+  "mobile": {
+    "navigation": "Navigation",
+    "openNavigation": "Open navigation",
+    "closeNavigation": "Close navigation"
+  },
+  "search": {
+    "tooltip": "Search (⌘K)"
+  },
+  "space": {
+    "emptyTitle": "Start your creative journey",
+    "emptyHint": "No Bots yet. Click + above to create one",
+    "newBot": "New Bot"
+  },
+  "tooltips": {
+    "newAgent": "New Agent"
+  },
+  "deviceOnline": "Online",
+  "deviceBusy": "Busy",
+  "deviceOffline": "Offline"
+}

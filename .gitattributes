@@ -1,0 +1,34 @@
+# 自动规范化行尾符
+* text=auto eol=lf
+
+# 明确指定文本文件使用 LF
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.sh text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+
+# Windows 批处理必须保留 CRLF；LF-only 会让 cmd.exe 把行切碎。
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# 二进制文件不处理
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
+

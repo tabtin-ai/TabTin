@@ -1,0 +1,520 @@
+{
+  "addressBar": {
+    "secureTitle": "安全な接続",
+    "insecureTitle": "安全でない接続",
+    "placeholder": "URLを入力してください...",
+    "copy": "URLをコピー",
+    "copied": "コピーされました"
+  },
+  "toolbarDescriptions": {
+    "annotationLabel": "ページに注釈を付ける",
+    "annotation": "ページのコンテンツを選択して会話に追加します",
+    "cancelAnnotationLabel": "注釈のキャンセル",
+    "cancelAnnotation": "ページ注釈モードを終了する",
+    "screenshotLabel": "会話のスクリーンショット",
+    "screenshot": "表示されているページをキャプチャして会話に追加します",
+    "bookmarkLabel": "このページをブックマークする",
+    "bookmark": "後でブラウザのブックマークから開く",
+    "removeBookmarkLabel": "ブックマークを削除する",
+    "removeBookmark": "このページをブラウザのブックマークから削除します"
+  },
+  "toast": {
+    "partitionRebuiltTitle": "新しいログイン環境に切り替えました",
+    "partitionRebuiltDesc": "このタブのブラウザ ID は、ワークスペース バインディングと一致するように更新されました。フォームに入力していた場合は、再入力する必要があります。"
+  },
+  "embedded": {
+    "loading": "読み込み中...",
+    "agentLockOverlay": "エージェントはこのブラウザを使用しています",
+    "logs": {
+      "setViewBoundsUnavailable": "setViewBounds は使用できません",
+      "setViewBoundsFailed": "境界の更新に失敗しました"
+    },
+    "errors": {
+      "missingProfile": "ワークスペースビューにプロファイル/パーティションがありません",
+      "showUnavailable": "host.view.show 利用不可",
+      "showFailed": "表示に失敗しました",
+      "showPrecheckFailed": "事前チェックの表示に失敗しました",
+      "pageLoadFailed": "ページの読み込みに失敗しました",
+      "refreshFailed": "リロードに失敗しました",
+      "navigationFailed": "ナビゲーションに失敗しました",
+      "navigationDeferredByAgent": "このページはエージェント タスクによって使用されています。ナビゲーションがスキップされました",
+      "goBackFailed": "戻るのに失敗しました",
+      "goForwardFailed": "先に進むことができませんでした",
+      "reloadFailed": "リロードに失敗しました",
+      "stopFailed": "ロードの停止に失敗しました",
+      "actionUnavailable": "{{action}} は利用できません",
+      "partitionRebuildFailed": "ログイン環境の切り替えに失敗しました: {{detail}}。このタブを閉じて再度開いてください。"
+    }
+  },
+  "urlInput": {
+    "title": "新しいウェブクロール",
+    "description": "クロールするWebページのURLを入力してください",
+    "urlLabel": "URL *",
+    "urlPlaceholder": "https://example.com",
+    "nameLabel": "ラベル名（オプション）",
+    "namePlaceholder": "自動生成",
+    "cancel": "キャンセル",
+    "create": "作成",
+    "errors": {
+      "required": "URLを入力してください",
+      "invalid": "有効な URL (例: example.com または https://example.com) を入力してください。"
+    },
+    "defaultName": "ページ{{time}}"
+  },
+  "diagnosis": {
+    "errors": {
+      "requestFailed": "診断リクエストが失敗しました",
+      "failed": "診断に失敗しました",
+      "invalidResult": "診断結果の形式が不正です",
+      "feedbackFailed": "フィードバックの送信に失敗しました",
+      "missingActiveView": "アクティブなビューが見つかりません",
+      "missingViewOptions": "viewOptions がありません。ページのコンテンツを取得できません",
+      "getProcessedContentUnavailable": "getProcessedContent は使用できません",
+      "noFeedbackRecord": "フィードバックを送信するための診断記録がありません",
+      "noAvailableModel": "利用可能なモデルが見つかりません。最初にモデルリストをロードしてください。",
+      "noWorkspaceSelected": "ワークスペースが選択されていません。ストリーミング診断を開始できません。",
+      "streamDiagnosisFailed": "ストリーミング診断に失敗しました"
+    }
+  },
+  "resource": {
+    "errors": {
+      "downloadFailed": "ダウンロードに失敗しました",
+      "fileSizeZero": "ダウンロードしたファイルのサイズは0です",
+      "timeout": "ダウンロードがタイムアウトしました ({{ms}}ms)"
+    }
+  },
+  "resourceCenter": {
+    "title": "リソースセンター",
+    "count": "{{count}} リソース",
+    "count_one": "{{count}} リソース",
+    "searchPlaceholder": "URL / resourceId / MIME を検索します",
+    "searchInputLabel": "リソースを検索する",
+    "empty": "このページでは利用可能なリソースがありません",
+    "previewUnavailable": "プレビューは利用できません",
+    "sourceUrlTitle": "ソースURL",
+    "selectHint": "詳細を表示するにはリソースを選択してください",
+    "segmentBadge": "セグメント",
+    "values": {
+      "unknown": "不明",
+      "unknownMime": "不明な MIME",
+      "unknownSize": "不明",
+      "none": "なし",
+      "fallbackNameSuffix": "リソース"
+    },
+    "actions": {
+      "toggleDeveloperMode": "開発者モード (技術的な詳細を表示)",
+      "developerMode": "開発者",
+      "refresh": "リソースを更新する",
+      "close": "リソースセンターを閉じる",
+      "downloadStream": "ダウンロードストリーム",
+      "downloadResource": "リソースをダウンロードする",
+      "captureContent": "コンテンツをキャプチャする",
+      "parseStream": "ストリームを解析する",
+      "copyLink": "リンクをコピー",
+      "copyCliCommand": "CLIコマンドのコピー",
+      "copyAgentPrompt": "エージェントプロンプトのコピー",
+      "downloadCompleteVideo": "完全なビデオをダウンロードする"
+    },
+    "aria": {
+      "filterAll": "すべてのリソースを表示",
+      "filterCategory": "カテゴリでフィルター: {{category}}",
+      "selectResource": "リソースを表示: {{name}}"
+    },
+    "errors": {
+      "loadFailed": "リソースのロードに失敗しました",
+      "downloadFailed": "ダウンロードに失敗しました",
+      "captureFailed": "キャプチャに失敗しました",
+      "parseStreamFailed": "ストリームの解析に失敗しました",
+      "streamDownloadFailed": "ストリームのダウンロードに失敗しました"
+    },
+    "toasts": {
+      "copyFailedTitle": "コピーに失敗しました",
+      "resourceDownloadedTitle": "ダウンロードされたリソース",
+      "capturedTitle": "キャプチャされたリソースのコンテンツ",
+      "captureCachedTitle": "リソースコンテンツはすでにキャッシュされています",
+      "streamParsedTitle": "ストリームが解析されました",
+      "streamParsedVariants": "{{count}} の亜種が見つかりました",
+      "streamParsedVariants_one": "{{count}} バリアントが見つかりました",
+      "streamParsedUpdated": "ストリームメタデータが更新されました",
+      "streamDownloadedTitle": "ダウンロードされたストリーム",
+      "cliCopiedTitle": "CLI コマンドがコピーされました",
+      "agentPromptCopiedTitle": "エージェントプロンプトがコピーされました",
+      "linkCopiedTitle": "リソースリンクがコピーされました",
+      "actionFailedTitle": "操作が失敗しました"
+    },
+    "categories": {
+      "all": "すべて",
+      "image": "画像",
+      "video": "ビデオ",
+      "audio": "オーディオ",
+      "hls": "HLS",
+      "dash": "ダッシュ",
+      "document": "文書",
+      "font": "フォント"
+    },
+    "captureStatus": {
+      "metadata_only": "メタデータのみ",
+      "content_cached": "キャッシュされたコンテンツ",
+      "page_bound_blob": "ページバインドされた BLOB",
+      "stream_manifest": "ストリームマニフェスト",
+      "downloaded": "ダウンロード済み",
+      "unsupported": "サポートされていません",
+      "failed": "失敗しました"
+    },
+    "capabilities": {
+      "preview": "プレビュー",
+      "download": "ダウンロード",
+      "import": "インポート",
+      "sendToAgent": "エージェントに送信",
+      "parse": "解析する",
+      "streamDownload": "ストリームダウンロード"
+    },
+    "sources": {
+      "network": "ネットワーク",
+      "dom_probe": "DOM プローブ",
+      "cdp_capture": "CDP キャプチャ",
+      "task_capture": "タスクキャプチャ",
+      "manual_capture": "手動キャプチャ"
+    },
+    "developer": {
+      "title": "開発者の詳細",
+      "idLabel": "ID",
+      "mimeTypeLabel": "マイム",
+      "statusLabel": "ステータス",
+      "capabilitiesLabel": "能力",
+      "sourceLabel": "ソース"
+    },
+    "qualityLabel": "品質",
+    "qualityBest": "最高品質",
+    "qualityWorst": "最低品質",
+    "hints": {
+      "pageBoundBlob": "このリソースはページ内の MediaSource/BLOB コンテキストから取得されるため、確実にダウンロードする前にページ内でキャプチャする必要があります。",
+      "dashPhaseOne": "DASH リソースは、品質の選択と完全なビデオのダウンロードをサポートしています。個別のオーディオ トラックは ffmpeg を介して自動的にマージされます。",
+      "blobResource": "これはページにバインドされたプレーヤー リソースです。 「コンテンツをキャプチャ」をクリックしてデータを取得し、ダウンロードします。",
+      "encrypted": "このリソースは DRM で保護されている可能性があります。ダウンロードしたファイルは正しく再生できない場合があります。"
+    },
+    "streamInfo": {
+      "title": "ストリーム情報",
+      "live": "ライブストリーム",
+      "vod": "オンデマンド ストリーム",
+      "segmentCount": "{{count}} セグメント",
+      "segmentCount_one": "{{count}} セグメント"
+    }
+  },
+  "clients": {
+    "apiUnavailable": "{{api}} API が使用できません",
+    "toolUnavailableTitle": "ツールが使用できません",
+    "toolUnavailableDescription": "アクション {{action}} が登録されていません"
+  },
+  "task": {
+    "errors": {
+      "schemaMissingListSelector": "スキーマに必要な listSelector がありません",
+      "schemaMissingFields": "スキーマに有効なフィールド構成がありません",
+      "unknown": "不明なエラー",
+      "executionFailed": "タスクの実行に失敗しました"
+    },
+    "logs": {
+      "apiUnavailable": "タスクAPIは使用できません",
+      "schemaMissingListSelector": "無効なスキーマ: listSelector がありません",
+      "schemaMissingFields": "presetSchema には有効なフィールドがありません",
+      "createTaskFailed": "タスクの作成に失敗しました",
+      "updateMetadataFailed": "タスクのメタデータの更新に失敗しました",
+      "enqueueFailed": "タスクのエンキューに失敗しました",
+      "createTaskException": "タスク作成例外",
+      "cancelTaskFailed": "タスクのキャンセルに失敗しました",
+      "resumeUnsupported": "タスク API は再開をサポートしていません",
+      "resumeFailed": "タスクの再開に失敗しました",
+      "resumeException": "タスクの例外を再開する",
+      "resumeWithPaginationUnsupported": "タスク API は、resumeWithPagination をサポートしていません",
+      "startPaginationFailed": "ページネーションの開始に失敗しました",
+      "paginationException": "ページネーションタスクの例外",
+      "selectRecommendationUnsupported": "タスク API は selectRecommendation をサポートしていません",
+      "selectRecommendationFailed": "推奨事項の選択を送信できませんでした",
+      "selectRecommendationException": "推奨事項選択の例外",
+      "apiUnavailableEffect": "useEffect: taskAPI が使用できません",
+      "exportTraceUnavailable": "トレースをエクスポートできません: タスクが初期化されていないか、タスク API が使用できません",
+      "exportTraceGetUnsupported": "タスク API は get をサポートしていません。トレースをエクスポートできません",
+      "exportTraceMissingTask": "タスクデータがありません。トレースをエクスポートできません",
+      "clipboardCopyFailed": "クリップボードへのコピーに失敗しました",
+      "exportTraceException": "エクスポートトレース例外"
+    }
+  },
+  "tabs": {
+    "defaultName": "クロール {{count}}",
+    "workspaceDefaultName": "ブラウザスペース"
+  },
+  "tabStore": {
+    "errors": {
+      "workspaceViewInTabs": "[CrawlTabStore] ワークスペース ビューをタブに書き込むことができません[]",
+      "createTabWorkspaceNotAllowed": "[CrawlTabStore] createTab はワークスペースを作成できません。 createWorkspaceを使用する",
+      "createWorkspaceExternalIdNotAllowed": "[CrawlTabStore] createWorkspace は外部のcrawlspaceIdを受け入れることができません",
+      "createWorkspaceMissingProfile": "[CrawlTabStore] createWorkspace プロファイルがありません",
+      "createWorkspaceMissingSpaceOrPartition": "[CrawlTabStore] createWorkspace には spaceId または明示的なパーティションが必要です。それ以外の場合、ワークスペースにはセッション分離の基盤がありません。",
+      "createWorkspaceMissingRandomUUID": "[CrawlTabStore] createWorkspace に crypto.randomUUID がありません",
+      "createWorkspaceIdExists": "[CrawlTabStore] クロールスペース ID はすでに存在します: {{id}}",
+      "missingCrawlspaceContextCache": "[CrawlTabStore] クロールスペースコンテキストキャッシュがありません: {{id}}"
+    },
+    "warnings": {
+      "legacyCreateTab": "⚠️ createTab は従来のパスです。新しい機能には使用しないでください"
+    }
+  },
+  "host": {
+    "errors": {
+      "viewIdMissingShow": "viewId が空です。ビューを表示できません",
+      "viewIdMissingBounds": "viewId が空です。境界を設定できません",
+      "viewIdMissingDestroy": "viewId が空です。破壊できない",
+      "viewIdMissingCheck": "viewId が空です。確認できません",
+      "viewIdMissingTouch": "viewId が空です。触れられない",
+      "viewIdMissingLoadUrl": "viewId が空です。 URLを読み込めません",
+      "viewIdMissingWaitForSelector": "viewId が空です。セレクターが待ちきれない",
+      "viewIdMissingGoBack": "viewId が空です。戻れない",
+      "viewIdMissingGoForward": "viewId が空です。先に進めない",
+      "viewIdMissingReload": "viewId が空です。リロードできません",
+      "viewIdMissingStop": "viewId が空です。読み込みを停止できません"
+    },
+    "logs": {
+      "ipcRendererUnavailable": "ipcRenderer は使用できません。ページネーション購読をスキップしています"
+    }
+  },
+  "workspaceDefaults": {
+    "errors": {
+      "missingPluginDefaults": "[WorkspaceDefaults] プラグインのデフォルトがありません: {{id}}"
+    }
+  },
+  "dataImport": {
+    "errors": {
+      "workspaceRequired": "ワークスペースが選択されていません",
+      "noData": "インポートするデータがありません",
+      "createTableFailed": "テーブルの作成に失敗しました",
+      "createFieldFailed": "フィールドの作成に失敗しました: {{details}}",
+      "importFailed": "データのインポートに失敗しました"
+    },
+    "progress": {
+      "creatingTable": "テーブルを作成しています...",
+      "creatingFields": "フィールドを作成しています...",
+      "tableReady": "テーブルが作成されました。クロールを開始する準備ができました...",
+      "loadingCache": "リソース キャッシュを読み込んでいます...",
+      "downloadingResources": "リソースをダウンロードしています...",
+      "uploadingResources": "リソースをプラットフォームにアップロードしています...",
+      "importingData": "データをインポートしています..."
+    },
+    "completion": {
+      "base": "インポート完了！",
+      "withFailedAndMissing": "インポート完了！ {{success}} は成功しました、{{failed}} は失敗しました、{{missing}} 添付ファイルがありません",
+      "withFailed": "インポート完了！ {{success}} は成功しました、{{failed}} は失敗しました",
+      "withMissing": "インポート完了！ {{success}} は成功しましたが、{{missing}} の添付ファイルがありません"
+    },
+    "fieldDescription": {
+      "sourceField": "抽出されたフィールド: {{field}}",
+      "originalUrl": "{{name}} の元の URL",
+      "attachment": "{{name}}用アタッチメント"
+    },
+    "fieldName": {
+      "originalUrl": "{{name}}_元の URL"
+    },
+    "tableDescription": "クロール元: {{taskId}}",
+    "tableName": {
+      "default": "新しいテーブル",
+      "singlePart": "クロール_{{name}}"
+    }
+  },
+  "stages": {
+    "config": "構成",
+    "executing": "実行中",
+    "mapping": "フィールドマッピング",
+    "completed": "完了"
+  },
+  "fieldNames": {
+    "name": "名前",
+    "title": "タイトル",
+    "rating": "評価",
+    "description": "説明",
+    "price": "価格",
+    "image": "画像",
+    "url": "URL",
+    "date": "日付",
+    "author": "著者",
+    "category": "カテゴリ"
+  },
+  "workspace": {
+    "configMissing": "ワークスペース構成がありません。再作成してください。",
+    "loading": "読み込み中...",
+    "pageLoadFailed": "ページの読み込みに失敗しました",
+    "pageLoadFailedDesc": "このページにアクセスできません。ネットワークを確認するか、後でもう一度試してください。",
+    "pageLoadErrors": {
+      "dns": {
+        "title": "ドメインが見つかりません",
+        "hint": "アドレスが正しいことを確認してください"
+      },
+      "offline": {
+        "title": "ネットワーク接続がありません",
+        "hint": "ネットワーク接続を確認して再試行してください"
+      },
+      "connection": {
+        "title": "接続できません",
+        "hint": "後でもう一度試すか、アドレスが正しいことを確認してください"
+      },
+      "server": {
+        "title": "サーバーエラー",
+        "hint": "後でもう一度試してください"
+      }
+    },
+    "reload": "リロード"
+  },
+  "portal": {
+    "logs": {
+      "noRenderTarget": "⚠️ レンダー ターゲットがありません: スロットは存在しますが、アクティブなものはなく、parkingHost は利用できません"
+    }
+  },
+  "temporaryTab": {
+    "logs": {
+      "uiEntryDisabled": "⏭️ 一時タブの UI エントリは無効になっています。登録をスキップする",
+      "listenerAlreadyRegistered": "⏭️ リスナーはすでに登録されています。スキップ",
+      "createRequestReceived": "一時タブの作成リクエストを受け取りました:",
+      "workspaceInternalViewHandled": "⏭️ コンテキストによって処理されるワークスペースの内部ビュー:",
+      "nonTemporaryIgnored": "⏭️ 一時的ではないリクエストは無視されました:",
+      "tabExistsSkipped": "⚠️ タブはすでに存在します。作成をスキップします:",
+      "tabCreated": "✅ 一時タブが作成されました:",
+      "skipAutoSelect": "自動選択スキップ（背景作成）",
+      "closeRequestReceived": "一時タブを閉じるリクエストを受け取りました:",
+      "workspaceViewSkipClose": "⏭️ ワークスペース ビューはコンテキストによって処理されます。スキップして閉じます:",
+      "workspaceTabSkipClose": "⏭️ [ワークスペース] タブは一時的に閉じるフローを使用しません。",
+      "nonTemporarySkipClose": "⏭️ 一時的なタブではありません。スキップして閉じます:",
+      "closeRequestNoTab": "⏭️ 一致するタブ/ビューがありません。クローズ要求を無視します:",
+      "listenerRegistered": "✅ 一時タブリスナーが登録されました",
+      "listenerCleaned": "🧹 一時タブリスナーがクリーンアップされました"
+    }
+  },
+  "recommendation": {
+    "defaultTitle": "おすすめプラン"
+  },
+  "downloads": {
+    "title": "ダウンロード",
+    "activeCount": "{{count}} ダウンロード中です",
+    "activeCount_one": "{{count}} ダウンロード中",
+    "noActive": "アクティブなダウンロードはありません",
+    "searchPlaceholder": "ファイル名またはURLを検索...",
+    "clearCompleted": "クリア完了",
+    "clearAll": "履歴をクリアする",
+    "empty": "まだダウンロードはありません",
+    "emptyHint": "Web ブラウジングからのダウンロードはここに表示されます",
+    "noResults": "一致するダウンロードは見つかりませんでした",
+    "today": "今日",
+    "yesterday": "昨日",
+    "paused": "一時停止中",
+    "cancelled": "キャンセルされました",
+    "failed": "ダウンロードに失敗しました",
+    "completed": "ダウンロード完了",
+    "remaining": "{{time}} 残り",
+    "pauseAction": "一時停止",
+    "resumeAction": "再開",
+    "cancelAction": "キャンセル",
+    "retryAction": "再試行",
+    "openAction": "ファイルを開く",
+    "showInFolderAction": "フォルダ内に表示",
+    "removeAction": "削除",
+    "deleteFileAction": "ファイルの削除",
+    "openFile": "ファイルを開く",
+    "copyLink": "ダウンロードリンクをコピーする",
+    "cancelDownload": "ダウンロードをキャンセルする",
+    "started": "ダウンロード開始: {{name}}",
+    "noSpace": "まずワークスペースを開いてください",
+    "ipcError": "{{action}} が失敗しました",
+    "actionFailed": "アクションが失敗しました",
+    "openFileFailed": "ファイルを開けませんでした",
+    "showInFolderFailed": "フォルダ内に表示できませんでした",
+    "deleteFileFailed": "ファイルの削除に失敗しました",
+    "fileUnavailable": "ファイルが利用できません",
+    "fileUnavailableHint": "ファイルが移動または削除されました。このエントリは削除することしかできません",
+    "units": {
+      "perSecond": "/秒",
+      "seconds": "s",
+      "minutes": "分",
+      "hours": "h"
+    },
+    "downloadCompleted": "ダウンロード完了: {{name}}",
+    "downloadFailed": "ダウンロードに失敗しました: {{name}}",
+    "streamDefaultName": "ストリーミングビデオ",
+    "streamActive": "ストリームダウンロード",
+    "streamHistory": "ストリーム履歴",
+    "streamResolving": "プレイリストを解決しています...",
+    "streamDownloading": "ダウンロード中",
+    "streamMerging": "セグメントを結合しています...",
+    "streamSegments": "セグメント",
+    "streamCompleted": "ダウンロード完了: {{name}}",
+    "streamFailed": "ダウンロードに失敗しました: {{error}}",
+    "streamErrors": {
+      "ENCRYPTED_STREAM": "このビデオは DRM で保護されているためダウンロードできません",
+      "LIVE_STREAM": "ライブ ストリームのダウンロードはサポートされていません。ストリームが終了してからもう一度お試しください",
+      "NO_SEGMENTS": "ダウンロード可能なビデオセグメントが見つかりません",
+      "NO_QUALITY_MATCH": "一致する品質オプションが見つかりません",
+      "SEGMENT_FAILED": "ダウンロードに失敗しました: 一部のコンテンツを取得できませんでした (サイト制限)",
+      "DOWNLOAD_TIMEOUT": "ダウンロードがタイムアウトしました。ネットワークを確認して再試行してください",
+      "HTTP_ERROR": "Web サイトがダウンロード リクエストをブロックしました",
+      "DOWNLOAD_ABORTED": "ダウンロードがキャンセルされました",
+      "MERGE_FAILED": "ビデオの結合に失敗しました。再試行してください",
+      "NETWORK_ERROR": "ネットワーク接続に失敗しました。ネットワークを確認して再試行してください",
+      "PARSE_ERROR": "認識できないビデオ URL 形式です。有効な m3u8 ファイルではない可能性があります",
+      "UNKNOWN": "不明なエラー"
+    }
+  },
+  "bookmarks": {
+    "title": "ブックマーク",
+    "totalCount": "{{count}} ブックマーク",
+    "totalCount_one": "{{count}} ブックマーク",
+    "noBookmarks": "ブックマークはありません",
+    "searchPlaceholder": "ブックマークを検索...",
+    "clearAll": "すべてクリア",
+    "empty": "ブックマークはありません",
+    "emptyHint": "アドレスバーの星をクリックしてページをブックマークします",
+    "noResults": "一致するブックマークが見つかりませんでした",
+    "addAction": "ブックマーク",
+    "removeAction": "ブックマークを削除する",
+    "openAction": "開く",
+    "deleteAction": "削除"
+  },
+  "history": {
+    "title": "閲覧履歴",
+    "totalCount": "{{count}} レコード",
+    "totalCount_one": "{{count}} レコード",
+    "noRecords": "閲覧履歴がありません",
+    "searchPlaceholder": "タイトルまたはURLを検索...",
+    "clearAll": "すべてクリア",
+    "empty": "閲覧履歴がありません",
+    "emptyHint": "アクセスしたページがここに表示されます",
+    "noResults": "一致するレコードが見つかりませんでした",
+    "today": "今日",
+    "yesterday": "昨日",
+    "thisWeek": "今週",
+    "thisMonth": "今月",
+    "openAction": "開く",
+    "deleteAction": "削除"
+  },
+  "tabContextMenu": {
+    "rename": "名前の変更",
+    "close": "タブを閉じる",
+    "delete": "タブの削除",
+    "dialogTitle": "タブの名前を変更",
+    "dialogDescription": "タブの新しい名前を設定します",
+    "newNameLabel": "新しい名前",
+    "newNamePlaceholder": "タブ名を入力してください",
+    "cancel": "キャンセル",
+    "confirm": "確認する"
+  },
+  "agentAutofillFailed": {
+    "title": "自動ログインに失敗しました",
+    "titleCredential": "資格情報の有効期限が切れている可能性があります",
+    "titleFill": "自動入力を完了できませんでした",
+    "descGeneric": "{{domain}} の自動ログインに失敗しました。 「設定」→「デバイス」→「ブラウザ」で認証情報を確認してください。",
+    "descCredential": "{{domain}} のパスワードの有効期限が切れているか、無効になっている可能性があります。 「設定」→「デバイス」→「ブラウザ」で更新してください。",
+    "descFill": "{{domain}} のログイン フォームは予期しない構造になっています。エージェントは一時停止するように通知されました。手動でログインしてください。",
+    "descGenericWithAgent": "{{agentName}} は {{domain}} に自動ログインできませんでした。 「設定」→「デバイス」→「ブラウザ」で認証情報を確認してください。",
+    "descCredentialWithAgent": "{{agentName}} の {{domain}} の認証情報の有効期限が切れている可能性があります。 「設定」→「デバイス」→「ブラウザ」で更新してください。",
+    "descFillWithAgent": "{{agentName}} は、{{domain}} のログインフォームに自動入力できませんでした。フォーム構造は予期しないものである可能性があります。手動でログインしてください。"
+  },
+  "agentAutofillSuccess": {
+    "title": "エージェントがサインインしました",
+    "description": "エージェントは {{username}} として {{domain}} にサインインしました。",
+    "descriptionWithAgent": "{{agentName}} は {{username}} として {{domain}} にサインインしました。"
+  }
+}

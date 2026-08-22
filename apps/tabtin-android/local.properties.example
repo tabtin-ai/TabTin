@@ -1,0 +1,7 @@
+# 复制为 local.properties 并填写本机 Android SDK 路径（勿提交 local.properties）
+# Copy to local.properties and set your SDK path (never commit local.properties)
+#
+# sdk.dir=/Users/yourname/Library/Android/sdk
+# sdk.dir=C\:\\Users\\yourname\\AppData\\Local\\Android\\Sdk
+
+sdk.dir=

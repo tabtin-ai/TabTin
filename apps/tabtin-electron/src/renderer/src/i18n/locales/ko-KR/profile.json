@@ -1,0 +1,131 @@
+{
+  "title": "프로필",
+  "description": "기본 사항, 연락처 정보, 계정 설정을 포함한 프로필 보기 및 편집",
+  "saved": "프로필이 업데이트되었습니다.",
+  "validation": {
+    "usernameLength": "사용자 이름은 3~20자여야 합니다.",
+    "usernameFormat": "사용자 이름은 문자, 숫자, 밑줄만 포함할 수 있으며 문자로 시작해야 합니다.",
+    "nicknameLength": "닉네임은 50자를 초과할 수 없습니다.",
+    "bioLength": "약력은 500자를 초과할 수 없습니다."
+  },
+  "errors": {
+    "updateFailed": "업데이트하지 못했습니다. 나중에 다시 시도해 주세요.",
+    "verificationFailed": "인증코드 전송 실패",
+    "logoutFailed": "로그아웃 실패"
+  },
+  "labels": {
+    "nickname": "닉네임",
+    "username": "사용자 이름",
+    "userId": "사용자 ID",
+    "phone": "전화",
+    "email": "이메일",
+    "bio": "바이오",
+    "contact": "연락처",
+    "accountInfo": "계정 정보",
+    "registeredAt": "가입됨",
+    "loginCount": "로그인 횟수",
+    "lastLogin": "마지막 로그인",
+    "buildVersion": "빌드 버전"
+  },
+  "placeholders": {
+    "nickname": "닉네임을 입력하세요",
+    "username": "사용자 이름을 입력하세요",
+    "bio": "자신에 대해 말해 보세요..."
+  },
+  "empty": {
+    "nickname": "닉네임 없음",
+    "username": "사용자 이름 없음",
+    "bio": "이 사용자는 자기 소개를 작성하지 않았습니다...",
+    "contact": "연락처 정보 없음",
+    "email": "이메일 바인딩 없음"
+  },
+  "actions": {
+    "editProfile": "프로필 수정",
+    "accountSettings": "계정 설정",
+    "copyId": "신분증 복사",
+    "copied": "복사됨",
+    "logout": "로그아웃",
+    "avatarComingSoon": "아바타 업로드 예정",
+    "logoutConfirmTitle": "계정에서 로그아웃하시겠습니까?",
+    "logoutConfirmDesc": "이 기기에 저장되지 않은 작업 내용은 모두 손실됩니다.",
+    "openStorageManager": "스토리지 관리자",
+    "openStorageManagerHint": "TabTin이 컴퓨터에 저장한 내용을 확인한 다음 정리하거나 내보냅니다.",
+    "changePassword": "비밀번호 변경",
+    "bindEmail": "이메일 바인딩"
+  },
+  "avatar": {
+    "cropTitle": "아바타 자르기",
+    "saved": "아바타가 저장되었습니다",
+    "saveFailed": "아바타를 저장하지 못했습니다.",
+    "removeUnsupported": "아바타 제거는 아직 지원되지 않습니다."
+  },
+  "alt": {
+    "avatar": "아바타"
+  },
+  "stats": {
+    "loginCount": "{{value}}회"
+  },
+  "changePassword": {
+    "title": "비밀번호 변경",
+    "descChange": "새로운 비밀번호를 설정하려면 현재 비밀번호를 입력하세요.",
+    "descReset": "{{identifier}}로 인증코드가 전송됩니다. 새 비밀번호를 설정하려면 이를 확인하세요.",
+    "descResetNoContact": "이 계정에는 이메일이나 전화 연결이 없으므로 코드 기반 재설정을 사용할 수 없습니다.",
+    "labels": {
+      "oldPassword": "현재 비밀번호",
+      "verificationCode": "인증코드",
+      "newPassword": "새 비밀번호",
+      "confirmPassword": "새 비밀번호 확인"
+    },
+    "placeholders": {
+      "oldPassword": "현재 비밀번호를 입력하세요",
+      "verificationCode": "6자리 코드를 입력하세요",
+      "newPassword": "새 비밀번호를 설정하세요",
+      "confirmPassword": "새 비밀번호를 다시 입력하세요."
+    },
+    "capsLockHint": "Caps Lock이 켜져 있습니다.",
+    "actions": {
+      "sendCode": "코드 보내기",
+      "submit": "비밀번호 업데이트",
+      "forgotOld": "현재 비밀번호를 잊으셨나요? 코드로 재설정",
+      "useOldPassword": "현재 비밀번호 사용으로 돌아가기"
+    },
+    "codeSent": "인증 코드가 전송되었습니다",
+    "success": "비밀번호가 업데이트되었습니다.",
+    "successRelogin": "새로운 비밀번호로 다시 로그인해주세요.",
+    "errors": {
+      "oldRequired": "현재 비밀번호를 입력해주세요",
+      "codeInvalid": "6자리 코드를 입력해주세요",
+      "newNoWhitespace": "새 비밀번호에는 공백이 포함될 수 없습니다. 공백이 제거되었습니다",
+      "newNoCjk": "비밀번호에는 CJK 문자가 포함될 수 없습니다. 다른 내용을 붙여넣지 마세요",
+      "newTooShort": "새 비밀번호는 8자 이상이어야 합니다.",
+      "newNotComplex": "새 비밀번호에는 대문자, 소문자, 숫자, 특수문자 중 3가지 이상이 포함되어야 합니다.",
+      "mismatch": "비밀번호가 일치하지 않습니다",
+      "sendCodeFailed": "코드를 보내지 못했습니다. 나중에 다시 시도해 주세요.",
+      "failed": "비밀번호를 업데이트하지 못했습니다. 입력 내용을 확인하고 다시 시도하세요."
+    }
+  },
+  "bindEmail": {
+    "title": "이메일 바인딩",
+    "description": "로그인, 비밀번호 복구, 조직 잔액 부족 알림에 사용하세요.",
+    "labels": {
+      "email": "이메일",
+      "verificationCode": "인증코드"
+    },
+    "placeholders": {
+      "email": "이름@example.com",
+      "verificationCode": "6자리 코드를 입력하세요"
+    },
+    "actions": {
+      "sendCode": "코드 보내기",
+      "submit": "이메일 바인딩"
+    },
+    "codeSent": "인증 코드가 전송되었습니다",
+    "success": "이메일이 성공적으로 바인딩되었습니다.",
+    "errors": {
+      "emailInvalid": "유효한 이메일 주소를 입력하세요.",
+      "codeInvalid": "6자리 코드를 입력하세요",
+      "sendCodeFailed": "코드를 보내지 못했습니다. 나중에 다시 시도해 주세요.",
+      "failed": "이메일을 바인딩하지 못했습니다. 입력 내용을 확인하고 다시 시도하세요."
+    }
+  }
+}

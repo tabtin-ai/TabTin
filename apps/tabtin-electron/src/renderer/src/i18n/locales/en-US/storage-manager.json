@@ -1,0 +1,241 @@
+{
+  "panel": {
+    "title": "Storage",
+    "subtitle": "What TabTin keeps on your computer.",
+    "totalLine": "TabTin uses {{size}} on this Mac",
+    "totalLineLoading": "Measuring storage…",
+    "refresh": "Recalculate",
+    "refreshHint": "Re-measure all data sizes",
+    "loadErrorTitle": "Failed to load"
+  },
+  "health": {
+    "healthy": {
+      "label": "Plenty of room",
+      "tagline": "You're set for a while — keep creating."
+    },
+    "attention": {
+      "label": "Steady",
+      "tagline": "Normal usage, nothing to worry about."
+    },
+    "heavy": {
+      "label": "Getting full",
+      "tagline": "Quite a bit piling up — anything below worth tidying?"
+    },
+    "critical": {
+      "label": "Time to clean",
+      "tagline": "TabTin is taking a lot of space. Time to clear out some unused data."
+    }
+  },
+  "metrics": {
+    "totalUsed": {
+      "label": "Used",
+      "sub": "{{count}} items"
+    },
+    "largest": {
+      "label": "Largest item"
+    },
+    "cache": {
+      "label": "Temporary cache",
+      "tooLow": "All optimized",
+      "clean": "Clean",
+      "cleaning": "Cleaning"
+    }
+  },
+  "section": {
+    "topItemsTitle": "Taking the most space"
+  },
+  "topItems": {
+    "loading": "Measuring your workspace data…",
+    "empty": "No data yet. Come back after using TabTin for a while.",
+    "itemCount": "{{count}} items",
+    "showAll": "Show other {{count}} items",
+    "collapseAll": "Collapse",
+    "conversation": {
+      "label": "Conversation history",
+      "subtitle_one": "From 1 workspace",
+      "subtitle_other": "From {{count}} workspaces",
+      "unscopedLabel": "Other conversation data",
+      "otherLabel": "Other workspaces"
+    },
+    "checkpoint": {
+      "label": "Project operation snapshots",
+      "subtitle": "{{count}} projects · Agent undo snapshots",
+      "otherLabel": "Unassigned undo data"
+    },
+    "browserEnv": {
+      "label": "Browser login environments",
+      "subtitle": "{{count}} environments · site logins & offline data",
+      "otherLabel": "Other environments"
+    },
+    "agentDownload": {
+      "label": "Agent tool downloads",
+      "subtitle": "{{count}} workspaces · files fetched by Agent",
+      "otherLabel": "Other workspaces"
+    },
+    "appBundle": {
+      "label": "Installed apps",
+      "subtitle": "{{count}} kinds of local app data"
+    },
+    "appProject": {
+      "otherLabel": "Other {{count}}",
+      "tabvideo": {
+        "subtitle": "{{count}} TabVideo projects"
+      },
+      "tabdoc": {
+        "subtitle": "{{count}} TabDoc drafts"
+      },
+      "tabwhiteboard": {
+        "subtitle": "{{count}} whiteboard assets"
+      },
+      "tabslide": {
+        "subtitle": "{{count}} TabSlide drafts"
+      }
+    },
+    "cache": {
+      "label": "Temporary cache",
+      "subtitle": "Rebuilds itself on next use"
+    }
+  },
+  "userGroup": {
+    "conversations": {
+      "title": "Conversations & history",
+      "description": "Your conversations with Agent and operation snapshots"
+    },
+    "browser": {
+      "title": "Embedded browser sites",
+      "description": "Sites you've signed into (Feishu, Notion, ChatGPT, etc.)"
+    },
+    "media": {
+      "title": "Media & downloads",
+      "description": "Recordings, screenshots, PDFs, downloads"
+    },
+    "apps": {
+      "title": "App data",
+      "description": "TabDoc drafts, installed apps, etc."
+    },
+    "voice": {
+      "title": "Voice hotwords & rules",
+      "description": "Your voice input customizations"
+    }
+  },
+  "bucketDisplay": {
+    "checkpoint:shadow-git": {
+      "title": "Project operation snapshots",
+      "description": "Snapshots that let you undo Agent operations in each project"
+    },
+    "agent:checkpoints": {
+      "title": "Project operation snapshots",
+      "description": "Snapshots that let you undo Agent operations in each project"
+    },
+    "browser:http-cache-aggregate": {
+      "title": "Embedded site cache",
+      "description": "Image/script/font cache for embedded sites like Feishu, Notion, ChatGPT."
+    },
+    "browser:bookmarks": {
+      "title": "Browser bookmarks",
+      "description": "Bookmarks you've saved in TabTin's embedded browser"
+    },
+    "browser:browsing-history": {
+      "title": "Browsing history",
+      "description": "Pages you've visited in TabTin's embedded browser"
+    },
+    "tin:sandboxes": {
+      "title": "Sandbox app data",
+      "description": "Local data and cache of Tin sandbox apps"
+    },
+    "marketplace:apps": {
+      "title": "Marketplace apps",
+      "description": "Executables and configs for tools installed from the Marketplace"
+    },
+    "mcp:local-connections": {
+      "title": "External AI tool config",
+      "description": "Configs for connecting Claude Desktop / Cursor / Windsurf (advanced users)"
+    },
+    "media:recordings": {
+      "title": "Recordings",
+      "description": "Recording files from the embedded browser"
+    },
+    "media:screenshots": {
+      "title": "Screenshots",
+      "description": "Screenshots saved to ~/.tabtin/screenshots"
+    },
+    "media:exports-pdf": {
+      "title": "PDF exports",
+      "description": "PDF export files saved to ~/.tabtin/exports"
+    },
+    "download:user-downloads": {
+      "title": "Download history",
+      "description": "History of downloads triggered by TabTin (records only)"
+    },
+    "download:agent-sandbox-downloads": {
+      "title": "Agent tool downloads",
+      "description": "Files downloaded by Agent tools in each workspace"
+    },
+    "media:tabvideo-render-tmp": {
+      "title": "Video render leftovers",
+      "description": "Temporary files from video rendering, export, widget snapshots"
+    },
+    "media:stream-download-tmp": {
+      "title": "Stream download chunks",
+      "description": "Temporary chunks from HLS/DASH video downloads"
+    },
+    "voice:hotwords-rules": {
+      "title": "Voice hotwords & rules",
+      "description": "Your voice input customizations (no cloud backup, please export periodically)"
+    },
+    "system:voice-settings": {
+      "title": "Voice hotwords & rules",
+      "description": "Your voice input customizations (no cloud backup, please export periodically)"
+    }
+  },
+  "totalUsage": "{{size}}",
+  "itemCount": "{{count}} items",
+  "groupSummary": "{{size}} · {{count}} items",
+  "actions": {
+    "manage": "Manage",
+    "collapse": "Collapse",
+    "listItems": "Items",
+    "export": "Export",
+    "exporting": "Exporting…",
+    "clear": "Clear",
+    "cancel": "Cancel",
+    "confirmClear": "Confirm clear",
+    "confirmDestroy": "Confirm delete",
+    "clearing": "Clearing…",
+    "acknowledgePartial": "OK"
+  },
+  "errors": {
+    "clearFailed": "Clear failed",
+    "listFailed": "Failed to load list",
+    "scanFailed": "Scan failed"
+  },
+  "dialog": {
+    "willFree": "Will free",
+    "warningsTitle": "After clearing you'll lose:",
+    "typeNameLabel": "Type \"{{name}}\" to confirm",
+    "fillName": "Fill",
+    "acknowledgeLabel": "I understand and accept that this cannot be undone",
+    "partialFailureTitle": "Partial clear failed ({{count}} items)",
+    "partialFailureHint": "Some items were not cleared (in use / permission denied). Click OK to close and retry later.",
+    "L1": {
+      "title": "Clear {{name}}",
+      "subtitle": "Will rebuild on next load. No data is lost."
+    },
+    "L2": {
+      "title": "Clear {{name}}",
+      "subtitle": "Next load may be slower, but no assets are lost."
+    },
+    "L3-soft": {
+      "title": "Clear {{name}}",
+      "subtitle": "This is user data. Cannot be undone."
+    },
+    "L3-hard": {
+      "title": "Clear {{name}}",
+      "subtitle": "This is critical user data. Type the name and check the box to confirm."
+    },
+    "L4": {
+      "title": "Clear {{name}} (high risk)",
+      "subtitle": "Please confirm carefully — this involves account or device identity data."
+    }
+  }
+}

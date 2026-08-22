@@ -1,0 +1,3 @@
+# Electron E2E fixtures run Django management scripts, so they need the
+# same Python dependency set as the local Django backend.
+-r ../../apps/tabtin_django/requirements.txt

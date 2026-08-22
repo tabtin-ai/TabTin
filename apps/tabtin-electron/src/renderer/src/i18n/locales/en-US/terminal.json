@@ -1,0 +1,64 @@
+{
+  "title": "Terminal",
+  "exitCode": "Exit code: {{code}}",
+  "restart": "Restart",
+  "scrollToBottom": "Scroll to bottom",
+  "errors": {
+    "createSessionFailed": "[Error] Unable to create terminal session",
+    "ptyUnavailable": "PTY API is unavailable"
+  },
+  "status": {
+    "processExited": "Process exited, exit code: {{code}}",
+    "idle": "Idle",
+    "running": "Running",
+    "exited": "Exited"
+  },
+  "restore": {
+    "title": "Restored previous output (process disconnected)",
+    "restored": "Historical output restored",
+    "startShell": "Restart Shell",
+    "dismiss": "Dismiss"
+  },
+  "split": {
+    "splitRight": "Split Right",
+    "splitDown": "Split Down",
+    "maximize": "Maximize",
+    "restore": "Restore",
+    "close": "Close Pane",
+    "maxPanesReached": "Maximum panes reached ({{max}})",
+    "equalize": "Equalize All Panes",
+    "doubleClickToEqualize": "Double-click to equalize"
+  },
+  "contextMenu": {
+    "copy": "Copy",
+    "paste": "Paste",
+    "search": "Search",
+    "scrollToBottom": "Scroll to Bottom",
+    "clear": "Clear Terminal",
+    "splitRight": "Split Right",
+    "splitDown": "Split Down",
+    "equalize": "Equalize All Panes",
+    "maximize": "Maximize",
+    "restore": "Restore",
+    "close": "Close Pane"
+  },
+  "search": {
+    "placeholder": "Search terminal…",
+    "noMatch": "No match",
+    "matchFound": "Found",
+    "caseSensitive": "Case sensitive",
+    "previous": "Previous",
+    "next": "Next",
+    "close": "Close search"
+  },
+  "imagePaste": {
+    "saving": "Saving image…",
+    "saved": "Image saved",
+    "failed": "Image paste failed",
+    "tooLarge": "Image too large ({{size}}MB), max 10MB"
+  },
+  "dragDrop": {
+    "hint": "Drop to insert file path",
+    "pathError": "Cannot read file path"
+  }
+}

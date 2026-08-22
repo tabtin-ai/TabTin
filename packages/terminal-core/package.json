@@ -1,0 +1,53 @@
+{
+  "name": "@tabtin/terminal-core",
+  "version": "0.1.0",
+  "description": "Core terminal execution utilities for TabTin",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "browser": {
+        "source": "./src/browser.ts",
+        "types": "./dist/browser.d.ts",
+        "import": "./dist/browser.js",
+        "default": "./dist/browser.js"
+      },
+      "default": {
+        "source": "./src/index.ts",
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "default": "./dist/index.js"
+      }
+    },
+    "./browser": {
+      "source": "./src/browser.ts",
+      "import": "./dist/browser.js",
+      "default": "./dist/browser.js"
+    },
+    "./agent-bridge-contract": {
+      "source": "./src/agent-bridge-contract.ts",
+      "types": "./dist/agent-bridge-contract.d.ts",
+      "import": "./dist/agent-bridge-contract.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts src/browser.ts src/agent-bridge-contract.ts --format esm --dts --external vitest",
+    "build:dts": "tsup src/index.ts src/browser.ts src/agent-bridge-contract.ts --format esm --dts --external vitest",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@tabtin/env-sanitize": "workspace:*",
+    "@tabtin/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.2.2",
+    "vitest": "4.0.18"
+  },
+  "files": [
+    "dist"
+  ]
+}

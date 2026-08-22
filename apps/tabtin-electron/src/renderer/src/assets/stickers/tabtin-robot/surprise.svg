@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+  <g stroke="#111111" stroke-linecap="round" stroke-linejoin="round">
+    <!-- stubby antenna -->
+    <path d="M64 18v14" stroke-width="6"/>
+    <circle cx="64" cy="16" r="9" fill="#111111" stroke="none"/>
+    <circle cx="61" cy="13" r="2.8" fill="#FFFFFF" stroke="none"/>
+    
+    <path d="M46 12l-9-12" stroke-width="6"/>
+    <path d="M82 12l9-12" stroke-width="6"/>
+    <path d="M34 20l-8-4" stroke-width="4"/>
+    <path d="M94 20l8-4" stroke-width="4"/>
+    <path d="M64 6v5" stroke-width="4"/>
+  
+    <!-- squishy TV head -->
+    <rect x="18" y="34" width="92" height="78" rx="28" ry="28" fill="#FFFFFF" stroke-width="7"/>
+    
+    <!-- huge round eyes -->
+    <circle cx="46" cy="70" r="13" fill="#111111" stroke="none"/>
+    <circle cx="82" cy="70" r="13" fill="#111111" stroke="none"/>
+    <circle cx="50" cy="65" r="4.5" fill="#FFFFFF" stroke="none"/>
+    <circle cx="86" cy="65" r="4.5" fill="#FFFFFF" stroke="none"/>
+    <circle cx="43" cy="74" r="2" fill="#FFFFFF" stroke="none" opacity="0.7"/>
+    <circle cx="79" cy="74" r="2" fill="#FFFFFF" stroke="none" opacity="0.7"/>
+    <!-- O mouth -->
+    <ellipse cx="64" cy="96" rx="9" ry="10" fill="#111111" stroke="none"/>
+    <ellipse cx="64" cy="96" rx="4.5" ry="5.5" fill="#FFFFFF" stroke="none"/>
+  
+  </g>
+</svg>

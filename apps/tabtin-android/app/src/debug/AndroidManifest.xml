@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  debug-only 视觉夹具入口。不打进 release，不出现在桌面启动器；只能用 adb 显式拉起：
+  adb shell am start -n com.tabtin.mobile/com.tabtin.mobile.debug.ComposerReadingCollapseReviewActivity
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <activity
+            android:name="com.tabtin.mobile.debug.ComposerReadingCollapseReviewActivity"
+            android:exported="true"
+            android:label="Composer Reading Collapse Review"
+            android:theme="@style/Theme.TabTin" />
+        <activity
+            android:name="com.tabtin.mobile.debug.NativeCloudDocsReviewActivity"
+            android:exported="true"
+            android:label="Native Cloud Docs Review"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.TabTin" />
+    </application>
+</manifest>

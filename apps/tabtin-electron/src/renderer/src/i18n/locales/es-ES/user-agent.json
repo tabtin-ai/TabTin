@@ -1,0 +1,98 @@
+{
+  "labels": {
+    "strategy": "Estrategia usuario-agente",
+    "recommended": "Recomendado",
+    "highestRealism": "💯 Máximo realismo: {{system}}",
+    "mobileDeviceHint": "📱 Elegido al azar entre más de 42 dispositivos reales",
+    "desktopPoolHint": "🎲 Elegido aleatoriamente entre más de 20 UA de escritorio, compatible con el seguimiento de la versión de Chrome",
+    "platform": "Plataforma",
+    "browser": "Navegador",
+    "preview": "Vista previa en vivo",
+    "uaPreview": "Vista previa del agente de usuario",
+    "refreshRandom": "Actualizar UA aleatoria",
+    "refreshOne": "elige otro",
+    "previewDesktopPool": "🎲 Ejemplo de grupo de escritorios: elegido aleatoriamente del grupo {{platform}} + {{browser}}",
+    "previewMobile": "📱 Ejemplo móvil: ponderado aleatorio del grupo de dispositivos {{device}}",
+    "previewAuto": "✅ Utilice el sistema UA para obtener el máximo realismo",
+    "consistencyTitle": "Comprobación de coherencia de la plataforma",
+    "consistencyLine": "Sistema actual: {{current}} → Plataforma de destino: {{target}}",
+    "fingerprintTitle": "Vista previa inteligente de huellas dactilares",
+    "gpuVendor": "Proveedor de GPU",
+    "renderer": "renderizador",
+    "platformInfo": "Información de la plataforma",
+    "clientHints": "Los encabezados de sugerencias del cliente se adaptan automáticamente",
+    "advancedSettings": "Configuraciones avanzadas",
+    "customPlaceholder": "Mozilla/5.0..."
+  },
+  "mode": {
+    "auto": {
+      "label": "Detección automática",
+      "description": "Utilice el entorno del sistema para mantener las huellas digitales nativas de GPU y Client Hints para lograr el mayor realismo"
+    },
+    "mobile": {
+      "label": "Simulación móvil",
+      "description": "Simule dispositivos móviles con perfiles de dispositivos reales (más de 42 dispositivos, GPU y resolución de adaptación automática)"
+    },
+    "desktop_pool": {
+      "label": "Grupo de UA de escritorio",
+      "description": "Elija aleatoriamente entre más de 20 UA de escritorio. El valor predeterminado es la plataforma actual para mayor coherencia, con simulación multiplataforma opcional y filtros de plataforma/navegador."
+    },
+    "custom": {
+      "label": "UA personalizado",
+      "description": "Personaliza completamente la cadena UA para necesidades especiales."
+    }
+  },
+  "platforms": {
+    "current": "Plataforma actual (mantener nativa)",
+    "windows": "ventanas",
+    "macos": "macos",
+    "linux": "linux"
+  },
+  "browsers": {
+    "chrome": "Cromo",
+    "edge": "Borde",
+    "firefox": "Firefox",
+    "safari": "safari"
+  },
+  "mobileDevices": {
+    "iphone": "iPhone (modelos populares aleatorios)",
+    "android": "Android (modelos populares aleatorios)",
+    "ipad": "iPad (modelos populares aleatorios)"
+  },
+  "mobileDevicesShort": {
+    "iphone": "iPhone",
+    "android": "androide",
+    "ipad": "iPad"
+  },
+  "platformNames": {
+    "macOS": "macos",
+    "Windows": "ventanas",
+    "Linux": "linux",
+    "iOS": "iOS",
+    "iPadOS": "iPadOS",
+    "Android": "androide",
+    "Unknown": "Desconocido"
+  },
+  "fingerprint": {
+    "mobileSummary": "📱 Simulación móvil: {{device}} ({{os}} {{version}}) + {{gpu}}",
+    "androidSummary": "📱 Simulación móvil: {{device}} + {{gpu}}",
+    "mac": {
+      "consistent": "✅ Coincidencia de plataforma: mantenga la huella digital nativa de la GPU de Apple",
+      "cross": "⚠️ Simulación multiplataforma: use la huella digital de la GPU de Apple"
+    },
+    "windows": {
+      "macToWindows": "⚠️ Simulación multiplataforma: Mac → Windows, la GPU se falsificará como NVIDIA (inyección de tiempo de ejecución)",
+      "consistent": "✅ Coincidencia de plataforma: mantenga la huella digital nativa de NVIDIA/AMD/Intel GPU",
+      "cross": "⚠️ Simulación multiplataforma: utilice la huella digital de la GPU NVIDIA"
+    },
+    "linux": {
+      "consistent": "✅ Coincidencia de plataforma: mantenga la huella digital nativa de la GPU",
+      "cross": "⚠️ Simulación multiplataforma: utilice la huella digital de la GPU Intel"
+    },
+    "unknown": "⚠️ UA no reconocido, usando la huella digital predeterminada de la GPU Intel"
+  },
+  "consistency": {
+    "best": "✅ ¡La mejor configuración! Mantener la coherencia de la plataforma permite huellas dactilares nativas de la GPU y es la más difícil de detectar.",
+    "cross": "⚠️ La simulación multiplataforma cambiará las huellas digitales de la GPU; considere el \"modo inteligente\" para mantener la coherencia de la plataforma"
+  }
+}

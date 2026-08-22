@@ -1,0 +1,14 @@
+{
+  "conditions": [],
+  "identity": {
+    "canonical_hash": "sha256:de9dfb1afb31002b84d72478a97b71ce0005f9f7210dabf63d72b33059c64a7b",
+    "key": "doubao-draft-zero-traffic",
+    "kind": "rollout-policy",
+    "revision": "1"
+  },
+  "lifecycle": "draft",
+  "percentage_basis_points": 0,
+  "replacement_ref": null,
+  "schema_version": "1",
+  "sunset_at": null
+}

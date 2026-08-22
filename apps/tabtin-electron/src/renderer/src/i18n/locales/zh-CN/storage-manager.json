@@ -1,0 +1,240 @@
+{
+  "panel": {
+    "title": "存储状态",
+    "subtitle": "TabTin 在你的电脑上存了哪些东西。",
+    "totalLine": "TabTin 在这台电脑上占用了 {{size}}",
+    "totalLineLoading": "正在统计 TabTin 占用的空间…",
+    "refresh": "重新计算",
+    "refreshHint": "重新统计所有数据的占用",
+    "loadErrorTitle": "加载失败"
+  },
+  "health": {
+    "healthy": {
+      "label": "充裕",
+      "tagline": "还能用很久，专心创作就好。"
+    },
+    "attention": {
+      "label": "适度",
+      "tagline": "正常使用中，目前一切平静。"
+    },
+    "heavy": {
+      "label": "偏多",
+      "tagline": "数据积攒得不少了，看一眼下面哪些能收拾？"
+    },
+    "critical": {
+      "label": "该清了",
+      "tagline": "TabTin 占用偏大，建议清掉一些不再需要的东西。"
+    }
+  },
+  "metrics": {
+    "totalUsed": {
+      "label": "已占用",
+      "sub": "{{count}} 项数据"
+    },
+    "largest": {
+      "label": "最大一类"
+    },
+    "cache": {
+      "label": "临时缓存",
+      "tooLow": "已最优",
+      "clean": "清掉",
+      "cleaning": "清理中"
+    }
+  },
+  "section": {
+    "topItemsTitle": "占空间最多的"
+  },
+  "topItems": {
+    "loading": "正在统计你的工作区数据…",
+    "empty": "还没什么数据，用一段时间后再来看看。",
+    "itemCount": "{{count}} 项",
+    "showAll": "查看其余 {{count}} 项",
+    "collapseAll": "收起",
+    "conversation": {
+      "label": "对话历史",
+      "subtitle": "来自 {{count}} 个工作区",
+      "unscopedLabel": "其他对话数据",
+      "otherLabel": "其他工作区"
+    },
+    "checkpoint": {
+      "label": "项目操作快照",
+      "subtitle": "{{count}} 个项目 · Agent 操作的撤销快照",
+      "otherLabel": "未归属撤销数据"
+    },
+    "browserEnv": {
+      "label": "浏览器登录环境",
+      "subtitle": "{{count}} 个环境 · 网站登录态与离线数据",
+      "otherLabel": "其他登录环境"
+    },
+    "agentDownload": {
+      "label": "Agent 工具下载",
+      "subtitle": "{{count}} 个工作区 · Agent 抓取的文件",
+      "otherLabel": "其他工作区"
+    },
+    "appBundle": {
+      "label": "已安装应用",
+      "subtitle": "{{count}} 类应用本地数据"
+    },
+    "appProject": {
+      "otherLabel": "其他 {{count}} 个",
+      "tabvideo": {
+        "subtitle": "{{count}} 个 TabVideo 项目"
+      },
+      "tabdoc": {
+        "subtitle": "{{count}} 个 TabDoc 草稿"
+      },
+      "tabwhiteboard": {
+        "subtitle": "{{count}} 个白板素材"
+      },
+      "tabslide": {
+        "subtitle": "{{count}} 个演示文稿草稿"
+      }
+    },
+    "cache": {
+      "label": "临时缓存",
+      "subtitle": "下次需要时会自动重建"
+    }
+  },
+  "userGroup": {
+    "conversations": {
+      "title": "对话与操作记录",
+      "description": "Agent 和你的所有对话内容、操作快照"
+    },
+    "browser": {
+      "title": "浏览器内嵌环境",
+      "description": "你登录过的网站（飞书、Notion、ChatGPT 等）"
+    },
+    "media": {
+      "title": "媒体与下载",
+      "description": "录屏、截图、PDF、下载文件"
+    },
+    "apps": {
+      "title": "应用本地数据",
+      "description": "TabDoc 草稿、已安装应用等本地内容"
+    },
+    "voice": {
+      "title": "Voice 热词与替换规则",
+      "description": "你的语音输入个性化设置"
+    }
+  },
+  "bucketDisplay": {
+    "checkpoint:shadow-git": {
+      "title": "项目操作快照",
+      "description": "让你能撤销 Agent 在每个项目里的操作的快照"
+    },
+    "agent:checkpoints": {
+      "title": "项目操作快照",
+      "description": "让你能撤销 Agent 在每个项目里的操作的快照"
+    },
+    "browser:http-cache-aggregate": {
+      "title": "内嵌网站缓存",
+      "description": "飞书、Notion、ChatGPT 等内嵌网站的图片 / 脚本 / 字体缓存。"
+    },
+    "browser:bookmarks": {
+      "title": "浏览器书签",
+      "description": "你在 TabTin 内嵌浏览器里收藏的书签"
+    },
+    "browser:browsing-history": {
+      "title": "浏览历史",
+      "description": "你在 TabTin 内嵌浏览器里访问过的网页"
+    },
+    "tin:sandboxes": {
+      "title": "沙箱应用数据",
+      "description": "Tin 沙箱应用运行时的本地数据与缓存"
+    },
+    "marketplace:apps": {
+      "title": "应用市场应用",
+      "description": "从「应用市场」安装的工具应用的可执行文件与配置"
+    },
+    "mcp:local-connections": {
+      "title": "外部 AI 工具配置",
+      "description": "连接 Claude Desktop / Cursor / Windsurf 等的配置（高级用户）"
+    },
+    "media:recordings": {
+      "title": "录屏",
+      "description": "内嵌浏览器里的录屏文件"
+    },
+    "media:screenshots": {
+      "title": "截图",
+      "description": "保存到 ~/.tabtin/screenshots 的截图"
+    },
+    "media:exports-pdf": {
+      "title": "PDF 导出",
+      "description": "保存到 ~/.tabtin/exports 的 PDF 导出文件"
+    },
+    "download:user-downloads": {
+      "title": "下载记录",
+      "description": "TabTin 触发的下载历史（仅记录）"
+    },
+    "download:agent-sandbox-downloads": {
+      "title": "Agent 工具下载",
+      "description": "Agent 工具在每个工作区下载的文件"
+    },
+    "media:tabvideo-render-tmp": {
+      "title": "视频渲染残留",
+      "description": "视频渲染、导出、Widget 烤图等产生的临时文件"
+    },
+    "media:stream-download-tmp": {
+      "title": "流媒体下载临时分片",
+      "description": "下载 HLS / DASH 视频时的临时分片"
+    },
+    "voice:hotwords-rules": {
+      "title": "Voice 热词与替换规则",
+      "description": "你的语音输入个性化设置（无云端备份，请定期导出）"
+    },
+    "system:voice-settings": {
+      "title": "Voice 热词与替换规则",
+      "description": "你的语音输入个性化设置（无云端备份，请定期导出）"
+    }
+  },
+  "totalUsage": "{{size}}",
+  "itemCount": "{{count}} 项",
+  "groupSummary": "{{size}} · {{count}} 项",
+  "actions": {
+    "manage": "管理",
+    "collapse": "收起",
+    "listItems": "查看明细",
+    "export": "导出",
+    "exporting": "导出中…",
+    "clear": "清理",
+    "cancel": "取消",
+    "confirmClear": "确认清理",
+    "confirmDestroy": "确认删除",
+    "clearing": "清理中…",
+    "acknowledgePartial": "我已了解"
+  },
+  "errors": {
+    "clearFailed": "清理失败",
+    "listFailed": "加载列表失败",
+    "scanFailed": "扫描失败"
+  },
+  "dialog": {
+    "willFree": "将释放",
+    "warningsTitle": "清后会丢失：",
+    "typeNameLabel": "请输入「{{name}}」以确认",
+    "fillName": "填充",
+    "acknowledgeLabel": "我已了解清理后果，且无法恢复",
+    "partialFailureTitle": "部分清理失败（{{count}} 项）",
+    "partialFailureHint": "部分项目未被清理（可能因为正在使用 / 权限不足）。点「我已了解」关闭，稍后可单独重试。",
+    "L1": {
+      "title": "清理 {{name}}",
+      "subtitle": "清后下次首次加载会自动重建，不影响任何数据。"
+    },
+    "L2": {
+      "title": "清理 {{name}}",
+      "subtitle": "清后下次首次加载会变慢，但不会丢任何资产。"
+    },
+    "L3-soft": {
+      "title": "清理 {{name}}",
+      "subtitle": "这是用户数据，清掉后无法恢复。请认真确认。"
+    },
+    "L3-hard": {
+      "title": "清理 {{name}}",
+      "subtitle": "这是关键用户数据，清掉后无法恢复。请输入名称并勾选确认。"
+    },
+    "L4": {
+      "title": "清理 {{name}}（高危）",
+      "subtitle": "请仔细确认——这是涉及账号或设备身份的关键数据。"
+    }
+  }
+}

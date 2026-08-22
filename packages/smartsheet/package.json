@@ -1,0 +1,42 @@
+{
+  "name": "@tabtin/smartsheet",
+  "version": "0.1.0",
+  "description": "TabTin SmartSheet Core Library",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "smartsheet",
+    "tabtin",
+    "data-table",
+    "spreadsheet"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "dependencies": {
+    "uuid": "^9.0.0",
+    "xlsx": "0.18.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/uuid": "^9.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  }
+}

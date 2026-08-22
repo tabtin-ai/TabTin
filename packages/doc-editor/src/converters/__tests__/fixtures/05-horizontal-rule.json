@@ -1,0 +1,13 @@
+{
+  "name": "horizontal-rule",
+  "description": "Horizontal rule between paragraphs",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      { "type": "paragraph", "content": [{ "type": "text", "text": "Before" }] },
+      { "type": "horizontalRule" },
+      { "type": "paragraph", "content": [{ "type": "text", "text": "After" }] }
+    ]
+  },
+  "expectedMarkdown": "Before\n\n---\n\nAfter"
+}

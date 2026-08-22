@@ -1,0 +1,68 @@
+{
+  "id": "tabtin-office-skills-pack",
+  "name": "Office Skills Pack",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "面向职场办公流的 TabTin Marketplace Skills：会议纪要、周报、邮件转任务、客户跟进、项目简报、数据复盘、演示稿生成。",
+  "icon": "briefcase-business",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "productivity",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 20
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": ["skills"]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": ["skills"]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/meeting-notes-to-actions",
+    "skills/weekly-report-builder",
+    "skills/mail-to-task-followup",
+    "skills/customer-followup-brief",
+    "skills/project-status-brief",
+    "skills/data-review-memo",
+    "skills/brief-to-slide-deck"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "meeting-notes-to-actions": { "enabled": true },
+      "weekly-report-builder": { "enabled": true },
+      "mail-to-task-followup": { "enabled": true },
+      "customer-followup-brief": { "enabled": true },
+      "project-status-brief": { "enabled": true },
+      "data-review-memo": { "enabled": true },
+      "brief-to-slide-deck": { "enabled": true }
+    }
+  }
+}

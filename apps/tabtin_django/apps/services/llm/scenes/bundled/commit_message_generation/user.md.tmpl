@@ -1,0 +1,18 @@
+已暂存文件：
+{% for path in files[:40] %}
+- {{ path }}
+{% endfor %}
+{%- if files|length > 40 %}
+- …共 {{ files|length }} 个文件
+{%- endif %}
+
+{% if truncated %}
+（diff 已截断，仅依据下方摘要生成）
+{% endif %}
+
+staged diff：
+```
+{{ diff_excerpt }}
+```
+
+只返回一行 Conventional Commit：

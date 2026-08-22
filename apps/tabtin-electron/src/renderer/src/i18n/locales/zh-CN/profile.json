@@ -1,0 +1,131 @@
+{
+  "title": "个人资料",
+  "description": "查看和编辑您的个人资料信息，包括基本信息、联系方式和账户设置",
+  "saved": "个人资料已更新",
+  "validation": {
+    "usernameLength": "用户名长度应为3-20个字符",
+    "usernameFormat": "用户名只能包含字母、数字、下划线，且以字母开头",
+    "nicknameLength": "昵称不能超过50个字符",
+    "bioLength": "个人简介不能超过500个字符"
+  },
+  "errors": {
+    "updateFailed": "更新失败，请稍后重试",
+    "verificationFailed": "发送验证码失败",
+    "logoutFailed": "退出登录失败"
+  },
+  "labels": {
+    "nickname": "昵称",
+    "username": "用户名",
+    "userId": "用户 ID",
+    "phone": "手机号",
+    "email": "邮箱",
+    "bio": "个人简介",
+    "contact": "联系方式",
+    "accountInfo": "账户信息",
+    "registeredAt": "注册时间",
+    "loginCount": "登录次数",
+    "lastLogin": "最后登录",
+    "buildVersion": "构建版本"
+  },
+  "placeholders": {
+    "nickname": "请输入昵称",
+    "username": "请输入用户名",
+    "bio": "介绍一下自己..."
+  },
+  "empty": {
+    "nickname": "未设置昵称",
+    "username": "未设置用户名",
+    "bio": "这个人很懒，什么都没有留下...",
+    "contact": "暂无联系方式",
+    "email": "未绑定邮箱"
+  },
+  "actions": {
+    "editProfile": "编辑资料",
+    "accountSettings": "账户设置",
+    "copyId": "复制 ID",
+    "copied": "已复制",
+    "logout": "退出登录",
+    "avatarComingSoon": "头像上传即将推出",
+    "logoutConfirmTitle": "确定要退出登录吗？",
+    "logoutConfirmDesc": "退出后当前设备的未保存工作将丢失",
+    "openStorageManager": "存储管理",
+    "openStorageManagerHint": "看见 TabTin 在你电脑上存了什么，按需要清理或导出",
+    "changePassword": "修改密码",
+    "bindEmail": "绑定邮箱"
+  },
+  "avatar": {
+    "cropTitle": "裁剪头像",
+    "saved": "头像已保存",
+    "saveFailed": "头像保存失败",
+    "removeUnsupported": "暂不支持移除头像"
+  },
+  "alt": {
+    "avatar": "头像"
+  },
+  "stats": {
+    "loginCount": "{{value}} 次"
+  },
+  "changePassword": {
+    "title": "修改密码",
+    "descChange": "输入当前密码以设置新密码。",
+    "descReset": "验证码将发送至 {{identifier}}，验证后即可设置新密码。",
+    "descResetNoContact": "当前账号未绑定邮箱或手机号，无法用验证码重置。",
+    "labels": {
+      "oldPassword": "当前密码",
+      "verificationCode": "验证码",
+      "newPassword": "新密码",
+      "confirmPassword": "确认新密码"
+    },
+    "placeholders": {
+      "oldPassword": "请输入当前密码",
+      "verificationCode": "请输入 6 位验证码",
+      "newPassword": "请设置新密码",
+      "confirmPassword": "请再次输入新密码"
+    },
+    "capsLockHint": "检测到大写锁定（Caps Lock）已开启",
+    "actions": {
+      "sendCode": "发送验证码",
+      "submit": "确认修改",
+      "forgotOld": "忘记当前密码？用验证码重置",
+      "useOldPassword": "返回用当前密码修改"
+    },
+    "codeSent": "验证码已发送",
+    "success": "密码修改成功",
+    "successRelogin": "请用新密码重新登录",
+    "errors": {
+      "oldRequired": "请输入当前密码",
+      "codeInvalid": "请输入 6 位数字验证码",
+      "newNoWhitespace": "新密码不能包含空格，已将空格过滤",
+      "newNoCjk": "密码不能包含中日韩文字，请勿粘贴其他内容",
+      "newTooShort": "新密码至少 8 位",
+      "newNotComplex": "新密码须包含大写字母、小写字母、数字、特殊字符中的至少 3 种",
+      "mismatch": "两次输入的密码不一致",
+      "sendCodeFailed": "验证码发送失败，请稍后重试",
+      "failed": "密码修改失败，请检查输入后重试"
+    }
+  },
+  "bindEmail": {
+    "title": "绑定邮箱",
+    "description": "绑定后可用于登录、找回密码，以及接收组织余额低预警等通知。",
+    "labels": {
+      "email": "邮箱",
+      "verificationCode": "验证码"
+    },
+    "placeholders": {
+      "email": "name@example.com",
+      "verificationCode": "请输入 6 位验证码"
+    },
+    "actions": {
+      "sendCode": "发送验证码",
+      "submit": "确认绑定"
+    },
+    "codeSent": "验证码已发送",
+    "success": "邮箱绑定成功",
+    "errors": {
+      "emailInvalid": "请输入有效的邮箱地址",
+      "codeInvalid": "请输入 6 位数字验证码",
+      "sendCodeFailed": "验证码发送失败，请稍后重试",
+      "failed": "绑定失败，请检查输入后重试"
+    }
+  }
+}

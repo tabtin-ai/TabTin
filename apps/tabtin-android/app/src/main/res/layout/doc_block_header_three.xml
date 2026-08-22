@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 三级标题块 -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.tabtin.mobile.features.doc.editor.core.DocTextInputWidget
+        android:id="@+id/textContent"
+        style="@style/DocBlockHeaderThreeContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/doc_placeholder_heading3"
+        android:textColorHint="@color/doc_editor_text_tertiary" />
+</FrameLayout>

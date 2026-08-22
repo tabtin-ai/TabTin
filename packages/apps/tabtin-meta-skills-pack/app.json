@@ -1,0 +1,70 @@
+{
+  "id": "tabtin-meta-skills-pack",
+  "name": "Meta Skills Pack",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "元技能：创建新技能、推荐该装的技能——让技能市场自己会「长」。",
+  "icon": "sparkles",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "knowledge",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 31
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/skill-creator",
+    "skills/suggesting-skills",
+    "skills/skill-qa-checklist"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "skill-creator": {
+        "enabled": true
+      },
+      "suggesting-skills": {
+        "enabled": true
+      },
+      "skill-qa-checklist": {
+        "enabled": true
+      }
+    }
+  }
+}

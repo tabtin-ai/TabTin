@@ -1,0 +1,20 @@
+{
+  "model": "gpt-4o-mini",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是一名图像描述专家。"
+    },
+    {
+      "role": "user",
+      "content": [
+        {"type": "text", "text": "请描述这张图。"},
+        {
+          "type": "image_url",
+          "image_url": {"url": "https://example.com/oss/abc.jpg"}
+        }
+      ]
+    }
+  ]
+}

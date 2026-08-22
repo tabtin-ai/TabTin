@@ -1,0 +1,27 @@
+{
+  "proposal": {
+    "headerTitle": "Plan draft",
+    "summaryLabel": "Summary",
+    "todosLabel": "Todos ({{count}})",
+    "todosEmpty": "No todos",
+    "expandButton": "Show full plan",
+    "collapseButton": "Collapse",
+    "openDocButton": "Open document",
+    "executeButton": "Execute",
+    "executingButton": "Executing…",
+    "executedButton": "Executed",
+    "todoStatus": {
+      "pending": "Pending",
+      "in_progress": "In progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "unknown": "Unknown"
+    },
+    "executeSuccess": "Started executing “{{name}}”",
+    "executeSuccessNoName": "Started executing this plan",
+    "executeErrorNoSession": "No active session — cannot execute the plan.",
+    "executeErrorSend": "Failed to send plan execution — please retry.",
+    "executeError": "Failed to execute: {{message}}",
+    "executeErrorUnknown": "Unknown error"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "id": "tabtin-dev-toolkit-pack",
+  "name": "工程开发工具包",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "工程开发：代码安全审计、代码架构图、规范化提交信息。",
+  "icon": "code-2",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "engineering",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 35
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/code-safety-audit",
+    "skills/code-to-chart",
+    "skills/smart-commit-gen"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "code-safety-audit": {
+        "enabled": true
+      },
+      "code-to-chart": {
+        "enabled": true
+      },
+      "smart-commit-gen": {
+        "enabled": true
+      }
+    }
+  }
+}

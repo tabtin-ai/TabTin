@@ -1,0 +1,14 @@
+{
+  "conditions": [],
+  "identity": {
+    "canonical_hash": "sha256:0d1c5195c2f732ac38f57f7233d5d21695b8a0e1ad473362cbf63a7aab6d0930",
+    "key": "kimi-draft-zero-traffic",
+    "kind": "rollout-policy",
+    "revision": "1"
+  },
+  "lifecycle": "draft",
+  "percentage_basis_points": 0,
+  "replacement_ref": null,
+  "schema_version": "1",
+  "sunset_at": null
+}

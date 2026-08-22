@@ -1,0 +1,29 @@
+{
+  "apiErrors": {
+    "fetchListFailed": "取得記錄清單失敗",
+    "fetchDetailFailed": "取得記錄詳情失敗",
+    "createFailed": "建立記錄失敗",
+    "updateFailed": "更新記錄失敗",
+    "deleteFailed": "刪除記錄失敗",
+    "bulkCreateFailed": "大量建立記錄失敗",
+    "bulkUpdateFailed": "批次更新記錄失敗",
+    "bulkDeleteFailed": "批量刪除記錄失敗"
+  },
+  "logs": {
+    "fetchDetailSuccess": "取得記錄詳情成功",
+    "createSuccess": "建立記錄成功",
+    "bulkUpdateMissingRecord": "批次更新結果中缺少目標記錄",
+    "deleteSuccess": "刪除記錄成功",
+    "bulkProgress": "批次執行進度",
+    "bulkCreateSuccess": "大量建立記錄成功",
+    "bulkCreatePartialFailed": "批次建立部分失敗",
+    "bulkUpdateSuccess": "大量更新記錄成功",
+    "bulkUpdatePartialFailed": "批次更新部分失敗",
+    "syncViewRecordsSuccess": "同步視圖記錄成功",
+    "syncViewRecordsFailed": "同步視圖記錄失敗",
+    "bulkDeleteSuccess": "批量刪除記錄成功",
+    "bulkDeletePartialFailed": "批量刪除部分失敗",
+    "mergeIncremental": "合併 {{count}} 筆增量記錄，新版本: {{version}}",
+    "removeByIds": "移除記錄"
+  }
+}

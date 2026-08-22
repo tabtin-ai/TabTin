@@ -1,0 +1,137 @@
+name: Tabtin
+options:
+  bundleIdPrefix: com.example.tabtin
+  deploymentTarget:
+    iOS: "18.0"
+  xcodeVersion: "16.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+  developmentRegion: zh-Hans
+  knownRegions:
+    - zh-Hans
+    - en
+
+settings:
+  base:
+    # per-target Swift 版本策略（移植自旧 tabtin-ios，长期治理决策）：
+    # base 保 SWIFT_VERSION=5.0，让 SPM 第三方依赖（Highlightr/Kingfisher/MarkdownUI）
+    # 按各自 Package.swift swift-tools-version 推断，避免 Highlightr 在 swift6 mode 编译失败阻塞整 build。
+    # Tabtin target 自身切 SWIFT_VERSION=6 + 严格并发，见 targets.Tabtin.settings.base。
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_EMIT_LOC_STRINGS: "YES"
+    # SE-0418：closure 捕获的 method/keypath literal 自动推导 Sendable（swift5 mode 手动开）。
+    SWIFT_UPCOMING_FEATURE_INFER_SENDABLE_FROM_CAPTURES: "YES"
+
+targets:
+  Tabtin:
+    type: application
+    platform: iOS
+    sources:
+      - path: Tabtin
+        excludes:
+          - "**/*.md"
+    entitlements:
+      path: Tabtin/Tabtin.entitlements
+      properties:
+        # 远程推送。development 供 Xcode 直跑调试；
+        # Archive 导出 App Store / Ad Hoc 包时由 Xcode 自动改写为 production。
+        aps-environment: development
+    settings:
+      base:
+        # Tabtin target 强制 Swift 6 严格并发（base SWIFT_VERSION=5.0 仅作 SPM 依赖 fallback）。
+        SWIFT_VERSION: "6"
+        SWIFT_STRICT_CONCURRENCY: complete
+        INFOPLIST_FILE: Tabtin/Resources/Info.plist
+        DEVELOPMENT_TEAM: ""
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.tabtin
+        MARKETING_VERSION: "1.0.1"
+        CURRENT_PROJECT_VERSION: "1"
+        TABTIN_GIT_SHA: ""
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: false
+        # 模拟器构建必须真的过一遍 codesign，并带上 entitlements：
+        # 否则产物是 linker-signed ad-hoc、entitlements 为空，Keychain（SecItem*）
+        # 直接返回 -34018 errSecMissingEntitlement，登录写 token 全线失败。
+        # 模拟器不校验 provisioning profile，ad-hoc "-" 身份 + 显式 entitlements 即可；
+        # 真机 Debug/Release 的手动签名口径（见 configs）完全不受影响。
+        # ⚠️ 命令行传 CODE_SIGNING_ALLOWED=NO 会盖掉这里，模拟器构建不要传。
+        "CODE_SIGN_ENTITLEMENTS[sdk=iphonesimulator*]": Signing/Tabtin-Simulator.entitlements
+        "CODE_SIGN_STYLE[sdk=iphonesimulator*]": Manual
+        "CODE_SIGN_IDENTITY[sdk=iphonesimulator*]": "-"
+        "PROVISIONING_PROFILE_SPECIFIER[sdk=iphonesimulator*]": ""
+        "CODE_SIGNING_ALLOWED[sdk=iphonesimulator*]": "YES"
+        "CODE_SIGNING_REQUIRED[sdk=iphonesimulator*]": "YES"
+      configs:
+        Debug:
+          CODE_SIGN_STYLE: Manual
+          CODE_SIGN_IDENTITY: Apple Development
+          PROVISIONING_PROFILE_SPECIFIER: ""
+          SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) DEBUGSWIFT_ENABLED"
+        Release:
+          CODE_SIGN_STYLE: Manual
+          CODE_SIGN_IDENTITY: Apple Distribution
+          PROVISIONING_PROFILE_SPECIFIER: ""
+          SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) DEBUGSWIFT_ENABLED"
+    dependencies:
+      - sdk: AppIntents.framework
+      - sdk: Security.framework
+      - sdk: SystemConfiguration.framework
+      - sdk: libz.tbd
+      - sdk: libc++.tbd
+      - package: Kingfisher
+      - package: MarkdownUI
+      - package: Highlightr
+      - package: DebugSwift
+      - package: Sentry
+      - package: SwiftCentrifuge
+
+  TabtinTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - TabtinTests
+    settings:
+      base:
+        BUNDLE_LOADER: "$(TEST_HOST)"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Tabtin.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tabtin"
+        IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+        GENERATE_INFOPLIST_FILE: true
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.tabtin.tests
+        DEVELOPMENT_TEAM: ""
+        CODE_SIGN_STYLE: Automatic
+    dependencies:
+      - target: Tabtin
+      - package: Sentry
+
+schemes:
+  Tabtin:
+    build:
+      targets:
+        Tabtin: all
+        TabtinTests: [test]
+    test:
+      targets:
+        - TabtinTests
+      gatherCoverageData: false
+
+packages:
+  Kingfisher:
+    url: https://github.com/onevcat/Kingfisher.git
+    from: "8.0.0"
+  MarkdownUI:
+    url: https://github.com/gonzalezreal/swift-markdown-ui.git
+    from: "2.4.0"
+  Highlightr:
+    url: https://github.com/raspu/Highlightr.git
+    from: "2.2.0"
+  DebugSwift:
+    url: https://github.com/DebugSwift/DebugSwift.git
+    from: "1.0.0"
+  Sentry:
+    url: https://github.com/getsentry/sentry-cocoa.git
+    from: "9.20.0"
+  SwiftCentrifuge:
+    url: https://github.com/centrifugal/centrifuge-swift.git
+    from: "0.9.0"

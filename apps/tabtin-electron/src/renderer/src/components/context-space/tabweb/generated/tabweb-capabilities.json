@@ -1,0 +1,414 @@
+{
+  "version": 1,
+  "groups": [
+    {
+      "id": "navigate",
+      "label": "打开与导航",
+      "order": 1
+    },
+    {
+      "id": "read",
+      "label": "读取页面",
+      "order": 2
+    },
+    {
+      "id": "capture",
+      "label": "截图与导出",
+      "order": 3
+    },
+    {
+      "id": "interact",
+      "label": "页面操作",
+      "order": 4
+    },
+    {
+      "id": "tab",
+      "label": "标签管理",
+      "order": 5
+    },
+    {
+      "id": "session",
+      "label": "会话与 Cookie",
+      "order": 6
+    },
+    {
+      "id": "resource",
+      "label": "资源与媒体",
+      "order": 7
+    },
+    {
+      "id": "record",
+      "label": "录制与回放",
+      "order": 8
+    }
+  ],
+  "commands": [
+    {
+      "name": "browser home",
+      "short": "打开浏览器入口（自定义主页或 TabWeb 工作区）",
+      "long": "打开用户的浏览器入口：已配置自定义主页时新建网页标签打开该网址；未配置时打开 TabWeb 工作区。\n\n仅用于用户要打开浏览器或浏览器主页、尚未指定具体网站或搜索内容的场景。\n指定 URL/网站、搜索词、浏览历史、书签或下载管理时，请使用对应浏览器命令。",
+      "group": "navigate",
+      "group_label": "打开与导航"
+    },
+    {
+      "name": "browser nav",
+      "short": "导航 (back/forward/reload/stop)",
+      "long": "",
+      "risk": "write",
+      "group": "navigate",
+      "group_label": "打开与导航"
+    },
+    {
+      "name": "browser open",
+      "short": "打开 URL（默认返回即含可交互元素清单，可直接 act）",
+      "long": "",
+      "risk": "write",
+      "group": "navigate",
+      "group_label": "打开与导航"
+    },
+    {
+      "name": "browser wait",
+      "short": "等待",
+      "long": "",
+      "group": "navigate",
+      "group_label": "打开与导航"
+    },
+    {
+      "name": "browser console",
+      "short": "控制台日志",
+      "long": "",
+      "group": "read",
+      "group_label": "读取页面"
+    },
+    {
+      "name": "browser network",
+      "short": "网络日志（列出页面加载发出的请求 / XHR / fetch）",
+      "long": "",
+      "group": "read",
+      "group_label": "读取页面"
+    },
+    {
+      "name": "browser print",
+      "short": "导出页面内容到文件（默认 markdown；--as text|markdown|html|json|pdf；--save 必填）",
+      "long": "",
+      "group": "capture",
+      "group_label": "截图与导出"
+    },
+    {
+      "name": "browser act",
+      "short": "执行动作序列（默认返回即含可交互元素清单，可直接继续 act）",
+      "long": "执行按顺序组成的页面动作。填写文本框时，value 是 fill 的正式字段；text 只是兼容别名，收到 compatibility_warnings 后应改用 value。选择下拉项也使用 value 传入选项值。",
+      "risk": "write",
+      "group": "interact",
+      "group_label": "页面操作"
+    },
+    {
+      "name": "browser batch",
+      "short": "批量操作",
+      "long": "",
+      "risk": "write",
+      "group": "interact",
+      "group_label": "页面操作"
+    },
+    {
+      "name": "browser clear-session",
+      "short": "清除会话数据",
+      "long": "",
+      "risk": "write",
+      "group": "interact",
+      "group_label": "页面操作"
+    },
+    {
+      "name": "browser eval",
+      "short": "执行 JavaScript",
+      "long": "",
+      "risk": "write",
+      "group": "interact",
+      "group_label": "页面操作"
+    },
+    {
+      "name": "browser glance",
+      "short": "看交互：观察页面可交互元素（默认轻量 ref/href；--tree 全量 a11y 树；--screenshot 截图）",
+      "long": "",
+      "group": "interact",
+      "group_label": "页面操作"
+    },
+    {
+      "name": "browser random-ua",
+      "short": "随机 User-Agent",
+      "long": "",
+      "group": "interact",
+      "group_label": "页面操作"
+    },
+    {
+      "name": "browser route",
+      "short": "拦截 / 改写匹配的网络请求",
+      "long": "",
+      "risk": "write",
+      "group": "interact",
+      "group_label": "页面操作"
+    },
+    {
+      "name": "browser route-list",
+      "short": "列出已注册的拦截规则（仅 Electron）",
+      "long": "",
+      "group": "interact",
+      "group_label": "页面操作"
+    },
+    {
+      "name": "browser unroute",
+      "short": "取消请求拦截",
+      "long": "",
+      "risk": "write",
+      "group": "interact",
+      "group_label": "页面操作"
+    },
+    {
+      "name": "browser tab close",
+      "short": "关闭 Tab",
+      "long": "",
+      "risk": "write",
+      "group": "tab",
+      "group_label": "标签管理"
+    },
+    {
+      "name": "browser tab list",
+      "short": "Tab 列表",
+      "long": "",
+      "group": "tab",
+      "group_label": "标签管理"
+    },
+    {
+      "name": "browser tab state",
+      "short": "Tab 状态",
+      "long": "",
+      "group": "tab",
+      "group_label": "标签管理"
+    },
+    {
+      "name": "browser tab switch",
+      "short": "切换 Tab",
+      "long": "",
+      "risk": "write",
+      "group": "tab",
+      "group_label": "标签管理"
+    },
+    {
+      "name": "browser cookies clear",
+      "short": "清除 Cookie",
+      "long": "",
+      "risk": "write",
+      "group": "session",
+      "group_label": "会话与 Cookie"
+    },
+    {
+      "name": "browser cookies get",
+      "short": "获取 Cookie",
+      "long": "",
+      "group": "session",
+      "group_label": "会话与 Cookie"
+    },
+    {
+      "name": "browser cookies set",
+      "short": "设置 Cookie",
+      "long": "",
+      "risk": "write",
+      "group": "session",
+      "group_label": "会话与 Cookie"
+    },
+    {
+      "name": "browser session close",
+      "short": "关闭会话",
+      "long": "",
+      "risk": "write",
+      "group": "session",
+      "group_label": "会话与 Cookie"
+    },
+    {
+      "name": "browser session close-all",
+      "short": "关闭所有会话",
+      "long": "",
+      "risk": "write",
+      "group": "session",
+      "group_label": "会话与 Cookie"
+    },
+    {
+      "name": "browser session create",
+      "short": "创建会话",
+      "long": "",
+      "risk": "write",
+      "group": "session",
+      "group_label": "会话与 Cookie"
+    },
+    {
+      "name": "browser session list",
+      "short": "列出会话",
+      "long": "",
+      "group": "session",
+      "group_label": "会话与 Cookie"
+    },
+    {
+      "name": "browser session load",
+      "short": "加载会话状态",
+      "long": "",
+      "risk": "write",
+      "group": "session",
+      "group_label": "会话与 Cookie"
+    },
+    {
+      "name": "browser session save",
+      "short": "保存会话状态",
+      "long": "",
+      "risk": "write",
+      "group": "session",
+      "group_label": "会话与 Cookie"
+    },
+    {
+      "name": "browser session switch",
+      "short": "切换会话",
+      "long": "",
+      "risk": "write",
+      "group": "session",
+      "group_label": "会话与 Cookie"
+    },
+    {
+      "name": "browser resource capture",
+      "short": "捕获资源",
+      "long": "",
+      "group": "resource",
+      "group_label": "资源与媒体"
+    },
+    {
+      "name": "browser resource download",
+      "short": "下载资源",
+      "long": "",
+      "group": "resource",
+      "group_label": "资源与媒体"
+    },
+    {
+      "name": "browser resource inspect",
+      "short": "资源详情",
+      "long": "",
+      "group": "resource",
+      "group_label": "资源与媒体"
+    },
+    {
+      "name": "browser resource list",
+      "short": "资源列表",
+      "long": "",
+      "group": "resource",
+      "group_label": "资源与媒体"
+    },
+    {
+      "name": "browser resource probe",
+      "short": "主动探测页面中的媒体元素（video/audio/blob）",
+      "long": "",
+      "group": "resource",
+      "group_label": "资源与媒体"
+    },
+    {
+      "name": "browser resource smart-download",
+      "short": "智能下载页面上的主要媒体资源",
+      "long": "",
+      "group": "resource",
+      "group_label": "资源与媒体"
+    },
+    {
+      "name": "browser stream download",
+      "short": "下载流媒体",
+      "long": "",
+      "group": "resource",
+      "group_label": "资源与媒体"
+    },
+    {
+      "name": "browser stream info",
+      "short": "查看流媒体详细信息（画质列表、时长、分片数）",
+      "long": "",
+      "group": "resource",
+      "group_label": "资源与媒体"
+    },
+    {
+      "name": "browser stream parse",
+      "short": "解析流媒体",
+      "long": "",
+      "group": "resource",
+      "group_label": "资源与媒体"
+    },
+    {
+      "name": "browser record start",
+      "short": "开始录制",
+      "long": "",
+      "risk": "write",
+      "group": "record",
+      "group_label": "录制与回放"
+    },
+    {
+      "name": "browser record status",
+      "short": "录制状态",
+      "long": "",
+      "group": "record",
+      "group_label": "录制与回放"
+    },
+    {
+      "name": "browser record stop",
+      "short": "停止录制",
+      "long": "",
+      "risk": "write",
+      "group": "record",
+      "group_label": "录制与回放"
+    },
+    {
+      "name": "browser replay list",
+      "short": "录制列表",
+      "long": "",
+      "group": "record",
+      "group_label": "录制与回放"
+    },
+    {
+      "name": "browser replay run",
+      "short": "运行回放",
+      "long": "",
+      "risk": "write",
+      "group": "record",
+      "group_label": "录制与回放"
+    }
+  ],
+  "featured": [
+    {
+      "key": "open",
+      "commands": [
+        "browser open"
+      ],
+      "title": "打开一个网页",
+      "description": "给网址或搜索词，让 AI 打开它",
+      "prompt": "帮我用浏览器打开一个网页。我给你网址或搜索关键词，你用 `tabtin browser open` 打开它，打开后告诉我页面标题和大致内容。"
+    },
+    {
+      "key": "read",
+      "commands": [
+        "browser print"
+      ],
+      "title": "读取页面内容",
+      "description": "把当前页面导出成 Markdown / 结构化文本",
+      "prompt": "帮我把当前浏览器页面的正文内容导出成 Markdown 文件并整理要点给我。先看看现在打开了哪些标签页，再导出我要的那个。"
+    },
+    {
+      "key": "observe",
+      "commands": [
+        "browser glance"
+      ],
+      "title": "看页面能做什么",
+      "description": "观察页面可交互元素（可点击 / 可填写）",
+      "prompt": "帮我看看当前浏览器页面上能做哪些操作。观察页面的可交互元素（可点击 / 可填写），告诉我它们分别是什么。"
+    },
+    {
+      "key": "download",
+      "commands": [
+        "browser resource smart-download"
+      ],
+      "title": "下载页面里的媒体",
+      "description": "自动发现并下载视频 / 图片 / 音频",
+      "prompt": "帮我把当前浏览器页面里的媒体资源（视频 / 图片 / 音频）找出来并下载。先探测页面上有哪些资源，再下载主要的那个。"
+    }
+  ]
+}

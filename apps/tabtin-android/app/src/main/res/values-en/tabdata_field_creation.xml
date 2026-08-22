@@ -1,0 +1,23 @@
+<resources>
+    <string name="tabdata_add_field">Add field</string>
+    <string name="tabdata_create_field_title">New field</string>
+    <string name="tabdata_field_name">Field name</string>
+    <string name="tabdata_field_name_placeholder">For example: Status</string>
+    <string name="tabdata_field_type_value">Field type: %1$s</string>
+    <string name="tabdata_field_choices">Choices</string>
+    <string name="tabdata_field_choices_hint">Enter one choice per line. The choices are immediately available in records.</string>
+    <string name="tabdata_field_create">Create field</string>
+    <string name="tabdata_field_creating">Creating…</string>
+    <string name="tabdata_field_created">Field created</string>
+    <string name="tabdata_field_name_required">Enter a field name.</string>
+    <string name="tabdata_field_name_too_long">Field names can contain at most 100 characters.</string>
+    <string name="tabdata_field_name_duplicate">A field with this name already exists.</string>
+    <string name="tabdata_field_choices_required">Add at least one choice.</string>
+    <string name="tabdata_field_create_failed">The field could not be created.</string>
+    <string name="tabdata_field_type_text">Text</string>
+    <string name="tabdata_field_type_long_text">Long text</string>
+    <string name="tabdata_field_type_number">Number</string>
+    <string name="tabdata_field_type_select">Single select</string>
+    <string name="tabdata_field_type_multi_select">Multiple select</string>
+    <string name="tabdata_field_type_checkbox">Checkbox</string>
+</resources>

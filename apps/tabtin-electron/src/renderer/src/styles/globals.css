@@ -1,0 +1,2021 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ============================================================
+   * 基础色板 — 暖中性 (Warm Neutral)
+   * 所有颜色使用 HSL 格式，通过 CSS Variables 注入
+   * ============================================================ */
+  :root {
+    --canvas: 40 20% 97%;
+    --background: 40 25% 99%;
+    --foreground: 30 10% 15%;
+    /* 正文阅读内容（Agent 回复主体）的最高对比文字色——比 --foreground 更
+       强一档，让"主内容"在视觉层级上明确高于侧边栏/次要 chrome。亮色下比
+       foreground 略深一点；暗色见 .dark。token 出口：tailwind `foreground-strong`。 */
+    --content-foreground: 30 14% 7%;
+    --card: 40 25% 99%;
+    --card-foreground: 30 10% 15%;
+    --popover: 40 25% 99%;
+    --popover-foreground: 30 10% 15%;
+    --primary: 215 65% 52%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 36 12% 95%;
+    --secondary-foreground: 30 10% 15%;
+    --muted: 36 14% 94%;
+    --muted-foreground: 30 6% 44%;
+    --accent: 215 65% 52%;
+    --accent-foreground: 0 0% 99%;
+    --destructive: 0 55% 52%;
+    --destructive-foreground: 0 0% 99%;
+    --success: 152 45% 42%;
+    --success-foreground: 0 0% 99%;
+    --warning: 38 70% 50%;
+    --warning-foreground: 0 0% 99%;
+    --info: 210 55% 52%;
+    --info-foreground: 0 0% 99%;
+    /* 数据可视化分类调色板（参考 shadcn/ui charts 的 --chart-1..5）：
+       供仪表盘条形图/分布图按类别循环取色，是「数据可视化」域内例外（design-system §16.2），
+       不参与 Shell 主色，彩色面积受控。Tailwind 出口：bg-chart-1 … bg-chart-5、text-chart-*。 */
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 44%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --border: 34 10% 89%;
+    --input: 36 14% 94%;
+    --ring: 215 65% 52%;
+    --radius: 0.25rem;
+    --radius-interactive: 0.5rem;
+
+    /* 主题色用在「文字 / 图标」上时的降饱和版本：保留品牌色相，掺入少量中性灰（~15%）
+       略降饱和，避免满饱和文字刺眼（design-system §6.8）。引用 var(--primary)/var(--accent)
+       与 --muted-foreground，随 scheme/明暗自动重算。用 text-primary-text / text-accent-text。 */
+    --primary-text: color-mix(in srgb, hsl(var(--primary)) 85%, hsl(var(--muted-foreground)) 15%);
+    --accent-text: color-mix(in srgb, hsl(var(--accent)) 85%, hsl(var(--muted-foreground)) 15%);
+
+    /* 次正文档（secondary）：介于 --foreground（正文）与 --muted-foreground（次文字）之间，
+       比正文略弱、比 hint 明显更清晰。用于表单 label、说明性正文等「次要但需清晰」的文字。
+       color-mix 混合 foreground/muted-foreground，随 scheme/明暗自动重算（同 --primary-text 模式）。
+       token 出口：tailwind `text-foreground-secondary`。 */
+    --foreground-secondary: color-mix(in srgb, hsl(var(--foreground)) 80%, hsl(var(--muted-foreground)) 20%);
+
+    /* Shell 玻璃面 + 画布氛围（见 components/layout/shellUi.ts）。
+       L2 上浮面只靠「半透明 + blur + 内高光」勾边，无外边框、无外投影
+       （design-system §10.2/§10.4）。外投影仅给脱离布局流的浮层。 */
+    /* 浅色主体玻璃面取暖灰（95~96%），不刺白；同级框靠与画布的背景色差区分（不再用内高光） */
+    --glass-bg: 40 25% 95% / 0.82;
+    --glass-bg-strong: 40 25% 96% / 0.9;
+    /* 侧栏实色底：浅色 #f9f9f9，与主区纯白拉开边界；不跟主题暖色 glass-bg 走。 */
+    --sidebar-fill: 0 0% 97.6%;
+    /* 一体卡主区填充：纯白底，与侧栏实色底缘拉开边界 */
+    --workspace-main-fill: 0 0% 100%;
+    /* 浮层面（右键菜单 / 下拉 / Popover / Select / Dialog / Sheet / Toast / Tooltip）：
+       刻意「不蹭主题色」——不透明纯白中性面，不随品牌色方案换色相、不透出底层画布
+       （早期为暖灰半透明毛玻璃，菜单上会泛主题色，观感别扭）。亮色纯白、暗色见 .dark 纯黑。 */
+    --glass-bg-overlay: 0 0% 100%;
+    --glass-blur: 28px;
+    /* 浮层（Popover/Dropdown/Select/Dialog/Sheet/Toast/Tooltip 等）专用更强模糊，
+       让脱离布局流的浮层呈现更明显的毛玻璃质感（design-system §10.2/§10.4/§11.4） */
+    --glass-blur-overlay: 64px;
+    --glass-saturate: 165%;
+    /* 内高光：更柔和、低对比、弥散——小偏移 + 大模糊 + 低 alpha，减轻体积/斜面感（design-system §10.4） */
+    --glass-shadow-inset: inset 0 1px 4px hsl(0 0% 100% / 0.28);
+    /* L0 下沉内阴影（输入井、终端、折叠展开区） */
+    --surface-recessed-inset: inset 0 1px 2px hsl(30 10% 15% / 0.06);
+    /* 浮层单层投影（Popover / Dropdown / Dialog / Toast）—— 布局流内禁止使用 */
+    --shadow-overlay: 0 8px 24px hsl(30 10% 15% / 0.10);
+    /* composer focus-within 的「上浮」反馈专用（见 ChatInput），非布局流默认材质 */
+    --glass-shadow-elevation: 0 8px 32px hsl(30 10% 15% / 0.07);
+    --ambient-primary: 0.14;
+    /* 画布第二氛围光斑（design-system §6.4B）：与 Primary 不同 hue，透明度更低。 */
+    --ambient-hue-secondary: 28;
+    --ambient-secondary: 0.09;
+    --ambient-secondary-s: 55%;
+    --ambient-secondary-l: 50%;
+
+    /* Chat composer 三级灰阶（不跟随主题色相，避免混入 Primary / Secondary tint）：
+       - backplate：柔和灰「托盘」，完整框住输入井，把 composer 从（常为纯白的）内容区
+         里托出来——纯白内容上，输入井靠这层灰托盘获得区分度，而非靠自身明度。
+       - surface：最亮、最干净的白「输入井」，是三层里最浅的一档（呼应"输入框浅一些"）。
+       梯度：内容(白) → backplate 托盘(灰) → surface 输入井(白，最亮)。 */
+    --chat-composer-backplate: 0 0% 97% / 0.72;
+    --chat-composer-surface: 0 0% 100% / 1;
+    /* hover 态等同常态：composer 不做 hover 底色高亮 */
+    --chat-composer-surface-hover: 0 0% 100% / 1;
+    --chat-composer-drop-surface: 0 0% 0% / 0.04;
+    --chat-composer-drop-ring: 0 0% 0% / 0.18;
+    --chat-composer-drop-text: 0 0% 34%;
+
+    /* Z-Index 语义化变量 — 与 @tabtin/app-shell ZIndex 常量对齐 */
+    --z-sticky: 10;
+    --z-floating: 20;
+    --z-banner: 30;
+    --z-overlay: 40;
+    --z-modal: 50;
+    --z-dropdown: 55;
+    --z-toast: 60;
+    --z-global: 9999;
+    --z-above-global: 10000;
+    --z-toast-host: 10050;
+
+    /* TabSlide 模块专用（画布编辑器特殊需求） */
+    --tabslide-bg: 0 0% 100%;
+    --tabslide-canvas: 0 0% 96%;
+    --tabslide-floating-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+    --tabslide-canvas-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.04);
+
+    /* 表格字体（表格引擎 canvas 渲染使用） */
+    --table-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    --table-font-weight: 400;
+    --table-header-font-weight: 500;
+    --table-font-size: 12px;
+
+    /* 类型色（用于分类标签：cron/webhook/agent 等） */
+    --type-cron: 25 90% 50%;
+    --type-webhook: 270 50% 55%;
+    --type-agent: 280 55% 48%;
+
+    /* 阴影（仅浮层使用） */
+    --shadow-float: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-dialog: 0 4px 16px rgba(0,0,0,0.12);
+
+    /* 全屏模态 clickaway 遮罩 — 对齐 design-system-migration（Light ~30%），略透便于见底层 */
+    --modal-scrim: 0 0 0 / 0.25;
+    /* 模态遮罩背景模糊唯一真源：适中档，柔化底层但仍可辨（见底层），非布局玻璃的
+       28px / 浮层的 64px 那种大模糊——大模糊叠全屏会把底层糊成一片灰。所有模态遮罩
+       （overlay-backdrop-blur / bg-modal-scrim）统一走此 token，改一处全局生效。 */
+    --modal-scrim-blur: 8px;
+
+    /* TabChat 单列时间线昵称色板（借 Discord「彩色昵称」处理手法，但收敛饱和度，
+       保持暖中性基调下的可读对比；按 sender id 稳定哈希取色，详见 imNameColor.ts）。
+       浅色下取 ~45% 亮度保证 4.5:1 对比；暗色见 .dark 提亮。 */
+    --im-name-1: 215 64% 48%;
+    --im-name-2: 152 48% 36%;
+    --im-name-3: 28 70% 44%;
+    --im-name-4: 350 58% 50%;
+    --im-name-5: 270 42% 52%;
+    --im-name-6: 178 52% 34%;
+    --im-name-7: 38 72% 40%;
+    --im-name-8: 320 46% 50%;
+  }
+
+  .dark {
+    --canvas: 30 8% 8%;
+    --background: 30 6% 9%;
+    --foreground: 36 14% 90%;
+    /* 暗色下正文用近纯白（中性 98%），与 --foreground 的暖灰白（90%）拉开
+       明确层级，避免 Agent 正文读起来"像侧边栏非激活灰字"。不带暖色调以贴近
+       #ffffff 的清爽观感；如需更柔可上调 lightness，如需纯白改 0 0% 100%。 */
+    --content-foreground: 0 0% 100%;
+    --card: 30 6% 9%;
+    --card-foreground: 36 14% 90%;
+    --popover: 30 6% 9%;
+    --popover-foreground: 36 14% 90%;
+    --primary: 215 65% 62%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 30 6% 16%;
+    --secondary-foreground: 36 14% 90%;
+    --muted: 30 6% 16%;
+    --muted-foreground: 30 6% 60%;
+    --accent: 215 65% 62%;
+    --accent-foreground: 0 0% 99%;
+    --destructive: 0 55% 60%;
+    --destructive-foreground: 0 0% 99%;
+    --success: 152 45% 55%;
+    --success-foreground: 0 0% 99%;
+    --warning: 38 60% 55%;
+    --warning-foreground: 0 0% 99%;
+    --info: 210 55% 62%;
+    --info-foreground: 0 0% 99%;
+    /* 数据可视化分类调色板（暗色，参考 shadcn/ui charts 暗色档）。 */
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --border: 30 6% 20%;
+    --input: 30 6% 16%;
+    --ring: 215 65% 62%;
+
+    --glass-bg: 30 6% 14% / 0.66;
+    --glass-bg-strong: 30 6% 14% / 0.8;
+    --sidebar-fill: 0 0% 8%;
+    --workspace-main-fill: 0 0% 0%;
+    /* 暗色浮层面：不透明纯黑中性面（同样不蹭主题色、不透底层）。 */
+    --glass-bg-overlay: 0 0% 0%;
+    --glass-shadow-inset: inset 0 1px 4px hsl(0 0% 100% / 0.04);
+    --surface-recessed-inset: inset 0 1px 2px hsl(0 0% 100% / 0.06);
+    --shadow-overlay: 0 10px 28px rgba(0, 0, 0, 0.45);
+    --glass-shadow-elevation: 0 8px 32px rgba(0, 0, 0, 0.38);
+    --ambient-primary: 0.18;
+    --ambient-secondary: 0.10;
+
+    /* 深色三级灰阶：backplate 托盘更深（框住输入井、从内容面板里托出来），
+       surface 输入井相对更亮一档，成为三层里最亮的一档，与浅色梯度方向一致。
+       梯度：内容(~9%) → backplate 托盘(~6%，最深) → surface 输入井(~12%，最亮)。 */
+    --chat-composer-backplate: 0 0% 6% / 0.6;
+    --chat-composer-surface: 0 0% 12% / 0.82;
+    /* hover 态等同常态：composer 不做 hover 底色高亮 */
+    --chat-composer-surface-hover: 0 0% 12% / 0.82;
+    --chat-composer-drop-surface: 0 0% 100% / 0.07;
+    --chat-composer-drop-ring: 0 0% 100% / 0.22;
+    --chat-composer-drop-text: 0 0% 72%;
+
+    --tabslide-bg: 30 6% 12%;
+    --tabslide-canvas: 0 0% 11%;
+    --tabslide-floating-shadow: 0 8px 20px -8px rgb(0 0 0 / 0.5), 0 4px 12px -6px rgb(0 0 0 / 0.4);
+    --tabslide-canvas-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 6px 14px rgba(0,0,0,0.3);
+
+    --table-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    --table-font-weight: 400;
+    --table-header-font-weight: 500;
+    --table-font-size: 12px;
+
+    --type-cron: 25 85% 60%;
+    --type-webhook: 270 55% 65%;
+    --type-agent: 280 55% 62%;
+
+    --shadow-float: 0 2px 8px rgba(0,0,0,0.2);
+    --shadow-dialog: 0 4px 16px rgba(0,0,0,0.3);
+
+    --modal-scrim: 0 0 0 / 0.32;
+
+    /* 暗色下提亮昵称色（~62-70% 亮度），在深背景上保持鲜明又不刺眼 */
+    --im-name-1: 215 72% 68%;
+    --im-name-2: 152 50% 58%;
+    --im-name-3: 28 82% 64%;
+    --im-name-4: 350 72% 70%;
+    --im-name-5: 270 60% 74%;
+    --im-name-6: 178 56% 56%;
+    --im-name-7: 38 82% 60%;
+    --im-name-8: 320 62% 70%;
+  }
+
+  /* ============================================================
+   * 品牌色方案（可切换）
+   * 每个方案覆盖：中性色板(canvas/bg/fg/card/muted/border/input)
+   *             + 强调色(primary/accent/ring) + brand 色阶
+   * 饱和度统一控制在 55-75%，避免过于鲜艳
+   * ============================================================ */
+
+  :root[data-color-scheme="blue"] {
+    --canvas: 215 15% 97%;
+    --background: 215 18% 99%;
+    --foreground: 215 10% 15%;
+    --card: 215 18% 99%;
+    --card-foreground: 215 10% 15%;
+    --popover: 215 18% 99%;
+    --popover-foreground: 215 10% 15%;
+    --primary: 215 65% 52%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 215 10% 95%;
+    --secondary-foreground: 215 10% 15%;
+    --muted: 215 12% 94%;
+    --muted-foreground: 215 5% 44%;
+    --accent: 215 65% 52%;
+    --accent-foreground: 0 0% 99%;
+    --border: 215 8% 89%;
+    --input: 215 12% 94%;
+    --ring: 215 65% 52%;
+    --ambient-hue-secondary: 28;
+    --brand-50: 215 50% 97%;
+    --brand-100: 215 50% 94%;
+    --brand-200: 215 55% 90%;
+    --brand-300: 215 60% 82%;
+    --brand-400: 215 62% 70%;
+    --brand-500: 215 65% 52%;
+    --brand-600: 215 65% 46%;
+    --brand-700: 215 65% 40%;
+    --brand-800: 215 65% 34%;
+    --brand-900: 215 65% 28%;
+    --brand-950: 215 65% 20%;
+  }
+
+  .dark[data-color-scheme="blue"] {
+    --canvas: 215 8% 8%;
+    --background: 215 6% 9%;
+    --foreground: 215 10% 90%;
+    --card: 215 6% 9%;
+    --card-foreground: 215 10% 90%;
+    --popover: 215 6% 9%;
+    --popover-foreground: 215 10% 90%;
+    --primary: 215 65% 62%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 215 6% 16%;
+    --secondary-foreground: 215 10% 90%;
+    --muted: 215 6% 16%;
+    --muted-foreground: 215 5% 60%;
+    --accent: 215 65% 62%;
+    --accent-foreground: 0 0% 99%;
+    --border: 215 6% 20%;
+    --input: 215 6% 16%;
+    --ring: 215 65% 62%;
+    --brand-500: 215 65% 62%;
+    --brand-600: 215 65% 56%;
+    --brand-700: 215 65% 50%;
+    --brand-800: 215 65% 44%;
+    --brand-900: 215 65% 38%;
+    --brand-950: 215 65% 30%;
+  }
+
+  :root[data-color-scheme="teal"] {
+    --canvas: 175 12% 97%;
+    --background: 175 15% 99%;
+    --foreground: 175 8% 15%;
+    --card: 175 15% 99%;
+    --card-foreground: 175 8% 15%;
+    --popover: 175 15% 99%;
+    --popover-foreground: 175 8% 15%;
+    --primary: 178 55% 42%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 175 8% 95%;
+    --secondary-foreground: 175 8% 15%;
+    --muted: 175 10% 94%;
+    --muted-foreground: 175 5% 44%;
+    --accent: 178 55% 42%;
+    --accent-foreground: 0 0% 99%;
+    --border: 175 6% 89%;
+    --input: 175 10% 94%;
+    --ring: 178 55% 42%;
+    --ambient-hue-secondary: 350;
+    --brand-50: 178 40% 97%;
+    --brand-100: 178 45% 94%;
+    --brand-200: 178 48% 90%;
+    --brand-300: 178 50% 82%;
+    --brand-400: 178 52% 68%;
+    --brand-500: 178 55% 42%;
+    --brand-600: 178 55% 37%;
+    --brand-700: 178 55% 32%;
+    --brand-800: 178 55% 27%;
+    --brand-900: 178 55% 22%;
+    --brand-950: 178 55% 16%;
+  }
+
+  .dark[data-color-scheme="teal"] {
+    --canvas: 175 6% 8%;
+    --background: 175 5% 9%;
+    --foreground: 175 8% 90%;
+    --card: 175 5% 9%;
+    --card-foreground: 175 8% 90%;
+    --popover: 175 5% 9%;
+    --popover-foreground: 175 8% 90%;
+    --primary: 178 55% 55%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 175 5% 16%;
+    --secondary-foreground: 175 8% 90%;
+    --muted: 175 5% 16%;
+    --muted-foreground: 175 4% 60%;
+    --accent: 178 55% 55%;
+    --accent-foreground: 0 0% 99%;
+    --border: 175 5% 20%;
+    --input: 175 5% 16%;
+    --ring: 178 55% 55%;
+    --brand-500: 178 55% 55%;
+    --brand-600: 178 55% 49%;
+    --brand-700: 178 55% 43%;
+    --brand-800: 178 55% 37%;
+    --brand-900: 178 55% 31%;
+    --brand-950: 178 55% 24%;
+  }
+
+  :root[data-color-scheme="orange"] {
+    --canvas: 40 20% 97%;
+    --background: 40 25% 99%;
+    --foreground: 30 10% 15%;
+    --card: 40 25% 99%;
+    --card-foreground: 30 10% 15%;
+    --popover: 40 25% 99%;
+    --popover-foreground: 30 10% 15%;
+    --primary: 28 75% 52%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 36 12% 95%;
+    --secondary-foreground: 30 10% 15%;
+    --muted: 36 14% 94%;
+    --muted-foreground: 30 6% 44%;
+    --accent: 28 75% 52%;
+    --accent-foreground: 0 0% 99%;
+    --border: 34 10% 89%;
+    --input: 36 14% 94%;
+    --ring: 28 75% 52%;
+    --ambient-hue-secondary: 178;
+    --brand-50: 28 60% 97%;
+    --brand-100: 28 65% 94%;
+    --brand-200: 28 68% 90%;
+    --brand-300: 28 70% 82%;
+    --brand-400: 28 72% 68%;
+    --brand-500: 28 75% 52%;
+    --brand-600: 28 75% 46%;
+    --brand-700: 28 75% 40%;
+    --brand-800: 28 75% 34%;
+    --brand-900: 28 75% 28%;
+    --brand-950: 28 75% 20%;
+  }
+
+  .dark[data-color-scheme="orange"] {
+    --canvas: 30 8% 8%;
+    --background: 30 6% 9%;
+    --foreground: 36 14% 90%;
+    --card: 30 6% 9%;
+    --card-foreground: 36 14% 90%;
+    --popover: 30 6% 9%;
+    --popover-foreground: 36 14% 90%;
+    --primary: 28 75% 60%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 30 6% 16%;
+    --secondary-foreground: 36 14% 90%;
+    --muted: 30 6% 16%;
+    --muted-foreground: 30 6% 60%;
+    --accent: 28 75% 60%;
+    --accent-foreground: 0 0% 99%;
+    --border: 30 6% 20%;
+    --input: 30 6% 16%;
+    --ring: 28 75% 60%;
+    --brand-500: 28 75% 60%;
+    --brand-600: 28 75% 54%;
+    --brand-700: 28 75% 48%;
+    --brand-800: 28 75% 42%;
+    --brand-900: 28 75% 36%;
+    --brand-950: 28 75% 28%;
+  }
+
+  :root[data-color-scheme="rose"] {
+    --canvas: 350 12% 97%;
+    --background: 350 15% 99%;
+    --foreground: 350 6% 15%;
+    --card: 350 15% 99%;
+    --card-foreground: 350 6% 15%;
+    --popover: 350 15% 99%;
+    --popover-foreground: 350 6% 15%;
+    --primary: 350 55% 52%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 350 8% 95%;
+    --secondary-foreground: 350 6% 15%;
+    --muted: 350 10% 94%;
+    --muted-foreground: 350 4% 44%;
+    --accent: 350 55% 52%;
+    --accent-foreground: 0 0% 99%;
+    --border: 350 6% 89%;
+    --input: 350 10% 94%;
+    --ring: 350 55% 52%;
+    --ambient-hue-secondary: 178;
+    --brand-50: 350 40% 97%;
+    --brand-100: 350 45% 94%;
+    --brand-200: 350 48% 90%;
+    --brand-300: 350 50% 82%;
+    --brand-400: 350 52% 70%;
+    --brand-500: 350 55% 52%;
+    --brand-600: 350 55% 46%;
+    --brand-700: 350 55% 40%;
+    --brand-800: 350 55% 34%;
+    --brand-900: 350 55% 28%;
+    --brand-950: 350 55% 20%;
+  }
+
+  .dark[data-color-scheme="rose"] {
+    --canvas: 350 6% 8%;
+    --background: 350 5% 9%;
+    --foreground: 350 8% 90%;
+    --card: 350 5% 9%;
+    --card-foreground: 350 8% 90%;
+    --popover: 350 5% 9%;
+    --popover-foreground: 350 8% 90%;
+    --primary: 350 55% 62%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 350 5% 16%;
+    --secondary-foreground: 350 8% 90%;
+    --muted: 350 5% 16%;
+    --muted-foreground: 350 4% 60%;
+    --accent: 350 55% 62%;
+    --accent-foreground: 0 0% 99%;
+    --border: 350 5% 20%;
+    --input: 350 5% 16%;
+    --ring: 350 55% 62%;
+    --brand-500: 350 55% 62%;
+    --brand-600: 350 55% 56%;
+    --brand-700: 350 55% 50%;
+    --brand-800: 350 55% 44%;
+    --brand-900: 350 55% 38%;
+    --brand-950: 350 55% 30%;
+  }
+
+  :root[data-color-scheme="slate"] {
+    --canvas: 220 6% 97%;
+    --background: 220 8% 99%;
+    --foreground: 220 6% 15%;
+    --card: 220 8% 99%;
+    --card-foreground: 220 6% 15%;
+    --popover: 220 8% 99%;
+    --popover-foreground: 220 6% 15%;
+    --primary: 220 10% 42%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 220 5% 95%;
+    --secondary-foreground: 220 6% 15%;
+    --muted: 220 6% 94%;
+    --muted-foreground: 220 4% 44%;
+    --accent: 220 10% 42%;
+    --accent-foreground: 0 0% 99%;
+    --border: 220 4% 89%;
+    --input: 220 6% 94%;
+    --ring: 220 10% 42%;
+    --ambient-hue-secondary: 178;
+    --ambient-secondary: 0.072;
+    --brand-50: 220 8% 97%;
+    --brand-100: 220 8% 94%;
+    --brand-200: 220 8% 90%;
+    --brand-300: 220 9% 82%;
+    --brand-400: 220 9% 68%;
+    --brand-500: 220 10% 42%;
+    --brand-600: 220 10% 37%;
+    --brand-700: 220 10% 32%;
+    --brand-800: 220 10% 27%;
+    --brand-900: 220 10% 22%;
+    --brand-950: 220 10% 16%;
+  }
+
+  .dark[data-color-scheme="slate"] {
+    --canvas: 220 5% 8%;
+    --background: 220 4% 9%;
+    --foreground: 220 6% 90%;
+    --card: 220 4% 9%;
+    --card-foreground: 220 6% 90%;
+    --popover: 220 4% 9%;
+    --popover-foreground: 220 6% 90%;
+    --primary: 220 10% 60%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 220 4% 16%;
+    --secondary-foreground: 220 6% 90%;
+    --muted: 220 4% 16%;
+    --muted-foreground: 220 4% 60%;
+    --accent: 220 10% 60%;
+    --accent-foreground: 0 0% 99%;
+    --border: 220 4% 20%;
+    --input: 220 4% 16%;
+    --ring: 220 10% 60%;
+    --ambient-secondary: 0.08;
+    --brand-500: 220 10% 60%;
+    --brand-600: 220 10% 54%;
+    --brand-700: 220 10% 48%;
+    --brand-800: 220 10% 42%;
+    --brand-900: 220 10% 36%;
+    --brand-950: 220 10% 28%;
+  }
+
+  :root[data-color-scheme="violet"] {
+    --canvas: 270 8% 97%;
+    --background: 270 10% 99%;
+    --foreground: 270 6% 15%;
+    --card: 270 10% 99%;
+    --card-foreground: 270 6% 15%;
+    --popover: 270 10% 99%;
+    --popover-foreground: 270 6% 15%;
+    --primary: 270 16% 38%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 270 6% 95%;
+    --secondary-foreground: 270 6% 15%;
+    --muted: 270 8% 94%;
+    --muted-foreground: 270 4% 44%;
+    --accent: 270 16% 38%;
+    --accent-foreground: 0 0% 99%;
+    --border: 270 5% 89%;
+    --input: 270 8% 94%;
+    --ring: 270 16% 38%;
+    --ambient-hue-secondary: 38;
+    --brand-50: 270 12% 97%;
+    --brand-100: 270 12% 94%;
+    --brand-200: 270 14% 90%;
+    --brand-300: 270 15% 82%;
+    --brand-400: 270 15% 65%;
+    --brand-500: 270 16% 38%;
+    --brand-600: 270 16% 33%;
+    --brand-700: 270 16% 28%;
+    --brand-800: 270 16% 23%;
+    --brand-900: 270 16% 18%;
+    --brand-950: 270 16% 13%;
+  }
+
+  .dark[data-color-scheme="violet"] {
+    --canvas: 270 6% 8%;
+    --background: 270 5% 9%;
+    --foreground: 270 8% 90%;
+    --card: 270 5% 9%;
+    --card-foreground: 270 8% 90%;
+    --popover: 270 5% 9%;
+    --popover-foreground: 270 8% 90%;
+    --primary: 270 16% 55%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 270 5% 16%;
+    --secondary-foreground: 270 8% 90%;
+    --muted: 270 5% 16%;
+    --muted-foreground: 270 4% 60%;
+    --accent: 270 16% 55%;
+    --accent-foreground: 0 0% 99%;
+    --border: 270 5% 20%;
+    --input: 270 5% 16%;
+    --ring: 270 16% 55%;
+    --brand-500: 270 16% 55%;
+    --brand-600: 270 16% 49%;
+    --brand-700: 270 16% 43%;
+    --brand-800: 270 16% 37%;
+    --brand-900: 270 16% 31%;
+    --brand-950: 270 16% 24%;
+  }
+
+  :root[data-color-scheme="sky"] {
+    --canvas: 200 4% 98%;
+    --background: 0 0% 100%;
+    --foreground: 210 8% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 8% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 8% 12%;
+    --primary: 194 76% 50%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 200 5% 96%;
+    --secondary-foreground: 210 8% 12%;
+    --muted: 200 6% 95%;
+    --muted-foreground: 210 4% 42%;
+    --accent: 194 76% 50%;
+    --accent-foreground: 0 0% 99%;
+    --border: 210 5% 90%;
+    --input: 200 6% 95%;
+    --ring: 194 76% 50%;
+    --ambient-hue-secondary: 28;
+    --brand-50: 194 50% 97%;
+    --brand-100: 194 55% 94%;
+    --brand-200: 194 60% 90%;
+    --brand-300: 194 65% 82%;
+    --brand-400: 194 70% 68%;
+    --brand-500: 194 76% 50%;
+    --brand-600: 194 76% 44%;
+    --brand-700: 194 76% 38%;
+    --brand-800: 194 76% 32%;
+    --brand-900: 194 76% 26%;
+    --brand-950: 194 76% 18%;
+  }
+
+  .dark[data-color-scheme="sky"] {
+    --canvas: 210 6% 7%;
+    --background: 210 5% 8%;
+    --foreground: 210 6% 92%;
+    --card: 210 5% 8%;
+    --card-foreground: 210 6% 92%;
+    --popover: 210 5% 8%;
+    --popover-foreground: 210 6% 92%;
+    --primary: 194 70% 58%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 210 5% 15%;
+    --secondary-foreground: 210 6% 92%;
+    --muted: 210 5% 15%;
+    --muted-foreground: 210 4% 60%;
+    --accent: 194 70% 58%;
+    --accent-foreground: 0 0% 99%;
+    --border: 210 5% 19%;
+    --input: 210 5% 15%;
+    --ring: 194 70% 58%;
+    --brand-500: 194 70% 58%;
+    --brand-600: 194 70% 52%;
+    --brand-700: 194 70% 46%;
+    --brand-800: 194 70% 40%;
+    --brand-900: 194 70% 34%;
+    --brand-950: 194 70% 26%;
+  }
+}
+
+/* ============================================================
+ * 全局基础样式
+ * ============================================================ */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply text-foreground;
+    background: hsl(var(--canvas)) !important;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Electron 窗口拖拽区域 */
+  .drag-region,
+  .app-region-drag {
+    -webkit-app-region: drag;
+  }
+
+  .no-drag,
+  .app-region-no-drag {
+    -webkit-app-region: no-drag;
+  }
+
+  /*
+   * 全局滚动条基准样式（细条 6px，始终可见）。
+   *
+   * 如需覆盖，请使用以下 utility 类（由 tailwind-preset 插件统一生成）：
+   *   scrollbar-hidden — 完全隐藏
+   *   scrollbar-thin   — 细条，始终可见
+   *   scrollbar-hover  — 默认隐藏，鼠标悬停容器时才显示（推荐用于面板、列表等）
+   *
+   * 特殊场景不适用 utility 类：
+   *   表格引擎 canvas 虚拟条 → .tt-grid-scrollbar + data-scrolling 属性（见下方）
+   *   Monaco 编辑器          → .tabcode-editor opacity 覆盖（见下方）
+   */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.4);
+  }
+
+  /* 编辑器文件标签只沿横轴滚动。始终预留 3px，悬停才显示滑块，避免布局跳动。 */
+  .tabcode-editor-tab-strip::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .tabcode-editor-tab-strip::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .tabcode-editor-tab-strip::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 9999px;
+    transition: background-color 120ms ease;
+  }
+
+  .tabcode-editor-tab-strip:hover::-webkit-scrollbar-thumb {
+    background: hsl(var(--border) / 0.6);
+  }
+
+  .tabcode-editor-tab-strip::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.8);
+  }
+
+  /* 以下三个 class 同时由 tailwind-preset 插件生成（@layer utilities），
+     此处 @layer base 定义作为非 Tailwind 上下文的兜底，保证 SSR / 动态 className 可用。 */
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hover {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+  .scrollbar-hover::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-hover::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-hover::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 9999px;
+  }
+  .scrollbar-hover:hover {
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  .scrollbar-hover:hover::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+  }
+  .scrollbar-hover:hover::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--muted-foreground) / 0.6);
+  }
+
+  /* 表格引擎虚拟滚动条（canvas 渲染特殊需求，保留）
+   *
+   * 关键：Chromium 一旦设置 scrollbar-width / scrollbar-color，会禁用
+   * ::-webkit-scrollbar，改走系统经典条。虚拟条容器只有 h-4 / w-4，
+   * 系统条会撑坏宽表横向滚动布局。因此 Chromium/Electron 只走 webkit
+   * 伪元素（10px + token 色）；Firefox 用 -moz 分支兜底。 */
+  .tt-grid-scrollbar {
+    -ms-overflow-style: none;
+  }
+
+  .tt-grid-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  .tt-grid-scrollbar[data-enabled="true"][data-scrolling="true"]::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .tt-grid-scrollbar[data-enabled="true"][data-scrolling="true"]::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.4);
+    border-radius: 9999px;
+  }
+
+  .tt-grid-scrollbar[data-enabled="true"][data-scrolling="true"]::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.6);
+  }
+
+  .tt-grid-scrollbar-horizontal[data-enabled="true"][data-scrolling="true"]::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  .tt-grid-scrollbar-vertical[data-enabled="true"][data-scrolling="true"]::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  @supports (-moz-appearance: none) {
+    .tt-grid-scrollbar {
+      scrollbar-width: none;
+    }
+
+    .tt-grid-scrollbar[data-enabled="true"][data-scrolling="true"] {
+      scrollbar-width: thin;
+      scrollbar-color: hsl(var(--muted-foreground) / 0.4) transparent;
+    }
+  }
+
+  /* TabCode Monaco 编辑器（编辑器内部样式覆盖，保留） */
+  .tabcode-editor .decorationsOverviewRuler {
+    display: none !important;
+  }
+  .tabcode-editor .overview-ruler {
+    display: none !important;
+  }
+  .tabcode-editor .editor-scrollable > .vertical {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .tabcode-editor .editor-scrollable:hover > .vertical,
+  .tabcode-editor .editor-scrollable:active > .vertical {
+    opacity: 1;
+  }
+  .tabcode-editor .editor-scrollable > .horizontal {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .tabcode-editor .editor-scrollable:hover > .horizontal,
+  .tabcode-editor .editor-scrollable:active > .horizontal {
+    opacity: 1;
+  }
+  .tabcode-editor .scroll-decoration {
+    display: none !important;
+  }
+  .tabcode-editor .monaco-editor,
+  .tabcode-editor .monaco-editor .overflow-guard,
+  .tabcode-editor .monaco-editor .margin,
+  .tabcode-editor .monaco-editor .monaco-editor-background {
+    background-color: hsl(var(--muted)) !important;
+  }
+  .dark .tabcode-editor .monaco-editor,
+  .dark .tabcode-editor .monaco-editor .overflow-guard,
+  .dark .tabcode-editor .monaco-editor .margin,
+  .dark .tabcode-editor .monaco-editor .monaco-editor-background {
+    background-color: hsl(var(--muted)) !important;
+  }
+  .tabcode-editor .monaco-editor .margin-view-overlays {
+    background-color: hsl(var(--muted)) !important;
+  }
+  .dark .tabcode-editor .monaco-editor .margin-view-overlays {
+    background-color: hsl(var(--muted)) !important;
+  }
+
+  /* VS Code-style SCM gutter markers for the normal TabCode source view. */
+  .tabcode-editor .monaco-editor .tabtin-git-gutter-added,
+  .tabcode-editor .monaco-editor .tabtin-git-gutter-modified {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 4px !important;
+    margin-top: -0.5px;
+    margin-left: 2px;
+    transform: scaleY(1.06);
+    transform-origin: center;
+    /* Slight overlap removes sub-pixel seams between adjacent Monaco line
+       decorations; square ends make a run read as one continuous bar. */
+    border-radius: 0;
+  }
+
+  .tabcode-editor .monaco-editor .tabtin-git-gutter-added {
+    background-color: #1a7f37;
+  }
+
+  .tabcode-editor .monaco-editor .tabtin-git-gutter-modified {
+    background-color: #0969da;
+  }
+
+  .tabcode-editor .monaco-editor .tabtin-git-gutter-deleted {
+    display: block;
+    width: 0 !important;
+    height: 0 !important;
+    /* The decoration is anchored to the first line after a deletion. Center
+       the small pointer on that line's top edge (the hunk boundary), rather
+       than placing it inside the line box. */
+    margin-top: -5px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #cf222e;
+  }
+
+  .dark .tabcode-editor .monaco-editor .tabtin-git-gutter-added {
+    background-color: #2ea043;
+  }
+
+  .dark .tabcode-editor .monaco-editor .tabtin-git-gutter-modified {
+    background-color: #58a6ff;
+  }
+
+  .dark .tabcode-editor .monaco-editor .tabtin-git-gutter-deleted {
+    border-left-color: #f85149;
+  }
+
+  /* 只读文件预览已有固定提示，不展示 Monaco 自带的只读浮层。 */
+  .readonly-preview-editor .monaco-editor-overlaymessage {
+    display: none !important;
+  }
+
+  /* 圆角收口挪到 Monaco 编辑器本体：外层圆角卡片（TabCodePreview）文本/代码态
+     不再用 overflow-hidden 裁剪——否则会连带裁掉查找栏按钮 hover tooltip（挂在
+     Monaco context-view 里、非 fixed 定位，嵌在容器内无法逃逸）。改由这里对
+     .monaco-editor 自身圆角 + overflow:hidden：.monaco-editor 是 tooltip 的 DOM
+     兄弟节点而非祖先，故不裁 tooltip；其内部溢出 widget（代码 hover / 查找栏）走
+     fixedOverflowWidgets 的 position:fixed，天然逃出 overflow:hidden，不受影响。
+     0.5rem = Tailwind rounded-lg，与外层卡片圆角对齐。 */
+  .tabcode-editor.rounded-lg .monaco-editor {
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  /* Ctrl+F 查找栏 tooltip 闪动，双管齐下从根解决：
+
+     1) Monaco `fixedOverflowWidgets: true`（见 CodeEditor.tsx / TabCodeDiffView.tsx）：
+        tooltip（overflow content widget）挂到 document.body 定位，逃出 .tabcode-editor
+        的 overflow-hidden 裁剪。此前 `.monaco-hover pointer-events` 的 CSS hack 在 widget
+        移出编辑器容器后已不再匹配，故移除，避免死规则误导。
+
+     2) 强制按钮 tooltip 单行：最右侧的 "Find in Selection" / "Close" 贴查找栏右边缘，
+        Monaco 给 tooltip 算的可用宽度被压到 ~68px → 最内层文字容器 `.hover-contents`
+        带 Monaco 内联的 `white-space: pre-wrap` + `overflow-wrap: break-word`，在这个
+        窄宽度里把标签断成两行 → tooltip 高度在单行(24px)/双行(43px)间抖动 →
+        HoverService 反复重定位 → 残留闪动。这类 `.workbench-hover.compact` 是控件短标签
+        hover，本应单行（VS Code 亦然）。直接对 `.hover-contents` 用 nowrap !important
+        覆盖其内联 pre-wrap（!important 压过无 !important 的内联样式），固定高度；配合
+        (1) 挂 body 可向左延展不被裁剪，彻底消除换行诱发的闪动。 */
+  .monaco-hover.workbench-hover.compact .hover-contents {
+    white-space: nowrap !important;
+  }
+
+  /* 平滑滚动 */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 选中文本样式 */
+  ::selection {
+    @apply bg-primary/20;
+  }
+
+  /* 焦点样式 — 细焦点环，位置落在元素 border 上（inset，无外偏移） */
+  :focus-visible {
+    @apply outline-none ring-1 ring-ring ring-inset;
+  }
+
+  /* 输入类元素不使用 ring，由各组件自行处理 */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [contenteditable]:focus-visible {
+    @apply outline-none ring-0 ring-offset-0;
+  }
+
+  /* 鼠标 hover 激活的菜单 / 选项 / tab 项用背景高亮表示，不显示焦点环
+     （radix 在 pointermove 时会编程聚焦这些项，避免悬停时出现焦点环） */
+  [data-highlighted],
+  [role="menuitem"]:focus-visible,
+  [role="menuitemcheckbox"]:focus-visible,
+  [role="menuitemradio"]:focus-visible,
+  [role="option"]:focus-visible {
+    @apply outline-none ring-0;
+  }
+
+  /* 交互元素禁止文本选中 —— 避免「点一下却选中文字」。
+     按 HTML 语义 + ARIA role 统一收口：Radix 的菜单/标签页/开关等会自动输出
+     对应 role，无需逐组件硬编码。刻意不命中 input/textarea/[contenteditable]，
+     保证输入与可编辑内容仍可选；也不纳入 cursor-pointer（常挂在含正文的可点元素上，
+     一刀切会挡掉用户想复制的内容）。 */
+  button,
+  [role="button"],
+  [role="tab"],
+  [role="menuitem"],
+  [role="menuitemcheckbox"],
+  [role="menuitemradio"],
+  [role="option"],
+  [role="switch"],
+  [role="radio"],
+  [role="checkbox"],
+  label,
+  summary {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* ============================================================
+ * 组件级工具类
+ * ============================================================ */
+@layer components {
+  /**
+   * Pane-scoped non-modal overlays can explicitly keep shell resizing available.
+   * The handle stays at z-sticky by default, so ordinary modal dialogs still
+   * block layout changes. Dropdown is the first shared layer above z-modal.
+   */
+  [data-shell-resizable-split]:has([data-shell-overlay-allows-resize]) [data-shell-resize-handle] {
+    z-index: var(--z-dropdown);
+  }
+
+  /** A real scoped modal always wins, even if an opt-in non-modal remains mounted. */
+  [data-shell-resizable-split]:has([role="dialog"][aria-modal="true"]) [data-shell-resize-handle] {
+    z-index: var(--z-sticky);
+  }
+
+  /**
+   * 消息悬停条只停在 z-floating。弹层打开时再收起，避免半透明遮罩下
+   * 仍露出赞 / 表情 / 回复条（续接向导等 Dialog 与操作条同屏）。
+   */
+  body:has([data-radix-dialog-overlay][data-state="open"]) [data-im-message-action-bar] {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /**
+   * Shell 画布 — 暖中性底 + 左上 Primary / 右下 Secondary 双氛围光斑（design-system §6.4B）。
+   * 玻璃卡片浮在其上，blur 时可见底色渗透；禁止整页 linear 壁纸。
+   */
+  .shell-canvas {
+    @apply relative;
+    background-color: hsl(var(--canvas));
+  }
+
+  .shell-canvas::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(
+        ellipse 110% 85% at 0% 0%,
+        hsl(var(--primary) / var(--ambient-primary)),
+        transparent 86%
+      ),
+      radial-gradient(
+        ellipse 95% 80% at 100% 100%,
+        hsl(var(--ambient-hue-secondary) var(--ambient-secondary-s) var(--ambient-secondary-l) / var(--ambient-secondary)),
+        transparent 84%
+      );
+  }
+
+  /**
+   * 标准玻璃面 — 侧栏、主/辅工作区卡片（L2 布局流：无外边框、无外投影、无内高光）。
+   * 同级在布局流内的框靠「半透明 + blur + 背景色差」区分，内高光只留给浮层（见 .surface-glass-overlay）。
+   */
+  .surface-glass {
+    background-color: hsl(var(--glass-bg));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  }
+
+  /** 略实玻璃 — 底栏、composer，减少底层文字干扰（同 L2，无外边框、无外投影、无内高光） */
+  .surface-glass-strong {
+    background-color: hsl(var(--glass-bg-strong));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  }
+
+  .chat-composer-backplate {
+    background-color: hsl(var(--chat-composer-backplate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  }
+
+  /**
+   * Chat composer 输入井 — 独立灰阶面，不吃主题色相。
+   * 发送按钮等 CTA 仍使用 accent；输入容器本身只表达可输入 / focus / drop 状态。
+   */
+  .chat-composer-surface {
+    background-color: hsl(var(--chat-composer-surface));
+    /* 白输入井叠在灰 backplate 上：不用 backdrop-blur，否则会透出托盘灰度 */
+    transition-property: background-color, box-shadow;
+    transition-duration: 150ms;
+  }
+
+  .chat-composer-surface:hover {
+    background-color: hsl(var(--chat-composer-surface-hover));
+  }
+
+  .chat-composer-surface.chat-composer-drag-state {
+    background-color: hsl(var(--chat-composer-drop-surface));
+    box-shadow: inset 0 0 0 2px hsl(var(--chat-composer-drop-ring));
+  }
+
+  .chat-composer-drag-text {
+    color: hsl(var(--chat-composer-drop-text));
+  }
+
+  /**
+   * 画布主卡片 — 主工作区使用的无边框通透背景。
+   * 比页面 canvas 更显眼，但不抬升成另一层卡片：无 border、无 shadow。
+   */
+  .surface-canvas-card {
+    /* 画布主卡片表面色——同时暴露为变量，供卡片内的标签栏滚动 grabber 等
+       需要"贴合卡片底色"的子元素复用（见 TabScrollIndicator surfaceColor）。 */
+    --surface-canvas-card: 0 0% 100%;
+    background-color: hsl(var(--surface-canvas-card));
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  }
+
+  .dark .surface-canvas-card {
+    --surface-canvas-card: 0 0% 0%;
+    background: hsl(var(--surface-canvas-card));
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(0, 0, 0, 0.35);
+  }
+
+  /**
+   * 侧栏实色底（#3938）：浅色 #f9f9f9、深色 #141414，与主区填充拉开边界。
+   */
+  .surface-sidebar-glass {
+    background-color: hsl(var(--sidebar-fill));
+  }
+
+  /**
+   * 「侧栏 + 主区白」一体卡（#3938）：把 surface-canvas-card 拆成两半复用——
+   * 外层用 -frame 只画卡的圆角投影（背景透明），侧栏区用 surface-sidebar-glass 实色底，
+   * 主区用 -fill 填不透明白/黑底。三块在同一外层内无缝相邻 → 整体仍是一张卡。
+   */
+  .surface-canvas-card-frame {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  }
+  .dark .surface-canvas-card-frame {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(0, 0, 0, 0.35);
+  }
+  .surface-canvas-card-fill {
+    background-color: hsl(var(--workspace-main-fill));
+  }
+  .dark .surface-canvas-card-fill {
+    background-color: hsl(var(--workspace-main-fill));
+  }
+
+  /**
+   * 能力介绍大卡片 — 背景只响应明暗主题，不跟随品牌色方案换色相。
+   */
+  .capability-banner-surface {
+    background-color: hsl(0 0% 100% / 0.74);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  }
+
+  .dark .capability-banner-surface {
+    background-color: hsl(0 0% 100% / 0.075);
+  }
+
+  /**
+   * 资源宫格卡片内部主题高光：只在卡片内部形成柔和色温，不改变布局尺寸、
+   * 不加外部阴影，也不使用高饱和主题色实底。
+   */
+  .resource-card-theme-glow {
+    position: absolute;
+    inset: -28%;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 92% 88% at 10% 6%, hsl(var(--primary) / 0.028), transparent 76%),
+      radial-gradient(ellipse 88% 86% at 92% 104%, hsl(var(--accent) / 0.018), transparent 80%);
+  }
+
+  .dark .resource-card-theme-glow {
+    background:
+      radial-gradient(ellipse 92% 88% at 10% 6%, hsl(var(--primary) / 0.045), transparent 76%),
+      radial-gradient(ellipse 88% 86% at 92% 104%, hsl(var(--accent) / 0.028), transparent 80%);
+  }
+
+  /**
+   * 选中/激活高亮底 — **纯灰阶**（中性 foreground 叠加，不混入主题色），与 hover/上下文态同一套
+   * 对比增强叠加（design-system §10.5）。彩只落在「图标」上（text-accent-text），文字保持黑白
+   * （foreground）。浅色 6% / 深色 8%。
+   */
+  .surface-row-active {
+    background-color: hsl(var(--foreground) / 0.06);
+  }
+  .dark .surface-row-active {
+    background-color: hsl(var(--foreground) / 0.08);
+  }
+
+  /**
+   * 浮层面 — Popover / Dropdown / 右键菜单 / Select / Dialog / Sheet / Toast / Tooltip 等
+   * 脱离布局流的浮层。**刻意不用毛玻璃、不蹭主题色**：不透明纯色面（亮白 / 暗黑，见
+   * --glass-bg-overlay），靠 1px 中性描边（inset ring）勾边 + 一层极轻浮层投影区分层级
+   * （design-system §10.4 唯一允许的外投影场景）。
+   */
+  .surface-glass-overlay {
+    background-color: hsl(var(--glass-bg-overlay));
+    box-shadow: var(--shadow-overlay), inset 0 0 0 1px hsl(var(--border));
+  }
+
+  /**
+   * 侧栏顶部分段导航（隔离式 segmented control）：
+   * 轨道 = foreground/6% 的浅下沉容器，把 tab 收进一个独立控件块、与下方列表隔离；
+   * 选中段 = 近白凸起药丸 + 一层极轻投影，从轨道上「浮」出来。
+   * 暗色下 --background 是深色不能当高亮，故选中段改用更亮的 foreground 叠加。
+   */
+  .sidebar-segment-track {
+    background-color: hsl(var(--foreground) / 0.06);
+  }
+  .sidebar-segment-active {
+    background-color: hsl(var(--background));
+    box-shadow: 0 1px 2px hsl(var(--foreground) / 0.10);
+  }
+  .dark .sidebar-segment-active {
+    background-color: hsl(var(--foreground) / 0.12);
+    box-shadow: 0 1px 2px hsl(0 0% 0% / 0.35);
+  }
+
+  /**
+   * 全屏模态遮罩（scrim）— Dialog / Sheet 及各类全屏浮层的点击拦截背板。
+   * 半透明 scrim（--modal-scrim，略透见底层）+ 适中背景模糊（--modal-scrim-blur，8px）。
+   * 关键：模糊走遮罩专用的 --modal-scrim-blur，**不用**浮层的 --glass-blur-overlay(64px)
+   * ——64px 叠全屏会把底层糊成一片均匀灰、彻底盖死，8px 则柔化底层又保留可辨的「见底层」。
+   * 与 utilities 层的 .bg-modal-scrim 视觉等价（同一对 token 驱动），是全局唯一的一套
+   * 模态遮罩材质；调模糊只改 --modal-scrim-blur 一处。
+   */
+  .overlay-backdrop-blur {
+    background-color: rgb(var(--modal-scrim));
+    backdrop-filter: blur(var(--modal-scrim-blur));
+    -webkit-backdrop-filter: blur(var(--modal-scrim-blur));
+  }
+
+  .preview-backdrop-blur {
+    background-color: rgb(0 0 0 / 0.78);
+    backdrop-filter: blur(var(--glass-blur-overlay)) saturate(var(--glass-saturate));
+    -webkit-backdrop-filter: blur(var(--glass-blur-overlay)) saturate(var(--glass-saturate));
+  }
+
+  .app-layout {
+    @apply h-screen flex overflow-hidden;
+    background: hsl(var(--canvas));
+  }
+
+  .sidebar {
+    @apply flex-shrink-0 border-r border-border/30;
+    transition: width 0.15s ease;
+  }
+
+  .sidebar-collapsed {
+    @apply w-16;
+  }
+
+  .sidebar-expanded {
+    @apply w-sidebar;
+  }
+
+  .list-panel {
+    @apply flex-shrink-0 bg-muted/30 border-r border-border/30;
+    width: var(--list-width, 320px);
+  }
+
+  .content-area {
+    @apply flex-1 flex flex-col overflow-hidden;
+  }
+
+  .card-hover {
+    @apply transition-colors duration-150 hover:bg-muted/40;
+  }
+
+  .virtuoso-container {
+    @apply h-full;
+  }
+
+  /* VirtuosoHoverScroller 已挂 scrollbar-hover + overflow-x:hidden；此处兜底非自定义 Scroller 的场景 */
+  .virtuoso-container [data-virtuoso-scroller] {
+    overflow-x: hidden;
+  }
+
+  .list-item {
+    @apply px-3 py-2 text-body cursor-pointer transition-colors duration-150;
+    @apply hover:bg-muted/50 hover:text-foreground;
+  }
+
+  .list-item-active {
+    @apply bg-muted/80 text-foreground font-medium;
+  }
+
+  /** 首屏 / 启动占位 — 与 shell-canvas 暖中性底一致，Spinner 走 .loading-spinner */
+  .boot-screen {
+    @apply fixed inset-0 flex flex-col items-center justify-center gap-4 bg-[hsl(var(--canvas))];
+  }
+
+  .boot-title {
+    @apply text-body text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-ellipsis-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .resize-handle {
+    @apply w-1 bg-transparent hover:bg-primary/30 cursor-col-resize transition-colors duration-150;
+  }
+
+  .loading-spinner {
+    @apply animate-spin rounded-full border-2 border-muted border-t-primary;
+  }
+
+  .boot-spinner {
+    @apply h-8 w-8 border-[3px];
+  }
+
+  .fade-in {
+    @apply animate-fade-in;
+  }
+
+  /* 模态遮罩（语义 utility）——与 components 层的 .overlay-backdrop-blur 视觉等价：
+     半透明 scrim + 适中背景模糊，同一对 token（--modal-scrim / --modal-scrim-blur）驱动，
+     全局唯一一套模态遮罩材质。用于 OverlayScrim primitive / GlobalSearch 等。
+     注：透明 overlay 子窗口里 backdrop-filter 无同文档背板可糊，为无害 no-op。 */
+  .bg-modal-scrim {
+    background-color: rgb(var(--modal-scrim));
+    backdrop-filter: blur(var(--modal-scrim-blur));
+    -webkit-backdrop-filter: blur(var(--modal-scrim-blur));
+  }
+}
+
+/* ============================================================
+ * 浮层/面板质感
+ * ============================================================ */
+.sidebar-vibrancy {
+  background: transparent !important;
+}
+
+.dark .sidebar-vibrancy {
+  background: transparent !important;
+}
+
+.canvas-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.dark .canvas-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* 独立 Agent 窗口（detached）布局根：透明，让外层 shell-canvas 暖底 + 氛围光斑
+ * 透出到「透明会话侧栏」背后；侧栏与内容卡片各自管理表面（侧栏透明、内容 surface-canvas-card），
+ * 与主窗口「画布 + 透明侧栏 + 内容卡片」剖面一致。 */
+.chat-panel-surface {
+  background: transparent;
+  border: none;
+}
+
+/* ============================================================
+ * TabChat 皮肤作用域
+ * 仅设字体（Inter，对齐参考稿），强调/背景等颜色仍走全局主题 token，
+ * 用户切换主题方案时自动适配——不在皮肤里硬编码配色。
+ * 挂在 TabChat 各挂载根（侧栏 IM 面板 / ChatView / 欢迎页 / 全屏面板）。
+ * ============================================================ */
+.tabchat-skin {
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-feature-settings: "cv11", "ss01";
+  font-optical-sizing: auto;
+}
+
+/* ============================================================
+ * Chat Markdown 渲染 & 代码高亮
+ * rehype-highlight 生成 hljs-* class — 内容渲染层，保留不变
+ * ============================================================ */
+
+.markdown-body .hljs {
+  color: hsl(var(--foreground));
+}
+.markdown-body .hljs-comment,
+.markdown-body .hljs-quote {
+  color: hsl(var(--muted-foreground));
+  font-style: italic;
+}
+.markdown-body .hljs-keyword,
+.markdown-body .hljs-selector-tag,
+.markdown-body .hljs-built_in,
+.markdown-body .hljs-name,
+.markdown-body .hljs-tag {
+  color: #8250df;
+}
+.markdown-body .hljs-string,
+.markdown-body .hljs-title,
+.markdown-body .hljs-section,
+.markdown-body .hljs-attribute,
+.markdown-body .hljs-literal,
+.markdown-body .hljs-template-tag,
+.markdown-body .hljs-template-variable,
+.markdown-body .hljs-type,
+.markdown-body .hljs-addition {
+  color: #0a3069;
+}
+.markdown-body .hljs-deletion,
+.markdown-body .hljs-selector-attr,
+.markdown-body .hljs-selector-pseudo,
+.markdown-body .hljs-meta {
+  color: #cf222e;
+}
+.markdown-body .hljs-number,
+.markdown-body .hljs-symbol,
+.markdown-body .hljs-bullet,
+.markdown-body .hljs-link {
+  color: #0550ae;
+}
+.markdown-body .hljs-emphasis {
+  font-style: italic;
+}
+.markdown-body .hljs-strong {
+  font-weight: 700;
+}
+
+.dark .markdown-body .hljs {
+  color: hsl(var(--foreground));
+}
+.dark .markdown-body .hljs-comment,
+.dark .markdown-body .hljs-quote {
+  color: hsl(var(--muted-foreground));
+  font-style: italic;
+}
+.dark .markdown-body .hljs-keyword,
+.dark .markdown-body .hljs-selector-tag,
+.dark .markdown-body .hljs-built_in,
+.dark .markdown-body .hljs-name,
+.dark .markdown-body .hljs-tag {
+  color: #d2a8ff;
+}
+.dark .markdown-body .hljs-string,
+.dark .markdown-body .hljs-title,
+.dark .markdown-body .hljs-section,
+.dark .markdown-body .hljs-attribute,
+.dark .markdown-body .hljs-literal,
+.dark .markdown-body .hljs-template-tag,
+.dark .markdown-body .hljs-template-variable,
+.dark .markdown-body .hljs-type,
+.dark .markdown-body .hljs-addition {
+  color: #a5d6ff;
+}
+.dark .markdown-body .hljs-deletion,
+.dark .markdown-body .hljs-selector-attr,
+.dark .markdown-body .hljs-selector-pseudo,
+.dark .markdown-body .hljs-meta {
+  color: #ffa198;
+}
+.dark .markdown-body .hljs-number,
+.dark .markdown-body .hljs-symbol,
+.dark .markdown-body .hljs-bullet,
+.dark .markdown-body .hljs-link {
+  color: #79c0ff;
+}
+
+/* ------------------------------------------------------------------
+ * 代码卡语法高亮作用域（DiffCard / CodeBlock 复用同一套 hljs 主题色）。
+ * 独立 class（非 .markdown-body）避免背上 markdown 的字号/行高/间距；
+ * 颜色值与上方 .markdown-body 主题保持一致，改色请两处同步。
+ * ------------------------------------------------------------------ */
+.tabtin-code-hl .hljs { color: hsl(var(--foreground)); }
+.tabtin-code-hl .hljs-comment,
+.tabtin-code-hl .hljs-quote { color: hsl(var(--muted-foreground)); font-style: italic; }
+.tabtin-code-hl .hljs-keyword,
+.tabtin-code-hl .hljs-selector-tag,
+.tabtin-code-hl .hljs-built_in,
+.tabtin-code-hl .hljs-name,
+.tabtin-code-hl .hljs-tag { color: #8250df; }
+.tabtin-code-hl .hljs-string,
+.tabtin-code-hl .hljs-title,
+.tabtin-code-hl .hljs-section,
+.tabtin-code-hl .hljs-attribute,
+.tabtin-code-hl .hljs-literal,
+.tabtin-code-hl .hljs-template-tag,
+.tabtin-code-hl .hljs-template-variable,
+.tabtin-code-hl .hljs-type,
+.tabtin-code-hl .hljs-addition { color: #0a3069; }
+.tabtin-code-hl .hljs-deletion,
+.tabtin-code-hl .hljs-selector-attr,
+.tabtin-code-hl .hljs-selector-pseudo,
+.tabtin-code-hl .hljs-meta { color: #cf222e; }
+.tabtin-code-hl .hljs-number,
+.tabtin-code-hl .hljs-symbol,
+.tabtin-code-hl .hljs-bullet,
+.tabtin-code-hl .hljs-link { color: #0550ae; }
+.tabtin-code-hl .hljs-emphasis { font-style: italic; }
+.tabtin-code-hl .hljs-strong { font-weight: 700; }
+.dark .tabtin-code-hl .hljs { color: hsl(var(--foreground)); }
+.dark .tabtin-code-hl .hljs-comment,
+.dark .tabtin-code-hl .hljs-quote { color: hsl(var(--muted-foreground)); font-style: italic; }
+.dark .tabtin-code-hl .hljs-keyword,
+.dark .tabtin-code-hl .hljs-selector-tag,
+.dark .tabtin-code-hl .hljs-built_in,
+.dark .tabtin-code-hl .hljs-name,
+.dark .tabtin-code-hl .hljs-tag { color: #d2a8ff; }
+.dark .tabtin-code-hl .hljs-string,
+.dark .tabtin-code-hl .hljs-title,
+.dark .tabtin-code-hl .hljs-section,
+.dark .tabtin-code-hl .hljs-attribute,
+.dark .tabtin-code-hl .hljs-literal,
+.dark .tabtin-code-hl .hljs-template-tag,
+.dark .tabtin-code-hl .hljs-template-variable,
+.dark .tabtin-code-hl .hljs-type,
+.dark .tabtin-code-hl .hljs-addition { color: #a5d6ff; }
+.dark .tabtin-code-hl .hljs-deletion,
+.dark .tabtin-code-hl .hljs-selector-attr,
+.dark .tabtin-code-hl .hljs-selector-pseudo,
+.dark .tabtin-code-hl .hljs-meta { color: #ffa198; }
+.dark .tabtin-code-hl .hljs-number,
+.dark .tabtin-code-hl .hljs-symbol,
+.dark .tabtin-code-hl .hljs-bullet,
+.dark .tabtin-code-hl .hljs-link { color: #79c0ff; }
+
+.markdown-body > *:first-child {
+  margin-top: 0 !important;
+}
+.markdown-body > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown-body {
+  /* 字号/行高由组件 token 控制（CHAT_MESSAGE_TEXT_BODY / text-body），勿在此硬编码以免盖掉 Tailwind。 */
+  color: hsl(var(--foreground));
+}
+
+.markdown-body pre {
+  background: transparent;
+}
+
+.markdown-body pre code {
+  line-height: 1.62;
+}
+
+.markdown-body ul:has(> li > input[type="checkbox"]) {
+  list-style: none;
+  padding-left: 0.25rem;
+}
+.markdown-body li > input[type="checkbox"] {
+  margin-right: 0.4rem;
+  accent-color: hsl(var(--primary));
+}
+
+/* Message scroll-to highlight animation (PRD 4.4.3) */
+@keyframes message-highlight {
+  0%   { background-color: hsl(var(--accent) / 0.15); }
+  60%  { background-color: hsl(var(--accent) / 0.15); }
+  100% { background-color: transparent; }
+}
+.animate-message-highlight {
+  animation: message-highlight 1.5s ease-out forwards;
+  border-radius: 0.5rem;
+}
+
+/* Agent 浏览器锁膜：边缝流光。中间挖空透出网页，渐变只走一圈边。 */
+@keyframes agent-lock-steam {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+.agent-lock-steam {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary) / 0.12),
+    hsl(var(--primary) / 0.5),
+    hsl(var(--primary) / 0.18),
+    hsl(var(--primary) / 0.55),
+    hsl(var(--primary) / 0.12),
+    hsl(var(--primary) / 0.5)
+  );
+  background-size: 400%;
+  animation: agent-lock-steam 20s linear infinite;
+  filter: blur(0.4px);
+}
+
+/* Collapsed AI capability card: shadcn-style diagonal shine sweep. */
+.capability-banner-collapsed-shine::before {
+  content: "";
+  position: absolute;
+  top: -45%;
+  bottom: -45%;
+  left: -72%;
+  width: 68%;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    hsl(var(--primary) / 0.03) 24%,
+    hsl(var(--primary) / 0.14) 48%,
+    hsl(var(--primary) / 0.06) 62%,
+    transparent 82%
+  );
+  filter: blur(2px);
+  transform: skewX(-20deg) translateX(0);
+  animation: capability-banner-shine-sweep 2.6s ease-in-out infinite;
+}
+
+@keyframes capability-banner-shine-sweep {
+  0%, 42% {
+    transform: skewX(-20deg) translateX(0);
+  }
+  100% {
+    transform: skewX(-20deg) translateX(300%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-message-highlight {
+    animation: none;
+    background-color: hsl(var(--accent) / 0.10);
+  }
+  .capability-banner-collapsed-shine::before {
+    animation: none;
+    left: auto;
+    right: 0;
+    opacity: 0.35;
+    transform: skewX(-20deg);
+  }
+  .composer-mascot--idle,
+  .composer-mascot--thinking,
+  .composer-mascot--streaming,
+  .composer-mascot--tap-reaction,
+  .composer-mascot-sparkle,
+  .composer-mascot-button {
+    animation: none;
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Streaming output：段尾 caret 见下方 .chat-motion-streaming-*；勿再挂 text-appear ── */
+
+/* Terminal pane running indicator pulse */
+@keyframes pane-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* ── Image generating：画布持续 loop 已退役（#6221）；状态 Hero 交给 ShinyText ── */
+
+/* ── Thinking「思考中…」Shiny Text（React Bits 风格扫光）───────────────
+ * 底色用 muted-foreground，高光用 foreground，随亮暗主题自动适配。
+ * background-position 从右扫到左，制造金属反光掠过字形的效果。
+ * Refs: #4177 / #6027 — 曾被 #5860 误删，已恢复。
+ */
+@keyframes thinking-shiny-text {
+  0% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: -100% center;
+  }
+}
+
+.thinking-shiny-text {
+  display: inline-block;
+  color: hsl(var(--muted-foreground) / 0.60);
+}
+
+.thinking-shiny-text[data-shiny-active="true"] {
+  background-image: linear-gradient(
+    120deg,
+    hsl(var(--muted-foreground) / 0.55) 0%,
+    hsl(var(--muted-foreground) / 0.55) 40%,
+    hsl(var(--foreground) / 0.92) 50%,
+    hsl(var(--muted-foreground) / 0.55) 60%,
+    hsl(var(--muted-foreground) / 0.55) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: thinking-shiny-text var(--chat-motion-shimmer);
+}
+
+/* 正文流式光标接管注意力时，同一消息内的进行中文本立即静止。 */
+.chat-motion-streaming-body .thinking-shiny-text[data-shiny-active="true"] {
+  animation: none;
+  background-image: none;
+  color: hsl(var(--muted-foreground) / 0.60);
+  -webkit-text-fill-color: currentColor;
+}
+
+/* ============================================================
+ * Agent 会话动效系统 · docs/agent-runtime/agent-motion-design.html
+ * 字面值对齐 chatDesignTokens.MOTION；组件只挂语义类，勿散落硬编码。
+ * ============================================================ */
+
+:root {
+  --chat-motion-micro: 120ms;
+  --chat-motion-state: 240ms;
+  --chat-motion-enter: 320ms;
+  --chat-motion-grow: 400ms;
+  --chat-motion-ease-out: cubic-bezier(.215,.61,.355,1);
+  --chat-motion-shimmer: 1.6s linear infinite;
+  --chat-motion-caret: 1s steps(2, start) infinite;
+  --chat-motion-breathe: 1.8s ease-in-out infinite;
+  --chat-motion-breathe-stagger: 200ms;
+  --chat-motion-pop: 180ms cubic-bezier(0.23, 1, 0.32, 1);
+  --chat-motion-count-up: 300ms;
+}
+
+@keyframes chat-motion-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes chat-motion-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes chat-motion-pop-in {
+  0% {
+    transform: scale(0.94);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes chat-motion-breathe {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@keyframes chat-motion-appr-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes chat-motion-expand-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes chat-motion-caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* 消息入场：rise 8px + fade，D-enter + E-out */
+.chat-motion-message-enter {
+  animation: chat-motion-rise-in var(--chat-motion-enter) var(--chat-motion-ease-out) both;
+}
+
+/* 失败黄点：一次性 pop，随后静止（L3）；色由组件 bg-warning 承担 */
+.chat-motion-failure-pop {
+  animation: chat-motion-pop-in var(--chat-motion-pop) both;
+}
+
+/* 思考等待骨架线：三段同色系呼吸，nth 延迟 0 / 200 / 400ms */
+.chat-motion-awaiting-line {
+  animation: chat-motion-breathe var(--chat-motion-breathe);
+}
+.chat-motion-awaiting-line:nth-child(2) {
+  animation-delay: var(--chat-motion-breathe-stagger);
+}
+.chat-motion-awaiting-line:nth-child(3) {
+  animation-delay: calc(var(--chat-motion-breathe-stagger) * 2);
+}
+
+/* 工具组内容区：折叠/展开 max-height，D-state */
+.chat-motion-tool-group-content {
+  overflow: hidden;
+  transition: max-height var(--chat-motion-state) var(--chat-motion-ease-out);
+}
+
+/* 审批卡入场：升起 D-grow + E-out，随后静止 */
+.chat-motion-approval-enter {
+  animation: chat-motion-appr-in var(--chat-motion-grow) var(--chat-motion-ease-out) both;
+}
+
+/* 流式段尾光标：伪元素落在 Markdown 最后一个块末尾，不另占一行。 */
+.chat-motion-streaming-caret,
+.chat-motion-streaming-body:not(:has([data-testid="block-timeline"])) .markdown-body.is-streaming > :last-child::after,
+.chat-motion-streaming-body [data-streaming-text="true"]:not(:has(~ [data-streaming-text="true"])) .markdown-body.is-streaming > :last-child::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  background: hsl(var(--foreground));
+  vertical-align: -2px;
+  margin-left: 1px;
+  animation: chat-motion-caret-blink var(--chat-motion-caret);
+}
+
+/* 子 Agent 行生长入场：D-state */
+.chat-motion-subagent-enter {
+  animation: chat-motion-expand-in var(--chat-motion-state) var(--chat-motion-ease-out) both;
+}
+
+/* meta / 耗时等淡入：D-state */
+.chat-motion-meta-enter {
+  animation: chat-motion-fade-in var(--chat-motion-state) var(--chat-motion-ease-out) both;
+}
+
+/* 降级：仅关闭上述会话动效，直接呈现终态；不碰全局 * */
+@media (prefers-reduced-motion: reduce) {
+  .chat-motion-message-enter,
+  .chat-motion-failure-pop,
+  .chat-motion-awaiting-line,
+  .chat-motion-approval-enter,
+  .chat-motion-streaming-caret,
+  .chat-motion-streaming-body:not(:has([data-testid="block-timeline"])) .markdown-body.is-streaming > :last-child::after,
+  .chat-motion-streaming-body [data-streaming-text="true"]:not(:has(~ [data-streaming-text="true"])) .markdown-body.is-streaming > :last-child::after,
+  .chat-motion-subagent-enter,
+  .chat-motion-meta-enter,
+  .thinking-shiny-text {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .chat-motion-message-enter,
+  .chat-motion-failure-pop,
+  .chat-motion-approval-enter,
+  .chat-motion-subagent-enter,
+  .chat-motion-meta-enter {
+    opacity: 1;
+  }
+
+  .chat-motion-awaiting-line {
+    opacity: 0.65;
+  }
+
+  .chat-motion-streaming-caret,
+  .chat-motion-streaming-body:not(:has([data-testid="block-timeline"])) .markdown-body.is-streaming > :last-child::after,
+  .chat-motion-streaming-body [data-streaming-text="true"]:not(:has(~ [data-streaming-text="true"])) .markdown-body.is-streaming > :last-child::after {
+    opacity: 1;
+  }
+
+  .chat-motion-tool-group-content {
+    transition: none !important;
+  }
+
+  .thinking-shiny-text {
+    background-image: none;
+    color: hsl(var(--muted-foreground) / 0.60);
+    -webkit-text-fill-color: currentColor;
+  }
+}
+
+/* ── Composer 吉祥物（趴在输入框上边缘，随 Agent 状态切换动效）───────── */
+.composer-mascot {
+  /* 绕底部「脚」变换，视觉上像趴/坐在输入框上边缘 */
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+/* 待命：缓慢呼吸 */
+.composer-mascot--idle {
+  animation: mascot-breathe 3.6s ease-in-out infinite;
+}
+@keyframes mascot-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-1px) scale(1.05); }
+}
+/* 思考：左右歪头 */
+.composer-mascot--thinking {
+  animation: mascot-think 1.5s ease-in-out infinite;
+}
+@keyframes mascot-think {
+  0%   { transform: rotate(-8deg); }
+  50%  { transform: rotate(8deg); }
+  100% { transform: rotate(-8deg); }
+}
+/* 输出：上下点头「说话」 */
+.composer-mascot--streaming {
+  animation: mascot-talk 0.55s ease-in-out infinite;
+}
+@keyframes mascot-talk {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  30%      { transform: translateY(-3px) scaleY(1.05); }
+  60%      { transform: translateY(0) scaleY(0.95); }
+}
+
+/* 首次进入欢迎页：从输入框后轻轻探出。 */
+.composer-mascot-button {
+  animation: mascot-enter 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes mascot-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 点击反馈：角色保持同一张图，只做克制回弹；星光避开鼠标遮挡的脸部。 */
+.composer-mascot--base {
+  transition: transform 160ms ease;
+}
+@media (hover: hover) {
+  .composer-mascot-button:hover .composer-mascot--base {
+    transform: translateY(-1px);
+  }
+}
+.composer-mascot-button:active .composer-mascot--base {
+  transform: translateY(1px) scale(0.99);
+}
+.composer-mascot--tap-reaction {
+  animation: mascot-tap-reaction 280ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes mascot-tap-reaction {
+  0%   { transform: translateY(1px) scale(0.99); }
+  45%  { transform: translateY(-2px) scale(1); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.composer-mascot-sparkle {
+  position: absolute;
+  display: block;
+  background: rgb(239 74 37);
+  clip-path: polygon(50% 0, 61% 38%, 100% 50%, 61% 62%, 50% 100%, 39% 62%, 0 50%, 39% 38%);
+  opacity: 0;
+  animation: mascot-sparkle-pop 380ms ease-out both;
+}
+.composer-mascot-sparkle--large {
+  top: 5px;
+  right: 8px;
+  width: 9px;
+  height: 9px;
+}
+.composer-mascot-sparkle--small {
+  top: 17px;
+  right: -1px;
+  width: 5px;
+  height: 5px;
+  animation-delay: 55ms;
+}
+@keyframes mascot-sparkle-pop {
+  0%   { opacity: 0; transform: translate(0, 4px) scale(0.35) rotate(0); }
+  32%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(4px, -7px) scale(1.1) rotate(24deg); }
+}

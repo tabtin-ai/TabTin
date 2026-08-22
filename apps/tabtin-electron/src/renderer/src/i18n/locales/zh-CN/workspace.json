@@ -1,0 +1,469 @@
+{
+  "welcomeTitle": "欢迎使用 TabTin",
+  "welcomeSubtitle": "AI 驱动的工作平台。创建一个新工作空间，或从左侧选择现有工作空间。",
+  "welcomeSubtitleGuest": "登录后即可创建工作空间并开始协作。",
+  "welcome": {
+    "title": "TabTin",
+    "tagline": "你的 AI 工作平台",
+    "conceptIntro": "在 TabTin 中，工作空间是持续存在的工作现场，绑定执行设备和工作目录，承载对话、App、资源和执行上下文；你可以组合表格、文档、代码、浏览器、设备控制、自动化、邮件和第三方集成等工作面，让 Agent 在这个边界里帮你完成任务。",
+    "loginCta": "登录 / 注册",
+    "learnMore": "了解更多 →",
+    "readyTitle": "准备好了！",
+    "readyDesc": "创建你的第一个工作空间开始工作。工作空间绑定执行设备和工作目录，承载对话、App、资源和执行上下文。",
+    "defaultAgentName": "默认工作空间",
+    "createFirstAgent": "创建第一个工作空间",
+    "creating": "创建中...",
+    "orCollaborate": "或者，与他人协作",
+    "createGroupRoom": "创建 Agent 群房间",
+    "createDM": "发起私信",
+    "createFailed": "创建工作空间失败",
+    "noOrganization": "请先选择组织",
+    "moreApps": "还有视频、白板、备忘录、目标管理、邮件等更多能力",
+    "apps": {
+      "tabdata": "TabData",
+      "tabdataDesc": "AI 驱动的智能表格",
+      "tabdoc": "TabDoc",
+      "tabdocDesc": "协作文档编辑",
+      "tabslide": "TabSlide",
+      "tabslideDesc": "演示文稿制作",
+      "browser": "Browser",
+      "browserDesc": "智能网页浏览",
+      "tabcode": "TabCode",
+      "tabcodeDesc": "代码与终端"
+    }
+  },
+  "actions": {
+    "createAgent": "创建新工作空间",
+    "loginToStart": "登录开始",
+    "viewDocs": "查看文档"
+  },
+  "selector": {
+    "loginRequired": "请先登录",
+    "placeholder": "选择组织",
+    "defaultBadge": "默认",
+    "empty": "暂无组织",
+    "pendingInvitations": "待处理邀请",
+    "invitedAs": "邀请为{{role}}",
+    "actions": {
+      "create": "创建新组织",
+      "settings": "组织设置",
+      "members": "成员管理"
+    }
+  },
+  "invitationResponse": {
+    "title": "组织邀请",
+    "description": "你被邀请加入以下组织",
+    "workspaceName": "组织",
+    "invitedBy": "由 {{name}} 邀请",
+    "role": "角色",
+    "expiresAt": "过期时间",
+    "accept": "接受邀请",
+    "reject": "拒绝",
+    "accepting": "加入中...",
+    "rejecting": "拒绝中...",
+    "accepted": "已加入组织「{{name}}」",
+    "rejected": "已拒绝邀请"
+  },
+  "invitationList": {
+    "title": "待处理邀请",
+    "description": "你有 {{count}} 条待处理的组织邀请",
+    "from": "来自 {{name}}"
+  },
+  "create": {
+    "errors": {
+      "failed": "创建失败"
+    }
+  },
+  "views": {
+    "newTab": "新建标签"
+  },
+  "settings": {
+    "title": "组织设置",
+    "tabs": {
+      "general": "基础设置",
+      "llm": "模型设置"
+    },
+    "validation": {
+      "nameRequired": "组织名称不能为空",
+      "nameMismatch": "组织名称不匹配",
+      "nameTooLong": "组织名称不能超过100个字符"
+    },
+    "errors": {
+      "updateFailed": "更新失败",
+      "deleteFailed": "删除失败",
+      "leaveFailed": "离开失败"
+    },
+    "fields": {
+      "icon": "图标",
+      "avatar": "组织头像",
+      "name": "名称",
+      "namePlaceholder": "组织名称",
+      "nameHint": "{{count}}/100 字符",
+      "description": "描述（可选）",
+      "descriptionPlaceholder": "描述组织的用途",
+      "descriptionHint": "{{count}}/500 字符"
+    },
+    "avatar": {
+      "pendingSave": "头像已裁剪，保存组织资料后生效",
+      "pendingRemove": "头像将在保存后移除",
+      "hint": "支持 JPG、PNG、GIF、WebP，最大 5MB。GIF 将转为静态图。",
+      "cropTitle": "裁剪组织头像"
+    },
+    "actions": {
+      "save": "保存更改",
+      "saving": "保存中...",
+      "saved": "已保存",
+      "delete": "删除组织",
+      "leave": "离开组织",
+      "cancel": "取消",
+      "confirmDelete": "确认删除",
+      "deleting": "删除中...",
+      "transfer": "转让"
+    },
+    "danger": {
+      "title": "危险操作",
+      "deleteTitle": "删除组织",
+      "deleteDefault": "默认组织不能被删除",
+      "deleteDesc": "此操作将永久删除组织及其所有数据，不可恢复",
+      "leaveTitle": "离开组织",
+      "leaveDesc": "离开后将失去访问权限，需要重新邀请才能加入",
+      "transferTitle": "转让所有权",
+      "transferDesc": "将所有权转让给现有成员"
+    },
+    "confirm": {
+      "title": "确认删除组织？",
+      "subtitle": "此操作将永久删除：",
+      "items": {
+        "organization": "组织 \"{{name}}\"",
+        "spaces": "所有 Agent 和表格",
+        "records": "所有数据记录",
+        "members": "所有成员关系"
+      },
+      "warning": "⚠️ 此操作不可恢复！",
+      "inputLabel": "请输入组织名称以确认删除："
+    },
+    "permissions": {
+      "ownerOnly": "💡 仅组织所有者可以编辑设置"
+    }
+  },
+  "llm": {
+    "defaultConfig": {
+      "title": "默认模型配置",
+      "subtitle": "团队成员在未单独指定模型时，优先使用这里的默认模型。",
+      "configured": "已配置",
+      "notConfigured": "未配置",
+      "currentModel": "当前默认模型",
+      "pickHint": "选择默认模型",
+      "unavailableCurrent": "当前不可用",
+      "selectHelp": "默认模型会用于新会话和未指定模型的任务。"
+    },
+    "presetSection": {
+      "title": "TabTin 预置模型",
+      "subtitle": "平台内置模型，开箱即用，可直接设为默认，无需配置渠道。",
+      "collapse": "收起预置模型",
+      "expandHint": "还有 {{count}} 个平台模型，展开查看全部。"
+    },
+    "providers": {
+      "title": "渠道管理",
+      "desc": "添加云端模型渠道（OpenAI 兼容）",
+      "provider": "提供商",
+      "providerKey": "渠道标识",
+      "displayName": "显示名称",
+      "baseUrl": "API Base URL",
+      "apiKey": "API Key",
+      "scope": "可见范围",
+      "scopeOrganization": "组织",
+      "scopeUser": "个人",
+      "scopeHint": "当前角色仅能创建个人渠道",
+      "save": "保存修改",
+      "cancel": "取消",
+      "edit": "编辑",
+      "delete": "删除",
+      "enable": "启用",
+      "disable": "禁用",
+      "validate": "测试连接",
+      "validating": "验证中...",
+      "validateSuccess": "渠道连接正常",
+      "validateFailed": "连接失败",
+      "statusEnabled": "已启用",
+      "statusDisabled": "已禁用",
+      "create": "添加渠道",
+      "creating": "添加中...",
+      "empty": "暂无渠道配置",
+      "modelCount": "{{count}} 个模型",
+      "createSuccess": "渠道已添加",
+      "updateSuccess": "渠道已更新",
+      "deleteSuccess": "渠道已删除",
+      "enableSuccess": "渠道已启用",
+      "disableSuccess": "渠道已禁用",
+      "confirmDelete": "确认删除渠道「{{name}}」？",
+      "validation": {
+        "required": "请填写 Base URL 与 API Key",
+        "providerKeyInvalid": "渠道标识格式不正确"
+      }
+    },
+    "models": {
+      "title": "模型管理",
+      "desc": "在指定渠道下添加模型",
+      "provider": "渠道",
+      "providerPlaceholder": "请选择渠道",
+      "searchKeyword": "搜索模型（LiteLLM）",
+      "searchPlaceholder": "例如 gpt-4o、claude-3.5",
+      "search": "搜索",
+      "searching": "搜索中...",
+      "clearSearch": "清空",
+      "searchResults": "搜索结果（点击填充模型名）",
+      "searchValidation": "请输入搜索关键词",
+      "searchEmpty": "未找到匹配的模型",
+      "modelName": "模型名称",
+      "displayName": "显示名称",
+      "maxTokens": "上下文长度",
+      "supportsVision": "支持图像",
+      "supportsStreaming": "支持流式",
+      "save": "保存修改",
+      "cancel": "取消",
+      "edit": "编辑",
+      "delete": "删除",
+      "enable": "启用",
+      "disable": "禁用",
+      "statusEnabled": "已启用",
+      "statusDisabled": "已禁用",
+      "statusReady": "可用",
+      "statusProviderDisabled": "渠道未启用",
+      "statusNotReady": "未就绪",
+      "globalOnly": "系统",
+      "organizationOnly": "组织",
+      "providerDisabled": "渠道已禁用，模型暂不可用",
+      "create": "添加模型",
+      "creating": "添加中...",
+      "empty": "暂无模型",
+      "userOnly": "个人",
+      "createSuccess": "模型已添加",
+      "updateSuccess": "模型已更新",
+      "deleteSuccess": "模型已删除",
+      "enableSuccess": "模型已启用",
+      "disableSuccess": "模型已禁用",
+      "confirmDelete": "确认删除模型「{{name}}」？",
+      "validation": {
+        "required": "请填写必填字段",
+        "providerRequired": "请先选择渠道",
+        "maxTokens": "请输入有效的上下文长度"
+      }
+    },
+    "default": {
+      "title": "默认模型",
+      "desc": "组织默认模型用于新会话",
+      "select": "选择默认模型",
+      "save": "设为默认",
+      "saving": "设置中...",
+      "current": "当前默认：{{name}}"
+    },
+    "errors": {
+      "loadProvidersFailed": "加载渠道失败",
+      "loadModelsFailed": "加载模型失败",
+      "createProviderFailed": "创建渠道失败",
+      "updateProviderFailed": "更新渠道失败",
+      "deleteProviderFailed": "删除渠道失败",
+      "validateProviderFailed": "验证渠道失败",
+      "createModelFailed": "创建模型失败",
+      "updateModelFailed": "更新模型失败",
+      "deleteModelFailed": "删除模型失败",
+      "searchModelFailed": "搜索模型失败",
+      "setDefaultModelFailed": "设置默认模型失败"
+    }
+  },
+  "trashedSpaces": {
+    "title": "工作空间回收站",
+    "subtitle": "被移入回收站的工作空间，保留期内可恢复，过期后将自动永久删除",
+    "empty": "回收站为空",
+    "emptyHint": "没有被移入回收站的工作空间",
+    "trashedAt": "删除于 {{date}}",
+    "daysLeft": "{{days}} 天后自动删除",
+    "restore": "恢复",
+    "restoring": "恢复中...",
+    "restoreSuccess": "已恢复工作空间「{{name}}」",
+    "restoreFailed": "恢复失败",
+    "permanentDelete": "永久删除",
+    "deleteConfirmTitle": "永久删除工作空间",
+    "deleteConfirm": "确定要永久删除「{{name}}」吗？此操作不可撤销。",
+    "deleteSuccess": "已永久删除工作空间「{{name}}」",
+    "deleteFailed": "永久删除失败",
+    "loading": "加载中...",
+    "loadFailed": "加载回收站失败",
+    "count": "{{count}} 个工作空间"
+  },
+  "apiErrors": {
+    "listNoResponse": "获取组织列表失败：无响应",
+    "listHttpFailed": "获取组织列表失败：HTTP {{status}}",
+    "listFailed": "获取组织列表失败",
+    "listInvalid": "获取组织列表失败：数据格式错误",
+    "detailFailed": "获取组织详情失败",
+    "detailInvalid": "获取组织详情失败：数据格式错误",
+    "createFailed": "创建组织失败",
+    "createInvalid": "创建组织失败：数据格式错误",
+    "updateFailed": "更新组织失败",
+    "updateInvalid": "更新组织失败：数据格式错误",
+    "deleteFailed": "删除组织失败",
+    "leaveFailed": "离开组织失败",
+    "healthUnknownStatus": "未知状态",
+    "healthUnexpected": "健康检查返回异常响应",
+    "healthUnavailable": "服务不可用"
+  },
+  "members": {
+    "title": "成员管理",
+    "subtitle": "{{name}} · {{count}} 位成员",
+    "actions": {
+      "add": "添加成员",
+      "addTitle": "添加新成员",
+      "cancel": "取消",
+      "confirmAdd": "确认添加",
+      "sendInvitation": "发送邀请",
+      "adding": "添加中...",
+      "setViewer": "设为查看者",
+      "setEditor": "设为编辑者",
+      "remove": "移除成员",
+      "invite": "邀请",
+      "changeRole": "角色",
+      "cancelInvitation": "取消邀请"
+    },
+    "fields": {
+      "userId": "用户 ID",
+      "userIdPlaceholder": "粘贴对方的用户 ID",
+      "userIdHint": "对方可在「设置 → 个人资料」中复制自己的用户 ID",
+      "role": "角色"
+    },
+    "roles": {
+      "owner": "所有者",
+      "admin": "管理员",
+      "editor": "编辑者",
+      "viewer": "查看者"
+    },
+    "roleDescriptions": {
+      "owner": "完全控制权",
+      "admin": "可管理成员和组织设置",
+      "editor": "可编辑内容",
+      "viewer": "只能查看"
+    },
+    "errors": {
+      "loadFailed": "加载成员列表失败",
+      "loadInvalid": "获取成员列表失败：数据格式错误",
+      "userIdRequired": "用户ID不能为空",
+      "roleInvalid": "角色必须是 editor 或 viewer",
+      "addFailed": "添加成员失败",
+      "addInvalid": "添加成员失败：数据格式错误",
+      "updateRoleFailed": "更新角色失败",
+      "removeFailed": "移除成员失败",
+      "cancelInvitationFailed": "取消邀请失败",
+      "permissionDenied": "无权限访问该组织"
+    },
+    "pendingInvitations": "待处理邀请 ({{count}})",
+    "linkInvitations": "邀请链接 ({{count}})",
+    "linkInvitation": "链接邀请",
+    "linkInvitationActive": "可使用",
+    "linkInvitationUsed": "已加入 {{count}} 人",
+    "directInvitation": "用户id {{userId}}",
+    "phoneInvitation": "手机号 {{phone}}",
+    "statusPending": "待接受",
+    "expiresAt": "过期于 {{date}}",
+    "confirmRemove": "确定要移除该成员吗？",
+    "ownerSection": "所有者",
+    "memberSection": "成员 ({{count}})",
+    "you": "你",
+    "joinedAt": "加入于 {{date}}",
+    "empty": {
+      "title": "暂无其他成员",
+      "hint": "点击上方按钮添加成员"
+    },
+    "permissions": {
+      "ownerOnly": "💡 仅组织所有者可以管理成员"
+    }
+  },
+  "search": {
+    "placeholder": "搜索表格、文档、设计...",
+    "all": "全部",
+    "tables": "表格",
+    "documents": "文档",
+    "designs": "设计",
+    "presentations": "幻灯片",
+    "code": "代码",
+    "videos": "视频",
+    "canvases": "白板",
+    "memos": "备忘录",
+    "sites": "站点",
+    "functions": "云函数",
+    "searching": "搜索中...",
+    "error": "搜索失败，请稍后重试",
+    "noResults": "未找到匹配结果",
+    "hint": "输入关键词搜索所有 Agent 中的资源",
+    "navigate": "导航",
+    "open": "打开",
+    "close": "关闭",
+    "results": "个结果",
+    "shortcutHint": "打开搜索",
+    "dialogLabel": "全局搜索",
+    "inputLabel": "搜索关键词",
+    "typeFilter": "类型筛选",
+    "resultsList": "搜索结果",
+    "shortcuts": "键盘快捷键",
+    "navigateFailedTitle": "无法打开资源",
+    "navigateFailedSpace": "目标工作空间未加载，请先在侧边栏中选择",
+    "navigateFailedType": "不支持的资源类型",
+    "clearScope": "搜索全部项目",
+    "scopedPlaceholder": "在「{{name}}」中搜索...",
+    "scopedHint": "在「{{name}}」中搜索，按退格键切换到全局搜索",
+    "globalMode": "全局搜索"
+  },
+  "logs": {
+    "loadListSuccess": "✅ 组织列表加载成功:",
+    "loadListFailed": "❌ 加载组织失败:",
+    "selectSuccess": "✅ 组织已选择:",
+    "selectFailed": "❌ 选择组织失败:",
+    "createSuccess": "✅ 组织创建成功:",
+    "createFailed": "❌ 创建组织失败:",
+    "updateSuccess": "✅ 组织更新成功:",
+    "updateFailed": "❌ 更新组织失败:",
+    "deleteSuccess": "✅ 组织删除成功",
+    "deleteFailed": "❌ 删除组织失败:",
+    "leaveSuccess": "✅ 已离开组织",
+    "leaveFailed": "❌ 离开组织失败:",
+    "membersLoadSuccess": "✅ 成员列表加载成功:",
+    "membersLoadFailed": "❌ 加载成员失败:",
+    "memberAddSuccess": "✅ 成员添加成功",
+    "memberAddFailed": "❌ 添加成员失败:",
+    "memberRoleUpdateSuccess": "✅ 成员角色更新成功",
+    "memberRoleUpdateFailed": "❌ 更新成员角色失败:",
+    "memberRemoveSuccess": "✅ 成员移除成功",
+    "memberRemoveFailed": "❌ 移除成员失败:",
+    "memberRoleFetchFailed": "❌ 获取用户角色失败:",
+    "getDefaultFailed": "❌ 获取默认组织失败:",
+    "healthCheckFailed": "❌ 组织服务健康检查失败:",
+    "cleared": "✅ 组织数据已清除"
+  },
+  "invitation": {
+    "errors": {
+      "sendFailed": "邀请发送失败",
+      "createLinkFailed": "邀请链接创建失败",
+      "listFailed": "获取邀请列表失败",
+      "cancelFailed": "取消邀请失败",
+      "notFound": "邀请不存在",
+      "acceptFailed": "接受邀请失败",
+      "respondFailed": "处理邀请失败",
+      "rateLimited": "邀请创建过于频繁，请稍后再试"
+    },
+    "accept": {
+      "title": "组织邀请",
+      "confirm": "接受邀请",
+      "accepting": "加入中...",
+      "invalid": "此邀请已失效",
+      "success": "已成功加入组织",
+      "successDesc": "你已加入「{{organization}}」",
+      "goToOrganization": "进入组织",
+      "loginRequired": "请先登录后再接受邀请",
+      "status": {
+        "expired": "邀请已过期",
+        "accepted": "邀请已被使用",
+        "cancelled": "邀请已取消"
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "actions": {
+    "upload": "Subir archivo adjunto",
+    "uploading": "Subiendo...",
+    "reuse": "Reutilizar archivo adjunto",
+    "reuseLoading": "Reutilizar...",
+    "cancel": "Cancelar",
+    "remove": "Quitar",
+    "removeAll": "Quitar todo",
+    "removingAll": "Eliminando...",
+    "download": "Descargar",
+    "downloadAll": "Descargar todo"
+  },
+  "labels": {
+    "reuseSection": "Reutilizar el archivo adjunto existente",
+    "uploadingList": "Subiendo",
+    "attachmentList": "Adjuntos",
+    "unknownType": "tipo desconocido",
+    "empty": "Sin archivos adjuntos"
+  },
+  "placeholders": {
+    "reuseFileId": "Ingrese el ID del archivo adjunto existente"
+  },
+  "tips": {
+    "uploadHelp": "Puede cargar varios archivos. Se guardarán como referencias adjuntas.",
+    "saveBeforeUpload": "Guarde el registro antes de cargar archivos adjuntos.",
+    "reuseHelp": "Ingrese un archivo adjunto existente file_id para hacer referencia a él en este registro.",
+    "syncing": "Sincronizando archivos adjuntos...",
+    "uploadDropHint": "Haga clic, pegue o arrastre archivos aquí"
+  },
+  "errors": {
+    "fetchFailed": "No se pudieron cargar los archivos adjuntos",
+    "uploadFailed": "No se pudieron cargar los archivos adjuntos",
+    "abortFailed": "No se pudo cancelar la carga",
+    "removeFailed": "No se pudo eliminar el archivo adjunto",
+    "reuseNeedSave": "Guarde el registro antes de reutilizar los archivos adjuntos",
+    "reuseMissingId": "Por favor ingrese el ID del archivo",
+    "reuseFailed": "No se pudo reutilizar el archivo adjunto",
+    "removeAllFailed": "No se pudieron eliminar los archivos adjuntos",
+    "fileTooLarge": "Supera el límite de tamaño de {{limit}}MB",
+    "fileTypeNotAllowed": "Tipo de archivo no compatible",
+    "fileRejectedSingle": "Archivo {{name}} omitido: {{reason}}",
+    "fileRejectedMultiple": "{{count}} archivos omitidos"
+  },
+  "apiErrors": {
+    "emptyFileList": "La lista de archivos no puede estar vacía",
+    "batchUploadFailed": "Error en la carga por lotes",
+    "batchUploadFailedWithReason": "Error al cargar el lote: {{message}}",
+    "uploadFailed": "Error al subir",
+    "createUploadTaskFailed": "No se pudo crear la tarea de carga de archivos adjuntos",
+    "uploadPartFailed": "No se pudo cargar el fragmento del archivo adjunto",
+    "uploadPartInvalid": "Respuesta de fragmento de carga no válida",
+    "completeUploadFailed": "No se pudo completar la carga del archivo adjunto",
+    "abortUploadFailed": "No se pudo cancelar la carga del archivo adjunto",
+    "reuseFailed": "No se pudo reutilizar el archivo adjunto",
+    "removeReferenceFailed": "No se pudo eliminar la referencia del archivo adjunto",
+    "convertFieldFailed": "No se pudo convertir el tipo de campo",
+    "uploadTaskEmpty": "La tarea de carga de archivos adjuntos no devolvió archivos",
+    "uploadTaskMissingItem": "Falta información de la tarea de carga para el archivo adjunto {{name}}"
+  },
+  "status": {
+    "pending": "En cola",
+    "uploading": "Subiendo",
+    "completed": "Completado",
+    "error": "Error al subir",
+    "cancelled": "Cancelado"
+  }
+}

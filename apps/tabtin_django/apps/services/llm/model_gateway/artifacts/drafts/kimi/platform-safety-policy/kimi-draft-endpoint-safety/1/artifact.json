@@ -1,0 +1,29 @@
+{
+  "blocked_extension_targets": [
+    "protocol.request.headers.authorization"
+  ],
+  "commercial_tier_limit": null,
+  "evidence": [
+    {
+      "locator": "endpoint policy remains separately trusted and non-publishable",
+      "source": "PR5 draft boundary"
+    }
+  ],
+  "identity": {
+    "canonical_hash": "sha256:0509e1a0ecece0258bf9b0e91dada0843a2afe90c1a49229125b89a9d3f6c978",
+    "key": "kimi-draft-endpoint-safety",
+    "kind": "platform-safety-policy",
+    "revision": "1"
+  },
+  "platform_ceiling": null,
+  "platform_ceiling_enforceable": false,
+  "platform_ceiling_verified": false,
+  "policy_keys": [
+    "draft-only",
+    "no-secrets",
+    "offline-validation-required"
+  ],
+  "provider_maximum": null,
+  "provider_maximum_verified": false,
+  "schema_version": "1"
+}

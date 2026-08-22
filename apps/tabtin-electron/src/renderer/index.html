@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      CSP 安全审计 (S3-04, 2026-03-24):
+      - 开发环境：宽松 CSP（含 unsafe-eval/unsafe-inline、localhost），支持 Vite HMR
+      - 生产环境：由 electron.vite.config.ts 中的 hardenCspPlugin 自动替换为严格 CSP
+      - unsafe-eval 在生产环境保留原因：Monaco Editor 使用 new Function() 进行语法高亮
+      - unsafe-inline (style-src) 保留原因：CSS-in-JS (framer-motion) 和 Tailwind 运行时样式
+      - 下一步：引入 nonce-based script CSP 以彻底消除 unsafe-inline (script-src)
+    -->
+    <!--
+      ：私有 HTML 经授权 API 拉成 Blob 后 iframe 用 blob: 渲染；dev CSP 必须放行 frame-src blob:。
+      blob/srcdoc 继承本页 CSP，故 script/style/font 需放行 HTML 块常用 CDN（与 production-csp.ts
+      HTML_ARTIFACT_CDN_ORIGINS / Tin 面板沙箱对齐：unpkg / jsdelivr / esm.sh / cdnjs / fonts）。
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:5173 ws://localhost:5173 https://unpkg.com https://cdn.jsdelivr.net https://esm.sh https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com; worker-src 'self' blob: http://localhost:5173; style-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net https://esm.sh https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' data: https://unpkg.com https://cdn.jsdelivr.net https://esm.sh https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: blob: https: http: tabtin-file:; media-src 'self' blob: https: http: tabtin-file:; connect-src 'self' blob: https: http: ws: tabtin-file:; frame-src 'self' blob: http: https:;" />
+    <title>TabTin - AI 工作平台</title>
+    <script src="./preboot-theme.js"></script>
+    <style>
+      /* 与 globals.css :root 默认暖中性 token 对齐，供 JS 加载前的静态占位使用 */
+      :root {
+        --canvas: 40 20% 97%;
+        --background: 40 25% 99%;
+        --foreground: 30 10% 15%;
+        --muted: 36 14% 94%;
+        --muted-foreground: 30 6% 44%;
+        --primary: 215 65% 52%;
+      }
+
+      .dark {
+        --canvas: 30 8% 8%;
+        --background: 30 6% 12%;
+        --foreground: 36 14% 90%;
+        --muted: 30 6% 16%;
+        --muted-foreground: 30 6% 60%;
+        --primary: 215 65% 62%;
+      }
+
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background-color: transparent;
+        color: hsl(var(--foreground));
+        overflow: hidden;
+      }
+
+      .boot-screen {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        background-color: hsl(var(--canvas));
+      }
+
+      .loading-spinner {
+        width: 32px;
+        height: 32px;
+        border: 3px solid hsl(var(--muted));
+        border-top-color: hsl(var(--primary));
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      .boot-spinner {
+        width: 32px;
+        height: 32px;
+        border-width: 3px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .boot-title {
+        font-size: 14px;
+        line-height: 22px;
+        color: hsl(var(--foreground));
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <!-- 加载状态 -->
+      <div class="boot-screen">
+        <div class="loading-spinner boot-spinner"></div>
+        <div class="boot-title">正在启动 TabTin...</div>
+      </div>
+    </div>
+
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>

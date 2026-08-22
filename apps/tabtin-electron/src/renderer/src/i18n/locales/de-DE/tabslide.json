@@ -1,0 +1,984 @@
+{
+  "title": "TabSlide-Präsentation",
+  "untitled": "Präsentation ohne Titel",
+  "preset": {
+    "ppt": "Präsentation (1920×1080)",
+    "xiaohongshu": "Xiaohongshu-Notiz (1080×1440)",
+    "poster": "Plakat",
+    "custom": "Benutzerdefinierte Größe"
+  },
+  "toolbar": {
+    "font": "Schriftart",
+    "fontSize": "Schriftgröße",
+    "fontColor": "Textfarbe",
+    "bold": "Fett",
+    "italic": "Kursiv",
+    "underline": "Unterstreichen",
+    "strikethrough": "Durchgestrichen",
+    "link": "Link",
+    "alignLeft": "Links ausrichten",
+    "alignCenter": "Mitte",
+    "alignRight": "Rechts ausrichten",
+    "alignJustify": "Begründen Sie",
+    "lineHeight": "Zeilenhöhe",
+    "letterSpacing": "Buchstabenabstand",
+    "bulletList": "Aufzählungsliste",
+    "orderedList": "Nummerierte Liste",
+    "indent": "Einzug vergrößern",
+    "outdent": "Einzug verkleinern",
+    "superscript": "Hochgestellt",
+    "subscript": "Tiefgestellt",
+    "backgroundColor": "Hervorheben",
+    "themeColor": "Themenfarbe"
+  },
+  "font": {
+    "default": "Standard",
+    "system": "Systemschriftarten",
+    "document": "Dokument",
+    "chinese": "Chinesisch",
+    "sansSerif": "Ohne Serifen",
+    "serif": "Serife",
+    "monospace": "Monospace"
+  },
+  "color": {
+    "default": "Standard",
+    "themeColors": "Themenfarben",
+    "textColors": "Textfarben",
+    "highlightColors": "Hervorheben von Farben",
+    "red": "Rot",
+    "orange": "Orange",
+    "yellow": "Gelb",
+    "green": "Grün",
+    "blue": "Blau",
+    "purple": "Lila",
+    "pink": "Rosa",
+    "gray": "Grau",
+    "black": "Schwarz",
+    "white": "Weiß",
+    "none": "Keine",
+    "dark1": "Dunkel 1",
+    "light1": "Licht 1",
+    "accent1": "Akzent 1",
+    "accent2": "Akzent 2",
+    "accent3": "Akzent 3",
+    "accent4": "Akzent 4",
+    "accent5": "Akzent 5",
+    "accent6": "Akzent 6",
+    "dark2": "Dunkel 2",
+    "light2": "Licht 2",
+    "background1": "Hintergrund 1",
+    "background2": "Hintergrund 2",
+    "text1": "Text 1",
+    "text2": "Text 2"
+  },
+  "link": {
+    "placeholder": "https://... oder Seite-2",
+    "confirm": "Bestätigen",
+    "remove": "Entfernen"
+  },
+  "letterSpacing": {
+    "default": "Standard",
+    "tight": "Eng"
+  },
+  "canvas": {
+    "zoomIn": "Vergrößern",
+    "zoomOut": "Herauszoomen",
+    "fitToScreen": "An Bildschirm anpassen",
+    "fit": "Passt",
+    "reset100": "Auf 100 % zurücksetzen",
+    "noData": "Keine Objektträgerdaten verfügbar",
+    "dropImage": "Lassen Sie es fallen, um ein Bild einzufügen"
+  },
+  "versionHistory": "Versionsverlauf",
+  "slideshow": {
+    "prev": "Zurück",
+    "next": "Als nächstes",
+    "exit": "Diashow beenden",
+    "start": "Anwesend",
+    "endTitle": "Ende der Präsentation",
+    "endSubtitle": "Klicken Sie auf eine beliebige Stelle oder drücken Sie ESC, um den Vorgang zu beenden",
+    "hintNavigate": "Navigieren Sie durch Folien",
+    "hintNext": "Nächster Schritt",
+    "hintExit": "Ausstieg",
+    "autoplayRestricted": "Autoplay eingeschränkt",
+    "autoplayMuted": "Automatische Wiedergabe stummgeschaltet",
+    "clickToPlay": "Klicken Sie zum Spielen",
+    "unmute": "Stummschaltung aufheben"
+  },
+  "image": {
+    "crop": "Zuschneiden",
+    "cropCircle": "Auf Kreis zuschneiden",
+    "removeCrop": "Zuschneiden entfernen",
+    "replace": "Bild ersetzen",
+    "delete": "Löschen",
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen",
+    "reset": "Zurücksetzen",
+    "loadFailed": "Das Bild konnte nicht geladen werden"
+  },
+  "export": {
+    "title": "Exportieren",
+    "format": "Exportformat",
+    "pptx": "Als PPTX exportieren",
+    "pdf": "Als PDF exportieren",
+    "image": "Bild",
+    "images": "Als Bilder exportieren",
+    "exporting": "Exportieren...",
+    "success": "Export erfolgreich",
+    "failed": "Der Export ist fehlgeschlagen"
+  },
+  "import": {
+    "title": "Importieren",
+    "pptx": "PPTX importieren",
+    "importing": "Importieren...",
+    "success": "Import erfolgreich",
+    "failed": "Der Import ist fehlgeschlagen"
+  },
+  "label": {
+    "user": "Benutzer"
+  },
+  "host": {
+    "loading": "Präsentation wird geladen...",
+    "reload": "Neu laden",
+    "preset": {
+      "title": "Präsentation erstellen",
+      "description": "Wählen Sie zum Starten ein Leinwandverhältnis oder importieren Sie eine vorhandene PPTX-Datei.",
+      "or": "oder",
+      "importButton": "PPTX-Datei importieren",
+      "option": {
+        "widescreen": {
+          "label": "16:9 Breitbild",
+          "description": "1920 × 1080"
+        },
+        "classic": {
+          "label": "4:3 Klassisch",
+          "description": "1024 × 768"
+        },
+        "xiaohongshu": {
+          "label": "Xiaohongshu",
+          "description": "1080 × 1440"
+        }
+      }
+    },
+    "importing": {
+      "title": "PPTX-Datei wird importiert...",
+      "description": "Der Folieninhalt wird analysiert. Bitte warten."
+    },
+    "import": {
+      "successWithStats": "Erfolgreich importiert: {{slides}} Folien, {{elements}} Elemente.",
+      "failedWithReason": "Import fehlgeschlagen: {{reason}}"
+    },
+    "export": {
+      "failedWithReason": "Export fehlgeschlagen: {{reason}}"
+    },
+    "exportWarning": {
+      "imagePlaceholderFallback": "{{count}} Remote-Bilder konnten nicht eingebunden werden und wurden durch Platzhalter ersetzt.",
+      "imageProxyFailed": "Bild-Proxy für {{count}}-Bild(er) fehlgeschlagen; Im exportierten PPTX erscheinen sie möglicherweise leer.",
+      "imageProxyNormalized": "Die Cross-Origin-Proxy-Normalisierung war für {{count}}-Remote-Image(s) erfolgreich.",
+      "imageRasterizeFailed": "{{count}}-Bilder konnten nicht gerastert werden und wurden durch Platzhalter ersetzt."
+    },
+    "error": {
+      "saveMissingContext": "Speichern fehlgeschlagen. Warten auf die Wiederherstellung des Organisations-/Agentenkontexts …",
+      "saveRetryExceeded": "Das Speichern ist nach der maximalen Anzahl an Wiederholungsversuchen fehlgeschlagen. Bitte überprüfen Sie Ihr Netzwerk und aktualisieren Sie es.",
+      "loadFailedRetry": "Laden fehlgeschlagen. Bitte aktualisieren Sie und versuchen Sie es erneut.",
+      "uploadEmptyUrl": "Der Upload war erfolgreich, aber es wurde keine Bild-URL zurückgegeben.",
+      "uploadValidation": "Dateivalidierung fehlgeschlagen: nicht unterstützter Typ oder Größe überschritten.",
+      "imageTooLarge": "Bilddatei ist zu groß (maximal {{maxSize}})",
+      "imageTypeNotSupported": "Nicht unterstütztes Bildformat.",
+      "imageUploadFallback": "Bild eingefügt. Wird automatisch hochgeladen, wenn online.",
+      "imageLoadFailed": "Bild konnte nicht geladen werden."
+    },
+    "reupload": {
+      "success": "{{count}} Offline-Bilder wurden in die Cloud hochgeladen",
+      "failed": "{{count}} Offline-Bild(er) konnten nicht hochgeladen werden, wird es beim nächsten Mal erneut versuchen",
+      "partialFailed": "{{success}} Bild(er) hochgeladen, {{failed}} fehlgeschlagen"
+    },
+    "longOfflineWarning": "Du warst schon lange offline",
+    "longOfflineWarningDesc": "Wir empfehlen Ihnen, Ihre Präsentationsinhalte auf Konsistenz zu überprüfen. Offline vorgenommene Änderungen wurden automatisch zusammengeführt.",
+    "versionRestored": "Version erfolgreich wiederhergestellt",
+    "versionRestoreFailed": "Die Version konnte nicht wiederhergestellt werden",
+    "collabSyncWarning": "Version wiederhergestellt, einige Online-Mitarbeiter werden jedoch möglicherweise nicht synchronisiert. Bitten Sie sie, die Seite zu aktualisieren.",
+    "versionMigrationNotice": "Ältere Versionen werden migriert und sind möglicherweise vorübergehend nicht sichtbar",
+    "storeFailedWarning": "Der Inhalt konnte nicht gespeichert werden. Bitte überprüfen Sie Ihre Netzwerkverbindung",
+    "concurrentEditWarning": "Ein anderer Mitarbeiter bearbeitet dieses Element ebenfalls. Änderungen werden möglicherweise überschrieben"
+  },
+  "history": {
+    "title": "Versionsverlauf",
+    "restore": "Stellen Sie diese Version wieder her",
+    "createVersion": "Benannte Version erstellen",
+    "versionName": "Versionsname",
+    "unnamed": "Unbenannte Version",
+    "restoreSuccess": "Version erfolgreich wiederhergestellt",
+    "restoreFailed": "Die Version konnte nicht wiederhergestellt werden"
+  },
+  "error": {
+    "projectNotFound": "Präsentation nicht gefunden",
+    "loadFailed": "Laden fehlgeschlagen",
+    "saveFailed": "Speichern fehlgeschlagen",
+    "versionConflict": "Versionskonflikt. Bitte aktualisieren Sie die Version und versuchen Sie es erneut",
+    "exportFailed": "Der Export ist fehlgeschlagen",
+    "importFailed": "Der Import ist fehlgeschlagen"
+  },
+  "message": {
+    "saved": "Gespeichert",
+    "saving": "Sparen...",
+    "autoSave": "Automatisch speichern",
+    "unsavedChanges": "Nicht gespeicherte Änderungen",
+    "editing": "Bearbeiten",
+    "saveError": "Speichern fehlgeschlagen"
+  },
+  "common": {
+    "cancel": "Abbrechen",
+    "delete": "Löschen"
+  },
+  "file": {
+    "title": "Datei",
+    "importPptx": "PPTX importieren",
+    "exportPptx": "Als PPTX exportieren",
+    "exportPdf": "Als PDF exportieren",
+    "versionHistory": "Versionsverlauf"
+  },
+  "page": {
+    "title": "Seiten",
+    "totalCount": "{{count}} Seiten insgesamt",
+    "addFirst": "Erste Seite hinzufügen",
+    "addAfterCurrent": "Neue Seite nach der aktuellen Seite hinzufügen",
+    "expandList": "Seitenliste erweitern",
+    "dropHere": "Kommen Sie hier vorbei",
+    "insertHere": "Folie hier einfügen",
+    "context": {
+      "duplicateCurrent": "Aktuelle Seite duplizieren",
+      "addAfter": "Seite danach hinzufügen",
+      "addRemark": "Bemerkung hinzufügen",
+      "copyToClipboard": "In die Zwischenablage kopieren",
+      "cut": "Seite ausschneiden",
+      "pasteAfter": "Nach dieser Seite einfügen",
+      "delete": "Seite löschen"
+    },
+    "deleteConfirm": {
+      "title": "Seite {{index}} löschen?",
+      "desc": "Diese Seite hat Inhalt. Sie können es über „Rückgängig“ (Strg/Befehl+Z) wiederherstellen."
+    },
+    "addSlide": "Folie hinzufügen"
+  },
+  "align": {
+    "left": "Links ausrichten",
+    "horizontalCenter": "Horizontale Mitte ausrichten",
+    "right": "Richtig ausrichten",
+    "top": "Oben ausrichten",
+    "verticalCenter": "Vertikale Mitte ausrichten",
+    "bottom": "Unten ausrichten",
+    "distributeH": "Horizontal verteilen",
+    "distributeV": "Vertikal verteilen",
+    "enableSmartGuides": "Aktivieren Sie das intelligente Einrasten von Hilfslinien",
+    "disableSmartGuides": "Deaktivieren Sie das Einrasten von Smart Guides",
+    "enableGridSnap": "Aktivieren Sie die Rasterausrichtung",
+    "disableGridSnap": "Deaktivieren Sie die Rasterausrichtung",
+    "showGrid": "Raster anzeigen",
+    "hideGrid": "Raster ausblenden",
+    "tidyUp": "Aufräumen"
+  },
+  "contextMenu": {
+    "copy": "Kopieren",
+    "cut": "Schneiden",
+    "paste": "Einfügen",
+    "duplicate": "Duplizieren",
+    "selectAll": "Alles auswählen",
+    "layer": "Schicht",
+    "bringToFront": "Nach vorne bringen",
+    "bringForward": "Vorwärts bringen",
+    "sendBackward": "Rückwärts senden",
+    "sendToBack": "Nach hinten senden",
+    "group": "Gruppe",
+    "ungroup": "Gruppierung aufheben",
+    "lock": "Sperren",
+    "unlock": "Entsperren",
+    "lockSelected": "Schloss ausgewählt",
+    "unlockSelected": "Ausgewählte Option entsperren",
+    "show": "Zeigen",
+    "hide": "Verstecken",
+    "showSelected": "Ausgewählte anzeigen",
+    "hideSelected": "Ausgewählte ausblenden",
+    "delete": "Löschen",
+    "align": "Ausrichten"
+  },
+  "moveable": {
+    "partialLocked": "Einige Elemente sind gesperrt"
+  },
+  "animation": {
+    "title": "Animationen",
+    "add": "Animation hinzufügen",
+    "empty": "Wählen Sie ein Element aus und fügen Sie dann einen Animationseffekt hinzu.",
+    "emptyWithSelection": "Wählen Sie mit „+ Animation hinzufügen“ einen Effekt aus, um ausgewählte Elemente zu animieren.",
+    "delete": "Animation löschen",
+    "elementDeleted": "(Gelöscht)",
+    "effect": {
+      "fadeIn": "Einblenden",
+      "fadeInDown": "Nach unten einblenden",
+      "fadeInUp": "Einblenden",
+      "fadeInLeft": "Links einblenden",
+      "fadeInRight": "Rechts einblenden",
+      "zoomIn": "Vergrößern",
+      "zoomInDown": "Heranzoomen",
+      "zoomInUp": "Vergrößern",
+      "zoomInLeft": "Nach links hineinzoomen",
+      "zoomInRight": "Rechts hineinzoomen",
+      "bounceIn": "Hüpf rein",
+      "bounceInDown": "Hineinspringen",
+      "bounceInUp": "Hüpfen Sie nach oben",
+      "bounceInLeft": "Nach links springen",
+      "bounceInRight": "Springe nach rechts",
+      "slideInDown": "Nach unten schieben",
+      "slideInUp": "Nach oben schieben",
+      "slideInLeft": "Nach links hineinschieben",
+      "slideInRight": "Rechts hineinschieben",
+      "rotateIn": "Eindrehen",
+      "rotateInDownLeft": "Nach unten links drehen",
+      "rotateInDownRight": "Nach rechts unten drehen",
+      "rotateInUpLeft": "Nach oben links drehen",
+      "rotateInUpRight": "Nach rechts oben drehen",
+      "flipInX": "X eindrehen",
+      "flipInY": "Y umdrehen",
+      "backInDown": "Zurück nach unten",
+      "backInUp": "Wieder rein",
+      "backInLeft": "Zurück nach links",
+      "backInRight": "Zurück in rechts",
+      "lightSpeedInRight": "Lichtgeschwindigkeit rechts",
+      "lightSpeedInLeft": "Lichtgeschwindigkeit links",
+      "fadeOut": "Ausblenden",
+      "fadeOutDown": "Nach unten ausblenden",
+      "fadeOutUp": "Ausblenden",
+      "fadeOutLeft": "Links ausblenden",
+      "fadeOutRight": "Richtig ausblenden",
+      "zoomOut": "Herauszoomen",
+      "zoomOutDown": "Verkleinern Sie die Ansicht",
+      "zoomOutUp": "Verkleinern Sie die Ansicht",
+      "zoomOutLeft": "Nach links herauszoomen",
+      "zoomOutRight": "Nach rechts herauszoomen",
+      "bounceOut": "Abprallen",
+      "bounceOutDown": "Springe nach unten",
+      "bounceOutUp": "Hüpfen Sie nach oben",
+      "bounceOutLeft": "Nach links abprallen",
+      "bounceOutRight": "Richtig abprallen",
+      "slideOutDown": "Nach unten herausschieben",
+      "slideOutUp": "Nach oben herausschieben",
+      "slideOutLeft": "Nach links herausschieben",
+      "slideOutRight": "Nach rechts herausschieben",
+      "bounce": "Hüpfen",
+      "shakeX": "Schütteln Sie X",
+      "shakeY": "Schüttle Y",
+      "wobble": "Wackeln",
+      "swing": "Schaukel",
+      "headShake": "Kopfschütteln",
+      "jello": "Wackelpudding",
+      "rubberBand": "Gummiband",
+      "tada": "Tada",
+      "flash": "Blitz",
+      "pulse": "Puls",
+      "heartBeat": "Herzschlag",
+      "flip": "Umdrehen"
+    },
+    "triggerLabel": "Auslöser",
+    "duration": "Dauer",
+    "type": {
+      "in": "Eingang",
+      "out": "Ausstieg",
+      "attention": "Betonung"
+    },
+    "trigger": {
+      "click": "Auf Klick",
+      "meantime": "Mit vorherigem",
+      "auto": "Nach vorherigem"
+    },
+    "group": {
+      "fade": "Verblassen",
+      "zoom": "Zoomen",
+      "bounce": "Hüpfen",
+      "slide": "Rutsche",
+      "rotate": "Drehen",
+      "flip": "Umdrehen",
+      "shake": "Schütteln",
+      "other": "Andere"
+    },
+    "effectLabel": "Wirkung"
+  },
+  "element": {
+    "type": {
+      "text": "Text",
+      "image": "Bild",
+      "shape": "Form",
+      "line": "Linie",
+      "chart": "Diagramm",
+      "table": "Tisch",
+      "latex": "Formel",
+      "video": "Video",
+      "audio": "Audio"
+    }
+  },
+  "insert": {
+    "defaultText": "Doppelklicken Sie, um den Text zu bearbeiten",
+    "text": "Text",
+    "image": "Medien",
+    "shape": "Form",
+    "line": {
+      "title": "Linie",
+      "presets": {
+        "straight": "Gerade",
+        "singleArrow": "Einzelner Pfeil",
+        "doubleArrow": "Doppelpfeil",
+        "diamondArrow": "Diamantpfeil",
+        "stealthArrow": "Stealth-Pfeil",
+        "dotEnd": "Punktende",
+        "dashed": "Gestrichelt",
+        "dashedArrow": "Gestrichelter Pfeil",
+        "dotted": "Gepunktet",
+        "curve": "Kurve",
+        "broken": "Gestrichelte Linie",
+        "broken2": "Doppelte unterbrochene Linie",
+        "cubic": "Kubische Kurve"
+      },
+      "category": {
+        "basic": "Einfach",
+        "arrows": "Pfeile",
+        "paths": "Wege"
+      }
+    },
+    "table": {
+      "chooseSize": "Wählen Sie die Tischgröße",
+      "preview": "{{rows}} × {{cols}} Tabelle",
+      "title": "Tisch"
+    },
+    "chart": {
+      "title": "Diagramm",
+      "types": {
+        "bar": {
+          "label": "Balkendiagramm",
+          "desc": "Vertikaler Balkenvergleich"
+        },
+        "column": {
+          "label": "Säulendiagramm",
+          "desc": "Reckvergleich"
+        },
+        "line": {
+          "label": "Liniendiagramm",
+          "desc": "Trendwechsel"
+        },
+        "area": {
+          "label": "Flächendiagramm",
+          "desc": "Trend und Volumen"
+        },
+        "pie": {
+          "label": "Kreisdiagramm",
+          "desc": "Zusammensetzungsverhältnis"
+        },
+        "ring": {
+          "label": "Donut-Diagramm",
+          "desc": "Zusammensetzungsverhältnis (hohl)"
+        },
+        "radar": {
+          "label": "Radarkarte",
+          "desc": "Mehrdimensionaler Vergleich"
+        },
+        "scatter": {
+          "label": "Streudiagramm",
+          "desc": "Korrelationsverteilung"
+        }
+      },
+      "default": {
+        "pieTitle": "Aktienanalyse",
+        "ringTitle": "Zusammensetzungsanalyse",
+        "lineTitle": "Trendanalyse",
+        "areaTitle": "Bereichstrend",
+        "compareTitle": "Datenvergleich",
+        "radarTitle": "Dimensionsvergleich",
+        "scatterTitle": "Streuverteilung",
+        "labels": {
+          "a": "Kategorie A",
+          "b": "Kategorie B",
+          "c": "Kategorie C",
+          "d": "Kategorie D"
+        },
+        "legendShare": "Teilen",
+        "series1": "Serie 1",
+        "series2": "Serie 2",
+        "dimension1": "Dimension 1",
+        "dimension2": "Dimension 2",
+        "dimension3": "Dimension 3",
+        "dimension4": "Dimension 4",
+        "dimension5": "Dimension 5",
+        "sampleA": "Probe A",
+        "sampleB": "Probe B"
+      }
+    },
+    "latex": {
+      "title": "Formel",
+      "placeholder": "Geben Sie LaTeX ein, z.B. x=\\\\frac{-b\\\\pm\\\\sqrt{b^2-4ac}}{2a}",
+      "color": "Farbe",
+      "submit": "Formel einfügen",
+      "processing": "Verarbeitung...",
+      "previewUnavailable": "Formelvorschau nicht verfügbar",
+      "presets": {
+        "quadratic": "Quadratische Formel",
+        "gaussian": "Gaußsche Verteilung",
+        "euler": "Euler-Identität"
+      },
+      "errors": {
+        "empty": "Bitte geben Sie eine Formel ein.",
+        "renderFailed": "Formel konnte nicht gerendert werden. Bitte überprüfen Sie die Syntax."
+      }
+    },
+    "title": "Einfügen"
+  },
+  "chart": {
+    "noData": "Keine Daten"
+  },
+  "name": {
+    "editHint": "Klicken oder doppelklicken Sie, um den Namen zu bearbeiten"
+  },
+  "property": {
+    "toolbar": {
+      "page": "Seite",
+      "position": "Position",
+      "transform": "Verwandeln",
+      "layer": "Schichten"
+    },
+    "multiSelection": "{{count}} Elemente ausgewählt",
+    "page": "Seite",
+    "collapse": "Zusammenbruch",
+    "pageLayout": {
+      "title": "Seitenlayout",
+      "unbound": "Ungebunden",
+      "index": "Index: {{index}}",
+      "noOriginMeta": "Für diese Seite sind keine ursprünglichen Layout-Metadaten verfügbar.",
+      "noSnapshots": "Keine Layout-Snapshots verfügbar.",
+      "unnamed": "Unbenanntes Layout",
+      "master": "Meister: {{name}}",
+      "layoutIndex": "Layout {{index}}"
+    },
+    "pageTransition": {
+      "title": "Folienübergang",
+      "option": {
+        "no": "Keine",
+        "fade": "Verblassen",
+        "slideX": "Horizontal schieben",
+        "slideY": "Vertikal schieben",
+        "slideX3D": "Horizontal schieben (3D)",
+        "slideY3D": "Vertikal schieben (3D)",
+        "rotate": "Drehen",
+        "scaleY": "Vertikal erweitern",
+        "scaleX": "Horizontal erweitern",
+        "scale": "Vergrößern",
+        "scaleReverse": "Herauszoomen",
+        "random": "Zufällig"
+      }
+    },
+    "pageBackground": {
+      "title": "Seitenhintergrund",
+      "themeKey": "Themenschlüssel",
+      "resolvedColor": "Aufgelöste Farbe",
+      "themePalette": "Themenpalette",
+      "switchToNormal": "Wechseln Sie zu einem einfarbigen Hintergrund",
+      "imageFit": "Bildanpassung",
+      "imageFitCover": "Cover (kann beschnitten werden)",
+      "imageFitContain": "Enthalten",
+      "imageFitRepeat": "Wiederholen",
+      "useTheme": "Verwenden Sie den Themenhintergrund",
+      "typeImage": "Bild",
+      "typeGradient": "Farbverlauf"
+    },
+    "themeFont": {
+      "title": "Themenschriftarten",
+      "heading": "Schriftart der Überschrift",
+      "headingPlaceholder": "Geben Sie die Schriftfamilie für die Überschrift ein",
+      "body": "Körperschrift",
+      "bodyPlaceholder": "Geben Sie die Schriftfamilie für den Körper ein"
+    },
+    "canvasAssist": {
+      "title": "Canvas-Assistent",
+      "snapToGuides": "Intelligentes Einrasten der Führung",
+      "snapToGrid": "Rasterraster",
+      "showGrid": "Raster anzeigen"
+    },
+    "currentValue": "Aktuell: {{value}}",
+    "default": "Standard",
+    "remark": "Notizen",
+    "remarkPlaceholder": "Sprechernotizen für diese Seite hinzufügen…",
+    "positionSize": "Position und Größe",
+    "transform": "Verwandeln",
+    "rotate": "Drehen",
+    "opacity": "Opazität",
+    "flipHorizontal": "Horizontal spiegeln",
+    "flipVertical": "Vertikal spiegeln",
+    "fixedRatio": "Sperrverhältnis",
+    "elementName": "Elementname",
+    "lock": "Sperren",
+    "unlock": "Entsperren",
+    "show": "Zeigen",
+    "hide": "Verstecken",
+    "color": "Farbe",
+    "font": "Schriftart",
+    "none": "Keine",
+    "enabled": "Aktiviert",
+    "apply": "Bewerben",
+    "clear": "Klar",
+    "layer": {
+      "action": {
+        "toFront": "Nach vorne bringen",
+        "forward": "Vorwärts bringen",
+        "backward": "Nach hinten senden",
+        "toBack": "Nach hinten senden",
+        "hideAll": "Alles ausblenden",
+        "showAll": "Alle anzeigen",
+        "lockAll": "Alle sperren",
+        "unlockAll": "Alle freischalten",
+        "lockedHint": "Die Ebene ist gesperrt"
+      },
+      "empty": "Keine Elemente",
+      "show": "Zeigen",
+      "hide": "Verstecken",
+      "lock": "Sperren",
+      "unlock": "Entsperren",
+      "group": {
+        "defaultName": "Gruppe ({{count}})",
+        "collapse": "Gruppe einklappen",
+        "expand": "Gruppe erweitern",
+        "placeholder": "Geben Sie den Gruppennamen ein",
+        "renameHint": "Drücken Sie zum Speichern die Eingabetaste",
+        "show": "Gruppe anzeigen",
+        "hide": "Gruppe ausblenden",
+        "hidePartial": "Sichtbare Elemente ausblenden",
+        "lock": "Gruppe sperren",
+        "lockPartial": "Sperren Sie entsperrte Gegenstände",
+        "unlock": "Gruppe entsperren"
+      }
+    },
+    "style": {
+      "chart": {
+        "title": "Diagramm"
+      },
+      "fill": {
+        "title": "Füllen",
+        "modeSolid": "Solide",
+        "modeGradient": "Farbverlauf",
+        "modeImage": "Bild",
+        "opacity": "Opazität",
+        "gradientType": "Typ",
+        "gradientTypeLinear": "Linear",
+        "gradientTypeRadial": "Radial",
+        "angle": "Winkel",
+        "positionPercent": "Position %",
+        "addStop": "+ Stopp",
+        "removeStop": "- Stopp",
+        "selectImage": "Wählen Sie Bild aus",
+        "uploadLocalImage": "Lokales Bild hochladen",
+        "inputImageUrl": "Oder geben Sie die Bild-URL ein"
+      },
+      "themeColor": "Themenfarbe",
+      "corners": {
+        "title": "Eckenradius (4 Ecken)",
+        "topLeft": "Oben links",
+        "topRight": "Oben rechts",
+        "bottomRight": "Unten rechts",
+        "bottomLeft": "Unten links"
+      },
+      "shapeText": {
+        "title": "Formtext",
+        "content": "Textinhalt",
+        "fontFamily": "Schriftfamilie",
+        "fontFamilyPlaceholder": "z.B. Microsoft YaHei",
+        "fontSize": "Schriftgröße (pt)",
+        "color": "Textfarbe",
+        "align": "Horizontal ausrichten",
+        "alignLeft": "L",
+        "alignCenter": "C",
+        "alignRight": "R",
+        "verticalAlign": "Vertikal ausrichten",
+        "verticalAlignTop": "T",
+        "verticalAlignMiddle": "M",
+        "verticalAlignBottom": "B"
+      },
+      "image": {
+        "src": "Bild-URL",
+        "altText": "Alt-Text",
+        "altTextPlaceholder": "Bildbeschreibung für Barrierefreiheit",
+        "radius": "Eckenradius",
+        "effects": {
+          "title": "Bildeffekte",
+          "fitMode": "Fit-Modus",
+          "fit": {
+            "cover": "Cover (kann beschnitten werden)",
+            "contain": "Enthalten",
+            "fill": "Füllen (dehnen)"
+          },
+          "colorMask": "Farbmaske",
+          "enableMask": "Maske aktivieren",
+          "filters": "Filter",
+          "filterBrightness": "Helligkeit",
+          "filterContrast": "Kontrast",
+          "filterSaturation": "Sättigung",
+          "filterBlur": "Unschärfe",
+          "filterGrayscale": "Graustufen",
+          "filterInvert": "Invertieren",
+          "filterHueRotate": "Farbton drehen",
+          "filterSepia": "Sepia",
+          "cropHint": "Doppelklicken Sie auf das Bild, um den Zuschneidemodus (Rechteck/Kreis) aufzurufen.",
+          "resetFilters": "Filter zurücksetzen"
+        }
+      },
+      "textDefault": {
+        "title": "Textstil",
+        "defaultColor": "Textfarbe",
+        "background": "Texthintergrund",
+        "fontFamily": "Schriftfamilie",
+        "fontFamilyPlaceholder": "z.B. Microsoft YaHei",
+        "fontSize": "Schriftgröße (pt)",
+        "lineHeight": "Zeilenhöhe",
+        "lineHeightPlaceholder": "Multiplikator, z.B. 1.5",
+        "wordSpace": "Buchstabenabstand",
+        "paragraphSpace": "Absatzabstand",
+        "verticalAlign": "Vertikal ausrichten",
+        "verticalAlignTop": "Top",
+        "verticalAlignMiddle": "Mitte",
+        "verticalAlignBottom": "Unten",
+        "verticalText": "Vertikaler Text",
+        "autoFit": "Textanpassung",
+        "autoFitNone": "Keine",
+        "autoFitShrink": "Text verkleinern",
+        "autoFitResize": "Boxgröße ändern",
+        "margin": "Polsterung",
+        "marginTop": "Top",
+        "marginRight": "Richtig",
+        "marginBottom": "Unten",
+        "marginLeft": "Links"
+      },
+      "link": {
+        "title": "Elementlink",
+        "type": {
+          "web": "Externer Link",
+          "slide": "Seitensprung"
+        },
+        "placeholder": {
+          "web": "https://example.com",
+          "slide": "Seite-2 / 2 / slide2.xml"
+        },
+        "save": "Link speichern",
+        "remove": "Link entfernen",
+        "noTarget": "Kein Linkziel",
+        "pageLabel": "Seite"
+      },
+      "tableRichText": {
+        "title": "Tabellen-Rich-Text",
+        "tip": "Doppelklicken Sie auf eine Tabellenzelle, um Rich-Text zu bearbeiten, und steuern Sie hier Schriftart, Farbe und Ausrichtung.",
+        "align": {
+          "left": "L",
+          "center": "C",
+          "right": "R",
+          "justify": "J"
+        },
+        "fontSize": "Schriftgröße (pt)",
+        "fontPlaceholder": "z.B. Microsoft YaHei",
+        "unorderedList": "Aufzählungsliste",
+        "orderedList": "Nummerierte Liste",
+        "linkPrompt": "Link eingeben (unterstützt https://... oder Seite-2)",
+        "linkPlaceholder": "https://... oder Seite-2",
+        "link": "Link",
+        "unlink": "Verknüpfung aufheben",
+        "cellBg": "Zellhintergrund",
+        "cellVerticalAlign": "Vertikal ausrichten",
+        "clearFormatting": "Formatierung löschen"
+      },
+      "tableTheme": {
+        "title": "Tischthema",
+        "color": "Themenfarbe",
+        "headerRow": "Kopfzeile",
+        "headerCol": "Erste Spalte",
+        "footerRow": "Fußzeile",
+        "lastCol": "Letzte Spalte",
+        "stripedRows": "Gebänderte Reihen",
+        "stripedCols": "Gebänderte Säulen"
+      },
+      "tableBorders": {
+        "title": "Tischränder",
+        "top": "Top",
+        "bottom": "Unten",
+        "left": "Links",
+        "right": "Richtig",
+        "insideH": "Innerhalb von H",
+        "insideV": "Innerhalb V"
+      },
+      "latex": {
+        "title": "Formel",
+        "placeholder": "Geben Sie die LaTeX-Formel ein",
+        "stroke": "Schlaganfall",
+        "hintApply": "Strg/Befehlstaste + Eingabetaste zum Anwenden",
+        "rendering": "Rendern…",
+        "errorEmpty": "Die Formel darf nicht leer sein.",
+        "errorRenderFailed": "Formel konnte nicht gerendert werden."
+      },
+      "line": {
+        "title": "Linienstil",
+        "width": "Breite",
+        "style": "Stil",
+        "styleOptions": {
+          "solid": "Solide",
+          "dashed": "Gestrichelt",
+          "dotted": "Gepunktet",
+          "dashDot": "Strichpunkt",
+          "longDash": "Langer Strich",
+          "longDashDot": "Langer Strichpunkt"
+        },
+        "type": "Linientyp",
+        "typeOptions": {
+          "straight": "Gerade",
+          "broken": "Kaputt",
+          "broken2": "Doppelt gebrochen",
+          "curve": "Quadratische Kurve",
+          "cubic": "Kubische Kurve"
+        },
+        "startCap": "Startkappe",
+        "endCap": "Endkappe",
+        "cap": {
+          "none": "Keine",
+          "arrow": "Pfeil",
+          "triangle": "Dreieck",
+          "stealth": "Heimlichkeit",
+          "diamond": "Diamant",
+          "dot": "Punkt"
+        }
+      },
+      "outline": {
+        "title": "Gliederung",
+        "none": "Keine Gliederung",
+        "width": "Breite",
+        "style": "Stil"
+      },
+      "shadow": {
+        "title": "Schatten",
+        "none": "Kein Schatten",
+        "offsetX": "Versatz X",
+        "offsetY": "Y-Versatz",
+        "blur": "Unschärfe",
+        "colorPlaceholder": "rgba(0,0,0,0,15)"
+      },
+      "video": {
+        "title": "Video",
+        "src": "Video-URL",
+        "poster": "Plakat",
+        "posterPlaceholder": "Posterbild-URL (optional)",
+        "autoplay": "Autoplay"
+      },
+      "audio": {
+        "title": "Audio",
+        "src": "Audio-URL",
+        "iconColor": "Symbolfarbe",
+        "autoplay": "Autoplay",
+        "loop": "Schleife"
+      }
+    },
+    "chart": {
+      "type": "Typ",
+      "title": "Titel",
+      "titlePlaceholder": "Diagrammtitel",
+      "labelsField": "Kategoriebezeichnungen (durch Kommas getrennt)",
+      "labelsFieldScatter": "X-Achsenwerte (Standard/erste Reihe, durch Kommas getrennt)",
+      "labelsPlaceholder": "Q1, Q2, Q3, Q4",
+      "labelsPlaceholderScatter": "1, 2, 3, 4",
+      "legendsField": "Legendennamen (durch Kommas getrennt)",
+      "legendsFieldPie": "Serienname (nur der erste wird verwendet)",
+      "legendsPlaceholder": "Serie 1, Serie 2",
+      "legendsPlaceholderPie": "Teilen",
+      "seriesField": "Datenreihen (eine Reihe pro Zeile, durch Kommas getrennt)",
+      "seriesFieldPie": "Werte (einzeilig, durch Kommas getrennt)",
+      "xSeriesField": "X-Werte pro Serie (eine Serie pro Zeile, optional)",
+      "xSeriesPlaceholder": "1, 2, 3, 4\n10, 20, 30, 40",
+      "xSeriesHint": "Wenn leer, werden die oben genannten Werte verwendet und an die jeweilige Serienlänge angepasst.",
+      "pieHint": "Pie/Donut verwendet nur die erste Datenzeile und den ersten Legendennamen.",
+      "showLegend": "Legende anzeigen",
+      "legendPosition": "Legendenposition",
+      "legendPositionBottom": "Unten",
+      "legendPositionTop": "Top",
+      "legendPositionLeft": "Links",
+      "legendPositionRight": "Richtig",
+      "showDataLabel": "Datenbeschriftungen anzeigen",
+      "stack": "Stapel",
+      "smooth": "Glatte Kurve",
+      "smoothScatter": "Glatte Linie",
+      "radarFilled": "Bereich füllen",
+      "themeMapping": "Theme-Farbzuordnung",
+      "themeMappingHint": "Binden Sie Serien an Thementasten, sodass die Farben automatisch den Themenänderungen folgen.",
+      "resetByTheme": "Nach Thema zurücksetzen",
+      "removeColor": "Farbe entfernen",
+      "customColor": "Benutzerdefinierte Farbe",
+      "addColor": "+ Farbe",
+      "chartFillColor": "Diagrammhintergrund",
+      "axisTextColor": "Achsentextfarbe",
+      "gridLineColor": "Farbe der Gitterlinie",
+      "defaultCategory": "Kategorie {{index}}",
+      "defaultLegendShare": "Teilen",
+      "defaultSeries": "Serie {{index}}"
+    },
+    "noSelection": "Wählen Sie ein Element aus, um mit der Bearbeitung zu beginnen",
+    "slideStyle": "Folienstil",
+    "pageProperties": "Seiteneigenschaften"
+  },
+  "tab": {
+    "slide": "Rutsche",
+    "design": "Design",
+    "properties": "Eigenschaften",
+    "layers": "Schichten",
+    "insert": "Einfügen",
+    "edit": "Bearbeiten",
+    "animation": "Animation"
+  },
+  "colorPicker": {
+    "themeColors": "Themenfarben",
+    "documentColors": "Dokumentfarben"
+  },
+  "present": {
+    "title": "Anwesend",
+    "fromBeginning": "Von Anfang an",
+    "fromCurrent": "Von der aktuellen Folie"
+  },
+  "insertShape": {
+    "category": {
+      "rect": "Rechtecke",
+      "basic": "Grundformen",
+      "basic2": "Grundformen 2",
+      "arrows": "Pfeile",
+      "stars": "Sterne"
+    },
+    "presets": {
+      "rect": "Rechteck",
+      "roundRect": "Abgerundetes Rechteck",
+      "roundRectSingle": "Einzelnes Rechteck mit abgerundeten Ecken",
+      "cutRect": "Rechteck ausschneiden",
+      "ellipse": "Ellipse",
+      "circle": "Kreis",
+      "triangle": "Dreieck",
+      "diamond": "Diamant",
+      "parallelogram": "Parallelogramm",
+      "trapezoid": "Trapez",
+      "pentagon": "Pentagon",
+      "hexagon": "Sechseck",
+      "octagon": "Achteck",
+      "cross": "Kreuz",
+      "rightTriangle": "Rechtes Dreieck",
+      "heart": "Herz",
+      "lightning": "Blitz",
+      "cloud": "Wolke",
+      "chevron": "Chevron",
+      "callout": "Hinweis",
+      "roundCallout": "Abgerundete Beschriftung",
+      "rightArrow": "Pfeil nach rechts",
+      "leftArrow": "Pfeil nach links",
+      "upArrow": "Pfeil nach oben",
+      "downArrow": "Pfeil nach unten",
+      "leftRightArrow": "Links-Rechts-Pfeil",
+      "upDownArrow": "Auf-Ab-Pfeil",
+      "notchedRightArrow": "Eingekerbter rechter Pfeil",
+      "star5": "5-Punkt-Stern",
+      "star4": "4-Punkt-Stern",
+      "star6": "6-Punkt-Stern"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "status": {
+    "running": "運作中",
+    "stopped": "已停止",
+    "streamEnded": "串流已結束",
+    "failed": "失敗"
+  },
+  "stop": "停止監控",
+  "failReason": {
+    "spawnPtyFailed": "監控任務啟動失敗（資源繁忙或已達上限），請稍後再試。",
+    "writePtyFailed": "監控指令執行失敗，請重試。",
+    "invalidRegex": "監控篩選條件格式有誤，請檢查後重試。",
+    "alreadyRunning": "該監控任務已在運作中。",
+    "unknownAction": "未知的監控操作。"
+  },
+  "emitInterrupted": "監控上報已中斷（認證失效），數據可能不完整。請檢查登入狀態。",
+  "resourceMonitor": {
+    "severity": {
+      "healthy": "鬆弛",
+      "attention": "良好",
+      "heavy": "滿載"
+    },
+    "tagline": {
+      "healthy": "一切從容，安心創作吧",
+      "attention": "運作順暢，靈感來了儘管發揮",
+      "heavy": "有點吃力了，試試關幾個不用的標籤？"
+    },
+    "current": "目前",
+    "browser": "Browser",
+    "browserReclaim": {
+      "checkTitle": "檢查 Browser 視圖堆積",
+      "available": "可回收 {{count}} 個空閒 Browser",
+      "noneIdle": "暫無可回收的空閒 Browser",
+      "noBrowsers": "目前沒有 Browser 視圖",
+      "reclaimMany": "{{reason}}，可先回收 {{count}} 個脫屏空閒 Browser，再觀察總帳是否回落。",
+      "reclaimOne": "{{reason}}，可先關閉脫屏空閒 Browser {{title}}，再觀察總帳是否回落。",
+      "overview": "{{reason}}，目前共有 {{total}} 個 Browser 視圖，佔總帳 {{share}}。",
+      "retained": "目前有 {{count}} 個脫屏或預覽 Browser 仍在使用或載入中，為避免中斷任務暫不回收。",
+      "metricAvailable": "可回收 {{count}}",
+      "metricNoneIdle": "暫無空閒",
+      "metricNoBrowsers": "無視圖",
+      "action": "一鍵回收空閒 Browser",
+      "actionUnavailable": "暫無可回收項",
+      "actionShort": "回收",
+      "boundaryNote": "只會回收脫屏或預覽態、且目前不在主視窗使用中的空閒 Browser，不會關閉主視窗內的普通標籤。"
+    },
+    "spaceSection": "Space",
+    "resourcesSection": "資源",
+    "systemOverhead": "系統開銷",
+    "uiEngine": "介面引擎",
+    "uiEngineDetail": "{{cpu}} · 頁面渲染引擎的共享記憶體開銷",
+    "appHost": "應用本體",
+    "appHostDetail": "{{cpu}} · TabTin 應用自身運作所需的基礎內存",
+    "unassigned": "未歸因",
+    "unassignedDetail": "{{cpu}} · 暫未歸屬到具體 Space 的資源",
+    "background": "後台",
+    "cpu": "CPU",
+    "cpuCores": "{{count}} 核",
+    "memory": "記憶體",
+    "ramShare": "佔 {{percent}}",
+    "tabs": "標籤",
+    "currentTabs": "目前標籤",
+    "allSessionTabs": "總標籤 {{count}} 個",
+    "closeAllTabs": "關閉所有未歸檔會話的全部標籤",
+    "panes": "{{count}} 個窗格",
+    "tabCount": "{{count}} 個標籤",
+    "runCount": "{{count}} 個運行",
+    "appCount": "{{label}} {{count}} 個",
+    "appBreakdownSeparator": "、",
+    "notCollected": "未採集",
+    "refresh": "重新整理",
+    "refreshLoading": "載入中",
+    "trend": {
+      "memoryUp": "記憶體上升 {{delta}}",
+      "memoryDown": "記憶體下降 {{delta}}",
+      "cpuUp": "CPU上升 {{delta}}",
+      "cpuDown": "CPU下降 {{delta}}",
+      "stale": "資料延遲 {{duration}}"
+    },
+    "viewDetails": "看詳情",
+    "indicatorTitle": "效能監控",
+    "openSettingsAria": "開啟效能監控設定頁"
+  }
+}

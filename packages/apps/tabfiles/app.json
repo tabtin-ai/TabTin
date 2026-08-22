@@ -1,0 +1,101 @@
+{
+  "id": "tabfiles",
+  "name": "Files",
+  "version": "0.1.0",
+  "kind": "app",
+  "icon": "file",
+  "description": "云盘文件管理 — 上传、浏览、下载任意文件（PDF/图片/压缩包等）",
+  "objectModel": {
+    "entities": [
+      "file"
+    ],
+    "schema": {
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "executionTarget": "backend",
+  "uiRuntime": "localBundle",
+  "agentRuntime": "hostBackend",
+  "distribution": "builtin",
+  "surface": "collaborative",
+  "contextSources": [
+    "tabfiles"
+  ],
+  "permissions": [
+    "tabfiles"
+  ],
+  "requiredCapabilities": [],
+  "runtimeDependencies": [],
+  "runtimeSupport": {
+    "electron": {
+      "mode": "full"
+    },
+    "daemon": {
+      "mode": "full"
+    },
+    "mobile": {
+      "mode": "full"
+    }
+  },
+  "skills": [
+    "skills/tabfiles-operator"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "tabfiles-operator": {
+        "enabled": true
+      }
+    }
+  },
+  "lifecycleHooks": {},
+  "runtimeBindings": {
+    "uiProvider": "electron:context-space.tabfiles",
+    "skillsProvider": "skills:local"
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false
+  },
+  "agentIntegration": {
+    "contextType": "tabfiles",
+    "contextFields": [
+      {
+        "name": "current_file_id",
+        "label": "file_id",
+        "isResourceId": true
+      },
+      {
+        "name": "current_file_name",
+        "label": "file_name",
+        "isResourceId": false
+      }
+    ],
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "displayField": "",
+    "workspaceRootSource": "",
+    "isFrontendDependent": false,
+    "typeAliases": [
+      "file",
+      "files",
+      "attachment"
+    ]
+  },
+  "opens": {
+    "types": [
+      {
+        "type": "file",
+        "priority": 80
+      }
+    ]
+  },
+  "catalog": {
+    "category": "storage",
+    "desktopGroup": "cloudResources",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": true,
+    "order": 20
+  }
+}

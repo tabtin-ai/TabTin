@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "_comment": "packages/ 下的 tsconfig.json 应 extends 本文件。新建包请参考 support/base/package-template/tsconfig.json。include/exclude/outDir/rootDir 必须在子配置中声明（TypeScript extends 的路径解析规则要求路径类属性在使用处声明）。统一的 exclude 模式：[\"node_modules\", \"dist\", \"**/*.test.ts\", \"**/*.test.tsx\", \"**/__tests__\"]",
+  "compilerOptions": {
+    "strict": true,
+    "declaration": true,
+    "declarationMap": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  }
+}

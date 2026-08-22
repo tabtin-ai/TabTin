@@ -1,0 +1,64 @@
+{
+  "title": "終端",
+  "exitCode": "退出碼: {{code}}",
+  "restart": "重啟",
+  "scrollToBottom": "滾動到底部",
+  "errors": {
+    "createSessionFailed": "[錯誤] 無法建立終端會話",
+    "ptyUnavailable": "PTY API 不可用"
+  },
+  "status": {
+    "processExited": "進程已退出，退出碼: {{code}}",
+    "idle": "空閒",
+    "running": "運作中",
+    "exited": "已退出"
+  },
+  "restore": {
+    "title": "已恢復歷史輸出（進程已斷開）",
+    "restored": "歷史輸出已恢復",
+    "startShell": "重新啟動 Shell",
+    "dismiss": "關閉"
+  },
+  "split": {
+    "splitRight": "向右分割畫面",
+    "splitDown": "向下分割畫面",
+    "maximize": "最大化",
+    "restore": "還原",
+    "close": "關閉面板",
+    "maxPanesReached": "已達最大面板數 ({{max}})",
+    "equalize": "均分所有面板",
+    "doubleClickToEqualize": "按兩下均分"
+  },
+  "contextMenu": {
+    "copy": "複製",
+    "paste": "貼上",
+    "search": "搜尋",
+    "scrollToBottom": "滾動到底部",
+    "clear": "清除終端",
+    "splitRight": "向右分割畫面",
+    "splitDown": "向下分割畫面",
+    "equalize": "均分所有面板",
+    "maximize": "最大化",
+    "restore": "還原",
+    "close": "關閉面板"
+  },
+  "search": {
+    "placeholder": "搜尋終端內容…",
+    "noMatch": "無匹配",
+    "matchFound": "已找到",
+    "caseSensitive": "區分大小寫",
+    "previous": "上一個",
+    "next": "下一個",
+    "close": "關閉搜尋"
+  },
+  "imagePaste": {
+    "saving": "正在保存圖片…",
+    "saved": "圖片已儲存",
+    "failed": "圖片貼上失敗",
+    "tooLarge": "圖片過大 ({{size}}MB)，最大 10MB"
+  },
+  "dragDrop": {
+    "hint": "鬆開以插入檔案路徑",
+    "pathError": "無法讀取檔案路徑"
+  }
+}

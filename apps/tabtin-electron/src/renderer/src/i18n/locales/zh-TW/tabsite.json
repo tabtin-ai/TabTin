@@ -1,0 +1,73 @@
+{
+  "actions.create": "新站點",
+  "actions.publish": "發布",
+  "actions.copyUrl": "複製連結",
+  "actions.urlCopied": "連結已複製",
+  "actions.editCode": "編輯程式碼",
+  "actions.refresh": "重新整理",
+  "actions.rollback": "復原",
+  "actions.download": "下載原始碼",
+  "status.draft": "草稿",
+  "status.published": "已發布",
+  "status.archived": "已歸檔",
+  "stats.views": "{{count}} 次訪問",
+  "preview.empty": "暫無預覽，發佈後即可查看",
+  "preview.desktop": "桌面預覽",
+  "preview.mobile": "行動端預覽",
+  "sidebar.info": "網站資訊",
+  "sidebar.url": "訪問地址",
+  "sidebar.framework": "技術堆疊",
+  "sidebar.visibility": "可見性",
+  "sidebar.public": "公開",
+  "sidebar.private": "私人",
+  "sidebar.versions": "版本記錄",
+  "sidebar.noVersions": "尚未發布過",
+  "version.current": "目前",
+  "error.siteNotFound": "站點未找到",
+  "error.publishFailed": "發布失敗",
+  "error.noDistUrl": "請先建置並上傳產物",
+  "error.noDistUrlHint": "在 TabCode 中執行 build，或使用 CLI: tabtin site build",
+  "actions.publishSuccess": "發布成功",
+  "publish.dialogTitle": "發佈站點",
+  "publish.messageLabel": "版本說明",
+  "publish.messagePlaceholder": "描述本次發布的變更",
+  "empty.noSites": "暫無站點，創建你的第一個輕應用",
+  "home": {
+    "assetBrowser": {
+      "newTabsite": "新站點",
+      "tabsiteEmpty": "暫無站點",
+      "tabsiteUnavailable": "TabSite不可用",
+      "tabsite": "站點"
+    }
+  },
+  "label": {
+    "untitled": "未命名站點",
+    "untitledSite": "未命名站點"
+  },
+  "dialog": {
+    "createTitle": "新站點",
+    "siteName": "網站名稱",
+    "siteNamePlaceholder": "輸入站台名稱",
+    "selectTemplate": "選擇模板",
+    "cancel": "取消",
+    "create": "創建"
+  },
+  "guide": {
+    "initTitle": "站點項目未初始化",
+    "initDescription": "初始化模板專案後即可在 TabCode 中編輯程式碼",
+    "initButton": "初始化專案",
+    "linkButton": "關聯已有目錄",
+    "initSuccess": "專案初始化成功",
+    "initFailed": "初始化失敗",
+    "linkSuccess": "目錄已關聯",
+    "linkFailed": "關聯失敗",
+    "linkWarning": "目錄中找不到 package.json",
+    "linkWarningHint": "關聯後可能無法正常構建，確認這是正確的專案目錄"
+  },
+  "template": {
+    "blank": "空白站點",
+    "blankDesc": "React + Vite + Tailwind，從零開始",
+    "dashboard": "數據看板",
+    "dashboardDesc": "存取 TabData 的資料視覺化面板"
+  }
+}

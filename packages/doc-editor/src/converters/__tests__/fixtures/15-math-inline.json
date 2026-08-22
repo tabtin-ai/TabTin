@@ -1,0 +1,18 @@
+{
+  "name": "math-inline",
+  "description": "Inline mathematics within a paragraph",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          { "type": "text", "text": "The formula " },
+          { "type": "mathematics", "attrs": { "latex": "E=mc^2", "display": false } },
+          { "type": "text", "text": " is famous" }
+        ]
+      }
+    ]
+  },
+  "expectedMarkdown": "The formula $E=mc^2$ is famous"
+}

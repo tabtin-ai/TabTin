@@ -1,0 +1,129 @@
+{
+  "dialogLabel": "Búsqueda unificada",
+  "inputLabel": "Buscar palabra clave",
+  "placeholder": "Buscar mensajes, recursos, agentes, espacios, memorandos, mensajería instantánea...",
+  "placeholderScoped": "Buscar en \"{{name}}\"...",
+  "clearScope": "Alcance del espacio claro",
+  "clearAgentScope": "Limpiar filtro de agente",
+  "selfLabel": "tu",
+  "typeFilterLabel": "Tipo de filtro",
+  "resourceSubtypeLabel": "Tipo de recurso",
+  "creatorFilterLabel": "Filtro de creador",
+  "resultsLabel": "Resultados de la búsqueda",
+  "retry": "Reintentar",
+  "cancel": "Cancelar",
+  "slowHint": "La búsqueda es lenta, por favor espere...",
+  "resultsTotal": "{{total}} resultados en total",
+  "tookMs": "{{ms}}ms",
+  "tabs": {
+    "all": "Todos",
+    "messages": "Mensajes",
+    "resources": "Recursos",
+    "agents": "Agentes",
+    "spaces": "Espacios",
+    "memos": "notas",
+    "im": "mensajería instantánea"
+  },
+  "resourceSubtype": {
+    "all": "Todos los tipos"
+  },
+  "resultType": {
+    "message": "Mensaje",
+    "resource": "Recurso",
+    "agent": "Agente",
+    "space": "Espacio de trabajo",
+    "memo": "Nota",
+    "im": "mensajería instantánea"
+  },
+  "logicalIndex": {
+    "messages": "Búsqueda de mensajes",
+    "resources": "Búsqueda de recursos",
+    "agents": "Búsqueda de agentes",
+    "spaces": "Búsqueda de espacio de trabajo",
+    "memos": "Búsqueda de notas",
+    "im": "búsqueda de mensajería instantánea"
+  },
+  "creatorFilter": {
+    "any": "Todos",
+    "userOnly": "solo mis mensajes",
+    "agentOnly": "Solo agente",
+    "r2_11Hint": "El filtro de agente solo se aplica precisamente a los tipos de Mensajes/Agentes"
+  },
+  "picker": {
+    "agentTitle": "Elija Agente para filtrar por",
+    "typeTitle": "Elija un tipo de filtro",
+    "spaceTitle": "Elija un espacio de trabajo para alcanzar",
+    "noAgents": "Ningún agente coincidente",
+    "noTypes": "Ningún tipo coincidente",
+    "noSpaces": "No hay espacio de trabajo coincidente",
+    "resourceSubtypeBadge": "subtipo de recurso"
+  },
+  "navigate": {
+    "imNotFound": "Esta conversación de mensajería instantánea no está en la lista actual (aún cargándose o eliminada)",
+    "spaceNotFound": "Este espacio de trabajo no está en la lista actual (aún se está cargando o no hay acceso)",
+    "agentNoSpace": "Este agente no tiene espacio de trabajo para ingresar",
+    "agentSpaceNotFound": "El espacio de trabajo principal de este agente no está en la lista actual"
+  },
+  "notice": {
+    "noAccessibleSpacesTitle": "No hay espacios de trabajo accesibles en esta organización",
+    "noAccessibleSpacesHint": "Los resultados vacíos se deben a que no hay acceso al espacio de trabajo en esta organización, no a que falten datos. Pídale a un administrador que lo agregue a los espacios de trabajo relevantes o verifique su identidad de inicio de sesión."
+  },
+  "degraded": {
+    "engine_disabled": "Motor de búsqueda no habilitado; volver a la búsqueda básica (solo recursos/notas)",
+    "health_red": "Servicio de búsqueda no disponible; volviendo a la búsqueda básica",
+    "circuit_open": "Buscar disyuntor abierto; Volviendo a la búsqueda básica, vuelva a intentarlo más tarde.",
+    "error_rate_breach": "Tasa de error de búsqueda elevada; volviendo a la búsqueda básica",
+    "opensearch_unavailable": "Servicio de búsqueda degradado; solo se admite la búsqueda básica (la tokenización CJK es aproximada)",
+    "partial_failure": "Algunos tipos de resultados no están disponibles temporalmente; mostrando otros tipos",
+    "partial_failure_with_indices": "{{indices}} no disponible temporalmente; mostrando otros tipos",
+    "rate_limited": "Demasiadas consultas en modo degradado; por favor espera",
+    "auth_missing": "Falta autenticación; por favor vuelve a iniciar sesión",
+    "internal_error": "Error de búsqueda interna; por favor vuelve a intentarlo más tarde",
+    "unknown": "Servicio de búsqueda parcialmente degradado"
+  },
+  "group": {
+    "openTabs": "Pestañas abiertas",
+    "viewAll": "Ver todos los resultados de {{count}}"
+  },
+  "empty": {
+    "noResults": "No hay resultados para \"{{query}}\"",
+    "didYouMean": "Quiso decir:",
+    "recentSearches": "Búsquedas recientes:",
+    "tipsTitle": "Consejos:",
+    "tip1": "\"frase exacta\" · en:Espacio de trabajo · #tipo"
+  },
+  "initial": {
+    "title": "Buscar mensajes, documentos, tablas, memorandos, agentes...",
+    "recentOpened": "Recientemente inaugurado",
+    "clearRecentOpened": "Borrar",
+    "untitled": "(sin título)",
+    "recentSearches": "Búsquedas recientes",
+    "clearHistory": "Borrar",
+    "tipsTitle": "Consejos:",
+    "tip1": "@ Agente · # tipo · en:Espacio de trabajo · \"frase exacta\"",
+    "tipCli": "Modo de comando: rastreador nuevo \"nombre\" --horario diario --a las 09:00"
+  },
+  "cli": {
+    "execute": "Ejecutar (Entrar)",
+    "trackerNewWithName": "Crear tarea de automatización: \"{{name}}\"",
+    "trackerNewNoName": "Crear tarea de automatización (nombre requerido)",
+    "trackerNewManualDesc": "Gatillo manual",
+    "trackerNewHourlyDesc": "Se ejecuta al principio de cada hora.",
+    "trackerNewTimedDesc": "{{schedule}} en {{at}}",
+    "trackerList": "Ver lista de tareas de automatización",
+    "editAfterTip": "Abriremos un formulario para confirmar antes de crear.",
+    "unknown": "Comando desconocido",
+    "schedule": {
+      "manual": "manuales",
+      "hourly": "Por hora",
+      "daily": "Diariamente",
+      "weekdays": "Días laborables",
+      "weekly": "Semanal"
+    }
+  },
+  "shortcut": {
+    "close": "Cerrar",
+    "clearScope": "Alcance del espacio claro",
+    "openSearch": "abrir búsqueda"
+  }
+}

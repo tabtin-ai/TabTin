@@ -1,0 +1,47 @@
+{
+  "errors": {
+    "noTable": "No table selected",
+    "submitFailed": "Action failed",
+    "loadHistoryFailed": "Failed to load history",
+    "tryAgainLater": "Please try again later"
+  },
+  "comments": {
+    "recoverableSubmitFailed": "The comment was not sent because the network connection failed or the request timed out. Your draft was kept. Check your connection and retry.",
+    "title": "Comments",
+    "toggle": "Open comments",
+    "placeholder": "Add a comment, type @ to mention members",
+    "submit": "Post comment",
+    "delete": "Delete",
+    "deleting": "Deleting...",
+    "retry": "Retry",
+    "loading": "Loading comments...",
+    "noMentionResults": "No matching members",
+    "loadMore": "Load earlier comments",
+    "loadingMore": "Loading...",
+    "reply": "Reply",
+    "replyingTo": "Replying to",
+    "cancelReply": "Cancel reply",
+    "deletedComment": "Original comment deleted",
+    "filterOpen": "Open",
+    "filterResolved": "Resolved",
+    "filterAll": "All",
+    "resolveThread": "Resolve",
+    "reopenThread": "Reopen",
+    "updatingThread": "Updating...",
+    "empty": "No comments",
+    "countUnit": "threads"
+  },
+  "dialog": {
+    "createTitle": "Add record to \"{{name}}\"",
+    "editTitle": "Edit record",
+    "viewTitle": "View record",
+    "createDescription": "Fill in the form to create a new record. Fields marked * are required.",
+    "editDescription": "Update the record. The primary field is editable; keep identifiers unique."
+  },
+  "incrementalSync": {
+    "errors": {
+      "aiTimeout": "AI processing timed out. Please refresh the page.",
+      "networkError": "Network error. Please refresh the page."
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{% if existing_summary %}
+已有摘要：
+{{ existing_summary }}
+
+请在此基础上增量更新，整合以下新消息：
+{% else %}
+请为以下对话生成摘要：
+{% endif %}
+
+{% for msg in messages %}
+{{ msg.role }}: {{ msg.content[:500] }}{% if msg.content|length > 500 %}...{% endif %}
+{% endfor %}

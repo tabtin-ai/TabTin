@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+  <defs>
+    <linearGradient id="body" x1="4.5" y1="3.5" x2="15" y2="17" gradientUnits="userSpaceOnUse"><stop stop-color="#0A6825"/><stop offset=".52" stop-color="#178739"/><stop offset="1" stop-color="#35A853"/></linearGradient>
+    <linearGradient id="fold" x1="11.5" y1="3.5" x2="15.5" y2="8" gradientUnits="userSpaceOnUse"><stop stop-color="#65B96D"/><stop offset="1" stop-color="#9BDE9E"/></linearGradient>
+  </defs>
+  <rect x=".5" y=".5" width="19" height="19" rx="4.5" fill="#FFF"/><rect x=".75" y=".75" width="18.5" height="18.5" rx="4.25" stroke="#E5E7EB" stroke-width=".5"/>
+  <g transform="translate(.375)"><path d="M6 3.25h5.375L16 7.875V14.5a2.75 2.75 0 0 1-2.75 2.75H6a2.75 2.75 0 0 1-2.75-2.75V6A2.75 2.75 0 0 1 6 3.25Z" fill="url(#body)"/><path d="M11.375 3.25v2.375a2.25 2.25 0 0 0 2.25 2.25H16l-4.625-4.625Z" fill="url(#fold)"/><g fill="none" stroke="#FFF" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"><rect x="6.25" y="9.25" width="7.5" height="5.75" rx="1"/><path d="M10 9.25V15M6.25 12.125h7.5"/></g></g>
+</svg>

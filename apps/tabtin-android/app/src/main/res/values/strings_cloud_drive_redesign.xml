@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cloud_drive_redesign_search_hint">搜索文件、文件夹和内容</string>
+    <string name="cloud_drive_redesign_recent_title">最近打开</string>
+    <string name="cloud_drive_redesign_library_title">团队云盘</string>
+    <string name="cloud_drive_redesign_all_content">所有内容</string>
+    <string name="cloud_drive_redesign_type_filter">类型</string>
+    <string name="cloud_drive_redesign_type_filter_title">按类型筛选</string>
+    <string name="cloud_drive_redesign_more_actions">%1$s 的更多操作</string>
+    <string name="cloud_drive_redesign_folder_count">%1$d 项</string>
+    <string name="cloud_drive_redesign_continue_open">继续打开</string>
+    <string name="cloud_drive_redesign_later">稍后</string>
+    <string name="cloud_drive_redesign_empty_title">这里还没有内容</string>
+    <string name="cloud_drive_redesign_empty_body">上传文件或新建文件夹，把团队资料整理到云盘。</string>
+    <string name="cloud_drive_redesign_type_cloud_doc">云文档</string>
+    <string name="cloud_drive_redesign_type_cloud_table">多维表</string>
+    <string name="cloud_drive_redesign_type_image">图片</string>
+    <string name="cloud_drive_redesign_type_pdf">PDF</string>
+    <string name="cloud_drive_redesign_type_document">文稿</string>
+    <string name="cloud_drive_redesign_type_spreadsheet">表格</string>
+    <string name="cloud_drive_redesign_type_presentation">演示</string>
+    <string name="cloud_drive_redesign_type_text">文本与代码</string>
+    <string name="cloud_drive_redesign_type_audio">音频</string>
+    <string name="cloud_drive_redesign_type_video">视频</string>
+    <string name="cloud_drive_redesign_type_archive">压缩包</string>
+    <string name="cloud_drive_redesign_type_generic">文件</string>
+    <string name="cloud_drive_redesign_preview_document_empty">打开后可查看完整内容</string>
+    <string name="cloud_drive_redesign_preview_table_empty">暂无表格摘要</string>
+    <string name="cloud_drive_redesign_preview_image_hint">图片预览</string>
+    <string name="cloud_drive_redesign_preview_audio_hint">音频波形</string>
+    <string name="cloud_drive_redesign_preview_video_hint">视频画面</string>
+    <string name="cloud_drive_redesign_preview_archive_hint">归档文件</string>
+    <string name="cloud_drive_redesign_root_label">云盘</string>
+</resources>

@@ -1,0 +1,241 @@
+{
+  "panel": {
+    "title": "ストレージ",
+    "subtitle": "TabTin がコンピュータに保存するもの。",
+    "totalLine": "TabTin はこの Mac で {{size}} を使用します",
+    "totalLineLoading": "ストレージを測定中…",
+    "refresh": "再計算",
+    "refreshHint": "すべてのデータ サイズを再測定する",
+    "loadErrorTitle": "ロードに失敗しました"
+  },
+  "health": {
+    "healthy": {
+      "label": "十分なスペース",
+      "tagline": "しばらく準備が整ったので、作成を続けてください。"
+    },
+    "attention": {
+      "label": "安定した",
+      "tagline": "通常の使用であれば、特に心配する必要はありません。"
+    },
+    "heavy": {
+      "label": "満腹になる",
+      "tagline": "かなり山積みになっています。整理する価値のあるものはありますか?"
+    },
+    "critical": {
+      "label": "掃除の時間",
+      "tagline": "TabTin は多くのスペースを占めています。いくつかの未使用データを消去する時期が来ました。"
+    }
+  },
+  "metrics": {
+    "totalUsed": {
+      "label": "中古品",
+      "sub": "{{count}} アイテム"
+    },
+    "largest": {
+      "label": "最大のアイテム"
+    },
+    "cache": {
+      "label": "一時キャッシュ",
+      "tooLow": "すべて最適化された",
+      "clean": "クリーン",
+      "cleaning": "クリーニング"
+    }
+  },
+  "section": {
+    "topItemsTitle": "最も多くのスペースを占める"
+  },
+  "topItems": {
+    "loading": "ワークスペースのデータを測定しています…",
+    "empty": "まだデータがありません。しばらくTabTinを使ってから戻ってきてください。",
+    "itemCount": "{{count}} アイテム",
+    "showAll": "他の {{count}} アイテムを表示",
+    "collapseAll": "崩壊する",
+    "conversation": {
+      "label": "会話履歴",
+      "subtitle_one": "1つのワークスペースから",
+      "subtitle_other": "{{count}} ワークスペースから",
+      "unscopedLabel": "その他の会話データ",
+      "otherLabel": "その他のワークスペース"
+    },
+    "checkpoint": {
+      "label": "プロジェクト運用スナップショット",
+      "subtitle": "{{count}} プロジェクト · エージェントのスナップショットの取り消し",
+      "otherLabel": "未割り当てのアンドゥデータ"
+    },
+    "browserEnv": {
+      "label": "ブラウザログイン環境",
+      "subtitle": "{{count}} 環境 · サイトのログインとオフライン データ",
+      "otherLabel": "その他の環境"
+    },
+    "agentDownload": {
+      "label": "エージェントツールのダウンロード",
+      "subtitle": "{{count}} ワークスペース · エージェントによってフェッチされたファイル",
+      "otherLabel": "その他のワークスペース"
+    },
+    "appBundle": {
+      "label": "インストールされているアプリ",
+      "subtitle": "{{count}} 種類のローカルアプリデータ"
+    },
+    "appProject": {
+      "otherLabel": "その他 {{count}}",
+      "tabvideo": {
+        "subtitle": "{{count}} TabVideo プロジェクト"
+      },
+      "tabdoc": {
+        "subtitle": "{{count}} TabDoc の下書き"
+      },
+      "tabwhiteboard": {
+        "subtitle": "{{count}} ホワイトボード アセット"
+      },
+      "tabslide": {
+        "subtitle": "{{count}} TabSlideの下書き"
+      }
+    },
+    "cache": {
+      "label": "一時キャッシュ",
+      "subtitle": "次回の使用時に自動的に再構築されます"
+    }
+  },
+  "userGroup": {
+    "conversations": {
+      "title": "会話と歴史",
+      "description": "エージェントとの会話と操作のスナップショット"
+    },
+    "browser": {
+      "title": "埋め込みブラウザサイト",
+      "description": "サインインしているサイト (Feishu、Notion、ChatGPT など)"
+    },
+    "media": {
+      "title": "メディアとダウンロード",
+      "description": "録画、スクリーンショット、PDF、ダウンロード"
+    },
+    "apps": {
+      "title": "アプリデータ",
+      "description": "TabDoc の下書き、インストールされているアプリなど。"
+    },
+    "voice": {
+      "title": "音声ホットワードとルール",
+      "description": "音声入力のカスタマイズ"
+    }
+  },
+  "bucketDisplay": {
+    "checkpoint:shadow-git": {
+      "title": "プロジェクト運用スナップショット",
+      "description": "各プロジェクトでエージェントの操作を元に戻すことができるスナップショット"
+    },
+    "agent:checkpoints": {
+      "title": "プロジェクト運用スナップショット",
+      "description": "各プロジェクトでエージェントの操作を元に戻すことができるスナップショット"
+    },
+    "browser:http-cache-aggregate": {
+      "title": "埋め込みサイトキャッシュ",
+      "description": "Feishu、Notion、ChatGPT などの埋め込みサイトの画像/スクリプト/フォント キャッシュ。"
+    },
+    "browser:bookmarks": {
+      "title": "ブラウザのブックマーク",
+      "description": "TabTin の組み込みブラウザに保存したブックマーク"
+    },
+    "browser:browsing-history": {
+      "title": "閲覧履歴",
+      "description": "TabTin の組み込みブラウザでアクセスしたページ"
+    },
+    "tin:sandboxes": {
+      "title": "サンドボックスアプリのデータ",
+      "description": "Tin サンドボックス アプリのローカル データとキャッシュ"
+    },
+    "marketplace:apps": {
+      "title": "マーケットプレイスアプリ",
+      "description": "マーケットプレイスからインストールされたツールの実行可能ファイルと構成ファイル"
+    },
+    "mcp:local-connections": {
+      "title": "外部AIツール構成",
+      "description": "Claude Desktop / Cursor / Windsurf を接続するための設定 (上級ユーザー)"
+    },
+    "media:recordings": {
+      "title": "録音",
+      "description": "組み込みブラウザからファイルを記録する"
+    },
+    "media:screenshots": {
+      "title": "スクリーンショット",
+      "description": "スクリーンショットは ~/.tabtin/screenshots に保存されます"
+    },
+    "media:exports-pdf": {
+      "title": "PDF エクスポート",
+      "description": "PDF エクスポート ファイルは ~/.tabtin/exports に保存されます"
+    },
+    "download:user-downloads": {
+      "title": "ダウンロード履歴",
+      "description": "TabTin によってトリガーされたダウンロードの履歴 (レコードのみ)"
+    },
+    "download:agent-sandbox-downloads": {
+      "title": "エージェントツールのダウンロード",
+      "description": "各ワークスペースのエージェント ツールによってダウンロードされたファイル"
+    },
+    "media:tabvideo-render-tmp": {
+      "title": "ビデオレンダリングの残り物",
+      "description": "ビデオレンダリング、エクスポート、ウィジェットスナップショットからの一時ファイル"
+    },
+    "media:stream-download-tmp": {
+      "title": "ストリームダウンロードチャンク",
+      "description": "HLS/DASH ビデオ ダウンロードの一時チャンク"
+    },
+    "voice:hotwords-rules": {
+      "title": "音声ホットワードとルール",
+      "description": "音声入力のカスタマイズ (クラウド バックアップはありません。定期的にエクスポートしてください)"
+    },
+    "system:voice-settings": {
+      "title": "音声ホットワードとルール",
+      "description": "音声入力のカスタマイズ (クラウド バックアップはありません。定期的にエクスポートしてください)"
+    }
+  },
+  "totalUsage": "{{size}}",
+  "itemCount": "{{count}} アイテム",
+  "groupSummary": "{{size}}・{{count}}アイテム",
+  "actions": {
+    "manage": "管理する",
+    "collapse": "崩壊する",
+    "listItems": "アイテム",
+    "export": "エクスポート",
+    "exporting": "エクスポート中…",
+    "clear": "クリア",
+    "cancel": "キャンセル",
+    "confirmClear": "クリアを確認する",
+    "confirmDestroy": "削除の確認",
+    "clearing": "クリア中…",
+    "acknowledgePartial": "OK"
+  },
+  "errors": {
+    "clearFailed": "クリア失敗",
+    "listFailed": "リストのロードに失敗しました",
+    "scanFailed": "スキャンに失敗しました"
+  },
+  "dialog": {
+    "willFree": "無料になります",
+    "warningsTitle": "クリアすると負けます：",
+    "typeNameLabel": "「{{name}}」と入力して確認します",
+    "fillName": "埋める",
+    "acknowledgeLabel": "これを元に戻すことはできないことを理解し、受け入れます",
+    "partialFailureTitle": "部分クリアに失敗しました（{{count}}項目）",
+    "partialFailureHint": "一部のアイテムがクリアされませんでした (使用中/許可が拒否されました)。 「OK」をクリックして閉じて、後で再試行します。",
+    "L1": {
+      "title": "{{name}}をクリア",
+      "subtitle": "次回のロード時に再構築されます。データは失われません。"
+    },
+    "L2": {
+      "title": "{{name}}をクリア",
+      "subtitle": "次の読み込みは遅くなる可能性がありますが、資産が失われることはありません。"
+    },
+    "L3-soft": {
+      "title": "{{name}}をクリア",
+      "subtitle": "これはユーザーデータです。元に戻すことはできません。"
+    },
+    "L3-hard": {
+      "title": "{{name}}をクリア",
+      "subtitle": "これは重要なユーザー データです。名前を入力し、ボックスにチェックを入れて確認します。"
+    },
+    "L4": {
+      "title": "{{name}}をクリア（ハイリスク）",
+      "subtitle": "慎重に確認してください。これにはアカウントまたはデバイスの ID データが含まれます。"
+    }
+  }
+}

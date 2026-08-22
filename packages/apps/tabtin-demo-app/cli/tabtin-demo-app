@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+"""tabtin-demo-app CLI 入口脚本。
+
+可以直接执行此文件，也可通过 ``python -m cli`` 调用。
+"""
+
+import os
+import sys
+
+# 确保 cli 包可 import（脚本可能位于 packages/apps/tabtin-demo-app/cli/ 内）
+script_dir = os.path.dirname(os.path.abspath(__file__))
+app_root = os.path.dirname(script_dir)
+if app_root not in sys.path:
+    sys.path.insert(0, app_root)
+
+from cli.main import main
+
+sys.exit(main())

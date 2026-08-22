@@ -1,0 +1,129 @@
+{
+  "dialogLabel": "統合検索",
+  "inputLabel": "検索キーワード",
+  "placeholder": "メッセージ、リソース、エージェント、スペース、メモ、IM を検索します...",
+  "placeholderScoped": "「{{name}}」で検索...",
+  "clearScope": "クリアスペーススコープ",
+  "clearAgentScope": "エージェントフィルターをクリア",
+  "selfLabel": "あなた",
+  "typeFilterLabel": "タイプフィルター",
+  "resourceSubtypeLabel": "リソースの種類",
+  "creatorFilterLabel": "クリエイターフィルター",
+  "resultsLabel": "検索結果",
+  "retry": "再試行",
+  "cancel": "キャンセル",
+  "slowHint": "検索が遅いです、お待ちください...",
+  "resultsTotal": "{{total}} の合計結果",
+  "tookMs": "{{ms}}ms",
+  "tabs": {
+    "all": "すべて",
+    "messages": "メッセージ",
+    "resources": "リソース",
+    "agents": "エージェント",
+    "spaces": "スペース",
+    "memos": "メモ",
+    "im": "IM"
+  },
+  "resourceSubtype": {
+    "all": "全種類"
+  },
+  "resultType": {
+    "message": "メッセージ",
+    "resource": "リソース",
+    "agent": "エージェント",
+    "space": "ワークスペース",
+    "memo": "メモ",
+    "im": "IM"
+  },
+  "logicalIndex": {
+    "messages": "メッセージ検索",
+    "resources": "リソース検索",
+    "agents": "エージェント検索",
+    "spaces": "ワークスペースの検索",
+    "memos": "メモ検索",
+    "im": "IM検索"
+  },
+  "creatorFilter": {
+    "any": "すべて",
+    "userOnly": "私のメッセージだけ",
+    "agentOnly": "エージェントのみ",
+    "r2_11Hint": "エージェント フィルターはメッセージ/エージェント タイプにのみ適用されます"
+  },
+  "picker": {
+    "agentTitle": "フィルタリングするエージェントを選択してください",
+    "typeTitle": "タイプフィルターを選択してください",
+    "spaceTitle": "範囲を指定するワークスペースを選択してください",
+    "noAgents": "一致するエージェントがありません",
+    "noTypes": "一致するタイプがありません",
+    "noSpaces": "一致するワークスペースがありません",
+    "resourceSubtypeBadge": "リソースのサブタイプ"
+  },
+  "navigate": {
+    "imNotFound": "この IM 会話は現在のリストにありません (まだ読み込み中か削除されています)",
+    "spaceNotFound": "このワークスペースは現在のリストにありません (まだ読み込み中か、アクセス権がありません)",
+    "agentNoSpace": "このエージェントには入るワークスペースがありません",
+    "agentSpaceNotFound": "このエージェントのメイン ワークスペースは現在のリストにありません"
+  },
+  "notice": {
+    "noAccessibleSpacesTitle": "この組織にはアクセス可能なワークスペースがありません",
+    "noAccessibleSpacesHint": "結果が空になるのは、データが欠落しているためではなく、この組織にワークスペースへのアクセスがないためです。関連するワークスペースに追加するよう管理者に依頼するか、ログイン ID を確認してください。"
+  },
+  "degraded": {
+    "engine_disabled": "検索エンジンが有効になっていません。基本検索に戻る (リソース/メモのみ)",
+    "health_red": "検索サービスは利用できません。基本検索に戻る",
+    "circuit_open": "サーキットブレーカーが開いていることを検索します。基本検索に戻ります。後で再試行してください",
+    "error_rate_breach": "検索エラー率が上昇。基本検索に戻る",
+    "opensearch_unavailable": "検索サービスが低下しました。基本的な検索のみがサポートされています (CJK トークン化は粗いです)",
+    "partial_failure": "一部の結果タイプは一時的に利用できなくなります。他のタイプを表示する",
+    "partial_failure_with_indices": "{{indices}} は一時的に利用できません。他のタイプを表示する",
+    "rate_limited": "縮退モードのクエリが多すぎます。お待ちください",
+    "auth_missing": "認証がありません。再ログインしてください",
+    "internal_error": "内部検索エラー。後で再試行してください",
+    "unknown": "検索サービスが部分的に低下しました"
+  },
+  "group": {
+    "openTabs": "タブを開く",
+    "viewAll": "{{count}} の結果をすべて表示"
+  },
+  "empty": {
+    "noResults": "\"{{query}}\" の結果はありません",
+    "didYouMean": "どういう意味ですか:",
+    "recentSearches": "最近の検索:",
+    "tipsTitle": "ヒント:",
+    "tip1": "「完全に一致するフレーズ」 · in:Workspace · #type"
+  },
+  "initial": {
+    "title": "メッセージ、ドキュメント、表、メモ、エージェントを検索...",
+    "recentOpened": "最近オープンした",
+    "clearRecentOpened": "クリア",
+    "untitled": "(無題)",
+    "recentSearches": "最近の検索",
+    "clearHistory": "クリア",
+    "tipsTitle": "ヒント:",
+    "tip1": "@ Agent · # type · in:Workspace · \"正確なフレーズ\"",
+    "tipCli": "コマンドモード: tracker new \"name\" --schedule daily --at 09:00"
+  },
+  "cli": {
+    "execute": "実行（入力）",
+    "trackerNewWithName": "オートメーションタスクの作成:「{{name}}」",
+    "trackerNewNoName": "自動化タスクの作成 (名前は必須)",
+    "trackerNewManualDesc": "手動トリガー",
+    "trackerNewHourlyDesc": "毎正時に運行",
+    "trackerNewTimedDesc": "{{at}}の{{schedule}}",
+    "trackerList": "自動化タスクリストの表示",
+    "editAfterTip": "作成する前にフォームを開いて確認します",
+    "unknown": "不明なコマンド",
+    "schedule": {
+      "manual": "マニュアル",
+      "hourly": "毎時",
+      "daily": "毎日",
+      "weekdays": "平日",
+      "weekly": "毎週"
+    }
+  },
+  "shortcut": {
+    "close": "閉じる",
+    "clearScope": "クリアスペーススコープ",
+    "openSearch": "検索を開く"
+  }
+}

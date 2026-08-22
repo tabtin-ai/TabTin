@@ -1,0 +1,64 @@
+{
+  "title": "Borne",
+  "exitCode": "Code de sortie : {{code}}",
+  "restart": "Redémarrer",
+  "scrollToBottom": "Faire défiler vers le bas",
+  "errors": {
+    "createSessionFailed": "[Erreur] Impossible de créer une session de terminal",
+    "ptyUnavailable": "L'API PTY n'est pas disponible"
+  },
+  "status": {
+    "processExited": "Processus terminé, code de sortie : {{code}}",
+    "idle": "Inactif",
+    "running": "Courir",
+    "exited": "Quitté"
+  },
+  "restore": {
+    "title": "Sortie précédente restaurée (processus déconnecté)",
+    "restored": "Sortie historique restaurée",
+    "startShell": "Redémarrer le shell",
+    "dismiss": "Rejeter"
+  },
+  "split": {
+    "splitRight": "Diviser à droite",
+    "splitDown": "Divisé",
+    "maximize": "Maximiser",
+    "restore": "Restaurer",
+    "close": "Fermer le volet",
+    "maxPanesReached": "Nombre maximum de volets atteint ({{max}})",
+    "equalize": "Égaliser tous les volets",
+    "doubleClickToEqualize": "Double-cliquez pour égaliser"
+  },
+  "contextMenu": {
+    "copy": "Copier",
+    "paste": "Coller",
+    "search": "Rechercher",
+    "scrollToBottom": "Faire défiler vers le bas",
+    "clear": "Effacer le terminal",
+    "splitRight": "Diviser à droite",
+    "splitDown": "Divisé",
+    "equalize": "Égaliser tous les volets",
+    "maximize": "Maximiser",
+    "restore": "Restaurer",
+    "close": "Fermer le volet"
+  },
+  "search": {
+    "placeholder": "Terminal de recherche…",
+    "noMatch": "Aucune correspondance",
+    "matchFound": "Trouvé",
+    "caseSensitive": "Sensible à la casse",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "close": "Fermer la recherche"
+  },
+  "imagePaste": {
+    "saving": "Enregistrement de l'image…",
+    "saved": "Image enregistrée",
+    "failed": "Échec du collage de l'image",
+    "tooLarge": "Image trop grande ({{size}} Mo), maximum 10 Mo"
+  },
+  "dragDrop": {
+    "hint": "Déposer pour insérer le chemin du fichier",
+    "pathError": "Impossible de lire le chemin du fichier"
+  }
+}

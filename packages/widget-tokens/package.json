@@ -1,0 +1,47 @@
+{
+  "name": "@tabtin/widget-tokens",
+  "version": "0.1.0",
+  "description": "TabTin widget design tokens + sandbox iframe wrapper template — single source of truth shared between Electron renderer (chat preview), Electron main (offscreen render), and Daemon (offscreen render).",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./theme-bundle": {
+      "source": "./src/theme-bundle.ts",
+      "types": "./dist/theme-bundle.d.ts",
+      "import": "./dist/theme-bundle.js",
+      "default": "./dist/theme-bundle.js"
+    },
+    "./wrapper": {
+      "source": "./src/wrapper.ts",
+      "types": "./dist/wrapper.d.ts",
+      "import": "./dist/wrapper.js",
+      "default": "./dist/wrapper.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "scripts",
+    "README.md"
+  ],
+  "scripts": {
+    "extract:tokens": "node ./scripts/extract-tokens.mjs",
+    "build": "node ./scripts/extract-tokens.mjs && tsup",
+    "build:dts": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.2.2",
+    "vitest": "4.0.18"
+  }
+}

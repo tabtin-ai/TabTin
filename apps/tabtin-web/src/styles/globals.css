@@ -1,0 +1,314 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --canvas: 40 20% 97%;
+    --background: 40 25% 99%;
+    --foreground: 30 10% 15%;
+    --card: 40 25% 99%;
+    --card-foreground: 30 10% 15%;
+    --popover: 40 25% 99%;
+    --popover-foreground: 30 10% 15%;
+    --primary: 215 65% 52%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 36 12% 95%;
+    --secondary-foreground: 30 10% 15%;
+    --muted: 36 14% 94%;
+    --muted-foreground: 30 6% 50%;
+    --accent: 215 65% 52%;
+    --accent-foreground: 0 0% 99%;
+    --destructive: 0 55% 52%;
+    --destructive-foreground: 0 0% 99%;
+    --success: 152 45% 42%;
+    --success-foreground: 0 0% 99%;
+    --warning: 38 70% 50%;
+    --warning-foreground: 0 0% 99%;
+    --info: 210 55% 52%;
+    --info-foreground: 0 0% 99%;
+    --border: 34 10% 89%;
+    --input: 36 14% 94%;
+    --ring: 215 65% 52%;
+    --radius: 0.25rem;
+    --table-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    --table-font-weight: 400;
+    --table-header-font-weight: 500;
+    --table-font-size: 12px;
+
+    /* Shared dropdown/popover surfaces used by smartsheet-ui. */
+    --glass-bg-overlay: 0 0% 100%;
+    --shadow-overlay: 0 8px 24px hsl(30 10% 15% / 0.10);
+
+    /* Prefilling row chrome (table-engine-canvas PrefillingRowContainer) */
+    --type-webhook: 270 50% 55%;
+
+    --shadow-float: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-dialog: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  .dark {
+    --canvas: 30 8% 8%;
+    --background: 30 6% 12%;
+    --foreground: 36 14% 90%;
+    --card: 30 6% 12%;
+    --card-foreground: 36 14% 90%;
+    --popover: 30 6% 12%;
+    --popover-foreground: 36 14% 90%;
+    --primary: 215 65% 62%;
+    --primary-foreground: 0 0% 99%;
+    --secondary: 30 6% 16%;
+    --secondary-foreground: 36 14% 90%;
+    --muted: 30 6% 16%;
+    --muted-foreground: 30 6% 55%;
+    --accent: 215 65% 62%;
+    --accent-foreground: 0 0% 99%;
+    --destructive: 0 55% 60%;
+    --destructive-foreground: 0 0% 99%;
+    --success: 152 45% 55%;
+    --success-foreground: 0 0% 99%;
+    --warning: 38 60% 55%;
+    --warning-foreground: 0 0% 99%;
+    --info: 210 55% 62%;
+    --info-foreground: 0 0% 99%;
+    --border: 30 6% 20%;
+    --input: 30 6% 16%;
+    --ring: 215 65% 62%;
+    --table-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    --table-font-weight: 400;
+    --table-header-font-weight: 500;
+    --table-font-size: 12px;
+
+    --glass-bg-overlay: 0 0% 0%;
+    --shadow-overlay: 0 10px 28px rgba(0, 0, 0, 0.45);
+
+    /* Prefilling row chrome (table-engine-canvas PrefillingRowContainer) */
+    --type-webhook: 270 55% 65%;
+
+    --shadow-float: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-dialog: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply text-foreground;
+    background: hsl(var(--canvas));
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.4);
+  }
+
+  /* 表格引擎虚拟滚动条（与 Electron 同源；Chromium 禁 scrollbar-width/color） */
+  .tt-grid-scrollbar {
+    -ms-overflow-style: none;
+  }
+
+  .tt-grid-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  .tt-grid-scrollbar[data-enabled="true"][data-scrolling="true"]::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .tt-grid-scrollbar[data-enabled="true"][data-scrolling="true"]::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.4);
+    border-radius: 9999px;
+  }
+
+  .tt-grid-scrollbar[data-enabled="true"][data-scrolling="true"]::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.6);
+  }
+
+  .tt-grid-scrollbar-horizontal[data-enabled="true"][data-scrolling="true"]::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  .tt-grid-scrollbar-vertical[data-enabled="true"][data-scrolling="true"]::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  @supports (-moz-appearance: none) {
+    .tt-grid-scrollbar {
+      scrollbar-width: none;
+    }
+
+    .tt-grid-scrollbar[data-enabled="true"][data-scrolling="true"] {
+      scrollbar-width: thin;
+      scrollbar-color: hsl(var(--muted-foreground) / 0.4) transparent;
+    }
+  }
+
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  ::selection {
+    @apply bg-primary/20;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring/30 ring-offset-1 ring-offset-background;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [contenteditable]:focus-visible {
+    @apply outline-none ring-0 ring-offset-0;
+  }
+}
+
+@layer utilities {
+  .loading-spinner {
+    @apply animate-spin rounded-full border-2 border-muted border-t-primary;
+  }
+
+  .fade-in {
+    @apply animate-fade-in;
+  }
+}
+
+@layer components {
+  .tabtin-doc-preview {
+    @apply text-[15px] leading-7 text-foreground;
+  }
+
+  .tabtin-doc-preview h1 {
+    @apply mb-4 mt-8 text-display font-semibold text-foreground;
+  }
+
+  .tabtin-doc-preview h2 {
+    @apply mb-3 mt-7 text-heading font-semibold text-foreground;
+  }
+
+  .tabtin-doc-preview h3 {
+    @apply mb-3 mt-6 text-title font-semibold text-foreground;
+  }
+
+  .tabtin-doc-preview p {
+    @apply my-4 text-[15px] leading-7 text-foreground;
+  }
+
+  .tabtin-doc-preview ul {
+    @apply my-4 list-disc space-y-2 pl-6;
+  }
+
+  .tabtin-doc-preview ol {
+    @apply my-4 list-decimal space-y-2 pl-6;
+  }
+
+  .tabtin-doc-preview li {
+    @apply text-[15px] leading-7 text-foreground;
+  }
+
+  .tabtin-doc-preview blockquote {
+    @apply my-5 rounded-r-2xl border-l-4 border-primary/30 bg-muted/40 px-4 py-3 text-muted-foreground;
+  }
+
+  .tabtin-doc-preview pre {
+    @apply my-5 overflow-x-auto rounded-2xl bg-muted px-4 py-4 text-body text-foreground;
+  }
+
+  .tabtin-doc-preview code {
+    @apply rounded bg-muted px-1.5 py-0.5 text-body;
+  }
+
+  .tabtin-doc-preview pre code {
+    @apply bg-transparent p-0;
+  }
+
+  .tabtin-doc-preview a {
+    @apply text-primary underline decoration-primary/30 underline-offset-4;
+  }
+
+  .tabtin-doc-preview hr {
+    @apply my-8 border-border;
+  }
+
+  .tabtin-doc-preview table {
+    @apply my-6 w-full border-collapse overflow-hidden rounded-2xl border border-border;
+  }
+
+  .tabtin-doc-preview thead {
+    @apply bg-muted/60;
+  }
+
+  .tabtin-doc-preview th,
+  .tabtin-doc-preview td {
+    @apply border border-border px-3 py-2 text-left text-body;
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+/* 原生 App 已提供返回、标题与更多菜单；WebView 内只保留资源内容。 */
+[data-web-shell='embedded'] .tabdoc-page {
+  padding-inline: 1rem;
+}
+
+[data-web-shell='embedded'] .tabdoc-editor-toolbar {
+  padding-inline: 0.5rem;
+}
+
+[data-web-shell='embedded'] .tabdoc-editor-toolbar-status {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* 平板仍保留高密度工具栏，但所有动作必须满足 44pt 触控命中。 */
+[data-web-host-form-factor='tablet'] [data-grid-toolbar-main],
+[data-web-layout='medium'][data-web-input='touch'] [data-grid-toolbar-main],
+[data-web-layout='expanded'][data-web-input='touch'] [data-grid-toolbar-main] {
+  height: 3.25rem;
+  min-height: 3.25rem;
+}
+
+[data-web-host-form-factor='tablet'] [data-grid-toolbar-main] button,
+[data-web-layout='medium'][data-web-input='touch'] [data-grid-toolbar-main] button,
+[data-web-layout='expanded'][data-web-input='touch'] [data-grid-toolbar-main] button {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+}
+
+[data-web-host-form-factor='tablet'] [data-grid-pagination-bar] button,
+[data-web-layout='medium'][data-web-input='touch'] [data-grid-pagination-bar] button,
+[data-web-layout='expanded'][data-web-input='touch'] [data-grid-pagination-bar] button,
+[data-record-form-touch-optimized='true'] button {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+}
+
+@media (max-width: 430px) {
+  [data-web-shell='embedded'] .tabdoc-editor-toolbar-status > :not(:first-child) {
+    display: none;
+  }
+
+  [data-web-shell='embedded'] .tabdoc-editor-toolbar-actions > span:first-child {
+    display: none;
+  }
+}

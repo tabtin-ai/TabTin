@@ -1,0 +1,40 @@
+{
+  "name": "@tabtin/browser-capabilities",
+  "version": "0.1.0",
+  "description": "Browser capabilities abstraction layer (based on Min Browser design)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "electron",
+    "browser",
+    "webcontentsview",
+    "view-manager"
+  ],
+  "author": "TabTin",
+  "license": "MIT",
+  "peerDependencies": {
+    "electron": ">=28.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "electron": "^41.0.0",
+    "typescript": "^5.3.3"
+  }
+}

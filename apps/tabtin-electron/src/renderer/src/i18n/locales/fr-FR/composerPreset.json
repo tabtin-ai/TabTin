@@ -1,0 +1,34 @@
+{
+  "validation": {
+    "required": "Ce champ est obligatoire",
+    "invalidUrl": "Veuillez saisir une URL valide",
+    "invalidEmail": "Veuillez entrer un email valide",
+    "invalidFormat": "Format invalide",
+    "minValue": "Le minimum est {{min}}",
+    "maxValue": "Le maximum est {{max}}",
+    "maxLength": "Au plus des caractères {{max}}"
+  },
+  "picker": {
+    "search": "Rechercher...",
+    "noResults": "Aucun résultat correspondant",
+    "empty": "Aucun outil d'IA disponible"
+  },
+  "blockCard": {
+    "presetTitle": "Paramètres soumis",
+    "askUserTitle": "Paramètres répondus",
+    "fallbackLabel": "Paramètres"
+  },
+  "card": {
+    "expand": "Développer",
+    "collapse": "Réduire",
+    "remove": "Supprimer"
+  },
+  "upload": {
+    "clickToUpload": "Cliquez pour télécharger",
+    "fileTooLarge": "Le fichier est trop volumineux",
+    "addMore": "Ajouter"
+  },
+  "input": {
+    "presetPicker": "Outils d'IA"
+  }
+}

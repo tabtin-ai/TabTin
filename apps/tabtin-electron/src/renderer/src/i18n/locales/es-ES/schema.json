@@ -1,0 +1,21 @@
+{
+  "analyzing": {
+    "title": "Análisis de IA...",
+    "modeFlash": "Modo flash: análisis rápido",
+    "modeDeep": "Modo profundo: análisis en profundidad",
+    "tasksTitle": "Tareas de análisis",
+    "tip": "💡 La IA está analizando la estructura de la página. Por favor espera...",
+    "tipDeepSuffix": "El modo profundo también analizará las páginas de detalles y puede tardar más.",
+    "cancel": "Cancelar análisis",
+    "phases": {
+      "initializing": "Inicializando",
+      "detecting_pre_actions": "Detección de acciones previas",
+      "identifying_region": "Identificar la región de la lista",
+      "analyzing_fields": "Analizando la estructura del campo",
+      "analyzing_pagination": "Detectando paginación",
+      "exploring_detail": "Explorando la entrada de detalles",
+      "building_schema": "Esquema de construcción",
+      "completed": "Completado"
+    }
+  }
+}

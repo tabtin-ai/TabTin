@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="splash_background">#000000</color>
+    <color name="splash_ink">#FFFFFF</color>
+
+    <!-- Native TabDoc blocks are Android Views hosted inside the Compose editor.
+         Keep their resource palette aligned with the default dark color scheme. -->
+    <color name="doc_editor_text_primary">#E3E5E8</color>
+    <color name="doc_editor_text_secondary">#94989E</color>
+    <color name="doc_editor_text_tertiary">#5C6066</color>
+    <color name="doc_editor_bg_primary">#131416</color>
+    <color name="doc_editor_bg_code">#222427</color>
+    <color name="doc_editor_divider">#303236</color>
+    <color name="doc_editor_highlight_bar">#303236</color>
+    <color name="doc_editor_checkbox_checked">#6098F5</color>
+    <color name="doc_editor_bullet">#94989E</color>
+</resources>

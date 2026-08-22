@@ -1,0 +1,112 @@
+{
+  "name": "@tabtin/daemon",
+  "version": "0.1.0",
+  "description": "TabTin Agent Daemon \u2014 headless execution runtime for remote servers",
+  "type": "module",
+  "bin": {
+    "tabtin-daemon": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "scripts",
+    "templates"
+  ],
+  "scripts": {
+    "build": "tsc --noEmit && tsup",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js start",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@anush008/tokenizers": "0.6.0",
+    "@electric-sql/pglite": "^0.2.0",
+    "@sentry/node": "^10.62.0",
+    "@tabtin/action-tools": "workspace:*",
+    "@tabtin/agent-host": "workspace:*",
+    "@tabtin/agent-prompt": "workspace:*",
+    "@tabtin/agent-runtime": "workspace:*",
+    "@tabtin/agent-wire": "workspace:*",
+    "@tabtin/anti-detect": "workspace:*",
+    "@tabtin/browser-core": "workspace:*",
+    "@tabtin/checkpoint-core": "workspace:*",
+    "@tabtin/cli-routes": "workspace:*",
+    "@tabtin/cli-server-core": "workspace:*",
+    "@tabtin/config": "workspace:*",
+    "@tabtin/contracts": "workspace:*",
+    "@tabtin/doc-editor": "workspace:*",
+    "@tabtin/search": "workspace:*",
+    "@tabtin/file-history-core": "workspace:*",
+    "@tabtin/file-pipeline": "workspace:*",
+    "@tabtin/local-docparse": "workspace:*",
+    "@tabtin/local-embedding": "workspace:*",
+    "@tabtin/lsp-runtime": "workspace:*",
+    "@tabtin/media-capabilities": "workspace:*",
+    "@tabtin/pty-core": "workspace:*",
+    "@tabtin/python-runtime-host": "workspace:*",
+    "@tabtin/security-policy": "workspace:*",
+    "@tabtin/shared": "workspace:*",
+    "@tabtin/storage-manager": "workspace:*",
+    "@tabtin/table-kernel": "workspace:*",
+    "@tabtin/table-kernel-pglite": "workspace:*",
+    "@tabtin/tabsite-core": "workspace:*",
+    "@tabtin/tabslide": "workspace:*",
+    "@tabtin/terminal-core": "workspace:*",
+    "@tabtin/widget-tokens": "workspace:*",
+    "@tabtin/ws-gateway-client": "workspace:*",
+    "commander": "^13.0.0",
+    "encoding": "0.1.13",
+    "fix-path": "5.0.0",
+    "iconv-lite": "0.7.2",
+    "jsdom": "29.1.0",
+    "mammoth": "1.12.0",
+    "node-pty": "1.1.0",
+    "onnxruntime-node": "^1.24.3",
+    "patchright-core": "1.58.2",
+    "pdfjs-dist": "5.4.296",
+    "proper-lockfile": "4.1.2",
+    "safer-buffer": "2.1.2",
+    "semver": "7.7.4",
+    "sharp": "0.34.5",
+    "simple-git": "3.31.1",
+    "turndown": "7.2.2",
+    "ws": "^8.19.0",
+    "xlsx": "0.18.5",
+    "@tabtin/agent-modes": "workspace:*"
+  },
+  "devDependencies": {
+    "@tabtin/app-shell": "workspace:*",
+    "@types/node": "^22.10.6",
+    "@types/proper-lockfile": "4.1.4",
+    "@types/semver": "7.7.1",
+    "@types/turndown": "5.0.6",
+    "@types/ws": "^8.5.0",
+    "react": "19.2.6",
+    "tsup": "^8.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.2.2",
+    "vitest": "4.0.18"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "tabtin",
+    "daemon",
+    "agent",
+    "remote-execution",
+    "headless"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT"
+}

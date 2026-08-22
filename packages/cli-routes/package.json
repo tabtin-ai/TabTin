@@ -1,0 +1,36 @@
+{
+  "name": "@tabtin/cli-routes",
+  "version": "0.1.0",
+  "description": "Shared CLI server route handlers for Electron and Daemon hosts",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "tsx --test src/**/*.test.ts",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "author": "TabTin Team",
+  "license": "MIT",
+  "dependencies": {
+    "@tabtin/action-tools": "workspace:*",
+    "@tabtin/agent-wire": "workspace:*",
+    "@tabtin/cli-server-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "5.7.2"
+  }
+}

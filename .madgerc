@@ -1,0 +1,11 @@
+{
+  "_comment": "madge 配置 — 把不归我们维护或者构建产物的目录排除掉，避免它们污染循环依赖检测。",
+  "excludeRegExp": [
+    "(^|/)dist/",
+    "(^|/)build/",
+    "(^|/)out/",
+    "(^|/)\\.next/",
+    "(^|/)coverage/",
+    "(^|/)node_modules/"
+  ]
+}

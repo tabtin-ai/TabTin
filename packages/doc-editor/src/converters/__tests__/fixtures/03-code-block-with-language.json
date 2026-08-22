@@ -1,0 +1,15 @@
+{
+  "name": "code-block-with-language",
+  "description": "Code block with language tag",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "codeBlock",
+        "attrs": { "language": "python" },
+        "content": [{ "type": "text", "text": "def hello():\n    print('world')" }]
+      }
+    ]
+  },
+  "expectedMarkdown": "```python\ndef hello():\n    print('world')\n```"
+}

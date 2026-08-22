@@ -1,0 +1,4 @@
+interface:
+  display_name: '采集落多维表'
+  short_description: '将采集结果或已有批量结构化数据可靠落入可关联可重跑的多维表'
+  default_prompt: '使用 $collect-to-table 将这批结构化数据落入多维表；需要分表时先让我确认方案，准备复用工作区里已有表时再一次性确认能否复用。'

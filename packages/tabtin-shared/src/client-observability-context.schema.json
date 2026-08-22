@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.example.com/schemas/client-observability-context.schema.json",
+  "title": "TabTin Client Observability Context",
+  "type": "object",
+  "required": ["tags", "contexts"],
+  "properties": {
+    "tags": { "$ref": "#/$defs/tags" },
+    "user": { "$ref": "#/$defs/user" },
+    "contexts": {
+      "type": "object",
+      "required": ["tabtin"],
+      "properties": {
+        "tabtin": { "$ref": "#/$defs/tabtinContext" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "user": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 128 }
+      },
+      "additionalProperties": false
+    },
+    "errorCategory": {
+      "enum": [
+        "CLIENT_CRASH",
+        "RENDERER_CRASH",
+        "GPU_CRASH",
+        "WEBVIEW_CRASH",
+        "STARTUP_FATAL",
+        "IPC_FATAL",
+        "AGENT_RUN_FATAL",
+        "AGENT_DOOM_LOOP",
+        "AGENT_PROTOCOL_FATAL",
+        "NETWORK_FATAL",
+        "AUTH_FATAL",
+        "LOCAL_DATA_FATAL",
+        "RESOURCE_FATAL",
+        "HANG",
+        "ABNORMAL_TERMINATION",
+        "UNKNOWN_FATAL"
+      ]
+    },
+    "recoverability": {
+      "enum": ["recovered", "degraded", "unrecoverable", "unknown"]
+    },
+    "optionalId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "tags": {
+      "type": "object",
+      "required": [
+        "source",
+        "service",
+        "client_platform",
+        "runtime",
+        "environment",
+        "release",
+        "error_category",
+        "error_code",
+        "severity",
+        "handled_by",
+        "recoverability"
+      ],
+      "properties": {
+        "source": { "const": "client" },
+        "service": { "const": "tabtin-client" },
+        "client_platform": { "enum": ["desktop", "ios", "android"] },
+        "runtime": {
+          "enum": [
+            "electron-main",
+            "electron-renderer",
+            "electron-preload",
+            "ios-native",
+            "ios-webview",
+            "android-native",
+            "android-webview"
+          ]
+        },
+        "environment": { "enum": ["local", "development", "preprod", "production"] },
+        "release": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "release_channel": { "type": "string", "minLength": 1, "maxLength": 32 },
+        "error_category": { "$ref": "#/$defs/errorCategory" },
+        "error_code": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "severity": { "enum": ["debug", "recoverable", "actionable", "fatal", "crash"] },
+        "handled_by": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "recoverability": { "$ref": "#/$defs/recoverability" }
+      },
+      "additionalProperties": false
+    },
+    "tabtinContext": {
+      "type": "object",
+      "properties": {
+        "organization_id": { "$ref": "#/$defs/optionalId" },
+        "workspace_id": { "$ref": "#/$defs/optionalId" },
+        "space_id": { "$ref": "#/$defs/optionalId" },
+        "client_install_id": { "$ref": "#/$defs/optionalId" },
+        "agent_id": { "$ref": "#/$defs/optionalId" },
+        "session_id": { "$ref": "#/$defs/optionalId" },
+        "run_id": { "$ref": "#/$defs/optionalId" },
+        "trace_id": { "$ref": "#/$defs/optionalId" },
+        "request_id": { "$ref": "#/$defs/optionalId" },
+        "task_id": { "$ref": "#/$defs/optionalId" },
+        "diagnostic_bundle_id": { "$ref": "#/$defs/optionalId" },
+        "app_version": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "build_number": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "git_sha": { "type": "string", "pattern": "^[0-9a-f]{7,40}$" },
+        "platform": { "enum": ["desktop", "ios", "android"] }
+      },
+      "additionalProperties": false
+    }
+  }
+}

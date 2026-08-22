@@ -1,0 +1,58 @@
+{
+  "errors": {
+    "noTable": "Ninguna mesa seleccionada",
+    "submitFailed": "La acción falló",
+    "loadHistoryFailed": "No se pudo cargar el historial",
+    "tryAgainLater": "Por favor inténtalo de nuevo más tarde."
+  },
+  "comments": {
+    "recoverableSubmitFailed": "El comentario no se envió porque falló la conexión de red o se agotó el tiempo de espera de la solicitud. Tu borrador fue guardado. Verifique su conexión y vuelva a intentarlo.",
+    "title": "Comentarios",
+    "toggle": "Abrir comentarios",
+    "placeholder": "Agregar un comentario, escriba @ para mencionar miembros",
+    "submit": "Publicar comentario",
+    "delete": "Eliminar",
+    "deleting": "Eliminando...",
+    "retry": "Reintentar",
+    "loading": "Cargando comentarios...",
+    "noMentionResults": "No hay miembros coincidentes",
+    "loadMore": "Cargar comentarios anteriores",
+    "loadingMore": "Cargando...",
+    "reply": "Responder",
+    "replyingTo": "Respondiendo a",
+    "cancelReply": "Cancelar respuesta",
+    "deletedComment": "Comentario original eliminado",
+    "filterOpen": "Abierto",
+    "filterResolved": "Resuelto",
+    "filterAll": "Todos",
+    "resolveThread": "resolver",
+    "reopenThread": "Reabrir",
+    "updatingThread": "Actualizando...",
+    "empty": "Sin comentarios",
+    "countUnit": "hilos"
+  },
+  "systemFields": {
+    "parentRecord": {
+      "name": "Registro principal",
+      "description": "Campo de registro principal para la jerarquía de subregistros"
+    }
+  },
+  "apiErrors": {
+    "fetchTrashFailed": "No se pudieron recuperar los registros eliminados",
+    "restoreFromTrashFailed": "No se pudo restaurar el registro",
+    "restoreBatchFromTrashFailed": "No se pudieron restaurar registros en lote"
+  },
+  "dialog": {
+    "createTitle": "Agregar registro a \"{{name}}\"",
+    "editTitle": "Editar registro",
+    "viewTitle": "Ver registro",
+    "createDescription": "Complete el formulario para crear un nuevo registro. Los campos marcados * son obligatorios.",
+    "editDescription": "Actualiza el registro. El campo principal es editable; mantenga los identificadores únicos."
+  },
+  "incrementalSync": {
+    "errors": {
+      "aiTimeout": "Se agotó el tiempo de procesamiento de IA. Por favor actualice la página.",
+      "networkError": "Error de red. Por favor actualice la página."
+    }
+  }
+}

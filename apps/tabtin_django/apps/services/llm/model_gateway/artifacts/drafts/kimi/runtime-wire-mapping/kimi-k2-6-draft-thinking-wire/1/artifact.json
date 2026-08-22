@@ -1,0 +1,48 @@
+{
+  "capability_ref": {
+    "expected_hash": "sha256:d5989fd5af2a2b48dd630f4f2b699ee5952872a3e06e0e201818cd054ecc0363",
+    "key": "kimi-k2-6-draft-capability",
+    "kind": "model-capability",
+    "revision": "1"
+  },
+  "identity": {
+    "canonical_hash": "sha256:b486dcdef644a1955fab80799467640ec366a47d9ffe7e3b55c3cafc685c811b",
+    "key": "kimi-k2-6-draft-thinking-wire",
+    "kind": "runtime-wire-mapping",
+    "revision": "1"
+  },
+  "mapping_role": "runtime-extension",
+  "patches": [
+    {
+      "namespace": "protocol.request.body",
+      "operations": [
+        {
+          "input_value": "off",
+          "operation": "set",
+          "schema_version": "1",
+          "source": null,
+          "target": "thinking.type",
+          "value": "disabled",
+          "when": null
+        },
+        {
+          "input_value": "on",
+          "operation": "set",
+          "schema_version": "1",
+          "source": null,
+          "target": "thinking.type",
+          "value": "enabled",
+          "when": null
+        }
+      ],
+      "schema_version": "1"
+    }
+  ],
+  "product_mapping_ref": {
+    "expected_hash": "sha256:d8c2059f6504d003a1acc4f757ac2fba084feee64cb28a0ae7abcfe966ac93a4",
+    "key": "kimi-k2-6-draft-thinking-control",
+    "kind": "product-control-mapping",
+    "revision": "1"
+  },
+  "schema_version": "1"
+}

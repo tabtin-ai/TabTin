@@ -1,0 +1,404 @@
+{
+  "appName": "自動化",
+  "panel": {
+    "header": "自動化",
+    "overview": "概要",
+    "list": "リスト",
+    "viewList": "リスト",
+    "viewAgenda": "タイムライン",
+    "viewKanban": "カンバン",
+    "createTask": "新しい自動化タスク",
+    "createAction": "新しい",
+    "search": "自動化タスクを検索…",
+    "filterAll": "すべて",
+    "filterAllStatus": "すべてのステータス",
+    "filterStatus": "ステータス",
+    "filterType": "タイプ",
+    "loadMore": "さらにロードする",
+    "totalCount": "{{count}} アイテム",
+    "emptyTitle": "自動化タスクはまだありません",
+    "emptyDescription": "エージェントに「毎朝 PR を確認してください」と伝えるか、自分でフォームに記入してください。",
+    "emptyHint": "「新しい自動化タスク」を使用します - 手動またはエージェント作成",
+    "createFirst": "最初の自動化タスクを作成する",
+    "selectSpace": "ワークスペースを選択してください",
+    "noResults": "一致するタスクはありません",
+    "workspaceUnavailable": "ワークスペースが利用できません",
+    "agentUnavailable": "エージェントが不在",
+    "nextRunAt": "次へ {{time}}",
+    "noNextRun": "次回の実行は予定されていません",
+    "pausedPlan": "一時停止中 — 自動的には実行されません",
+    "openTaskDetail": "スケジュールされたタスク「{{name}}」を開きます",
+    "rowActions": {
+      "menu": "タスクのアクション"
+    },
+    "columns": {
+      "task": "タスク",
+      "workspace": "ワークスペース",
+      "status": "ステータス",
+      "type": "タイプ",
+      "instructions": "指示",
+      "schedule": "次の/最近の実行",
+      "actions": "アクション"
+    }
+  },
+  "overview": {
+    "attention": "注意が必要です",
+    "summary": "{{total}} タスク · {{attention}} 注意が必要 · {{active}} アクティブ",
+    "attentionEmpty": "全てクリア",
+    "running": "ランニング",
+    "runningEmpty": "実行中のタスクはありません",
+    "scheduled": "予定されている",
+    "scheduledEmpty": "自動化タスクはありません",
+    "dormant": "下書きと一時停止",
+    "view": "見る",
+    "runNow": "今すぐ実行",
+    "activate": "有効にする",
+    "resume": "再開"
+  },
+  "status": {
+    "draft": "草案",
+    "active": "アクティブ",
+    "paused": "一時停止中",
+    "disabled": "終了しました",
+    "archived": "アーカイブ済み"
+  },
+  "trigger": {
+    "manual": "マニュアル",
+    "cron": "クロン",
+    "interval": "間隔",
+    "at": "ワンタイム",
+    "webhook": "Webhook",
+    "table_event": "テーブルイベント",
+    "extension_event": "延長イベント",
+    "tracker_completed": "上流タスクが完了したとき"
+  },
+  "scope": {
+    "all": "すべて"
+  },
+  "detail": {
+    "loading": "読み込み中…",
+    "empty": "タスクが見つかりません",
+    "retry": "再試行",
+    "noRuns": "まだ実行はありません",
+    "nextRun": "次の実行",
+    "instructions": "指示",
+    "noInstructions": "まだ指示がありません",
+    "description": "リストノート",
+    "taskInfo": "タスク情報",
+    "workspace": "ワークスペース",
+    "agent": "執行代理人",
+    "runHistory": "実行履歴",
+    "scheduleActive": "{{schedule}}",
+    "schedulePaused": "{{schedule}} · 一時停止中",
+    "openRunSession": "このランのチャットを開く",
+    "openRunSessionFailed": "この実行のチャットを開けませんでした。もう一度試してください。",
+    "refreshRuns": "リフレッシュ",
+    "health": {
+      "disabled": "一時停止 — 再開して実行を継続します",
+      "missedSkipped": "最新の失敗した実行は、設定に従ってスキップされました ({{time}})。合計 {{count}} をスキップしました。"
+    },
+    "resultSummary": "結果",
+    "errorDetail": "障害の詳細",
+    "cancelDetail": "キャンセル理由",
+    "runStatus": {
+      "completed": "完了",
+      "failed": "失敗しました",
+      "running": "ランニング",
+      "pending": "保留中",
+      "cancelled": "キャンセルされました",
+      "waiting_device": "デバイスを待機中"
+    },
+    "actions": {
+      "edit": "編集",
+      "activate": "有効にする",
+      "activateDraft": "スケジュールを有効にして開始",
+      "activateDraftManual": "手動トリガーを許可するために有効にします",
+      "draftHint": "ドラフトはトリガーされません。ルールに基づいて自動的に実行できるようにします。",
+      "pause": "一時停止",
+      "trigger": "今すぐ実行",
+      "triggerDisabledActiveRun": "実行はすでに進行中です。完了するまで待つか、最初にキャンセルしてください。",
+      "delete": "削除",
+      "confirmDelete": "削除の確認",
+      "confirmDeleteTitle": "スケジュールされたタスクを削除する",
+      "confirmDeleteHint": "タスク カードはオートメーション リストから削除されます。実行履歴が存在する場合、そのタスク名と実行エントリがサイドバーに残ります。",
+      "resume": "再開",
+      "paused": "一時停止中",
+      "resumed": "再開しました",
+      "triggered": "トリガーされた",
+      "deleted": "削除されました",
+      "cancelRun": "この実行をキャンセルする",
+      "runCancelled": "この実行はキャンセルされました"
+    },
+    "more": {
+      "title": "もっと見る",
+      "note": "注記",
+      "noNote": "メモなし",
+      "catchup": "欠落ポリシー",
+      "authorization": "認可"
+    },
+    "frequencyLabel": "周波数",
+    "highFrequencyToast": "有効 · {{summary}}。変更するには詳細ページから一時停止してください。"
+  },
+  "frequencyHint": {
+    "manual": "手動でのみトリガーされます - 単独では実行されません",
+    "cronCustom": "カスタム スケジュールで実行",
+    "cronHourly": "1 時間ごとに実行 (1 日あたり最大 24 回)",
+    "cronDaily": "毎日 {{at}} に運行",
+    "cronWeekdays": "毎週平日 {{at}} に運行",
+    "cronWeekly": "毎週月曜日 {{at}} に実行",
+    "intervalUnknown": "一定の時間間隔で実行されます",
+    "intervalSummary": "{{unit}} (1 日あたり ~{{count}} 回)",
+    "atOnce": "{{at}} で 1 回実行します",
+    "atUnknown": "スケジュールされた時刻に 1 回実行されます",
+    "unitSeconds": "{{n}} 秒ごと",
+    "unitMinutes": "~{{n}} 分ごと",
+    "unitHours": "~{{n}} 時間ごと",
+    "webhook": "受信 Webhook によってトリガー — レートは呼び出し元によって異なります",
+    "tableEvent": "テーブル イベント (行の作成/更新/削除) によってトリガーされます。",
+    "extensionEvent": "拡張イベントによってトリガーされる",
+    "trackerCompleted": "上流の自動化タスクが終了するとトリガーされます"
+  },
+  "createDialog": {
+    "title": "新しい自動化タスク",
+    "editTitle": "自動化タスクの編集",
+    "sections": {
+      "what": "タスクの内容",
+      "when": "スケジュール"
+    },
+    "cancel": "キャンセル",
+    "submit": "作成",
+    "save": "保存",
+    "moreOptions": "その他のオプション",
+    "createModeLabel": "メソッドの作成",
+    "tabs": {
+      "manual": "マニュアル",
+      "agent": "エージェントの作成"
+    },
+    "agentTab": {
+      "hint": "送信後、サイドチャットのエージェントが作成して有効にします。",
+      "requestLabel": "エージェントはどの自動化タスクを作成する必要がありますか?",
+      "placeholder": "例:毎日午前 9 時に、24 時間以上経過した GitHub PR をレビュー キューにリストし、受信箱に投稿します",
+      "submit": "チャットに送信",
+      "submitting": "チャットを開いています…"
+    },
+    "fields": {
+      "name": "タスク名",
+      "nameHint": "このタスクを認識できるようにタスク リストに表示されます。",
+      "title": "タイトル",
+      "description": "リストメモ（オプション）",
+      "instructions": "指示",
+      "instructionsHint": "実行のたびにエージェントに送信されます。エージェントは必要に応じて適切なスキルを独自に選択します。",
+      "agent": "執行代理人",
+      "workspace": "執行代理人",
+      "activateOnCreate": "作成後すぐに有効にする",
+      "activateOnCreateHint": "作成後すぐにスケジュールを開始します。手動タスクでは引き続き「今すぐ実行」が必要です。",
+      "schedule": "スケジュール",
+      "atTime": "で",
+      "frequency": "周波数",
+      "runTime": "実行時間",
+      "firstRunTime": "初回実行時間 (オプション)",
+      "intervalEvery": "実行頻度",
+      "hours": "時間",
+      "skillLabel": "連動スキル（オプション）",
+      "skillHint": "エージェントが使用するスキルを選択します。エージェントに決定させるため、空のままにしておきます。",
+      "recurrenceDays": "繰り返します",
+      "intervalMinutes": "N分ごと",
+      "intervalPrefix": "毎",
+      "intervalSuffix": "分",
+      "onceAt": "実行日時",
+      "catchup": "ランを逃した場合",
+      "table": "テーブルを選択してください",
+      "tableEvents": "トリガーイベント",
+      "tableConditionNote": "現在、このテーブル内のすべての変更と一致します。フィールドベースのフィルターは近日公開予定です。"
+    },
+    "schedule": {
+      "manual": "マニュアル",
+      "recurring": "繰り返し発生する",
+      "interval": "間隔"
+    },
+    "permissionNotice": {
+      "hint": "このタスクは、各ステップで確認することなく、スケジュールに従って自動的に実行されます。いつでも一時停止できます。"
+    },
+    "schedulePresets": {
+      "manual": "マニュアル",
+      "hourly": "毎時",
+      "daily": "毎日",
+      "weekdays": "平日",
+      "weekly": "毎週",
+      "interval": "間隔",
+      "at": "一度",
+      "table_event": "テーブルチェンジ時"
+    },
+    "schedulePresetHints": {
+      "manual": "「今すぐ実行」を押した場合のみ実行されます。",
+      "hourly": "毎正時に 1 回実行されます。",
+      "daily": "1 日 1 回、指定された時刻に実行されます。",
+      "weekdays": "月曜日から金曜日までの指定された時刻に実行されます。",
+      "weekly": "毎週月曜日の指定時刻に実行されます。",
+      "interval": "一定時間間隔で自動実行します。",
+      "at": "選択した日付と時刻に 1 回実行され、その後停止します。",
+      "table_event": "選択したテーブルが変更されると自動的に実行されます。"
+    },
+    "tableEventTypes": {
+      "record_created": "行が追加されました",
+      "record_updated": "行が更新されました",
+      "record_deleted": "行が削除されました"
+    },
+    "recurrence": {
+      "daily": "毎日",
+      "weekly": "毎週",
+      "monthly": "毎月",
+      "day": {
+        "MO": "モー",
+        "TU": "トゥ",
+        "WE": "私たち",
+        "TH": "Th",
+        "FR": "神父",
+        "SA": "サ",
+        "SU": "スー"
+      }
+    },
+    "placeholders": {
+      "name": "例:毎日のデータ同期",
+      "nameTitle": "タスク名を入力してください",
+      "title": "タスクのタイトル",
+      "description": "例:チームメイトへのメモ — オプション",
+      "instructions": "例:昨日の未読メールを 3 つの箇条書きにまとめて受信トレイに投稿する",
+      "agent": "エージェントを選択してください",
+      "workspace": "スペースを選択してください",
+      "agentDefault": "デフォルト（現在のチャットエージェント）",
+      "workspaceDefault": "デフォルト (現在のスペース)",
+      "agentLoading": "エージェントをロード中...",
+      "workspaceLoading": "スペースを読み込んでいます...",
+      "skillKeyFriendly": "空のままにします = エージェントが自動選択します",
+      "table": "監視するテーブルを選択してください",
+      "tableLoading": "読み込み中…",
+      "tableEmpty": "このスペースにはまだテーブルがありません"
+    },
+    "errors": {
+      "nameRequired": "名前を入力してください。",
+      "instructionsRequired": "エージェントが行うべき手順を入力してください。",
+      "agentCreateFailed": "チャットを開始できませんでした。もう一度試してください。",
+      "noOrganization": "組織を特定できませんでした。もう一度試してください。",
+      "submitFailed": "作成に失敗しました。再試行するか、管理者に連絡してください。",
+      "intervalRequired": "有効な間隔を分単位で入力してください (≥ 1)。",
+      "onceAtRequired": "実行する日付と時刻を選択してください。",
+      "onceAtMustBeFuture": "実行時間は将来のものである必要があります。後の時間を選択してください。",
+      "tableRequired": "視聴するテーブルを選択してください。",
+      "tableEventsRequired": "少なくとも 1 つのトリガー イベントを選択してください。"
+    },
+    "lockedTrigger": {
+      "cronValue": "カスタム スケジュール ルール ({{expression}})",
+      "hint": "このタスクのトリガーはここでは編集できません。保存すると、元のトリガーは変更されません。"
+    },
+    "catchup": {
+      "run_once": "一度追いつく",
+      "skip": "逃したランをスキップする",
+      "hint": "コンピューターの電源がオフになっているか、アプリが実行されていない場合、実行はスケジュールされた時刻に間に合わない可能性があります。回復後に何が起こるかを選択します。",
+      "run_onceHint": "リカバリ後に自動的に 1 回実行されます。見逃せないレポートやダイジェストに適しています。",
+      "skipHint": "見逃した実行をスキップして次のサイクルを待ちます。時間が経過すると意味が失われるリマインダーに適しています。"
+    },
+    "intentSnapshot": {
+      "title": "創作意図",
+      "empty": "元の意図は記録されませんでした (この自動化タスクは以前に作成されていた可能性があります)。",
+      "userUtterance": "あなたが言ったこと",
+      "agentProposal": "エージェントの提案",
+      "finalValues": "最終値",
+      "createdVia": "経由で作成されました",
+      "via": {
+        "ui": "UIフォーム",
+        "cli": "コマンドライン",
+        "agent": "エージェントチャット",
+        "command_palette": "コマンドパレット"
+      }
+    }
+  },
+  "home": {
+    "subtitle": "スケジュールに従って実行するエージェント自動化タスクを作成および管理する",
+    "viewAll": "すべて見る",
+    "nextRun": "次の実行",
+    "create": "タスクの作成",
+    "loadFailed": "ロードに失敗しました"
+  },
+  "automation": {
+    "title": "自動化",
+    "subtitle": "自動化タスクを使用してエージェントをスケジュールに従って実行できるようにする"
+  },
+  "schedule": {
+    "prevWeek": "前の週",
+    "nextWeek": "来週",
+    "prevMonth": "前月",
+    "nextMonth": "来月",
+    "today": "今日",
+    "weekView": "週",
+    "monthView": "月",
+    "scopeOrganization": "組織の範囲",
+    "scopeSpace": "現在のワークスペース",
+    "scopeOrganizationShort": "組織",
+    "scopeSpaceShort": "ワークスペース",
+    "manage": "タスクを管理する",
+    "truncatedHint": "スケジュールされた実行が多すぎます。この日付範囲の一部のみが表示されています。",
+    "loadError": "スケジュールの読み込みに失敗しました",
+    "emptyTitle": "この期間中に予想される実行はありません",
+    "emptyDescription": "自動化タスクを作成または有効にすると、今後の実行がここに表示されます",
+    "narrowList": "日付ごとのスケジュール",
+    "pending": "保留中",
+    "weekGrid": "週間カレンダー",
+    "monthGrid": "月間カレンダー",
+    "moreCount": "+{{count}}",
+    "moreAriaLabel": "{{date}}、{{count}} その他のタスク"
+  },
+  "toast": {
+    "activated": "有効",
+    "createdAndActivated": "作成され有効化されました",
+    "createdAsDraft": "作成されました",
+    "createdAsDraftHint": "下書きは自動的には実行されません。詳細ビューで「有効」をクリックしてトリガーを開始します。",
+    "activateAfterCreateFailed": "保存されましたが、有効化に失敗しました。詳細ビューで再度有効化を試みてください。",
+    "runCompleted": "自動化タスクが完了しました",
+    "runFailed": "自動化タスクが失敗しました",
+    "error": "操作が失敗しました"
+  },
+  "notification": {
+    "trackerCompletedBody": "クリックしてこの実行を表示します",
+    "trackerFailedBody": "クリックして失敗を表示"
+  },
+  "chatSidebar": {
+    "trackersSection": "自動化",
+    "openModule": "オートメーションモジュールを開く",
+    "newTracker": "+ 新しい自動化タスク",
+    "emptyHint": "最初の自動化タスクを作成する",
+    "emptyForWorkspace": "このワークスペースには自動化タスクはありません",
+    "emptyCreate": "新しい自動化タスク",
+    "viewAll": "すべて見る ({{count}})",
+    "openTaskDetail": "タスクの詳細を開く",
+    "archivedTask": "削除されたタスク。実行履歴が保持される",
+    "deleteHistory": "履歴の削除",
+    "deleteHistoryTitle": "自動化履歴を削除する",
+    "deleteHistoryHint": "これにより、すべての実行レコードとその会話が完全に削除されます。これを元に戻すことはできません。",
+    "deleteHistorySuccess": "履歴が削除されました",
+    "deleteHistoryFailed": "削除に失敗しました。もう一度やり直してください。",
+    "expandRuns": "実行履歴を展開する",
+    "collapseRuns": "実行履歴を折りたたむ",
+    "runsLoading": "実行履歴を読み込んでいます…",
+    "runsError": "ロードに失敗しました",
+    "runsRetry": "再試行",
+    "runsEmpty": "まだ実行はありません",
+    "viewAllRuns": "すべて見る ({{count}})"
+  },
+  "timeline": {
+    "today": "今日",
+    "tomorrow": "明日",
+    "thisWeek": "今週",
+    "later": "後で",
+    "noSchedule": "予定外",
+    "empty": "今後の自動化タスクはありません"
+  },
+  "kanban": {
+    "empty": "自動化タスクはありません",
+    "colEmpty": "空の",
+    "colDraft": "草案",
+    "colActive": "アクティブ",
+    "colPaused": "一時停止中",
+    "colDisabled": "終了しました"
+  }
+}

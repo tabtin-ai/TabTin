@@ -1,0 +1,177 @@
+{
+  "primaryNav": {
+    "newTask": "New task",
+    "apps": "Workbench",
+    "automation": "Automation",
+    "importData": "Import data",
+    "importDataDetected": "Import data (history detected)",
+    "externalHistory": "External history",
+    "agents": "AI Avatars",
+    "skills": "Skills & Connectors",
+    "collaboration": "Collaboration",
+    "messages": "Messages"
+  },
+  "rail": {
+    "tasks": "Tasks",
+    "messages": "Messages",
+    "cloudDocs": "Cloud Documents",
+    "projects": "Projects",
+    "more": "More",
+    "customerSupport": "Support",
+    "customerSupportTitle": "Contact Support",
+    "customerSupportHint": "Scan with WeChat to add us on WeCom",
+    "customerSupportQrAlt": "WeCom customer support QR code"
+  },
+  "cloudDocs": {
+    "browse": {
+      "label": "Browse cloud documents",
+      "all": "All",
+      "recent": "Recent",
+      "shared": "Shared with me",
+      "recentHint": "History sorted by last visit—not only what is open now",
+      "sharedHint": "Documents, tables, and files shared with you"
+    },
+    "openTabs": {
+      "label": "Open now",
+      "count": "{{count}}",
+      "close": "Close {{title}}",
+      "hint": "Documents, tables, and files open in the editor"
+    },
+    "tree": {
+      "empty": "No documents or tables yet",
+      "emptyFolder": "No pages inside",
+      "searchPlaceholder": "Search documents and tables…",
+      "searchResults": "Search results",
+      "newChildDoc": "New sub-document",
+      "newChildTable": "New sub-table",
+      "moveTo": "Move to…",
+      "foldersRetired": "Folders are retired — nest documents and tables instead",
+      "loadingChildren": "Loading…",
+      "maxNestingDepth": "Maximum nesting is 4 levels; cannot add more sub-documents"
+    }
+  },
+  "appHome": {
+    "aiAgents": "AI Avatars",
+    "aiAgentsSubtitle": "Manage AI avatars in your organization: create, rename, set persona and skill bundles.",
+    "skillLibrary": "Skills & Connectors",
+    "collaborationSubtitle": "Pick a Project to collaborate as a team—tasks, assets, and discussions stay scoped to that Project."
+  },
+  "filter": "Filter...",
+  "personalOrganization": "Personal",
+  "emptyTables": "No tables",
+  "emptyHint": "Open a Workspace to create a table",
+  "actions": {
+    "agentOrganization": "Workspace",
+    "shellTest": "Shell test",
+    "taskExecution": "Task execution"
+  },
+  "plugins": {
+    "taskExecution": {
+      "description": "Direct execution mode with manual Schema input"
+    }
+  },
+  "tooltips": {
+    "collapse": "Collapse sidebar (⌘B)",
+    "expand": "Expand sidebar (⌘B)",
+    "newAgent": "New Workspace"
+  },
+  "theme": {
+    "lightToggle": "Light mode (click to toggle)",
+    "darkToggle": "Dark mode (click to toggle)",
+    "systemToggle": "System (click to toggle)",
+    "light": "Light mode",
+    "dark": "Dark mode",
+    "system": "System"
+  },
+  "search": {
+    "tooltip": "Search (⌘K)"
+  },
+  "organizationFallback": "Organization",
+  "loadingOrganizations": "Loading organizations...",
+  "loadingAgents": "Loading Workspaces...",
+  "personalIdentity": "Personal",
+  "teamGroup": "Organizations",
+  "newTeam": "Create Organization",
+  "newOrganization": "New Organization",
+  "personalSettings": "Personal Settings",
+  "organizationSettings": "Organization Settings",
+  "memberManagement": "Member Management",
+  "loadFailed": "Load failed",
+  "deviceOnline": "Online",
+  "deviceBusy": "Busy",
+  "deviceOffline": "Offline",
+  "deviceLocal": "This device",
+  "deviceDraining": "Not accepting tasks",
+  "deviceUnknown": "Status unknown",
+  "unknownDevice": "Unknown device",
+  "unboundDevice": "No execution device",
+  "deviceNeedsWorkspace": "Create a Workspace on this device first",
+  "sharedFrom": "Shared from {{name}}",
+  "memo": "Memos",
+  "moreAgents": "More Workspaces...",
+  "filterAgents": "Filter Workspaces...",
+  "currentWorkspace": "Current Workspace",
+  "pinAgent": "Pin Workspace",
+  "unpinAgent": "Unpin",
+  "workingDirMeta": "Root: {{name}}",
+  "workingDirTitle": "Working directory: {{dir}}",
+  "tabConversations": "Tasks",
+  "tabDesktop": "Apps",
+  "tabMessages": "Messages",
+  "aiAvatars": "AI Avatars",
+  "skillLibrary": "Skills & Connectors",
+  "mainNav": {
+    "im": "Messages",
+    "agent": "Spaces",
+    "memo": "Memory",
+    "me": "Me",
+    "openIMWindow": "Open Messages Window",
+    "openSettings": "Open Settings",
+    "unreadLabel": "{{label}} ({{count}} unread)",
+    "pendingInviteLabel": "{{label}} ({{count}} pending invites)"
+  },
+  "conversations": {
+    "title": "All Conversations",
+    "back": "Back to Workspaces",
+    "new": "New task",
+    "search": "Search conversations...",
+    "empty": "No conversations yet",
+    "emptyHint": "Create a Workspace to start chatting",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "thisWeek": "This Week",
+    "earlier": "Earlier",
+    "agentDeleted": "Workspace deleted",
+    "agentWorking": "Working...",
+    "unread": "New reply",
+    "sharedFrom": "From {{name}}",
+    "selectAgent": "Select a Workspace",
+    "importAgentHistory": "Import external Agent history",
+    "newTopic": "New task",
+    "searchAgent": "Search spaces...",
+    "noAgents": "No spaces available",
+    "filteringAgent": "Filter: {{name}}",
+    "filteringOrganization": "Organization filter: {{name}}",
+    "clearFilter": "Clear filter",
+    "justNow": "Just now",
+    "minutesAgo": "{{count}}m ago",
+    "hoursAgo": "{{count}}h ago",
+    "daysAgo": "{{count}}d ago",
+    "untitledSession": "{{agent}}'s conversation",
+    "spaceNotFound": "The conversation's Workspace no longer exists or has been archived",
+    "noResults": "No matching conversations found",
+    "noResultsHint": "Try different keywords or clear the filter",
+    "createFailed": "Failed to create conversation, please try again",
+    "openFailed": "Failed to open conversation, please try again",
+    "personalIdentity": "Personal"
+  },
+  "space": {
+    "emptyTitle": "Start your journey",
+    "emptyHint": "Create a Workspace, group chat, or DM to get started",
+    "loginHint": "Sign in",
+    "newAgent": "New Workspace",
+    "newGroup": "New Group Chat",
+    "newDM": "New DM"
+  },
+  "untitled": "Unnamed user"
+}

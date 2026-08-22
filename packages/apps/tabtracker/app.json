@@ -1,0 +1,83 @@
+{
+  "id": "tabtracker",
+  "name": "Automation",
+  "version": "0.1.0",
+  "kind": "app",
+  "icon": "activity",
+  "description": "Agent 自动化任务与监控，查看执行状态、运行历史、触发配置",
+  "objectModel": {
+    "entities": [
+      "tracker",
+      "tracker_run"
+    ],
+    "schema": {
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "executionTarget": "backend",
+  "uiRuntime": "localBundle",
+  "agentRuntime": "hostBackend",
+  "distribution": "builtin",
+  "surface": "collaborative",
+  "uiHints": {
+    "iconAsset": {
+      "default": "assets/icon.svg",
+      "presentation": "selfContained"
+    }
+  },
+  "contextSources": [],
+  "permissions": [],
+  "requiredCapabilities": [],
+  "runtimeDependencies": [],
+  "runtimeSupport": {
+    "electron": {
+      "mode": "full"
+    },
+    "daemon": {
+      "mode": "full"
+    }
+  },
+  "skills": [],
+  "skillsConfig": {
+    "entries": {}
+  },
+  "lifecycleHooks": {},
+  "runtimeBindings": {
+    "uiProvider": "electron:context-space.tabtracker",
+    "skillsProvider": "skills:local"
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false
+  },
+  "agentIntegration": {
+    "contextType": "tabtracker",
+    "contextFields": [
+      { "name": "current_tracker_id", "label": "tracker_id", "isResourceId": true },
+      { "name": "current_tracker_title", "label": "title" }
+    ],
+    "toolDomains": ["tabtracker"],
+    "hasPromptSection": true,
+    "displayField": "",
+    "workspaceRootSource": "",
+    "isFrontendDependent": false,
+    "typeAliases": []
+  },
+  "opens": {
+    "types": [
+      {
+        "type": "tracker",
+        "priority": 100
+      }
+    ]
+  },
+  "catalog": {
+    "category": "intelligence",
+    "desktopGroup": "cloudResources",
+    "canCreate": false,
+    "searchable": false,
+    "isDefaultEnabled": true,
+    "order": 10
+  }
+}

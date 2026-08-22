@@ -1,0 +1,241 @@
+{
+  "panel": {
+    "title": "Almacenamiento",
+    "subtitle": "Lo que TabTin guarda en tu computadora.",
+    "totalLine": "TabTin usa {{size}} en esta Mac",
+    "totalLineLoading": "Almacenamiento de medición…",
+    "refresh": "Recalcular",
+    "refreshHint": "Vuelva a medir todos los tamaños de datos",
+    "loadErrorTitle": "No se pudo cargar"
+  },
+  "health": {
+    "healthy": {
+      "label": "Mucho espacio",
+      "tagline": "Estás listo para un tiempo: sigue creando."
+    },
+    "attention": {
+      "label": "constante",
+      "tagline": "Uso normal, nada de qué preocuparse."
+    },
+    "heavy": {
+      "label": "Llenándose",
+      "tagline": "Se está acumulando bastante: ¿hay algo debajo que valga la pena ordenar?"
+    },
+    "critical": {
+      "label": "hora de limpiar",
+      "tagline": "TabTin está ocupando mucho espacio. Es hora de borrar algunos datos no utilizados."
+    }
+  },
+  "metrics": {
+    "totalUsed": {
+      "label": "Usado",
+      "sub": "{{count}} artículos"
+    },
+    "largest": {
+      "label": "Artículo más grande"
+    },
+    "cache": {
+      "label": "caché temporal",
+      "tooLow": "Todo optimizado",
+      "clean": "limpio",
+      "cleaning": "Limpieza"
+    }
+  },
+  "section": {
+    "topItemsTitle": "Aprovechando al máximo el espacio"
+  },
+  "topItems": {
+    "loading": "Medición de los datos de su espacio de trabajo...",
+    "empty": "Aún no hay datos. Vuelve después de usar TabTin por un tiempo.",
+    "itemCount": "{{count}} artículos",
+    "showAll": "Mostrar otros artículos {{count}}",
+    "collapseAll": "Colapso",
+    "conversation": {
+      "label": "Historial de conversaciones",
+      "subtitle_one": "Desde 1 espacio de trabajo",
+      "subtitle_other": "Desde espacios de trabajo {{count}}",
+      "unscopedLabel": "Otros datos de la conversación",
+      "otherLabel": "Otros espacios de trabajo"
+    },
+    "checkpoint": {
+      "label": "Instantáneas de la operación del proyecto",
+      "subtitle": "Proyectos {{count}} · Agente deshacer instantáneas",
+      "otherLabel": "Datos de deshacer no asignados"
+    },
+    "browserEnv": {
+      "label": "Entornos de inicio de sesión del navegador",
+      "subtitle": "Entornos {{count}} · inicios de sesión en sitios y datos fuera de línea",
+      "otherLabel": "Otros ambientes"
+    },
+    "agentDownload": {
+      "label": "Descargas de herramientas del agente",
+      "subtitle": "{{count}} espacios de trabajo · archivos obtenidos por el Agente",
+      "otherLabel": "Otros espacios de trabajo"
+    },
+    "appBundle": {
+      "label": "Aplicaciones instaladas",
+      "subtitle": "{{count}} tipos de datos de aplicaciones locales"
+    },
+    "appProject": {
+      "otherLabel": "Otro {{count}}",
+      "tabvideo": {
+        "subtitle": "{{count}} proyectos de TabVideo"
+      },
+      "tabdoc": {
+        "subtitle": "{{count}} Borradores de TabDoc"
+      },
+      "tabwhiteboard": {
+        "subtitle": "{{count}} recursos de pizarra"
+      },
+      "tabslide": {
+        "subtitle": "{{count}} Borradores TabSlide"
+      }
+    },
+    "cache": {
+      "label": "caché temporal",
+      "subtitle": "Se reconstruye en el próximo uso."
+    }
+  },
+  "userGroup": {
+    "conversations": {
+      "title": "Conversaciones e historia",
+      "description": "Sus conversaciones con el Agente y instantáneas de operaciones"
+    },
+    "browser": {
+      "title": "Sitios de navegador integrados",
+      "description": "Sitios en los que ha iniciado sesión (Feishu, Notion, ChatGPT, etc.)"
+    },
+    "media": {
+      "title": "Medios y descargas",
+      "description": "Grabaciones, capturas de pantalla, PDF, descargas"
+    },
+    "apps": {
+      "title": "Datos de la aplicación",
+      "description": "Borradores de TabDoc, aplicaciones instaladas, etc."
+    },
+    "voice": {
+      "title": "Palabras activas y reglas de voz",
+      "description": "Tus personalizaciones de entrada de voz"
+    }
+  },
+  "bucketDisplay": {
+    "checkpoint:shadow-git": {
+      "title": "Instantáneas de la operación del proyecto",
+      "description": "Instantáneas que le permiten deshacer las operaciones del Agente en cada proyecto"
+    },
+    "agent:checkpoints": {
+      "title": "Instantáneas de la operación del proyecto",
+      "description": "Instantáneas que le permiten deshacer las operaciones del Agente en cada proyecto"
+    },
+    "browser:http-cache-aggregate": {
+      "title": "Caché de sitio integrado",
+      "description": "Caché de imágenes/scripts/fuentes para sitios integrados como Feishu, Notion, ChatGPT."
+    },
+    "browser:bookmarks": {
+      "title": "Marcadores del navegador",
+      "description": "Marcadores que ha guardado en el navegador integrado de TabTin"
+    },
+    "browser:browsing-history": {
+      "title": "Historial de navegación",
+      "description": "Páginas que ha visitado en el navegador integrado de TabTin"
+    },
+    "tin:sandboxes": {
+      "title": "Datos de la aplicación Sandbox",
+      "description": "Datos locales y caché de las aplicaciones Tin sandbox"
+    },
+    "marketplace:apps": {
+      "title": "Aplicaciones del mercado",
+      "description": "Ejecutables y configuraciones para herramientas instaladas desde Marketplace"
+    },
+    "mcp:local-connections": {
+      "title": "Configuración de herramienta de IA externa",
+      "description": "Configuraciones para conectar Claude Desktop / Cursor / Windsurf (usuarios avanzados)"
+    },
+    "media:recordings": {
+      "title": "Grabaciones",
+      "description": "Grabación de archivos desde el navegador integrado"
+    },
+    "media:screenshots": {
+      "title": "Capturas de pantalla",
+      "description": "Capturas de pantalla guardadas en ~/.tabtin/screenshots"
+    },
+    "media:exports-pdf": {
+      "title": "Exportaciones de PDF",
+      "description": "Archivos de exportación PDF guardados en ~/.tabtin/exports"
+    },
+    "download:user-downloads": {
+      "title": "Historial de descargas",
+      "description": "Historial de descargas activadas por TabTin (solo registros)"
+    },
+    "download:agent-sandbox-downloads": {
+      "title": "Descargas de herramientas del agente",
+      "description": "Archivos descargados por las herramientas del Agente en cada espacio de trabajo"
+    },
+    "media:tabvideo-render-tmp": {
+      "title": "Sobras de renderizado de vídeo",
+      "description": "Archivos temporales de renderizado de video, exportación, instantáneas de widgets"
+    },
+    "media:stream-download-tmp": {
+      "title": "Transmitir fragmentos de descarga",
+      "description": "Fragmentos temporales de descargas de videos HLS/DASH"
+    },
+    "voice:hotwords-rules": {
+      "title": "Palabras activas y reglas de voz",
+      "description": "Sus personalizaciones de entrada de voz (sin respaldo en la nube, exporte periódicamente)"
+    },
+    "system:voice-settings": {
+      "title": "Palabras activas y reglas de voz",
+      "description": "Sus personalizaciones de entrada de voz (sin respaldo en la nube, exporte periódicamente)"
+    }
+  },
+  "totalUsage": "{{size}}",
+  "itemCount": "{{count}} artículos",
+  "groupSummary": "{{size}} · {{count}} elementos",
+  "actions": {
+    "manage": "Administrar",
+    "collapse": "Colapso",
+    "listItems": "Artículos",
+    "export": "Exportar",
+    "exporting": "Exportando…",
+    "clear": "Borrar",
+    "cancel": "Cancelar",
+    "confirmClear": "Confirmar claro",
+    "confirmDestroy": "Confirmar eliminación",
+    "clearing": "Limpiando…",
+    "acknowledgePartial": "bien"
+  },
+  "errors": {
+    "clearFailed": "Borrar fallido",
+    "listFailed": "No se pudo cargar la lista",
+    "scanFailed": "Error de escaneo"
+  },
+  "dialog": {
+    "willFree": "voluntad libre",
+    "warningsTitle": "Después de limpiar perderás:",
+    "typeNameLabel": "Escribe \"{{name}}\" para confirmar",
+    "fillName": "Rellenar",
+    "acknowledgeLabel": "Entiendo y acepto que esto no se puede deshacer.",
+    "partialFailureTitle": "Error de borrado parcial ({{count}} elementos)",
+    "partialFailureHint": "Algunos elementos no se borraron (en uso/permiso denegado). Haga clic en Aceptar para cerrar y volver a intentarlo más tarde.",
+    "L1": {
+      "title": "Borrar {{name}}",
+      "subtitle": "Se reconstruirá en la próxima carga. No se pierde ningún dato."
+    },
+    "L2": {
+      "title": "Borrar {{name}}",
+      "subtitle": "La siguiente carga puede ser más lenta, pero no se pierde ningún recurso."
+    },
+    "L3-soft": {
+      "title": "Borrar {{name}}",
+      "subtitle": "Estos son datos del usuario. No se puede deshacer."
+    },
+    "L3-hard": {
+      "title": "Borrar {{name}}",
+      "subtitle": "Estos son datos de usuario críticos. Escriba el nombre y marque la casilla para confirmar."
+    },
+    "L4": {
+      "title": "Borrar {{name}} (alto riesgo)",
+      "subtitle": "Confirme con atención: se trata de datos de identidad de la cuenta o del dispositivo."
+    }
+  }
+}

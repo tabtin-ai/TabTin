@@ -1,0 +1,110 @@
+{
+  "name": "@tabtin/tabslide",
+  "version": "0.1.0",
+  "description": "纯 React 幻灯片引擎：渲染、编辑、状态管理，面向 TabSlide 演示模式",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./exports": {
+      "source": "./src/exports/index.ts",
+      "types": "./dist/exports/index.d.ts",
+      "import": "./dist/exports/index.js"
+    },
+    "./image-reupload": {
+      "source": "./src/image-reupload.ts",
+      "types": "./dist/image-reupload.d.ts",
+      "import": "./dist/image-reupload.js"
+    },
+    "./viewer": {
+      "source": "./src/viewer.ts",
+      "types": "./dist/viewer.d.ts",
+      "import": "./dist/viewer.js"
+    },
+    "./headless": {
+      "source": "./src/headless.ts",
+      "types": "./dist/headless.d.ts",
+      "import": "./dist/headless.js"
+    },
+    "./collab/ydoc-schema": {
+      "source": "./src/collab/ydoc-schema.ts",
+      "types": "./dist/collab/ydoc-schema.d.ts",
+      "import": "./dist/collab/ydoc-schema.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "tsc && node ../../scripts/shared/copy-static-assets.mjs src dist css",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "@mathjax/src": "4.1.0",
+    "@radix-ui/react-scroll-area": "^1.2.18",
+    "@tabtin/app-shell": "workspace:*",
+    "@tabtin/collab-core": "workspace:*",
+    "@tabtin/doc-editor": "workspace:*",
+    "@tabtin/media-core": "workspace:*",
+    "@tabtin/smartsheet-ui": "workspace:*",
+    "@tabtin/storage-manager": "workspace:*",
+    "@tiptap/core": "^2.11.0",
+    "@tiptap/extension-color": "^2.11.0",
+    "@tiptap/extension-font-family": "^2.11.0",
+    "@tiptap/extension-highlight": "^2.11.0",
+    "@tiptap/extension-placeholder": "^2.11.0",
+    "@tiptap/extension-subscript": "2",
+    "@tiptap/extension-superscript": "2",
+    "@tiptap/extension-text-align": "^2.11.0",
+    "@tiptap/extension-text-style": "^2.11.0",
+    "@tiptap/extension-underline": "^2.11.0",
+    "@tiptap/pm": "^2.27.2",
+    "@tiptap/react": "^2.11.0",
+    "@tiptap/starter-kit": "^2.11.0",
+    "dompurify": "3.3.1",
+    "echarts": "^5.5.0",
+    "echarts-for-react": "^3.0.2",
+    "fractional-indexing": "3.2.0",
+    "html2canvas-pro": "1.6.7",
+    "immer": "^10.1.1",
+    "jspdf": "4.1.0",
+    "jszip": "3.10.1",
+    "lucide-react": "0.487.0",
+    "nanoid": "^5.0.0",
+    "pptxgenjs": "4.0.1",
+    "react-moveable": "^0.56.0",
+    "react-virtuoso": "^4.18.1",
+    "yjs": "^13.6.29",
+    "zustand": "^5.0.0"
+  },
+  "optionalDependencies": {
+    "pngjs": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/dompurify": "3.2.0",
+    "@types/pngjs": "^6.0.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "playwright": "1.58.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "5.7.2",
+    "vitest": "4.0.18"
+  }
+}

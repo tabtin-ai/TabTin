@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="capabilities_title">Device Capabilities</string>
+    <string name="capabilities_l1_title">Standard Permissions</string>
+    <string name="capabilities_l1_subtitle">Grant permissions so Agent can read device data</string>
+    <string name="capabilities_l2_title">Developer Capabilities</string>
+    <string name="capabilities_l2_subtitle">Requires Developer Mode for screen automation</string>
+    <string name="capabilities_granted">Granted</string>
+    <string name="capabilities_denied">Denied</string>
+    <string name="capabilities_request">Grant</string>
+    <string name="capabilities_go_settings">Go to Settings</string>
+    <string name="capabilities_contacts">Contacts</string>
+    <string name="capabilities_sms">Read SMS</string>
+    <string name="capabilities_sms_send">Send SMS</string>
+    <string name="capabilities_call_log">Call Log</string>
+    <string name="capabilities_phone">Phone Call</string>
+    <string name="capabilities_calendar">Calendar</string>
+    <string name="capabilities_location">Location</string>
+    <string name="capabilities_notification">Notifications</string>
+    <string name="capabilities_notification_listener">Notification listener</string>
+    <string name="capabilities_media">Photos/Images</string>
+    <string name="capabilities_media_video">Videos</string>
+    <string name="capabilities_l2_connected">Privileged process running</string>
+    <string name="capabilities_l2_disconnected">Not connected</string>
+    <string name="capabilities_l2_setup">Set up Developer Mode</string>
+    <string name="capabilities_l2_start">Start Privileged Process</string>
+    <string name="capabilities_l2_stop">Stop</string>
+    <string name="capabilities_l2_starting">Starting…</string>
+    <string name="capabilities_l2_not_supported">Not supported (requires Android 11+)</string>
+    <string name="capabilities_l2_not_supported_harmony">Wireless debugging not supported on this system (HarmonyOS NEXT). Contact support for latest compatibility info</string>
+    <string name="capabilities_l2_screen_auto">Screenshots, Screen Content, Touch Input</string>
+    <string name="capabilities_l2_app_mgmt">App Launch/Stop, System Settings</string>
+    <string name="capabilities_l2_step1_title">Step 1: Enable Developer Options</string>
+    <string name="capabilities_l2_step2_title">Step 2: Enter Pairing Code</string>
+    <string name="capabilities_l2_step2_hint">Tap "Pair device with pairing code" in Wireless Debugging to get the 6-digit code</string>
+    <string name="capabilities_l2_pair_code_label">Pairing Code</string>
+    <string name="capabilities_l2_pair_btn">Pair &amp; Connect</string>
+    <string name="capabilities_l2_reconnect_btn">Reconnect</string>
+    <string name="capabilities_l2_pairing">Pairing…</string>
+    <string name="capabilities_l2_discovering">Discovering device, may take up to 30s…</string>
+    <string name="capabilities_l2_connecting">Connecting…</string>
+    <string name="capabilities_l2_adb_connected">ADB Connected</string>
+    <string name="capabilities_l2_warning">Note</string>
+    <string name="capabilities_l2_guide_expand">View %s</string>
+    <string name="capabilities_l2_guide_collapse">Collapse %s</string>
+    <string name="capabilities_l2_restart_privileged">Restart Privileged Process</string>
+    <string name="capabilities_l2_auto_recovering">Recovering device control capabilities…</string>
+    <string name="capabilities_l2_auto_recover_succeeded">Device control capabilities restored</string>
+    <string name="capabilities_l2_auto_recover_failed">Auto-recovery failed</string>
+    <string name="capabilities_l2_recover_wireless_off">Wireless debugging not enabled, cannot auto-recover</string>
+    <string name="capabilities_l2_open_wireless_settings">Open Wireless Debugging Settings</string>
+    <string name="capabilities_l2_recover_max_attempts">Auto-recovery retry limit reached</string>
+    <string name="capabilities_l2_auto_pairing">Pairing code detected, auto-pairing…</string>
+    <string name="capabilities_l2_awaiting_approval">Please tap "Allow" on your device to authorize the connection…</string>
+    <string name="capabilities_l2_xiaomi_wait_days">Xiaomi/Redmi devices require a %d-day wait after first enabling Developer Options before Wireless Debugging becomes available</string>
+    <string name="capabilities_l2_background_settings">This device brand requires additional background keep-alive settings — see the guide above</string>
+
+    <!-- Error localization -->
+    <string name="capabilities_error_discover_pairing">Could not find pairing service. Please ensure Wireless Debugging is enabled</string>
+    <string name="capabilities_error_discover_wireless">Could not find wireless debugging service. Please ensure it is enabled</string>
+    <string name="capabilities_error_invalid_pairing_code">Invalid pairing code, please re-enter</string>
+    <string name="capabilities_error_pairing_failed">Pairing failed, please check the pairing code</string>
+    <string name="capabilities_error_privileged_timeout">Privileged process response timed out</string>
+    <string name="capabilities_error_privileged_not_connected">Privileged process not connected</string>
+    <string name="capabilities_error_max_reconnect">Maximum reconnect attempts exceeded</string>
+    <string name="capabilities_error_requires_android11">Requires Android 11 or higher</string>
+    <string name="capabilities_error_connection_failed">Connection failed</string>
+    <string name="capabilities_error_communication">Communication error</string>
+    <string name="capabilities_error_shell_failed">Shell command execution failed</string>
+    <string name="capabilities_error_pairing_expired">Pairing code may have expired (>55s). Please generate a new code and retry</string>
+    <string name="capabilities_error_pairing_unsupported">Wireless pairing is not supported on this device</string>
+
+    <!-- Device-action security confirm (Agent remote drive) -->
+    <string name="capabilities_security_confirm_title">Agent Permission Request</string>
+    <string name="capabilities_security_confirm_allow_once">Allow once</string>
+    <string name="capabilities_security_confirm_allow_session">Don\'t ask again this session</string>
+    <string name="capabilities_security_confirm_deny">Deny</string>
+</resources>

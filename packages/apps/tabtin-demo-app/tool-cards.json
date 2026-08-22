@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.example.com/app-tool-cards.schema.json",
+  "$comment": "App 平台 H1 / Wave B-B6 — Simple Todo (Demo) Tool Card 声明。全部走 GenericToolCard 通用渲染，无需自定义 React 组件。",
+  "demo_issue_create": {
+    "id": "demo_issue_create",
+    "category": "tool",
+    "labelKey": "chat:card.demo.issueCreate",
+    "icon": "PlusCircle",
+    "riskLevel": "review",
+    "defaultCollapsed": false,
+    "renderer": "GenericToolCard"
+  },
+  "demo_issue_list": {
+    "id": "demo_issue_list",
+    "category": "tool",
+    "labelKey": "chat:card.demo.issueList",
+    "icon": "List",
+    "riskLevel": "safe",
+    "defaultCollapsed": true,
+    "renderer": "GenericToolCard"
+  },
+  "demo_issue_get": {
+    "id": "demo_issue_get",
+    "category": "tool",
+    "labelKey": "chat:card.demo.issueGet",
+    "icon": "Eye",
+    "riskLevel": "safe",
+    "defaultCollapsed": true,
+    "renderer": "GenericToolCard"
+  },
+  "demo_issue_close": {
+    "id": "demo_issue_close",
+    "category": "tool",
+    "labelKey": "chat:card.demo.issueClose",
+    "icon": "CheckCircle",
+    "riskLevel": "review",
+    "defaultCollapsed": false,
+    "renderer": "GenericToolCard"
+  }
+}

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export COMPOSE_DISABLE_ENV_FILE=1
+
+usage() {
+  echo "Usage: ./community {start|stop|logs}" >&2
+  exit 2
+}
+
+case "${1:-}" in
+  start)
+    docker compose --project-directory "${repo_root}" -f "${repo_root}/compose.yaml" up -d --build
+    echo "TabTin Community: http://127.0.0.1:6060"
+    echo "Electron: Settings -> Model Configuration -> BYOK"
+    ;;
+  stop)
+    docker compose --project-directory "${repo_root}" -f "${repo_root}/compose.yaml" down
+    ;;
+  logs)
+    docker compose --project-directory "${repo_root}" -f "${repo_root}/compose.yaml" logs --follow --tail 200
+    ;;
+  *)
+    usage
+    ;;
+esac

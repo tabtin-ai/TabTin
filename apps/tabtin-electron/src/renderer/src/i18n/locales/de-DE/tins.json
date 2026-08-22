@@ -1,0 +1,83 @@
+{
+  "title": "Dosen",
+  "installedCount": "{{count}} installiert",
+  "section": {
+    "installed": "Installiert",
+    "available": "Verfügbar"
+  },
+  "action": {
+    "install": "Installieren",
+    "uninstall": "Deinstallieren",
+    "enable": "Aktivieren",
+    "disable": "Deaktivieren",
+    "pin": "Pin",
+    "unpin": "Lösen",
+    "edit": "Bearbeiten",
+    "retry": "Versuchen Sie es noch einmal",
+    "saveAll": "Alles speichern"
+  },
+  "confirm": {
+    "uninstall": "Sind Sie sicher, dass Sie „{{name}}“ deinstallieren möchten?",
+    "delete": "Sind Sie sicher, dass Sie „{{name}}“ löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "unsavedChanges": "Sie haben nicht gespeicherte Änderungen. Sind Sie sicher, dass Sie gehen möchten?"
+  },
+  "empty": {
+    "title": "Noch keine Dosen",
+    "description": "Teilen Sie dem Agenten mit, was Sie erreichen möchten – er kann ein Tin für Sie erstellen und installieren. Von Teamkollegen veröffentlichte Dosen werden in der Liste „Verfügbar“ unten angezeigt.",
+    "askAgent": "Bitten Sie den Agenten, eine Dose zu erstellen",
+    "agentPrompt": "Helfen Sie mir, ein Tin-Plugin zu erstellen. Fragen Sie zunächst, welches Szenario ich lösen möchte (z. B. automatische Hervorhebung von Seiten, Extrahieren von Informationen oder Browser-Hilfsprogramme), und erstellen und installieren Sie es dann in diesem Arbeitsbereich.",
+    "errorNoSession": "Es ist momentan nicht möglich, einen Chat zu starten. Bitte versuchen Sie es erneut.",
+    "openPanel": "Öffnen Sie das Dosenfenster"
+  },
+  "sidePanel": {
+    "emptyTitle": "Kein Zinn installiert",
+    "emptyDescription": "Tins sind intelligente Plugins, die beim Surfen aktiviert werden und Hilfsfunktionen bereitstellen.",
+    "openPanel": "Zinn installieren"
+  },
+  "home": {
+    "loading": "Laden...",
+    "viewAll": "Alle {{count}} Dosen anzeigen...",
+    "activeCount": "{{count}} Zinn(e) aktiv",
+    "loadError": "Das Laden der Dosen ist fehlgeschlagen",
+    "retry": "Versuchen Sie es noch einmal"
+  },
+  "activated": "Aktiviert",
+  "editor": {
+    "tabs": {
+      "panelHtml": "UI-Panel",
+      "contentScript": "Inhaltsskript",
+      "backgroundScript": "Hintergrundskript",
+      "agentInstructions": "Agentenanweisungen"
+    },
+    "placeholder": {
+      "panelHtml": "<!-- Schreiben Sie hier den HTML-Code Ihres Tin-UI-Panels -->\n<!-- Verwenden Sie CDN-Bibliotheken und kommunizieren Sie mit dem Host über die window.tin-API -->",
+      "contentScript": "// Skript in durchsuchte Seiten eingefügt\n// Kann auf das Seiten-DOM zugreifen und es ändern",
+      "backgroundScript": "// Hintergrundskript, das in der Sandbox des Hauptprozesses ausgeführt wird",
+      "agentInstructions": "# Agentenanweisungen\n\nBeschreiben Sie, was diese Dose macht und wie man damit interagiert ..."
+    },
+    "lang": {
+      "html": "HTML",
+      "javascript": "JavaScript",
+      "markdown": "Abschlag"
+    },
+    "charCount": "{{count}} Zeichen"
+  },
+  "toast": {
+    "installSuccess": "„{{name}}“ erfolgreich installiert",
+    "installFailed": "Die Installation ist fehlgeschlagen",
+    "uninstallSuccess": "„{{name}}“ deinstalliert",
+    "uninstallFailed": "Die Deinstallation ist fehlgeschlagen",
+    "activateSuccess": "„{{name}}“ aktiviert",
+    "activateFailed": "Die Aktivierung ist fehlgeschlagen",
+    "disableSuccess": "„{{name}}“ deaktiviert",
+    "disableFailed": "Die Deaktivierung ist fehlgeschlagen",
+    "deleteSuccess": "„{{name}}“ gelöscht",
+    "deleteFailed": "Das Löschen ist fehlgeschlagen",
+    "enableFailed": "Aktivierung fehlgeschlagen",
+    "pinFailed": "Der Pin-Vorgang ist fehlgeschlagen",
+    "loadFailed": "Das Laden ist fehlgeschlagen",
+    "saveSuccess": "Speichern erfolgreich",
+    "saveFailed": "Speichern fehlgeschlagen",
+    "persistVarFailed": "Variable konnte nicht gespeichert werden"
+  }
+}

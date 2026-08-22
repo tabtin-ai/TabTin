@@ -1,0 +1,23 @@
+{
+  "errors": {
+    "loadStatsFailed": "載入匯出統計失敗",
+    "exportFailed": "匯出失敗，請稍後重試"
+  },
+  "success": {
+    "exported": "已導出 {{filename}}",
+    "showInFolder": "開啟文件位置"
+  },
+  "stats": {
+    "sampledHint": "統計基於取樣估算，實際匯出包含全部 {{total}} 筆選取記錄"
+  },
+  "apiErrors": {
+    "exportFailedWithStatus": "匯出失敗: HTTP {{status}}",
+    "unsupportedFormat": "不支援的匯出格式: {{format}}",
+    "unsupportedResponseType": "無法處理的回應資料型別: {{type}}",
+    "downloadBlobRequired": "downloadFile 需要 Blob 型別參數，但收到: {{type}}",
+    "filenameRequired": "filename 必須是非空字串，但收到: {{type}}"
+  },
+  "filename": {
+    "defaultTableName": "表格"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "capability_ref": {
+    "expected_hash": "sha256:ebde96ae639e7adb04eb31ac669390401552daa92024992bb2730883b62e4811",
+    "key": "doubao-seed-evolving-draft-capability",
+    "kind": "model-capability",
+    "revision": "1"
+  },
+  "deployment_ref": {
+    "expected_hash": "sha256:4c1fdf992e2ccf5a5a27db80f6f6dcb2bd3eba9dd451488d459ba8016f63a64b",
+    "key": "volcengine",
+    "kind": "deployment-profile",
+    "revision": "1"
+  },
+  "identity": {
+    "canonical_hash": "sha256:5470e474d9562b96a3b133b0a588fdd5995d251db8dcad28fa09704e1b708912",
+    "key": "doubao-seed-evolving-draft-binding",
+    "kind": "model-deployment-binding",
+    "revision": "1"
+  },
+  "model_key": "doubao-seed-evolving",
+  "rollout_ref": {
+    "expected_hash": "sha256:de9dfb1afb31002b84d72478a97b71ce0005f9f7210dabf63d72b33059c64a7b",
+    "key": "doubao-draft-zero-traffic",
+    "kind": "rollout-policy",
+    "revision": "1"
+  },
+  "schema_version": "1",
+  "upstream_model_id": "doubao-seed-evolving"
+}

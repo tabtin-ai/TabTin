@@ -1,0 +1,49 @@
+{
+  "$comment": "M4.1 L-W6-22/23 文案 SSoT — slug → 业务名人话翻译。三端（Electron / iOS / Android）从本文件抄走文案到各自 i18n 文件。CI 用 hardline-v3-rules.json 提取 slug 全集、再校验三端覆盖；本文件是翻译的权威来源，不是 slug 的全集定义来源。",
+
+  "sensitiveCategory": {
+    "ssh":                 { "zh-CN": "SSH 凭据",               "en-US": "SSH credentials" },
+    "aws":                 { "zh-CN": "AWS 凭据",               "en-US": "AWS credentials" },
+    "gnupg":               { "zh-CN": "GnuPG 密钥",             "en-US": "GnuPG keys" },
+    "kube":                { "zh-CN": "Kubernetes 配置",        "en-US": "Kubernetes config" },
+    "env":                 { "zh-CN": "环境变量密钥",             "en-US": "environment secrets" },
+    "private-key":         { "zh-CN": "私钥文件",               "en-US": "private key file" },
+    "git":                 { "zh-CN": "Git 凭据",               "en-US": "Git credentials" },
+    "shell-rc":            { "zh-CN": "Shell 启动脚本",          "en-US": "shell startup script" },
+    "cloud-cli":           { "zh-CN": "云服务 CLI 凭据",         "en-US": "cloud CLI credentials" },
+    "package-credentials": { "zh-CN": "包管理器凭据",            "en-US": "package registry credentials" },
+    "macos-keychain":      { "zh-CN": "macOS 钥匙串",            "en-US": "macOS Keychain" },
+    "browser-credentials": { "zh-CN": "浏览器凭据",              "en-US": "browser credentials" },
+    "password-manager":    { "zh-CN": "密码管理器数据",           "en-US": "password manager data" },
+    "linux-keyring":       { "zh-CN": "Linux 凭据环",            "en-US": "Linux keyring" }
+  },
+
+  "hardlinePattern": {
+    "rm -rf root or home":       { "zh-CN": "递归删除家目录或根目录",      "en-US": "recursive delete of home/root directory" },
+    "rm -rf system root":        { "zh-CN": "递归删除系统根（rm -rf /）",   "en-US": "recursive delete of system root (rm -rf /)" },
+    "fork bomb":                 { "zh-CN": "Fork 炸弹（无限创建进程）",    "en-US": "fork bomb (infinite process creation)" },
+    "dd to raw device":          { "zh-CN": "向裸设备写入（dd）",           "en-US": "write to raw device (dd)" },
+    "mkfs format":               { "zh-CN": "格式化文件系统（mkfs）",       "en-US": "format filesystem (mkfs)" },
+    "format disk windows":       { "zh-CN": "格式化 Windows 磁盘",          "en-US": "format Windows disk" },
+    "redirect to raw disk":      { "zh-CN": "重定向写入裸磁盘",             "en-US": "redirect write to raw disk" },
+    "curl pipe to shell":        { "zh-CN": "从网络下载并直接执行脚本",     "en-US": "download and execute script from network" },
+    "shutdown / reboot":         { "zh-CN": "系统关机或重启",               "en-US": "system shutdown or reboot" },
+    "kill all processes":        { "zh-CN": "强制终止所有进程",             "en-US": "force kill all processes" },
+    "mv to /dev/null":           { "zh-CN": "将文件移入 /dev/null（变相删除）", "en-US": "move file to /dev/null (destructive delete)" },
+    "sudo escalation":           { "zh-CN": "提权执行（sudo）",             "en-US": "privilege escalation (sudo)" },
+    "chmod 777 root":            { "zh-CN": "对系统根目录 chmod 777",        "en-US": "chmod 777 on system root" },
+    "chmod -R 777":              { "zh-CN": "递归 chmod 777",                "en-US": "recursive chmod 777" },
+    "chown -R root":             { "zh-CN": "递归 chown 到 root",            "en-US": "recursive chown to root" },
+    "iptables flush":            { "zh-CN": "清空防火墙规则（iptables -F）", "en-US": "flush firewall rules (iptables -F)" },
+    "systemctl stop critical":   { "zh-CN": "停止关键系统服务",             "en-US": "stop critical system services" },
+    "eval expansion":            { "zh-CN": "eval 展开任意命令",             "en-US": "eval with arbitrary command expansion" },
+    "macOS /System":             { "zh-CN": "macOS 系统只读区（/System）",   "en-US": "macOS system read-only area (/System)" },
+    "macOS /Library root":       { "zh-CN": "macOS 系统级 Library（/Library）", "en-US": "macOS system-level Library (/Library)" },
+    "Unix /usr":                 { "zh-CN": "Unix 系统目录（/usr）",          "en-US": "Unix system directory (/usr)" },
+    "Unix /bin":                 { "zh-CN": "Unix 系统目录（/bin）",          "en-US": "Unix system directory (/bin)" },
+    "Unix /sbin":                { "zh-CN": "Unix 系统目录（/sbin）",         "en-US": "Unix system directory (/sbin)" },
+    "Unix /etc":                 { "zh-CN": "Unix 系统配置目录（/etc）",      "en-US": "Unix system config directory (/etc)" },
+    "Windows system root":       { "zh-CN": "Windows 系统目录（C:/Windows）", "en-US": "Windows system directory (C:/Windows)" },
+    "Windows program files":     { "zh-CN": "Windows 程序目录",              "en-US": "Windows Program Files directory" }
+  }
+}

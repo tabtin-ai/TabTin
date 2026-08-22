@@ -1,0 +1,83 @@
+{
+  "title": "Boîtes",
+  "installedCount": "{{count}} installé",
+  "section": {
+    "installed": "Installé",
+    "available": "Disponible"
+  },
+  "action": {
+    "install": "Installer",
+    "uninstall": "Désinstaller",
+    "enable": "Activer",
+    "disable": "Désactiver",
+    "pin": "Épingle",
+    "unpin": "Désépingler",
+    "edit": "Modifier",
+    "retry": "Réessayer",
+    "saveAll": "Enregistrer tout"
+  },
+  "confirm": {
+    "uninstall": "Êtes-vous sûr de vouloir désinstaller \"{{name}}\" ?",
+    "delete": "Etes-vous sûr de vouloir supprimer « {{name}} » ? Cette action ne peut pas être annulée.",
+    "unsavedChanges": "Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir partir ?"
+  },
+  "empty": {
+    "title": "Pas encore de boîtes",
+    "description": "Dites à l'agent ce que vous souhaitez accomplir : il peut créer et installer un Tin pour vous. Les boîtes publiées par les coéquipiers apparaîtront dans la liste Disponible ci-dessous.",
+    "askAgent": "Demander à l'agent de créer une boîte",
+    "agentPrompt": "Aidez-moi à créer un plugin Tin. Demandez d'abord quel scénario je souhaite résoudre (par exemple, mise en surbrillance automatique des pages, extraction d'informations ou aides au navigateur), puis créez-le et installez-le dans cet espace de travail.",
+    "errorNoSession": "Impossible de démarrer une discussion pour le moment. Veuillez réessayer.",
+    "openPanel": "Panneau de boîtes ouvertes"
+  },
+  "sidePanel": {
+    "emptyTitle": "Aucune étain installée",
+    "emptyDescription": "Les boîtes sont des plugins intelligents qui s'activent lors de la navigation et fournissent des fonctionnalités d'assistance.",
+    "openPanel": "Installer l'étain"
+  },
+  "home": {
+    "loading": "Chargement...",
+    "viewAll": "Voir toutes les boîtes {{count}}...",
+    "activeCount": "{{count}} Boîte(s) active(s)",
+    "loadError": "Échec du chargement des boîtes",
+    "retry": "Réessayer"
+  },
+  "activated": "Activé",
+  "editor": {
+    "tabs": {
+      "panelHtml": "Panneau d'interface utilisateur",
+      "contentScript": "Script de contenu",
+      "backgroundScript": "Script d'arrière-plan",
+      "agentInstructions": "Instructions pour les agents"
+    },
+    "placeholder": {
+      "panelHtml": "<!-- Écrivez le code HTML de votre panneau Tin UI ici -->\n<!-- Utilisez les bibliothèques CDN et communiquez avec l'hôte via l'API window.tin -->",
+      "contentScript": "// Script injecté dans les pages parcourues\n// Peut accéder et modifier la page DOM",
+      "backgroundScript": "// Script d'arrière-plan exécuté dans le bac à sable du processus principal",
+      "agentInstructions": "# Instructions pour les agents\n\nDécrivez ce que fait cette boîte et comment interagir avec elle..."
+    },
+    "lang": {
+      "html": "HTML",
+      "javascript": "Javascript",
+      "markdown": "Démarquage"
+    },
+    "charCount": "Caractères {{count}}"
+  },
+  "toast": {
+    "installSuccess": "\"{{name}}\" installé avec succès",
+    "installFailed": "L'installation a échoué",
+    "uninstallSuccess": "\"{{name}}\" désinstallé",
+    "uninstallFailed": "Échec de la désinstallation",
+    "activateSuccess": "\"{{name}}\" activé",
+    "activateFailed": "L'activation a échoué",
+    "disableSuccess": "\"{{name}}\" désactivé",
+    "disableFailed": "Échec de la désactivation",
+    "deleteSuccess": "\"{{name}}\" supprimé",
+    "deleteFailed": "Échec de la suppression",
+    "enableFailed": "Échec de l'activation",
+    "pinFailed": "L'opération de broche a échoué",
+    "loadFailed": "Échec du chargement",
+    "saveSuccess": "Sauvegarde réussie",
+    "saveFailed": "Échec de l'enregistrement",
+    "persistVarFailed": "Échec de l'enregistrement de la variable"
+  }
+}

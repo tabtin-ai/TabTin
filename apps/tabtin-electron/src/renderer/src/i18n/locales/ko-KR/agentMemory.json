@@ -1,0 +1,84 @@
+{
+  "actions": {
+    "useful": "유용함",
+    "correct": "맞다",
+    "forget": "잊어버리다",
+    "cancel": "취소",
+    "retry": "재시도",
+    "loadMore": "더 로드하기"
+  },
+  "errors": {
+    "loadFailed": "로드하지 못했습니다. 다시 시도해 주세요.",
+    "loadMoreFailed": "더 로드하지 못했습니다. 다시 시도해 주세요.",
+    "actionFailed": "작업 실패",
+    "correctFailed": "수정하지 못했습니다.",
+    "exportFailed": "내보내기 실패"
+  },
+  "toast": {
+    "corrected": "메모리 수정됨"
+  },
+  "types": {
+    "about_you": "당신에 대해",
+    "insight": "통찰력",
+    "task_summary": "협업 요약",
+    "diary": "일기"
+  },
+  "emotions": {
+    "happy": "행복하다",
+    "curious": "호기심",
+    "frustrated": "좌절하다",
+    "relieved": "안심",
+    "surprised": "놀랐다",
+    "reflective": "반사",
+    "neutral": "참고"
+  },
+  "time": {
+    "justNow": "지금 막",
+    "minutesAgo": "{{count}}분 전",
+    "hoursAgo": "{{count}}시간 전",
+    "daysAgo": "{{count}}일 전",
+    "today": "오늘",
+    "yesterday": "어제"
+  },
+  "importanceTitle": "중요도 {{count}}",
+  "exportDoc": {
+    "title": "{{name}}의 추억",
+    "organization": "조직: {{name}}",
+    "exportedAt": "내보낸 날짜: {{time}}",
+    "count": "{{count}} 총 추억",
+    "importanceLabel": "중요성"
+  },
+  "diary": {
+    "title": "{{name}}의 성장 기록",
+    "subtitle": "당신과 함께 일하면서 그들이 주목한 것",
+    "loadFailedTitle": "성장 로그를 로드하지 못했습니다.",
+    "selectAgent": "성장 로그를 보려면 AI 아바타를 선택하세요.",
+    "emptyTitle": "아직 성장 로그가 없습니다.",
+    "emptyHint": "공동작업하면 여기에 업무 일기가 표시됩니다.",
+    "forgetTitle": "이 AI 아바타가 이 항목을 잊어버렸습니까?",
+    "forgetDesc": "일단 잊어버리면 AI 아바타는 이 메모리를 다시 사용하지 않으며 여기에 나타나지도 않습니다. 이 작업은 취소할 수 없습니다."
+  },
+  "governance": {
+    "tabs": {
+      "overview": "개요",
+      "records": "모든 기록"
+    },
+    "filters": {
+      "all": "모두"
+    },
+    "records": {
+      "hint": "항목을 수정하거나 잊어버리면 다음 증류 시 개요 요약이 업데이트됩니다.",
+      "loadFailedTitle": "추억을 로드하지 못했습니다.",
+      "emptyTitle": "이 AI 아바타에는 아직 메모리 기록이 없습니다.",
+      "emptyHint": "공동작업하면 여기에 기록이 표시됩니다."
+    },
+    "forgetTitle": "이 AI 아바타는 이 기억을 잊었나요?",
+    "disabledNotice": "현재 메모리 녹화가 꺼져 있습니다. AI 아바타는 더 이상 기억을 기록, 회상, 표시하지 않습니다. 메모리 → 메모리 환경설정 → 에이전트가 메모하도록 허용에서 다시 켜세요.",
+    "export": {
+      "nothing": "이 AI 아바타에는 아직 내보낼 메모리가 없습니다.",
+      "disabledEmpty": "메모리 녹음이 꺼져 있어서 내보낼 것이 없습니다. 메모리 → 메모리 환경설정 → 에이전트가 메모하도록 허용에서 다시 켜세요.",
+      "filenameMemory": "기억",
+      "done": "{{count}} 추억을 내보냈습니다."
+    }
+  }
+}

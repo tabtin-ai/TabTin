@@ -1,0 +1,38 @@
+{
+  "home": {
+    "title": "Bot Space",
+    "noDocs": "这个 Space 里暂时没有文档",
+    "noTables": "这个 Space 里暂时没有表格",
+    "loadingContent": "正在加载内容...",
+    "loadingTables": "正在加载表格...",
+    "loadDocsFailed": "加载文档失败",
+    "loadTablesFailed": "加载表格失败",
+    "docCount": "{{count}} 篇文档",
+    "docSection": "文档",
+    "tableCount": "{{count}} 张表格",
+    "rowCount": "{{count}} 行",
+    "fieldCount": "{{count}} 列",
+    "openDoc": "打开",
+    "openTable": "打开",
+    "createTable": "新建表格",
+    "refreshContent": "刷新",
+    "refreshTables": "刷新",
+    "backToSpaces": "返回 Space 列表",
+    "tableSection": "表格",
+    "untitledDoc": "未命名文档",
+    "listView": "列表视图",
+    "gridView": "宫格视图",
+    "emptyTitle": "选择一个 Bot",
+    "emptyDescription": "从左侧选择一个 Bot Space 来查看其内容"
+  },
+  "panel": {
+    "cloudResources": "云端应用",
+    "viewAll": "查看全部"
+  },
+  "table": {
+    "visibility": {
+      "system": "系统表",
+      "internal": "内部"
+    }
+  }
+}

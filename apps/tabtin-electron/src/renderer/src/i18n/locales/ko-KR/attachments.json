@@ -1,0 +1,68 @@
+{
+  "actions": {
+    "upload": "첨부파일 업로드",
+    "uploading": "업로드 중...",
+    "reuse": "첨부파일 재사용",
+    "reuseLoading": "재사용 중...",
+    "cancel": "취소",
+    "remove": "제거",
+    "removeAll": "모두 제거",
+    "removingAll": "삭제 중...",
+    "download": "다운로드",
+    "downloadAll": "모두 다운로드"
+  },
+  "labels": {
+    "reuseSection": "기존 첨부 파일 재사용",
+    "uploadingList": "업로드 중",
+    "attachmentList": "첨부파일",
+    "unknownType": "알 수 없는 유형",
+    "empty": "첨부파일 없음"
+  },
+  "placeholders": {
+    "reuseFileId": "기존 첨부파일 ID 입력"
+  },
+  "tips": {
+    "uploadHelp": "여러 파일을 업로드할 수 있습니다. 첨부 파일 참조로 저장됩니다.",
+    "saveBeforeUpload": "첨부파일을 업로드하기 전에 기록을 저장하세요.",
+    "reuseHelp": "이 레코드에서 참조하려면 기존 첨부 파일_id를 입력하세요.",
+    "syncing": "첨부파일 동기화 중...",
+    "uploadDropHint": "여기를 클릭하거나 붙여넣거나 파일을 드래그하세요"
+  },
+  "errors": {
+    "fetchFailed": "첨부파일을 로드하지 못했습니다.",
+    "uploadFailed": "첨부파일을 업로드하지 못했습니다.",
+    "abortFailed": "업로드를 취소하지 못했습니다.",
+    "removeFailed": "첨부파일을 삭제하지 못했습니다.",
+    "reuseNeedSave": "첨부 파일을 재사용하기 전에 기록을 저장하세요",
+    "reuseMissingId": "파일 ID를 입력하세요.",
+    "reuseFailed": "첨부파일을 재사용하지 못했습니다.",
+    "removeAllFailed": "첨부파일을 삭제하지 못했습니다.",
+    "fileTooLarge": "{{limit}}MB 크기 제한을 초과했습니다.",
+    "fileTypeNotAllowed": "지원되지 않는 파일 형식",
+    "fileRejectedSingle": "파일 {{name}} 건너뛰기: {{reason}}",
+    "fileRejectedMultiple": "{{count}} 파일을 건너뛰었습니다."
+  },
+  "apiErrors": {
+    "emptyFileList": "파일 목록은 비워둘 수 없습니다.",
+    "batchUploadFailed": "일괄 업로드 실패",
+    "batchUploadFailedWithReason": "일괄 업로드 실패: {{message}}",
+    "uploadFailed": "업로드 실패",
+    "createUploadTaskFailed": "첨부파일 업로드 작업을 생성하지 못했습니다.",
+    "uploadPartFailed": "첨부 파일 청크를 업로드하지 못했습니다.",
+    "uploadPartInvalid": "잘못된 업로드 청크 응답",
+    "completeUploadFailed": "첨부파일 업로드를 완료하지 못했습니다.",
+    "abortUploadFailed": "첨부파일 업로드를 취소하지 못했습니다.",
+    "reuseFailed": "첨부파일을 재사용하지 못했습니다.",
+    "removeReferenceFailed": "첨부파일 참조를 삭제하지 못했습니다.",
+    "convertFieldFailed": "필드 유형을 변환하지 못했습니다.",
+    "uploadTaskEmpty": "첨부 파일 업로드 작업에서 파일이 반환되지 않았습니다.",
+    "uploadTaskMissingItem": "첨부파일 업로드 작업 정보 누락 {{name}}"
+  },
+  "status": {
+    "pending": "대기 중",
+    "uploading": "업로드 중",
+    "completed": "완료됨",
+    "error": "업로드 실패",
+    "cancelled": "취소됨"
+  }
+}

@@ -1,0 +1,421 @@
+/**
+ * Context Menu Styles
+ */
+
+/* ========== 根容器 ========== */
+.context-menu {
+  min-width: 160px !important;
+  padding: 4px !important;
+  
+  border-radius: var(--radius-interactive, 0.5rem) !important;
+  border: 0 !important;
+  background: hsl(var(--glass-bg-overlay, var(--glass-bg-strong, var(--popover)))) !important;
+  box-shadow:
+    var(--shadow-overlay, 0 10px 28px hsl(var(--foreground) / 0.08)),
+    var(--glass-shadow-inset, inset 0 1px 4px hsl(var(--background) / 0.28)) !important;
+  backdrop-filter: blur(var(--glass-blur-overlay, 16px)) saturate(var(--glass-saturate, 150%)) !important;
+  -webkit-backdrop-filter: blur(var(--glass-blur-overlay, 16px)) saturate(var(--glass-saturate, 150%)) !important;
+  
+  position: absolute !important;
+  z-index: var(--z-dropdown) !important;
+  
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  
+  user-select: none !important;
+  outline: none !important;
+  
+  visibility: visible !important;
+  opacity: 1 !important;
+  
+  animation: context-menu-enter 100ms ease-out !important;
+  animation-fill-mode: both !important;
+}
+
+@keyframes context-menu-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.context-menu[data-state="closed"] {
+  animation: context-menu-exit 80ms ease-in;
+}
+
+@keyframes context-menu-exit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ========== 菜单体 ========== */
+.context-menu-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+/* ========== 菜单项 ========== */
+.context-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  min-height: 28px;
+  
+  border-radius: var(--radius-interactive, 0.5rem);
+  font-size: 14px;
+  line-height: 22px;
+  color: hsl(var(--popover-foreground));
+  
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 80ms ease-out;
+  outline: none;
+}
+
+.context-menu-item:hover:not([data-disabled="true"]) {
+  background: hsl(var(--foreground) / 0.03);
+  color: hsl(var(--foreground));
+}
+
+.context-menu-item:focus-visible {
+  background: hsl(var(--foreground) / 0.06);
+  color: hsl(var(--foreground));
+  outline: none;
+}
+
+.context-menu-item[data-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.context-menu-item[data-danger="true"] {
+  color: hsl(var(--destructive));
+}
+
+.context-menu-item[data-danger="true"] .context-menu-item__icon {
+  color: hsl(var(--destructive));
+}
+
+.context-menu-item[data-danger="true"]:hover {
+  background: hsl(var(--destructive) / 0.1);
+}
+
+/* ========== 图标 ========== */
+.context-menu-item__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  font-size: 16px;
+  color: hsl(var(--muted-foreground) / 0.6);
+  transition: color 80ms ease-out;
+}
+
+.context-menu-item:hover:not([data-disabled="true"]) .context-menu-item__icon {
+  color: inherit;
+}
+
+.context-menu-item:focus-visible .context-menu-item__icon {
+  color: inherit;
+}
+
+.context-menu-item__icon > svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ========== 文字 ========== */
+.context-menu-item__label {
+  flex: 1;
+  font-size: 14px;
+  line-height: 22px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ========== 后缀 ========== */
+.context-menu-item__suffix {
+  font-size: 12px;
+  color: hsl(var(--muted-foreground) / 0.6);
+}
+
+/* ========== 快捷键 ========== */
+.context-menu-item__shortcut {
+  font-size: 12px;
+  color: hsl(var(--muted-foreground) / 0.6);
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+}
+
+/* ========== 选中图标 ========== */
+.context-menu-item__check {
+  width: 14px;
+  height: 14px;
+  color: hsl(var(--foreground));
+  margin-left: auto;
+}
+
+/* ========== 分隔线 ========== */
+.context-menu-divider {
+  height: 0.5px;
+  margin: 3px 4px;
+  background: hsl(var(--border) / 0.3);
+  border: none;
+}
+
+/* ========== Section（分组）========== */
+.context-menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.context-menu-section + .context-menu-section {
+  margin-top: 2px;
+  padding-top: 2px;
+  border-top: 0.5px solid hsl(var(--border) / 0.3);
+}
+
+/* ========== 标题栏 ========== */
+.context-menu-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px 6px;
+  margin-bottom: 2px;
+  border-bottom: 0.5px solid hsl(var(--border) / 0.3);
+}
+
+.context-menu-header__icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(var(--muted-foreground) / 0.6);
+}
+
+.context-menu-header__title {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: hsl(var(--muted-foreground) / 0.6);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.context-menu-header__button {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-interactive, 0.5rem);
+  color: hsl(var(--muted-foreground) / 0.6);
+  cursor: pointer;
+  transition: background-color 80ms ease-out;
+}
+
+.context-menu-header__button:hover {
+  background: hsl(var(--foreground) / 0.03);
+  color: hsl(var(--popover-foreground));
+}
+
+/* ========== 输入框 ========== */
+.context-menu-input {
+  padding: 4px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.context-menu-input__container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.context-menu-input__icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(var(--muted-foreground) / 0.6);
+}
+
+.context-menu-input__field {
+  flex: 1;
+  height: 28px;
+  padding: 4px 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-interactive, 0.5rem);
+  font-size: 14px;
+  line-height: 22px;
+  background: hsl(var(--muted) / 0.3);
+  color: hsl(var(--foreground));
+  outline: none;
+  transition: border-color 80ms ease-out;
+}
+
+.context-menu-input__field:focus {
+  border-color: transparent;
+  background: hsl(var(--muted) / 0.35);
+  box-shadow: inset 0 0 0 1px hsl(var(--ring));
+}
+
+.context-menu-input__field::placeholder {
+  color: hsl(var(--muted-foreground) / 0.4);
+}
+
+.context-menu-input__error {
+  font-size: 12px;
+  color: hsl(var(--destructive));
+  padding: 0 4px;
+}
+
+/* ========== Textarea ========== */
+.context-menu-textarea {
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.context-menu-textarea__container {
+  display: flex;
+  gap: 8px;
+}
+
+.context-menu-textarea__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
+  color: hsl(var(--muted-foreground));
+}
+
+.context-menu-textarea__field {
+  flex: 1;
+  padding: 4px 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-interactive, 0.5rem);
+  font-size: 14px;
+  line-height: 22px;
+  background: hsl(var(--muted) / 0.3);
+  color: hsl(var(--foreground));
+  outline: none;
+  resize: vertical;
+  min-height: 56px;
+  font-family: inherit;
+  transition: border-color 80ms ease-out;
+}
+
+.context-menu-textarea__field:focus {
+  border-color: transparent;
+  background: hsl(var(--muted) / 0.35);
+  box-shadow: inset 0 0 0 1px hsl(var(--ring));
+}
+
+.context-menu-textarea__field::placeholder {
+  color: hsl(var(--muted-foreground) / 0.4);
+}
+
+/* ========== Checkbox ========== */
+.context-menu-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: var(--radius-interactive, 0.5rem);
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 80ms ease-out;
+}
+
+.context-menu-checkbox:hover:not([data-disabled="true"]) {
+  background: hsl(var(--foreground) / 0.03);
+}
+
+.context-menu-checkbox[data-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.context-menu-checkbox__box {
+  width: 16px;
+  height: 16px;
+  border: 1px solid hsl(var(--border) / 0.2);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: hsl(var(--muted) / 0.3);
+  transition: all 80ms ease-out;
+}
+
+.context-menu-checkbox[data-checked="true"] .context-menu-checkbox__box {
+  background: hsl(var(--primary));
+  border-color: hsl(var(--primary));
+}
+
+.context-menu-checkbox__check {
+  width: 12px;
+  height: 12px;
+  color: hsl(var(--primary-foreground));
+  opacity: 0;
+  transition: opacity 80ms ease-out;
+}
+
+.context-menu-checkbox[data-checked="true"] .context-menu-checkbox__check {
+  opacity: 1;
+}
+
+.context-menu-checkbox__label {
+  flex: 1;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+/* ========== 子菜单 ========== */
+.context-menu-sub-menu {
+  position: relative;
+}
+
+.context-menu-sub-menu__arrow {
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  color: hsl(var(--muted-foreground));
+  opacity: 0.7;
+}
+
+.context-menu--submenu {
+  /* 子菜单样式与主菜单一致 */
+}
+
+/* ========== Custom ========== */
+.context-menu-custom {
+  padding: 4px;
+}
+

@@ -1,0 +1,84 @@
+{
+  "actions": {
+    "useful": "役に立つ",
+    "correct": "正しい",
+    "forget": "忘れる",
+    "cancel": "キャンセル",
+    "retry": "再試行",
+    "loadMore": "さらにロードする"
+  },
+  "errors": {
+    "loadFailed": "ロードに失敗しました。再試行してください",
+    "loadMoreFailed": "さらに読み込めませんでした。再試行してください",
+    "actionFailed": "アクションが失敗しました",
+    "correctFailed": "修正できませんでした",
+    "exportFailed": "エクスポートに失敗しました"
+  },
+  "toast": {
+    "corrected": "記憶修正済み"
+  },
+  "types": {
+    "about_you": "あなたについて",
+    "insight": "洞察力",
+    "task_summary": "コラボレーション概要",
+    "diary": "日記"
+  },
+  "emotions": {
+    "happy": "ハッピー",
+    "curious": "好奇心旺盛",
+    "frustrated": "イライラした",
+    "relieved": "安心した",
+    "surprised": "驚いた",
+    "reflective": "反射性",
+    "neutral": "注記"
+  },
+  "time": {
+    "justNow": "たった今",
+    "minutesAgo": "{{count}} 分前",
+    "hoursAgo": "{{count}} 時間前",
+    "daysAgo": "{{count}} 日前",
+    "today": "今日",
+    "yesterday": "昨日"
+  },
+  "importanceTitle": "重要性 {{count}}",
+  "exportDoc": {
+    "title": "{{name}}の思い出",
+    "organization": "組織: {{name}}",
+    "exportedAt": "エクスポート済み: {{time}}",
+    "count": "{{count}} 思い出の合計",
+    "importanceLabel": "重要性"
+  },
+  "diary": {
+    "title": "{{name}}の成長記録",
+    "subtitle": "あなたとの作業中に彼らが気づいたこと",
+    "loadFailedTitle": "成長ログのロードに失敗しました",
+    "selectAgent": "AI アバターを選択すると、その成長ログが表示されます",
+    "emptyTitle": "成長記録はまだありません",
+    "emptyHint": "コラボレーションすると、作業日記がここに表示されます",
+    "forgetTitle": "この AI アバターはこのエントリを忘れましたか?",
+    "forgetDesc": "一度忘れてしまうと、AI アバターがこのメモリを再度使用することはなくなり、ここにも表示されなくなります。この操作は元に戻すことができません。"
+  },
+  "governance": {
+    "tabs": {
+      "overview": "概要",
+      "records": "すべての記録"
+    },
+    "filters": {
+      "all": "すべて"
+    },
+    "records": {
+      "hint": "エントリを修正するか忘れると、次の蒸留で概要の概要が更新されます。",
+      "loadFailedTitle": "メモリーのロードに失敗しました",
+      "emptyTitle": "この AI アバターにはまだ記憶記録がありません",
+      "emptyHint": "コラボレーション後、レコードがここに表示されます"
+    },
+    "forgetTitle": "このAIアバターはこの記憶を忘れてしまったのだろうか？",
+    "disabledNotice": "メモリ記録は現在オフになっています。 AI アバターは、記憶を記録したり、思い出したり、表示したりすることはなくなりました。 [メモリ] → [メモリ設定] → [エージェントにメモを取らせる] でオンに戻します。",
+    "export": {
+      "nothing": "この AI アバターにはエクスポートする記憶がまだありません",
+      "disabledEmpty": "メモリの記録がオフになっているため、エクスポートするものはありません。 [メモリ] → [メモリ設定] → [エージェントにメモを取らせる] でオンに戻します。",
+      "filenameMemory": "記憶",
+      "done": "エクスポートされた {{count}} メモリ"
+    }
+  }
+}

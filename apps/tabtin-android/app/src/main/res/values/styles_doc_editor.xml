@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default style for HighlightDrawer background rendering -->
+    <style name="DocRoundedBgTextView">
+        <item name="roundedTextHorizontalPadding">@dimen/tt_spacing_xs</item>
+        <item name="roundedTextVerticalPadding">@dimen/tt_spacing_xxs</item>
+        <item name="roundedTextDrawable">@drawable/doc_rounded_bg</item>
+        <item name="roundedTextDrawableLeft">@drawable/doc_rounded_bg_left</item>
+        <item name="roundedTextDrawableMid">@drawable/doc_rounded_bg_mid</item>
+        <item name="roundedTextDrawableRight">@drawable/doc_rounded_bg_right</item>
+    </style>
+
+    <!-- Block text content styles -->
+    <style name="DocBlockTextContent">
+        <item name="android:textColor">@color/doc_editor_text_primary</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:gravity">top|start</item>
+        <item name="android:inputType">textMultiLine|textCapSentences|textAutoCorrect</item>
+    </style>
+
+    <style name="DocBlockHeaderOneContent" parent="DocBlockTextContent">
+    </style>
+
+    <style name="DocBlockHeaderTwoContent" parent="DocBlockTextContent">
+    </style>
+
+    <style name="DocBlockHeaderThreeContent" parent="DocBlockTextContent">
+    </style>
+
+    <style name="DocBlockHeaderFourContent" parent="DocBlockTextContent" />
+
+    <style name="DocBlockHeaderFiveContent" parent="DocBlockTextContent" />
+
+    <style name="DocBlockHeaderSixContent" parent="DocBlockTextContent" />
+
+    <style name="DocBlockBulletedContent" parent="DocBlockTextContent" />
+
+    <style name="DocBlockNumberedContent" parent="DocBlockTextContent" />
+
+    <style name="DocBlockCheckboxContent" parent="DocBlockTextContent" />
+
+    <style name="DocBlockHighlightContent" parent="DocBlockTextContent">
+        <item name="android:textColor">@color/doc_editor_text_secondary</item>
+    </style>
+
+    <style name="DocBlockCodeContent" parent="DocBlockTextContent">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">@dimen/tt_font_body</item>
+        <item name="android:lineSpacingExtra">@dimen/tt_spacing_xxs</item>
+        <item name="android:paddingStart">@dimen/tt_spacing_md</item>
+        <item name="android:paddingEnd">@dimen/tt_spacing_md</item>
+        <item name="android:paddingTop">@dimen/tt_spacing_sm</item>
+        <item name="android:paddingBottom">@dimen/tt_spacing_sm</item>
+        <item name="docIgnoreDragAndDrop">true</item>
+        <item name="docOnlyPasteAsPlainText">true</item>
+    </style>
+</resources>

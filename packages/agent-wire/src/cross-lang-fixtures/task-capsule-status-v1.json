@@ -1,0 +1,107 @@
+{
+  "_doc": "TaskCapsule 跨端状态投影契约 fixture —— Electron / iOS / Android 必须对同一组投影输入给出 byte-identical 的 canonical status key，并对视觉决策（full/mini/hidden）保持一致。优先级：人工介入 → paused/连接恢复 → 忙碌 → 终态 → 待命。后端不下发颜色/尺寸；视觉态由客户端纯函数 resolveTaskCapsuleVisual 给出（仅 ready → mini；其余含 paused、未读 complete → full）。SSOT：@tabtin/contracts resolveTaskCapsuleStatus / resolveTaskCapsuleVisual；Electron 正典 resolveCapsuleStatus 应委托或等价于该函数。",
+  "spec_version": "v1",
+  "ssot_anchor": "@tabtin/agent-wire cross-lang-fixtures/task-capsule-status-v1.json",
+  "validation_rule": "resolveTaskCapsuleStatus(input) === expected_status; resolveTaskCapsuleVisual(expected_status) === expected_visual",
+  "priority_order": [
+    "pendingApproval → needsApproval",
+    "pendingAnswer → needsAnswer",
+    "paused → paused",
+    "suspended → recovering",
+    "busy → preparing|queued|thinking|planningNext|working|finishing",
+    "runPhase=error → error",
+    "runPhase=cancelled → stopped",
+    "unreadCount>0 → complete",
+    "else → ready"
+  ],
+  "cases": [
+    {
+      "name": "approval · 人工确认优先于 busy",
+      "input": {
+        "busy": true,
+        "runPhase": "tool_calls",
+        "pendingApproval": true
+      },
+      "expected_status": "needsApproval",
+      "expected_visual": "full"
+    },
+    {
+      "name": "answer · 人工回答优先于 busy",
+      "input": {
+        "busy": true,
+        "runPhase": "planning",
+        "pendingAnswer": true
+      },
+      "expected_status": "needsAnswer",
+      "expected_visual": "full"
+    },
+    {
+      "name": "paused · 优先于 busy，且不是 stopped/recovering",
+      "input": {
+        "busy": true,
+        "runPhase": "tool_calls",
+        "paused": true
+      },
+      "expected_status": "paused",
+      "expected_visual": "full",
+      "notes": "paused 是用户主动暂停；不得误投影为 stopped（cancelled）或 recovering（suspended）"
+    },
+    {
+      "name": "paused · 优先于 suspended（人工暂停高于连接恢复）",
+      "input": {
+        "busy": false,
+        "paused": true,
+        "suspended": true
+      },
+      "expected_status": "paused",
+      "expected_visual": "full"
+    },
+    {
+      "name": "recovering · 连接中断待恢复",
+      "input": {
+        "busy": true,
+        "runPhase": "tool_calls",
+        "suspended": true
+      },
+      "expected_status": "recovering",
+      "expected_visual": "full"
+    },
+    {
+      "name": "queue · busy + queuedCount",
+      "input": {
+        "busy": true,
+        "runPhase": "done",
+        "queuedCount": 2
+      },
+      "expected_status": "queued",
+      "expected_visual": "full"
+    },
+    {
+      "name": "error · 终态异常优先于未读 complete",
+      "input": {
+        "busy": false,
+        "runPhase": "error",
+        "unreadCount": 2
+      },
+      "expected_status": "error",
+      "expected_visual": "full"
+    },
+    {
+      "name": "complete · 未读完成 → full",
+      "input": {
+        "busy": false,
+        "unreadCount": 1
+      },
+      "expected_status": "complete",
+      "expected_visual": "full"
+    },
+    {
+      "name": "ready · 仅待命 → mini",
+      "input": {
+        "busy": false
+      },
+      "expected_status": "ready",
+      "expected_visual": "mini"
+    }
+  ]
+}

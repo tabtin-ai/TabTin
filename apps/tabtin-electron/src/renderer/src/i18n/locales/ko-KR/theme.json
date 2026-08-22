@@ -1,0 +1,35 @@
+{
+  "theme": {
+    "toggle": "테마 전환",
+    "light": "빛",
+    "dark": "어둠",
+    "system": "시스템"
+  },
+  "colorScheme": {
+    "toggle": "색 구성표 전환",
+    "options": {
+      "orange": "생생한 오렌지",
+      "teal": "깊은 청록색",
+      "crimson": "크림슨",
+      "slate": "비즈니스 그레이",
+      "emerald": "에메랄드",
+      "blue": "비즈니스 블루",
+      "carbon": "카본 블랙",
+      "rose": "로즈",
+      "violet": "보라색",
+      "sky": "스카이블루"
+    },
+    "descriptions": {
+      "orange": "따뜻하고 활력이 넘치는",
+      "teal": "전문적이고 꾸준한",
+      "crimson": "대담하고 반응이 좋습니다.",
+      "slate": "중립적이고 형식적임",
+      "emerald": "신선하고 협력적인",
+      "blue": "클래식 및 엔터프라이즈",
+      "carbon": "미니멀하고 집중된",
+      "rose": "활기차고 창의적",
+      "violet": "조용하고 우아한",
+      "sky": "순수하고 상쾌한"
+    }
+  }
+}

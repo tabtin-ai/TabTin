@@ -1,0 +1,34 @@
+{
+  "validation": {
+    "required": "Este campo es obligatorio",
+    "invalidUrl": "Por favor ingresa una URL válida",
+    "invalidEmail": "Por favor introduce un correo electrónico válido",
+    "invalidFormat": "Formato no válido",
+    "minValue": "El mínimo es {{min}}",
+    "maxValue": "El máximo es {{max}}",
+    "maxLength": "Como máximo caracteres {{max}}"
+  },
+  "picker": {
+    "search": "Buscar...",
+    "noResults": "No hay resultados coincidentes",
+    "empty": "No hay herramientas de IA disponibles"
+  },
+  "blockCard": {
+    "presetTitle": "Parámetros enviados",
+    "askUserTitle": "Parámetros respondidos",
+    "fallbackLabel": "Parámetros"
+  },
+  "card": {
+    "expand": "Expandir",
+    "collapse": "Colapso",
+    "remove": "Quitar"
+  },
+  "upload": {
+    "clickToUpload": "Haga clic para cargar",
+    "fileTooLarge": "El archivo es demasiado grande",
+    "addMore": "Añadir"
+  },
+  "input": {
+    "presetPicker": "Herramientas de IA"
+  }
+}

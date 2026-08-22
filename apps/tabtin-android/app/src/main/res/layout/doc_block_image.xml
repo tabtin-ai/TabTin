@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 图片块 -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/tt_spacing_lg">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:contentDescription="@null" />
+
+    <!-- 空图片占位符 -->
+    <LinearLayout
+        android:id="@+id/placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/doc_editor_image_placeholder_height"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:background="@drawable/doc_code_bg"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:layout_width="@dimen/tt_spacing_xxxl"
+            android:layout_height="@dimen/tt_spacing_xxxl"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:contentDescription="@null"
+            android:alpha="0.5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tt_spacing_sm"
+            android:text="@string/doc_image_placeholder"
+            android:textColor="@color/doc_editor_text_tertiary"
+            android:textSize="@dimen/tt_font_meta" />
+    </LinearLayout>
+</FrameLayout>

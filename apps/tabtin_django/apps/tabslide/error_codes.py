@@ -1,0 +1,36 @@
+"""
+TabSlide 错误码定义
+
+继承通用错误码，仅添加 TabSlide 特有的错误码。
+
+使用方式:
+    from apps.tabslide.error_codes import ErrorCode
+"""
+
+from apps.services.common.error_codes import CommonErrorCode
+
+
+class ErrorCode(CommonErrorCode):
+    """TabSlide 错误码常量"""
+
+    # 资源不存在
+    SLIDE_PROJECT_NOT_FOUND = "SLIDE_PROJECT_NOT_FOUND"
+    PPTX_FILE_NOT_FOUND = "PPTX_FILE_NOT_FOUND"
+    ELEMENT_NOT_FOUND = "ELEMENT_NOT_FOUND"
+
+    # 业务逻辑错误
+    SLIDES_CREATION_FAILED = "SLIDES_CREATION_FAILED"
+    PAGES_SAVE_FAILED = "PAGES_SAVE_FAILED"
+    PPTX_IMPORT_FAILED = "PPTX_IMPORT_FAILED"
+    PPTX_IMPORT_TASK_NOT_FOUND = "PPTX_IMPORT_TASK_NOT_FOUND"
+    PPTX_INVALID_FORMAT = "PPTX_INVALID_FORMAT"
+    EXPORT_FORMAT_NOT_SUPPORTED = "EXPORT_FORMAT_NOT_SUPPORTED"
+    ELEMENT_UPDATE_FAILED = "ELEMENT_UPDATE_FAILED"
+    # patch schema 不合法（顶层有未知字段、内容字段未嵌 props 等）
+    PATCH_SCHEMA_INVALID = "PATCH_SCHEMA_INVALID"
+    IMAGE_UPLOAD_FAILED = "IMAGE_UPLOAD_FAILED"
+
+    # 版本控制
+    VERSION_CONFLICT = "VERSION_CONFLICT"
+    HISTORY_NOT_FOUND = "HISTORY_NOT_FOUND"
+    HISTORY_RESTORE_FAILED = "HISTORY_RESTORE_FAILED"

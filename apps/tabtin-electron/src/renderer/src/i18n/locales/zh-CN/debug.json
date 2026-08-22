@@ -1,0 +1,11 @@
+{
+  "panelEntry": {
+    "title": "爬虫调试",
+    "opening": "打开中..."
+  },
+  "errorBoundary": {
+    "title": "界面渲染异常",
+    "unknown": "未知错误",
+    "emptyStack": "暂无组件栈信息"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "id": "tabtin-integrations-lite-pack",
+  "name": "Integrations Lite Pack",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "集成轻量包：GitHub / 飞书 / 邮件 / 日历的 Encoded Preference + CLI 编排（不依赖完整 MCP）。",
+  "icon": "plug",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "automation",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 29
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/github-pr-ops",
+    "skills/lark-sync-brief",
+    "skills/feishu-import-to-org",
+    "skills/mail-triage-ops",
+    "skills/calendar-day-plan"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "github-pr-ops": {
+        "enabled": true
+      },
+      "lark-sync-brief": {
+        "enabled": true
+      },
+      "feishu-import-to-org": {
+        "enabled": true
+      },
+      "mail-triage-ops": {
+        "enabled": true
+      },
+      "calendar-day-plan": {
+        "enabled": true
+      }
+    }
+  }
+}

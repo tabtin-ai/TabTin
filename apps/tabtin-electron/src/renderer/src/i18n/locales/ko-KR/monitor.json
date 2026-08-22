@@ -1,0 +1,84 @@
+{
+  "status": {
+    "running": "달리기",
+    "stopped": "중지됨",
+    "streamEnded": "스트림 종료됨",
+    "failed": "실패"
+  },
+  "stop": "모니터 중지",
+  "failReason": {
+    "spawnPtyFailed": "모니터를 시작하지 못했습니다(사용 중이거나 제한에 도달함). 나중에 다시 시도하세요.",
+    "writePtyFailed": "모니터 명령을 실행하지 못했습니다. 다시 시도해 주세요.",
+    "invalidRegex": "필터 패턴이 잘못되었습니다. 규칙을 확인하고 다시 시도하세요.",
+    "alreadyRunning": "이 모니터는 이미 실행 중입니다.",
+    "unknownAction": "알 수 없는 모니터 작업입니다."
+  },
+  "emitInterrupted": "모니터 보고가 중단되었습니다(인증 만료). 데이터가 불완전할 수 있습니다. 로그인 상태를 확인하세요.",
+  "resourceMonitor": {
+    "severity": {
+      "healthy": "편안한",
+      "attention": "좋음",
+      "heavy": "헤비"
+    },
+    "tagline": {
+      "healthy": "모든 것이 조용합니다. 쉽게 만들 수 있습니다.",
+      "attention": "원활하게 실행 - 영감을 따르세요",
+      "heavy": "기분이 무거워요. 사용하지 않는 탭을 닫아 보세요."
+    },
+    "current": "현재",
+    "browser": "브라우저",
+    "browserReclaim": {
+      "checkTitle": "브라우저 뷰 구축 확인",
+      "available": "{{count}} 유휴 브라우저를 회수할 수 있습니다.",
+      "noneIdle": "지금 회수할 유휴 브라우저가 없습니다.",
+      "noBrowsers": "추적된 브라우저 보기가 없습니다.",
+      "reclaimMany": "{{reason}}. {{count}} 분리된 유휴 브라우저를 먼저 회수한 다음 전체 사용량이 감소하는지 확인하세요.",
+      "reclaimOne": "{{reason}}. 분리된 유휴 브라우저 {{title}}를 먼저 닫은 후 전체 사용량이 감소하는지 확인하세요.",
+      "overview": "{{reason}}. 현재 총 브라우저 조회 수는 {{total}}개, {{share}}개입니다.",
+      "retained": "{{count}} 분리 또는 미리보기 브라우저 보기가 아직 사용 중이거나 로드 중입니다. 작업 중단을 피하기 위해 회수되지 않습니다.",
+      "metricAvailable": "{{count}} 회수 가능",
+      "metricNoneIdle": "유휴 상태 없음",
+      "metricNoBrowsers": "없음",
+      "action": "유휴 브라우저 회수",
+      "actionUnavailable": "회수 가능한 품목 없음",
+      "actionShort": "회수",
+      "boundaryNote": "기본 창에서 사용되지 않는 분리된 브라우저 또는 미리보기 유휴 브라우저만 회수합니다. 일반 기본 창 탭은 닫히지 않습니다."
+    },
+    "spaceSection": "공간",
+    "resourcesSection": "자원",
+    "systemOverhead": "시스템 오버헤드",
+    "uiEngine": "UI 엔진",
+    "uiEngineDetail": "{{cpu}} · 페이지 렌더링 엔진용 공유 메모리",
+    "appHost": "앱 호스트",
+    "appHostDetail": "{{cpu}} · TabTin 앱 자체의 기본 메모리",
+    "unassigned": "할당되지 않음",
+    "unassignedDetail": "{{cpu}} · 아직 공간에 귀속되지 않은 리소스",
+    "background": "배경",
+    "cpu": "CPU",
+    "cpuCores": "{{count}} 코어",
+    "memory": "메모리",
+    "ramShare": "RAM의 {{percent}}",
+    "tabs": "탭",
+    "currentTabs": "현재 탭",
+    "allSessionTabs": "{{count}} 총 탭 수",
+    "closeAllTabs": "보관되지 않은 모든 세션에서 모든 탭을 닫습니다.",
+    "panes": "{{count}} 창",
+    "tabCount": "{{count}} 탭",
+    "runCount": "{{count}} 실행",
+    "appCount": "{{label}} × {{count}}",
+    "appBreakdownSeparator": ",",
+    "notCollected": "수집되지 않음",
+    "refresh": "새로고침",
+    "refreshLoading": "로드 중",
+    "trend": {
+      "memoryUp": "메모리 부족 {{delta}}",
+      "memoryDown": "메모리 부족 {{delta}}",
+      "cpuUp": "CPU 작동 {{delta}}",
+      "cpuDown": "CPU 다운 {{delta}}",
+      "stale": "데이터 지연 {{duration}}"
+    },
+    "viewDetails": "세부정보 보기",
+    "indicatorTitle": "성능",
+    "openSettingsAria": "성능 모니터 설정 열기"
+  }
+}

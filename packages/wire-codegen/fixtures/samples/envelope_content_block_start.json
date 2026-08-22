@@ -1,0 +1,15 @@
+{
+  "protocol_version": "v2",
+  "min_compatible_version": "v2",
+  "trace_id": "trace_abc123",
+  "thread_id": "thread_xyz789",
+  "_seq": 2,
+  "event_type": "agent.stream.content_block_start",
+  "message_id": "msg_01",
+  "index": 0,
+  "block_id": "blk_001",
+  "block": {
+    "type": "text",
+    "text": ""
+  }
+}

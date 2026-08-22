@@ -1,0 +1,253 @@
+{
+  "rewind": {
+    "recordHistoryMissing": "「{{tableName}}」無法完整回退：{{count}} 行記錄的歷史快照已超期清理。本次回退已停止，資料保持目前狀態。建議：① 選擇較近的版本點；② 若必須使用此版本點，聯絡管理員從備份還原。",
+    "outboxDiscarded": "「{{tableName}}」的 {{count}} 個後台計算因回退已被丟棄，系統正在重新計算所有公式列。預計 {{etaSeconds}} 秒內完成，完成前部分單元格可能顯示「計算中…」。"
+  },
+  "field": {
+    "typeConvertFailed": "「{{fieldName}}」從 {{oldType}} 改為 {{newType}} 失敗：第 {{rowNo}} 行的「{{sample}}」無法轉換。本次變更已撤銷，欄位類型保持原樣。建議：① 匯出此列後用表格軟體清洗；② 改用「批次更新」先把異常值統一；③ 聯絡管理員協助處理 {{count}} 行受影響資料。",
+    "renameConflict": "「{{oldName}}」無法改名為「{{newName}}」：已有同名欄位或被 {{count}} 個公式 / 關聯欄位引用。建議先在「欄位依賴」中查看引用關係，或選擇不同名稱。",
+    "deleteReferenced": "「{{fieldName}}」無法刪除：仍被 {{count}} 個公式 / 關聯欄位引用。強行刪除會導致這些欄位失效。建議先刪除引用方，或在「欄位依賴」中查看完整連結後再決策。",
+    "primaryFieldDeleteForbidden": "無法刪除“{{fieldName}}”：這是主鍵欄位。直接刪除可能影響現有資料或關聯列。請先在表格設定裡更換主鍵。",
+    "deleteImpactDialog": {
+      "warningHigh": "此字段被其它字段或視圖引用，刪除會讓下游字段失效。建議先到「字段依賴」中查看完整鏈路再決策。",
+      "warningMedium": "此欄位被部分視圖引用，刪除後視圖配置會自動清理。",
+      "warningLow": "此欄位無下游依賴，可安全刪除。",
+      "noImpactSafe": "確認要刪除欄位“{{name}}”嗎？此欄位無下游依賴，可放心操作。是否可撤銷請看下方提示。",
+      "undoSimpleHint": "可撤銷：刪除後按 Ctrl+Z 或 ⌘Z 即可恢復欄位及歷史結構。",
+      "undoComplexHint": "可以撤銷：刪除後按 Ctrl+Z 或 ⌘Z 恢復欄位。恢復時會自動重建依賴圖並重算值（可能需要幾秒鐘）；若依賴的欄位已被刪除，系統會提示特定缺失資訊。",
+      "undoNotInWaveHint": "無法撤銷：此欄位類型本期不在撤銷白名單。如需復原請前往「版本歷史」還原至刪除前的版本，或聯絡組織管理員。",
+      "undoUnknownHint": "無法撤銷：未知欄位類型，請聯絡組織管理員。",
+      "openVersionHistory": "查看版本歷史",
+      "fetchErrorFallback": "依賴分析載入失敗，請稍後重試。仍可繼續刪除，但刪除後建議立即檢查表格狀態。"
+    },
+    "batchRestore": {
+      "title": "撤銷結果包含部分無法復原的字段",
+      "summary": "本撤銷中：{{restorableCount}} 個簡單欄位已可單獨 Ctrl+Z 復原；{{unrestorableCount}} 個複雜欄位需走「版本歷史」還原。",
+      "restorableSection": "可單獨撤銷 ({{count}})",
+      "unrestorableSection": "需走版本歷史 ({{count}})",
+      "openVersionHistory": "打開版本歷史",
+      "complexFieldHint": "公式 / 關聯 / 搜尋 / Link 欄位涉及下游依賴圖重建，恢復時可能需要幾秒鐘。",
+      "close": "知道了"
+    }
+  },
+  "table": {
+    "deleteReferenced": "「{{tableName}}」無法刪除：仍有 {{skillCount}} 個 Skill / {{viewCount}} 個跨表視圖依賴它。強行刪除會讓這些 Skill 錯誤或視圖為空。建議先在「欄位依賴」中查看完整引用，或先歸檔表格讓依賴方有時間遷移。",
+    "trashedBanner": {
+      "title": "「{{tableName}}」已移至回收站",
+      "description": "後台計算任務已停止；依賴此表的 Skill 規則 / 跨表視圖已自動暫停。 30 天內可在「組織設定 · 資源回收站」中恢復表格。",
+      "restoreAction": "恢復表格",
+      "viewTrash": "前往回收站",
+      "dismiss": "知道了"
+    },
+    "deletedBanner": {
+      "title": "「{{tableName}}」已刪除",
+      "description": "已停止該表的所有後台計算任務，並暫停依賴此表的 Skill 規則 / 跨表視圖。永久刪除後無法恢復，如需歷史資料請聯絡組織管理員從備份處理。"
+    }
+  },
+  "bulk": {
+    "checkpointCreating": "「{{tableName}}」AI 操作影響 {{count}} 行，正在建立自動版本點... 完成後可在對話中「撤銷這次 AI 操作」一鍵撤回。",
+    "quotaExceeded": "本次更新預計消耗 {{tokens}} 個組織配額，超出剩餘 {{remaining}} 個。本次預檢已停止，數據未變化。建議：① 縮小篩選條件；② 等待每月配額刷新；③ 聯絡組織管理員升級套餐。",
+    "affectedRecords_one": "{{count}} 行記錄受影響",
+    "affectedRecords_other": "{{count}} 行記錄受影響",
+    "updateByFilter": {
+      "previewTitle": "批量更新預覽",
+      "matchedRows": "匹配 {{count}} 行",
+      "samplePreview": "預覽（最多 20 行樣本）",
+      "riskLow": "低風險操作",
+      "riskLowDesc": "影響行數較少，可放心執行。",
+      "riskMedium": "中風險操作",
+      "riskMediumDesc": "影響 {{count}} 行，將自動建立版本點。",
+      "riskHigh": "高風險操作",
+      "riskHighDesc": "影響 {{count}} 行，請輸入「確認更新」後執行。",
+      "highRiskConfirmText": "確認更新",
+      "highRiskInputPlaceholder": "請輸入「確認更新」以繼續",
+      "estimatedDuration": "預期 ~{{seconds}} 秒",
+      "estimatedDurationLong": "預計 ~{{seconds}} 秒，可在後台繼續",
+      "checkpointHint": "將自動建立版本點，可隨時回退",
+      "confirm": "確認執行",
+      "cancel": "取消",
+      "committing": "正在執行批次更新…",
+      "commitSuccess": "批次更新完成，共更新 {{count}} 行。",
+      "preflightFailed": "批量更新預檢失敗：{{reason}}。資料保持目前狀態。建議稍後重試；多次失敗請聯絡組織管理員。",
+      "commitFailed": "批次更新提交失敗：{{reason}}。資料保持目前狀態。建議稍後重試；多次失敗請聯絡組織管理員。",
+      "rejected": "超出單次更新上限",
+      "rejectedDesc": "符合 {{count}} 行，超出單次上限 10000 行。請縮小篩選條件分批執行，或聯絡管理員。",
+      "driftWarning": "實際更新行數與預檢時有 {{ratio}}% 差異（預檢 {{expected}} 行，實際 {{actual}} 行），建議核查資料。",
+      "driftDismiss": "知道了",
+      "errorListTitle": "{{count}} 筆記錄更新失敗",
+      "errorItem": "記錄 {{recordId}}：{{reason}}",
+      "showMore": "展開更多 {{count}} 條",
+      "showLess": "收起"
+    }
+  },
+  "compute": {
+    "divisionByZero": "「{{fieldName}}」第 {{rowNo}} 行自動計算失敗：目前公式裡用到了除以 0。這一格會先留空，不影響其它行。請改一下參與計算的數值（例如「{{relatedColumn}}」），儲存後會自動重算。",
+    "typeMismatch": "「{{fieldName}}」第 {{rowNo}} 行自動計算失敗：公式需要數字，但這一行「{{columnName}}」不是數字。該格結果暫時算不出來。請把這行資料改對，或調整計算公式。",
+    "lookupTargetDeleted": "「{{fieldName}}」所依賴的「{{targetTable}}.{{targetColumn}}」已被刪除或不可用。這一列會暫停自動更新，舊資料可能不再準確。請開啟欄位設置，重新選擇要關聯的表格和列。",
+    "circularDependency": "「{{fieldName}}」公式存在迴圈依賴：{{path}}。該欄位會被停用，不參與計算。請開啟公式編輯器調整，斷開任一環節即可。",
+    "recalc": {
+      "queued": "已排隊：{{total}} 個計算欄位將開始重算。",
+      "progress": "計算字段 {{percentage}}%（{{done}}/{{total}}）",
+      "completed": "{{total}} 個計算欄位已重算完成。",
+      "failedSummary": "{{failed}} 個字段重算失敗：{{names}}。其它 {{succeeded}} 個字段已成功。請開啟欄位配置檢查依賴項，或稍後再試。",
+      "dismiss": "關閉進度提示"
+    },
+    "outboxWorker": {
+      "recomputing": "表格結果已更新"
+    }
+  },
+  "lookup": {
+    "targetTimeout": "「{{fieldName}}」查詢關聯的「{{targetTable}}」逾時：目標表過大或網路繁忙。本次刷新已停止，顯示的是上次成功的結果。建議稍後再試，或聯絡管理員評估關聯表索引。"
+  },
+  "view": {
+    "filterInvalid": "目前視圖的篩選條件已失效：依賴的“{{fieldName}}”欄位已被刪除。視圖將顯示所有記錄，不套用篩選。請開啟視圖設定重新配置篩選條件。"
+  },
+  "form": {},
+  "record": {
+    "concurrentEditConflict": "這條記錄剛被 {{collaboratorName}} 修改過：你的本次改動尚未保存。系統已為你保留輸入，刷新後可基於最新版本繼續編輯；如需強制覆蓋，請點「我已確認，覆蓋保存」。",
+    "restoreConflict": "無法把這條記錄恢復到原位置：{{reason}}。繼續操作可能產生重複或錯位資料。請到表中確認最新結構，或改用「複製為新行」等方式處理。",
+    "trash": {
+      "panelTitle": "記錄回收站",
+      "description": "最近 30 天被刪除的記錄可在此恢復到表格中。",
+      "expiryHint": "超過 30 天的記錄已永久清理，無法在此恢復。如需更早的數據，請聯絡組織管理員從備份處理。",
+      "empty": "回收站為空，最近 30 天沒有刪除的記錄。",
+      "loading": "載入回收站記錄中…",
+      "loadFailed": "載入回收站失敗，請稍後重試。如持續失敗請聯絡組織管理員。",
+      "trashedAt": "刪除時間：{{time}}",
+      "restore": "恢復到表中",
+      "restoreSelected": "恢復選取（{{count}}）",
+      "restoreAll": "恢復全部",
+      "selectAll": "全選",
+      "clearSelection": "清空選擇",
+      "refresh": "重新整理",
+      "close": "關閉",
+      "untitled": "（無標題）",
+      "restoreSuccess": "已恢復 1 筆記錄到表中。",
+      "restoreSuccessBatch": "已恢復 {{count}} 筆記錄到表中。",
+      "restoreFailed": "恢復失敗：暫時無法連線到服務，請稍後重試。如持續失敗請聯絡組織管理員。",
+      "restoreBatchPartial": "已恢復 {{restored}} 筆記錄，{{failed}} 筆失敗：{{firstError}}。",
+      "batchLimit": "單次最多恢復 1000 筆記錄，請分批操作。"
+    },
+    "degraded": {
+      "badgeLabel": "資料降級",
+      "badgeTooltip": "此記錄因超過歷史保留期，僅恢復了行結構；欄位值無法還原，表格中顯示為空白。",
+      "toastSingle": "已恢復 1 筆記錄，但因資料已逾期，欄位值無法還原，表格中顯示為空白。如需完整數據，請聯絡管理員從備份恢復。",
+      "toastBatch": "已恢復 {{restored}} 筆記錄，其中 {{degraded}} 條因資料已超期只能恢復結構，欄位值顯示為空白。如需完整數據，請聯絡管理員從備份恢復。",
+      "rowAriaLabel": "資料降級行：欄位值已超期，無法還原。"
+    }
+  },
+  "import": {
+    "fieldUnmapped": "匯入預檢發現 {{count}} 列未對應到目標欄位（例如「{{exampleColumn}}」）。這些列會被忽略，不影響其它列導入。建議在「欄位對應」中明確選擇對應目標，或勾選「忽略未對應列」繼續。",
+    "failed": "匯入在第 {{rowNo}} 行失敗：「{{columnName}}」這一列{{expected}}，但文件裡是「{{actualValue}}」。本次匯入已停止，已成功寫入的資料請以提示為準。請修正該儲存格或列對應後重新匯入；大範圍問題可用更小檔案分批試。"
+  },
+  "undo": {
+    "failed": "無法撤銷上一步操作：{{reason}}。表格內容保持目前狀態不變。請刷新後重試；若仍失敗，可從版本記錄或回收站嘗試復原。"
+  },
+  "admin": {
+    "outbox": {
+      "title": "計算隊列管理",
+      "description": "檢視和管理後台計算任務的執行狀態。",
+      "summaryTab": "概覽",
+      "tasksTab": "任務清單",
+      "grayscaleTab": "灰階配置",
+      "loading": "加載中…",
+      "loadFailed": "載入失敗，請稍後重試。",
+      "retry": "重試",
+      "noData": "暫無計算任務",
+      "refresh": "重新整理",
+      "exportCsv": "匯出 CSV",
+      "summary": {
+        "title": "隊列摘要",
+        "pending": "待計算",
+        "processing": "計算中",
+        "succeeded": "已完成（24h）",
+        "failed": "失敗（24h）",
+        "dlq": "多次失敗",
+        "cancelled": "已取消",
+        "oldestPending": "最早排隊"
+      },
+      "hotspots": {
+        "title": "24h 失敗熱點",
+        "table": "表",
+        "count": "失敗次數",
+        "lastError": "最近錯誤",
+        "empty": "近 24 小時無失敗紀錄"
+      },
+      "task": {
+        "status": "狀態",
+        "table": "表",
+        "createdAt": "創建時間",
+        "updatedAt": "更新時間",
+        "actions": "操作",
+        "retryAction": "重試",
+        "cancelAction": "取消",
+        "pauseAction": "暫停",
+        "retrySuccess": "任務已加入重試隊列",
+        "retryFailed": "重試失敗：{{reason}}",
+        "cancelSuccess": "任務已取消",
+        "cancelFailed": "取消失敗：{{reason}}",
+        "pauseSuccess": "任務已暫停",
+        "pauseFailed": "暫停失敗：{{reason}}",
+        "statusPending": "待計算",
+        "statusProcessing": "計算中",
+        "statusSucceeded": "已完成",
+        "statusFailed": "失敗",
+        "statusCancelled": "已取消",
+        "statusDlq": "死信"
+      },
+      "grayscale": {
+        "title": "灰階配置",
+        "mode": "目前模式",
+        "modeDisabled": "關閉",
+        "modeGlobal": "全域開啟",
+        "modeAllowlist": "白名單",
+        "allowlist": "白名單",
+        "allowlistEmpty": "暫無白名單",
+        "description": "控制 Outbox 非同步計算引擎的啟用範圍。修改僅對目前進程生效，集群需環境變數 + 滾動重啟。",
+        "warning": "目前灰階配置與預設值不同，修改僅目前進程生效。"
+      },
+      "filterAll": "全部",
+      "pagination": {
+        "prev": "上一頁",
+        "next": "下一頁",
+        "pageInfo": "第 {{page}} 頁"
+      }
+    },
+    "fieldRecycleBin": {
+      "title": "已刪除字段",
+      "description": "保留期內的已刪除欄位可在此恢復。超過 {{days}} 天將永久清理。",
+      "empty": "暫無已刪除字段",
+      "loading": "加載中…",
+      "loadFailed": "載入失敗，請稍後重試。",
+      "fieldName": "欄位名",
+      "fieldType": "類型",
+      "deletedAt": "刪除時間",
+      "daysRemaining": "剩餘天數",
+      "daysRemainingValue": "{{days}} 天",
+      "actions": "操作",
+      "restoreAction": "恢復字段",
+      "restoreSuccess": "字段“{{name}}”已恢復。",
+      "restoreFailed": "恢復失敗：{{reason}}",
+      "refresh": "重新整理",
+      "close": "關閉",
+      "ttlHint": "字段刪除後保留 {{days}} 天，超期後永久清理。"
+    },
+    "integrity": {
+      "title": "一致性檢查",
+      "checkAction": "檢查",
+      "repairAction": "修復",
+      "checking": "檢查中…",
+      "repairing": "修復中…",
+      "noDrift": "未發現漂移項",
+      "driftFound": "發現 {{count}} 處漂移",
+      "autoFixable": "可自動修復",
+      "manualFix": "需手動修復"
+    }
+  },
+  "banner": {
+    "cascadeComputing": "表格正在計算中…",
+    "cascadeComputingDesc": "後台正在重新計算相關字段，完成後自動更新。",
+    "dlqWarning": "{{count}} 條計算失敗",
+    "dlqWarningDesc": "有 {{count}} 條後台計算任務失敗，請聯絡管理員查看詳情。"
+  }
+}

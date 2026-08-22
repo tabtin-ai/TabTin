@@ -1,0 +1,74 @@
+{
+  "id": "tabtin-research-pack",
+  "name": "Research Insights Pack",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "研究洞察：网页调研简报、竞品拆解、多源综合、学习消化笔记。",
+  "icon": "search",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "research",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 23
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/web-research-brief",
+    "skills/competitor-teardown",
+    "skills/source-synthesis",
+    "skills/learning-digest"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "web-research-brief": {
+        "enabled": true
+      },
+      "competitor-teardown": {
+        "enabled": true
+      },
+      "source-synthesis": {
+        "enabled": true
+      },
+      "learning-digest": {
+        "enabled": true
+      }
+    }
+  }
+}

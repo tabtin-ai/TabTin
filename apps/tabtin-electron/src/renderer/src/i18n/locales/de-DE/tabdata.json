@@ -1,0 +1,252 @@
+{
+  "rewind": {
+    "recordHistoryMissing": "„{{tableName}}“ kann nicht vollständig wiederhergestellt werden: {{count}}-Zeilen sind aus dem Verlauf veraltet. Der Rücklauf wurde gestoppt und die Daten bleiben unverändert. Vorgeschlagene Maßnahmen: (1) Wählen Sie einen neueren Wiederherstellungspunkt oder (2) bitten Sie Ihren Administrator, die Wiederherstellung aus dem Backup durchzuführen, wenn Sie diesen Punkt verwenden müssen.",
+    "outboxDiscarded": "{{count}} Hintergrundberechnungen zu „{{tableName}}“ wurden aufgrund des Zurückspulens verworfen. Alle Formelspalten werden neu berechnet (ETA: {{etaSeconds}}s). In einigen Zellen wird bis dahin möglicherweise „Wird berechnet…“ angezeigt."
+  },
+  "field": {
+    "typeConvertFailed": "„{{fieldName}}“ konnte nicht von {{oldType}} in {{newType}} geändert werden: Zeile {{rowNo}} Wert „{{sample}}“ kann nicht konvertiert werden. Die Änderung wurde rückgängig gemacht. Vorgeschlagene Maßnahmen: (1) Exportieren Sie die Spalte und bereinigen Sie sie extern; (2) Verwenden Sie „Massenaktualisierung“, um zunächst fehlerhafte Werte zu normalisieren. (3) Bitten Sie einen Administrator, bei der Bearbeitung der {{count}} betroffenen Zeilen zu helfen.",
+    "renameConflict": "„{{oldName}}“ kann nicht in „{{newName}}“ umbenannt werden: Ein Feld mit diesem Namen ist bereits vorhanden oder es wird durch {{count}}-Formel/Suchfeld(er) referenziert. Überprüfen Sie zuerst „Feldabhängigkeiten“ oder wählen Sie einen anderen Namen.",
+    "deleteReferenced": "„{{fieldName}}“ kann nicht gelöscht werden: Es wird durch {{count}}-Formel/Suchfeld(er) referenziert. Wenn Sie das Löschen erzwingen, werden diese Felder beschädigt. Entfernen Sie zuerst die abhängigen Elemente oder überprüfen Sie „Feldabhängigkeiten“, bevor Sie eine Entscheidung treffen.",
+    "primaryFieldDeleteForbidden": "„{{fieldName}}“ kann nicht gelöscht werden: Es ist das primäre Feld. Wenn Sie es direkt löschen, können vorhandene Daten oder zugehörige Spalten beschädigt werden. Ändern Sie zuerst das primäre Feld in den Tabelleneinstellungen.",
+    "deleteImpactDialog": {
+      "warningHigh": "Auf dieses Feld wird von anderen Feldern oder Ansichten verwiesen; Durch das Löschen werden nachgeschaltete Felder beschädigt. Wir empfehlen, die gesamte Kette unter „Feldabhängigkeiten“ zu überprüfen, bevor Sie fortfahren.",
+      "warningMedium": "Auf dieses Feld wird von einigen Ansichten verwiesen; Diese Ansichtskonfigurationen werden nach dem Löschen automatisch bereinigt.",
+      "warningLow": "Dieses Feld hat keine nachgelagerten Abhängigkeiten und kann bedenkenlos gelöscht werden.",
+      "noImpactSafe": "Feld „{{name}}“ löschen? Es gibt keine Downstream-Abhängigkeiten und kann daher sicher entfernt werden. Sehen Sie sich den Hinweis unten an, um zu erfahren, ob dieser Löschvorgang rückgängig gemacht werden kann.",
+      "undoSimpleHint": "Rückgängig machen: Drücken Sie direkt nach dem Löschen Strg+Z (⌘Z), um das Feld und seine Verlaufsstruktur wiederherzustellen.",
+      "undoComplexHint": "Rückgängig machen: Drücken Sie direkt nach dem Löschen Strg+Z (⌘Z), um das Feld wiederherzustellen. Das Abhängigkeitsdiagramm wird neu erstellt und die Werte werden automatisch neu berechnet (kann einige Sekunden dauern). Wenn ein erforderliches Abhängigkeitsfeld gelöscht wurde, wird eine bestimmte Fehlermeldung angezeigt.",
+      "undoNotInWaveHint": "Kann nicht rückgängig gemacht werden: Dieser Feldtyp steht in dieser Version nicht auf der Zulassungsliste für schnelles Rückgängigmachen. Zur Wiederherstellung führen Sie eine Wiederherstellung über den „Versionsverlauf“ durch oder wenden Sie sich an den Administrator Ihrer Organisation.",
+      "undoUnknownHint": "Kann nicht rückgängig gemacht werden: unbekannter Feldtyp. Bitte wenden Sie sich an den Administrator Ihrer Organisation.",
+      "openVersionHistory": "Versionsverlauf öffnen",
+      "fetchErrorFallback": "Die Abhängigkeitsanalyse konnte nicht geladen werden. Sie können den Löschvorgang trotzdem fortsetzen, überprüfen Sie aber bitte unmittelbar danach den Tabellenstatus."
+    },
+    "batchRestore": {
+      "title": "Einige Felder konnten in diesem Schritt nicht rückgängig gemacht werden",
+      "summary": "In diesem Rückgängig-Schritt: {{restorableCount}} einfache Felder können einzeln mit Strg+Z wiederhergestellt werden; {{unrestorableCount}} komplexe Felder müssen aus dem „Versionsverlauf“ wiederhergestellt werden.",
+      "restorableSection": "Kann einzeln rückgängig gemacht werden ({{count}})",
+      "unrestorableSection": "Versionsverlauf erforderlich ({{count}})",
+      "openVersionHistory": "Versionsverlauf öffnen",
+      "complexFieldHint": "Formel-/Such-/Linkfelder erfordern eine nachgelagerte Neuerstellung des Abhängigkeitsdiagramms. Die Wiederherstellung kann einige Sekunden dauern.",
+      "close": "Okay"
+    }
+  },
+  "table": {
+    "deleteReferenced": "„{{tableName}}“ kann nicht gelöscht werden: {{skillCount}} Fähigkeit(en) und {{viewCount}} Kreuztabellenansicht(en) hängen davon ab. Wenn Sie das Löschen erzwingen, werden diese Fähigkeiten beschädigt oder diese Ansichten werden geleert. Aktivieren Sie „Feldabhängigkeiten“ oder archivieren Sie die Tabelle zunächst, damit abhängige Elemente migriert werden können.",
+    "trashedBanner": {
+      "title": "„{{tableName}}“ wurde in den Papierkorb verschoben",
+      "description": "Hintergrundberechnungen werden gestoppt; Fertigkeitsregeln und tabellenübergreifende Ansichten, die von dieser Tabelle abhängen, werden automatisch angehalten. Sie können die Tabelle innerhalb von 30 Tagen über „Organisationseinstellungen · Ressourcenpapierkorb“ wiederherstellen.",
+      "restoreAction": "Tabelle wiederherstellen",
+      "viewTrash": "Öffnen Sie den Papierkorb",
+      "dismiss": "Verstanden"
+    },
+    "deletedBanner": {
+      "title": "„{{tableName}}“ gelöscht",
+      "description": "Alle Hintergrundberechnungen für diese Tabelle werden gestoppt und die davon abhängigen Skill-Regeln/Kreuztabellenansichten werden angehalten. Die Tabelle kann nach dem endgültigen Löschen nicht wiederhergestellt werden. Wenden Sie sich bei Bedarf an den Administrator Ihrer Organisation, um historische Daten aus der Sicherung wiederherzustellen."
+    }
+  },
+  "bulk": {
+    "checkpointCreating": "Die KI-Aktion auf „{{tableName}}“ wirkt sich auf {{count}}-Zeilen aus. Erstellen eines automatischen Wiederherstellungspunkts... Sobald Sie fertig sind, können Sie diese KI-Aktion mit einem Klick im Chat rückgängig machen.",
+    "quotaExceeded": "Dieses Update verbraucht {{tokens}} Organisationstoken und übersteigt damit die verbleibenden {{remaining}}. Vorflug gestoppt; Die Daten bleiben unverändert. Vorschläge: (1) Den Filter eingrenzen; (2) auf die Zurücksetzung des monatlichen Kontingents warten; (3) Bitten Sie den Administrator Ihrer Organisation um ein Upgrade.",
+    "affectedRecords_one": "{{count}}-Datensatz betroffen",
+    "affectedRecords_other": "{{count}} Datensätze betroffen",
+    "updateByFilter": {
+      "previewTitle": "Massenaktualisierungsvorschau",
+      "matchedRows": "{{count}} Zeilen stimmten überein",
+      "samplePreview": "Vorschau (bis zu 20 Beispielzeilen)",
+      "riskLow": "Geringes Risiko",
+      "riskLowDesc": "Nur wenige Reihen betroffen; es ist sicher, fortzufahren.",
+      "riskMedium": "Mittleres Risiko",
+      "riskMediumDesc": "{{count}} Zeilen betroffen. Es wird automatisch ein Wiederherstellungspunkt erstellt.",
+      "riskHigh": "Hohes Risiko",
+      "riskHighDesc": "{{count}} Zeilen betroffen. Geben Sie „BESTÄTIGEN“ ein, um fortzufahren.",
+      "highRiskConfirmText": "BESTÄTIGEN",
+      "highRiskInputPlaceholder": "Geben Sie „BESTÄTIGEN“ ein, um fortzufahren",
+      "estimatedDuration": "Geschätzte ~{{seconds}}s",
+      "estimatedDurationLong": "Geschätzte ~{{seconds}}s, kann im Hintergrund fortgesetzt werden",
+      "checkpointHint": "Es wird ein Wiederherstellungspunkt erstellt; Sie können jederzeit zurückspulen",
+      "confirm": "Bestätigen",
+      "cancel": "Abbrechen",
+      "committing": "Massenaktualisierung wird ausgeführt…",
+      "commitSuccess": "Massenaktualisierung abgeschlossen: {{count}}-Zeilen aktualisiert.",
+      "preflightFailed": "Der Preflight für die Massenaktualisierung ist fehlgeschlagen: {{reason}}. Die Daten bleiben unverändert. Bitte versuchen Sie es später noch einmal; Wenden Sie sich an den Administrator Ihrer Organisation, wenn es weiterhin fehlschlägt.",
+      "commitFailed": "Massenaktualisierungs-Commit fehlgeschlagen: {{reason}}. Die Daten bleiben unverändert. Bitte versuchen Sie es später noch einmal; Wenden Sie sich an den Administrator Ihrer Organisation, wenn es weiterhin fehlschlägt.",
+      "rejected": "Überschreitet das Limit für ein einzelnes Update",
+      "rejectedDesc": "{{count}} Zeilen stimmten überein und überstiegen die Grenze von 10.000 Zeilen für die Einzelaktualisierung. Grenzen Sie den Filter ein, um kleinere Chargen zu verarbeiten, oder wenden Sie sich an einen Administrator.",
+      "driftWarning": "Die tatsächlich aktualisierten Zeilen unterscheiden sich vom Preflight um {{ratio}} % (erwartet {{expected}}, tatsächlich {{actual}}). Bitte überprüfen Sie Ihre Daten.",
+      "driftDismiss": "Verstanden",
+      "errorListTitle": "{{count}}-Datensätze konnten nicht aktualisiert werden",
+      "errorItem": "Aufnahme {{recordId}}: {{reason}}",
+      "showMore": "{{count}} mehr anzeigen",
+      "showLess": "Weniger anzeigen"
+    }
+  },
+  "compute": {
+    "divisionByZero": "Die automatische Berechnung ist in Zeile „{{fieldName}}“ {{rowNo}} fehlgeschlagen: Die Formel dividiert durch 0. Diese Zelle bleibt leer, ohne dass sich dies auf andere Zeilen auswirkt. Passen Sie die Eingaben an (z. B. „{{relatedColumn}}“) und es wird beim Speichern automatisch neu berechnet.",
+    "typeMismatch": "Die automatische Berechnung ist in Zeile „{{fieldName}}“ {{rowNo}} fehlgeschlagen: Die Formel erwartet eine Zahl, aber „{{columnName}}“ in dieser Zeile ist keine. Die Zelle kann derzeit nicht berechnet werden. Korrigieren Sie die Daten dieser Zeile oder passen Sie die Formel an.",
+    "lookupTargetDeleted": "„{{fieldName}}“ hängt von „{{targetTable}}.{{targetColumn}}“ ab, das gelöscht wurde oder nicht verfügbar ist. Die automatische Aktualisierung dieser Spalte wird angehalten. Ältere Daten sind möglicherweise nicht mehr korrekt. Öffnen Sie die Feldeinstellungen und verknüpfen Sie die Zieltabelle und -spalte erneut.",
+    "circularDependency": "Zirkuläre Abhängigkeit in „{{fieldName}}“: {{path}}. Das Feld ist deaktiviert und von Berechnungen ausgeschlossen. Öffnen Sie den Formeleditor und unterbrechen Sie alle zu reparierenden Glieder in der Kette.",
+    "recalc": {
+      "queued": "In der Warteschlange: Die berechneten Felder {{total}} beginnen mit der Neuberechnung.",
+      "progress": "Berechnete Felder {{percentage}}% ({{done}}/{{total}}) neu berechnen",
+      "completed": "{{total}} berechnete(s) Feld(er) neu berechnet.",
+      "failedSummary": "{{failed}}-Feld(er) konnten nicht neu berechnet werden: {{names}}. Die anderen {{succeeded}}-Felder waren erfolgreich. Öffnen Sie die Feldeinstellungen, um Abhängigkeiten zu überprüfen, oder versuchen Sie es später erneut.",
+      "dismiss": "Fortschrittsbenachrichtigung verwerfen"
+    },
+    "outboxWorker": {
+      "recomputing": "Tabellenergebnisse aktualisiert"
+    }
+  },
+  "lookup": {
+    "targetTimeout": "Bei der Suche nach „{{fieldName}}“ kam es beim Abrufen von „{{targetTable}}“ zu einer Zeitüberschreitung: Die Zieltabelle ist zu groß oder das Netzwerk ist ausgelastet. Das bisherige Erfolgsergebnis wird angezeigt. Versuchen Sie es später erneut oder bitten Sie einen Administrator, die Indizes für die Zieltabelle zu überprüfen."
+  },
+  "view": {
+    "filterInvalid": "Der Filter dieser Ansicht ist nicht mehr gültig: Das referenzierte Feld „{{fieldName}}“ wurde gelöscht. Die Ansicht zeigt nun alle Datensätze ohne Filterung an. Öffnen Sie die Ansichtseinstellungen, um sie neu zu konfigurieren."
+  },
+  "record": {
+    "concurrentEditConflict": "Dieser Datensatz wurde gerade von {{collaboratorName}} geändert: Ihre Änderungen sind noch nicht gespeichert. Ihre Eingabe bleibt erhalten – aktualisieren Sie sie, um mit der Bearbeitung auf der neuesten Version fortzufahren, oder klicken Sie auf „Ich bestätige, überschreiben“, um das Speichern zu erzwingen.",
+    "restoreConflict": "Dieser Datensatz kann nicht an seinem ursprünglichen Speicherort wiederhergestellt werden: {{reason}}. Wenn Sie fortfahren, entstehen möglicherweise doppelte oder falsch ausgerichtete Daten. Überprüfen Sie die neueste Struktur in der Tabelle oder verwenden Sie stattdessen „Als neue Zeile duplizieren“.",
+    "trash": {
+      "panelTitle": "Müll aufnehmen",
+      "description": "In den letzten 30 Tagen gelöschte Datensätze können hier in der Tabelle wiederhergestellt werden.",
+      "expiryHint": "Datensätze, die älter als 30 Tage sind, wurden dauerhaft bereinigt und können hier nicht wiederhergestellt werden. Bei älteren Daten wenden Sie sich an den Administrator Ihrer Organisation, um die Daten aus der Sicherung wiederherzustellen.",
+      "empty": "Der Papierkorb ist leer. In den letzten 30 Tagen wurden keine Datensätze gelöscht.",
+      "loading": "Vernichtete Datensätze werden geladen…",
+      "loadFailed": "Der Papierkorb konnte nicht geladen werden. Bitte versuchen Sie es später noch einmal. Wenden Sie sich an den Administrator Ihrer Organisation, wenn es weiterhin fehlschlägt.",
+      "trashedAt": "Gelöscht am {{time}}",
+      "restore": "Zur Tabelle wiederherstellen",
+      "restoreSelected": "Ausgewählte wiederherstellen ({{count}})",
+      "restoreAll": "Alles wiederherstellen",
+      "selectAll": "Alles auswählen",
+      "clearSelection": "Klare Auswahl",
+      "refresh": "Aktualisieren",
+      "close": "Schließen",
+      "untitled": "(Ohne Titel)",
+      "restoreSuccess": "1 Datensatz in der Tabelle wiederhergestellt.",
+      "restoreSuccessBatch": "{{count}}-Datensätze wurden in der Tabelle wiederhergestellt.",
+      "restoreFailed": "Wiederherstellung fehlgeschlagen: Der Server konnte vorübergehend nicht erreicht werden. Bitte versuchen Sie es später noch einmal. Wenden Sie sich an den Administrator Ihrer Organisation, wenn es weiterhin fehlschlägt.",
+      "restoreBatchPartial": "{{restored}}-Datensätze wiederhergestellt, {{failed}} fehlgeschlagen: {{firstError}}.",
+      "batchLimit": "Pro Stapel können bis zu 1000 Datensätze wiederhergestellt werden. Teilen Sie sich in kleinere Gruppen auf."
+    },
+    "degraded": {
+      "badgeLabel": "Daten verschlechtert",
+      "badgeTooltip": "Die Zeilenstruktur dieses Datensatzes wurde wiederhergestellt, aber seine Feldwerte sind aus dem Verlauf veraltet und können nicht wiederhergestellt werden. Zellen erscheinen leer.",
+      "toastSingle": "1 Datensatz wiederhergestellt, aber seine Feldwerte sind aus dem Verlauf entfernt und können nicht wiederhergestellt werden; Zellen erscheinen leer. Wenden Sie sich an Ihren Administrator, um die Daten aus der Sicherung wiederherzustellen, wenn Sie die vollständigen Daten benötigen.",
+      "toastBatch": "Wiederhergestellte {{restored}}-Datensätze, von denen {{degraded}} nur ihre Struktur wiederhergestellt hat, weil ihre Werte aus der Historie verschwunden sind; Ihre Zellen erscheinen leer. Wenden Sie sich an Ihren Administrator, um die Daten aus der Sicherung wiederherzustellen, wenn Sie die vollständigen Daten benötigen.",
+      "rowAriaLabel": "Beeinträchtigte Zeile: Feldwerte sind abgelaufen und können nicht wiederhergestellt werden."
+    }
+  },
+  "import": {
+    "fieldUnmapped": "Beim Import-Preflight wurden {{count}}-Spalten ohne Zielfeldzuordnung gefunden (z. B. „{{exampleColumn}}“). Diese Spalten werden ignoriert, ohne dass sich dies auf andere auswirkt. Ordnen Sie sie explizit in „Feldzuordnung“ zu oder aktivieren Sie „Nicht zugeordnete Spalten ignorieren“, um fortzufahren.",
+    "failed": "Der Import ist in Zeile {{rowNo}} fehlgeschlagen: Spalte „{{columnName}}“ {{expected}}, aber die Datei enthält „{{actualValue}}“. Der Import wurde gestoppt; Bereits importierte Zeilen folgen dem neuesten Hinweis. Korrigieren Sie die Zellen- oder Spaltenzuordnung und importieren Sie sie erneut. Versuchen Sie es bei großen Problemen mit einer kleineren Datei."
+  },
+  "undo": {
+    "failed": "Die letzte Aktion kann nicht rückgängig gemacht werden: {{reason}}. Der Tabelleninhalt bleibt unverändert. Aktualisieren Sie und versuchen Sie es erneut. Wenn es immer noch fehlschlägt, können Sie versuchen, die Wiederherstellung aus dem Versionsverlauf oder dem Papierkorb durchzuführen."
+  },
+  "admin": {
+    "outbox": {
+      "title": "Administrator der berechneten Warteschlange",
+      "description": "Status der Hintergrundberechnungsaufgabe anzeigen und verwalten.",
+      "summaryTab": "Zusammenfassung",
+      "tasksTab": "Aufgaben",
+      "grayscaleTab": "Graustufen",
+      "loading": "Laden…",
+      "loadFailed": "Laden fehlgeschlagen. Bitte versuchen Sie es später noch einmal.",
+      "retry": "Versuchen Sie es noch einmal",
+      "noData": "Keine Rechenaufgaben",
+      "refresh": "Aktualisieren",
+      "exportCsv": "CSV exportieren",
+      "summary": {
+        "title": "Warteschlangenzusammenfassung",
+        "pending": "Ausstehend",
+        "processing": "Verarbeitung",
+        "succeeded": "Erfolgreich (24 Stunden)",
+        "failed": "Fehlgeschlagen (24 Stunden)",
+        "dlq": "Wiederholt fehlgeschlagen",
+        "cancelled": "Abgesagt",
+        "oldestPending": "Älteste ausstehend"
+      },
+      "hotspots": {
+        "title": "Fehler-Hotspots (24h)",
+        "table": "Tisch",
+        "count": "Misserfolge",
+        "lastError": "Letzter Fehler",
+        "empty": "Keine Ausfälle in den letzten 24 Stunden"
+      },
+      "task": {
+        "status": "Status",
+        "table": "Tisch",
+        "createdAt": "Erstellt am",
+        "updatedAt": "Aktualisiert am",
+        "actions": "Aktionen",
+        "retryAction": "Versuchen Sie es noch einmal",
+        "cancelAction": "Abbrechen",
+        "pauseAction": "Pause",
+        "retrySuccess": "Die Aufgabe steht für einen erneuten Versuch in der Warteschlange",
+        "retryFailed": "Wiederholung fehlgeschlagen: {{reason}}",
+        "cancelSuccess": "Aufgabe abgebrochen",
+        "cancelFailed": "Abbrechen fehlgeschlagen: {{reason}}",
+        "pauseSuccess": "Aufgabe angehalten",
+        "pauseFailed": "Pause fehlgeschlagen: {{reason}}",
+        "statusPending": "Ausstehend",
+        "statusProcessing": "Verarbeitung",
+        "statusSucceeded": "Erfolgreich",
+        "statusFailed": "Fehlgeschlagen",
+        "statusCancelled": "Abgesagt",
+        "statusDlq": "DLQ"
+      },
+      "grayscale": {
+        "title": "Graustufenkonfiguration",
+        "mode": "Aktueller Modus",
+        "modeDisabled": "Deaktiviert",
+        "modeGlobal": "Global aktiviert",
+        "modeAllowlist": "Zulassungsliste",
+        "allowlist": "Zulassungsliste",
+        "allowlistEmpty": "Die Zulassungsliste ist leer",
+        "description": "Steuern Sie den Umfang der asynchronen Berechnungs-Engine für den Postausgang. Änderungen wirken sich nur auf den aktuellen Prozess aus; Clusterweite Änderungen erfordern Umgebungsvariablen + fortlaufenden Neustart.",
+        "warning": "Die aktuelle Graustufenkonfiguration weicht vom Standard ab. Änderungen wirken sich nur auf diesen Prozess aus."
+      },
+      "filterAll": "Alle",
+      "pagination": {
+        "prev": "Zurück",
+        "next": "Als nächstes",
+        "pageInfo": "Seite {{page}}"
+      }
+    },
+    "fieldRecycleBin": {
+      "title": "Gelöschte Felder",
+      "description": "Gelöschte Felder innerhalb der Aufbewahrungsfrist können hier wiederhergestellt werden. Felder werden nach {{days}} Tagen dauerhaft entfernt.",
+      "empty": "Keine gelöschten Felder",
+      "loading": "Laden…",
+      "loadFailed": "Laden fehlgeschlagen. Bitte versuchen Sie es später noch einmal.",
+      "fieldName": "Feldname",
+      "fieldType": "Typ",
+      "deletedAt": "Gelöscht um",
+      "daysRemaining": "Verbleibende Tage",
+      "daysRemainingValue": "{{days}} Tage",
+      "actions": "Aktionen",
+      "restoreAction": "Feld wiederherstellen",
+      "restoreSuccess": "Feld „{{name}}“ wiederhergestellt.",
+      "restoreFailed": "Wiederherstellung fehlgeschlagen: {{reason}}",
+      "refresh": "Aktualisieren",
+      "close": "Schließen",
+      "ttlHint": "Gelöschte Felder bleiben {{days}} Tage lang erhalten und werden dann dauerhaft entfernt."
+    },
+    "integrity": {
+      "title": "Integritätsprüfung",
+      "checkAction": "Überprüfen",
+      "repairAction": "Reparieren",
+      "checking": "Überprüfen…",
+      "repairing": "Reparieren…",
+      "noDrift": "Keine Drift gefunden",
+      "driftFound": "{{count}} Drift(s) gefunden",
+      "autoFixable": "Automatisch reparierbar",
+      "manualFix": "Manuelle Korrektur erforderlich"
+    }
+  },
+  "banner": {
+    "cascadeComputing": "Tisch rechnet…",
+    "cascadeComputingDesc": "Im Hintergrund berechnete Felder werden neu berechnet. Die Ergebnisse werden automatisch aktualisiert.",
+    "dlqWarning": "{{count}}-Berechnung(en) ist fehlgeschlagen",
+    "dlqWarningDesc": "{{count}} Hintergrundberechnungsaufgabe(n) fehlgeschlagen. Weitere Informationen erhalten Sie von Ihrem Administrator."
+  }
+}

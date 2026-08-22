@@ -1,0 +1,984 @@
+{
+  "title": "TabSlide 프리젠테이션",
+  "untitled": "제목 없는 프레젠테이션",
+  "preset": {
+    "ppt": "프리젠테이션(1920×1080)",
+    "xiaohongshu": "샤오홍슈 노트 (1080×1440)",
+    "poster": "포스터",
+    "custom": "사용자 정의 크기"
+  },
+  "toolbar": {
+    "font": "글꼴",
+    "fontSize": "글꼴 크기",
+    "fontColor": "텍스트 색상",
+    "bold": "굵게",
+    "italic": "이탤릭체",
+    "underline": "밑줄",
+    "strikethrough": "취소선",
+    "link": "링크",
+    "alignLeft": "왼쪽 정렬",
+    "alignCenter": "센터",
+    "alignRight": "오른쪽 정렬",
+    "alignJustify": "양쪽 맞춤",
+    "lineHeight": "라인 높이",
+    "letterSpacing": "문자 간격",
+    "bulletList": "글머리 기호 목록",
+    "orderedList": "번호 매기기 목록",
+    "indent": "들여쓰기 늘리기",
+    "outdent": "들여쓰기 줄이기",
+    "superscript": "위 첨자",
+    "subscript": "아래첨자",
+    "backgroundColor": "하이라이트",
+    "themeColor": "테마 색상"
+  },
+  "font": {
+    "default": "기본값",
+    "system": "시스템 글꼴",
+    "document": "문서",
+    "chinese": "중국어",
+    "sansSerif": "산세리프체",
+    "serif": "세리프",
+    "monospace": "고정 폭"
+  },
+  "color": {
+    "default": "기본값",
+    "themeColors": "테마 색상",
+    "textColors": "텍스트 색상",
+    "highlightColors": "강조 색상",
+    "red": "빨간색",
+    "orange": "오렌지",
+    "yellow": "노란색",
+    "green": "녹색",
+    "blue": "블루",
+    "purple": "보라색",
+    "pink": "핑크",
+    "gray": "그레이",
+    "black": "블랙",
+    "white": "화이트",
+    "none": "없음",
+    "dark1": "다크 1",
+    "light1": "조명 1",
+    "accent1": "악센트 1",
+    "accent2": "악센트 2",
+    "accent3": "악센트 3",
+    "accent4": "악센트 4",
+    "accent5": "악센트 5",
+    "accent6": "악센트 6",
+    "dark2": "다크 2",
+    "light2": "조명 2",
+    "background1": "배경 1",
+    "background2": "배경 2",
+    "text1": "텍스트 1",
+    "text2": "텍스트 2"
+  },
+  "link": {
+    "placeholder": "https://... 또는 페이지-2",
+    "confirm": "확인",
+    "remove": "제거"
+  },
+  "letterSpacing": {
+    "default": "기본값",
+    "tight": "꽉"
+  },
+  "canvas": {
+    "zoomIn": "확대",
+    "zoomOut": "축소",
+    "fitToScreen": "화면에 맞추기",
+    "fit": "핏",
+    "reset100": "100%로 재설정",
+    "noData": "사용 가능한 슬라이드 데이터가 없습니다.",
+    "dropImage": "이미지를 삽입하려면 드롭하세요."
+  },
+  "versionHistory": "버전 기록",
+  "slideshow": {
+    "prev": "이전",
+    "next": "다음",
+    "exit": "슬라이드쇼 종료",
+    "start": "현재",
+    "endTitle": "프레젠테이션 종료",
+    "endSubtitle": "아무 곳이나 클릭하거나 ESC를 눌러 종료하세요.",
+    "hintNavigate": "슬라이드 탐색",
+    "hintNext": "다음 단계",
+    "hintExit": "종료",
+    "autoplayRestricted": "자동재생 제한됨",
+    "autoplayMuted": "음소거 자동재생 중",
+    "clickToPlay": "재생하려면 클릭하세요",
+    "unmute": "음소거 해제"
+  },
+  "image": {
+    "crop": "자르기",
+    "cropCircle": "원형으로 자르기",
+    "removeCrop": "자르기 제거",
+    "replace": "이미지 교체",
+    "delete": "삭제",
+    "confirm": "확인",
+    "cancel": "취소",
+    "reset": "재설정",
+    "loadFailed": "이미지를 로드하지 못했습니다."
+  },
+  "export": {
+    "title": "수출",
+    "format": "내보내기 형식",
+    "pptx": "PPTX로 내보내기",
+    "pdf": "PDF로 내보내기",
+    "image": "이미지",
+    "images": "이미지로 내보내기",
+    "exporting": "내보내는 중...",
+    "success": "내보내기 성공",
+    "failed": "내보내기 실패"
+  },
+  "import": {
+    "title": "가져오기",
+    "pptx": "PPTX 가져오기",
+    "importing": "가져오는 중...",
+    "success": "가져오기 성공",
+    "failed": "가져오기 실패"
+  },
+  "label": {
+    "user": "사용자"
+  },
+  "host": {
+    "loading": "프레젠테이션 로드 중...",
+    "reload": "새로고침",
+    "preset": {
+      "title": "프레젠테이션 만들기",
+      "description": "시작할 캔버스 비율을 선택하거나 기존 PPTX 파일을 가져옵니다.",
+      "or": "또는",
+      "importButton": "PPTX 파일 가져오기",
+      "option": {
+        "widescreen": {
+          "label": "16:9 와이드스크린",
+          "description": "1920×1080"
+        },
+        "classic": {
+          "label": "4:3 클래식",
+          "description": "1024×768"
+        },
+        "xiaohongshu": {
+          "label": "샤오홍슈",
+          "description": "1080×1440"
+        }
+      }
+    },
+    "importing": {
+      "title": "PPTX 파일을 가져오는 중...",
+      "description": "슬라이드 내용을 분석하는 중입니다. 잠시 기다려 주세요."
+    },
+    "import": {
+      "successWithStats": "성공적으로 가져왔습니다: {{slides}} 슬라이드, {{elements}} 요소.",
+      "failedWithReason": "가져오기 실패: {{reason}}"
+    },
+    "export": {
+      "failedWithReason": "내보내기 실패: {{reason}}"
+    },
+    "exportWarning": {
+      "imagePlaceholderFallback": "{{count}} 원격 이미지를 인라인할 수 없어 자리 표시자로 대체되었습니다.",
+      "imageProxyFailed": "{{count}} 이미지에 대한 이미지 프록시가 실패했습니다. 내보낸 PPTX에서는 공백으로 나타날 수 있습니다.",
+      "imageProxyNormalized": "{{count}} 원격 이미지에 대한 교차 출처 프록시 정규화가 성공했습니다.",
+      "imageRasterizeFailed": "{{count}} 이미지를 래스터화하지 못하여 자리표시자로 대체되었습니다."
+    },
+    "error": {
+      "saveMissingContext": "저장에 실패했습니다. 조직/에이전트 컨텍스트가 복구되기를 기다리는 중...",
+      "saveRetryExceeded": "최대 재시도 후 저장에 실패했습니다. 네트워크를 확인하고 새로고침하세요.",
+      "loadFailedRetry": "로드하지 못했습니다. 새로고침한 후 다시 시도해 주세요.",
+      "uploadEmptyUrl": "업로드에 성공했지만 이미지 URL이 반환되지 않았습니다.",
+      "uploadValidation": "파일 유효성 검사 실패: 지원되지 않는 유형 또는 크기가 초과되었습니다.",
+      "imageTooLarge": "이미지 파일이 너무 큽니다(최대 {{maxSize}}).",
+      "imageTypeNotSupported": "지원되지 않는 이미지 형식입니다.",
+      "imageUploadFallback": "이미지가 삽입되었습니다. 온라인일 때 자동 업로드됩니다.",
+      "imageLoadFailed": "이미지를 로드하지 못했습니다."
+    },
+    "reupload": {
+      "success": "{{count}} 클라우드에 업로드된 오프라인 이미지",
+      "failed": "{{count}} 오프라인 이미지를 업로드하지 못했습니다. 다음에 다시 시도하겠습니다.",
+      "partialFailed": "{{success}} 이미지 업로드됨, {{failed}} 실패"
+    },
+    "longOfflineWarning": "오랫동안 오프라인 상태였습니다",
+    "longOfflineWarningDesc": "프레젠테이션 내용의 일관성을 확인하는 것이 좋습니다. 오프라인 상태에서 수정한 내용은 자동으로 병합되었습니다.",
+    "versionRestored": "버전이 성공적으로 복원되었습니다.",
+    "versionRestoreFailed": "버전을 복원하지 못했습니다.",
+    "collabSyncWarning": "버전이 복원되었지만 일부 온라인 공동작업자가 동기화되지 않을 수 있습니다. 페이지를 새로고침해 달라고 요청하세요.",
+    "versionMigrationNotice": "이전 버전이 마이그레이션 중이므로 일시적으로 표시되지 않을 수 있습니다.",
+    "storeFailedWarning": "콘텐츠를 저장하지 못했습니다. 네트워크 연결을 확인하세요.",
+    "concurrentEditWarning": "다른 공동작업자도 이 요소를 수정하고 있습니다. 변경사항을 덮어쓸 수 있습니다."
+  },
+  "history": {
+    "title": "버전 기록",
+    "restore": "이 버전을 복원하세요",
+    "createVersion": "명명된 버전 생성",
+    "versionName": "버전 이름",
+    "unnamed": "이름이 없는 버전",
+    "restoreSuccess": "버전이 성공적으로 복원되었습니다.",
+    "restoreFailed": "버전을 복원하지 못했습니다."
+  },
+  "error": {
+    "projectNotFound": "프레젠테이션을 찾을 수 없습니다.",
+    "loadFailed": "로드하지 못했습니다.",
+    "saveFailed": "저장하지 못했습니다.",
+    "versionConflict": "버전 충돌입니다. 새로고침한 후 다시 시도해 주세요.",
+    "exportFailed": "내보내기 실패",
+    "importFailed": "가져오기 실패"
+  },
+  "message": {
+    "saved": "저장됨",
+    "saving": "저장 중...",
+    "autoSave": "자동 저장",
+    "unsavedChanges": "저장되지 않은 변경사항",
+    "editing": "편집",
+    "saveError": "저장 실패"
+  },
+  "common": {
+    "cancel": "취소",
+    "delete": "삭제"
+  },
+  "file": {
+    "title": "파일",
+    "importPptx": "PPTX 가져오기",
+    "exportPptx": "PPTX로 내보내기",
+    "exportPdf": "PDF로 내보내기",
+    "versionHistory": "버전 기록"
+  },
+  "page": {
+    "title": "페이지",
+    "totalCount": "{{count}} 총 페이지 수",
+    "addFirst": "첫 페이지 추가",
+    "addAfterCurrent": "현재 페이지 뒤에 새 페이지 추가",
+    "expandList": "페이지 목록 펼치기",
+    "dropHere": "여기에 드롭",
+    "insertHere": "여기에 슬라이드 삽입",
+    "context": {
+      "duplicateCurrent": "현재 페이지 복제",
+      "addAfter": "다음 이후에 페이지 추가",
+      "addRemark": "비고 추가",
+      "copyToClipboard": "클립보드에 복사",
+      "cut": "페이지 잘라내기",
+      "pasteAfter": "이 페이지 뒤에 붙여넣기",
+      "delete": "페이지 삭제"
+    },
+    "deleteConfirm": {
+      "title": "페이지 {{index}}을 삭제하시겠습니까?",
+      "desc": "이 페이지에는 콘텐츠가 있습니다. 실행 취소(Ctrl/Cmd+Z)를 통해 복구할 수 있습니다."
+    },
+    "addSlide": "슬라이드 추가"
+  },
+  "align": {
+    "left": "왼쪽 정렬",
+    "horizontalCenter": "수평 중심 정렬",
+    "right": "오른쪽 정렬",
+    "top": "상단 정렬",
+    "verticalCenter": "세로 가운데 정렬",
+    "bottom": "하단 정렬",
+    "distributeH": "수평으로 배포",
+    "distributeV": "수직으로 배포",
+    "enableSmartGuides": "스마트 가이드 스냅 활성화",
+    "disableSmartGuides": "스마트 가이드 스냅 비활성화",
+    "enableGridSnap": "그리드 스냅 활성화",
+    "disableGridSnap": "그리드 스냅 비활성화",
+    "showGrid": "그리드 표시",
+    "hideGrid": "그리드 숨기기",
+    "tidyUp": "정리"
+  },
+  "contextMenu": {
+    "copy": "복사",
+    "cut": "컷",
+    "paste": "붙여넣기",
+    "duplicate": "중복",
+    "selectAll": "모두 선택",
+    "layer": "레이어",
+    "bringToFront": "맨 앞으로 가져오기",
+    "bringForward": "앞으로 가져오기",
+    "sendBackward": "뒤로 보내기",
+    "sendToBack": "뒤로 보내기",
+    "group": "그룹",
+    "ungroup": "그룹 해제",
+    "lock": "잠금",
+    "unlock": "잠금 해제",
+    "lockSelected": "선택 잠금",
+    "unlockSelected": "선택 잠금 해제",
+    "show": "쇼",
+    "hide": "숨기기",
+    "showSelected": "선택 항목 표시",
+    "hideSelected": "선택 항목 숨기기",
+    "delete": "삭제",
+    "align": "정렬"
+  },
+  "moveable": {
+    "partialLocked": "일부 요소가 잠겨 있습니다."
+  },
+  "animation": {
+    "title": "애니메이션",
+    "add": "애니메이션 추가",
+    "empty": "요소를 선택한 다음 애니메이션 효과를 추가하세요.",
+    "emptyWithSelection": "선택한 요소에 애니메이션을 적용하려면 '+ 애니메이션 추가'로 효과를 선택하세요.",
+    "delete": "애니메이션 삭제",
+    "elementDeleted": "(삭제됨)",
+    "effect": {
+      "fadeIn": "페이드 인",
+      "fadeInDown": "페이드 인 다운",
+      "fadeInUp": "페이드 인 업",
+      "fadeInLeft": "페이드 인 왼쪽",
+      "fadeInRight": "페이드 인 오른쪽",
+      "zoomIn": "확대",
+      "zoomInDown": "아래로 확대",
+      "zoomInUp": "확대",
+      "zoomInLeft": "왼쪽 확대",
+      "zoomInRight": "오른쪽 확대",
+      "bounceIn": "바운스 인",
+      "bounceInDown": "바운스 인 다운",
+      "bounceInUp": "바운스 인 업",
+      "bounceInLeft": "왼쪽으로 바운스",
+      "bounceInRight": "오른쪽으로 바운스",
+      "slideInDown": "슬라이드 인 다운",
+      "slideInUp": "슬라이드 인 업",
+      "slideInLeft": "왼쪽으로 슬라이드",
+      "slideInRight": "오른쪽으로 슬라이드",
+      "rotateIn": "안으로 회전",
+      "rotateInDownLeft": "왼쪽 아래로 회전",
+      "rotateInDownRight": "오른쪽 아래로 회전",
+      "rotateInUpLeft": "왼쪽 위로 회전",
+      "rotateInUpRight": "오른쪽 위로 회전",
+      "flipInX": "X로 뒤집기",
+      "flipInY": "Y로 뒤집기",
+      "backInDown": "백 인 다운",
+      "backInUp": "다시 위로",
+      "backInLeft": "뒤로 왼쪽으로",
+      "backInRight": "오른쪽으로 돌아 가기",
+      "lightSpeedInRight": "오른쪽의 빛 속도",
+      "lightSpeedInLeft": "왼쪽의 빛 속도",
+      "fadeOut": "페이드 아웃",
+      "fadeOutDown": "페이드 아웃 다운",
+      "fadeOutUp": "페이드 아웃 업",
+      "fadeOutLeft": "페이드 아웃 왼쪽",
+      "fadeOutRight": "페이드 아웃 오른쪽",
+      "zoomOut": "축소",
+      "zoomOutDown": "아래로 축소",
+      "zoomOutUp": "축소 위로",
+      "zoomOutLeft": "왼쪽으로 축소",
+      "zoomOutRight": "오른쪽으로 축소",
+      "bounceOut": "바운스 아웃",
+      "bounceOutDown": "바운스 아웃 다운",
+      "bounceOutUp": "바운스 아웃 업",
+      "bounceOutLeft": "왼쪽으로 바운스 아웃",
+      "bounceOutRight": "오른쪽으로 바운스 아웃",
+      "slideOutDown": "아래로 슬라이드 아웃",
+      "slideOutUp": "위로 슬라이드 아웃",
+      "slideOutLeft": "왼쪽으로 슬라이드 아웃",
+      "slideOutRight": "오른쪽으로 슬라이드 아웃",
+      "bounce": "바운스",
+      "shakeX": "쉐이크엑스",
+      "shakeY": "쉐이크와이",
+      "wobble": "워블",
+      "swing": "그네",
+      "headShake": "머리 흔들기",
+      "jello": "젤로",
+      "rubberBand": "고무줄",
+      "tada": "짜다",
+      "flash": "플래시",
+      "pulse": "펄스",
+      "heartBeat": "심장 박동",
+      "flip": "뒤집기"
+    },
+    "triggerLabel": "트리거",
+    "duration": "기간",
+    "type": {
+      "in": "입구",
+      "out": "종료",
+      "attention": "강조"
+    },
+    "trigger": {
+      "click": "클릭 시",
+      "meantime": "이전과",
+      "auto": "이전 이후"
+    },
+    "group": {
+      "fade": "페이드",
+      "zoom": "줌",
+      "bounce": "바운스",
+      "slide": "슬라이드",
+      "rotate": "회전",
+      "flip": "뒤집기",
+      "shake": "흔들어",
+      "other": "기타"
+    },
+    "effectLabel": "효과"
+  },
+  "element": {
+    "type": {
+      "text": "텍스트",
+      "image": "이미지",
+      "shape": "모양",
+      "line": "라인",
+      "chart": "차트",
+      "table": "테이블",
+      "latex": "공식",
+      "video": "비디오",
+      "audio": "오디오"
+    }
+  },
+  "insert": {
+    "defaultText": "텍스트를 편집하려면 두 번 클릭하세요.",
+    "text": "텍스트",
+    "image": "미디어",
+    "shape": "모양",
+    "line": {
+      "title": "라인",
+      "presets": {
+        "straight": "스트레이트",
+        "singleArrow": "단일 화살표",
+        "doubleArrow": "이중 화살표",
+        "diamondArrow": "다이아몬드 화살",
+        "stealthArrow": "스텔스 애로우",
+        "dotEnd": "도트 엔드",
+        "dashed": "점선",
+        "dashedArrow": "점선 화살표",
+        "dotted": "점선",
+        "curve": "곡선",
+        "broken": "파선",
+        "broken2": "이중 파선",
+        "cubic": "3차 곡선"
+      },
+      "category": {
+        "basic": "기본",
+        "arrows": "화살",
+        "paths": "경로"
+      }
+    },
+    "table": {
+      "chooseSize": "테이블 크기 선택",
+      "preview": "{{rows}} × {{cols}} 테이블",
+      "title": "테이블"
+    },
+    "chart": {
+      "title": "차트",
+      "types": {
+        "bar": {
+          "label": "막대 차트",
+          "desc": "세로 막대 비교"
+        },
+        "column": {
+          "label": "기둥형 차트",
+          "desc": "가로 막대 비교"
+        },
+        "line": {
+          "label": "꺾은선형 차트",
+          "desc": "추세 변화"
+        },
+        "area": {
+          "label": "면적 차트",
+          "desc": "추세 및 거래량"
+        },
+        "pie": {
+          "label": "원형 차트",
+          "desc": "구성비율"
+        },
+        "ring": {
+          "label": "도넛 차트",
+          "desc": "구성비(중공)"
+        },
+        "radar": {
+          "label": "레이더 차트",
+          "desc": "다차원 비교"
+        },
+        "scatter": {
+          "label": "분산형 차트",
+          "desc": "상관관계 분포"
+        }
+      },
+      "default": {
+        "pieTitle": "분석 공유",
+        "ringTitle": "구성 분석",
+        "lineTitle": "추세 분석",
+        "areaTitle": "면적 동향",
+        "compareTitle": "데이터 비교",
+        "radarTitle": "차원 비교",
+        "scatterTitle": "분산형 분포",
+        "labels": {
+          "a": "카테고리 A",
+          "b": "카테고리 B",
+          "c": "카테고리 C",
+          "d": "카테고리 D"
+        },
+        "legendShare": "공유",
+        "series1": "시리즈 1",
+        "series2": "시리즈 2",
+        "dimension1": "차원 1",
+        "dimension2": "차원 2",
+        "dimension3": "차원 3",
+        "dimension4": "차원 4",
+        "dimension5": "차원 5",
+        "sampleA": "샘플 A",
+        "sampleB": "샘플 B"
+      }
+    },
+    "latex": {
+      "title": "공식",
+      "placeholder": "LaTeX를 입력하세요. x=\\\\frac{-b\\\\pm\\\\sqrt{b^2-4ac}}{2a}",
+      "color": "색상",
+      "submit": "수식 삽입",
+      "processing": "처리 중...",
+      "previewUnavailable": "수식 미리보기를 사용할 수 없습니다.",
+      "presets": {
+        "quadratic": "이차 공식",
+        "gaussian": "가우스 분포",
+        "euler": "오일러 항등식"
+      },
+      "errors": {
+        "empty": "수식을 입력하세요.",
+        "renderFailed": "수식을 렌더링하지 못했습니다. 구문을 확인하세요."
+      }
+    },
+    "title": "삽입"
+  },
+  "chart": {
+    "noData": "데이터 없음"
+  },
+  "name": {
+    "editHint": "이름을 편집하려면 클릭하거나 두 번 클릭하세요."
+  },
+  "property": {
+    "toolbar": {
+      "page": "페이지",
+      "position": "위치",
+      "transform": "변환",
+      "layer": "레이어"
+    },
+    "multiSelection": "{{count}} 요소 선택됨",
+    "page": "페이지",
+    "collapse": "접기",
+    "pageLayout": {
+      "title": "페이지 레이아웃",
+      "unbound": "언바운드",
+      "index": "색인: {{index}}",
+      "noOriginMeta": "이 페이지에서는 원본 레이아웃 메타데이터를 사용할 수 없습니다.",
+      "noSnapshots": "사용 가능한 레이아웃 스냅샷이 없습니다.",
+      "unnamed": "이름이 없는 레이아웃",
+      "master": "마스터: {{name}}",
+      "layoutIndex": "레이아웃 {{index}}"
+    },
+    "pageTransition": {
+      "title": "슬라이드 전환",
+      "option": {
+        "no": "없음",
+        "fade": "페이드",
+        "slideX": "수평으로 슬라이드",
+        "slideY": "수직 슬라이드",
+        "slideX3D": "수평 슬라이드(3D)",
+        "slideY3D": "수직 슬라이드(3D)",
+        "rotate": "회전",
+        "scaleY": "수직 확장",
+        "scaleX": "수평 확장",
+        "scale": "확대",
+        "scaleReverse": "축소",
+        "random": "무작위"
+      }
+    },
+    "pageBackground": {
+      "title": "페이지 배경",
+      "themeKey": "테마 키",
+      "resolvedColor": "해결된 색상",
+      "themePalette": "테마 팔레트",
+      "switchToNormal": "단색 배경으로 전환",
+      "imageFit": "이미지 맞춤",
+      "imageFitCover": "표지(자르기도 함)",
+      "imageFitContain": "포함",
+      "imageFitRepeat": "반복",
+      "useTheme": "테마 배경 사용",
+      "typeImage": "이미지",
+      "typeGradient": "그라데이션"
+    },
+    "themeFont": {
+      "title": "테마 글꼴",
+      "heading": "제목 글꼴",
+      "headingPlaceholder": "제목 글꼴 모음 입력",
+      "body": "본문 글꼴",
+      "bodyPlaceholder": "본문 글꼴 모음 입력"
+    },
+    "canvasAssist": {
+      "title": "캔버스 지원",
+      "snapToGuides": "스마트 가이드 스냅",
+      "snapToGrid": "그리드 스냅",
+      "showGrid": "그리드 표시"
+    },
+    "currentValue": "현재: {{value}}",
+    "default": "기본값",
+    "remark": "메모",
+    "remarkPlaceholder": "이 페이지에 대한 발표자 노트 추가…",
+    "positionSize": "위치 및 크기",
+    "transform": "변환",
+    "rotate": "회전",
+    "opacity": "불투명도",
+    "flipHorizontal": "수평 뒤집기",
+    "flipVertical": "수직 뒤집기",
+    "fixedRatio": "잠금 비율",
+    "elementName": "요소 이름",
+    "lock": "잠금",
+    "unlock": "잠금 해제",
+    "show": "쇼",
+    "hide": "숨기기",
+    "color": "색상",
+    "font": "글꼴",
+    "none": "없음",
+    "enabled": "활성화됨",
+    "apply": "적용",
+    "clear": "지우기",
+    "layer": {
+      "action": {
+        "toFront": "맨 앞으로 가져오기",
+        "forward": "앞으로 가져오기",
+        "backward": "뒤로 보내기",
+        "toBack": "맨 뒤로 보내기",
+        "hideAll": "모두 숨기기",
+        "showAll": "모두 표시",
+        "lockAll": "모두 잠금",
+        "unlockAll": "모두 잠금 해제",
+        "lockedHint": "레이어가 잠겨 있습니다."
+      },
+      "empty": "요소 없음",
+      "show": "쇼",
+      "hide": "숨기기",
+      "lock": "잠금",
+      "unlock": "잠금 해제",
+      "group": {
+        "defaultName": "그룹({{count}})",
+        "collapse": "그룹 축소",
+        "expand": "그룹 펼치기",
+        "placeholder": "그룹 이름을 입력하세요",
+        "renameHint": "Enter를 눌러 저장하세요.",
+        "show": "그룹 표시",
+        "hide": "그룹 숨기기",
+        "hidePartial": "보이는 항목 숨기기",
+        "lock": "잠금 그룹",
+        "lockPartial": "잠금 해제된 항목 잠금",
+        "unlock": "그룹 잠금 해제"
+      }
+    },
+    "style": {
+      "chart": {
+        "title": "차트"
+      },
+      "fill": {
+        "title": "채우기",
+        "modeSolid": "솔리드",
+        "modeGradient": "그라데이션",
+        "modeImage": "이미지",
+        "opacity": "불투명도",
+        "gradientType": "유형",
+        "gradientTypeLinear": "선형",
+        "gradientTypeRadial": "방사형",
+        "angle": "각도",
+        "positionPercent": "게재순위 %",
+        "addStop": "+ 중지",
+        "removeStop": "- 중지",
+        "selectImage": "이미지 선택",
+        "uploadLocalImage": "로컬 이미지 업로드",
+        "inputImageUrl": "또는 이미지 URL을 입력하세요."
+      },
+      "themeColor": "테마 색상",
+      "corners": {
+        "title": "코너 반경(4코너)",
+        "topLeft": "왼쪽 위",
+        "topRight": "오른쪽 상단",
+        "bottomRight": "오른쪽 하단",
+        "bottomLeft": "왼쪽 하단"
+      },
+      "shapeText": {
+        "title": "도형 텍스트",
+        "content": "텍스트 내용",
+        "fontFamily": "글꼴군",
+        "fontFamilyPlaceholder": "예를 들어 마이크로소프트 야헤이",
+        "fontSize": "글꼴 크기(pt)",
+        "color": "텍스트 색상",
+        "align": "수평 정렬",
+        "alignLeft": "엘",
+        "alignCenter": "C",
+        "alignRight": "R",
+        "verticalAlign": "수직 정렬",
+        "verticalAlignTop": "티",
+        "verticalAlignMiddle": "엠",
+        "verticalAlignBottom": "비"
+      },
+      "image": {
+        "src": "이미지 URL",
+        "altText": "대체 텍스트",
+        "altTextPlaceholder": "접근성을 위한 이미지 설명",
+        "radius": "코너 반경",
+        "effects": {
+          "title": "이미지 효과",
+          "fitMode": "맞춤 모드",
+          "fit": {
+            "cover": "표지(자르기도 함)",
+            "contain": "포함",
+            "fill": "채우기(늘이기)"
+          },
+          "colorMask": "컬러 마스크",
+          "enableMask": "마스크 활성화",
+          "filters": "필터",
+          "filterBrightness": "밝기",
+          "filterContrast": "대비",
+          "filterSaturation": "채도",
+          "filterBlur": "흐림",
+          "filterGrayscale": "그레이스케일",
+          "filterInvert": "반전",
+          "filterHueRotate": "색조 회전",
+          "filterSepia": "세피아",
+          "cropHint": "자르기 모드(직사각형/원형)로 들어가려면 이미지를 두 번 클릭하세요.",
+          "resetFilters": "필터 재설정"
+        }
+      },
+      "textDefault": {
+        "title": "텍스트 스타일",
+        "defaultColor": "텍스트 색상",
+        "background": "텍스트 배경",
+        "fontFamily": "글꼴군",
+        "fontFamilyPlaceholder": "예를 들어 마이크로소프트 야헤이",
+        "fontSize": "글꼴 크기(pt)",
+        "lineHeight": "라인 높이",
+        "lineHeightPlaceholder": "승수(예: 1.5",
+        "wordSpace": "문자 간격",
+        "paragraphSpace": "단락 간격",
+        "verticalAlign": "수직 정렬",
+        "verticalAlignTop": "탑",
+        "verticalAlignMiddle": "중간",
+        "verticalAlignBottom": "바닥",
+        "verticalText": "세로 텍스트",
+        "autoFit": "텍스트 맞춤",
+        "autoFitNone": "없음",
+        "autoFitShrink": "텍스트 축소",
+        "autoFitResize": "상자 크기 조정",
+        "margin": "패딩",
+        "marginTop": "탑",
+        "marginRight": "오른쪽",
+        "marginBottom": "바닥",
+        "marginLeft": "왼쪽"
+      },
+      "link": {
+        "title": "요소 링크",
+        "type": {
+          "web": "외부링크",
+          "slide": "페이지 점프"
+        },
+        "placeholder": {
+          "web": "https://example.com",
+          "slide": "페이지-2 / 2 / Slide2.xml"
+        },
+        "save": "링크 저장",
+        "remove": "링크 제거",
+        "noTarget": "링크 대상 없음",
+        "pageLabel": "페이지"
+      },
+      "tableRichText": {
+        "title": "테이블 리치 텍스트",
+        "tip": "서식 있는 텍스트를 편집하려면 표 셀을 두 번 클릭한 다음 여기에서 글꼴, 색상 및 정렬을 제어하세요.",
+        "align": {
+          "left": "엘",
+          "center": "C",
+          "right": "R",
+          "justify": "제이"
+        },
+        "fontSize": "글꼴 크기(pt)",
+        "fontPlaceholder": "예를 들어 마이크로소프트 야헤이",
+        "unorderedList": "글머리 기호 목록",
+        "orderedList": "번호 매기기 목록",
+        "linkPrompt": "링크 입력(https://... 또는 page-2 지원)",
+        "linkPlaceholder": "https://... 또는 페이지-2",
+        "link": "링크",
+        "unlink": "연결 해제",
+        "cellBg": "셀 배경",
+        "cellVerticalAlign": "수직 정렬",
+        "clearFormatting": "서식 지우기"
+      },
+      "tableTheme": {
+        "title": "테이블 테마",
+        "color": "테마 색상",
+        "headerRow": "헤더 행",
+        "headerCol": "첫 번째 열",
+        "footerRow": "바닥글 행",
+        "lastCol": "마지막 열",
+        "stripedRows": "줄무늬 행",
+        "stripedCols": "줄무늬 기둥"
+      },
+      "tableBorders": {
+        "title": "표 테두리",
+        "top": "탑",
+        "bottom": "바닥",
+        "left": "왼쪽",
+        "right": "오른쪽",
+        "insideH": "H 내부",
+        "insideV": "V 내부"
+      },
+      "latex": {
+        "title": "공식",
+        "placeholder": "LaTeX 수식을 입력하세요",
+        "stroke": "뇌졸중",
+        "hintApply": "Ctrl/Cmd + Enter를 눌러 적용",
+        "rendering": "렌더링…",
+        "errorEmpty": "수식은 비워둘 수 없습니다.",
+        "errorRenderFailed": "수식을 렌더링하지 못했습니다."
+      },
+      "line": {
+        "title": "선 스타일",
+        "width": "폭",
+        "style": "스타일",
+        "styleOptions": {
+          "solid": "솔리드",
+          "dashed": "점선",
+          "dotted": "점선",
+          "dashDot": "대시 도트",
+          "longDash": "긴 대시",
+          "longDashDot": "긴 대시 점"
+        },
+        "type": "선 종류",
+        "typeOptions": {
+          "straight": "스트레이트",
+          "broken": "부서진",
+          "broken2": "더블 브로큰",
+          "curve": "2차 곡선",
+          "cubic": "3차 곡선"
+        },
+        "startCap": "스타트 캡",
+        "endCap": "엔드캡",
+        "cap": {
+          "none": "없음",
+          "arrow": "화살표",
+          "triangle": "삼각형",
+          "stealth": "스텔스",
+          "diamond": "다이아몬드",
+          "dot": "도트"
+        }
+      },
+      "outline": {
+        "title": "개요",
+        "none": "개요 없음",
+        "width": "폭",
+        "style": "스타일"
+      },
+      "shadow": {
+        "title": "그림자",
+        "none": "그림자 없음",
+        "offsetX": "오프셋 X",
+        "offsetY": "오프셋 Y",
+        "blur": "흐림",
+        "colorPlaceholder": "RGBA(0,0,0,0.15)"
+      },
+      "video": {
+        "title": "비디오",
+        "src": "비디오 URL",
+        "poster": "포스터",
+        "posterPlaceholder": "포스터 이미지 URL(선택사항)",
+        "autoplay": "자동재생"
+      },
+      "audio": {
+        "title": "오디오",
+        "src": "오디오 URL",
+        "iconColor": "아이콘 색상",
+        "autoplay": "자동재생",
+        "loop": "루프"
+      }
+    },
+    "chart": {
+      "type": "유형",
+      "title": "제목",
+      "titlePlaceholder": "차트 제목",
+      "labelsField": "카테고리 라벨(쉼표로 구분)",
+      "labelsFieldScatter": "X축 값(기본값/첫 번째 계열, 쉼표로 구분)",
+      "labelsPlaceholder": "1분기, 2분기, 3분기, 4분기",
+      "labelsPlaceholderScatter": "1, 2, 3, 4",
+      "legendsField": "범례 이름(쉼표로 구분)",
+      "legendsFieldPie": "시리즈 이름(첫 번째 하나만 사용됨)",
+      "legendsPlaceholder": "시리즈 1, 시리즈 2",
+      "legendsPlaceholderPie": "공유",
+      "seriesField": "데이터 계열(한 줄에 하나의 계열, 쉼표로 구분)",
+      "seriesFieldPie": "값(한 줄, 쉼표로 구분)",
+      "xSeriesField": "시리즈별 X 값(라인당 하나의 시리즈, 선택 사항)",
+      "xSeriesPlaceholder": "1, 2, 3, 4\n10, 20, 30, 40",
+      "xSeriesHint": "비어 있으면 위의 값이 사용되어 각 계열 길이에 맞춰 정렬됩니다.",
+      "pieHint": "원형/도넛은 첫 번째 데이터 행과 첫 번째 범례 이름만 사용합니다.",
+      "showLegend": "범례 표시",
+      "legendPosition": "범례 위치",
+      "legendPositionBottom": "바닥",
+      "legendPositionTop": "탑",
+      "legendPositionLeft": "왼쪽",
+      "legendPositionRight": "오른쪽",
+      "showDataLabel": "데이터 레이블 표시",
+      "stack": "스택",
+      "smooth": "부드러운 곡선",
+      "smoothScatter": "부드러운 선",
+      "radarFilled": "채우기 영역",
+      "themeMapping": "테마 색상 매핑",
+      "themeMappingHint": "색상이 테마 변경을 자동으로 따르도록 시리즈를 테마 키에 바인딩합니다.",
+      "resetByTheme": "테마별 재설정",
+      "removeColor": "색상 제거",
+      "customColor": "맞춤 색상",
+      "addColor": "+ 색상",
+      "chartFillColor": "차트 배경",
+      "axisTextColor": "축 텍스트 색상",
+      "gridLineColor": "그리드 선 색상",
+      "defaultCategory": "카테고리 {{index}}",
+      "defaultLegendShare": "공유",
+      "defaultSeries": "시리즈 {{index}}"
+    },
+    "noSelection": "편집을 시작하려면 요소를 선택하세요.",
+    "slideStyle": "슬라이드 스타일",
+    "pageProperties": "페이지 속성"
+  },
+  "tab": {
+    "slide": "슬라이드",
+    "design": "디자인",
+    "properties": "속성",
+    "layers": "레이어",
+    "insert": "삽입",
+    "edit": "편집",
+    "animation": "애니메이션"
+  },
+  "colorPicker": {
+    "themeColors": "테마 색상",
+    "documentColors": "문서 색상"
+  },
+  "present": {
+    "title": "현재",
+    "fromBeginning": "처음부터",
+    "fromCurrent": "현재 슬라이드에서"
+  },
+  "insertShape": {
+    "category": {
+      "rect": "직사각형",
+      "basic": "기본 모양",
+      "basic2": "기본도형2",
+      "arrows": "화살",
+      "stars": "별"
+    },
+    "presets": {
+      "rect": "직사각형",
+      "roundRect": "둥근 직사각형",
+      "roundRectSingle": "단일 둥근 모서리 직사각형",
+      "cutRect": "자르기 직사각형",
+      "ellipse": "타원",
+      "circle": "서클",
+      "triangle": "삼각형",
+      "diamond": "다이아몬드",
+      "parallelogram": "평행사변형",
+      "trapezoid": "사다리꼴",
+      "pentagon": "펜타곤",
+      "hexagon": "육각형",
+      "octagon": "팔각형",
+      "cross": "십자가",
+      "rightTriangle": "직각삼각형",
+      "heart": "하트",
+      "lightning": "번개",
+      "cloud": "클라우드",
+      "chevron": "쉐브론",
+      "callout": "설명선",
+      "roundCallout": "둥근 설명선",
+      "rightArrow": "오른쪽 화살표",
+      "leftArrow": "왼쪽 화살표",
+      "upArrow": "위쪽 화살표",
+      "downArrow": "아래쪽 화살표",
+      "leftRightArrow": "왼쪽-오른쪽 화살표",
+      "upDownArrow": "위쪽-아래쪽 화살표",
+      "notchedRightArrow": "노치 오른쪽 화살표",
+      "star5": "5점 별",
+      "star4": "4점 별",
+      "star6": "6점 별"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "capability_ref": {
+    "expected_hash": "sha256:780bdbaa41cd0540b298d4e81b4302c1fdb39cb4fb2054d1319d6bb11f842803",
+    "key": "kimi-k3-draft-capability",
+    "kind": "model-capability",
+    "revision": "1"
+  },
+  "identity": {
+    "canonical_hash": "sha256:83c232306358d5fe44f30c1276773ba6cbdef8053ddd67c7c35cbbfbaba52124",
+    "key": "kimi-k3-draft-thinking-wire",
+    "kind": "runtime-wire-mapping",
+    "revision": "1"
+  },
+  "mapping_role": "runtime-extension",
+  "patches": [
+    {
+      "namespace": "protocol.request.body",
+      "operations": [
+        {
+          "input_value": "low",
+          "operation": "set",
+          "schema_version": "1",
+          "source": null,
+          "target": "reasoning_effort",
+          "value": "low",
+          "when": null
+        },
+        {
+          "input_value": "high",
+          "operation": "set",
+          "schema_version": "1",
+          "source": null,
+          "target": "reasoning_effort",
+          "value": "high",
+          "when": null
+        },
+        {
+          "input_value": "max",
+          "operation": "set",
+          "schema_version": "1",
+          "source": null,
+          "target": "reasoning_effort",
+          "value": "max",
+          "when": null
+        }
+      ],
+      "schema_version": "1"
+    }
+  ],
+  "product_mapping_ref": {
+    "expected_hash": "sha256:c06baafcfe2841550bcfeaf4f1850b5ce9850e0bd8136a495290987d778a5c19",
+    "key": "kimi-k3-draft-thinking-control",
+    "kind": "product-control-mapping",
+    "revision": "1"
+  },
+  "schema_version": "1"
+}

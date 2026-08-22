@@ -1,0 +1,21 @@
+以下输入同时用于生成 intent_summary、decision_summary 和 unresolved_items。
+
+用户意图：{{ user_prompt[:300] }}
+
+{% if files %}
+文件变更：
+{% for f in files[:20] %}
+- {{ f.path }} ({{ f.action }})
+{% endfor %}
+{% endif %}
+
+{% if resources %}
+资源变更：
+{% for r in resources[:10] %}
+- {{ r.type }}: {{ r.name }} ({{ r.action }})
+{% endfor %}
+{% endif %}
+
+{% if basic_outcome %}
+基础结果：{{ basic_outcome }}
+{% endif %}

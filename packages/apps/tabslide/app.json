@@ -1,0 +1,120 @@
+{
+  "id": "tabslide",
+  "name": "Slides",
+  "version": "0.1.0",
+  "description": "Presentation creation module supporting PPTX import/export, HTML-to-slides, and AI-assisted slide generation",
+  "objectModel": {
+    "entities": [
+      "project",
+      "slide",
+      "element"
+    ],
+    "schema": {
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "executionTarget": "backend",
+  "uiRuntime": "iframe",
+  "agentRuntime": "hostBackend",
+  "distribution": "builtin",
+  "surface": "collaborative",
+  "uiHints": {
+    "panel": true,
+    "icon": "presentation",
+    "iconAsset": {
+      "default": "assets/icon.svg",
+      "presentation": "selfContained",
+      "aliases": [
+        "slide"
+      ]
+    }
+  },
+  "uiOnly": false,
+  "contextSources": [
+    "tabslide"
+  ],
+  "permissions": [
+    "tabslide"
+  ],
+  "requiredCapabilities": [],
+  "runtimeDependencies": [],
+  "runtimeSupport": {
+    "electron": {
+      "mode": "full"
+    },
+    "daemon": {
+      "mode": "full"
+    }
+  },
+  "skills": [
+    "skills/tabslide-operator",
+    "skills/operations",
+    "skills/html-spec",
+    "skills/design-guide"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "tabslide-operator": {
+        "enabled": true
+      },
+      "operations": {
+        "enabled": true
+      },
+      "html-spec": {
+        "enabled": true
+      },
+      "design-guide": {
+        "enabled": true
+      }
+    }
+  },
+  "lifecycleHooks": {},
+  "kind": "app",
+  "runtimeBindings": {
+    "uiProvider": "electron:context-space.tabslide",
+    "skillsProvider": "skills:local"
+  },
+  "tools": [],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false
+  },
+  "agentIntegration": {
+    "contextType": "tabslide",
+    "contextFields": [
+      {
+        "name": "current_slide_id",
+        "label": "slide_id",
+        "isResourceId": true
+      },
+      {
+        "name": "current_slide_title",
+        "label": "title",
+        "isResourceId": false
+      }
+    ],
+    "toolDomains": [],
+    "hasPromptSection": true,
+    "displayField": "",
+    "workspaceRootSource": "",
+    "isFrontendDependent": false,
+    "typeAliases": []
+  },
+  "opens": {
+    "types": [
+      {
+        "type": "slide",
+        "priority": 100
+      }
+    ]
+  },
+  "catalog": {
+    "category": "creation",
+    "desktopGroup": "cloudResources",
+    "canCreate": true,
+    "searchable": true,
+    "isDefaultEnabled": true,
+    "order": 4
+  }
+}

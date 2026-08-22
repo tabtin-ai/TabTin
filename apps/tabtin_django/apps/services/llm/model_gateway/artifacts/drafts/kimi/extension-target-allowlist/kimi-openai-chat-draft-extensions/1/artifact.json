@@ -1,0 +1,23 @@
+{
+  "adapter_key": "openai-chat-completions",
+  "adapter_version": "draft-v1",
+  "identity": {
+    "canonical_hash": "sha256:a345bdf85de59a136f9b2af7285cf8f1697ffe2e38d88364fce8ec3f4d64e960",
+    "key": "kimi-openai-chat-draft-extensions",
+    "kind": "extension-target-allowlist",
+    "revision": "1"
+  },
+  "mapping_role": "runtime-extension",
+  "mapping_schema_ref": {
+    "expected_hash": "sha256:ea1ae488fc69215c50cf5aa3954dfdf537e9b6f38613133cfad4f70c4bd18929",
+    "key": "kimi-draft-contract-evidence",
+    "kind": "projection-metadata",
+    "revision": "1"
+  },
+  "protocol_type": "openai-compatible",
+  "schema_version": "1",
+  "targets": [
+    "thinking.type",
+    "reasoning_effort"
+  ]
+}

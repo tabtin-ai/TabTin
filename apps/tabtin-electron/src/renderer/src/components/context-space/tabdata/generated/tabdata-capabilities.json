@@ -1,0 +1,714 @@
+{
+  "version": 1,
+  "groups": [
+    {
+      "id": "tables",
+      "label": "表管理",
+      "order": 1
+    },
+    {
+      "id": "records",
+      "label": "记录",
+      "order": 2
+    },
+    {
+      "id": "fields",
+      "label": "字段",
+      "order": 3
+    },
+    {
+      "id": "views",
+      "label": "视图",
+      "order": 4
+    },
+    {
+      "id": "sql",
+      "label": "数据查询",
+      "order": 5
+    },
+    {
+      "id": "relations",
+      "label": "关联与层级",
+      "order": 6
+    },
+    {
+      "id": "import_export",
+      "label": "导入与导出",
+      "order": 7
+    },
+    {
+      "id": "version_history",
+      "label": "版本与历史",
+      "order": 8
+    },
+    {
+      "id": "organize",
+      "label": "组织与回收站",
+      "order": 9
+    },
+    {
+      "id": "share",
+      "label": "表单分享",
+      "order": 10
+    },
+    {
+      "id": "data_share",
+      "label": "数据分享",
+      "order": 11
+    }
+  ],
+  "commands": [
+    {
+      "name": "table create",
+      "short": "创建表格",
+      "long": "在当前 Organization 新建一张表，可选自定义字段或使用默认「标题」字段。\n设计理由：create 返回 table-id，是 smoke 主链第一步；--use-default-fields 适合\n快速探针，--fields 适合建模时一次性声明 schema。\n常见陷阱：create 只建表结构，不写记录——数据写入走 record insert；软删用 delete，\n物理清除需 trash permanent + --yes。\n要挂到知识库侧栏某父资源下时传 --parent-item-id（ContextItem ID）；不传则落在根级。",
+      "risk": "write",
+      "group": "tables",
+      "group_label": "表管理"
+    },
+    {
+      "name": "table info",
+      "short": "表格详情",
+      "long": "取单张表的元数据（名称、描述、归档/回收状态、默认视图等）。\n设计理由：info 比 list 字段更全，改表属性前或确认 trashed/archived 状态时先读。\n常见陷阱：info 不返回记录行——记录数用 stats 或 record list。",
+      "group": "tables",
+      "group_label": "表管理"
+    },
+    {
+      "name": "table list",
+      "short": "列出表格",
+      "long": "分页列出当前 Space 下的表格，支持关键词搜索、归档过滤。\n设计理由：list 是 TabData 入口——先拿 table-id 再调 record/field/view 子命令；\n返回含 default_view_id / field_count，便于 Agent 判断表规模。\n常见陷阱：软删表不在 list 里，需 `tabtin table trash list`；`restore` 是解归档、`trash restore` 是从回收站恢复，动词不同。",
+      "group": "tables",
+      "group_label": "表管理"
+    },
+    {
+      "name": "table search",
+      "short": "全文搜索",
+      "long": "在单表全文索引中搜索关键词，可限定字段或视图。\n设计理由：比 SQL LIKE 更适合中文分词/索引场景；与 search-index 子组（索引管理）分工。\n常见陷阱：需表已建搜索索引；无索引时可能空结果或报错，先 search-index status 排查。",
+      "group": "tables",
+      "group_label": "表管理"
+    },
+    {
+      "name": "table stats",
+      "short": "表格统计",
+      "long": "返回表的记录数、字段数等聚合统计，只读。\n设计理由：大表操作前先 stats 评估规模，避免 record list 一次拉全表。\n常见陷阱：stats 是快照，并发写入时数字可能略滞后。",
+      "group": "tables",
+      "group_label": "表管理"
+    },
+    {
+      "name": "table update",
+      "short": "更新表格属性",
+      "long": "修改表级元数据（名称、描述、图标），不改字段 schema 与记录数据。\n设计理由：与 field add/update 分工——本命令只动 Table 对象属性。\n常见陷阱：改字段结构走 field 子命令；rename 表不影响 record-id 与 field-id。",
+      "risk": "write",
+      "group": "tables",
+      "group_label": "表管理"
+    },
+    {
+      "name": "table record bulk-insert",
+      "short": "批量插入",
+      "long": "单次最多 1000 条记录（MAX_BULK_RECORDS）。字段值格式随类型变化，详见下方说明。\n\n各类型字段在 --data / --records 里的值格式：\n\n基础:\n  text / long_text   \"字符串\"\n  number / percent / currency / rating   数字（JSON 数字）\n  checkbox           true / false\n  date               \"2026-05-01\"（ISO 日期）\n  select             \"选项名\"（单选）\n  multi_select       [\"选项A\",\"选项B\"]\n  url / email / phone   \"...\"\n\n用户 / 系统:\n  user               [{\"id\":\"<user uuid>\",\"name\":\"...\"}]  单值时也允许 {\"id\":\"...\"}\n  created_time / last_modified_time / created_by / last_modified_by   只读（写入被忽略）\n\n文件:\n  attachment          [{\"file_id\":\"...\",\"name\":\"...\",\"url\":\"...\",\"size\":12345,\"mime_type\":\"image/png\"}]\n\n高级:\n  link                单值:  {\"id\":\"<目标记录 UUID>\"} 或 [\"<uuid>\"]\n                      多值:  [{\"id\":\"<uuid>\"},{\"id\":\"<uuid>\"}] 或 [\"<uuid>\",\"<uuid>\"]\n                      传空:  null 或 []（清空关联）\n\nKey 约定:\n  --field-key-type=name（默认）时，data/records 里 key 用字段名；\n  --field-key-type=id    时，key 用字段 UUID。\n  系统字段 id 以 __id 传入（upsert 更新时）。",
+      "risk": "write",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table record comment create",
+      "short": "新增记录评论",
+      "long": "在一条 TabData 记录下新增评论，不修改记录字段值。\n设计理由：人和 Agent 使用同一命令与署名链路；Agent 的运行与会话归因由 transport 自动携带。\n常见陷阱：不要传 Agent 身份；重试写入时请复用 --client-request-id，避免产生重复评论。",
+      "risk": "write",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table record comment list",
+      "short": "列出记录评论",
+      "long": "列出一条 TabData 记录下当前可见的评论。\n设计理由：评论是记录协作上下文，不混入字段值；读取沿用当前 Profile 的资源权限。\n常见陷阱：record-id 是记录 UUID，而不是所属表格 UUID。",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table record comment reopen",
+      "short": "重新打开评论线程",
+      "long": "更新一条 TabData 记录下评论线程的解决状态。\n设计理由：线程状态独立于评论正文，便于按未解决、已解决和全部分类协作。\n常见陷阱：thread-id 应传根评论 ID；重复执行同一状态是幂等操作。",
+      "risk": "write",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table record comment reply",
+      "short": "回复记录评论",
+      "long": "回复一条 TabData 记录下的已有评论，不修改记录字段值。\n设计理由：显式 reply 命令让 Agent 可直接发现回复能力；底层复用新增评论接口并保留完整父评论上下文。\n常见陷阱：comment-id 必须属于当前记录且未删除；重试写入时请复用 --client-request-id。",
+      "risk": "write",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table record comment resolve",
+      "short": "标记评论线程为已解决",
+      "long": "更新一条 TabData 记录下评论线程的解决状态。\n设计理由：线程状态独立于评论正文，便于按未解决、已解决和全部分类协作。\n常见陷阱：thread-id 应传根评论 ID；重复执行同一状态是幂等操作。",
+      "risk": "write",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table record comment rm",
+      "short": "删除自己的记录评论",
+      "long": "软删除自己在一条 TabData 记录下发布的评论。\n设计理由：删除权只属于评论作者；服务端按当前 Profile 或受审计的 Agent 会话判定作者身份。\n常见陷阱：这是软删除，定级 RiskWrite，不需要 --yes；不能用它删除其他作者的评论。",
+      "risk": "write",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table record delete",
+      "short": "永久删除记录（不可恢复）",
+      "long": "永久删除一条或多条记录。记录、附件引用、关联关系和记录级历史会一并清理。\n本操作没有记录回收站，也不能通过撤销或版本历史恢复。\n常见陷阱：批量删除请用 --record-ids（JSON 数组），不要循环调用单条 delete——\n量大时后端有事务与限流成本，且失败时不易定位哪条没删成功。",
+      "risk": "high-risk-write",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table record detail",
+      "short": "记录详情",
+      "long": "取单条记录的完整字段值（含 link 关联字段的当前值）。\n设计理由：record list 为分页浏览做了瘦身，link 等重字段不一定\n全带；需要完整值时用 detail 按 record-id 精确取一条。TabTin 稳定资源链接或复制自\n页面的记录链接可直接作为位置参数，CLI 会复用当前 Profile 授权并解析 record-id。\n常见陷阱：--field-key-type 决定返回 JSON 的 key 是字段名还是字段 UUID，与\nrecord update 的 --data key 约定要保持一致，否则回写会对不上字段。",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table record insert",
+      "short": "插入记录",
+      "long": "向表格插入一条记录。字段值格式随类型变化——详见下方说明。\n\n各类型字段在 --data / --records 里的值格式：\n\n基础:\n  text / long_text   \"字符串\"\n  number / percent / currency / rating   数字（JSON 数字）\n  checkbox           true / false\n  date               \"2026-05-01\"（ISO 日期）\n  select             \"选项名\"（单选）\n  multi_select       [\"选项A\",\"选项B\"]\n  url / email / phone   \"...\"\n\n用户 / 系统:\n  user               [{\"id\":\"<user uuid>\",\"name\":\"...\"}]  单值时也允许 {\"id\":\"...\"}\n  created_time / last_modified_time / created_by / last_modified_by   只读（写入被忽略）\n\n文件:\n  attachment          [{\"file_id\":\"...\",\"name\":\"...\",\"url\":\"...\",\"size\":12345,\"mime_type\":\"image/png\"}]\n\n高级:\n  link                单值:  {\"id\":\"<目标记录 UUID>\"} 或 [\"<uuid>\"]\n                      多值:  [{\"id\":\"<uuid>\"},{\"id\":\"<uuid>\"}] 或 [\"<uuid>\",\"<uuid>\"]\n                      传空:  null 或 []（清空关联）\n\nKey 约定:\n  --field-key-type=name（默认）时，data/records 里 key 用字段名；\n  --field-key-type=id    时，key 用字段 UUID。\n  系统字段 id 以 __id 传入（upsert 更新时）。",
+      "risk": "write",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table record list",
+      "short": "记录列表",
+      "long": "分页列出表格内的记录，支持关键词搜索、排序、指定返回字段。\n设计理由：与 record detail 分工——list 走轻量分页浏览，detail 取单条完整字段值；\n大表请配合 --page-size 分批拉，避免一次性拉全表拖慢响应。\n常见陷阱：--fields 只影响返回列，不改变筛选范围；要过滤记录用 view records 的\n--filters，或先 table search 再按 id 批量 detail。",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table record update",
+      "short": "更新记录",
+      "long": "更新单条记录（--url，或 --table-id + --record-id）或批量更新（--records）。简单单字段优先用可重复的 --set field=value，避免 Windows PowerShell 剥掉 inline JSON 引号。--set 一律按字符串保留（含 123/true/null）；需要数字/布尔/对象/数组时走 --data @file。字段值格式随类型变化——详见下方说明。\n\nWindows：复杂 JSON 请先写 UTF-8 **无 BOM** 文件，再用带引号的 @file（如 --data '@patch.json' / --records '@records.json'）。PowerShell 5.x 的 Set-Content -Encoding utf8 会写 BOM，优先用 write_file / python json.dump / Out-File -Encoding utf8NoBOM。\n\n各类型字段在 --data / --records 里的值格式：\n\n基础:\n  text / long_text   \"字符串\"\n  number / percent / currency / rating   数字（JSON 数字）\n  checkbox           true / false\n  date               \"2026-05-01\"（ISO 日期）\n  select             \"选项名\"（单选）\n  multi_select       [\"选项A\",\"选项B\"]\n  url / email / phone   \"...\"\n\n用户 / 系统:\n  user               [{\"id\":\"<user uuid>\",\"name\":\"...\"}]  单值时也允许 {\"id\":\"...\"}\n  created_time / last_modified_time / created_by / last_modified_by   只读（写入被忽略）\n\n文件:\n  attachment          [{\"file_id\":\"...\",\"name\":\"...\",\"url\":\"...\",\"size\":12345,\"mime_type\":\"image/png\"}]\n\n高级:\n  link                单值:  {\"id\":\"<目标记录 UUID>\"} 或 [\"<uuid>\"]\n                      多值:  [{\"id\":\"<uuid>\"},{\"id\":\"<uuid>\"}] 或 [\"<uuid>\",\"<uuid>\"]\n                      传空:  null 或 []（清空关联）\n\nKey 约定:\n  --field-key-type=name（默认）时，data/records 里 key 用字段名；\n  --field-key-type=id    时，key 用字段 UUID。\n  系统字段 id 以 __id 传入（upsert 更新时）。",
+      "risk": "write",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table record update-by-filter commit",
+      "short": "提交：校验 token 后原子批量更新",
+      "long": "用 preflight 返回的 confirm_token 提交批量更新。\n设计理由：token 绑定 filter/patch 哈希与 matched_total，防重放、防中途改条件。\n常见陷阱：filter_clause / patch 必须与 preflight 完全一致；token 过期或 nonce 复用会 409/410。",
+      "risk": "write",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table record update-by-filter preflight",
+      "short": "预检：统计匹配行并签发 confirm_token",
+      "long": "按筛选条件预检批量更新影响面，不写库。\n设计理由：Agent 先看 matched_total / sample_records，再决定是否 commit，避免误伤整表。\n常见陷阱：commit 必须原样回传同一组 filter_clause + patch + confirm_token；改任一字段会验签失败。",
+      "risk": "write",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table record upsert",
+      "short": "Upsert 记录",
+      "long": "按 --upsert-on 指定的业务键匹配：命中则更新、未命中则新建。\n\n⚠ 重要：当前返回值仅含 created_count / updated_count / errors，**不返回 record_id 映射**。如果下游（比如 link 字段写入）需要 record_id，upsert 之后请再用 `record list` 分页重拉（MAX_PAGE_SIZE=1000）。\n\n各类型字段在 --data / --records 里的值格式：\n\n基础:\n  text / long_text   \"字符串\"\n  number / percent / currency / rating   数字（JSON 数字）\n  checkbox           true / false\n  date               \"2026-05-01\"（ISO 日期）\n  select             \"选项名\"（单选）\n  multi_select       [\"选项A\",\"选项B\"]\n  url / email / phone   \"...\"\n\n用户 / 系统:\n  user               [{\"id\":\"<user uuid>\",\"name\":\"...\"}]  单值时也允许 {\"id\":\"...\"}\n  created_time / last_modified_time / created_by / last_modified_by   只读（写入被忽略）\n\n文件:\n  attachment          [{\"file_id\":\"...\",\"name\":\"...\",\"url\":\"...\",\"size\":12345,\"mime_type\":\"image/png\"}]\n\n高级:\n  link                单值:  {\"id\":\"<目标记录 UUID>\"} 或 [\"<uuid>\"]\n                      多值:  [{\"id\":\"<uuid>\"},{\"id\":\"<uuid>\"}] 或 [\"<uuid>\",\"<uuid>\"]\n                      传空:  null 或 []（清空关联）\n\nKey 约定:\n  --field-key-type=name（默认）时，data/records 里 key 用字段名；\n  --field-key-type=id    时，key 用字段 UUID。\n  系统字段 id 以 __id 传入（upsert 更新时）。",
+      "risk": "write",
+      "group": "records",
+      "group_label": "记录"
+    },
+    {
+      "name": "table field add",
+      "short": "添加字段",
+      "long": "添加一个字段到表格。\n\n可创建字段类型清单（共 16 种，与 TabData UI 一致）：\n\n基础文本: text / long_text\n  - text              单行文本\n  - long_text         多行文本（options 可选 {\"format\":\"markdown\"}）\n\n数值: number / percent / currency / rating\n  - number            数字（options: {\"precision\":2}）\n  - percent           百分比（options: {\"precision\":2}；存储 0-100 或 0-1，按 precision）\n  - currency          货币（options: {\"symbol\":\"¥\",\"precision\":2}）\n  - rating            评分（options: {\"max\":5,\"icon\":\"star\"}）\n\n选择: select / multi_select / checkbox\n  - select            单选（options: {\"choices\":[\"A\",\"B\"]} 或 {\"choices\":[{\"value\":\"A\",\"label\":\"A\",\"color\":\"#4299E1\"}]}）\n  - multi_select      多选（options 同 select）\n  - checkbox          复选框（无 options）\n\n日期: date\n  - date              日期（options: {\"format\":\"YYYY-MM-DD\"}）\n\n链接联系: url / email / phone\n  - url               URL 链接\n  - email             电子邮箱\n  - phone             手机号\n\n用户: user\n  - user              用户引用（options: {\"allowMultiple\":false}）\n\n文件: attachment\n  - attachment        附件（支持任意文件，值为 [{\"file_id\":\"\",\"name\":\"\",\"url\":\"\"}]）\n\n高级:\n  - link              关联到另一张表\n                      options: {\"foreignTableId\":\"<目标表 UUID>\",\n                                \"relationship\":\"ManyMany|OneMany|ManyOne|OneOne\",\n                                \"isOneWay\":false}\n                      ⚠ 双向 link 会自动在目标表创建对称字段。",
+      "risk": "write",
+      "group": "fields",
+      "group_label": "字段"
+    },
+    {
+      "name": "table field bulk-add",
+      "short": "批量添加字段",
+      "long": "单次最多 50 个字段（MAX_BULK_FIELDS）。字段类型与 TabData UI 保持一致。\n\n可创建字段类型清单（共 16 种，与 TabData UI 一致）：\n\n基础文本: text / long_text\n  - text              单行文本\n  - long_text         多行文本（options 可选 {\"format\":\"markdown\"}）\n\n数值: number / percent / currency / rating\n  - number            数字（options: {\"precision\":2}）\n  - percent           百分比（options: {\"precision\":2}；存储 0-100 或 0-1，按 precision）\n  - currency          货币（options: {\"symbol\":\"¥\",\"precision\":2}）\n  - rating            评分（options: {\"max\":5,\"icon\":\"star\"}）\n\n选择: select / multi_select / checkbox\n  - select            单选（options: {\"choices\":[\"A\",\"B\"]} 或 {\"choices\":[{\"value\":\"A\",\"label\":\"A\",\"color\":\"#4299E1\"}]}）\n  - multi_select      多选（options 同 select）\n  - checkbox          复选框（无 options）\n\n日期: date\n  - date              日期（options: {\"format\":\"YYYY-MM-DD\"}）\n\n链接联系: url / email / phone\n  - url               URL 链接\n  - email             电子邮箱\n  - phone             手机号\n\n用户: user\n  - user              用户引用（options: {\"allowMultiple\":false}）\n\n文件: attachment\n  - attachment        附件（支持任意文件，值为 [{\"file_id\":\"\",\"name\":\"\",\"url\":\"\"}]）\n\n高级:\n  - link              关联到另一张表\n                      options: {\"foreignTableId\":\"<目标表 UUID>\",\n                                \"relationship\":\"ManyMany|OneMany|ManyOne|OneOne\",\n                                \"isOneWay\":false}\n                      ⚠ 双向 link 会自动在目标表创建对称字段。",
+      "risk": "write",
+      "group": "fields",
+      "group_label": "字段"
+    },
+    {
+      "name": "table field convert",
+      "short": "类型转换",
+      "long": "将字段原地转换为另一种类型。低风险转换直接生效，高风险（如丢精度、结构变更）需 --force 或 --async。\n\n可创建字段类型清单（共 16 种，与 TabData UI 一致）：\n\n基础文本: text / long_text\n  - text              单行文本\n  - long_text         多行文本（options 可选 {\"format\":\"markdown\"}）\n\n数值: number / percent / currency / rating\n  - number            数字（options: {\"precision\":2}）\n  - percent           百分比（options: {\"precision\":2}；存储 0-100 或 0-1，按 precision）\n  - currency          货币（options: {\"symbol\":\"¥\",\"precision\":2}）\n  - rating            评分（options: {\"max\":5,\"icon\":\"star\"}）\n\n选择: select / multi_select / checkbox\n  - select            单选（options: {\"choices\":[\"A\",\"B\"]} 或 {\"choices\":[{\"value\":\"A\",\"label\":\"A\",\"color\":\"#4299E1\"}]}）\n  - multi_select      多选（options 同 select）\n  - checkbox          复选框（无 options）\n\n日期: date\n  - date              日期（options: {\"format\":\"YYYY-MM-DD\"}）\n\n链接联系: url / email / phone\n  - url               URL 链接\n  - email             电子邮箱\n  - phone             手机号\n\n用户: user\n  - user              用户引用（options: {\"allowMultiple\":false}）\n\n文件: attachment\n  - attachment        附件（支持任意文件，值为 [{\"file_id\":\"\",\"name\":\"\",\"url\":\"\"}]）\n\n高级:\n  - link              关联到另一张表\n                      options: {\"foreignTableId\":\"<目标表 UUID>\",\n                                \"relationship\":\"ManyMany|OneMany|ManyOne|OneOne\",\n                                \"isOneWay\":false}\n                      ⚠ 双向 link 会自动在目标表创建对称字段。",
+      "risk": "write",
+      "group": "fields",
+      "group_label": "字段"
+    },
+    {
+      "name": "table field delete",
+      "short": "删除字段（不可恢复）",
+      "long": "硬删除字段及其在全部记录里存储的值——没有回收站层。\n设计理由：字段级删除后端不提供撤销端点；link 字段还会同时清理关联关系。\n常见陷阱：删除后字段定义和历史记录值都不可恢复；建议先 field detail 确认目标。",
+      "risk": "high-risk-write",
+      "group": "fields",
+      "group_label": "字段"
+    },
+    {
+      "name": "table field detail",
+      "short": "字段详情",
+      "long": "取单个字段的完整定义，包括 options 里的 link 关联配置。\n设计理由：field list 为列表浏览做了瘦身，完整 options 需要用 detail 单独取。\n常见陷阱：link 字段的 options 存的是目标表和关联关系，不是关联记录的当前值；\n取实际值请用 record detail。",
+      "group": "fields",
+      "group_label": "字段"
+    },
+    {
+      "name": "table field list",
+      "short": "字段列表",
+      "long": "列出表格的全部字段定义（名称、类型、options、是否必填/主字段）。\n设计理由：新建 record 前先 field list 确认字段名与类型，能避免 record insert\n的 --data key 或值格式对不上（如把 select 的字符串值传成了数组）。\n常见陷阱：字段名可能重复被改名——长期跑的脚本建议缓存 field-id 而不是硬编码\n字段名，或每次先 list 再按名称查 id。",
+      "group": "fields",
+      "group_label": "字段"
+    },
+    {
+      "name": "table field update",
+      "short": "更新字段",
+      "long": "更新字段名称、描述、必填、options 等属性（不含字段类型变更）。\n改类型请用 `field check` / `field preview` / `field convert`。\n\n可创建字段类型清单（共 16 种，与 TabData UI 一致）：\n\n基础文本: text / long_text\n  - text              单行文本\n  - long_text         多行文本（options 可选 {\"format\":\"markdown\"}）\n\n数值: number / percent / currency / rating\n  - number            数字（options: {\"precision\":2}）\n  - percent           百分比（options: {\"precision\":2}；存储 0-100 或 0-1，按 precision）\n  - currency          货币（options: {\"symbol\":\"¥\",\"precision\":2}）\n  - rating            评分（options: {\"max\":5,\"icon\":\"star\"}）\n\n选择: select / multi_select / checkbox\n  - select            单选（options: {\"choices\":[\"A\",\"B\"]} 或 {\"choices\":[{\"value\":\"A\",\"label\":\"A\",\"color\":\"#4299E1\"}]}）\n  - multi_select      多选（options 同 select）\n  - checkbox          复选框（无 options）\n\n日期: date\n  - date              日期（options: {\"format\":\"YYYY-MM-DD\"}）\n\n链接联系: url / email / phone\n  - url               URL 链接\n  - email             电子邮箱\n  - phone             手机号\n\n用户: user\n  - user              用户引用（options: {\"allowMultiple\":false}）\n\n文件: attachment\n  - attachment        附件（支持任意文件，值为 [{\"file_id\":\"\",\"name\":\"\",\"url\":\"\"}]）\n\n高级:\n  - link              关联到另一张表\n                      options: {\"foreignTableId\":\"<目标表 UUID>\",\n                                \"relationship\":\"ManyMany|OneMany|ManyOne|OneOne\",\n                                \"isOneWay\":false}\n                      ⚠ 双向 link 会自动在目标表创建对称字段。",
+      "risk": "write",
+      "group": "fields",
+      "group_label": "字段"
+    },
+    {
+      "name": "table view create",
+      "short": "创建视图",
+      "long": "在表格下新建一个视图，可选带初始筛选/排序/分组/可见字段/config。\n设计理由：视图是独立于表格数据的展示配置对象，创建后不影响已有记录；\n--view-type 决定后续 config 的可选字段。看板（kanban）必须指定分组字段，\n否则界面只有空壳、不会按列分卡——优先用 --group-by-field-id；复杂多级分组再用 --groups。\n常见陷阱：不传 --filters/--sorts 时新视图默认无筛选、按创建顺序展示；\n只传 --view-type kanban 而不传分组，创建会成功但看板不可用——先 field list\n取单选字段 ID，再带 --group-by-field-id 创建，最后用 view detail 确认 group_by_field。\nWindows：结构化 JSON 请先写 UTF-8 无 BOM 文件，再用带引号的 @file（如 --groups '@groups.json'），\n不要依赖 PowerShell 内联 JSON 引号；PowerShell 5.x 勿用 Set-Content -Encoding utf8（会写 BOM）。",
+      "risk": "write",
+      "group": "views",
+      "group_label": "视图"
+    },
+    {
+      "name": "table view delete",
+      "short": "删除视图（不可恢复）",
+      "long": "硬删除一个视图配置——没有回收站层，仅删配置，不影响表格记录本身。\n设计理由：视图是纯展示层对象，删除不会丢数据，但会丢失已保存的筛选/排序/\n分组配置和分享链接（表单视图的 share_id 会一并失效）。\n常见陷阱：删除表单视图（view_type=form）会连带使已发出的分享链接失效——\n删前确认没有依赖该分享链接的下游流程（如自动化表单收集）。",
+      "risk": "high-risk-write",
+      "group": "views",
+      "group_label": "视图"
+    },
+    {
+      "name": "table view detail",
+      "short": "视图详情",
+      "long": "取单个视图的完整配置——筛选条件、排序、分组、可见字段、config。\n设计理由：view list 只给概览字段，filters/sorts/groups 等结构化配置需要 detail\n才能拿全，是 view update 增量修改前的必要读取步骤。\n常见陷阱：filters/sorts 的 JSON 结构随字段类型变化（如 select 字段的\noperator 集合和 text 不同），改前先读一遍现有结构再改，别凭空拼。",
+      "group": "views",
+      "group_label": "视图"
+    },
+    {
+      "name": "table view list",
+      "short": "视图列表",
+      "long": "列出表格下的全部视图（grid/kanban/calendar/gallery/list/flashcard/form）。\n设计理由：视图承载筛选/排序/分组/可见字段等展示配置，先 list 确认 view-id 和\nview-type 再操作 view records / view update，避免误改错视图。\n常见陷阱：不同 view-type 支持的 config 字段不同（如 kanban 需要分组字段），\n--view-type 过滤只是缩小列表范围，不改变已有视图的类型。",
+      "group": "views",
+      "group_label": "视图"
+    },
+    {
+      "name": "table view records",
+      "short": "视图内记录",
+      "long": "按视图已保存的筛选/排序读取记录，也可用 --filters/--sorts 做临时覆盖（不落库）。\n设计理由：与 record list（忽略视图配置的全表分页）不同，本命令复用视图已保存\n的筛选/排序逻辑，是 UI「打开某视图看到的数据」的 CLI 等价物。\n常见陷阱：临时传的 --filters/--sorts 只影响本次查询，不会写回视图配置；\n想固化下来要用 view update。",
+      "group": "views",
+      "group_label": "视图"
+    },
+    {
+      "name": "table view set-default",
+      "short": "设为默认视图",
+      "long": "把指定视图设为该表格打开时的默认展示视图。\n设计理由：默认视图只是一个指针字段（table.default_view_id），切换不影响\n任何视图本身的配置或记录数据，随时可再切换。\n常见陷阱：--view-id 必须属于 --table-id 指定的表，跨表设置会被后端拒绝；\n删除当前默认视图后表格会退回到某个兜底视图（通常是最早创建的）。",
+      "risk": "write",
+      "group": "views",
+      "group_label": "视图"
+    },
+    {
+      "name": "table view statistics",
+      "short": "视图统计",
+      "long": "按视图当前生效的筛选范围，统计各列的汇总值（求和/平均/计数等，取决于字段类型）。\n设计理由：统计范围跟随视图已保存的 filters，不需要额外传参——想看不同筛选下\n的统计，先 view update 改 filters 再调本命令，或直接看 view records 自行聚合。\n常见陷阱：文本类字段通常只有 count，数值类字段才有 sum/avg/min/max——\n返回结构随列的字段类型变化，不要假设所有列都有相同的统计维度。",
+      "group": "views",
+      "group_label": "视图"
+    },
+    {
+      "name": "table view update",
+      "short": "更新视图",
+      "long": "增量更新视图的名称/描述/筛选/排序/分组/可见字段/共享与锁定状态。\n设计理由：只传要改的字段即可，未传字段保持原值；--is-locked 锁定后其它协作者\n在 UI 上不能改视图配置（CLI 调用不受此限制）。\n常见陷阱：--filters/--sorts/--groups 都是整体覆盖而非增量合并——想加一条筛选\n条件，需要先 view detail 取出现有 filters 再拼接新条件一起传。",
+      "risk": "write",
+      "group": "views",
+      "group_label": "视图"
+    },
+    {
+      "name": "table execute",
+      "short": "执行写 SQL",
+      "long": "执行 INSERT/UPDATE/DELETE 等写 SQL；DELETE 需 --allow-delete，DDL 需 --allow-ddl。\n设计理由：批量改数/复杂条件更新时比逐条 record update 高效，但风险更高。\n常见陷阱：--allow-ddl 是 CLI 侧门禁，后端仍可能拒绝 DDL；DELETE 不带 flag 会被 Validate 拦截。",
+      "risk": "write",
+      "group": "sql",
+      "group_label": "数据查询"
+    },
+    {
+      "name": "table query",
+      "short": "只读 SQL 查询",
+      "long": "对 Space 内 TabData 表执行只读 SQL（SELECT），TabTin 特色能力。\n设计理由：跨表只读分析、复杂筛选比多次 record list 更高效；与 execute 严格分工。\n常见陷阱：query 拒绝写语句——UPDATE/DELETE 走 execute 并带确认 flag。",
+      "group": "sql",
+      "group_label": "数据查询"
+    },
+    {
+      "name": "table link add",
+      "short": "增量挂上关联目标",
+      "long": "在现有关联上合并新的目标 id（读-改-写）。多关联去重合并；单关联（ManyOne/OneOne）则覆盖为传入的最后一个 id。\n设计理由：Agent 最常见需求是「再挂一个演员 / 再挂一个标签」，不应要求先 list 再手拼整格 JSON。\n常见陷阱：增量合并在 Desktop/Daemon（cli-server）下完整支持；纯 API 直连请改用 link set；\n目标 id 用 linkable-records 查，不要把姓名当 id。",
+      "risk": "write",
+      "group": "relations",
+      "group_label": "关联与层级"
+    },
+    {
+      "name": "table link create",
+      "short": "创建关联（link）字段",
+      "long": "在本表创建指向目标表的 link 字段，用一等 flag 代替手写 options JSON。\n设计理由：Agent 最常踩的坑是漏 foreignTableId / 写错 relationship 大小写 / 误造 is_multi；\n本命令把必填项提升为 flag，并在 help 里写清单/多关联与 relationship 的对照。\n常见陷阱：单/多不是 is_multi——ManyOne/OneOne=单值，ManyMany/OneMany=多值；\n双向（默认）会在目标表自动建对称字段，别再手建反向 link；先建目标表再 create。",
+      "risk": "write",
+      "group": "relations",
+      "group_label": "关联与层级"
+    },
+    {
+      "name": "table link list",
+      "short": "列出记录当前关联目标",
+      "long": "读取某条记录在指定 link 字段上的当前目标 id（及 title，若后端有缓存）。\n设计理由：比 record detail 再 jq 抠字段更稳，返回结构对 Agent 友好（target_ids / count）。\n常见陷阱：--field-id 是本表 link 字段；空关联返回 count=0 而不是错误。",
+      "group": "relations",
+      "group_label": "关联与层级"
+    },
+    {
+      "name": "table link populate-choices",
+      "short": "根据样本数据自动填充 select 选项",
+      "long": "给 select / multi_select 字段从样本值中提取唯一值、生成 choices。\n设计理由：数据导入后 select 字段的 options 往往是空的，逐个手填选项很繁琐；\n本命令扫现有记录值自动补全，或直接传 --values 指定候选集。\n常见陷阱：仅对 select / multi_select 字段有效，其它类型调用会被后端拒绝；\n与 link 边操作无关——别用它处理关联字段；--values 传入时会覆盖式合并。",
+      "risk": "write",
+      "group": "relations",
+      "group_label": "关联与层级"
+    },
+    {
+      "name": "table link remove",
+      "short": "解绑关联目标",
+      "long": "从现有关联中去掉指定目标 id，或 --all 清空。内部读-改-写后整格写回。\n设计理由：与 add 对称，避免 Agent 为了解绑一条去拼完整剩余列表。\n常见陷阱：没传 --target-ids 又没 --all 会校验失败；清空也可用 link set --targets '[]'；\n双向 link 解绑会同步对称边（后端保证）。",
+      "risk": "write",
+      "group": "relations",
+      "group_label": "关联与层级"
+    },
+    {
+      "name": "table link set",
+      "short": "整格覆盖关联目标",
+      "long": "把某条记录的 link 单元格设为给定目标 id 列表（整格覆盖，不是增量）。\n设计理由：后端 set_link_cell 语义就是整格 diff；需要「只留这些」时用 set，避免 add/remove 来回。\n常见陷阱：必须显式传 --targets / --target-ids（漏参会校验失败，不会静默清空）；清空请传 --targets '[]' 或改用 remove --all；\n值必须是目标表 record UUID，禁止写显示名。",
+      "risk": "write",
+      "group": "relations",
+      "group_label": "关联与层级"
+    },
+    {
+      "name": "table sub-record create",
+      "short": "创建子记录（挂到指定父记录）",
+      "long": "在表内创建一条记录，并通过自引用 link 字段挂到指定的父记录。\n设计理由：树形数据（任务/子任务等）需要子记录本身也是可独立查询的正式记录，\n而不是嵌套 JSON；parent-field-id 可省略，用表上默认父字段。\n常见陷阱：调用前表上必须已有父字段，没有先用 ensure-parent-field 建一个；\ndata 的字段值格式与 record insert 完全一致。",
+      "risk": "write",
+      "group": "relations",
+      "group_label": "关联与层级"
+    },
+    {
+      "name": "table sub-record move",
+      "short": "移动记录到新父（或升级为根）",
+      "long": "改变记录在树中的父节点，用于重新组织层级关系。\n设计理由：--new-parent-id 传空字符串或不传，等价于把记录从子树中摘出升为根节点；\n移动只改父子关系，不改记录本身的其它字段值。\n常见陷阱：移动到的新父不能是该记录自身的子孙节点，否则会形成环，后端会拒绝；\nparent-field-id 省略时用表上默认父字段，多父字段场景需显式指定。",
+      "risk": "write",
+      "group": "relations",
+      "group_label": "关联与层级"
+    },
+    {
+      "name": "table export csv",
+      "short": "导出 CSV",
+      "long": "把表数据（可按视图/字段/记录筛选）导出为 CSV，只读操作不改变表数据。\n设计理由：与其它 export 子命令共用同一后端端点，仅 format 固定不同；\n--output 指定本地文件路径，不传则直出到 stdout（配合 --format 处理）。\n常见陷阱：view-id 会应用该视图的筛选/排序/可见字段；不传 view-id 默认导出全表\n所有字段，大表导出耗时和文件体积都会明显增加。\n大表请加 --async：后端转 Celery 任务立即回 task_id，再用 export wait / export download\n取产物；同步导出在大表上会顶到请求超时。--async 与 --output 不要一起用——异步分支\n返回的是任务信息 JSON，不是文件内容。",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "table export download",
+      "short": "下载异步导出产物",
+      "long": "按 --file-id 下载异步导出生成的文件（二进制原样落盘）。\n设计理由：异步导出把产物放在对象存储，file_id 来自 `table export wait` 的成功结果。\n后端只发签名 URL（不做 302 跟随，避免 Authorization 头被带到对象存储导致拒签），\ncli-server 代取字节后按 `__binary` 信封回传，CLI 用 -o 写盘。\n常见陷阱：必须配 -o 指定落盘路径，不传只会打印文件元信息（二进制不适合直出 stdout）；\n超过 CLI 通道 7MB 直传上限的文件不回字节，改回 download_url，自己用 curl 取；\n签名地址有效期有限（默认 1 小时），过期重新执行本命令即可。",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "table export excel",
+      "short": "导出 Excel",
+      "long": "把表数据导出为 Excel（.xlsx），只读操作，保留基本表格样式。\n设计理由：面向需要用 Excel 打开分析/交付给非技术同事的场景，比 CSV\n多了列宽/表头样式等可读性优化。\n常见陷阱：大表导出为 Excel 比 CSV 更耗时（格式化开销），超大数据量建议用 csv/json；\nview-id 应用视图筛选，逻辑与 export csv 一致。\nExcel 格式化开销大，几万行以上优先加 --async 走任务队列（同步分支容易顶到请求超时）。",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "table export json",
+      "short": "导出 JSON",
+      "long": "把表数据导出为 JSON（数组或按对象聚合），只读操作。\n设计理由：与 export csv 共享筛选参数（field-ids/record-ids/view-id），只是\n输出格式不同；format-type=object 适合按主键聚合成 map 结构的场景。\n常见陷阱：format-type 只影响顶层结构（array vs object），不影响字段值本身\n的类型（link/attachment 等复杂字段仍是嵌套 JSON）。",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "table export pdf",
+      "short": "导出 PDF",
+      "long": "把表数据导出为 PDF，适合排版打印或存档交付，只读操作。\n设计理由：与其它 export 格式共享筛选参数；PDF 排版由后端固定模板生成，\n不支持自定义样式。\n常见陷阱：字段较多或记录较多时 PDF 排版可能换页/换列，可读性不如 Excel；\n建议先用 record-ids 限定小范围数据核对排版效果，再放开全量导出。\nPDF 渲染是三种格式里最慢的，全量导出建议直接加 --async。",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "table export wait",
+      "short": "轮询异步导出/导入任务到终态",
+      "long": "阻塞轮询 --task-id 指向的异步任务，直到成功、失败或超时（--wait-timeout 秒，默认 600）。\n设计理由：异步导出/大文件导入完成时后端只发 WS `export_completed`，CLI 与\nheadless 环境收不到长连接推送，只能靠 HTTP 轮询拿终态；本命令把轮询节奏、\n超时和退出码收在一处，调用方不用自己写 sleep 循环。\n退出码：成功 0；任务失败 1；等待超时 7（TIMEOUT，任务本身可能还在跑，\n可以用同一个 task_id 再 wait 一次）。\n导出任务成功后结果里带 file_id，接着用 `table export download --file-id` 取文件；\n导入任务成功后结果里是新增/更新条数与错误摘要。",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "table import csv",
+      "short": "导入 CSV",
+      "long": "从 CSV 文件/内容/stdin 批量写入表记录，可选自动创建缺失字段。\n设计理由：--file / --csv-content / stdin 三种输入方式覆盖不同脚本场景；\nauto-create-fields 默认开启，省去手动逐个建字段的步骤，适合快速导入探索性数据。\n常见陷阱：primary-key-field + update-existing 组合决定是新增还是按主键更新已有记录，\n不设置时默认全部当新记录插入，可能产生重复行。",
+      "risk": "write",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "table import excel",
+      "short": "导入 Excel",
+      "long": "从 Excel 文件（.xlsx）导入数据到表，指定 sheet 名可选择具体工作表。\n设计理由：Excel 是业务方最常用的原始数据格式，本命令让 Agent 直接消费\n用户手头的表格文件，不需要先手动转 CSV。\n常见陷阱：文件内容按 Base64 传输（FileBase64），大文件耗时较长（Timeout 5 分钟）；\n未指定 sheet-name 时默认取第一个工作表，多 sheet 文件请显式指定。",
+      "risk": "write",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "table import file",
+      "short": "导入大文件（超阈值自动转异步任务）",
+      "long": "从本地文件导入数据，文件超过 500KB 时后端自动转 Celery 异步任务并返回 task_id。\n设计理由：import csv/json/excel 是同步路径——整个文件在一次请求里解析完，\n大文件会顶到请求超时。本命令只把**文件路径**发给 cli-server，由它读盘：\n≤6MB 内联 base64 直发后端；更大的先直传对象存储，再只用 file_id 发起导入，\n文件字节不进 CLI 请求体（否则会撞 10MB 请求体上限）。上限因此是后端口径：\nCSV/JSON 10MB、Excel 20MB。小文件请继续用 import csv/json/excel，语义更直白。\n常见陷阱：文件由 cli-server 读取，必须是**本机** $HOME 或 /tmp 下的真实文件\n（不能是软链、不能在白名单目录外）；--file-type 不传时按扩展名推断\n（.csv/.json/.xlsx/.xls），扩展名不认识必须显式指定；返回 async=true 时要用\n`table export wait --task-id` 轮询终态，命令返回不代表数据已经写进表；\n文本文件按 UTF-8（带 BOM）解析，失败回退 GBK。",
+      "risk": "write",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "table import json",
+      "short": "导入 JSON",
+      "long": "从 JSON 文件/内容/stdin 批量写入表记录，可选自动创建缺失字段。\n设计理由：与 import csv 同一套语义，只是输入格式为 JSON 数组；适合从其它\n系统导出的结构化数据直接灌入。\n常见陷阱：primary-key-field + update-existing 决定新增 vs 更新，同 import csv；\nJSON 数组里每个对象的 key 会被当作字段名，命名不规范会自动创建同名字段。",
+      "risk": "write",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "table import preview",
+      "short": "预览导入结果（不写入）",
+      "long": "解析 CSV/JSON/Excel 文件内容并返回预览结果，不实际写入任何记录。\n设计理由：正式导入前先看解析出来的字段/行数/类型推断是否符合预期，\n避免大批量写入后才发现列错位或类型识别错误。\n常见陷阱：preview 是只读命令，本身不需要 --dry-run；预览结果的字段类型推断\n可能与实际 import 时的行为略有差异，仅供参考不是强保证。",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "table import template",
+      "short": "下载导入模板",
+      "long": "按当前表字段生成一份导入模板（CSV 或 JSON），key 为字段显示名，含一行示例值。\n设计理由：先下载模板再填数据，避免字段名对不上导致空写；JSON 模板形态为对象数组，\n可直接用于 table import json / 对照后 bulk-insert。\n常见陷阱：--file-format 控制模板文件格式（csv|json，默认 csv）；全局 --format 只影响\nCLI 回显样式。PowerShell 下写文件请用 --output；字段名必须与 table info 一致。",
+      "group": "import_export",
+      "group_label": "导入与导出"
+    },
+    {
+      "name": "table history list",
+      "short": "表历史",
+      "long": "分页列出表级操作历史（谁在什么时候做了什么），支持时间范围与过滤。\n设计理由：history 是 undo/redo/restore 的数据来源；先 list 找到目标\nhistory-id 或时间点，再决定用 undo（撤销最近操作）还是 restore（跳到指定历史）。\n常见陷阱：include-undone 决定是否显示已被撤销的历史条目，默认可能不显示；\nonly-my-operations 只看自己的操作，团队协作排查问题时通常要去掉这个过滤。",
+      "group": "version_history",
+      "group_label": "版本与历史"
+    },
+    {
+      "name": "table history redo",
+      "short": "表级重做（重做最近一次被撤销的操作）",
+      "long": "重做该表最近一次被 undo 撤销的操作，行为类似编辑器 Ctrl+Shift+Z。\n设计理由：与 undo 成对——撤销错了可以用 redo 拿回来，前提是 undo 之后\n没有产生新的写操作打断 redo 链。\n常见陷阱：redo-stack 为空时本命令无效果；only-my-operations 需要和当时\nundo 时的过滤范围一致，否则可能找不到对应条目。",
+      "risk": "write",
+      "group": "version_history",
+      "group_label": "版本与历史"
+    },
+    {
+      "name": "table history restore",
+      "short": "恢复到指定历史快照（覆盖当前数据，不可逆）",
+      "long": "把表恢复到某条历史记录对应的状态，覆盖当前数据——这是不可逆操作。\n设计理由：与 undo（撤销最近一步）不同，restore 可以跳到任意历史时间点，\n适合\"发现问题很久之后才被发现\"的场景。\n常见陷阱：restore 会覆盖 restore 时间点之后的全部变更，不是增量合并；\n执行前强烈建议先 snapshot 预览，确认这是你要的状态。",
+      "risk": "high-risk-write",
+      "group": "version_history",
+      "group_label": "版本与历史"
+    },
+    {
+      "name": "table history snapshot",
+      "short": "查看历史快照详情",
+      "long": "取某条历史记录对应时间点的表数据快照详情，只读预览，不做任何变更。\n设计理由：restore 前先用本命令看清楚要恢复到的具体内容，避免盲目恢复\n覆盖当前数据。\n常见陷阱：snapshot 只是预览，看完想真正恢复仍需调用 history restore；\nhistory-id 必须来自 history list 返回的真实条目，不能是任意猜测值。",
+      "group": "version_history",
+      "group_label": "版本与历史"
+    },
+    {
+      "name": "table history undo",
+      "short": "表级撤销（撤销最近一步操作）",
+      "long": "撤销该表最近一次可撤销的写操作，行为类似编辑器 Ctrl+Z。\n设计理由：与 restore 分工——undo 只回退一步，风险和影响范围比 restore 小，\n适合\"刚做错一步\"的场景，跨会话/跨用户的撤销范围以 only-my-operations 控制。\n常见陷阱：undo 有栈深度限制（见 undo-stack 查看可撤销条目），不是无限回退；\n撤销后若又有新操作发生，原本的 redo 路径可能失效。",
+      "risk": "write",
+      "group": "version_history",
+      "group_label": "版本与历史"
+    },
+    {
+      "name": "table record history",
+      "short": "记录历史",
+      "long": "按时间倒序列出一条记录的变更历史（谁在何时改了哪个字段）。\n设计理由：与 table history（整表快照）不同，本命令是记录级细粒度审计轨迹，\n是 record undo / redo 依赖的数据源。\n常见陷阱：--include-undone 默认不含已撤销的操作；排障时想看完整轨迹（包括\n被 undo 撤销掉的）要显式加上这个 flag。",
+      "group": "version_history",
+      "group_label": "版本与历史"
+    },
+    {
+      "name": "table version create",
+      "short": "创建命名版本",
+      "long": "在当前时间点给表打一个命名标记（如\"上线前快照\"），方便后续按名字定位历史。\n设计理由：大改动前先 version create 打点，比翻 history 时间线更容易定位\n\"我要回到哪一刻\"。\n常见陷阱：create 不会冻结/复制数据，它只是给 history 时间线上的当前点起\n了个名字；数据仍在正常变化，恢复时用的是对应时间点的 history 记录。",
+      "risk": "write",
+      "group": "version_history",
+      "group_label": "版本与历史"
+    },
+    {
+      "name": "table version list",
+      "short": "命名版本列表",
+      "long": "列出表上创建过的命名版本（快照点），供后续 rename/delete 或人工对照。\n设计理由：命名版本是表历史（history）里被显式打了标签的时间点，比连续的\nhistory 记录更适合做\"上线前/大改前\"的关键节点标记。\n常见陷阱：命名版本本身不是可恢复的快照实体——它是标记，恢复到某个历史\n点仍要走 history restore，version 组只负责标记的增删改查。",
+      "group": "version_history",
+      "group_label": "版本与历史"
+    },
+    {
+      "name": "table version rename",
+      "short": "重命名版本",
+      "long": "修改已创建命名版本的显示名称，不改变其对应的历史时间点。\n设计理由：命名版本只是标签，改名字不影响它所指向的数据历史时刻，\n适合\"当时起名不准确，后来想改\"的场景。\n常见陷阱：version-id 必须是已存在的命名版本 ID，不是随意时间戳；\n重命名不会创建新版本，是原地改名。",
+      "risk": "write",
+      "group": "version_history",
+      "group_label": "版本与历史"
+    },
+    {
+      "name": "table archive",
+      "short": "归档表格",
+      "long": "将表标记为已归档（is_archived），通常从默认 list 隐藏，与回收站正交。\n设计理由：archive 适合「暂不用但保留」场景，不删数据；与 delete→trash 是不同维度。\n常见陷阱：archive 不等于 delete；解归档用 restore（非 trash restore）。",
+      "risk": "write",
+      "group": "organize",
+      "group_label": "组织与回收站"
+    },
+    {
+      "name": "table delete",
+      "short": "删除表格（软删，移入回收站）",
+      "long": "软删除表格——数据移入回收站，可用 trash restore 恢复。\n设计理由：与 trash permanent（不可逆）形成两级删除；比硬删更安全，Agent 应优先本命令。\n常见陷阱：delete 是进回收站，不是 record delete；解归档用 restore，回收站恢复用 trash restore。",
+      "risk": "write",
+      "group": "organize",
+      "group_label": "组织与回收站"
+    },
+    {
+      "name": "table move",
+      "short": "在知识库树中移动表格",
+      "long": "把已有表格挂到知识库侧栏的新父资源下，或移到根级。\n设计理由：create --parent-item-id 只覆盖新建；改挂走 ContextItem.parent。\n本命令用 --table-id 反查 ContextItem，免去 Agent 手查 item id。\n常见陷阱：--parent-item-id 传父 ContextItem ID（不是 table-id）；落根用 --root。\n需全局 --organization-id。",
+      "risk": "write",
+      "group": "organize",
+      "group_label": "组织与回收站"
+    },
+    {
+      "name": "table restore",
+      "short": "恢复表格（解归档）",
+      "long": "解除表格归档状态（is_archived=false），不是从回收站恢复。\n设计理由：与 trash restore 动词碰撞——本命令只处理 archive 维度；回收站表走 trash 子组。\n常见陷阱：表在回收站时用 trash restore；仅归档时用本命令。",
+      "risk": "write",
+      "group": "organize",
+      "group_label": "组织与回收站"
+    },
+    {
+      "name": "table trash list",
+      "short": "列出回收站中的表",
+      "long": "分页列出已软删（trashed）的表格，支持关键词搜索。\n设计理由：delete 后的表不在 table list，需本命令拿 table-id 再 trash restore / permanent。\n常见陷阱：archive 与 trash 正交——归档未删表走 list --archived，不在 trash list。",
+      "group": "organize",
+      "group_label": "组织与回收站"
+    },
+    {
+      "name": "table trash restore",
+      "short": "从回收站恢复表格",
+      "long": "将软删表从回收站恢复（trashed_at 清空），不是解归档 restore。\n设计理由：与 table restore（解 archive）动词碰撞——本命令只处理回收站维度。\n常见陷阱：表仅归档未删时走 table restore；已 trash permanent 的表无法恢复。",
+      "risk": "write",
+      "group": "organize",
+      "group_label": "组织与回收站"
+    },
+    {
+      "name": "table view form-share-disable",
+      "short": "关闭表单分享链接",
+      "long": "关闭 view_type=form 视图当前生效的公开分享链接，旧链接立即失效。\n设计理由：与 form-share-enable 对称——关闭后持有旧链接的人无法再提交数据；\n再次 enable 会生成新的 share_id，不是恢复旧链接。\n常见陷阱：关闭前确认没有依赖该链接的进行中收集流程——旧链接失效是立即的，\n没有宽限期，正在填写中的用户会提交失败。",
+      "risk": "write",
+      "group": "share",
+      "group_label": "表单分享"
+    },
+    {
+      "name": "table view form-share-enable",
+      "short": "为表单视图创建/获取分享链接",
+      "long": "为 view_type=form 的视图开启公开填写分享，返回 share_id 供匿名访问。\n设计理由：已存在未过期分享时直接返回同一个 share_id（幂等），不会生成多个\n并行有效的链接，避免旧链接失效但用户不知道。\n常见陷阱：仅对 view_type=form 的视图有效——对其它类型视图调用会被后端拒绝；\n分享开启后任何持有链接的人都能提交数据，敏感表单请配合权限/字段可见性控制。",
+      "risk": "write",
+      "group": "share",
+      "group_label": "表单分享"
+    },
+    {
+      "name": "table view form-share-rotate",
+      "short": "轮换分享链接（生成新 share_id，旧链接失效）",
+      "long": "生成新的 share_id 并使旧链接立即失效——用于怀疑链接泄露时的应急轮换。\n设计理由：与 disable 后再 enable 的效果类似（旧链接失效 + 生成新链接），\n但 rotate 是单步原子操作，避免中间状态（分享完全关闭）造成的短暂不可用。\n常见陷阱：轮换后所有已分发的旧链接会同时失效——需要同步通知所有正在使用\n该链接的下游方更新到新链接，否则他们会遇到提交失败。",
+      "risk": "write",
+      "group": "share",
+      "group_label": "表单分享"
+    },
+    {
+      "name": "table share get",
+      "short": "查看表格当前有效分享设置",
+      "long": "查看表格当前的只读数据分享设置（GET /tables/{table_id}/share）。\n省略 --share-type 时返回当前有效分享（data / organization 互斥）；也可显式传\ndata|organization。未开启分享时返回 {share: null, enabled: false}；已开启返回\n分享详情（share_id 短链 / 权限 / 是否有密码 / 过期时间 / 下载开关 / 访问次数等）。\n只读操作。",
+      "group": "data_share",
+      "group_label": "数据分享"
+    },
+    {
+      "name": "table share off",
+      "short": "关闭表格数据分享（data / organization）",
+      "long": "关闭表格数据分享，让分享链接立即失效（DELETE /tables/{table_id}/share）。\n后端物理删除该 share_type 的分享记录（不是软删），返回 {deleted_count}；\n之后用 table share set 可重新开启分享（会生成新的 share_id）。表数据本身\n不受影响，故定级 RiskWrite（不强制 --yes），不是 RiskDestructive。\n\n省略 --share-type 时关闭 data 分享（后端默认）；也可显式传 organization。",
+      "risk": "write",
+      "group": "data_share",
+      "group_label": "数据分享"
+    },
+    {
+      "name": "table share set",
+      "short": "开启或更新表格数据分享（create-or-update）",
+      "long": "开启或更新表格的只读数据分享（POST /tables/{table_id}/share，互斥 upsert）。\n同一表 data 与 organization 互斥：切换范围时旧类型链接立即失效。返回分享详情\n（含 share_id / 是否有密码 / 过期时间 / 访问次数等）。\n\n--share-type（必填，显式选 data / organization）：\n  data          免登录只读链接：任何拿到 share_id 的人都能访问表格数据。\n                安全警示——这是**全网可达**的，敏感表请改用 organization，\n                或务必加 --password / --expire-hours 限制。首次（或从\n                organization）扩到 data 时必须加 --acknowledge-public-exposure，\n                否则后端返回 409 PUBLIC_EXPOSURE_ACK_REQUIRED（CLI 本地也会拒绝）。\n  organization  组织限定：仅目标 organization 成员登录后可访问；目标组织用\n                **全局 --organization-id** 指定（不是命令级 flag——见下）；\n                缺组织 id 时后端会尝试从表格归属推导，仍失败则 400。\n\n可选配置：\n  --permission     view / comment / edit（默认 view）——访问者拿到的权限级别。\n  --password       访问密码。三态语义：不传=保留旧密码不动；传 \"\"=清空密码；传非空=设新密码。\n  --expire-hours   有效期小时数（>0 生效，到点失效）；不传或 <=0 = 永不过期。\n  --allow-download 是否允许下载（默认允许；传 --allow-download=false 禁止）。\n  --view-id        绑定到指定视图（不传则分享全表默认视图）。\n  --acknowledge-public-exposure  确认接受公网暴露风险（仅扩到 data 时必需，否则 409）。\n\n关于 organization 目标组织：CLI **不提供** --organization-id 命令级 flag（它是全局 persistent flag，\n命令级会撞名）。要建 organization 分享，用全局 --organization-id 指定目标组织，例如：\n  tabtin table share set tbl_xxx --share-type organization --organization-id wt_yyy",
+      "risk": "write",
+      "group": "data_share",
+      "group_label": "数据分享"
+    },
+    {
+      "name": "table share shared-with-me",
+      "short": "列出分享给我的表格（资源级协作，独立访问发现入口）",
+      "long": "列出当前用户具备有效访问权限、但本人非 owner 的表格（GET /shared-with-me）。\n与「分享给我的文档」（doc）对称的独立访问发现入口——Agent 私有化后协作者\n无法看到他人的 workspace/Project，只能通过被显式邀请的 TablePermission\n（table collaborator invite）访问这些表。已归档 / 已在回收站的表不会出现。\n\n省略 --organization-id 时返回当前用户在全部 Organization 下的分享表；\n传全局 --organization-id 可限定单个 Organization。",
+      "group": "data_share",
+      "group_label": "数据分享"
+    }
+  ],
+  "featured": [
+    {
+      "key": "build",
+      "commands": [
+        "table create",
+        "table field bulk-add"
+      ],
+      "title": "搭一张新表",
+      "description": "说用途，让 AI 设计字段结构并建好",
+      "prompt": "帮我建一张新的多维表。我给你说用途，你先设计好字段结构（字段名 + 类型）、把表建出来，再填几行示例数据让我看看效果。"
+    },
+    {
+      "key": "import",
+      "commands": [
+        "table import preview",
+        "table import csv"
+      ],
+      "title": "导入数据建表",
+      "description": "把 CSV / Excel 数据导入成多维表",
+      "prompt": "我有一份数据要导入成多维表。先帮我预览一下字段和类型识别得对不对，确认没问题再正式导入。我待会儿把文件或内容给你。"
+    },
+    {
+      "key": "analyze",
+      "commands": [
+        "table list",
+        "table query"
+      ],
+      "title": "用 SQL 分析数据",
+      "description": "查询、汇总表里的数据回答问题",
+      "prompt": "用 SQL 分析这个空间里的表数据来回答我的问题，并把关键结果整理清楚。先看看有哪些表和字段可用，再告诉我你的查询思路。"
+    },
+    {
+      "key": "model",
+      "commands": [
+        "table link create",
+        "table link add"
+      ],
+      "title": "关联两张表",
+      "description": "用关联字段把相关的表连起来，并挂上目标行",
+      "prompt": "帮我把两张相关的表用关联字段连起来（比如电影↔演员、订单↔客户），并演示怎么搜索候选、挂上关联值。先看看现有的表结构再动手。"
+    }
+  ]
+}

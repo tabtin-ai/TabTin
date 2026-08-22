@@ -1,0 +1,3 @@
+# harness 中间产物（cloud.json / local.json），不进 git；最终对比表落档到
+# docs/agent/xlsx-parse-acceptance-harness.md
+_harness-results/

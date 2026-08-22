@@ -1,0 +1,110 @@
+{
+  "id": "tabfolder",
+  "name": "Directories",
+  "version": "0.1.0",
+  "description": "Agent 工作目录的目录浏览视角 — 可展开目录树 + 预览（单根契约：以 agent.working_dir 为唯一目录根）",
+  "objectModel": {
+    "entities": [
+      "folder",
+      "file"
+    ],
+    "schema": {
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "executionTarget": "frontend",
+  "uiRuntime": "localBundle",
+  "agentRuntime": "frontendBridge",
+  "distribution": "builtin",
+  "surface": "builtin",
+  "contextSources": [
+    "tabfolder"
+  ],
+  "permissions": [
+    "filesystem"
+  ],
+  "skills": [
+    "skills/tabfolder-operator"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "tabfolder-operator": {
+        "enabled": true
+      }
+    }
+  },
+  "kind": "app",
+  "icon": "folder-tree",
+  "uiHints": {
+    "iconAsset": {
+      "default": "assets/icon.svg",
+      "variants": {
+        "tab": "assets/tab.svg"
+      },
+      "presentation": "selfContained"
+    }
+  },
+  "runtimeBindings": {
+    "toolProvider": "action-tools:tabfolder",
+    "uiProvider": "electron:context-space.tabfolder",
+    "skillsProvider": "skills:local"
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "full"
+    },
+    "daemon": {
+      "mode": "unavailable",
+      "reason": "文件浏览器需要 GUI"
+    }
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "contextFields": [
+      {
+        "name": "current_folder_path",
+        "label": "folder_path",
+        "isResourceId": false
+      },
+      {
+        "name": "current_file_path",
+        "label": "file_path",
+        "isResourceId": false
+      }
+    ],
+    "toolDomains": [],
+    "hasPromptSection": true,
+    "displayField": "path",
+    "workspaceRootSource": "current_folder_path",
+    "isFrontendDependent": true,
+    "typeAliases": [
+      "folder"
+    ]
+  },
+  "opens": {
+    "types": [
+      {
+        "type": "folder",
+        "priority": 100
+      }
+    ],
+    "schemes": [
+      {
+        "scheme": "file:",
+        "priority": 100
+      },
+      {
+        "scheme": "tabtin-file:",
+        "priority": 100
+      }
+    ]
+  },
+  "catalog": {
+    "category": "tools",
+    "desktopGroup": "localResources",
+    "canCreate": false,
+    "searchable": false,
+    "isDefaultEnabled": true
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "modes": [
+    "ask",
+    "agent",
+    "plan",
+    "study",
+    "yolo",
+    "group"
+  ],
+  "configs": {
+    "ask": {
+      "metadata": {
+        "name": "ask",
+        "label": "问答 (Ask)",
+        "description": "只读问答与分析；不允许任何修改类操作。",
+        "authorization_preset": "cautious",
+        "skip_execution_section": true
+      },
+      "tool_policy": {
+        "kind": "restricted",
+        "allow_tool_names": [
+          "ask_user",
+          "ask_form",
+          "show_widget",
+          "run_terminal_command",
+          "agent",
+          "switch_mode"
+        ],
+        "deny_tool_names": [
+          "mcp_call_tool",
+          "write_file",
+          "edit_file",
+          "delete_file",
+          "tabdoc_update_document",
+          "skill_invoke",
+          "skill_create",
+          "memory_write",
+          "memory_delete",
+          "tabdoc_replace_content",
+          "todo_write",
+          "plan_create",
+          "plan_update_todos"
+        ],
+        "default_allow_read_only": true,
+        "mcp_read_only_only": true,
+        "restricted_shell_allowlist": "tabtin-readonly"
+      },
+      "has_prompt_section": true
+    },
+    "agent": {
+      "metadata": {
+        "name": "agent",
+        "label": "执行 (Agent)",
+        "description": "默认执行模式；所有工具可用，按授权预设审批写操作。",
+        "authorization_preset": "collaborative",
+        "skip_execution_section": false
+      },
+      "tool_policy": {
+        "kind": "all",
+        "allow_tool_names": [],
+        "deny_tool_names": [],
+        "default_allow_read_only": true,
+        "mcp_read_only_only": false
+      },
+      "has_prompt_section": false
+    },
+    "plan": {
+      "metadata": {
+        "name": "plan",
+        "label": "规划 (Plan)",
+        "description": "只读规划模式；产出结构化方案，由用户审批后切换 Agent 执行。",
+        "authorization_preset": "cautious",
+        "skip_execution_section": true
+      },
+      "tool_policy": {
+        "kind": "restricted",
+        "allow_tool_names": [
+          "ask_user",
+          "ask_form",
+          "show_widget",
+          "todo_write",
+          "plan_create",
+          "plan_update_todos",
+          "switch_mode",
+          "run_terminal_command"
+        ],
+        "deny_tool_names": [
+          "mcp_call_tool",
+          "agent",
+          "write_file",
+          "edit_file",
+          "delete_file",
+          "tabdoc_update_document",
+          "skill_invoke",
+          "skill_create",
+          "memory_write",
+          "memory_delete",
+          "tabdoc_replace_content"
+        ],
+        "default_allow_read_only": true,
+        "mcp_read_only_only": true,
+        "restricted_shell_allowlist": "tabtin-readonly"
+      },
+      "has_prompt_section": true
+    },
+    "study": {
+      "metadata": {
+        "name": "study",
+        "label": "学习 (Study)",
+        "description": "教学模式；以教会用户为目标，允许创建学习材料但禁止破坏性写操作。",
+        "authorization_preset": "collaborative",
+        "skip_execution_section": true
+      },
+      "tool_policy": {
+        "kind": "restricted",
+        "allow_tool_names": [
+          "ask_user",
+          "ask_form",
+          "show_widget",
+          "todo_write",
+          "plan_create",
+          "plan_update_todos",
+          "present_to_user",
+          "run_terminal_command",
+          "switch_mode"
+        ],
+        "deny_tool_names": [
+          "mcp_call_tool",
+          "agent",
+          "write_file",
+          "edit_file",
+          "delete_file",
+          "tabdoc_update_document",
+          "skill_invoke",
+          "skill_create",
+          "memory_write",
+          "memory_delete",
+          "tabdoc_replace_content"
+        ],
+        "default_allow_read_only": true,
+        "mcp_read_only_only": true,
+        "restricted_shell_allowlist": "tabtin-readonly"
+      },
+      "has_prompt_section": true
+    },
+    "yolo": {
+      "metadata": {
+        "name": "yolo",
+        "label": "全自动 (Yolo)",
+        "description": "全自动执行模式；工具集同 agent，授权预设 full_auto（不打扰干活，红线与敏感 deny 仍生效）。",
+        "authorization_preset": "full_auto",
+        "skip_execution_section": false
+      },
+      "tool_policy": {
+        "kind": "all",
+        "allow_tool_names": [],
+        "deny_tool_names": [],
+        "default_allow_read_only": true,
+        "mcp_read_only_only": false
+      },
+      "has_prompt_section": false
+    },
+    "group": {
+      "metadata": {
+        "name": "group",
+        "label": "PMO",
+        "description": "以项目管理者身份拆解任务、跟进进度，并调度子 Agent 协作完成。",
+        "authorization_preset": "collaborative",
+        "skip_execution_section": true
+      },
+      "tool_policy": {
+        "kind": "all",
+        "allow_tool_names": [],
+        "deny_tool_names": [],
+        "default_allow_read_only": true,
+        "mcp_read_only_only": false
+      },
+      "has_prompt_section": true
+    }
+  }
+}

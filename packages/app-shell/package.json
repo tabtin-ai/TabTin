@@ -1,0 +1,75 @@
+{
+  "name": "@tabtin/app-shell",
+  "version": "0.1.0",
+  "description": "Shared application shell: types, stores, services, and sidebar components for Electron & Web",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./types": {
+      "source": "./src/types/space-types.ts",
+      "types": "./dist/types/space-types.d.ts",
+      "import": "./dist/types/space-types.js"
+    },
+    "./agent-config-v2": {
+      "source": "./src/utils/agent-config-v2.ts",
+      "types": "./dist/utils/agent-config-v2.d.ts",
+      "import": "./dist/utils/agent-config-v2.js"
+    }
+  },
+  "files": [
+    "dist",
+    "assets",
+    "app-icons.json"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "zustand": ">=4",
+    "i18next": ">=23",
+    "react-i18next": ">=14",
+    "@tabtin/shared": "workspace:*",
+    "@tabtin/config": "workspace:*"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    },
+    "zustand": {
+      "optional": false
+    },
+    "i18next": {
+      "optional": false
+    },
+    "react-i18next": {
+      "optional": false
+    }
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.1",
+    "react": "^19.0.0",
+    "zustand": "^5.0.3",
+    "i18next": "^24.2.2",
+    "react-i18next": "^15.4.1",
+    "jsdom": "28.0.0",
+    "@tabtin/shared": "workspace:*",
+    "@tabtin/config": "workspace:*",
+    "typescript": "5.7.2",
+    "vitest": "4.0.18"
+  }
+}

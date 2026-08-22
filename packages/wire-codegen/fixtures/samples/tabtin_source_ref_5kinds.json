@@ -1,0 +1,68 @@
+[
+  {
+    "type": "tabtin_source_ref",
+    "source_id": "src_web_01",
+    "ref_kind": "web",
+    "snapshot": {
+      "kind": "web",
+      "url": "https://docs.anthropic.com/messages",
+      "title": "Anthropic Messages API"
+    }
+  },
+  {
+    "type": "tabtin_source_ref",
+    "source_id": "src_doc_01",
+    "ref_kind": "doc",
+    "snapshot": {
+      "kind": "doc",
+      "doc_id": "doc_xyz",
+      "page": 12,
+      "bbox": [
+        0.1,
+        0.2,
+        0.5,
+        0.6
+      ]
+    }
+  },
+  {
+    "type": "tabtin_source_ref",
+    "source_id": "src_table_01",
+    "ref_kind": "table",
+    "snapshot": {
+      "kind": "table",
+      "table_id": "tbl_users",
+      "row_ids": [
+        "r1",
+        "r2"
+      ],
+      "field_ids": [
+        "name",
+        "email"
+      ],
+      "csv_preview": "name,email\nAlice,a@b.com\n"
+    }
+  },
+  {
+    "type": "tabtin_source_ref",
+    "source_id": "src_code_01",
+    "ref_kind": "code",
+    "snapshot": {
+      "kind": "code",
+      "file_path": "src/main.ts",
+      "start_line": 10,
+      "end_line": 20,
+      "code_excerpt": "export function main() { ... }",
+      "lang": "typescript"
+    }
+  },
+  {
+    "type": "tabtin_source_ref",
+    "source_id": "src_memo_01",
+    "ref_kind": "memo",
+    "snapshot": {
+      "kind": "memo",
+      "memo_id": "memo_abc"
+    }
+  }
+]

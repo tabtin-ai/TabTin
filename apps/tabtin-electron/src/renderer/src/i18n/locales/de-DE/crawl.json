@@ -1,0 +1,520 @@
+{
+  "addressBar": {
+    "secureTitle": "Sichere Verbindung",
+    "insecureTitle": "Unsichere Verbindung",
+    "placeholder": "URL eingeben...",
+    "copy": "URL kopieren",
+    "copied": "Kopiert"
+  },
+  "toolbarDescriptions": {
+    "annotationLabel": "Kommentieren Sie die Seite",
+    "annotation": "Wählen Sie den Seiteninhalt aus und fügen Sie ihn der Konversation hinzu",
+    "cancelAnnotationLabel": "Anmerkung abbrechen",
+    "cancelAnnotation": "Verlassen Sie den Seitenanmerkungsmodus",
+    "screenshotLabel": "Screenshot zum Gespräch",
+    "screenshot": "Erfassen Sie die sichtbare Seite und fügen Sie sie der Konversation hinzu",
+    "bookmarkLabel": "Setzen Sie ein Lesezeichen für diese Seite",
+    "bookmark": "Öffnen Sie es später über die Browser-Lesezeichen",
+    "removeBookmarkLabel": "Lesezeichen entfernen",
+    "removeBookmark": "Entfernen Sie diese Seite aus den Browser-Lesezeichen"
+  },
+  "toast": {
+    "partitionRebuiltTitle": "Auf neue Anmeldeumgebung umgestellt",
+    "partitionRebuiltDesc": "Die Browseridentität dieser Registerkarte wurde aktualisiert, um mit der Workspace-Bindung übereinzustimmen. Wenn Sie ein Formular ausgefüllt haben, müssen Sie es erneut eingeben."
+  },
+  "embedded": {
+    "loading": "Laden...",
+    "agentLockOverlay": "Der Agent verwendet diesen Browser",
+    "logs": {
+      "setViewBoundsUnavailable": "setViewBounds ist nicht verfügbar",
+      "setViewBoundsFailed": "Grenzen konnten nicht aktualisiert werden"
+    },
+    "errors": {
+      "missingProfile": "In der Arbeitsbereichsansicht fehlt ein Profil/eine fehlende Partition",
+      "showUnavailable": "host.view.show nicht verfügbar",
+      "showFailed": "Die Anzeige ist fehlgeschlagen",
+      "showPrecheckFailed": "Die Vorprüfung der Anzeige ist fehlgeschlagen",
+      "pageLoadFailed": "Das Laden der Seite ist fehlgeschlagen",
+      "refreshFailed": "Neuladen fehlgeschlagen",
+      "navigationFailed": "Die Navigation ist fehlgeschlagen",
+      "navigationDeferredByAgent": "Diese Seite wird von einer Agentenaufgabe verwendet. Die Navigation wurde übersprungen",
+      "goBackFailed": "Zurückgehen ist fehlgeschlagen",
+      "goForwardFailed": "Vorwärts gehen fehlgeschlagen",
+      "reloadFailed": "Neuladen fehlgeschlagen",
+      "stopFailed": "Das Stoppen des Ladens ist fehlgeschlagen",
+      "actionUnavailable": "{{action}} nicht verfügbar",
+      "partitionRebuildFailed": "Fehler beim Wechseln der Anmeldeumgebung: {{detail}}. Bitte schließen Sie diesen Tab und öffnen Sie ihn erneut."
+    }
+  },
+  "urlInput": {
+    "title": "Neuer Webcrawl",
+    "description": "Geben Sie die zu crawlende Webseiten-URL ein",
+    "urlLabel": "URL *",
+    "urlPlaceholder": "https://example.com",
+    "nameLabel": "Labelname (optional)",
+    "namePlaceholder": "Automatisch generieren",
+    "cancel": "Abbrechen",
+    "create": "Erstellen",
+    "errors": {
+      "required": "Bitte geben Sie eine URL ein",
+      "invalid": "Bitte geben Sie eine gültige URL ein (z. B. example.com oder https://example.com)."
+    },
+    "defaultName": "Seite {{time}}"
+  },
+  "diagnosis": {
+    "errors": {
+      "requestFailed": "Diagnoseanforderung fehlgeschlagen",
+      "failed": "Diagnose fehlgeschlagen",
+      "invalidResult": "Ungültiges Diagnoseergebnisformat",
+      "feedbackFailed": "Das Senden des Feedbacks ist fehlgeschlagen",
+      "missingActiveView": "Keine aktive Ansicht gefunden",
+      "missingViewOptions": "Fehlende Ansichtsoptionen; Seiteninhalt konnte nicht abgerufen werden",
+      "getProcessedContentUnavailable": "getProcessedContent ist nicht verfügbar",
+      "noFeedbackRecord": "Kein Diagnosedatensatz zur Übermittlung einer Rückmeldung vorhanden",
+      "noAvailableModel": "Kein verfügbares Modell gefunden. Bitte laden Sie zuerst die Modellliste.",
+      "noWorkspaceSelected": "Kein Arbeitsbereich ausgewählt. Die Streaming-Diagnose kann nicht gestartet werden.",
+      "streamDiagnosisFailed": "Die Streaming-Diagnose ist fehlgeschlagen"
+    }
+  },
+  "resource": {
+    "errors": {
+      "downloadFailed": "Der Download ist fehlgeschlagen",
+      "fileSizeZero": "Die Größe der heruntergeladenen Datei beträgt 0",
+      "timeout": "Download-Zeitüberschreitung ({{ms}}ms)"
+    }
+  },
+  "resourceCenter": {
+    "title": "Ressourcenzentrum",
+    "count": "{{count}} Ressourcen",
+    "count_one": "{{count}}-Ressource",
+    "searchPlaceholder": "Such-URL/Ressourcen-ID/MIME",
+    "searchInputLabel": "Ressourcen durchsuchen",
+    "empty": "Auf dieser Seite sind keine Ressourcen verfügbar",
+    "previewUnavailable": "Vorschau nicht verfügbar",
+    "sourceUrlTitle": "Quell-URL",
+    "selectHint": "Wählen Sie eine Ressource aus, um Details anzuzeigen",
+    "segmentBadge": "Segment",
+    "values": {
+      "unknown": "Unbekannt",
+      "unknownMime": "Unbekannter MIME",
+      "unknownSize": "Unbekannt",
+      "none": "Keine",
+      "fallbackNameSuffix": "Ressource"
+    },
+    "actions": {
+      "toggleDeveloperMode": "Entwicklermodus (technische Details anzeigen)",
+      "developerMode": "Entwickler",
+      "refresh": "Ressourcen auffrischen",
+      "close": "Ressourcencenter schließen",
+      "downloadStream": "Stream herunterladen",
+      "downloadResource": "Ressource herunterladen",
+      "captureContent": "Erfassen Sie Inhalte",
+      "parseStream": "Stream analysieren",
+      "copyLink": "Link kopieren",
+      "copyCliCommand": "CLI-Befehl kopieren",
+      "copyAgentPrompt": "Agent-Eingabeaufforderung kopieren",
+      "downloadCompleteVideo": "Komplettes Video herunterladen"
+    },
+    "aria": {
+      "filterAll": "Alle Ressourcen anzeigen",
+      "filterCategory": "Nach Kategorie filtern: {{category}}",
+      "selectResource": "Ressource anzeigen: {{name}}"
+    },
+    "errors": {
+      "loadFailed": "Das Laden der Ressourcen ist fehlgeschlagen",
+      "downloadFailed": "Der Download ist fehlgeschlagen",
+      "captureFailed": "Die Aufnahme ist fehlgeschlagen",
+      "parseStreamFailed": "Das Stream-Parsen ist fehlgeschlagen",
+      "streamDownloadFailed": "Stream-Download fehlgeschlagen"
+    },
+    "toasts": {
+      "copyFailedTitle": "Der Kopiervorgang ist fehlgeschlagen",
+      "resourceDownloadedTitle": "Ressource heruntergeladen",
+      "capturedTitle": "Ressourceninhalt erfasst",
+      "captureCachedTitle": "Ressourceninhalt bereits zwischengespeichert",
+      "streamParsedTitle": "Stream analysiert",
+      "streamParsedVariants": "{{count}}-Varianten gefunden",
+      "streamParsedVariants_one": "Variante {{count}} gefunden",
+      "streamParsedUpdated": "Stream-Metadaten aktualisiert",
+      "streamDownloadedTitle": "Stream heruntergeladen",
+      "cliCopiedTitle": "CLI-Befehl kopiert",
+      "agentPromptCopiedTitle": "Agentenaufforderung kopiert",
+      "linkCopiedTitle": "Ressourcenlink kopiert",
+      "actionFailedTitle": "Der Vorgang ist fehlgeschlagen"
+    },
+    "categories": {
+      "all": "Alle",
+      "image": "Bild",
+      "video": "Video",
+      "audio": "Audio",
+      "hls": "HLS",
+      "dash": "DASH",
+      "document": "Dokument",
+      "font": "Schriftart"
+    },
+    "captureStatus": {
+      "metadata_only": "Nur Metadaten",
+      "content_cached": "Inhalt zwischengespeichert",
+      "page_bound_blob": "Seitengebundener Blob",
+      "stream_manifest": "Stream-Manifest",
+      "downloaded": "Heruntergeladen",
+      "unsupported": "Nicht unterstützt",
+      "failed": "Fehlgeschlagen"
+    },
+    "capabilities": {
+      "preview": "Vorschau",
+      "download": "Herunterladen",
+      "import": "Importieren",
+      "sendToAgent": "An den Agenten senden",
+      "parse": "Analysieren",
+      "streamDownload": "Stream-Download"
+    },
+    "sources": {
+      "network": "Netzwerk",
+      "dom_probe": "DOM-Sonde",
+      "cdp_capture": "CDP-Erfassung",
+      "task_capture": "Aufgabenerfassung",
+      "manual_capture": "Manuelle Erfassung"
+    },
+    "developer": {
+      "title": "Details zum Entwickler",
+      "idLabel": "Ausweis",
+      "mimeTypeLabel": "MIME",
+      "statusLabel": "Status",
+      "capabilitiesLabel": "Fähigkeiten",
+      "sourceLabel": "Quelle"
+    },
+    "qualityLabel": "Qualität",
+    "qualityBest": "Höchste Qualität",
+    "qualityWorst": "Niedrigste Qualität",
+    "hints": {
+      "pageBoundBlob": "Diese Ressource stammt aus einem In-Page-MediaSource-/Blob-Kontext und muss innerhalb der Seite erfasst werden, bevor sie zuverlässig heruntergeladen werden kann.",
+      "dashPhaseOne": "DASH-Ressourcen unterstützen die Qualitätsauswahl und den vollständigen Video-Download. Separate Audiospuren werden automatisch über ffmpeg zusammengeführt.",
+      "blobResource": "Dies ist eine seitengebundene Player-Ressource. Klicken Sie auf „Inhalt erfassen“, um die Daten abzurufen, und laden Sie sie dann herunter.",
+      "encrypted": "Diese Ressource ist möglicherweise DRM-geschützt. Heruntergeladene Dateien werden möglicherweise nicht richtig abgespielt."
+    },
+    "streamInfo": {
+      "title": "Stream-Info",
+      "live": "Live-Stream",
+      "vod": "On-Demand-Stream",
+      "segmentCount": "{{count}} Segmente",
+      "segmentCount_one": "{{count}}-Segment"
+    }
+  },
+  "clients": {
+    "apiUnavailable": "Die {{api}}-API ist nicht verfügbar",
+    "toolUnavailableTitle": "Werkzeug nicht verfügbar",
+    "toolUnavailableDescription": "Aktion {{action}} ist nicht registriert"
+  },
+  "task": {
+    "errors": {
+      "schemaMissingListSelector": "Im Schema fehlt der erforderliche listSelector",
+      "schemaMissingFields": "Schema hat keine gültige Feldkonfiguration",
+      "unknown": "Unbekannter Fehler",
+      "executionFailed": "Die Aufgabenausführung ist fehlgeschlagen"
+    },
+    "logs": {
+      "apiUnavailable": "Die Aufgaben-API ist nicht verfügbar",
+      "schemaMissingListSelector": "Ungültiges Schema: listSelector fehlt",
+      "schemaMissingFields": "PresetSchema hat keine gültigen Felder",
+      "createTaskFailed": "Aufgabe konnte nicht erstellt werden",
+      "updateMetadataFailed": "Die Metadaten der Aufgabe konnten nicht aktualisiert werden",
+      "enqueueFailed": "Die Aufgabe konnte nicht in die Warteschlange gestellt werden",
+      "createTaskException": "Ausnahme bei der Aufgabenerstellung",
+      "cancelTaskFailed": "Aufgabe konnte nicht abgebrochen werden",
+      "resumeUnsupported": "Die Task-API unterstützt keinen Lebenslauf",
+      "resumeFailed": "Die Aufgabe konnte nicht fortgesetzt werden",
+      "resumeException": "Ausnahme beim Fortsetzen der Aufgabe",
+      "resumeWithPaginationUnsupported": "Die Task-API unterstützt „resumeWithPagination“ nicht",
+      "startPaginationFailed": "Die Paginierung konnte nicht gestartet werden",
+      "paginationException": "Ausnahme bei der Paginierungsaufgabe",
+      "selectRecommendationUnsupported": "Die Task-API unterstützt selectRecommendation nicht",
+      "selectRecommendationFailed": "Empfehlungsauswahl konnte nicht übermittelt werden",
+      "selectRecommendationException": "Ausnahme für die Empfehlungsauswahl",
+      "apiUnavailableEffect": "useEffect: taskAPI nicht verfügbar",
+      "exportTraceUnavailable": "Trace kann nicht exportiert werden: Aufgabe nicht initialisiert oder Aufgaben-API nicht verfügbar",
+      "exportTraceGetUnsupported": "Die Task-API unterstützt get nicht. Trace kann nicht exportiert werden",
+      "exportTraceMissingTask": "Keine Aufgabendaten; Trace kann nicht exportiert werden",
+      "clipboardCopyFailed": "Kopieren in die Zwischenablage fehlgeschlagen",
+      "exportTraceException": "Ausnahme beim Exportieren der Ablaufverfolgung"
+    }
+  },
+  "tabs": {
+    "defaultName": "Kriechen {{count}}",
+    "workspaceDefaultName": "Browserbereich"
+  },
+  "tabStore": {
+    "errors": {
+      "workspaceViewInTabs": "[CrawlTabStore] Arbeitsbereichsansicht kann nicht in Tabs geschrieben werden[]",
+      "createTabWorkspaceNotAllowed": "[CrawlTabStore] createTab kann keinen Arbeitsbereich erstellen; Verwenden Sie createWorkspace",
+      "createWorkspaceExternalIdNotAllowed": "[CrawlTabStore] createWorkspace kann keine externe CrawlspaceId akzeptieren",
+      "createWorkspaceMissingProfile": "[CrawlTabStore] createWorkspace fehlt Profil",
+      "createWorkspaceMissingSpaceOrPartition": "[CrawlTabStore] createWorkspace erfordert eine SpaceId oder eine explizite Partition; Andernfalls verfügt der Arbeitsbereich nicht über eine Sitzungsisolationsbasis.",
+      "createWorkspaceMissingRandomUUID": "[CrawlTabStore] createWorkspace fehlt crypto.randomUUID",
+      "createWorkspaceIdExists": "[CrawlTabStore] crawlspaceId existiert bereits: {{id}}",
+      "missingCrawlspaceContextCache": "[CrawlTabStore] fehlt CrawlspaceContextCache: {{id}}"
+    },
+    "warnings": {
+      "legacyCreateTab": "⚠️ createTab ist ein Legacy-Pfad. Vermeiden Sie die Verwendung für neue Funktionen"
+    }
+  },
+  "host": {
+    "errors": {
+      "viewIdMissingShow": "viewId ist leer; Ansicht kann nicht angezeigt werden",
+      "viewIdMissingBounds": "viewId ist leer; kann keine Grenzen setzen",
+      "viewIdMissingDestroy": "viewId ist leer; kann nicht zerstören",
+      "viewIdMissingCheck": "viewId ist leer; kann nicht prüfen",
+      "viewIdMissingTouch": "viewId ist leer; nicht berühren kann",
+      "viewIdMissingLoadUrl": "viewId ist leer; URL kann nicht geladen werden",
+      "viewIdMissingWaitForSelector": "viewId ist leer; Ich kann nicht auf den Selektor warten",
+      "viewIdMissingGoBack": "viewId ist leer; kann nicht zurückgehen",
+      "viewIdMissingGoForward": "viewId ist leer; kann nicht weitermachen",
+      "viewIdMissingReload": "viewId ist leer; kann nicht neu geladen werden",
+      "viewIdMissingStop": "viewId ist leer; kann den Ladevorgang nicht stoppen"
+    },
+    "logs": {
+      "ipcRendererUnavailable": "ipcRenderer nicht verfügbar; Überspringen des Paginierungsabonnements"
+    }
+  },
+  "workspaceDefaults": {
+    "errors": {
+      "missingPluginDefaults": "[WorkspaceDefaults] fehlende Plugin-Standardeinstellungen: {{id}}"
+    }
+  },
+  "dataImport": {
+    "errors": {
+      "workspaceRequired": "Kein Arbeitsbereich ausgewählt",
+      "noData": "Keine Daten zum Importieren",
+      "createTableFailed": "Tabelle konnte nicht erstellt werden",
+      "createFieldFailed": "Felder konnten nicht erstellt werden: {{details}}",
+      "importFailed": "Daten konnten nicht importiert werden"
+    },
+    "progress": {
+      "creatingTable": "Tabelle wird erstellt...",
+      "creatingFields": "Felder erstellen...",
+      "tableReady": "Tabelle erstellt. Bereit zum Krabbeln...",
+      "loadingCache": "Ressourcencache wird geladen...",
+      "downloadingResources": "Ressourcen werden heruntergeladen...",
+      "uploadingResources": "Ressourcen werden auf die Plattform hochgeladen...",
+      "importingData": "Daten werden importiert..."
+    },
+    "completion": {
+      "base": "Import abgeschlossen!",
+      "withFailedAndMissing": "Import abgeschlossen! {{success}} erfolgreich, {{failed}} fehlgeschlagen, {{missing}} fehlende Anhänge",
+      "withFailed": "Import abgeschlossen! {{success}} war erfolgreich, {{failed}} ist fehlgeschlagen",
+      "withMissing": "Import abgeschlossen! {{success}} erfolgreich, {{missing}} fehlende Anhänge"
+    },
+    "fieldDescription": {
+      "sourceField": "Extrahiertes Feld: {{field}}",
+      "originalUrl": "Ursprüngliche URL für {{name}}",
+      "attachment": "Anhang für {{name}}"
+    },
+    "fieldName": {
+      "originalUrl": "{{name}}_Original-URL"
+    },
+    "tableDescription": "Gecrawlt von: {{taskId}}",
+    "tableName": {
+      "default": "Neuer Tisch",
+      "singlePart": "Crawl_{{name}}"
+    }
+  },
+  "stages": {
+    "config": "Konfig",
+    "executing": "Ausführen",
+    "mapping": "Feldkartierung",
+    "completed": "Abgeschlossen"
+  },
+  "fieldNames": {
+    "name": "Name",
+    "title": "Titel",
+    "rating": "Bewertung",
+    "description": "Beschreibung",
+    "price": "Preis",
+    "image": "Bild",
+    "url": "URL",
+    "date": "Datum",
+    "author": "Autor",
+    "category": "Kategorie"
+  },
+  "workspace": {
+    "configMissing": "Die Arbeitsbereichskonfiguration fehlt. Bitte neu erstellen.",
+    "loading": "Laden...",
+    "pageLoadFailed": "Die Seite konnte nicht geladen werden",
+    "pageLoadFailedDesc": "Diese Seite kann nicht erreicht werden. Überprüfen Sie Ihr Netzwerk oder versuchen Sie es später noch einmal.",
+    "pageLoadErrors": {
+      "dns": {
+        "title": "Domain nicht gefunden",
+        "hint": "Überprüfen Sie, ob die Adresse korrekt ist"
+      },
+      "offline": {
+        "title": "Keine Netzwerkverbindung",
+        "hint": "Überprüfen Sie Ihre Netzwerkverbindung und versuchen Sie es erneut"
+      },
+      "connection": {
+        "title": "Es kann keine Verbindung hergestellt werden",
+        "hint": "Versuchen Sie es später noch einmal oder überprüfen Sie, ob die Adresse korrekt ist"
+      },
+      "server": {
+        "title": "Serverfehler",
+        "hint": "Bitte versuchen Sie es später noch einmal"
+      }
+    },
+    "reload": "Neu laden"
+  },
+  "portal": {
+    "logs": {
+      "noRenderTarget": "⚠️ Kein Renderziel: Slots vorhanden, aber keiner aktiv, und parkingHost ist nicht verfügbar"
+    }
+  },
+  "temporaryTab": {
+    "logs": {
+      "uiEntryDisabled": "⏭️ Der temporäre Tab-UI-Eintrag ist deaktiviert. Überspringen der Registrierung",
+      "listenerAlreadyRegistered": "⏭️ Zuhörer bereits registriert; überspringen",
+      "createRequestReceived": "Anfrage zum Erstellen eines temporären Tabs erhalten:",
+      "workspaceInternalViewHandled": "⏭️ Interne Ansicht des Arbeitsbereichs, verwaltet durch den Kontext:",
+      "nonTemporaryIgnored": "⏭️ Nicht vorübergehende Anfrage ignoriert:",
+      "tabExistsSkipped": "⚠️ Tab existiert bereits; Erstellen überspringen:",
+      "tabCreated": "✅ Temporärer Tab erstellt:",
+      "skipAutoSelect": "Automatische Auswahl übersprungen (Hintergrunderstellung)",
+      "closeRequestReceived": "Anfrage zum Schließen des temporären Tabs erhalten:",
+      "workspaceViewSkipClose": "⏭️ Arbeitsbereichsansicht wird vom Kontext verwaltet; Überspringen schließen:",
+      "workspaceTabSkipClose": "⏭️ Die Registerkarte „Arbeitsbereich“ verwendet keinen temporären Schließfluss:",
+      "nonTemporarySkipClose": "⏭️ Nicht temporäre Registerkarte; Überspringen schließen:",
+      "closeRequestNoTab": "⏭️ Keine passende Registerkarte/Ansicht; Schließanforderung ignorieren:",
+      "listenerRegistered": "✅ Temporärer Tab-Listener registriert",
+      "listenerCleaned": "🧹 Temporärer Tab-Listener bereinigt"
+    }
+  },
+  "recommendation": {
+    "defaultTitle": "Empfohlener Plan"
+  },
+  "downloads": {
+    "title": "Downloads",
+    "activeCount": "{{count}}-Downloads laufen",
+    "activeCount_one": "{{count}} Download läuft",
+    "noActive": "Keine aktiven Downloads",
+    "searchPlaceholder": "Dateiname oder URL suchen...",
+    "clearCompleted": "Klar abgeschlossen",
+    "clearAll": "Klare Geschichte",
+    "empty": "Noch keine Downloads",
+    "emptyHint": "Downloads vom Surfen im Internet werden hier angezeigt",
+    "noResults": "Keine passenden Downloads gefunden",
+    "today": "Heute",
+    "yesterday": "Gestern",
+    "paused": "Angehalten",
+    "cancelled": "Abgesagt",
+    "failed": "Der Download ist fehlgeschlagen",
+    "completed": "Download abgeschlossen",
+    "remaining": "{{time}} übrig",
+    "pauseAction": "Pause",
+    "resumeAction": "Lebenslauf",
+    "cancelAction": "Abbrechen",
+    "retryAction": "Versuchen Sie es noch einmal",
+    "openAction": "Datei öffnen",
+    "showInFolderAction": "Im Ordner anzeigen",
+    "removeAction": "Entfernen",
+    "deleteFileAction": "Datei löschen",
+    "openFile": "Datei öffnen",
+    "copyLink": "Download-Link kopieren",
+    "cancelDownload": "Download abbrechen",
+    "started": "Download gestartet: {{name}}",
+    "noSpace": "Bitte öffnen Sie zunächst einen Arbeitsbereich",
+    "ipcError": "{{action}} ist fehlgeschlagen",
+    "actionFailed": "Aktion fehlgeschlagen",
+    "openFileFailed": "Datei konnte nicht geöffnet werden",
+    "showInFolderFailed": "Fehler beim Anzeigen im Ordner",
+    "deleteFileFailed": "Datei konnte nicht gelöscht werden",
+    "fileUnavailable": "Datei nicht verfügbar",
+    "fileUnavailableHint": "Die Datei wurde verschoben oder gelöscht; Sie können diesen Eintrag nur entfernen",
+    "units": {
+      "perSecond": "/s",
+      "seconds": "s",
+      "minutes": "min",
+      "hours": "h"
+    },
+    "downloadCompleted": "Download abgeschlossen: {{name}}",
+    "downloadFailed": "Download fehlgeschlagen: {{name}}",
+    "streamDefaultName": "Video-Streaming",
+    "streamActive": "Stream-Downloads",
+    "streamHistory": "Stream-Verlauf",
+    "streamResolving": "Wiedergabeliste wird aufgelöst...",
+    "streamDownloading": "Herunterladen",
+    "streamMerging": "Segmente zusammenführen...",
+    "streamSegments": "Segmente",
+    "streamCompleted": "Download abgeschlossen: {{name}}",
+    "streamFailed": "Download fehlgeschlagen: {{error}}",
+    "streamErrors": {
+      "ENCRYPTED_STREAM": "Dieses Video ist DRM-geschützt und kann nicht heruntergeladen werden",
+      "LIVE_STREAM": "Das Herunterladen von Livestreams wird nicht unterstützt. Versuchen Sie es erneut, nachdem der Stream beendet ist",
+      "NO_SEGMENTS": "Keine herunterladbaren Videosegmente gefunden",
+      "NO_QUALITY_MATCH": "Keine passende Qualitätsoption gefunden",
+      "SEGMENT_FAILED": "Download fehlgeschlagen: Einige Inhalte konnten nicht abgerufen werden (Site-Einschränkung)",
+      "DOWNLOAD_TIMEOUT": "Zeitüberschreitung beim Herunterladen. Überprüfen Sie Ihr Netzwerk und versuchen Sie es erneut",
+      "HTTP_ERROR": "Die Website hat die Download-Anfrage blockiert",
+      "DOWNLOAD_ABORTED": "Download abgebrochen",
+      "MERGE_FAILED": "Die Videozusammenführung ist fehlgeschlagen. Bitte versuchen Sie es erneut",
+      "NETWORK_ERROR": "Netzwerkverbindung fehlgeschlagen. Überprüfen Sie Ihr Netzwerk und versuchen Sie es erneut",
+      "PARSE_ERROR": "Unbekanntes Video-URL-Format. Möglicherweise handelt es sich nicht um eine gültige m3u8-Datei",
+      "UNKNOWN": "Unbekannter Fehler"
+    }
+  },
+  "bookmarks": {
+    "title": "Lesezeichen",
+    "totalCount": "{{count}} Lesezeichen",
+    "totalCount_one": "{{count}} Lesezeichen",
+    "noBookmarks": "Keine Lesezeichen",
+    "searchPlaceholder": "Lesezeichen durchsuchen...",
+    "clearAll": "Alles löschen",
+    "empty": "Keine Lesezeichen",
+    "emptyHint": "Klicken Sie auf den Stern in der Adressleiste, um eine Seite mit einem Lesezeichen zu versehen",
+    "noResults": "Keine passenden Lesezeichen gefunden",
+    "addAction": "Lesezeichen",
+    "removeAction": "Lesezeichen entfernen",
+    "openAction": "Offen",
+    "deleteAction": "Löschen"
+  },
+  "history": {
+    "title": "Browserverlauf",
+    "totalCount": "{{count}} Datensätze",
+    "totalCount_one": "{{count}}-Datensatz",
+    "noRecords": "Kein Browserverlauf",
+    "searchPlaceholder": "Titel oder URL suchen...",
+    "clearAll": "Alles löschen",
+    "empty": "Kein Browserverlauf",
+    "emptyHint": "Die von Ihnen besuchten Seiten werden hier angezeigt",
+    "noResults": "Keine passenden Datensätze gefunden",
+    "today": "Heute",
+    "yesterday": "Gestern",
+    "thisWeek": "Diese Woche",
+    "thisMonth": "Diesen Monat",
+    "openAction": "Offen",
+    "deleteAction": "Löschen"
+  },
+  "tabContextMenu": {
+    "rename": "Umbenennen",
+    "close": "Tab schließen",
+    "delete": "Registerkarte löschen",
+    "dialogTitle": "Registerkarte umbenennen",
+    "dialogDescription": "Legen Sie einen neuen Namen für die Registerkarte fest",
+    "newNameLabel": "Neuer Name",
+    "newNamePlaceholder": "Geben Sie den Namen der Registerkarte ein",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen"
+  },
+  "agentAutofillFailed": {
+    "title": "Die automatische Anmeldung ist fehlgeschlagen",
+    "titleCredential": "Der Berechtigungsnachweis ist möglicherweise abgelaufen",
+    "titleFill": "Das automatische Ausfüllen konnte nicht abgeschlossen werden",
+    "descGeneric": "Die automatische Anmeldung für {{domain}} ist fehlgeschlagen. Bitte überprüfen Sie die Zugangsdaten unter Einstellungen → Gerät → Browser.",
+    "descCredential": "Das Passwort für {{domain}} ist möglicherweise abgelaufen oder wurde deaktiviert. Bitte aktualisieren Sie es unter Einstellungen → Gerät → Browser.",
+    "descFill": "Das Anmeldeformular auf {{domain}} hat eine unerwartete Struktur; Dem Agenten wurde eine Pause mitgeteilt. Bitte melden Sie sich manuell an.",
+    "descGenericWithAgent": "{{agentName}} konnte sich nicht automatisch bei {{domain}} anmelden. Bitte überprüfen Sie die Zugangsdaten unter Einstellungen → Gerät → Browser.",
+    "descCredentialWithAgent": "Der Berechtigungsnachweis von {{agentName}} für {{domain}} ist möglicherweise abgelaufen. Bitte aktualisieren Sie es unter Einstellungen → Gerät → Browser.",
+    "descFillWithAgent": "{{agentName}} konnte das Anmeldeformular auf {{domain}} nicht automatisch ausfüllen. Die Formularstruktur kann unerwartet sein. Bitte melden Sie sich manuell an."
+  },
+  "agentAutofillSuccess": {
+    "title": "Agent hat sich angemeldet",
+    "description": "Der Agent hat sich bei {{domain}} als {{username}} angemeldet.",
+    "descriptionWithAgent": "{{agentName}} hat sich bei {{domain}} als {{username}} angemeldet."
+  }
+}

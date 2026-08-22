@@ -1,0 +1,468 @@
+{
+  "welcomeTitle": "TabTinへようこそ",
+  "welcomeSubtitle": "統合された AI 作業プラットフォーム。新しいワークスペースを作成するか、左側からワークスペースを選択します。",
+  "welcomeSubtitleGuest": "サインインしてワークスペースを作成し、共同作業を開始します。",
+  "welcome": {
+    "title": "TabTin",
+    "tagline": "AI 作業プラットフォーム",
+    "conceptIntro": "TabTin では、ワークスペースは、実行デバイスと作業ディレクトリにバインドされた永続的な作業サイトです。会話、アプリ、リソース、実行コンテキストをまとめて保持するため、エージェントはその境界内で支援できます。",
+    "loginCta": "サインイン/登録",
+    "learnMore": "さらに詳しく→",
+    "readyTitle": "準備完了です！",
+    "readyDesc": "まずは最初のワークスペースを作成してください。ワークスペースは実行デバイスと作業ディレクトリをバインドし、会話、アプリ、リソース、実行コンテキストをまとめて保持します。",
+    "defaultAgentName": "デフォルトワークスペース",
+    "createFirstAgent": "最初のワークスペースを作成する",
+    "creating": "作成中...",
+    "orCollaborate": "または他の人と協力する",
+    "createGroupRoom": "エージェントグループルームの作成",
+    "createDM": "DMを開始する",
+    "createFailed": "ワークスペースの作成に失敗しました",
+    "noOrganization": "最初に組織を選択してください",
+    "moreApps": "さらにビデオ、キャンバス、メモ、目標、電子メールなど",
+    "apps": {
+      "tabdata": "TabData",
+      "tabdataDesc": "AIを活用したスマートテーブル",
+      "tabdoc": "TabDoc",
+      "tabdocDesc": "共同ドキュメント",
+      "tabslide": "TabSlide",
+      "tabslideDesc": "プレゼンテーションメーカー",
+      "browser": "ブラウザ",
+      "browserDesc": "スマートなウェブブラウジング",
+      "tabcode": "TabCode",
+      "tabcodeDesc": "コードと端子"
+    }
+  },
+  "actions": {
+    "createAgent": "ワークスペースの作成",
+    "loginToStart": "サインインして開始する",
+    "viewDocs": "ドキュメントを見る"
+  },
+  "selector": {
+    "loginRequired": "サインインしてください",
+    "placeholder": "組織の選択",
+    "defaultBadge": "デフォルト",
+    "empty": "まだ組織がありません",
+    "pendingInvitations": "保留中の招待状",
+    "invitedAs": "{{role}} として招待されました",
+    "actions": {
+      "create": "組織の作成",
+      "settings": "組織の設定",
+      "members": "会員管理"
+    }
+  },
+  "invitationResponse": {
+    "title": "組織への招待",
+    "description": "組織への参加に招待されました",
+    "workspaceName": "組織",
+    "invitedBy": "{{name}} からの招待",
+    "role": "役割",
+    "expiresAt": "有効期限",
+    "accept": "受け入れる",
+    "reject": "辞退",
+    "accepting": "参加中...",
+    "rejecting": "衰退中...",
+    "accepted": "組織「{{name}}」に参加しました",
+    "rejected": "招待が拒否されました"
+  },
+  "invitationList": {
+    "title": "保留中の招待状",
+    "description": "保留中の組織への招待状が {{count}} あります",
+    "from": "{{name}} から"
+  },
+  "create": {
+    "errors": {
+      "failed": "作成に失敗しました"
+    }
+  },
+  "views": {
+    "newTab": "新しいタブ"
+  },
+  "settings": {
+    "title": "組織の設定",
+    "tabs": {
+      "general": "一般",
+      "llm": "モデル設定"
+    },
+    "validation": {
+      "nameRequired": "組織名は必須です",
+      "nameMismatch": "組織名が一致しません",
+      "nameTooLong": "組織名は 100 文字以内である必要があります"
+    },
+    "errors": {
+      "updateFailed": "アップデートに失敗しました",
+      "deleteFailed": "削除に失敗しました",
+      "leaveFailed": "退出失敗"
+    },
+    "fields": {
+      "icon": "アイコン",
+      "avatar": "組織のアバター",
+      "name": "名前",
+      "namePlaceholder": "組織名",
+      "nameHint": "{{count}}/100文字",
+      "description": "説明 (オプション)",
+      "descriptionPlaceholder": "組織について説明する",
+      "descriptionHint": "{{count}}/500文字"
+    },
+    "avatar": {
+      "pendingSave": "アバターはトリミングされています。組織プロファイルを保存して適用する",
+      "pendingRemove": "保存するとアバターは削除されます",
+      "hint": "JPG、PNG、GIF、または WebP 最大 5MB。 GIFは静止画になります。",
+      "cropTitle": "作物組織のアバター"
+    },
+    "actions": {
+      "save": "変更を保存する",
+      "saving": "保存中...",
+      "saved": "保存されました",
+      "delete": "組織の削除",
+      "leave": "組織を離れる",
+      "cancel": "キャンセル",
+      "confirmDelete": "削除",
+      "deleting": "削除中...",
+      "transfer": "転送"
+    },
+    "danger": {
+      "title": "危険地帯",
+      "deleteTitle": "組織の削除",
+      "deleteDefault": "デフォルトの組織は削除できません",
+      "deleteDesc": "これにより、組織とそのすべてのデータが完全に削除されます",
+      "leaveTitle": "組織を離れる",
+      "leaveDesc": "アクセスできなくなるため、再参加するには新しい招待が必要です",
+      "transferTitle": "所有権を譲渡する",
+      "transferDesc": "既存会員への移行"
+    },
+    "confirm": {
+      "title": "組織の削除を確認しますか?",
+      "subtitle": "これにより、以下が完全に削除されます。",
+      "items": {
+        "organization": "組織「{{name}}」",
+        "spaces": "すべてのエージェントとテーブル",
+        "records": "すべての記録",
+        "members": "メンバー全員の関係性"
+      },
+      "warning": "⚠️ この操作は元に戻すことができません。",
+      "inputLabel": "組織名を入力して削除を確認します:"
+    },
+    "permissions": {
+      "ownerOnly": "💡 組織の所有者のみが設定を編集できます"
+    }
+  },
+  "llm": {
+    "defaultConfig": {
+      "title": "デフォルトのモデル構成",
+      "subtitle": "チーム メンバーがモデルを選択しない場合は、このデフォルトが最初に使用されます。",
+      "configured": "設定済み",
+      "notConfigured": "未設定",
+      "currentModel": "現在のデフォルトモデル",
+      "pickHint": "デフォルトのモデルを選択してください",
+      "unavailableCurrent": "現在利用不可",
+      "selectHelp": "デフォルトのモデルは、モデルが指定されていない新しいセッションとタスクに使用されます。"
+    },
+    "presetSection": {
+      "title": "TabTin プリセット モデル",
+      "subtitle": "組み込みプラットフォームモデル。デフォルトとしてすぐに使用できます。チャネル設定は必要ありません。",
+      "collapse": "プリセットモデルを折りたたむ",
+      "expandHint": "{{count}} より多くのプラットフォーム モデル。展開してすべてを表示します。"
+    },
+    "providers": {
+      "title": "プロバイダーチャネル",
+      "desc": "クラウドモデルチャネルの追加（OpenAI互換）",
+      "provider": "プロバイダー",
+      "providerKey": "チャンネルキー",
+      "displayName": "表示名",
+      "baseUrl": "APIベースURL",
+      "apiKey": "APIキー",
+      "scope": "可視性",
+      "scopeOrganization": "組織",
+      "scopeUser": "個人的な",
+      "scopeHint": "あなたの役割で作成できるのは個人チャンネルのみです",
+      "save": "変更を保存する",
+      "cancel": "キャンセル",
+      "edit": "編集",
+      "delete": "削除",
+      "enable": "有効にする",
+      "disable": "無効にする",
+      "validate": "テスト接続",
+      "validating": "テスト中...",
+      "validateSuccess": "接続OK",
+      "validateFailed": "接続に失敗しました",
+      "statusEnabled": "有効",
+      "statusDisabled": "障害者",
+      "create": "チャンネルを追加",
+      "creating": "作成中...",
+      "empty": "まだチャンネルがありません",
+      "modelCount": "{{count}} モデル",
+      "createSuccess": "チャンネルが追加されました",
+      "updateSuccess": "チャンネルが更新されました",
+      "deleteSuccess": "チャンネルが削除されました",
+      "enableSuccess": "チャネルが有効になっています",
+      "disableSuccess": "チャンネルが無効になっています",
+      "confirmDelete": "チャンネル「{{name}}」を削除しますか?",
+      "validation": {
+        "required": "ベース URL と API キーを入力してください",
+        "providerKeyInvalid": "無効なチャネルキー形式です"
+      }
+    },
+    "models": {
+      "title": "モデル",
+      "desc": "チャネルの下にモデルを追加する",
+      "provider": "チャンネル",
+      "providerPlaceholder": "チャンネルを選択してください",
+      "searchKeyword": "モデルの検索 (LiteLLM)",
+      "searchPlaceholder": "例: gpt-4o、クロード-3.5",
+      "search": "検索",
+      "searching": "検索中...",
+      "clearSearch": "クリア",
+      "searchResults": "結果 (クリックして記入)",
+      "searchValidation": "検索キーワードを入力してください",
+      "searchEmpty": "一致するモデルがありません",
+      "modelName": "機種名",
+      "displayName": "表示名",
+      "maxTokens": "コンテキストの長さ",
+      "supportsVision": "ビジョン",
+      "supportsStreaming": "ストリーミング",
+      "save": "変更を保存する",
+      "cancel": "キャンセル",
+      "edit": "編集",
+      "delete": "削除",
+      "enable": "有効にする",
+      "disable": "無効にする",
+      "statusEnabled": "有効",
+      "statusDisabled": "障害者",
+      "statusReady": "準備完了",
+      "statusProviderDisabled": "チャンネルが無効になっています",
+      "statusNotReady": "準備ができていません",
+      "globalOnly": "システム",
+      "organizationOnly": "組織",
+      "providerDisabled": "プロバイダーが無効になっており、モデルが利用できません",
+      "create": "モデルの追加",
+      "creating": "作成中...",
+      "empty": "まだモデルがありません",
+      "userOnly": "個人的な",
+      "createSuccess": "モデルを追加しました",
+      "updateSuccess": "モデルが更新されました",
+      "deleteSuccess": "モデルが削除されました",
+      "enableSuccess": "有効なモデル",
+      "disableSuccess": "モデルが無効になっています",
+      "confirmDelete": "モデル「{{name}}」を削除しますか?",
+      "validation": {
+        "required": "必須フィールドに入力してください",
+        "providerRequired": "最初にチャンネルを選択してください",
+        "maxTokens": "有効なコンテキストの長さを入力してください"
+      }
+    },
+    "default": {
+      "title": "デフォルトモデル",
+      "desc": "新しいセッションのデフォルト モデル",
+      "select": "デフォルトのモデルを選択",
+      "save": "デフォルトを設定する",
+      "saving": "保存中...",
+      "current": "現在のデフォルト: {{name}}"
+    },
+    "errors": {
+      "loadProvidersFailed": "チャンネルの読み込みに失敗しました",
+      "loadModelsFailed": "モデルのロードに失敗しました",
+      "createProviderFailed": "チャンネルの作成に失敗しました",
+      "updateProviderFailed": "チャンネルの更新に失敗しました",
+      "deleteProviderFailed": "チャンネルの削除に失敗しました",
+      "validateProviderFailed": "チャネルの検証に失敗しました",
+      "createModelFailed": "モデルの作成に失敗しました",
+      "updateModelFailed": "モデルの更新に失敗しました",
+      "deleteModelFailed": "モデルの削除に失敗しました",
+      "searchModelFailed": "モデルの検索に失敗しました",
+      "setDefaultModelFailed": "デフォルトモデルの設定に失敗しました"
+    }
+  },
+  "trashedSpaces": {
+    "title": "ワークスペースのゴミ箱",
+    "subtitle": "ゴミ箱内のワークスペースは、保持期間内であれば復元でき、その後完全に削除できます。",
+    "empty": "ゴミ箱が空です",
+    "emptyHint": "ゴミ箱にワークスペースがありません",
+    "trashedAt": "{{date}}に削除されました",
+    "daysLeft": "{{days}} 日後に自動削除されます",
+    "restore": "復元",
+    "restoring": "復元中...",
+    "restoreSuccess": "ワークスペース「{{name}}」を復元しました",
+    "restoreFailed": "復元に失敗しました",
+    "permanentDelete": "完全に削除",
+    "deleteConfirmTitle": "ワークスペースを完全に削除する",
+    "deleteConfirm": "「{{name}}」を完全に削除しますか?これを元に戻すことはできません。",
+    "deleteSuccess": "ワークスペース「{{name}}」が完全に削除されました",
+    "deleteFailed": "完全に削除できませんでした",
+    "loading": "読み込み中...",
+    "loadFailed": "ゴミ箱に捨てられたワークスペースのロードに失敗しました",
+    "count": "{{count}} ワークスペース"
+  },
+  "apiErrors": {
+    "listNoResponse": "組織の取得に失敗しました: 応答なし",
+    "listHttpFailed": "組織の取得に失敗しました: HTTP {{status}}",
+    "listFailed": "組織の取得に失敗しました",
+    "listInvalid": "組織の取得に失敗しました: 無効な応答",
+    "detailFailed": "組織の取得に失敗しました",
+    "detailInvalid": "組織の取得に失敗しました: 無効な応答",
+    "createFailed": "組織の作成に失敗しました",
+    "createInvalid": "組織の作成に失敗しました: 無効な応答",
+    "updateFailed": "組織の更新に失敗しました",
+    "updateInvalid": "組織を更新できませんでした: 無効な応答",
+    "deleteFailed": "組織の削除に失敗しました",
+    "leaveFailed": "組織を脱退できませんでした",
+    "healthUnknownStatus": "不明なステータス",
+    "healthUnexpected": "ヘルスチェックで予期しない応答が返されました",
+    "healthUnavailable": "サービスが利用できません"
+  },
+  "members": {
+    "title": "会員管理",
+    "subtitle": "{{name}}・{{count}}メンバー",
+    "actions": {
+      "add": "メンバーを追加",
+      "addTitle": "メンバーを追加",
+      "cancel": "キャンセル",
+      "confirmAdd": "追加",
+      "sendInvitation": "招待状を送信する",
+      "adding": "追加中...",
+      "setViewer": "ビューアとして設定",
+      "setEditor": "エディタとして設定",
+      "remove": "メンバーの削除",
+      "invite": "招待する",
+      "changeRole": "役割",
+      "cancelInvitation": "招待をキャンセルする"
+    },
+    "fields": {
+      "userId": "ユーザーID",
+      "userIdPlaceholder": "ユーザーIDを貼り付けてください",
+      "userIdHint": "ユーザー ID は、「設定」→「プロフィール」からコピーできます。",
+      "role": "役割"
+    },
+    "roles": {
+      "owner": "オーナー",
+      "admin": "管理者",
+      "editor": "編集者",
+      "viewer": "ビューア"
+    },
+    "roleDescriptions": {
+      "owner": "フルコントロール",
+      "admin": "メンバーと組織の設定を管理できる",
+      "editor": "編集可能",
+      "viewer": "閲覧のみ"
+    },
+    "errors": {
+      "loadFailed": "メンバーのロードに失敗しました",
+      "loadInvalid": "メンバーのロードに失敗しました: 無効な応答",
+      "userIdRequired": "ユーザーIDが必要です",
+      "roleInvalid": "役割は編集者または閲覧者である必要があります",
+      "addFailed": "メンバーの追加に失敗しました",
+      "addInvalid": "メンバーの追加に失敗しました: 無効な応答",
+      "updateRoleFailed": "役割の更新に失敗しました",
+      "removeFailed": "メンバーの削除に失敗しました",
+      "cancelInvitationFailed": "招待をキャンセルできませんでした",
+      "permissionDenied": "この組織にアクセスする権限がありません"
+    },
+    "pendingInvitations": "保留中の招待 ({{count}})",
+    "linkInvitations": "招待リンク ({{count}})",
+    "linkInvitation": "リンクへの招待",
+    "linkInvitationActive": "アクティブ",
+    "linkInvitationUsed": "{{count}}が参加しました",
+    "directInvitation": "ユーザーID {{userId}}",
+    "phoneInvitation": "電話番号 {{phone}}",
+    "statusPending": "保留中",
+    "expiresAt": "期限切れ {{date}}",
+    "confirmRemove": "このメンバーを削除しますか?",
+    "ownerSection": "オーナー",
+    "memberSection": "メンバー ({{count}})",
+    "you": "あなた",
+    "joinedAt": "{{date}}に参加しました",
+    "empty": {
+      "title": "他のメンバーはまだいません",
+      "hint": "上のボタンを使用してメンバーを追加してください"
+    },
+    "permissions": {
+      "ownerOnly": "💡 組織の所有者のみがメンバーを管理できます"
+    }
+  },
+  "search": {
+    "placeholder": "TabData、TabDoc、TabSlide を検索...",
+    "all": "すべて",
+    "tables": "TabData",
+    "documents": "TabDoc",
+    "presentations": "TabSlide",
+    "code": "TabCode",
+    "videos": "TabVideo",
+    "canvases": "タブホワイトボード",
+    "memos": "タブメモ",
+    "sites": "タブサイト",
+    "functions": "機能",
+    "searching": "検索中...",
+    "error": "検索に失敗しました。もう一度お試しください",
+    "noResults": "一致する結果はありません",
+    "hint": "キーワードを入力してすべてのエージェントのリソースを検索します",
+    "navigate": "ナビゲート",
+    "open": "開く",
+    "close": "閉じる",
+    "results": "結果",
+    "shortcutHint": "検索を開く",
+    "dialogLabel": "グローバル検索",
+    "inputLabel": "検索キーワード",
+    "typeFilter": "タイプフィルター",
+    "resultsList": "検索結果",
+    "shortcuts": "キーボードショートカット",
+    "navigateFailedTitle": "リソースを開けません",
+    "navigateFailedSpace": "ターゲット ワークスペースがロードされていません。まずはサイドバーから選択してください。",
+    "navigateFailedType": "サポートされていないリソースタイプです",
+    "clearScope": "すべてのプロジェクトを検索",
+    "scopedPlaceholder": "「{{name}}」で検索...",
+    "scopedHint": "「{{name}}」で検索しています。 Backspace キーを押してグローバル検索に切り替えます。",
+    "globalMode": "グローバル検索"
+  },
+  "logs": {
+    "loadListSuccess": "✅ 組織リストがロードされました:",
+    "loadListFailed": "❌ 組織のロードに失敗しました:",
+    "selectSuccess": "✅ 選択した組織:",
+    "selectFailed": "❌ 組織の選択に失敗しました:",
+    "createSuccess": "✅ 作成された組織:",
+    "createFailed": "❌ 組織の作成に失敗しました:",
+    "updateSuccess": "✅ 組織が更新されました:",
+    "updateFailed": "❌ 組織を更新できませんでした:",
+    "deleteSuccess": "✅ 組織が削除されました",
+    "deleteFailed": "❌ 組織の削除に失敗しました:",
+    "leaveSuccess": "✅ 組織を離れた",
+    "leaveFailed": "❌ 組織を脱退できませんでした:",
+    "membersLoadSuccess": "✅ ロードされたメンバー:",
+    "membersLoadFailed": "❌ メンバーのロードに失敗しました:",
+    "memberAddSuccess": "✅ メンバーが追加されました",
+    "memberAddFailed": "❌ メンバーの追加に失敗しました:",
+    "memberRoleUpdateSuccess": "✅ メンバーの役割が更新されました",
+    "memberRoleUpdateFailed": "❌ メンバーの役割を更新できませんでした:",
+    "memberRemoveSuccess": "✅ メンバーが削除されました",
+    "memberRemoveFailed": "❌ メンバーの削除に失敗しました:",
+    "memberRoleFetchFailed": "❌ ユーザー役割の取得に失敗しました:",
+    "getDefaultFailed": "❌ デフォルトの組織を取得できませんでした:",
+    "healthCheckFailed": "❌ 組織の健全性チェックに失敗しました:",
+    "cleared": "✅ 組織データがクリアされました"
+  },
+  "invitation": {
+    "errors": {
+      "sendFailed": "招待状の送信に失敗しました",
+      "createLinkFailed": "招待リンクの作成に失敗しました",
+      "listFailed": "招待状を読み込めませんでした",
+      "cancelFailed": "招待をキャンセルできませんでした",
+      "notFound": "招待状が見つかりません",
+      "acceptFailed": "招待を承諾できませんでした",
+      "respondFailed": "招待に応答できませんでした",
+      "rateLimited": "作成された招待状が多すぎます。後でもう一度お試しください。"
+    },
+    "accept": {
+      "title": "組織への招待",
+      "confirm": "招待を承諾する",
+      "accepting": "参加中...",
+      "invalid": "この招待状は無効になりました",
+      "success": "組織に正常に参加しました",
+      "successDesc": "「{{organization}}」に参加しました",
+      "goToOrganization": "組織に移動",
+      "loginRequired": "この招待を受け入れるには、まずログインしてください",
+      "status": {
+        "expired": "招待状の有効期限が切れました",
+        "accepted": "招待状はすでに使用されています",
+        "cancelled": "招待がキャンセルされました"
+      }
+    }
+  }
+}

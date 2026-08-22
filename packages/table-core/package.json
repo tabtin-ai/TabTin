@@ -1,0 +1,44 @@
+{
+  "name": "@tabtin/table-core",
+  "version": "0.1.0",
+  "description": "Host-agnostic table runtime contracts and core utilities",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "build:test": "tsc -p tsconfig.test.json",
+    "clean": "rm -rf dist .test-dist",
+    "test": "pnpm run build:test && node -e \"require('node:fs').writeFileSync('.test-dist/package.json', '{\\\"type\\\":\\\"commonjs\\\"}')\" && node --test .test-dist/tests/*.test.js"
+  },
+  "keywords": [
+    "tabtin",
+    "table",
+    "core",
+    "runtime"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "dependencies": {
+    "@tabtin/app-host-sdk": "workspace:*",
+    "@tabtin/table-kernel": "workspace:*",
+    "xlsx": "0.18.5",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "typescript": "5.7.2"
+  }
+}

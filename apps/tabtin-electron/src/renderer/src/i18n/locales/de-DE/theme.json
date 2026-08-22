@@ -1,0 +1,35 @@
+{
+  "theme": {
+    "toggle": "Thema umschalten",
+    "light": "Licht",
+    "dark": "Dunkel",
+    "system": "System"
+  },
+  "colorScheme": {
+    "toggle": "Farbschema wechseln",
+    "options": {
+      "orange": "Lebendiges Orange",
+      "teal": "Tiefblaugrün",
+      "crimson": "Purpur",
+      "slate": "Business-Grau",
+      "emerald": "Smaragd",
+      "blue": "Geschäftsblau",
+      "carbon": "Ruß",
+      "rose": "Rose",
+      "violet": "Violett",
+      "sky": "Himmelblau"
+    },
+    "descriptions": {
+      "orange": "Warm und voller Energie",
+      "teal": "Professionell und stabil",
+      "crimson": "Mutig und reaktionsschnell",
+      "slate": "Neutral und formell",
+      "emerald": "Frisch und kooperativ",
+      "blue": "Klassisch und unternehmerisch",
+      "carbon": "Minimal und fokussiert",
+      "rose": "Lebendig und kreativ",
+      "violet": "Ruhig und elegant",
+      "sky": "Rein und erfrischend"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "required": ["category", "priority"],
+  "properties": {
+    "category": { "type": "string", "enum": ["inquiry", "feedback", "promo", "system", "personal", "other"] },
+    "priority": { "type": "string", "enum": ["urgent", "high", "medium", "low"] },
+    "labels": { "type": "array", "items": { "type": "string" } },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "reasoning": { "type": "string" }
+  }
+}

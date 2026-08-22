@@ -1,0 +1,93 @@
+[
+  {
+    "protocol_version": "v2",
+    "min_compatible_version": "v2",
+    "trace_id": "trace_abc123",
+    "thread_id": "thread_xyz789",
+    "_seq": 3,
+    "event_type": "agent.stream.content_block_delta",
+    "message_id": "msg_01",
+    "index": 0,
+    "delta": {
+      "type": "text_delta",
+      "text": "Hello, "
+    }
+  },
+  {
+    "protocol_version": "v2",
+    "min_compatible_version": "v2",
+    "trace_id": "trace_abc123",
+    "thread_id": "thread_xyz789",
+    "_seq": 4,
+    "event_type": "agent.stream.content_block_delta",
+    "message_id": "msg_01",
+    "index": 1,
+    "delta": {
+      "type": "input_json_delta",
+      "partial_json": "{\"path\":\"src"
+    }
+  },
+  {
+    "protocol_version": "v2",
+    "min_compatible_version": "v2",
+    "trace_id": "trace_abc123",
+    "thread_id": "thread_xyz789",
+    "_seq": 5,
+    "event_type": "agent.stream.content_block_delta",
+    "message_id": "msg_01",
+    "index": 2,
+    "delta": {
+      "type": "thinking_delta",
+      "thinking": "我需要思考..."
+    }
+  },
+  {
+    "protocol_version": "v2",
+    "min_compatible_version": "v2",
+    "trace_id": "trace_abc123",
+    "thread_id": "thread_xyz789",
+    "_seq": 6,
+    "event_type": "agent.stream.content_block_delta",
+    "message_id": "msg_01",
+    "index": 2,
+    "delta": {
+      "type": "signature_delta",
+      "signature": "sig_abc_xyz_456"
+    }
+  },
+  {
+    "protocol_version": "v2",
+    "min_compatible_version": "v2",
+    "trace_id": "trace_abc123",
+    "thread_id": "thread_xyz789",
+    "_seq": 7,
+    "event_type": "agent.stream.content_block_delta",
+    "message_id": "msg_01",
+    "index": 0,
+    "delta": {
+      "type": "citations_delta",
+      "citation": {
+        "type": "char_location",
+        "cited_text": "cited",
+        "document_index": 0,
+        "document_title": "doc.md",
+        "start_char_index": 0,
+        "end_char_index": 5
+      }
+    }
+  },
+  {
+    "protocol_version": "v2",
+    "min_compatible_version": "v2",
+    "trace_id": "trace_abc123",
+    "thread_id": "thread_xyz789",
+    "_seq": 8,
+    "event_type": "agent.stream.content_block_delta",
+    "message_id": "msg_01",
+    "index": 0,
+    "delta": {
+      "type": "connector_text_delta",
+      "connector_text": "\n"
+    }
+  }
+]

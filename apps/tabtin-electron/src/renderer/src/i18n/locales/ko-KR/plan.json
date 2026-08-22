@@ -1,0 +1,27 @@
+{
+  "proposal": {
+    "headerTitle": "계획 초안",
+    "summaryLabel": "요약",
+    "todosLabel": "할 일 ({{count}})",
+    "todosEmpty": "할 일 없음",
+    "expandButton": "전체 계획 보기",
+    "collapseButton": "접기",
+    "openDocButton": "문서 열기",
+    "executeButton": "실행",
+    "executingButton": "실행 중…",
+    "executedButton": "실행됨",
+    "todoStatus": {
+      "pending": "보류 중",
+      "in_progress": "진행중",
+      "completed": "완료됨",
+      "cancelled": "취소됨",
+      "unknown": "알 수 없음"
+    },
+    "executeSuccess": "“{{name}}” 실행을 시작했습니다.",
+    "executeSuccessNoName": "이 계획을 실행하기 시작했습니다",
+    "executeErrorNoSession": "활성 세션 없음 — 계획을 실행할 수 없습니다.",
+    "executeErrorSend": "계획 실행을 보내지 못했습니다. 다시 시도하세요.",
+    "executeError": "실행 실패: {{message}}",
+    "executeErrorUnknown": "알 수 없는 오류"
+  }
+}

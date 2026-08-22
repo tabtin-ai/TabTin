@@ -1,0 +1,404 @@
+{
+  "appName": "自动化",
+  "panel": {
+    "header": "自动化",
+    "overview": "概览",
+    "list": "列表",
+    "viewList": "列表",
+    "viewAgenda": "时间线",
+    "viewKanban": "看板",
+    "createTask": "新建自动化任务",
+    "createAction": "新建",
+    "search": "搜索自动化任务…",
+    "filterAll": "全部",
+    "filterAllStatus": "全部状态",
+    "filterStatus": "状态",
+    "filterType": "类型",
+    "loadMore": "加载更多",
+    "totalCount": "共 {{count}} 项",
+    "emptyTitle": "还没有任何自动化任务",
+    "emptyDescription": "可以说「每天早上检查 PR」让 Agent 帮你建，或自己填表创建",
+    "emptyHint": "点「新建自动化任务」开始，可选手动填写或 Agent 创建",
+    "createFirst": "创建第一个自动化任务",
+    "selectSpace": "请先选择工作空间",
+    "noResults": "没有匹配的任务",
+    "workspaceUnavailable": "工作空间不可用",
+    "agentUnavailable": "Agent 不可用",
+    "nextRunAt": "下次 {{time}}",
+    "noNextRun": "暂无下次执行时间",
+    "pausedPlan": "已暂停，不会自动执行",
+    "openTaskDetail": "打开定时任务「{{name}}」详情",
+    "rowActions": {
+      "menu": "任务操作"
+    },
+    "columns": {
+      "task": "任务",
+      "workspace": "所属工作空间",
+      "status": "状态",
+      "type": "类型",
+      "instructions": "指令摘要",
+      "schedule": "下次/最近执行",
+      "actions": "操作"
+    }
+  },
+  "overview": {
+    "attention": "需要关注",
+    "summary": "共 {{total}} 个任务 · {{attention}} 个需要关注 · {{active}} 个已激活",
+    "attentionEmpty": "一切正常",
+    "running": "运行中",
+    "runningEmpty": "暂无运行中的任务",
+    "scheduled": "已排期",
+    "scheduledEmpty": "暂无已排期任务",
+    "dormant": "草稿与暂停",
+    "view": "查看",
+    "runNow": "立即执行",
+    "activate": "启用",
+    "resume": "恢复"
+  },
+  "status": {
+    "draft": "草稿",
+    "active": "活动",
+    "paused": "暂停",
+    "disabled": "已结束",
+    "archived": "已归档"
+  },
+  "trigger": {
+    "manual": "手动触发",
+    "cron": "定时",
+    "interval": "间隔",
+    "at": "定时一次",
+    "webhook": "Webhook",
+    "table_event": "表格事件",
+    "extension_event": "扩展事件",
+    "tracker_completed": "上游自动化任务完成"
+  },
+  "scope": {
+    "all": "全部"
+  },
+  "detail": {
+    "loading": "加载中…",
+    "empty": "未找到任务",
+    "retry": "重试",
+    "noRuns": "还没执行过",
+    "nextRun": "下次执行",
+    "instructions": "指令",
+    "noInstructions": "未填写指令",
+    "description": "列表备注",
+    "taskInfo": "任务信息",
+    "workspace": "工作空间",
+    "agent": "执行 Agent",
+    "runHistory": "历史记录",
+    "scheduleActive": "{{schedule}}",
+    "schedulePaused": "{{schedule}} · 当前已暂停",
+    "openRunSession": "打开本次执行对话",
+    "openRunSessionFailed": "打开执行对话失败，请重试",
+    "refreshRuns": "刷新",
+    "health": {
+      "disabled": "当前已暂停，恢复后才会继续执行",
+      "missedSkipped": "最近一次错过已按设置跳过（{{time}}），累计跳过 {{count}} 次"
+    },
+    "resultSummary": "执行结果",
+    "errorDetail": "失败详情",
+    "cancelDetail": "取消原因",
+    "runStatus": {
+      "completed": "成功",
+      "failed": "失败",
+      "running": "执行中",
+      "pending": "等待中",
+      "cancelled": "已取消",
+      "waiting_device": "等待设备上线"
+    },
+    "actions": {
+      "edit": "编辑",
+      "activate": "启用",
+      "activateDraft": "启用并开始调度",
+      "activateDraftManual": "启用并允许手动触发",
+      "draftHint": "草稿状态不会被触发。启用后才会按你设置的规则自动执行",
+      "pause": "暂停",
+      "trigger": "立即执行",
+      "triggerDisabledActiveRun": "已有执行中的任务，请等待完成或先取消后再触发",
+      "delete": "删除",
+      "confirmDelete": "确认删除",
+      "confirmDeleteTitle": "删除定时任务",
+      "confirmDeleteHint": "任务卡将从自动化主列表中移除；已有历史记录时，左侧会保留任务名称和 Run 入口。",
+      "resume": "恢复",
+      "paused": "已暂停",
+      "resumed": "已恢复",
+      "triggered": "已触发执行",
+      "deleted": "已删除",
+      "cancelRun": "取消本次执行",
+      "runCancelled": "已取消本次执行"
+    },
+    "more": {
+      "title": "更多",
+      "note": "备注",
+      "noNote": "未填写备注",
+      "catchup": "错过策略",
+      "authorization": "授权提示"
+    },
+    "frequencyLabel": "执行频率",
+    "highFrequencyToast": "已启用 · {{summary}}。如需调整频率,去详情页点「暂停」"
+  },
+  "frequencyHint": {
+    "manual": "需手动触发,不会自动跑",
+    "cronCustom": "按自定义计划自动执行",
+    "cronHourly": "每小时自动执行一次(约每天 24 次)",
+    "cronDaily": "每天 {{at}} 自动执行一次",
+    "cronWeekdays": "每个工作日 {{at}} 自动执行一次",
+    "cronWeekly": "每周一 {{at}} 自动执行一次",
+    "intervalUnknown": "按固定时间间隔自动执行",
+    "intervalSummary": "{{unit}}(预计每天约 {{count}} 次)",
+    "atOnce": "{{at}} 执行一次",
+    "atUnknown": "在设定时间执行一次",
+    "unitSeconds": "每 {{n}} 秒一次",
+    "unitMinutes": "约每 {{n}} 分钟一次",
+    "unitHours": "约每 {{n}} 小时一次",
+    "webhook": "由 webhook 入站触发,频率取决于上游调用",
+    "tableEvent": "由表格事件触发(行新增/更新/删除时)",
+    "extensionEvent": "由扩展事件触发",
+    "trackerCompleted": "上游自动化任务完成时触发"
+  },
+  "createDialog": {
+    "title": "新建自动化任务",
+    "editTitle": "编辑自动化任务",
+    "sections": {
+      "what": "任务内容",
+      "when": "执行时机"
+    },
+    "cancel": "取消",
+    "submit": "创建",
+    "save": "保存",
+    "moreOptions": "更多选项",
+    "createModeLabel": "创建方式",
+    "tabs": {
+      "manual": "手动填写",
+      "agent": "Agent 创建"
+    },
+    "agentTab": {
+      "hint": "发送后，右侧对话里的 Agent 会帮你建好并启用。",
+      "requestLabel": "你想让 Agent 建什么样的自动化任务？",
+      "placeholder": "例如：每天早上 9 点检查 GitHub 上超过 24 小时未处理的 PR，生成清单发到 Inbox",
+      "submit": "发送到对话",
+      "submitting": "正在打开对话…"
+    },
+    "fields": {
+      "name": "任务名称",
+      "nameHint": "显示在任务列表里，方便认出这条任务。",
+      "title": "标题",
+      "description": "列表备注（可选）",
+      "instructions": "执行指令",
+      "instructionsHint": "每次到点会把这段话发给 Agent 执行。Agent 会按需自行选择合适的 Skill。",
+      "agent": "执行 Agent",
+      "workspace": "执行 Agent",
+      "activateOnCreate": "创建后立即启用",
+      "activateOnCreateHint": "创建后立刻进入调度（「手动」类任务仍需点「立即执行」）",
+      "schedule": "调度方式",
+      "atTime": "执行时刻",
+      "frequency": "频率",
+      "runTime": "执行时间",
+      "firstRunTime": "首次执行时间(可选)",
+      "intervalEvery": "执行频率",
+      "hours": "小时",
+      "skillLabel": "关联 Skill(可选)",
+      "skillHint": "指定 Agent 使用的 Skill,留空则由 Agent 自行决定",
+      "recurrenceDays": "重复日",
+      "intervalMinutes": "每隔多少分钟",
+      "intervalPrefix": "每隔",
+      "intervalSuffix": "分钟",
+      "onceAt": "执行日期时间",
+      "catchup": "错过后怎么办",
+      "table": "选择数据表",
+      "tableEvents": "触发事件",
+      "tableConditionNote": "当前匹配该表所有变更，按字段筛选条件即将支持。"
+    },
+    "schedule": {
+      "manual": "手动执行",
+      "recurring": "定时重复",
+      "interval": "间隔执行"
+    },
+    "permissionNotice": {
+      "hint": "任务会按计划自动执行，执行过程中不会逐步询问；你可以随时暂停任务。"
+    },
+    "schedulePresets": {
+      "manual": "手动",
+      "hourly": "每小时",
+      "daily": "每天",
+      "weekdays": "工作日",
+      "weekly": "每周",
+      "interval": "间隔执行",
+      "at": "定时一次",
+      "table_event": "表格变化"
+    },
+    "schedulePresetHints": {
+      "manual": "你点击\"立即执行\"时才运行。",
+      "hourly": "每小时整点运行一次。",
+      "daily": "每天在指定时刻运行一次。",
+      "weekdays": "周一至周五在指定时刻运行。",
+      "weekly": "每周一在指定时刻运行。",
+      "interval": "每隔固定时间自动执行一次。",
+      "at": "在你指定的日期时间执行一次，跑完即停。",
+      "table_event": "当选定的数据表发生行变化时自动执行。"
+    },
+    "tableEventTypes": {
+      "record_created": "新增行",
+      "record_updated": "修改行",
+      "record_deleted": "删除行"
+    },
+    "recurrence": {
+      "daily": "每天",
+      "weekly": "每周",
+      "monthly": "每月",
+      "day": {
+        "MO": "一",
+        "TU": "二",
+        "WE": "三",
+        "TH": "四",
+        "FR": "五",
+        "SA": "六",
+        "SU": "日"
+      }
+    },
+    "placeholders": {
+      "name": "例如：每日数据同步",
+      "nameTitle": "填写任务名称",
+      "title": "输入任务标题",
+      "description": "例如：给同事看的备注，可不填",
+      "instructions": "例如：汇总昨天的未读邮件，生成三句话摘要发到 Inbox",
+      "agent": "选择 Agent",
+      "workspace": "选择 Space",
+      "agentDefault": "默认(当前对话 Agent)",
+      "workspaceDefault": "默认（当前 Space）",
+      "agentLoading": "Agent 列表加载中...",
+      "workspaceLoading": "Space 列表加载中...",
+      "skillKeyFriendly": "留空 = Agent 自动选择",
+      "table": "选择要监听的数据表",
+      "tableLoading": "加载中…",
+      "tableEmpty": "该空间暂无数据表"
+    },
+    "errors": {
+      "nameRequired": "请填写名称",
+      "instructionsRequired": "请填写指令，告诉 Agent 要做什么",
+      "agentCreateFailed": "无法发起对话，请稍后再试",
+      "noOrganization": "无法确定组织,请稍后重试",
+      "submitFailed": "创建失败,请重试或联系管理员",
+      "intervalRequired": "请填写有效的间隔分钟数(≥ 1)",
+      "onceAtRequired": "请选择执行的日期时间",
+      "onceAtMustBeFuture": "执行时间必须在未来，请选择一个之后的时间",
+      "tableRequired": "请选择要监听的数据表",
+      "tableEventsRequired": "请至少勾选一种触发事件"
+    },
+    "lockedTrigger": {
+      "cronValue": "自定义调度规则（{{expression}}）",
+      "hint": "此任务的触发方式在这里不支持修改，保存时会保持原有触发配置不变。"
+    },
+    "catchup": {
+      "run_once": "错过后补跑一次",
+      "skip": "错过就跳过",
+      "hint": "电脑关机或应用没开时，任务可能错过原定时间。这里决定恢复后要不要补跑。",
+      "run_onceHint": "恢复后自动补跑一次，适合日报、汇总这类不能漏的任务。",
+      "skipHint": "错过的这次不再执行，等下一个周期，适合提醒类任务（过了时间就没意义）。"
+    },
+    "intentSnapshot": {
+      "title": "创建意图回顾",
+      "empty": "本自动化任务创建时未保留原始意图(可能是较早创建的)。",
+      "userUtterance": "你说的话",
+      "agentProposal": "Agent 的提议",
+      "finalValues": "最终采用",
+      "createdVia": "创建路径",
+      "via": {
+        "ui": "UI 表单",
+        "cli": "命令行",
+        "agent": "Agent 对话",
+        "command_palette": "命令面板"
+      }
+    }
+  },
+  "home": {
+    "subtitle": "创建和管理让 Agent 按计划运行的自动化任务",
+    "viewAll": "查看全部",
+    "nextRun": "下次执行",
+    "create": "创建任务",
+    "loadFailed": "加载失败"
+  },
+  "automation": {
+    "title": "自动化",
+    "subtitle": "用自动化任务让 Agent 按计划自动执行"
+  },
+  "schedule": {
+    "prevWeek": "上一周",
+    "nextWeek": "下一周",
+    "prevMonth": "上一月",
+    "nextMonth": "下一月",
+    "today": "今天",
+    "weekView": "周",
+    "monthView": "月",
+    "scopeOrganization": "组织范围",
+    "scopeSpace": "当前空间",
+    "scopeOrganizationShort": "组织",
+    "scopeSpaceShort": "空间",
+    "manage": "任务管理",
+    "truncatedHint": "执行点过多，仅显示当前时间范围内的部分结果",
+    "loadError": "日程加载失败",
+    "emptyTitle": "这段时间没有预计执行",
+    "emptyDescription": "创建或启用自动化任务后，未来执行点会出现在这里",
+    "narrowList": "按日期列表",
+    "pending": "待执行",
+    "weekGrid": "周日历",
+    "monthGrid": "月日历",
+    "moreCount": "+{{count}}",
+    "moreAriaLabel": "{{date}}，另有 {{count}} 个任务"
+  },
+  "toast": {
+    "activated": "已启用",
+    "createdAndActivated": "已创建并启用",
+    "createdAsDraft": "已创建",
+    "createdAsDraftHint": "草稿不会自动运行。在详情页点击「启用」后才会按触发条件执行",
+    "activateAfterCreateFailed": "任务已保存，但启用失败——请在详情页点「启用」重试",
+    "runCompleted": "自动化任务执行完成",
+    "runFailed": "自动化任务执行失败",
+    "error": "操作失败，请重试"
+  },
+  "notification": {
+    "trackerCompletedBody": "点击查看本次执行结果",
+    "trackerFailedBody": "点击查看失败原因"
+  },
+  "chatSidebar": {
+    "trackersSection": "自动化",
+    "openModule": "打开自动化模块",
+    "newTracker": "+ 新建自动化任务",
+    "emptyHint": "创建首个自动化任务",
+    "emptyForWorkspace": "当前工作空间暂无自动化任务",
+    "emptyCreate": "新建自动化任务",
+    "viewAll": "查看全部 ({{count}})",
+    "openTaskDetail": "打开任务详情",
+    "archivedTask": "已删除任务，仅保留历史执行记录",
+    "deleteHistory": "删除历史记录",
+    "deleteHistoryTitle": "删除自动化历史",
+    "deleteHistoryHint": "将永久删除该任务的全部执行记录和对应对话，无法恢复。",
+    "deleteHistorySuccess": "历史记录已删除",
+    "deleteHistoryFailed": "删除失败，请重试",
+    "expandRuns": "展开执行记录",
+    "collapseRuns": "收起执行记录",
+    "runsLoading": "加载执行记录…",
+    "runsError": "加载失败",
+    "runsRetry": "重试",
+    "runsEmpty": "暂无执行记录",
+    "viewAllRuns": "查看全部 ({{count}})"
+  },
+  "timeline": {
+    "today": "今天",
+    "tomorrow": "明天",
+    "thisWeek": "本周",
+    "later": "更晚",
+    "noSchedule": "未排期",
+    "empty": "暂无计划中的自动化任务"
+  },
+  "kanban": {
+    "empty": "暂无自动化任务",
+    "colEmpty": "空",
+    "colDraft": "草稿",
+    "colActive": "已激活",
+    "colPaused": "已暂停",
+    "colDisabled": "已结束"
+  }
+}

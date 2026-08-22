@@ -1,0 +1,129 @@
+{
+  "dialogLabel": "统一搜索",
+  "inputLabel": "搜索关键词",
+  "placeholder": "搜索消息、资源、Agent、Space、备忘录、IM...",
+  "placeholderScoped": "在「{{name}}」中搜索...",
+  "clearScope": "清除工作空间收窄",
+  "clearAgentScope": "清除 Agent 筛选",
+  "selfLabel": "你",
+  "typeFilterLabel": "类型筛选",
+  "resourceSubtypeLabel": "资源类型",
+  "creatorFilterLabel": "创建者筛选",
+  "resultsLabel": "搜索结果",
+  "retry": "重试",
+  "cancel": "取消",
+  "slowHint": "搜索较慢，请稍等...",
+  "resultsTotal": "共 {{total}} 条结果",
+  "tookMs": "{{ms}}ms",
+  "tabs": {
+    "all": "全部",
+    "messages": "消息",
+    "resources": "资源",
+    "agents": "Agent",
+    "spaces": "工作空间",
+    "memos": "备忘录",
+    "im": "IM"
+  },
+  "resourceSubtype": {
+    "all": "全部类型"
+  },
+  "resultType": {
+    "message": "消息",
+    "resource": "资源",
+    "agent": "Agent",
+    "space": "工作空间",
+    "memo": "备忘录",
+    "im": "IM"
+  },
+  "logicalIndex": {
+    "messages": "消息搜索",
+    "resources": "资源搜索",
+    "agents": "Agent 搜索",
+    "spaces": "工作空间搜索",
+    "memos": "备忘录搜索",
+    "im": "IM 搜索"
+  },
+  "creatorFilter": {
+    "any": "所有",
+    "userOnly": "只看我说的",
+    "agentOnly": "只看 Agent 的",
+    "r2_11Hint": "Agent 筛选仅对消息/Agent 类型精准生效"
+  },
+  "picker": {
+    "agentTitle": "选择 Agent 筛选范围",
+    "typeTitle": "选择类型筛选",
+    "spaceTitle": "选择工作空间范围",
+    "noAgents": "没有匹配的 Agent",
+    "noTypes": "没有匹配的类型",
+    "noSpaces": "没有匹配的工作空间",
+    "resourceSubtypeBadge": "资源子类型"
+  },
+  "navigate": {
+    "imNotFound": "该 IM 会话不在当前列表中（可能正在加载或已被删除）",
+    "spaceNotFound": "该工作空间不在当前列表中（可能正在加载或无访问权限）",
+    "agentNoSpace": "该 Agent 暂无可进入的工作空间",
+    "agentSpaceNotFound": "该 Agent 的主工作空间不在当前列表中"
+  },
+  "notice": {
+    "noAccessibleSpacesTitle": "当前 Organization 内无可访问工作空间",
+    "noAccessibleSpacesHint": "搜索结果为空是因为你在该 Organization 没有任何工作空间的访问权限，并不是真的没有数据。请联系管理员加入相关工作空间，或确认登录身份。"
+  },
+  "degraded": {
+    "engine_disabled": "搜索引擎尚未启用，已切换到基础搜索（仅资源 / 备忘录）",
+    "health_red": "搜索服务暂时不可用，已切换到基础搜索",
+    "circuit_open": "搜索服务熔断保护中，已切换到基础搜索，请稍后重试",
+    "error_rate_breach": "搜索服务错误率较高，已切换到基础搜索",
+    "opensearch_unavailable": "搜索服务降级中，仅支持基础搜索（中文分词较粗糙）",
+    "partial_failure": "部分类型搜索暂时不可用，已展示其他类型结果",
+    "partial_failure_with_indices": "{{indices}}暂时不可用，已展示其他类型结果",
+    "rate_limited": "降级模式下查询过于频繁，请稍候再试",
+    "auth_missing": "登录态异常，请重新登录",
+    "internal_error": "搜索服务内部错误，请稍后重试",
+    "unknown": "搜索服务部分降级"
+  },
+  "group": {
+    "openTabs": "已打开标签",
+    "viewAll": "查看全部 {{count}} 条"
+  },
+  "empty": {
+    "noResults": "未找到关于「{{query}}」的结果",
+    "didYouMean": "你是不是要搜：",
+    "recentSearches": "最近搜过：",
+    "tipsTitle": "搜索技巧：",
+    "tip1": "\"精确短语\"  ·  in:工作空间  ·  #类型"
+  },
+  "initial": {
+    "title": "搜索消息、文档、表格、备忘录、Agent...",
+    "recentOpened": "最近打开",
+    "clearRecentOpened": "清除",
+    "untitled": "（无标题）",
+    "recentSearches": "最近搜过",
+    "clearHistory": "清除",
+    "tipsTitle": "搜索技巧：",
+    "tip1": "@ Agent  ·  # 类型  ·  in:工作空间  ·  \"精确短语\"",
+    "tipCli": "命令模式：tracker new \"名称\" --schedule daily --at 09:00"
+  },
+  "cli": {
+    "execute": "执行(Enter)",
+    "trackerNewWithName": "创建自动化任务:「{{name}}」",
+    "trackerNewNoName": "创建自动化任务(请填名称)",
+    "trackerNewManualDesc": "手动触发",
+    "trackerNewHourlyDesc": "每小时整点运行",
+    "trackerNewTimedDesc": "{{schedule}}, {{at}}",
+    "trackerList": "查看自动化任务列表",
+    "editAfterTip": "执行后会打开表单让你确认",
+    "unknown": "未识别的命令",
+    "schedule": {
+      "manual": "手动",
+      "hourly": "每小时",
+      "daily": "每天",
+      "weekdays": "工作日",
+      "weekly": "每周"
+    }
+  },
+  "shortcut": {
+    "close": "关闭",
+    "clearScope": "清除工作空间收窄",
+    "openSearch": "打开搜索"
+  }
+}

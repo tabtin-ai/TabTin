@@ -1,0 +1,1091 @@
+{
+  "sourceLanguage" : "zh-Hans",
+  "strings" : {
+    "project.segment.aiAvatar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "AI Avatars" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "AI分身" } }
+      }
+    },
+    "project.segment.space" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Workspace" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "工作空间" } }
+      }
+    },
+    "project.segment.project" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Project" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Project" } }
+      }
+    },
+    "project.myAgents.searchPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search AI Avatars" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "搜索 AI分身" } }
+      }
+    },
+    "project.myAgents.emptyTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No AI avatars yet" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "还没有 AI分身" } }
+      }
+    },
+    "project.myAgents.emptyDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create an AI avatar from a template or start from scratch." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "从模板创建一个 AI分身，也可以从空白开始。" } }
+      }
+    },
+    "project.myAgents.loadFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn't load AI avatars" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "AI分身列表加载失败" } }
+      }
+    },
+    "project.myAgents.sourceCustom" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Custom" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自建" } }
+      }
+    },
+    "project.myAgents.sourceTemplate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Template" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "模板" } }
+      }
+    },
+    "project.myAgents.updatedAt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Updated %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "更新于 %@" } }
+      }
+    },
+    "project.myAgents.detailRules" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Persona" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "人设" } }
+      }
+    },
+    "project.myAgents.detailRulesEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No persona rules yet" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "还没有设置人设规则" } }
+      }
+    },
+    "project.myAgents.detailDesktopHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Skill packs and full memory controls are still managed on desktop." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Skill 携带集和完整记忆治理仍需在电脑端管理。" } }
+      }
+    },
+    "project.myAgents.create" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New AI Avatar" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "新建 AI分身" } }
+      }
+    },
+    "project.myAgents.createAction" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "创建" } }
+      }
+    },
+    "project.myAgents.edit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "编辑" } }
+      }
+    },
+    "project.myAgents.name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Name" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "名称" } }
+      }
+    },
+    "project.myAgents.template" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Start from" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "创建方式" } }
+      }
+    },
+    "project.myAgents.blank" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Blank avatar" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "空白分身" } }
+      }
+    },
+    "project.myAgents.blankHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Define the persona yourself after creation" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "创建后自行定义人设与规则" } }
+      }
+    },
+    "project.myAgents.personaRules" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Persona and rules" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "人设与规则" } }
+      }
+    },
+    "project.myAgents.personaPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Describe its role, style, principles, and boundaries" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "描述它的角色、风格、原则与边界" } }
+      }
+    },
+    "project.myAgents.personaScopeHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This applies to the avatar across Workspaces. Workspace-specific rules are configured in Workspace settings." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "这里影响该分身在所有工作空间中的表现；仅当前工作空间生效的规则请到工作空间设置中配置。" } }
+      }
+    },
+    "project.myAgents.deactivate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deactivate avatar" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "停用分身" } }
+      }
+    },
+    "project.myAgents.deactivateTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deactivate this AI avatar?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "停用这个 AI分身？" } }
+      }
+    },
+    "project.myAgents.deactivateBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ will no longer appear in your active AI avatars." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "停用后，“%@”将不再出现在可用 AI分身列表中。" } }
+      }
+    },
+    "project.myAgents.actionFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Action failed" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "操作失败" } }
+      }
+    },
+    "project.myAgents.deactivatedTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deactivated" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已停用" } }
+      }
+    },
+    "project.myAgents.deactivatedStatus" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deactivated" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已停用" } }
+      }
+    },
+    "project.myAgents.deactivatedAt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deactivated %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "停用于 %@" } }
+      }
+    },
+    "project.myAgents.reactivate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reactivate" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "恢复" } }
+      }
+    },
+    "project.myAgents.permanentDelete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete permanently" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "彻底删除" } }
+      }
+    },
+    "project.myAgents.permanentDeleteTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete this AI avatar permanently?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "彻底删除这个 AI分身？" } }
+      }
+    },
+    "project.myAgents.permanentDeleteBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This will permanently delete %@ and cannot be undone." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "“%@”将被彻底删除，且无法撤销。" } }
+      }
+    },
+    "project.myAgents.alreadyReactivating" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This AI avatar is already being reactivated." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "这个 AI分身正在恢复中。" } }
+      }
+    },
+    "project.myAgents.chat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Chat" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Chat 对话" } }
+      }
+    },
+    "project.myAgents.default" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Default" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "默认" } }
+      }
+    },
+    "project.myAgents.correctMemory" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Correct" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "纠正" } }
+      }
+    },
+    "project.myAgents.correctMemoryHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "The original memory will be archived and the corrected text will replace it for future collaboration." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "会归档原记忆，并用新内容作为替代记忆继续参与之后的协作。" } }
+      }
+    },
+    "project.myAgents.correctMemoryTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Correct this memory" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "纠正这条记忆" } }
+      }
+    },
+    "project.myAgents.forgetMemory" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Forget" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "忘记" } }
+      }
+    },
+    "project.myAgents.forgetMemoryBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This memory will no longer be used by this AI avatar." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "忘记后，这条记忆将不再被这个 AI分身使用。" } }
+      }
+    },
+    "project.myAgents.forgetMemoryTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Forget this memory?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "忘记这条记忆？" } }
+      }
+    },
+    "project.myAgents.memory" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Memory" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "记忆" } }
+      }
+    },
+    "project.myAgents.memoryEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No saved memories yet" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "还没有沉淀记忆" } }
+      }
+    },
+    "project.myAgents.memoryHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "What this avatar has retained from your collaboration." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "这个 AI分身在协作中沉淀下来的理解。" } }
+      }
+    },
+    "project.myAgents.memoryOverview" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Overview" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "概览" } }
+      }
+    },
+    "project.myAgents.memoryRecords" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "All records" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "全部记录" } }
+      }
+    },
+    "project.myAgents.memoryOverviewHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This avatar’s overall understanding of you." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "TA 对你的综合理解；你也可以补充提示，让 TA 更懂你。" } }
+      }
+    },
+    "project.myAgents.memoryRecordsHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Review, correct, or forget the specific memories retained by this AI avatar." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "查看、纠正或忘记这个 AI分身沉淀的具体记忆。" } }
+      }
+    },
+    "project.myAgents.memoryHintLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add a hint" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "补充一条提示" } }
+      }
+    },
+    "project.myAgents.memoryHintPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tell this avatar something that helps them understand you better..." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "告诉这个 AI 分身一些能让 TA 更懂你的事…" } }
+      }
+    },
+    "project.myAgents.memoryType.aboutYou" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "About you" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "关于你" } }
+      }
+    },
+    "project.myAgents.memoryType.diary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Diary" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "日记" } }
+      }
+    },
+    "project.myAgents.memoryType.insight" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Insight" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "洞察" } }
+      }
+    },
+    "project.myAgents.memoryType.taskSummary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Collaboration summary" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "协作小结" } }
+      }
+    },
+    "project.myAgents.projectTask" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Project task" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Project 任务" } }
+      }
+    },
+    "project.myAgents.recentTasks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Recent tasks" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "最近任务" } }
+      }
+    },
+    "project.myAgents.recentTasksEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No recent Chat or Project tasks" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "还没有最近的 Chat 或 Project 任务" } }
+      }
+    },
+    "project.myAgents.recentTasksHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Chat conversations and Project tasks this avatar participates in." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "这个 AI分身参与过的 Chat 对话和 Project 任务。" } }
+      }
+    },
+    "project.myAgents.removeSkill" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Remove" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "移除" } }
+      }
+    },
+    "project.myAgents.removeSkillBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Remove “%@” from this AI avatar? Its private configuration will be cleared, but the skill stays in your library." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "要从这个 AI分身的携带集中移除“%@”吗？它的私有配置会一并清除，但技能本身仍留在技能库。" } }
+      }
+    },
+    "project.myAgents.removeSkillTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Remove this skill?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "移除这个技能？" } }
+      }
+    },
+    "project.myAgents.skillLocked" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Required by the default avatar" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "默认分身必备技能" } }
+      }
+    },
+    "project.myAgents.addSkill" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add skill" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加技能" } }
+      }
+    },
+    "project.myAgents.addSkillTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add skill" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加技能" } }
+      }
+    },
+    "project.myAgents.addSkillEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No skills available to add" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "没有可添加的技能" } }
+      }
+    },
+    "project.myAgents.addSkillSearch" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search skills" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "搜索技能" } }
+      }
+    },
+    "project.myAgents.addSkillAction" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加" } }
+      }
+    },
+    "project.myAgents.addSkillActionCount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add %d" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加 %d 个" } }
+      }
+    },
+    "project.myAgents.skillAdded" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Added %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已添加 %@" } }
+      }
+    },
+    "project.myAgents.skillsAddedBatch" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Added %@ and %d skills" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已添加 %@ 等 %d 个技能" } }
+      }
+    },
+    "project.myAgents.skills" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Skill pack" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "技能携带集" } }
+      }
+    },
+    "project.myAgents.skillsEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No skills in this avatar’s pack" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "这个 AI分身还没有携带技能" } }
+      }
+    },
+    "project.myAgents.skillsHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Skills travel with this AI avatar across its work." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "技能会跟着这个 AI分身，在不同的工作现场生效。" } }
+      }
+    },
+    "project.myAgents.tools" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tool pack" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "工具携带集" } }
+      }
+    },
+    "project.myAgents.toolsEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No organization connectors yet. Add them on desktop." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "组织里还没有连接器，请在电脑端添加" } }
+      }
+    },
+    "project.myAgents.toolsNotMounted" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No connectors mounted for this avatar yet. Manage them on desktop." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "尚未为该分身挂载连接器，请在电脑端管理" } }
+      }
+    },
+    "project.myAgents.toolsHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Connectors this AI avatar can carry. Mounting is managed on desktop — mobile cannot change attach state yet." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "这个 AI 分身可携带的连接器。挂载状态在电脑端管理，手机暂不能开关。" } }
+      }
+    },
+    "project.myAgents.toolsManageOnDesktop" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Manage on desktop" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请在电脑端管理" } }
+      }
+    },
+    "project.myAgents.toolsDeviceOffline" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Open TabTin on your computer" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请在电脑打开 TabTin" } }
+      }
+    },
+    "project.myAgents.toolsSourceOrg" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "组织" } }
+      }
+    },
+    "project.myAgents.toolsSourceLocal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Local" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "本机" } }
+      }
+    },
+    "project.searchPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Search Projects" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "搜索 Project" } }
+      }
+    },
+    "project.invitations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Project Invitations" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Project 邀请" } }
+      }
+    },
+    "project.invitation.invitedBy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Invited by %@ · %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 邀请 · %@" } }
+      }
+    },
+    "project.invitation.desktopAccept" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Accept on Desktop" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "前往电脑端接受" } }
+      }
+    },
+    "project.invitation.desktopAcceptTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Accept on Desktop" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请前往电脑端接受" } }
+      }
+    },
+    "project.invitation.desktopAcceptBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Accepting a Project invitation currently requires choosing an execution device and a local folder. Mobile will keep this invitation pending and will not create a local execution environment." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "当前接受 Project 邀请需要选择执行设备和本地目录。手机端不会创建本地执行环境，这条邀请会继续保留为待处理。" } }
+      }
+    },
+    "project.emptyTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No Projects" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂无 Project" } }
+      }
+    },
+    "project.emptyDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Projects you join on desktop will appear here for mobile collaboration." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "在电脑端创建或加入 Project 后，可在手机上查看协作内容。" } }
+      }
+    },
+    "project.fallbackDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "A shared place for team discussions, assets, and Agent outcomes." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "团队围绕同一目标讨论，并沉淀共享资产和 Agent 产物。" } }
+      }
+    },
+    "project.detailNotFound" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Project not found" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Project 不存在" } }
+      }
+    },
+    "project.memberCount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%d members" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%d 位成员" } }
+      }
+    },
+    "project.execution.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Project does not bind a local folder" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Project 不直接绑定本地目录" } }
+      }
+    },
+    "project.execution.unavailable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You can review collaboration here. To run a task, prepare your Workspace, device, and local folder on desktop." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "手机上可以查看协作内容；需要执行任务时，请在电脑端准备自己的工作空间、设备和本地目录。" } }
+      }
+    },
+    "project.execution.ready" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your execution environment is ready on desktop. Mobile remains a collaboration and control surface." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你的执行环境已在电脑端准备好；手机端继续作为协作与指挥入口。" } }
+      }
+    },
+    "project.execution.readyWorkspace" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Desktop execution Workspace: %@. Mobile will not change its device or local folder." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "电脑端执行工作空间：%@。手机端不会改动它的设备或本地目录。" } }
+      }
+    },
+    "project.task.start" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Start a Task" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "发起任务" } }
+      }
+    },
+    "project.task.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Project Task" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "新建 Project 任务" } }
+      }
+    },
+    "project.task.prompt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "What should the Agent do?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "希望 Agent 做什么？" } }
+      }
+    },
+    "project.task.promptPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Describe the goal, expected output, and any constraints" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "描述目标、期望产物和需要遵守的限制" } }
+      }
+    },
+    "project.task.executionSection" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Execution" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "执行位置" } }
+      }
+    },
+    "project.task.executionHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "The task runs in your desktop Workspace. Mobile is the control surface and does not access its local folder." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "任务会在你自己的电脑端工作空间中执行；手机只负责发起和控制，不读取本地目录。" } }
+      }
+    },
+    "project.task.chooseAgent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Choose Agent" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "选择 Agent" } }
+      }
+    },
+    "project.task.noAgent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No available Agent" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂无可用的 Agent" } }
+      }
+    },
+    "project.task.deviceOffline" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Open the linked desktop Workspace before starting this task." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请先打开关联的电脑端工作空间，再发起任务。" } }
+      }
+    },
+    "project.task.noWorkspace" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Prepare an execution Workspace on desktop before starting a task." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请先在电脑端准备执行工作空间，再从手机发起任务。" } }
+      }
+    },
+    "project.task.send" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Start" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "开始" } }
+      }
+    },
+    "project.task.workspace" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Workspace · %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "工作空间 · %@" } }
+      }
+    },
+    "project.tab.discussion" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Discussion" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "讨论" } }
+      }
+    },
+    "project.tab.assets" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Assets" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "资产" } }
+      }
+    },
+    "project.tab.activity" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Activity" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "动态" } }
+      }
+    },
+    "project.tab.members" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Members" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "成员" } }
+      }
+    },
+    "project.discussion.intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Project channels keep team context and Agent updates together. Mobile currently provides a read-only channel overview." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Project 频道集中沉淀团队上下文和 Agent 更新；当前手机端先提供只读频道概览。" } }
+      }
+    },
+    "project.discussion.empty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No discussion channels yet." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "还没有讨论频道。" } }
+      }
+    },
+    "project.discussion.general" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Daily discussion, decisions, and shared context." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "日常讨论、决策和共享上下文。" } }
+      }
+    },
+    "project.discussion.agentUpdates" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Agent task results, failures, and asset links." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Agent 任务结果、失败状态和产物入口。" } }
+      }
+    },
+    "project.discussion.memberCount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%d participants" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%d 人参与" } }
+      }
+    },
+    "project.assets.intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Files uploaded by members and explicit cloud deliverables produced by Agents." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "这里汇总成员上传的文件，以及 Agent 明确归档的云端产物。" } }
+      }
+    },
+    "project.assets.empty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No shared assets yet." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "还没有共享资产。" } }
+      }
+    },
+    "project.activity.intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Member changes, assets, Agent runs, channels, and settings are recorded here." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "成员变化、资产更新、Agent 任务、频道和设置变更都会记录在这里。" } }
+      }
+    },
+    "project.activity.empty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No activity yet." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "还没有 Project 动态。" } }
+      }
+    },
+    "project.members.intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Formal Project participants are listed here. Temporary subagents remain inside individual tasks." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "这里展示 Project 的正式成员和 Agent；临时子 Agent 仍只出现在具体任务内部。" } }
+      }
+    },
+    "project.members.empty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No participants are available." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂时没有可显示的参与者。" } }
+      }
+    },
+    "project.memberKind" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Member" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "成员" } }
+      }
+    },
+    "project.agentKind" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Agent" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Agent" } }
+      }
+    },
+    "project.primaryAgent.badge" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Primary" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "主要负责" } }
+      }
+    },
+    "project.primaryAgent.set" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Set Primary" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "设为主要负责" } }
+      }
+    },
+    "project.readOnlyHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Read-only on mobile for now" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "当前手机端只读" } }
+      }
+    },
+    "project.partialLoadError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Some Project content could not be loaded. Pull to retry." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "部分 Project 内容暂时无法加载，下拉可重试。" } }
+      }
+    },
+    "project.source.space" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Workspace" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "工作空间" } }
+      }
+    },
+    "project.source.project" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Project" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Project" } }
+      }
+    },
+    "project.asset.unnamed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Untitled Asset" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "未命名资产" } }
+      }
+    },
+    "project.activity.unknownActor" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "A member" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "有成员" } }
+      }
+    },
+    "project.activity.unknownTarget" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Untitled" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "未命名" } }
+      }
+    },
+    "project.activity.generic" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Project activity" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "有一条新的 Project 动态" } }
+      }
+    },
+    "project.activity.event.space_created" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ created Project “%@”" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 创建了 Project「%@」" } }
+      }
+    },
+    "project.activity.event.member_joined" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ added %@ to the Project" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 邀请 %@ 加入了 Project" } }
+      }
+    },
+    "project.activity.event.member_left" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ removed %@ from the Project" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 将 %@ 移出了 Project" } }
+      }
+    },
+    "project.activity.event.member_role_changed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ changed the role of %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 调整了 %@ 的角色" } }
+      }
+    },
+    "project.activity.event.asset_created" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ added asset “%@”" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 新增了资产「%@」" } }
+      }
+    },
+    "project.activity.event.asset_archived" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ archived asset “%@”" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 归档了资产「%@」" } }
+      }
+    },
+    "project.activity.event.asset_restored" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ restored asset “%@”" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 恢复了资产「%@」" } }
+      }
+    },
+    "project.activity.event.agent_run_started" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ started Agent task “%@”" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 发起了 Agent 任务「%@」" } }
+      }
+    },
+    "project.activity.event.agent_run_completed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ completed Agent task “%@”" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 的 Agent 任务「%@」已完成" } }
+      }
+    },
+    "project.activity.event.agent_run_failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ failed Agent task “%@”" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 的 Agent 任务「%@」失败了" } }
+      }
+    },
+    "project.activity.event.settings_updated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ updated Project settings for %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 更新了 %@ 的 Project 设置" } }
+      }
+    },
+    "project.activity.event.channel_created" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ created channel “%@”" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 创建了讨论频道「%@」" } }
+      }
+    },
+    "project.activity.event.channel_renamed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ renamed channel “%@”" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 重命名了讨论频道「%@」" } }
+      }
+    },
+    "project.activity.event.channel_archived" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ archived channel “%@”" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 归档了讨论频道「%@」" } }
+      }
+    },
+    "project.header.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "PROJECT" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "项目" } }
+      }
+    },
+    "project.sectionPicker.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sections" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "板块" } }
+      }
+    },
+    "project.task.loadFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn’t load the execution environment. Pull to refresh or retry above, then start a task." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "执行环境加载失败，请下拉刷新或点上方重试后再发起任务。" } }
+      }
+    },
+    "project.invitationLoadError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn’t load invitations. Pull to retry." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "邀请加载失败，下拉可重试。" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

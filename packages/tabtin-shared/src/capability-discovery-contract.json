@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "namespaces": {
+    "leaf": [
+      "runtime_tool",
+      "core_cli",
+      "extension_cli",
+      "mcp_tool"
+    ],
+    "container": [
+      "skill",
+      "subagent",
+      "extension",
+      "mcp_attachment"
+    ]
+  },
+  "discoverySources": [
+    "declared_catalog",
+    "observed_registry",
+    "observed_health",
+    "space_config",
+    "execution_snapshot",
+    "local_discovery"
+  ],
+  "snapshotSources": [
+    "electron",
+    "daemon",
+    "android",
+    "ios",
+    "unknown"
+  ],
+  "mountStates": [
+    "mounted",
+    "unmounted",
+    "partial",
+    "unknown"
+  ],
+  "availabilityStates": [
+    "available",
+    "degraded",
+    "unavailable",
+    "unknown"
+  ],
+  "freshnessStates": [
+    "fresh",
+    "refreshing",
+    "stale",
+    "expired",
+    "unknown"
+  ],
+  "policyStates": [
+    "allowed",
+    "restricted",
+    "blocked",
+    "unknown"
+  ],
+  "reasonCodes": [
+    "ok",
+    "space_unbound",
+    "binding_missing",
+    "binding_switched",
+    "backend_external",
+    "snapshot_missing",
+    "snapshot_stale",
+    "snapshot_expired",
+    "refresh_supported",
+    "refresh_requested",
+    "refresh_inflight",
+    "refresh_timeout",
+    "refresh_forbidden",
+    "refresh_unsupported",
+    "refresh_offline",
+    "refresh_failed",
+    "device_offline",
+    "device_busy",
+    "device_unknown",
+    "device_mismatch",
+    "policy_restricted",
+    "policy_blocked",
+    "mount_missing",
+    "connection_missing",
+    "attachment_missing",
+    "visibility_filtered",
+    "runtime_not_registered",
+    "mcp_not_running",
+    "cli_not_installed",
+    "unsupported_version",
+    "source_partial_error",
+    "legacy_snapshot",
+    "unknown"
+  ]
+}

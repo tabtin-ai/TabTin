@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="workbench_title">工作台</string>
+    <string name="workbench_active_task">执行中</string>
+    <string name="workbench_agent_running">Agent 正在执行任务…</string>
+    <string name="workbench_pinned">置顶</string>
+    <string name="workbench_delegate_to_agent">让 Agent 处理</string>
+    <string name="workbench_unpin">取消置顶</string>
+    <string name="workbench_pin">置顶</string>
+    <string name="workbench_resources">资源</string>
+    <string name="workbench_no_resources">暂无资源</string>
+    <string name="workbench_share_to_chat">分享到对话</string>
+    <string name="workbench_more">更多</string>
+    <string name="workbench_pin_error">置顶失败</string>
+    <string name="workbench_unpin_error">取消置顶失败</string>
+    <string name="workbench_goal">目标</string>
+    <string name="workbench_rules">规则</string>
+    <string name="workbench_quick_actions">快速操作</string>
+    <string name="workbench_app_homes">全部应用</string>
+    <string name="workbench_apps_count">%1$d 个</string>
+    <string name="workbench_request_app_hint">请在对话中让 Agent 使用「%1$s」</string>
+    <string name="workbench_back_to_overview">返回工作台</string>
+    <string name="workbench_memo_home_placeholder">组织级笔记首页即将在这里呈现；当前可先从任务工作台进入与返回。</string>
+    <string name="workbench_files_home_placeholder">组织级云盘首页即将在这里呈现；当前可先从任务工作台进入与返回。</string>
+    <string name="workbench_app_home_empty">这个任务还没有 %1$s 内容</string>
+    <string name="workbench_new_document">新建文档</string>
+
+    <!-- Dashboard（对齐 iOS TaskWorkbenchDashboardView） -->
+    <string name="workbench_continue_work">继续工作</string>
+    <string name="workbench_task_outputs">本任务产出</string>
+    <string name="workbench_task_outputs_count">%1$d 项</string>
+    <string name="workbench_task_outputs_empty_title">这个任务还没有产物</string>
+    <string name="workbench_task_outputs_empty_body">Agent 生成的文档、数据和站点会自动出现在这里。</string>
+    <string name="workbench_start_new">开始新的</string>
+    <string name="workbench_start_new_trailing">通过 Agent 创建</string>
+    <string name="workbench_quick_start_agent">让 Agent 开始</string>
+    <string name="workbench_restore_safety">恢复与安全</string>
+    <string name="workbench_checkpoint_empty_title">还没有检查点</string>
+    <string name="workbench_checkpoint_empty_body">Agent 完成重要步骤后，可在这里回看与恢复。</string>
+    <string name="workbench_output_sync_pending">资源同步后可打开</string>
+    <string name="workbench_task_outputs_show_more">展开其余 %1$d 项</string>
+    <string name="workbench_task_outputs_show_less">收起</string>
+
+    <!-- 文档 / 多维表 App Home（对齐 iOS TaskResourceAppHomeView） -->
+    <string name="workbench_apphome_doc_title">文档</string>
+    <string name="workbench_apphome_table_title">多维表</string>
+    <string name="workbench_apphome_search_doc">搜索标题和正文</string>
+    <string name="workbench_apphome_search_table">搜索表名和字段</string>
+    <string name="workbench_apphome_continue_write">继续写</string>
+    <string name="workbench_apphome_continue_handle">继续处理</string>
+    <string name="workbench_apphome_resume_task">来自当前任务</string>
+    <string name="workbench_apphome_resume_recent">最近打开</string>
+    <string name="workbench_apphome_blank_doc">空白文档</string>
+    <string name="workbench_apphome_blank_table">空白多维表</string>
+    <string name="workbench_apphome_blank_doc_sub">立即开始写</string>
+    <string name="workbench_apphome_blank_table_sub">从空表开始</string>
+    <string name="workbench_apphome_agent_draft">让 Agent 起草</string>
+    <string name="workbench_apphome_agent_build">让 Agent 搭建</string>
+    <string name="workbench_apphome_agent_draft_sub">描述主题生成文档大纲</string>
+    <string name="workbench_apphome_agent_build_sub">描述场景生成结构</string>
+    <string name="workbench_apphome_library_docs">你的文档</string>
+    <string name="workbench_apphome_library_tables">你的多维表</string>
+    <string name="workbench_apphome_scope_recent">最近</string>
+    <string name="workbench_apphome_scope_all">全部</string>
+    <string name="workbench_apphome_scope_shared">分享给我</string>
+    <string name="workbench_apphome_library_empty">还没有最近打开的%1$s</string>
+    <string name="workbench_apphome_library_empty_sub">打开过的内容会出现在这里</string>
+    <string name="workbench_apphome_library_all_empty">这里还没有%1$s</string>
+    <string name="workbench_apphome_library_all_empty_sub">新建后即可在这里快速打开</string>
+    <string name="workbench_apphome_library_shared_empty">还没有分享给你的%1$s</string>
+    <string name="workbench_apphome_library_shared_empty_sub">其他成员分享的内容会出现在这里</string>
+    <string name="workbench_apphome_library_search_empty">没有找到相关%1$s</string>
+    <string name="workbench_apphome_library_search_empty_sub">换个关键词试试</string>
+    <string name="workbench_apphome_preview_empty">打开后可继续查看和编辑</string>
+    <string name="workbench_apphome_doc_type">云文档</string>
+    <string name="workbench_apphome_table_type">多维表格</string>
+    <string name="workbench_apphome_table_rows_empty">暂无记录预览</string>
+    <string name="workbench_apphome_record_count">%1$d 条记录</string>
+    <string name="workbench_apphome_collaboration_loading">读取协作信息</string>
+    <string name="workbench_apphome_collaborator_fallback">协作者</string>
+    <string name="workbench_apphome_collaboration_count">%1$d 位协作者</string>
+    <string name="workbench_apphome_maintained_by">由 %1$s 维护</string>
+    <string name="workbench_apphome_section_task_content">本任务内容</string>
+    <string name="workbench_apphome_task_empty_sub">交给 Agent，它会在当前任务里继续处理。</string>
+    <string name="workbench_apphome_loading">加载中…</string>
+
+    <!-- Cloud Drive App Home -->
+    <string name="cloud_drive_title">云盘</string>
+    <string name="cloud_drive_search_hint">搜索云盘资源</string>
+    <string name="cloud_drive_scope_all">全部</string>
+    <string name="cloud_drive_scope_recent">最近</string>
+    <string name="cloud_drive_scope_shared">分享给我</string>
+    <string name="cloud_drive_type_all">全部类型</string>
+    <string name="cloud_drive_type_doc">文档</string>
+    <string name="cloud_drive_type_table">多维表</string>
+    <string name="cloud_drive_type_file">文件</string>
+    <string name="cloud_drive_root">根目录</string>
+    <string name="cloud_drive_root_hint">当前在根目录</string>
+    <string name="cloud_drive_retry">重试</string>
+    <string name="cloud_drive_empty_all">这里还没有资源。点右上角「+」上传或新建。</string>
+    <string name="cloud_drive_actions_title">新建与上传</string>
+    <string name="cloud_drive_upload_file">上传文件</string>
+    <string name="cloud_drive_new_folder">新建文件夹</string>
+    <string name="cloud_drive_new_doc">新建文档</string>
+    <string name="cloud_drive_new_table">新建多维表</string>
+    <string name="cloud_drive_write_actions_footer">将在当前文件夹创建，不关联任务。</string>
+    <string name="cloud_drive_write_unavailable">当前范围不可写入</string>
+    <string name="cloud_drive_write_unavailable_footer">请切换到「全部」并进入目标文件夹后再新建或上传。</string>
+    <string name="cloud_drive_retry_pending_mount">重试待挂载（%1$d）</string>
+    <string name="cloud_drive_mount_pending_hint">文件已上传，但尚未挂到云盘。可稍后重试，无需重新选择文件。</string>
+    <string name="cloud_drive_folder_name_hint">文件夹名称</string>
+    <string name="cloud_drive_create_failed">创建失败</string>
+    <string name="cloud_drive_upload_failed">上传失败</string>
+    <string name="cloud_drive_upload_progress">正在上传…</string>
+    <string name="cloud_drive_mount_retry_failed">挂载重试失败</string>
+    <string name="cloud_drive_mount_retry_done">已重试挂载</string>
+    <string name="cloud_drive_untitled_doc">未命名文档</string>
+    <string name="cloud_drive_untitled_table">未命名表格</string>
+    <string name="workbench_tabdata_create_failed">创建多维表失败，请重试。</string>
+    <string name="workbench_web_authenticating">正在验证登录状态…</string>
+    <string name="workbench_web_loading">正在打开完整编辑器…</string>
+    <string name="cloud_drive_load_failed">加载失败</string>
+    <string name="cloud_drive_shared_load_failed">分享列表加载失败</string>
+    <string name="cloud_drive_search_failed">搜索失败</string>
+    <string name="cloud_drive_add">新建</string>
+    <string name="cloud_drive_empty_recent">还没有最近打开的资源</string>
+    <string name="cloud_drive_empty_shared">还没有分享给你的资源</string>
+    <string name="cloud_drive_empty_search">没有匹配的搜索结果</string>
+    <string name="cloud_drive_download">下载</string>
+    <string name="cloud_drive_preview_ready">可安全预览，点右上角在系统中打开</string>
+    <string name="cloud_drive_preview_unsafe">此类型仅支持下载或用系统应用打开</string>
+    <string name="cloud_drive_context_item_id">ContextItem ID</string>
+    <string name="cloud_drive_move">移动到文件夹</string>
+    <string name="cloud_drive_move_folder">移动文件夹</string>
+    <string name="cloud_drive_rename_folder">重命名文件夹</string>
+    <string name="cloud_drive_delete_folder">删除文件夹</string>
+    <string name="cloud_drive_delete_folder_confirm_title">确认删除文件夹？</string>
+    <string name="cloud_drive_delete_folder_confirm_body">将永久删除文件夹「%1$s」及其所有子文件夹；其中的文档、多维表和文件会进入回收站，不是简单移回根目录。</string>
+    <string name="cloud_drive_folder_actions_footer">文件夹不能发送到对话。删除会递归处理子文件夹。</string>
+    <string name="cloud_drive_trash">移入回收站</string>
+    <string name="cloud_drive_trash_confirm_title">移入回收站？</string>
+    <string name="cloud_drive_trash_confirm_body">将「%1$s」移入回收站。之后可在组织回收站恢复或永久删除。</string>
+    <string name="cloud_drive_trash_denied">当前无权将该文件移入回收站</string>
+    <string name="cloud_drive_move_owner_only">仅资源所有者可移动到个人文件夹</string>
+    <string name="cloud_drive_send_to_conversation">发送到当前对话</string>
+    <string name="cloud_drive_manage_collaborators">管理协作者</string>
+    <string name="cloud_drive_collaborator_owner">所有者：%1$s</string>
+    <string name="cloud_drive_collaborators_empty">还没有协作者</string>
+    <string name="cloud_drive_revoke_collaborator">移除</string>
+    <string name="cloud_drive_invite_user_hint">搜索组织成员以邀请</string>
+    <string name="cloud_drive_invite_as_viewer_suffix">（以可查看邀请）</string>
+    <string name="cloud_drive_action_failed">操作失败</string>
+
+    <!-- WorkbenchTab labels -->
+    <string name="workbench_tab_recent">最近</string>
+    <string name="workbench_tab_tabdata">多维表</string>
+    <string name="workbench_tab_tabdoc">文档</string>
+    <string name="workbench_tab_tabslide">演示</string>
+    <string name="workbench_tab_tabsite">站点</string>
+    <string name="workbench_tab_tabtracker">Tracker</string>
+
+    <!-- Resource summary labels -->
+    <string name="workbench_summary_tabdata">表</string>
+    <string name="workbench_summary_tabdoc">文档</string>
+    <string name="workbench_summary_tabslide">演示</string>
+    <string name="workbench_summary_tabsite">站点</string>
+    <string name="workbench_summary_tabtracker">任务</string>
+
+    <!-- TabSite preview -->
+    <string name="tabsite_preview_title">站点预览</string>
+    <string name="tabsite_status_draft">草稿</string>
+    <string name="tabsite_status_published">已发布</string>
+    <string name="tabsite_status_archived">已归档</string>
+    <string name="tabsite_copy_link">复制链接</string>
+    <string name="tabsite_link_copied">链接已复制</string>
+    <string name="tabsite_share">分享</string>
+    <string name="tabsite_open_in_browser">在浏览器中打开</string>
+    <string name="tabsite_not_published">站点尚未发布</string>
+    <string name="tabsite_not_published_hint">该站点尚未发布，暂无可预览的内容。请在桌面端完成构建和发布后重试。</string>
+    <string name="tabsite_loading">加载中…</string>
+    <string name="tabsite_load_error">加载失败</string>
+
+    <!-- TabSlide -->
+    <string name="tabslide_present">演示</string>
+</resources>

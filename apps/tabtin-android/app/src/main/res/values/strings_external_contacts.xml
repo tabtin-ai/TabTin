@@ -1,0 +1,34 @@
+<resources>
+    <string name="external_contacts_title">外部联系人</string>
+    <string name="external_contacts_badge">外部</string>
+    <string name="external_contacts_description">添加其他组织的联系人，建立跨组织私信。外部群聊会沿用同一套权限和消息能力。</string>
+    <string name="external_contacts_phone">手机号</string>
+    <string name="external_contacts_add">查找并添加</string>
+    <string name="external_contacts_pending">待处理邀请</string>
+    <string name="external_contacts_empty">还没有外部联系人</string>
+    <string name="external_contacts_remove">移除</string>
+    <string name="external_contacts_accept">接受</string>
+    <string name="external_contacts_reject">拒绝</string>
+    <string name="external_contacts_tab_members">组织成员</string>
+    <string name="external_contacts_tab_incoming">收到的申请</string>
+    <string name="external_contacts_tab_outgoing">发出的申请</string>
+    <string name="external_contacts_tab_blocked">已拉黑</string>
+    <string name="external_contacts_add_contact">添加联系人</string>
+    <string name="external_contacts_message">发消息</string>
+    <string name="external_contacts_block">拉黑</string>
+    <string name="external_contacts_unblock">解除拉黑</string>
+    <string name="external_contacts_blocked_message_hint">该外部联系人已被拉黑，解除拉黑后才能发消息</string>
+    <string name="external_contacts_remove_relationship">解除关系</string>
+    <string name="external_contacts_cancel_request">取消申请</string>
+    <string name="external_contacts_empty_generic">暂无内容</string>
+    <string name="external_contacts_choose_identity">选择身份</string>
+    <string name="external_contacts_note">验证消息（选填）</string>
+    <string name="external_contacts_search">查找</string>
+    <string name="external_contacts_search_hint">通过完整手机号精确查找，对方同意后即可发起私信。</string>
+    <string name="external_contacts_send_request">发送申请</string>
+    <string name="external_contacts_request_sent">申请已发送</string>
+    <string name="external_contacts_already_friend">已是外部联系人</string>
+    <string name="external_contacts_remove_confirm_title">解除外部联系人关系？</string>
+    <string name="external_contacts_remove_confirm_description">私信历史仍会保留，但双方不能再发送新消息或互相邀请；共同群聊不受影响。</string>
+    <string name="external_contacts_more_actions">更多操作</string>
+</resources>

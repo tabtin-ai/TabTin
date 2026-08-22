@@ -1,0 +1,84 @@
+{
+  "status": {
+    "running": "corriendo",
+    "stopped": "Detenido",
+    "streamEnded": "Transmisión finalizada",
+    "failed": "Fallido"
+  },
+  "stop": "Detener monitor",
+  "failReason": {
+    "spawnPtyFailed": "El monitor no pudo iniciarse (ocupado o límite alcanzado). Vuelve a intentarlo más tarde.",
+    "writePtyFailed": "No se pudo ejecutar el comando del monitor. Vuelva a intentarlo.",
+    "invalidRegex": "Patrón de filtro no válido. Comprueba la regla y vuelve a intentarlo.",
+    "alreadyRunning": "Este monitor ya está funcionando.",
+    "unknownAction": "Acción de monitor desconocida."
+  },
+  "emitInterrupted": "Monitoreo de informes interrumpidos (autenticación caducada). Los datos pueden estar incompletos. Verifique el estado de inicio de sesión.",
+  "resourceMonitor": {
+    "severity": {
+      "healthy": "Relajado",
+      "attention": "bueno",
+      "heavy": "pesado"
+    },
+    "tagline": {
+      "healthy": "Todo está en calma: crea con facilidad",
+      "attention": "Funcionando sin problemas: sigue tu inspiración",
+      "heavy": "Te sientes pesado: ¿intentas cerrar las pestañas que no utilizas?"
+    },
+    "current": "Actual",
+    "browser": "Navegador",
+    "browserReclaim": {
+      "checkTitle": "Verifique la acumulación de la vista del navegador",
+      "available": "{{count}} Los navegadores inactivos se pueden recuperar",
+      "noneIdle": "No hay navegador inactivo para recuperar ahora mismo",
+      "noBrowsers": "No se rastrean las vistas del navegador",
+      "reclaimMany": "{{reason}}. Primero recupere {{count}} los navegadores inactivos desconectados y luego verifique si el uso general disminuye.",
+      "reclaimOne": "{{reason}}. Primero cierre el navegador inactivo desconectado {{title}} y luego verifique si el uso general disminuye.",
+      "overview": "{{reason}}. Actualmente hay {{total}} vistas del navegador, {{share}} del total.",
+      "retained": "{{count}} Las vistas del navegador separadas o de vista previa todavía están en uso o cargándose. No serán reclamados para evitar la interrupción del trabajo.",
+      "metricAvailable": "{{count}} recuperable",
+      "metricNoneIdle": "Ninguno inactivo",
+      "metricNoBrowsers": "Ninguno",
+      "action": "Recuperar navegadores inactivos",
+      "actionUnavailable": "No hay artículos recuperables",
+      "actionShort": "Reclamar",
+      "boundaryNote": "Solo recupera navegadores desconectados o inactivos que no están en uso en la ventana principal. Las pestañas habituales de la ventana principal no están cerradas."
+    },
+    "spaceSection": "espacio",
+    "resourcesSection": "Recursos",
+    "systemOverhead": "Gastos generales del sistema",
+    "uiEngine": "motor de interfaz de usuario",
+    "uiEngineDetail": "{{cpu}} · Memoria compartida para el motor de renderizado de páginas",
+    "appHost": "anfitrión de la aplicación",
+    "appHostDetail": "{{cpu}} · Memoria base para la propia aplicación TabTin",
+    "unassigned": "No asignado",
+    "unassignedDetail": "{{cpu}} · Recursos aún no atribuidos a un Espacio",
+    "background": "Antecedentes",
+    "cpu": "CPU",
+    "cpuCores": "{{count}} núcleos",
+    "memory": "Memoria",
+    "ramShare": "{{percent}} de RAM",
+    "tabs": "Pestañas",
+    "currentTabs": "Pestañas actuales",
+    "allSessionTabs": "{{count}} pestañas totales",
+    "closeAllTabs": "Cierra todas las pestañas en cada sesión no archivada",
+    "panes": "Paneles {{count}}",
+    "tabCount": "{{count}} pestañas",
+    "runCount": "{{count}} corre",
+    "appCount": "{{label}} × {{count}}",
+    "appBreakdownSeparator": ",",
+    "notCollected": "No recogido",
+    "refresh": "Actualizar",
+    "refreshLoading": "Cargando",
+    "trend": {
+      "memoryUp": "Memoria arriba {{delta}}",
+      "memoryDown": "Memoria caída {{delta}}",
+      "cpuUp": "CPU arriba {{delta}}",
+      "cpuDown": "CPU caída {{delta}}",
+      "stale": "Datos retrasados {{duration}}"
+    },
+    "viewDetails": "Ver detalles",
+    "indicatorTitle": "Rendimiento",
+    "openSettingsAria": "Abrir la configuración del monitor de rendimiento"
+  }
+}

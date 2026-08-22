@@ -1,0 +1,35 @@
+{
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "colorScheme": {
+    "toggle": "Switch color scheme",
+    "options": {
+      "orange": "Vivid Orange",
+      "teal": "Deep Teal",
+      "crimson": "Crimson",
+      "slate": "Business Gray",
+      "emerald": "Emerald",
+      "blue": "Business Blue",
+      "carbon": "Carbon Black",
+      "rose": "Rose",
+      "violet": "Violet",
+      "sky": "Sky Blue"
+    },
+    "descriptions": {
+      "orange": "Warm and energetic",
+      "teal": "Professional and steady",
+      "crimson": "Bold and responsive",
+      "slate": "Neutral and formal",
+      "emerald": "Fresh and collaborative",
+      "blue": "Classic and enterprise",
+      "carbon": "Minimal and focused",
+      "rose": "Vibrant and creative",
+      "violet": "Quiet and elegant",
+      "sky": "Pure and refreshing"
+    }
+  }
+}

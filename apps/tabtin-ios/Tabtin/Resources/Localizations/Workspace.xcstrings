@@ -1,0 +1,1392 @@
+{
+  "sourceLanguage" : "zh-Hans",
+  "strings" : {
+    "workspace.selectWorkspace" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select Organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "选择组织" } }
+      }
+    },
+    "workspace.noWorkspaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No organizations" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂无组织" } }
+      }
+    },
+    "workspace.create" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "新建组织" } }
+      }
+    },
+    "workspace.createTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create Organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "创建组织" } }
+      }
+    },
+    "workspace.createAction" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "创建" } }
+      }
+    },
+    "workspace.nameLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Name" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "名称" } }
+      }
+    },
+    "workspace.namePlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter organization name" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请输入组织名称" } }
+      }
+    },
+    "workspace.descriptionLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Description" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "描述" } }
+      }
+    },
+    "workspace.descriptionPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Optional description" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "可选描述" } }
+      }
+    },
+    "workspace.switchedTo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Switched to %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已切换到 %@" } }
+      }
+    },
+    "workspace.switchOrganization" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Switch organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "切换组织" } }
+      }
+    },
+    "workspace.members" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lld members" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%lld 位成员" } }
+      }
+    },
+    "workspace.membersLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Members" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "成员" } }
+      }
+    },
+    "workspace.roleLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your Role" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你的角色" } }
+      }
+    },
+    "workspace.default" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Default" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "默认" } }
+      }
+    },
+    "workspace.settingsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Organization Settings" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "组织设置" } }
+      }
+    },
+    "workspace.spacesLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Workspaces & Projects" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Workspace 与 Project" } }
+      }
+    },
+    "workspace.editableBadge" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Can Edit" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "可编辑" } }
+      }
+    },
+    "workspace.headerDescriptionFallback" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add a short description to help teammates understand this organization." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加一句简介，帮助协作者快速理解这个组织。" } }
+      }
+    },
+    "workspace.readOnlyTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Read-only access" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "当前为只读" } }
+      }
+    },
+    "workspace.readOnlyMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You can review members and defaults here, but only editors and above can change organization info." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你可以查看成员和默认配置，但只有编辑者及以上角色可以修改组织信息。" } }
+      }
+    },
+    "workspace.basicInfoTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Basic Info" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "基本信息" } }
+      }
+    },
+    "workspace.basicInfoDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Name, description and icon will be visible to everyone in this organization." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "名称、简介和图标会同步给这个组织中的所有成员。" } }
+      }
+    },
+    "workspace.iconLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Icon" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "图标" } }
+      }
+    },
+    "workspace.collaborationTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "People & Permissions" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "协作与权限" } }
+      }
+    },
+    "workspace.collaborationDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Manage members and quickly confirm your current access level." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "从这里进入成员管理，并快速确认你当前的权限级别。" } }
+      }
+    },
+    "workspace.capabilitiesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Agent Defaults" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Agent 默认配置" } }
+      }
+    },
+    "workspace.capabilitiesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "These defaults come from the server-side organization configuration." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "这些能力项来自服务端下发的组织默认配置。" } }
+      }
+    },
+    "workspace.defaultModelLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Default Model" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "默认模型" } }
+      }
+    },
+    "workspace.toolsLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Built-in Tools" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "内置工具" } }
+      }
+    },
+    "workspace.byokBadge" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "BYOK" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "BYOK" } }
+      }
+    },
+    "workspace.byokScopeOrganization" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Organization BYOK channel — applies only to main chat. Auxiliary scenes (titles, embeddings, vision, ASR, TTS, media) still bill the organization wallet at platform pricing." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "组织 BYOK 渠道：仅在主对话生效。标题生成 / Embedding / 视觉解析 / ASR / TTS / 媒体生成等辅助场景仍走平台计费，从组织钱包扣费。" } }
+      }
+    },
+    "workspace.byokScopeUser" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Personal BYOK channel — applies only to main chat. Auxiliary scenes still bill the organization wallet at platform pricing." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "个人 BYOK 渠道：仅在主对话生效。辅助场景仍走平台计费，从组织钱包扣费。" } }
+      }
+    },
+    "workspace.byokInfoTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "BYOK Channel Scope" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "BYOK 渠道作用范围" } }
+      }
+    },
+    "workspace.toolsEnabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enabled" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已开启" } }
+      }
+    },
+    "workspace.toolsDisabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Disabled" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已关闭" } }
+      }
+    },
+    "workspace.leaveTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Leave Organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "离开组织" } }
+      }
+    },
+    "workspace.leaveDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "After leaving, you will lose access until you are invited again." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "离开后你将失去访问权限，直到再次被邀请。" } }
+      }
+    },
+    "workspace.dangerDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "These actions affect ownership and data permanently. Please proceed carefully." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "以下操作会永久影响所有权或数据，请谨慎执行。" } }
+      }
+    },
+    "workspace.transferOwnershipDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Hand organization ownership to another member before you step back." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "将组织所有权转交给其他成员。" } }
+      }
+    },
+    "workspace.deleteDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete the organization and all associated content permanently." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "永久删除该组织及其关联内容。" } }
+      }
+    },
+    "workspace.defaultWorkspaceLocked" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "The default organization cannot be transferred or deleted." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "默认组织暂不支持转让或删除。" } }
+      }
+    },
+    "workspace.unsavedChanges" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unsaved changes" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "有未保存的更改" } }
+      }
+    },
+    "workspace.savedStateIdle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "All changes saved" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "当前修改已同步" } }
+      }
+    },
+    "workspace.savingAction" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Saving..." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "保存中..." } }
+      }
+    },
+    "workspace.savedMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Saved" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已保存" } }
+      }
+    },
+    "workspace.discardTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Discard changes?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "放弃未保存的更改？" } }
+      }
+    },
+    "workspace.discardMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your edits haven't been saved yet. Leaving now will discard them." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你还没有保存当前修改，离开后这些更改将会丢失。" } }
+      }
+    },
+    "workspace.discardAction" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Discard" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "放弃更改" } }
+      }
+    },
+    "workspace.keepEditing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Keep Editing" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "继续编辑" } }
+      }
+    },
+    "workspace.roleOwner" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Owner" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "所有者" } }
+      }
+    },
+    "workspace.roleAdmin" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Admin" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "管理员" } }
+      }
+    },
+    "workspace.roleEditor" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Editor" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "编辑者" } }
+      }
+    },
+    "workspace.roleViewer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Viewer" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "查看者" } }
+      }
+    },
+    "workspace.roleUnknown" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unknown" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "未知角色" } }
+      }
+    },
+    "workspace.deleteAction" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete Organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "删除组织" } }
+      }
+    },
+    "workspace.deleteConfirmTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete Organization?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "删除组织？" } }
+      }
+    },
+    "workspace.deleteConfirmMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This will permanently delete the organization and all its data. This action cannot be undone." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "此操作将永久删除组织及其所有数据，且无法撤销。" } }
+      }
+    },
+    "workspace.leaveAction" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Leave Organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "离开组织" } }
+      }
+    },
+    "workspace.leaveConfirmTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Leave Organization?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "离开组织？" } }
+      }
+    },
+    "workspace.leaveConfirmMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You will lose access to this organization. You can rejoin if invited again." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你将失去对此组织的访问权限。如再次被邀请可重新加入。" } }
+      }
+    },
+    "workspace.dangerZone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Danger Zone" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "危险操作" } }
+      }
+    },
+    "workspace.addMember" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Member" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加成员" } }
+      }
+    },
+    "workspace.addMemberTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Member" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加成员" } }
+      }
+    },
+    "workspace.userIdPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter user ID" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请输入用户 ID" } }
+      }
+    },
+    "workspace.selectRole" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select Role" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "选择角色" } }
+      }
+    },
+    "workspace.removeMember" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Remove Member" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "移除成员" } }
+      }
+    },
+    "workspace.removeMemberConfirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Are you sure? The member will lose access to this organization." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "确定要移除该成员吗？移除后对方将无法访问此组织。" } }
+      }
+    },
+    "workspace.changeRole" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change Role" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "修改角色" } }
+      }
+    },
+    "workspace.currentUser" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你" } }
+      }
+    },
+    "workspace.userIdLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "User ID" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "用户 ID" } }
+      }
+    },
+    "workspace.transferOwnership" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Transfer Ownership" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "转让所有权" } }
+      }
+    },
+    "workspace.transferAction" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Transfer" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "转让" } }
+      }
+    },
+    "workspace.transferNewOwnerLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New Owner User ID" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "新所有者用户 ID" } }
+      }
+    },
+    "workspace.transferNewOwnerPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter user ID of the new owner" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请输入新所有者的用户 ID" } }
+      }
+    },
+    "workspace.transferWarning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "After transfer, you will become an admin of this organization and lose owner privileges." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "转让后，你将成为此组织的管理员，失去所有者权限。" } }
+      }
+    },
+    "workspace.transferConfirmTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Transfer Ownership?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "转让所有权？" } }
+      }
+    },
+    "workspace.transferConfirmMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This action cannot be undone. The new owner will have full control of this organization." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "此操作不可撤销。新所有者将拥有此组织的完全控制权。" } }
+      }
+    },
+    "workspace.invite" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Invite" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "邀请" } }
+      }
+    },
+    "workspace.inviteByEmail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Email Invite" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "邮件邀请" } }
+      }
+    },
+    "workspace.inviteByLink" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Link Invite" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "链接邀请" } }
+      }
+    },
+    "workspace.inviteEmailPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter email address" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请输入邮箱地址" } }
+      }
+    },
+    "workspace.inviteSend" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Send Invitation" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "发送邀请" } }
+      }
+    },
+    "workspace.inviteGenerateLink" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Generate Link" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "生成链接" } }
+      }
+    },
+    "workspace.inviteCopyLink" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Copy Link" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "复制链接" } }
+      }
+    },
+    "workspace.inviteLinkCopied" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Link copied" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "链接已复制" } }
+      }
+    },
+    "workspace.pendingInvitations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Pending Invitations" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "待处理邀请" } }
+      }
+    },
+    "workspace.cancelInvitation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel Invitation" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "取消邀请" } }
+      }
+    },
+    "workspace.acceptInvitation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Accept Invitation" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "接受邀请" } }
+      }
+    },
+    "workspace.invitationExpired" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This invitation has expired" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "此邀请已过期" } }
+      }
+    },
+    "workspace.invitationInvalid" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This invitation is no longer valid" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "此邀请已失效" } }
+      }
+    },
+    "workspace.joinWorkspace" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Join Organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "加入组织" } }
+      }
+    },
+    "workspace.invitedToWorkspace" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You have been invited to join an organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你被邀请加入一个组织" } }
+      }
+    },
+    "workspace.defaultModelNone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "None" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "未设置" } }
+      }
+    },
+    "workspace.inviteByUserId" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "User ID" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "用户 ID" } }
+      }
+    },
+    "workspace.sendInvitation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Send Invitation" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "发送邀请" } }
+      }
+    },
+    "workspace.userIdHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "They can copy their User ID from Settings → Profile" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "对方可在「设置 → 个人资料」中复制自己的用户 ID" } }
+      }
+    },
+    "workspace.pendingLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Pending" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "待处理" } }
+      }
+    },
+    "workspace.invitationAccepted" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Joined organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已加入组织" } }
+      }
+    },
+    "workspace.rejectInvitation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Decline" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "拒绝邀请" } }
+      }
+    },
+    "workspace.invitedByUser" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ invited you" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ 邀请你加入" } }
+      }
+    },
+    "workspace.personalIdentity" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Personal" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "个人身份" } }
+      }
+    },
+    "workspace.teamSection" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Organizations" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "组织" } }
+      }
+    },
+    "workspace.walletTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Wallet" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "钱包" } }
+      }
+    },
+    "workspace.walletBalance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Balance" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "余额" } }
+      }
+    },
+    "workspace.walletAvailable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Available" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "可用" } }
+      }
+    },
+    "workspace.walletFrozen" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reserved" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "预留" } }
+      }
+    },
+    "workspace.walletFrozenInfoTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reserved Credits" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "预留 credits" } }
+      }
+    },
+    "workspace.walletFrozenInfoBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reserved credits are held for ongoing AI conversations. They will be automatically released or settled when the conversation ends. Available = Total - Reserved." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "预留 credits 是正在进行的 AI 对话预留的费用。对话结束后会自动释放或结算。可用余额 = 总余额 - 预留。" } }
+      }
+    },
+    "workspace.walletRechargeHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Please recharge on the desktop app" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请在桌面端充值" } }
+      }
+    },
+    "workspace.walletEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No transactions yet" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂无交易记录" } }
+      }
+    },
+    "workspace.walletAll" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "All" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "全部" } }
+      }
+    },
+    "workspace.walletConsumption" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Usage" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "消费" } }
+      }
+    },
+    "workspace.walletRecharge" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Top-up" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "充值" } }
+      }
+    },
+    "workspace.walletOther" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Other" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "其他" } }
+      }
+    },
+    "workspace.walletLoadMoreRetry" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn’t load more. Tap to retry." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "加载失败，点击重试" } }
+      }
+    },
+    "workspace.modelsAdminOnlyHint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Only admins can change the default model." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "仅管理员可更改默认模型" } }
+      }
+    },
+    "workspace.usageTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Usage" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "用量" } }
+      }
+    },
+    "workspace.usageCurrentMonth" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This month" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "本月消费" } }
+      }
+    },
+    "workspace.usageCredits" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ credits" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@点券" } }
+      }
+    },
+    "workspace.usageLastMonth" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Last month" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "上月消费" } }
+      }
+    },
+    "workspace.usageMonthOverMonth" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "MoM" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "环比" } }
+      }
+    },
+    "workspace.usageMeterDistribution" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "By meter" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "消费分布" } }
+      }
+    },
+    "workspace.usageModelTop" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Top models" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "模型消费" } }
+      }
+    },
+    "workspace.usageModelEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No model usage" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂无模型用量" } }
+      }
+    },
+    "workspace.usageCallCount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lld calls" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%lld 次调用" } }
+      }
+    },
+    "workspace.dataRecoveryTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Data & Recovery" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "数据与回收" } }
+      }
+    },
+    "workspace.dataRecoveryDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Manage deleted organization documents, tables, and other resources." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "集中管理组织内已删除的文档、表格等资源。" } }
+      }
+    },
+    "workspace.usageEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No usage data" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂无用量数据" } }
+      }
+    },
+    "workspace.modelsTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Models" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "模型管理" } }
+      }
+    },
+    "workspace.modelsLoading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Loading models…" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "加载模型列表..." } }
+      }
+    },
+    "workspace.modelsEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No models available" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂无可用模型" } }
+      }
+    },
+    "workspace.modelsDefault" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Default model" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "默认模型" } }
+      }
+    },
+    "workspace.modelsSetDefault" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Set default model" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "设为默认" } }
+      }
+    },
+    "workspace.financeTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Billing" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "财务信息" } }
+      }
+    },
+    "billing.balanceLow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Low Balance Warning" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "余额不足提醒" } }
+      }
+    },
+    "billing.balanceLowDetail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Balance: %1$@ credits, below threshold %2$@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "当前余额 %1$@ credits，低于阈值 %2$@" } }
+      }
+    },
+    "billing.blockedDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Service suspended, please top up to continue" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "服务已暂停，请充值后继续使用" } }
+      }
+    },
+    "billing.unblocked" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Service restored" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "服务已恢复" } }
+      }
+    },
+    "billing.quotaExhausted" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Monthly quota exhausted" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "本月配额已用完" } }
+      }
+    },
+    "billing.creditsRecharged" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Credits recharged" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "充值成功" } }
+      }
+    },
+    "billing.membershipActivated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Membership activated" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "会员已激活" } }
+      }
+    },
+    "billing.budgetWarning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Budget usage warning" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "预算使用警告" } }
+      }
+    },
+    "billing.budgetCritical" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Budget nearly exhausted" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "预算即将耗尽" } }
+      }
+    },
+    "billing.budgetResolved" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Budget back to normal" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "预算已恢复正常" } }
+      }
+    },
+    "billing.budgetUsagePctLimit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%1$d%% used, budget limit %2$@ credits" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已使用 %1$d%%，预算上限 %2$@ credits" } }
+      }
+    },
+    "billing.budgetUsagePct" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%1$d%% used" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已使用 %1$d%%" } }
+      }
+    },
+    "billing.membershipExpiring" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Membership expiring soon" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "会员即将到期" } }
+      }
+    },
+    "billing.membershipExpiringDays" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Membership expires in %d days" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "会员将在 %d 天后到期" } }
+      }
+    },
+    "billing.membershipExpired" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Membership expired" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "会员已到期" } }
+      }
+    },
+    "billing.autoRenewFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Auto-renewal failed" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自动续费失败" } }
+      }
+    },
+    "billing.autoRenewFailedBalance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Auto-renewal failed: insufficient balance" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自动续费失败：余额不足" } }
+      }
+    },
+    "billing.membershipDowngraded" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Membership downgraded, %d items over limit" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "会员已降级，%d 项超出限额" } }
+      }
+    },
+    "billing.invoiceRefunded" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Refund completed" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "退款成功" } }
+      }
+    },
+    "billing.renewalCancelled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Auto-renewal cancelled" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已取消自动续费" } }
+      }
+    },
+    "billing.degradationAlert" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Service degradation: %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "服务降级：%@" } }
+      }
+    },
+    "billing.memberBudgetWarning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Usage limit warning" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "额度使用提醒" } }
+      }
+    },
+    "billing.memberBudgetWarningDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You have used %d%% of your monthly limit" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "您的月度额度已使用 %d%%" } }
+      }
+    },
+    "billing.memberBudgetDailyWarningDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You have used %d%% of your daily limit" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "您的日度额度已使用 %d%%" } }
+      }
+    },
+    "billing.memberBudgetExhausted" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Usage limit reached" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "额度已用完" } }
+      }
+    },
+    "billing.memberBudgetExhaustedDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Monthly usage limit reached. Contact your admin to increase the limit." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "月度额度已用完，请联系管理员提升额度。" } }
+      }
+    },
+    "billing.memberBudgetDailyExhaustedDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Daily usage limit reached. Try again tomorrow or contact your admin." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "今日额度已用完，请明日重试或联系管理员。" } }
+      }
+    },
+    "billing.memberBudgetResolved" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Usage limit restored" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "额度已恢复" } }
+      }
+    },
+    "workspace.team" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "组织" } }
+      }
+    },
+    "workspace.teamInfo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Organization Info" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "组织信息" } }
+      }
+    },
+    "workspace.teamName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Organization name" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "组织名称" } }
+      }
+    },
+    "workspace.teamDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Organization description" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "组织描述" } }
+      }
+    },
+    "workspace.teamIconPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Icon, e.g. ✨" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "图标，例如 ✨" } }
+      }
+    },
+    "workspace.createTeam" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create Organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "创建组织" } }
+      }
+    },
+    "workspace.teamInvitation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Organization Invitation" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "组织邀请" } }
+      }
+    },
+    "workspace.invitedAs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You are invited to join as %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "邀请你以 %@ 身份加入" } }
+      }
+    },
+    "workspace.invitedByAs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ · %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ · %@" } }
+      }
+    },
+    "workspace.invitationManagement" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Invitation Management" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "邀请管理" } }
+      }
+    },
+    "workspace.inviteMembers" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Invite Members" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "邀请成员" } }
+      }
+    },
+    "workspace.email" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Email" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "邮箱" } }
+      }
+    },
+    "workspace.role" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Role" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "角色" } }
+      }
+    },
+    "workspace.sendEmailInvitation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Send email invitation" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "发送邮件邀请" } }
+      }
+    },
+    "workspace.pendingInvitations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Pending Invitations" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "待处理邀请" } }
+      }
+    },
+    "workspace.noPendingInvitations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No pending invitations" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "没有待处理邀请" } }
+      }
+    },
+    "workspace.teamSettings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Organization Settings" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "组织设置" } }
+      }
+    },
+    "workspace.defaultTeam" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Default Organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "默认组织" } }
+      }
+    },
+    "workspace.cannotDelete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cannot delete" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "不可删除" } }
+      }
+    },
+    "workspace.deleteTeam" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete Organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "删除组织" } }
+      }
+    },
+    "workspace.deleteTeamDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Resources in this organization will become unavailable after deletion" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "删除后组织内资源将不可用" } }
+      }
+    },
+    "workspace.leaveTeam" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Leave Organization" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "离开组织" } }
+      }
+    },
+    "workspace.leaveTeamDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You will need a new invitation to join again" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "离开后需要重新邀请才能加入" } }
+      }
+    },
+    "workspace.deleteTeamConfirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete organization?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "删除组织？" } }
+      }
+    },
+    "workspace.leaveTeamConfirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Leave organization?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "离开组织？" } }
+      }
+    },
+    "workspace.selectSpace" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select Workspace" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "选择工作空间" } }
+      }
+    },
+    "workspace.loadingSpace" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Loading Workspaces..." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "加载工作空间…" } }
+      }
+    },
+    "workspace.noSpaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No Workspaces" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂无工作空间" } }
+      }
+    },
+    "workspace.noSpacesDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "There are no Workspaces in the current organization." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "当前组织下还没有工作空间。" } }
+      }
+    },
+    "workspace.refresh" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Refresh" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "刷新" } }
+      }
+    },
+    "workspace.role.owner" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Owner" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "所有者" } }
+      }
+    },
+    "workspace.role.admin" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Admin" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "管理员" } }
+      }
+    },
+    "workspace.role.editor" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Editor" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "编辑者" } }
+      }
+    },
+    "workspace.role.viewer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Viewer" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "查看者" } }
+      }
+    },
+    "workspace.role.unknown" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unknown" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "未知" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

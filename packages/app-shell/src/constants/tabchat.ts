@@ -1,0 +1,2 @@
+export const CONVERSATION_TYPE_DM = 1
+export const CONVERSATION_TYPE_GROUP = 2

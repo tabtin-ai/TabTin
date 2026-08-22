@@ -1,0 +1,32 @@
+{
+  "name": "table-html-merged",
+  "description": "HTML table with colspan/rowspan (D1 decision)",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "table",
+        "content": [
+          {
+            "type": "tableRow",
+            "content": [
+              {
+                "type": "tableHeader",
+                "attrs": { "colspan": 2 },
+                "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Merged Header" }] }]
+              }
+            ]
+          },
+          {
+            "type": "tableRow",
+            "content": [
+              { "type": "tableCell", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "A" }] }] },
+              { "type": "tableCell", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "B" }] }] }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expectedMarkdown": "<table>\n<tr>\n<th colspan=\"2\">Merged Header</th>\n</tr>\n<tr>\n<td>A</td>\n<td>B</td>\n</tr>\n</table>"
+}

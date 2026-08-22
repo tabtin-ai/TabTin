@@ -1,0 +1,29 @@
+{
+  "apiErrors": {
+    "fetchListFailed": "Datensätze konnten nicht abgerufen werden",
+    "fetchDetailFailed": "Datensatzdetails konnten nicht abgerufen werden",
+    "createFailed": "Datensatz konnte nicht erstellt werden",
+    "updateFailed": "Datensatz konnte nicht aktualisiert werden",
+    "deleteFailed": "Datensatz konnte nicht gelöscht werden",
+    "bulkCreateFailed": "Die Massenerstellung von Datensätzen ist fehlgeschlagen",
+    "bulkUpdateFailed": "Die Massenaktualisierung der Datensätze ist fehlgeschlagen",
+    "bulkDeleteFailed": "Das Massenlöschen von Datensätzen ist fehlgeschlagen"
+  },
+  "logs": {
+    "fetchDetailSuccess": "Datensatzdetails abgerufen",
+    "createSuccess": "Datensatz erstellt",
+    "bulkUpdateMissingRecord": "Der Zieldatensatz fehlt im Ergebnis der Massenaktualisierung",
+    "deleteSuccess": "Datensatz gelöscht",
+    "bulkProgress": "Fortschritt des Massenvorgangs",
+    "bulkCreateSuccess": "Massenerstellung abgeschlossen",
+    "bulkCreatePartialFailed": "Die Massenerstellung ist teilweise fehlgeschlagen",
+    "bulkUpdateSuccess": "Massenaktualisierung abgeschlossen",
+    "bulkUpdatePartialFailed": "Massenaktualisierung ist teilweise fehlgeschlagen",
+    "syncViewRecordsSuccess": "Synchronisierte Datensätze anzeigen",
+    "syncViewRecordsFailed": "Ansichtsdatensätze konnten nicht synchronisiert werden",
+    "bulkDeleteSuccess": "Massenlöschung abgeschlossen",
+    "bulkDeletePartialFailed": "Das Massenlöschen ist teilweise fehlgeschlagen",
+    "mergeIncremental": "Zusammengeführte {{count}} inkrementelle Datensätze, neue Version: {{version}}",
+    "removeByIds": "Datensätze entfernt"
+  }
+}

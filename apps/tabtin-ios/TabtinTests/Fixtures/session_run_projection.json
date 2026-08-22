@@ -1,0 +1,47 @@
+{
+  "session": {
+    "id": "session-4679",
+    "organization_id": "org-4679",
+    "has_active_task": false,
+    "has_unread_reply": false,
+    "last_run_failed": false,
+    "run_state": {
+      "run_id": "run-1",
+      "sequence": 7,
+      "revision": 3,
+      "status": "waiting_user",
+      "queue_depth": 0,
+      "started_at": "2026-07-28T10:00:00Z",
+      "state_changed_at": "2026-07-28T10:00:03Z",
+      "ended_at": null,
+      "stop_reason": null,
+      "error_class": null,
+      "waiting_interaction_id": "interaction-1"
+    }
+  },
+  "realtime_event": {
+    "v": 1,
+    "type": "chat.session.run_state.updated",
+    "request_id": "request-4679",
+    "ts": 1785232804,
+    "device_id": "server",
+    "role": "server",
+    "payload": {
+      "session_id": "session-4679",
+      "organization_id": "org-4679",
+      "run_state": {
+        "run_id": "run-1",
+        "sequence": 7,
+        "revision": 4,
+        "status": "completed",
+        "queue_depth": 0,
+        "started_at": "2026-07-28T10:00:00Z",
+        "state_changed_at": "2026-07-28T10:00:04Z",
+        "ended_at": "2026-07-28T10:00:04Z",
+        "stop_reason": "end_turn",
+        "error_class": null,
+        "waiting_interaction_id": null
+      }
+    }
+  }
+}

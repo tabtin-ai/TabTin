@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 块级公式：WebView 真渲染，失败时退回可读 LaTeX 源码 -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/tt_spacing_lg"
+    android:paddingVertical="@dimen/tt_spacing_sm">
+
+    <TextView
+        android:id="@+id/fallback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/doc_editor_text_secondary"
+        android:textSize="@dimen/tt_font_body" />
+
+    <FrameLayout
+        android:id="@+id/web_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+</FrameLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!--
+        Debug 环境二维码会携带开发机当前的局域网地址，IP 无法预先枚举。
+        仅在 debug source set 放开明文 HTTP；release 继续使用 main 中的严格配置。
+    -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

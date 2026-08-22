@@ -1,0 +1,520 @@
+{
+  "addressBar": {
+    "secureTitle": "보안 연결",
+    "insecureTitle": "안전하지 않은 연결",
+    "placeholder": "URL을 입력하세요...",
+    "copy": "URL 복사",
+    "copied": "복사됨"
+  },
+  "toolbarDescriptions": {
+    "annotationLabel": "페이지에 주석 달기",
+    "annotation": "페이지 콘텐츠를 선택하고 대화에 추가하세요.",
+    "cancelAnnotationLabel": "주석 취소",
+    "cancelAnnotation": "페이지 주석 모드 종료",
+    "screenshotLabel": "대화 스크린샷",
+    "screenshot": "보이는 페이지를 캡처하여 대화에 추가하세요",
+    "bookmarkLabel": "이 페이지를 북마크에 추가하세요",
+    "bookmark": "나중에 브라우저 북마크에서 엽니다.",
+    "removeBookmarkLabel": "북마크 삭제",
+    "removeBookmark": "브라우저 북마크에서 이 페이지를 삭제하세요."
+  },
+  "toast": {
+    "partitionRebuiltTitle": "새로운 로그인 환경으로 전환되었습니다",
+    "partitionRebuiltDesc": "이 탭의 브라우저 ID는 작업공간 바인딩과 일치하도록 업데이트되었습니다. 양식을 작성 중이었다면 다시 입력해야 합니다."
+  },
+  "embedded": {
+    "loading": "로드 중...",
+    "agentLockOverlay": "상담원이 이 브라우저를 사용하고 있습니다.",
+    "logs": {
+      "setViewBoundsUnavailable": "setViewBounds를 사용할 수 없습니다.",
+      "setViewBoundsFailed": "경계를 업데이트하지 못했습니다."
+    },
+    "errors": {
+      "missingProfile": "작업 공간 보기에서 프로필/파티션이 누락되었습니다.",
+      "showUnavailable": "호스트.뷰.쇼를 사용할 수 없습니다.",
+      "showFailed": "표시 실패",
+      "showPrecheckFailed": "사전 확인 표시 실패",
+      "pageLoadFailed": "페이지 로드 실패",
+      "refreshFailed": "새로고침 실패",
+      "navigationFailed": "탐색 실패",
+      "navigationDeferredByAgent": "이 페이지는 에이전트 작업에서 사용 중입니다. 탐색을 건너뛰었습니다.",
+      "goBackFailed": "돌아가기 실패",
+      "goForwardFailed": "앞으로 이동 실패",
+      "reloadFailed": "새로고침 실패",
+      "stopFailed": "로드 중지 실패",
+      "actionUnavailable": "{{action}} 사용할 수 없음",
+      "partitionRebuildFailed": "로그인 환경 전환 실패: {{detail}}. 이 탭을 닫았다가 다시 열어주세요."
+    }
+  },
+  "urlInput": {
+    "title": "새로운 웹 크롤링",
+    "description": "크롤링할 웹페이지 URL을 입력하세요.",
+    "urlLabel": "URL *",
+    "urlPlaceholder": "https://example.com",
+    "nameLabel": "라벨 이름(선택사항)",
+    "namePlaceholder": "자동 생성",
+    "cancel": "취소",
+    "create": "만들기",
+    "errors": {
+      "required": "URL을 입력하세요",
+      "invalid": "유효한 URL(예: example.com 또는 https://example.com)을 입력하세요."
+    },
+    "defaultName": "페이지 {{time}}"
+  },
+  "diagnosis": {
+    "errors": {
+      "requestFailed": "진단 요청 실패",
+      "failed": "진단 실패",
+      "invalidResult": "잘못된 진단 결과 형식",
+      "feedbackFailed": "피드백 제출 실패",
+      "missingActiveView": "활성 보기를 찾을 수 없습니다.",
+      "missingViewOptions": "viewOptions가 없습니다. 페이지 콘텐츠를 가져올 수 없습니다.",
+      "getProcessedContentUnavailable": "getProcessedContent를 사용할 수 없습니다.",
+      "noFeedbackRecord": "피드백을 제출할 진단 기록이 없습니다.",
+      "noAvailableModel": "사용 가능한 모델이 없습니다. 먼저 모델 목록을 로드해 주세요.",
+      "noWorkspaceSelected": "선택된 작업공간이 없습니다. 스트리밍 진단을 시작할 수 없습니다.",
+      "streamDiagnosisFailed": "스트리밍 진단 실패"
+    }
+  },
+  "resource": {
+    "errors": {
+      "downloadFailed": "다운로드 실패",
+      "fileSizeZero": "다운로드한 파일 크기는 0입니다.",
+      "timeout": "다운로드 시간 초과({{ms}}ms)"
+    }
+  },
+  "resourceCenter": {
+    "title": "리소스 센터",
+    "count": "{{count}} 리소스",
+    "count_one": "{{count}} 리소스",
+    "searchPlaceholder": "검색 URL/resourceId/MIME",
+    "searchInputLabel": "리소스 검색",
+    "empty": "이 페이지에는 사용 가능한 리소스가 없습니다.",
+    "previewUnavailable": "미리보기를 사용할 수 없습니다.",
+    "sourceUrlTitle": "소스 URL",
+    "selectHint": "세부정보를 보려면 리소스를 선택하세요.",
+    "segmentBadge": "세그먼트",
+    "values": {
+      "unknown": "알 수 없음",
+      "unknownMime": "알 수 없는 MIME",
+      "unknownSize": "알 수 없음",
+      "none": "없음",
+      "fallbackNameSuffix": "자원"
+    },
+    "actions": {
+      "toggleDeveloperMode": "개발자 모드(기술 세부정보 표시)",
+      "developerMode": "개발자",
+      "refresh": "리소스 새로 고침",
+      "close": "리소스 센터 닫기",
+      "downloadStream": "스트림 다운로드",
+      "downloadResource": "리소스 다운로드",
+      "captureContent": "콘텐츠 캡처",
+      "parseStream": "구문 분석 스트림",
+      "copyLink": "링크 복사",
+      "copyCliCommand": "CLI 명령 복사",
+      "copyAgentPrompt": "상담원 프롬프트 복사",
+      "downloadCompleteVideo": "전체 비디오 다운로드"
+    },
+    "aria": {
+      "filterAll": "모든 리소스 표시",
+      "filterCategory": "카테고리별로 필터링: {{category}}",
+      "selectResource": "리소스 보기: {{name}}"
+    },
+    "errors": {
+      "loadFailed": "리소스를 로드하지 못했습니다.",
+      "downloadFailed": "다운로드 실패",
+      "captureFailed": "캡처 실패",
+      "parseStreamFailed": "스트림 구문 분석에 실패했습니다.",
+      "streamDownloadFailed": "스트림 다운로드 실패"
+    },
+    "toasts": {
+      "copyFailedTitle": "복사 실패",
+      "resourceDownloadedTitle": "다운로드된 리소스",
+      "capturedTitle": "캡처된 리소스 콘텐츠",
+      "captureCachedTitle": "이미 캐시된 리소스 콘텐츠",
+      "streamParsedTitle": "구문 분석된 스트림",
+      "streamParsedVariants": "{{count}} 변종 발견",
+      "streamParsedVariants_one": "{{count}} 변종 발견",
+      "streamParsedUpdated": "스트림 메타데이터가 업데이트되었습니다.",
+      "streamDownloadedTitle": "스트림이 다운로드됨",
+      "cliCopiedTitle": "CLI 명령이 복사되었습니다.",
+      "agentPromptCopiedTitle": "상담사 메시지가 복사되었습니다.",
+      "linkCopiedTitle": "리소스 링크가 복사되었습니다.",
+      "actionFailedTitle": "작업 실패"
+    },
+    "categories": {
+      "all": "모두",
+      "image": "이미지",
+      "video": "비디오",
+      "audio": "오디오",
+      "hls": "HLS",
+      "dash": "대시",
+      "document": "문서",
+      "font": "글꼴"
+    },
+    "captureStatus": {
+      "metadata_only": "메타데이터만",
+      "content_cached": "캐시된 콘텐츠",
+      "page_bound_blob": "페이지 바인딩된 Blob",
+      "stream_manifest": "스트림 매니페스트",
+      "downloaded": "다운로드됨",
+      "unsupported": "지원되지 않음",
+      "failed": "실패"
+    },
+    "capabilities": {
+      "preview": "미리보기",
+      "download": "다운로드",
+      "import": "가져오기",
+      "sendToAgent": "상담원에게 보내기",
+      "parse": "구문 분석",
+      "streamDownload": "스트림 다운로드"
+    },
+    "sources": {
+      "network": "네트워크",
+      "dom_probe": "DOM 프로브",
+      "cdp_capture": "CDP 캡처",
+      "task_capture": "작업 캡처",
+      "manual_capture": "수동 캡처"
+    },
+    "developer": {
+      "title": "개발자 세부정보",
+      "idLabel": "아이디",
+      "mimeTypeLabel": "마임",
+      "statusLabel": "상태",
+      "capabilitiesLabel": "기능",
+      "sourceLabel": "소스"
+    },
+    "qualityLabel": "품질",
+    "qualityBest": "최고 품질",
+    "qualityWorst": "최저 품질",
+    "hints": {
+      "pageBoundBlob": "이 리소스는 페이지 내 MediaSource/blob 컨텍스트에서 제공되며 안정적으로 다운로드되기 전에 페이지 내에서 캡처되어야 합니다.",
+      "dashPhaseOne": "DASH 리소스는 품질 선택 및 전체 비디오 다운로드를 지원합니다. 별도의 오디오 트랙은 ffmpeg를 통해 자동으로 병합됩니다.",
+      "blobResource": "이것은 페이지에 바인딩된 플레이어 리소스입니다. '콘텐츠 캡처'를 클릭하여 데이터를 가져온 다음 다운로드하세요.",
+      "encrypted": "이 리소스는 DRM으로 보호될 수 있습니다. 다운로드한 파일이 제대로 재생되지 않을 수 있습니다."
+    },
+    "streamInfo": {
+      "title": "스트림 정보",
+      "live": "실시간 스트림",
+      "vod": "주문형 스트림",
+      "segmentCount": "{{count}} 세그먼트",
+      "segmentCount_one": "{{count}} 세그먼트"
+    }
+  },
+  "clients": {
+    "apiUnavailable": "{{api}} API를 사용할 수 없습니다.",
+    "toolUnavailableTitle": "도구를 사용할 수 없음",
+    "toolUnavailableDescription": "작업 {{action}}이 등록되지 않았습니다."
+  },
+  "task": {
+    "errors": {
+      "schemaMissingListSelector": "스키마에 필수 listSelector가 없습니다.",
+      "schemaMissingFields": "스키마에 유효한 필드 구성이 없습니다.",
+      "unknown": "알 수 없는 오류",
+      "executionFailed": "작업 실행 실패"
+    },
+    "logs": {
+      "apiUnavailable": "태스크 API를 사용할 수 없습니다.",
+      "schemaMissingListSelector": "잘못된 스키마: listSelector가 누락되었습니다.",
+      "schemaMissingFields": "PresetSchema에 유효한 필드가 없습니다.",
+      "createTaskFailed": "작업을 생성하지 못했습니다.",
+      "updateMetadataFailed": "작업 메타데이터를 업데이트하지 못했습니다.",
+      "enqueueFailed": "작업을 대기열에 넣지 못했습니다.",
+      "createTaskException": "태스크 생성 예외",
+      "cancelTaskFailed": "작업을 취소하지 못했습니다.",
+      "resumeUnsupported": "Task API는 이력서를 지원하지 않습니다.",
+      "resumeFailed": "작업을 재개하지 못했습니다.",
+      "resumeException": "재개 작업 예외",
+      "resumeWithPaginationUnsupported": "작업 API는resumeWithPagination을 지원하지 않습니다.",
+      "startPaginationFailed": "페이지 매김을 시작하지 못했습니다.",
+      "paginationException": "페이지 매김 작업 예외",
+      "selectRecommendationUnsupported": "태스크 API는 selectRecommendation을 지원하지 않습니다.",
+      "selectRecommendationFailed": "추천 선택을 제출하지 못했습니다.",
+      "selectRecommendationException": "추천 선정 예외",
+      "apiUnavailableEffect": "useEffect: taskAPI를 사용할 수 없습니다.",
+      "exportTraceUnavailable": "추적을 내보낼 수 없습니다. 작업이 초기화되지 않았거나 작업 API를 사용할 수 없습니다.",
+      "exportTraceGetUnsupported": "태스크 API는 가져오기를 지원하지 않습니다. 추적을 내보낼 수 없습니다.",
+      "exportTraceMissingTask": "작업 데이터가 없습니다. 추적을 내보낼 수 없습니다.",
+      "clipboardCopyFailed": "클립보드에 복사하지 못했습니다.",
+      "exportTraceException": "추적 예외 내보내기"
+    }
+  },
+  "tabs": {
+    "defaultName": "크롤링 {{count}}",
+    "workspaceDefaultName": "브라우저 공간"
+  },
+  "tabStore": {
+    "errors": {
+      "workspaceViewInTabs": "[CrawlTabStore] 작업공간 보기를 탭에 쓸 수 없습니다.[]",
+      "createTabWorkspaceNotAllowed": "[CrawlTabStore] createTab이 작업공간을 생성할 수 없습니다. createWorkspace 사용",
+      "createWorkspaceExternalIdNotAllowed": "[CrawlTabStore] createWorkspace는 외부 크롤링 공간 ID를 허용할 수 없습니다.",
+      "createWorkspaceMissingProfile": "[CrawlTabStore] createWorkspace 프로필이 누락되었습니다.",
+      "createWorkspaceMissingSpaceOrPartition": "[CrawlTabStore] createWorkspace에는 spaceId 또는 명시적인 파티션이 필요합니다. 그렇지 않으면 작업공간에 세션 격리 기반이 없습니다.",
+      "createWorkspaceMissingRandomUUID": "[CrawlTabStore] createWorkspace에 crypto.randomUUID가 없습니다.",
+      "createWorkspaceIdExists": "[CrawlTabStore] 크롤링 공간 ID가 이미 존재합니다: {{id}}",
+      "missingCrawlspaceContextCache": "[CrawlTabStore] CrawlspaceContextCache 누락: {{id}}"
+    },
+    "warnings": {
+      "legacyCreateTab": "⚠️ createTab은 레거시 경로입니다. 새로운 기능에 사용하지 마세요"
+    }
+  },
+  "host": {
+    "errors": {
+      "viewIdMissingShow": "viewId가 비어 있습니다. 보기를 표시할 수 없습니다",
+      "viewIdMissingBounds": "viewId가 비어 있습니다. 경계를 설정할 수 없습니다",
+      "viewIdMissingDestroy": "viewId가 비어 있습니다. 파괴할 수 없다",
+      "viewIdMissingCheck": "viewId가 비어 있습니다. 확인할 수 없다",
+      "viewIdMissingTouch": "viewId가 비어 있습니다. 만질 수 없다",
+      "viewIdMissingLoadUrl": "viewId가 비어 있습니다. URL을 로드할 수 없습니다",
+      "viewIdMissingWaitForSelector": "viewId가 비어 있습니다. 선택기를 기다릴 수 없습니다",
+      "viewIdMissingGoBack": "viewId가 비어 있습니다. 돌아갈 수 없다",
+      "viewIdMissingGoForward": "viewId가 비어 있습니다. 앞으로 나아갈 수 없다",
+      "viewIdMissingReload": "viewId가 비어 있습니다. 다시 로드할 수 없습니다",
+      "viewIdMissingStop": "viewId가 비어 있습니다. 로딩을 멈출 수 없습니다"
+    },
+    "logs": {
+      "ipcRendererUnavailable": "ipcRenderer를 사용할 수 없습니다. 페이지 매김 구독 건너뛰기"
+    }
+  },
+  "workspaceDefaults": {
+    "errors": {
+      "missingPluginDefaults": "[WorkspaceDefaults] 플러그인 기본값 누락: {{id}}"
+    }
+  },
+  "dataImport": {
+    "errors": {
+      "workspaceRequired": "선택한 작업공간이 없습니다.",
+      "noData": "가져올 데이터가 없습니다.",
+      "createTableFailed": "테이블을 생성하지 못했습니다.",
+      "createFieldFailed": "필드 생성 실패: {{details}}",
+      "importFailed": "데이터를 가져오지 못했습니다."
+    },
+    "progress": {
+      "creatingTable": "테이블 생성 중...",
+      "creatingFields": "필드 생성 중...",
+      "tableReady": "테이블이 생성되었습니다. 크롤링을 시작할 준비가 되었습니다...",
+      "loadingCache": "리소스 캐시 로드 중...",
+      "downloadingResources": "리소스 다운로드 중...",
+      "uploadingResources": "플랫폼에 리소스를 업로드하는 중...",
+      "importingData": "데이터 가져오는 중..."
+    },
+    "completion": {
+      "base": "가져오기가 완료되었습니다!",
+      "withFailedAndMissing": "가져오기가 완료되었습니다! {{success}} 성공, {{failed}} 실패, {{missing}} 첨부 파일 누락",
+      "withFailed": "가져오기가 완료되었습니다! {{success}} 성공, {{failed}} 실패",
+      "withMissing": "가져오기가 완료되었습니다! {{success}} 성공, {{missing}} 첨부파일 누락"
+    },
+    "fieldDescription": {
+      "sourceField": "추출된 필드: {{field}}",
+      "originalUrl": "{{name}}의 원본 URL",
+      "attachment": "{{name}}에 대한 첨부파일"
+    },
+    "fieldName": {
+      "originalUrl": "{{name}}_원본 URL"
+    },
+    "tableDescription": "크롤링 위치: {{taskId}}",
+    "tableName": {
+      "default": "새 테이블",
+      "singlePart": "크롤링_{{name}}"
+    }
+  },
+  "stages": {
+    "config": "구성",
+    "executing": "실행 중",
+    "mapping": "필드 매핑",
+    "completed": "완료됨"
+  },
+  "fieldNames": {
+    "name": "이름",
+    "title": "제목",
+    "rating": "등급",
+    "description": "설명",
+    "price": "가격",
+    "image": "이미지",
+    "url": "URL",
+    "date": "날짜",
+    "author": "작성자",
+    "category": "카테고리"
+  },
+  "workspace": {
+    "configMissing": "작업공간 구성이 누락되었습니다. 다시 만들어 주세요.",
+    "loading": "로드 중...",
+    "pageLoadFailed": "페이지를 로드하지 못했습니다.",
+    "pageLoadFailedDesc": "이 페이지에 접속할 수 없습니다. 네트워크를 확인하거나 나중에 다시 시도하세요.",
+    "pageLoadErrors": {
+      "dns": {
+        "title": "도메인을 찾을 수 없습니다",
+        "hint": "주소가 맞는지 확인하세요"
+      },
+      "offline": {
+        "title": "네트워크 연결 없음",
+        "hint": "네트워크 연결을 확인하고 다시 시도하세요."
+      },
+      "connection": {
+        "title": "연결할 수 없습니다",
+        "hint": "나중에 다시 시도하거나 주소가 올바른지 확인하세요."
+      },
+      "server": {
+        "title": "서버 오류",
+        "hint": "나중에 다시 시도해 주세요."
+      }
+    },
+    "reload": "새로고침"
+  },
+  "portal": {
+    "logs": {
+      "noRenderTarget": "⚠️ 렌더링 대상 없음: 슬롯이 있지만 활성 상태가 아니며 parkingHost를 사용할 수 없습니다."
+    }
+  },
+  "temporaryTab": {
+    "logs": {
+      "uiEntryDisabled": "⏭️ 임시 탭 UI 항목이 비활성화됩니다. 등록 건너뛰기",
+      "listenerAlreadyRegistered": "⏭️ 이미 등록된 청취자입니다. 건너뛰는 중",
+      "createRequestReceived": "임시 탭 생성 요청을 받았습니다:",
+      "workspaceInternalViewHandled": "⏭️ 컨텍스트에 의해 처리되는 작업공간 내부 보기:",
+      "nonTemporaryIgnored": "⏭️ 임시가 아닌 요청이 무시되었습니다:",
+      "tabExistsSkipped": "⚠️ 탭이 이미 존재합니다. 생성 건너뛰기:",
+      "tabCreated": "✅ 임시 탭 생성됨:",
+      "skipAutoSelect": "자동 선택 건너뛰기(백그라운드 생성)",
+      "closeRequestReceived": "임시 탭 닫기 요청을 받았습니다:",
+      "workspaceViewSkipClose": "⏭️ 컨텍스트에 의해 처리되는 작업 공간 보기; 건너뛰기 닫기:",
+      "workspaceTabSkipClose": "⏭️ 작업공간 탭은 임시 닫기 흐름을 사용하지 않습니다.",
+      "nonTemporarySkipClose": "⏭️ 비임시 탭; 건너뛰기 닫기:",
+      "closeRequestNoTab": "⏭️ 일치하는 탭/보기가 없습니다. 닫기 요청 무시:",
+      "listenerRegistered": "✅ 임시 탭 리스너 등록됨",
+      "listenerCleaned": "🧹 임시 탭 리스너가 정리되었습니다."
+    }
+  },
+  "recommendation": {
+    "defaultTitle": "추천 플랜"
+  },
+  "downloads": {
+    "title": "다운로드",
+    "activeCount": "{{count}} 다운로드 진행 중",
+    "activeCount_one": "{{count}} 다운로드 진행 중",
+    "noActive": "활성 다운로드 없음",
+    "searchPlaceholder": "파일 이름 또는 URL 검색...",
+    "clearCompleted": "클리어 완료",
+    "clearAll": "기록 지우기",
+    "empty": "아직 다운로드가 없습니다.",
+    "emptyHint": "웹 탐색을 통해 다운로드한 항목이 여기에 표시됩니다.",
+    "noResults": "일치하는 다운로드가 없습니다.",
+    "today": "오늘",
+    "yesterday": "어제",
+    "paused": "일시중지됨",
+    "cancelled": "취소됨",
+    "failed": "다운로드 실패",
+    "completed": "다운로드 완료",
+    "remaining": "{{time}} 남음",
+    "pauseAction": "일시중지",
+    "resumeAction": "이력서",
+    "cancelAction": "취소",
+    "retryAction": "재시도",
+    "openAction": "파일 열기",
+    "showInFolderAction": "폴더에 표시",
+    "removeAction": "제거",
+    "deleteFileAction": "파일 삭제",
+    "openFile": "파일 열기",
+    "copyLink": "다운로드 링크 복사",
+    "cancelDownload": "다운로드 취소",
+    "started": "다운로드 시작됨: {{name}}",
+    "noSpace": "먼저 작업공간을 열어주세요",
+    "ipcError": "{{action}} 실패",
+    "actionFailed": "작업 실패",
+    "openFileFailed": "파일을 열지 못했습니다.",
+    "showInFolderFailed": "폴더에 표시하지 못했습니다.",
+    "deleteFileFailed": "파일을 삭제하지 못했습니다.",
+    "fileUnavailable": "파일을 사용할 수 없음",
+    "fileUnavailableHint": "파일이 이동되었거나 삭제되었습니다. 이 항목만 제거할 수 있습니다",
+    "units": {
+      "perSecond": "/초",
+      "seconds": "초",
+      "minutes": "분",
+      "hours": "시간"
+    },
+    "downloadCompleted": "다운로드 완료: {{name}}",
+    "downloadFailed": "다운로드 실패: {{name}}",
+    "streamDefaultName": "스트리밍 비디오",
+    "streamActive": "스트림 다운로드",
+    "streamHistory": "스트림 기록",
+    "streamResolving": "재생목록 확인 중...",
+    "streamDownloading": "다운로드 중",
+    "streamMerging": "세그먼트 병합 중...",
+    "streamSegments": "세그먼트",
+    "streamCompleted": "다운로드 완료: {{name}}",
+    "streamFailed": "다운로드 실패: {{error}}",
+    "streamErrors": {
+      "ENCRYPTED_STREAM": "이 비디오는 DRM으로 보호되어 다운로드할 수 없습니다.",
+      "LIVE_STREAM": "라이브 스트림 다운로드는 지원되지 않습니다. 스트림이 끝난 후 다시 시도하세요.",
+      "NO_SEGMENTS": "다운로드 가능한 동영상 세그먼트를 찾을 수 없습니다.",
+      "NO_QUALITY_MATCH": "일치하는 품질 옵션이 없습니다.",
+      "SEGMENT_FAILED": "다운로드 실패: 일부 콘텐츠를 검색할 수 없습니다(사이트 제한).",
+      "DOWNLOAD_TIMEOUT": "다운로드 시간이 초과되었습니다. 네트워크를 확인하고 다시 시도하세요.",
+      "HTTP_ERROR": "웹사이트에서 다운로드 요청을 차단했습니다.",
+      "DOWNLOAD_ABORTED": "다운로드가 취소되었습니다.",
+      "MERGE_FAILED": "비디오 병합에 실패했습니다. 다시 시도해 주세요",
+      "NETWORK_ERROR": "네트워크 연결에 실패했습니다. 네트워크를 확인하고 다시 시도하세요.",
+      "PARSE_ERROR": "인식할 수 없는 동영상 URL 형식입니다. 유효한 m3u8 파일이 아닐 수 있습니다.",
+      "UNKNOWN": "알 수 없는 오류"
+    }
+  },
+  "bookmarks": {
+    "title": "북마크",
+    "totalCount": "{{count}} 북마크",
+    "totalCount_one": "{{count}} 북마크",
+    "noBookmarks": "북마크 없음",
+    "searchPlaceholder": "북마크 검색...",
+    "clearAll": "모두 지우기",
+    "empty": "북마크 없음",
+    "emptyHint": "페이지를 북마크하려면 주소 표시줄의 별표를 클릭하세요.",
+    "noResults": "일치하는 북마크가 없습니다.",
+    "addAction": "북마크",
+    "removeAction": "북마크 삭제",
+    "openAction": "열기",
+    "deleteAction": "삭제"
+  },
+  "history": {
+    "title": "검색 기록",
+    "totalCount": "{{count}} 기록",
+    "totalCount_one": "{{count}} 기록",
+    "noRecords": "검색 기록 없음",
+    "searchPlaceholder": "제목 또는 URL 검색...",
+    "clearAll": "모두 지우기",
+    "empty": "검색 기록 없음",
+    "emptyHint": "방문한 페이지가 여기에 표시됩니다.",
+    "noResults": "일치하는 기록이 없습니다",
+    "today": "오늘",
+    "yesterday": "어제",
+    "thisWeek": "이번 주",
+    "thisMonth": "이번 달",
+    "openAction": "열기",
+    "deleteAction": "삭제"
+  },
+  "tabContextMenu": {
+    "rename": "이름 바꾸기",
+    "close": "탭 닫기",
+    "delete": "탭 삭제",
+    "dialogTitle": "탭 이름 바꾸기",
+    "dialogDescription": "탭의 새 이름 설정",
+    "newNameLabel": "새 이름",
+    "newNamePlaceholder": "탭 이름을 입력하세요",
+    "cancel": "취소",
+    "confirm": "확인"
+  },
+  "agentAutofillFailed": {
+    "title": "자동 로그인 실패",
+    "titleCredential": "자격 증명이 만료되었을 수 있습니다.",
+    "titleFill": "자동완성을 완료할 수 없습니다.",
+    "descGeneric": "{{domain}} 자동 로그인에 실패했습니다. 설정 → 디바이스 → 브라우저에서 자격증명을 확인해주세요.",
+    "descCredential": "{{domain}}의 비밀번호가 만료되었거나 비활성화되었을 수 있습니다. 설정 → 디바이스 → 브라우저에서 업데이트해주세요.",
+    "descFill": "{{domain}}의 로그인 양식에 예상치 못한 구조가 있습니다. 상담원에게 일시중지하라는 알림이 전달되었습니다. 수동으로 로그인해주세요.",
+    "descGenericWithAgent": "{{agentName}}은 {{domain}}에 자동 로그인할 수 없습니다. 설정 → 디바이스 → 브라우저에서 자격증명을 확인해주세요.",
+    "descCredentialWithAgent": "{{domain}}에 대한 {{agentName}}의 자격증명이 만료되었을 수 있습니다. 설정 → 디바이스 → 브라우저에서 업데이트해주세요.",
+    "descFillWithAgent": "{{agentName}}은 {{domain}}의 로그인 양식을 자동으로 채울 수 없습니다. 양식 구조가 예상치 못한 것일 수 있습니다. 수동으로 로그인해주세요."
+  },
+  "agentAutofillSuccess": {
+    "title": "상담원이 로그인했습니다.",
+    "description": "상담원이 {{domain}}에 {{username}}로 로그인했습니다.",
+    "descriptionWithAgent": "{{agentName}}는 {{domain}}에 {{username}}로 로그인했습니다."
+  }
+}

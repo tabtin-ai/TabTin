@@ -1,0 +1,21 @@
+{
+  "analyzing": {
+    "title": "AIが分析中…",
+    "modeFlash": "フラッシュモード - 高速分析",
+    "modeDeep": "ディープ モード - 詳細な分析",
+    "tasksTitle": "分析タスク",
+    "tip": "💡 AIがページ構造を分析しています。お待ちください...",
+    "tipDeepSuffix": "ディープ モードでは詳細ページも分析されるため、さらに時間がかかる場合があります。",
+    "cancel": "分析をキャンセルする",
+    "phases": {
+      "initializing": "初期化中",
+      "detecting_pre_actions": "プレアクションの検出",
+      "identifying_region": "リスト領域の識別",
+      "analyzing_fields": "フィールド構造の分析",
+      "analyzing_pagination": "ページネーションの検出",
+      "exploring_detail": "詳細エントリの探索",
+      "building_schema": "スキーマの構築",
+      "completed": "完了"
+    }
+  }
+}

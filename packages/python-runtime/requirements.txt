@@ -1,0 +1,6 @@
+# TabTin 自管 Python 运行时的冻结依赖基线（L2 构建输入）。
+#
+# 至少包含平台自带工具脚本会用到的依赖，直接规避 Codex #24195「bundled python 缺 PyYAML」。
+# 未来 app.json.runtimeDependencies 的 python 子集会在 build-python-runtime.sh 里合并进来。
+PyYAML==6.0.2
+-r requirements-skill-bundles.txt

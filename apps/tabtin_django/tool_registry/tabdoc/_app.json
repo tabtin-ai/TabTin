@@ -1,0 +1,12 @@
+{
+  "id": "tabdoc",
+  "name": "TabDoc",
+  "icon": "file-text",
+  "description": "TabTin 一等公民应用 — TabDoc",
+  "capability_summary": "",
+  "tool_hints": "",
+  "skill_name": "",
+  "execution_env": "hybrid",
+  "status": "active",
+  "order": 2
+}

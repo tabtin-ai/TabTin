@@ -1,0 +1,14 @@
+{
+  "name": "math-block",
+  "description": "Block-level display mathematics",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "mathematicsBlock",
+        "attrs": { "latex": "\\int_0^1 x^2 dx" }
+      }
+    ]
+  },
+  "expectedMarkdown": "$$\n\\int_0^1 x^2 dx\n$$"
+}

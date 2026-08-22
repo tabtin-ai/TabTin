@@ -1,0 +1,252 @@
+{
+  "rewind": {
+    "recordHistoryMissing": "\"{{tableName}}\"은(는) 완전히 복원할 수 없습니다. {{count}} 행의 기록이 오래되었습니다. 되감기가 중지되었으며 데이터는 변경되지 않았습니다. 권장 조치: (1) 최신 복원 지점을 선택하거나 (2) 이 지점을 사용해야 하는 경우 관리자에게 백업에서 복원하도록 요청하세요.",
+    "outboxDiscarded": "되감기로 인해 '{{tableName}}'의 {{count}} 백그라운드 계산이 삭제되었습니다. 모든 수식 열이 다시 계산되고 있습니다(ETA: {{etaSeconds}}s). 그때까지 일부 셀에는 \"계산 중...\"이 표시될 수 있습니다."
+  },
+  "field": {
+    "typeConvertFailed": "\"{{fieldName}}\"을 {{oldType}}에서 {{newType}}로 변경할 수 없습니다. 행 {{rowNo}} 값 \"{{sample}}\"을 변환할 수 없습니다. 변경사항이 취소되었습니다. 권장 조치: (1) 컬럼을 내보내고 외부로 청소합니다. (2) \"대량 업데이트\"를 사용하여 먼저 잘못된 값을 정규화합니다. (3) 관리자에게 영향을 받은 {{count}}개 행을 처리하는 데 도움을 요청하세요.",
+    "renameConflict": "\"{{oldName}}\"의 이름을 \"{{newName}}\"로 바꿀 수 없습니다. 해당 이름의 필드가 이미 존재하거나 {{count}} 수식/조회 필드에서 참조됩니다. 먼저 \"필드 종속성\"을 확인하거나 다른 이름을 선택하세요.",
+    "deleteReferenced": "\"{{fieldName}}\"은(는) 삭제할 수 없습니다. {{count}} 수식/조회 필드에서 참조됩니다. 강제로 삭제하면 해당 필드가 손상됩니다. 종속 항목을 먼저 제거하거나 결정하기 전에 \"필드 종속 항목\"을 확인하세요.",
+    "primaryFieldDeleteForbidden": "'{{fieldName}}'은 삭제할 수 없습니다. 기본 필드입니다. 직접 삭제하면 기존 데이터나 관련 열이 손상될 수 있습니다. 먼저 테이블 설정에서 기본 필드를 변경하세요.",
+    "deleteImpactDialog": {
+      "warningHigh": "이 필드는 다른 필드나 보기에서 참조됩니다. 이를 삭제하면 다운스트림 필드가 중단됩니다. 계속하기 전에 \"필드 종속성\"에서 전체 체인을 검토하는 것이 좋습니다.",
+      "warningMedium": "이 필드는 일부 보기에서 참조됩니다. 해당 보기 구성은 삭제 후 자동으로 정리됩니다.",
+      "warningLow": "이 필드에는 다운스트림 종속 항목이 없으므로 안전하게 삭제할 수 있습니다.",
+      "noImpactSafe": "'{{name}}' 필드를 삭제하시겠습니까? 다운스트림 종속 항목이 없으므로 제거해도 안전합니다. 이 삭제를 실행 취소할 수 있는지 알아보려면 아래 힌트를 참조하세요.",
+      "undoSimpleHint": "실행 취소 가능: 삭제 직후 Ctrl+Z(⌘Z)를 누르면 필드와 해당 기록 구조가 복원됩니다.",
+      "undoComplexHint": "실행 취소 가능: 삭제 직후 Ctrl+Z(⌘Z)를 눌러 필드를 복원합니다. 종속성 그래프가 다시 작성되고 값이 자동으로 다시 계산됩니다(몇 초 정도 걸릴 수 있음). 필수 종속성 필드가 삭제된 경우 특정 오류 메시지가 표시됩니다.",
+      "undoNotInWaveHint": "실행 취소할 수 없습니다. 이 필드 유형은 이번 릴리스의 빠른 실행 취소 허용 목록에 없습니다. 복구하려면 '버전 기록'에서 복원하거나 조직 관리자에게 문의하세요.",
+      "undoUnknownHint": "취소할 수 없습니다. 필드 유형을 알 수 없습니다. 조직 관리자에게 문의하세요.",
+      "openVersionHistory": "버전 기록 열기",
+      "fetchErrorFallback": "종속성 분석을 로드하지 못했습니다. 삭제를 계속할 수 있지만 삭제 후 즉시 테이블 상태를 확인하세요."
+    },
+    "batchRestore": {
+      "title": "이 단계에서는 일부 필드를 실행취소할 수 없습니다.",
+      "summary": "이 실행 취소 단계에서: {{restorableCount}} 단순 필드는 Ctrl+Z를 사용하여 개별적으로 복원할 수 있습니다. {{unrestorableCount}} 복합 필드는 '버전 기록'에서 복원해야 합니다.",
+      "restorableSection": "개별적으로 실행취소 가능({{count}})",
+      "unrestorableSection": "버전 기록이 필요합니다({{count}})",
+      "openVersionHistory": "버전 기록 열기",
+      "complexFieldHint": "수식/조회/링크 필드에는 다운스트림 종속성 그래프 재구축이 포함됩니다. 복원에는 몇 초 정도 걸릴 수 있습니다.",
+      "close": "알았어"
+    }
+  },
+  "table": {
+    "deleteReferenced": "\"{{tableName}}\"은 삭제할 수 없습니다. {{skillCount}} 스킬 및 {{viewCount}} 교차 테이블 보기가 이에 따라 달라집니다. 강제로 삭제하면 해당 스킬이 중단되거나 해당 보기가 비워집니다. \"필드 종속성\"을 확인하거나 먼저 테이블을 보관하여 종속 항목이 마이그레이션되도록 하세요.",
+    "trashedBanner": {
+      "title": "'{{tableName}}'이(가) 휴지통으로 이동되었습니다.",
+      "description": "백그라운드 계산이 중지됩니다. 이 테이블에 의존하는 기술 규칙 및 교차 테이블 보기는 자동으로 일시 중지됩니다. 30일 이내에 \"조직 설정·자원 휴지통\"에서 테이블을 복원할 수 있습니다.",
+      "restoreAction": "테이블 복원",
+      "viewTrash": "휴지통 열기",
+      "dismiss": "알았어요"
+    },
+    "deletedBanner": {
+      "title": "'{{tableName}}'이 삭제되었습니다.",
+      "description": "이 테이블의 모든 백그라운드 계산이 중지되고 이에 의존하는 기술 규칙/교차 테이블 보기가 일시 중지됩니다. 영구 삭제 후에는 테이블을 복원할 수 없습니다. 필요한 경우 조직 관리자에게 문의하여 백업에서 기록 데이터를 복구하세요."
+    }
+  },
+  "bulk": {
+    "checkpointCreating": "\"{{tableName}}\"에 대한 AI 작업은 {{count}} 행에 영향을 미칩니다. 자동 복원 지점 만들기... 준비가 되면 채팅에서 한 번의 클릭으로 \"이 AI 작업 실행 취소\"를 할 수 있습니다.",
+    "quotaExceeded": "이 업데이트는 나머지 {{remaining}}을 초과하는 {{tokens}} 조직 토큰을 소비합니다. 비행 전이 중지되었습니다. 데이터는 변경되지 않습니다. 제안: (1) 필터 범위를 좁힙니다. (2) 월별 할당량 재설정을 기다립니다. (3) 조직 관리자에게 업그레이드를 요청하세요.",
+    "affectedRecords_one": "{{count}} 레코드가 영향을 받음",
+    "affectedRecords_other": "{{count}} 레코드가 영향을 받음",
+    "updateByFilter": {
+      "previewTitle": "대량 업데이트 미리보기",
+      "matchedRows": "{{count}} 행이 일치함",
+      "samplePreview": "미리보기(최대 20개의 샘플 행)",
+      "riskLow": "낮은 위험",
+      "riskLowDesc": "영향을 받는 행은 거의 없습니다. 안전하게 진행하세요.",
+      "riskMedium": "중간 위험",
+      "riskMediumDesc": "{{count}} 행이 영향을 받았습니다. 복원 지점이 자동으로 생성됩니다.",
+      "riskHigh": "고위험",
+      "riskHighDesc": "{{count}} 행이 영향을 받았습니다. 계속하려면 \"CONFIRM\"을 입력하세요.",
+      "highRiskConfirmText": "확인",
+      "highRiskInputPlaceholder": "계속하려면 \"CONFIRM\"을 입력하세요.",
+      "estimatedDuration": "예상 ~{{seconds}}초",
+      "estimatedDurationLong": "대략 ~{{seconds}}s, 백그라운드에서 계속 가능",
+      "checkpointHint": "복원 지점이 생성됩니다. 언제든지 되돌릴 수 있어요",
+      "confirm": "확인",
+      "cancel": "취소",
+      "committing": "일괄 업데이트 실행 중…",
+      "commitSuccess": "일괄 업데이트 완료: {{count}} 행이 업데이트되었습니다.",
+      "preflightFailed": "대량 업데이트 실행 전 실패: {{reason}}. 데이터는 변경되지 않습니다. 나중에 다시 시도해 주세요. 계속 실패하면 조직 관리자에게 문의하세요.",
+      "commitFailed": "대량 업데이트 커밋 실패: {{reason}}. 데이터는 변경되지 않습니다. 나중에 다시 시도해 주세요. 계속 실패하면 조직 관리자에게 문의하세요.",
+      "rejected": "단일 업데이트 제한을 초과했습니다.",
+      "rejectedDesc": "{{count}} 행이 일치하여 10,000행 단일 업데이트 제한을 초과했습니다. 더 작은 배치로 처리하려면 필터 범위를 좁히거나 관리자에게 문의하세요.",
+      "driftWarning": "실제 업데이트된 행은 실행 전 행과 {{ratio}}%만큼 다릅니다(예상 {{expected}}, 실제 {{actual}}). 데이터를 확인하세요.",
+      "driftDismiss": "알았어요",
+      "errorListTitle": "{{count}} 레코드를 업데이트하지 못했습니다.",
+      "errorItem": "기록 {{recordId}}: {{reason}}",
+      "showMore": "{{count}} 더보기",
+      "showLess": "간략히 보기"
+    }
+  },
+  "compute": {
+    "divisionByZero": "\"{{fieldName}}\" 행 {{rowNo}}에서 자동 계산에 실패했습니다. 수식이 0으로 나누어집니다. 이 셀은 다른 행에 영향을 주지 않고 비어 있게 됩니다. 입력(예: \"{{relatedColumn}}\")을 조정하면 저장 시 자동으로 다시 계산됩니다.",
+    "typeMismatch": "\"{{fieldName}}\" 행 {{rowNo}}에서 자동 계산이 실패했습니다. 수식에는 숫자가 필요하지만 이 행의 \"{{columnName}}\"은 1이 아닙니다. 지금은 셀을 계산할 수 없습니다. 이 행의 데이터를 수정하거나 수식을 조정하세요.",
+    "lookupTargetDeleted": "\"{{fieldName}}\"은 삭제되었거나 사용할 수 없는 \"{{targetTable}}.{{targetColumn}}\"에 종속됩니다. 이 열은 자동 업데이트를 일시중지합니다. 오래된 데이터는 더 이상 정확하지 않을 수 있습니다. 필드 설정을 열고 대상 테이블과 열을 다시 연결합니다.",
+    "circularDependency": "\"{{fieldName}}\"의 순환 종속성: {{path}}. 해당 필드가 비활성화되고 계산에서 제외됩니다. 수식 편집기를 열고 체인의 링크를 끊어 수정하세요.",
+    "recalc": {
+      "queued": "대기 중: {{total}} 계산된 필드가 다시 계산되기 시작합니다.",
+      "progress": "계산된 필드 다시 계산 {{percentage}}% ({{done}}/{{total}})",
+      "completed": "{{total}} 계산된 필드가 다시 계산되었습니다.",
+      "failedSummary": "{{failed}} 필드를 다시 계산하지 못했습니다: {{names}}. 다른 {{succeeded}} 필드가 성공했습니다. 필드 설정을 열어 종속성을 확인하거나 나중에 다시 시도하세요.",
+      "dismiss": "진행률 알림 닫기"
+    },
+    "outboxWorker": {
+      "recomputing": "테이블 결과가 업데이트되었습니다."
+    }
+  },
+  "lookup": {
+    "targetTimeout": "\"{{fieldName}}\" 조회가 \"{{targetTable}}\"에서 가져오는 동안 시간이 초과되었습니다. 대상 테이블이 너무 크거나 네트워크 사용량이 많습니다. 이전에 성공한 결과가 표시됩니다. 나중에 다시 시도하거나 관리자에게 대상 테이블의 인덱스를 검토하도록 요청하세요."
+  },
+  "view": {
+    "filterInvalid": "이 보기의 필터는 더 이상 유효하지 않습니다. 참조된 '{{fieldName}}' 필드가 삭제되었습니다. 이제 보기에 필터링 없이 모든 기록이 표시됩니다. 재구성하려면 보기 설정을 여세요."
+  },
+  "record": {
+    "concurrentEditConflict": "이 기록은 {{collaboratorName}}에 의해 방금 수정되었습니다. 변경사항은 아직 저장되지 않았습니다. 입력 내용은 보존됩니다. 최신 버전에서 계속 편집하려면 새로 고치거나, 강제 저장하려면 \"확인, 덮어쓰기\"를 클릭하세요.",
+    "restoreConflict": "이 기록을 원래 위치({{reason}})로 복원할 수 없습니다. 계속하면 중복되거나 잘못 정렬된 데이터가 생성될 수 있습니다. 테이블의 최신 구조를 확인하거나 대신 \"새 행으로 복제\"를 사용하세요.",
+    "trash": {
+      "panelTitle": "쓰레기 기록",
+      "description": "지난 30일 동안 삭제된 기록은 여기에서 테이블로 복원할 수 있습니다.",
+      "expiryHint": "30일이 지난 기록은 영구적으로 정리되었으며 여기서 복원할 수 없습니다. 오래된 데이터의 경우 조직 관리자에게 문의하여 백업에서 복구하세요.",
+      "empty": "휴지통이 비어 있습니다. 지난 30일 동안 삭제된 기록이 없습니다.",
+      "loading": "휴지통에 있는 기록을 로드하는 중…",
+      "loadFailed": "휴지통을 로드하지 못했습니다. 나중에 다시 시도해 주세요. 계속 실패하면 조직 관리자에게 문의하세요.",
+      "trashedAt": "{{time}}에서 삭제됨",
+      "restore": "테이블로 복원",
+      "restoreSelected": "선택됨 복원({{count}})",
+      "restoreAll": "모두 복원",
+      "selectAll": "모두 선택",
+      "clearSelection": "선택 취소",
+      "refresh": "새로고침",
+      "close": "닫기",
+      "untitled": "(제목 없음)",
+      "restoreSuccess": "테이블에 레코드 1개를 복원했습니다.",
+      "restoreSuccessBatch": "{{count}} 레코드를 테이블에 복원했습니다.",
+      "restoreFailed": "복원 실패: 일시적으로 서버에 연결할 수 없습니다. 나중에 다시 시도해 주세요. 계속 실패하면 조직 관리자에게 문의하세요.",
+      "restoreBatchPartial": "{{restored}} 레코드 복원됨, {{failed}} 실패: {{firstError}}.",
+      "batchLimit": "배치당 최대 1000개의 레코드를 복원할 수 있습니다. 더 작은 그룹으로 나눕니다."
+    },
+    "degraded": {
+      "badgeLabel": "데이터 품질이 저하됨",
+      "badgeTooltip": "이 레코드의 행 구조가 복원되었지만 해당 필드 값이 기록에서 만료되어 복구할 수 없습니다. 셀이 비어 있는 것으로 나타납니다.",
+      "toastSingle": "1개의 레코드를 복원했지만 해당 필드 값이 기록에서 만료되어 복구할 수 없습니다. 셀이 비어 있는 것으로 나타납니다. 전체 데이터가 필요한 경우 관리자에게 문의하여 백업에서 복원하세요.",
+      "toastBatch": "복원된 {{restored}} 레코드. 그 중 {{degraded}}에는 값이 기록에서 오래되었기 때문에 구조만 복원되었습니다. 해당 셀은 비어 있는 것으로 나타납니다. 전체 데이터가 필요한 경우 관리자에게 문의하여 백업에서 복원하세요.",
+      "rowAriaLabel": "저하된 행: 필드 값이 만료되어 복원할 수 없습니다."
+    }
+  },
+  "import": {
+    "fieldUnmapped": "대상 필드 매핑이 없는 {{count}} 열(예: \"{{exampleColumn}}\")을 가져오기 프리플라이트가 발견되었습니다. 이러한 열은 다른 열에 영향을 주지 않고 무시됩니다. 계속하려면 \"필드 매핑\"에서 명시적으로 매핑하거나 \"매핑되지 않은 열 무시\"를 선택하세요.",
+    "failed": "{{rowNo}} 행: \"{{columnName}}\" {{expected}} 열에서 가져오기에 실패했지만 파일에 \"{{actualValue}}\"이 있습니다. 가져오기가 중지되었습니다. 이미 가져온 행은 최신 힌트를 따릅니다. 셀 또는 열 매핑을 수정하고 다시 가져옵니다. 큰 문제의 경우 더 작은 파일을 사용해 보세요."
+  },
+  "undo": {
+    "failed": "마지막 작업을 취소할 수 없습니다: {{reason}}. 테이블 내용은 변경되지 않습니다. 새로고침하고 다시 시도하세요. 그래도 실패하면 버전 기록이나 휴지통에서 복구를 시도할 수 있습니다."
+  },
+  "admin": {
+    "outbox": {
+      "title": "계산된 대기열 관리자",
+      "description": "백그라운드 계산 작업 상태를 보고 관리합니다.",
+      "summaryTab": "요약",
+      "tasksTab": "작업",
+      "grayscaleTab": "그레이스케일",
+      "loading": "로드 중…",
+      "loadFailed": "로드하지 못했습니다. 나중에 다시 시도해 주세요.",
+      "retry": "재시도",
+      "noData": "계산 작업 없음",
+      "refresh": "새로고침",
+      "exportCsv": "CSV 내보내기",
+      "summary": {
+        "title": "대기열 요약",
+        "pending": "보류 중",
+        "processing": "처리",
+        "succeeded": "성공함(24시간)",
+        "failed": "실패(24시간)",
+        "dlq": "반복적으로 실패함",
+        "cancelled": "취소됨",
+        "oldestPending": "가장 오래된 보류 중"
+      },
+      "hotspots": {
+        "title": "장애 핫스팟(24시간)",
+        "table": "테이블",
+        "count": "실패",
+        "lastError": "최신 오류",
+        "empty": "지난 24시간 동안 오류가 발생하지 않았습니다."
+      },
+      "task": {
+        "status": "상태",
+        "table": "테이블",
+        "createdAt": "생성 날짜",
+        "updatedAt": "업데이트 날짜",
+        "actions": "작업",
+        "retryAction": "재시도",
+        "cancelAction": "취소",
+        "pauseAction": "일시중지",
+        "retrySuccess": "재시도를 위해 대기 중인 작업",
+        "retryFailed": "재시도 실패: {{reason}}",
+        "cancelSuccess": "작업이 취소되었습니다.",
+        "cancelFailed": "취소 실패: {{reason}}",
+        "pauseSuccess": "작업이 일시중지되었습니다.",
+        "pauseFailed": "일시중지 실패: {{reason}}",
+        "statusPending": "보류 중",
+        "statusProcessing": "처리",
+        "statusSucceeded": "성공함",
+        "statusFailed": "실패",
+        "statusCancelled": "취소됨",
+        "statusDlq": "DLQ"
+      },
+      "grayscale": {
+        "title": "그레이스케일 구성",
+        "mode": "현재 모드",
+        "modeDisabled": "장애인",
+        "modeGlobal": "전역적으로 활성화됨",
+        "modeAllowlist": "허용 목록",
+        "allowlist": "허용 목록",
+        "allowlistEmpty": "허용 목록이 비어 있습니다.",
+        "description": "Outbox 비동기 계산 엔진의 범위를 제어합니다. 변경 사항은 현재 프로세스에만 영향을 미칩니다. 클러스터 전체 변경에는 환경 변수 + 롤링 재시작이 필요합니다.",
+        "warning": "현재 그레이스케일 구성이 기본값과 다릅니다. 변경사항은 이 프로세스에만 영향을 미칩니다."
+      },
+      "filterAll": "모두",
+      "pagination": {
+        "prev": "이전",
+        "next": "다음",
+        "pageInfo": "페이지 {{page}}"
+      }
+    },
+    "fieldRecycleBin": {
+      "title": "삭제된 필드",
+      "description": "보관 기간 내에 삭제된 필드를 여기에서 복원할 수 있습니다. {{days}}일 후에 필드가 영구적으로 삭제됩니다.",
+      "empty": "삭제된 필드 없음",
+      "loading": "로드 중…",
+      "loadFailed": "로드하지 못했습니다. 나중에 다시 시도해 주세요.",
+      "fieldName": "필드 이름",
+      "fieldType": "유형",
+      "deletedAt": "삭제 날짜",
+      "daysRemaining": "남은 일수",
+      "daysRemainingValue": "{{days}}일",
+      "actions": "작업",
+      "restoreAction": "필드 복원",
+      "restoreSuccess": "'{{name}}' 필드가 복원되었습니다.",
+      "restoreFailed": "복원 실패: {{reason}}",
+      "refresh": "새로고침",
+      "close": "닫기",
+      "ttlHint": "삭제된 필드는 {{days}}일 동안 보관된 후 영구적으로 제거됩니다."
+    },
+    "integrity": {
+      "title": "무결성 검사",
+      "checkAction": "확인",
+      "repairAction": "수리",
+      "checking": "확인 중…",
+      "repairing": "수리 중…",
+      "noDrift": "드리프트가 발견되지 않았습니다.",
+      "driftFound": "{{count}} 드리프트 발견됨",
+      "autoFixable": "자동 수정 가능",
+      "manualFix": "수동 수정 필요"
+    }
+  },
+  "banner": {
+    "cascadeComputing": "테이블이 컴퓨팅 중입니다…",
+    "cascadeComputingDesc": "백그라운드 계산 필드가 다시 계산되고 있습니다. 결과는 자동으로 업데이트됩니다.",
+    "dlqWarning": "{{count}} 계산 실패",
+    "dlqWarningDesc": "{{count}} 백그라운드 계산 작업이 실패했습니다. 자세한 내용은 관리자에게 문의하세요."
+  }
+}

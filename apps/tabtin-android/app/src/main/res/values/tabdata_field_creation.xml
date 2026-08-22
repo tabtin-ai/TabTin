@@ -1,0 +1,23 @@
+<resources>
+    <string name="tabdata_add_field">新增字段</string>
+    <string name="tabdata_create_field_title">新增字段</string>
+    <string name="tabdata_field_name">字段名称</string>
+    <string name="tabdata_field_name_placeholder">例如：状态</string>
+    <string name="tabdata_field_type_value">字段类型：%1$s</string>
+    <string name="tabdata_field_choices">选项</string>
+    <string name="tabdata_field_choices_hint">每行填写一个选项；字段创建后即可在记录中选择。</string>
+    <string name="tabdata_field_create">创建字段</string>
+    <string name="tabdata_field_creating">创建中…</string>
+    <string name="tabdata_field_created">字段已创建</string>
+    <string name="tabdata_field_name_required">请输入字段名称。</string>
+    <string name="tabdata_field_name_too_long">字段名称最多 100 个字符。</string>
+    <string name="tabdata_field_name_duplicate">已存在同名字段。</string>
+    <string name="tabdata_field_choices_required">请至少添加一个选项。</string>
+    <string name="tabdata_field_create_failed">字段创建失败，请重试。</string>
+    <string name="tabdata_field_type_text">文本</string>
+    <string name="tabdata_field_type_long_text">长文本</string>
+    <string name="tabdata_field_type_number">数字</string>
+    <string name="tabdata_field_type_select">单选</string>
+    <string name="tabdata_field_type_multi_select">多选</string>
+    <string name="tabdata_field_type_checkbox">复选框</string>
+</resources>

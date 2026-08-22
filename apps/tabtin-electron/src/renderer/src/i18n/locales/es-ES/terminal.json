@@ -1,0 +1,64 @@
+{
+  "title": "terminales",
+  "exitCode": "Código de salida: {{code}}",
+  "restart": "Reiniciar",
+  "scrollToBottom": "Desplazarse hacia abajo",
+  "errors": {
+    "createSessionFailed": "[Error] No se puede crear una sesión de terminal",
+    "ptyUnavailable": "La API de PTY no está disponible"
+  },
+  "status": {
+    "processExited": "Proceso salido, código de salida: {{code}}",
+    "idle": "inactivo",
+    "running": "corriendo",
+    "exited": "Salido"
+  },
+  "restore": {
+    "title": "Salida anterior restaurada (proceso desconectado)",
+    "restored": "Producción histórica restaurada",
+    "startShell": "Reiniciar shell",
+    "dismiss": "Descartar"
+  },
+  "split": {
+    "splitRight": "Dividir a la derecha",
+    "splitDown": "Dividir hacia abajo",
+    "maximize": "maximizar",
+    "restore": "Restaurar",
+    "close": "Cerrar panel",
+    "maxPanesReached": "Paneles máximos alcanzados ({{max}})",
+    "equalize": "Ecualizar todos los paneles",
+    "doubleClickToEqualize": "Haga doble clic para ecualizar"
+  },
+  "contextMenu": {
+    "copy": "Copiar",
+    "paste": "Pegar",
+    "search": "Buscar",
+    "scrollToBottom": "Desplazarse hacia abajo",
+    "clear": "Borrar terminal",
+    "splitRight": "Dividir a la derecha",
+    "splitDown": "Dividir hacia abajo",
+    "equalize": "Ecualizar todos los paneles",
+    "maximize": "maximizar",
+    "restore": "Restaurar",
+    "close": "Cerrar panel"
+  },
+  "search": {
+    "placeholder": "Terminal de búsqueda…",
+    "noMatch": "No hay coincidencia",
+    "matchFound": "Encontrado",
+    "caseSensitive": "Distingue entre mayúsculas y minúsculas",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "close": "Cerrar búsqueda"
+  },
+  "imagePaste": {
+    "saving": "Guardando imagen…",
+    "saved": "Imagen guardada",
+    "failed": "Error al pegar la imagen",
+    "tooLarge": "Imagen demasiado grande ({{size}}MB), máximo 10 MB"
+  },
+  "dragDrop": {
+    "hint": "Soltar para insertar la ruta del archivo",
+    "pathError": "No se puede leer la ruta del archivo"
+  }
+}

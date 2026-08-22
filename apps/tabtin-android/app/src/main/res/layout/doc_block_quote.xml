@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 引用块 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="top"
+    android:paddingStart="@dimen/tt_spacing_lg">
+
+    <!-- 左侧高亮竖条 -->
+    <View
+        android:id="@+id/quoteBar"
+        android:layout_width="@dimen/tt_spacing_xxs"
+        android:layout_height="match_parent"
+        android:background="@color/doc_editor_highlight_bar" />
+
+    <com.tabtin.mobile.features.doc.editor.core.DocTextInputWidget
+        android:id="@+id/textContent"
+        style="@style/DocBlockHighlightContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/tt_spacing_sm"
+        android:textColorHint="@color/doc_editor_text_tertiary" />
+</LinearLayout>

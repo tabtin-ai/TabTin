@@ -1,0 +1,183 @@
+{
+  "capabilities": [
+    {
+      "budget": null,
+      "conditions": [],
+      "default_value": null,
+      "deployment_tags": [],
+      "eligible_rate_card_refs": [],
+      "evidence": [
+        {
+          "locator": "OpenAI-compatible stream_supported legacy configuration",
+          "source": "migrations 0050, 0054 and 0055"
+        }
+      ],
+      "factual_values": [],
+      "fallback_policy": null,
+      "family": "streaming",
+      "mime_types": [],
+      "name": "streaming",
+      "native_state": null,
+      "preprocessing_ref": null,
+      "preprocessing_state": null,
+      "profile_capability_refs": [],
+      "retention_ref": null,
+      "runtime_mapping_ref": null,
+      "schema_version": "1",
+      "selection_refs": [],
+      "shape": null,
+      "state": "supported",
+      "transports": [],
+      "user_controllable": false
+    },
+    {
+      "budget": null,
+      "conditions": [],
+      "default_value": null,
+      "deployment_tags": [],
+      "eligible_rate_card_refs": [],
+      "evidence": [
+        {
+          "locator": "legacy supports_function_calling configuration",
+          "source": "migrations 0050, 0054 and 0055"
+        }
+      ],
+      "factual_values": [],
+      "fallback_policy": null,
+      "family": "tools",
+      "mime_types": [],
+      "name": "tool-calling",
+      "native_state": null,
+      "preprocessing_ref": null,
+      "preprocessing_state": null,
+      "profile_capability_refs": [],
+      "retention_ref": null,
+      "runtime_mapping_ref": null,
+      "schema_version": "1",
+      "selection_refs": [],
+      "shape": null,
+      "state": "unknown",
+      "transports": [],
+      "user_controllable": false
+    },
+    {
+      "budget": null,
+      "conditions": [
+        {
+          "children": [],
+          "field": "request.input_tokens",
+          "operator": "present",
+          "value": null
+        }
+      ],
+      "default_value": null,
+      "deployment_tags": [],
+      "eligible_rate_card_refs": [],
+      "evidence": [
+        {
+          "locator": "synthetic usage fixture; no upstream probe",
+          "source": "PR0 Golden"
+        }
+      ],
+      "factual_values": [],
+      "fallback_policy": null,
+      "family": "usage",
+      "mime_types": [],
+      "name": "usage",
+      "native_state": null,
+      "preprocessing_ref": null,
+      "preprocessing_state": null,
+      "profile_capability_refs": [],
+      "retention_ref": null,
+      "runtime_mapping_ref": null,
+      "schema_version": "1",
+      "selection_refs": [],
+      "shape": null,
+      "state": "conditional",
+      "transports": [],
+      "user_controllable": false
+    },
+    {
+      "budget": null,
+      "conditions": [],
+      "default_value": "high",
+      "deployment_tags": [],
+      "eligible_rate_card_refs": [],
+      "evidence": [
+        {
+          "locator": "thinking control and wire evidence; output limit unknown",
+          "source": "migrations 0050, 0054 and 0055"
+        }
+      ],
+      "factual_values": [
+        {
+          "evidence": [
+            {
+              "locator": "legacy runtime thinking profile",
+              "source": "migrations 0050, 0054 and 0055"
+            }
+          ],
+          "key": "off",
+          "order": 0
+        },
+        {
+          "evidence": [
+            {
+              "locator": "legacy runtime thinking profile",
+              "source": "migrations 0050, 0054 and 0055"
+            }
+          ],
+          "key": "low",
+          "order": 1
+        },
+        {
+          "evidence": [
+            {
+              "locator": "legacy runtime thinking profile",
+              "source": "migrations 0050, 0054 and 0055"
+            }
+          ],
+          "key": "medium",
+          "order": 2
+        },
+        {
+          "evidence": [
+            {
+              "locator": "legacy runtime thinking profile",
+              "source": "migrations 0050, 0054 and 0055"
+            }
+          ],
+          "key": "high",
+          "order": 3
+        }
+      ],
+      "fallback_policy": null,
+      "family": "thinking",
+      "mime_types": [],
+      "name": "thinking",
+      "native_state": null,
+      "preprocessing_ref": null,
+      "preprocessing_state": null,
+      "profile_capability_refs": [],
+      "retention_ref": null,
+      "runtime_mapping_ref": null,
+      "schema_version": "1",
+      "selection_refs": [],
+      "shape": "effort_ladder",
+      "state": "supported",
+      "transports": [],
+      "user_controllable": false
+    }
+  ],
+  "context_window": 262144,
+  "identity": {
+    "canonical_hash": "sha256:5a3bfb3bcac06b12f58626df131e9c5f58b93424da02ca79a47b8da6727d691c",
+    "key": "doubao-seed-2-1-pro-draft-capability",
+    "kind": "model-capability",
+    "revision": "1"
+  },
+  "max_output_tokens": 0,
+  "modality": "multimodal",
+  "model_family": "doubao-seed-2-1-pro",
+  "schema_version": "1"
+}

@@ -1,0 +1,29 @@
+{
+  "group": {
+    "ungrouped": "Desagrupados",
+    "unclassified": "sin clasificar",
+    "loadedOfTotal": "{{loaded}} de {{total}} cargado"
+  },
+  "attachments": {
+    "missingRequired": "Faltan archivos adjuntos requeridos"
+  },
+  "record": {
+    "createMissingTableTitle": "No se puede crear registro",
+    "createMissingTableDesc": "Falta información de la tabla. Vuelva a seleccionar la tabla e inténtelo de nuevo.",
+    "createFailedTitle": "Error al crear",
+    "createFailedDesc": "No se pudo crear el registro. Inténtelo de nuevo más tarde.",
+    "createFailedFallback": "No se puede crear el registro. Inténtelo de nuevo más tarde.",
+    "createPatchFailedTitle": "No se guardaron ediciones adicionales",
+    "createPatchFailedDesc": "Se creó el registro, pero no se aplicaron las últimas ediciones después de guardarlo. Vuelva a intentarlo.",
+    "createdTitle": "Creado",
+    "createdHiddenDesc": "{{count}} los nuevos registros no son visibles actualmente en esta vista.",
+    "createdHiddenAction": "Revelar limpiando filtros"
+  },
+  "error": {
+    "cellUpdateFailed": "No se pudo actualizar la celda. Por favor inténtalo de nuevo."
+  },
+  "autoFill": {
+    "createdTimeHint": "Este campo se completa automáticamente cuando se crea el registro.",
+    "lastModifiedTimeHint": "Este campo se actualiza automáticamente con cada modificación de registro."
+  }
+}

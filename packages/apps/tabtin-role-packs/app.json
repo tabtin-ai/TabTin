@@ -1,0 +1,74 @@
+{
+  "id": "tabtin-role-packs",
+  "name": "Role Playbooks Pack",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "角色包：产品经理 / 销售 / 运营 / 财务分析——按域装一包的工作方式与交付物模板。",
+  "icon": "users",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "project_management",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 30
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/role-product-manager",
+    "skills/role-sales-owner",
+    "skills/role-ops-owner",
+    "skills/role-finance-analyst"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "role-product-manager": {
+        "enabled": true
+      },
+      "role-sales-owner": {
+        "enabled": true
+      },
+      "role-ops-owner": {
+        "enabled": true
+      },
+      "role-finance-analyst": {
+        "enabled": true
+      }
+    }
+  }
+}

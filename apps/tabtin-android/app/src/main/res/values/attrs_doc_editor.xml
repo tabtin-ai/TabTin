@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DocTextInputWidget custom attributes -->
+    <declare-styleable name="DocTextInputWidget">
+        <attr name="docIgnoreDragAndDrop" format="boolean" />
+        <attr name="docOnlyPasteAsPlainText" format="boolean" />
+    </declare-styleable>
+
+    <!-- HighlightDrawer custom attributes for code/background highlight rendering -->
+    <declare-styleable name="HighlightDrawer">
+        <attr name="roundedTextHorizontalPadding" format="dimension" />
+        <attr name="roundedTextVerticalPadding" format="dimension" />
+        <attr name="roundedTextDrawable" format="reference" />
+        <attr name="roundedTextDrawableLeft" format="reference" />
+        <attr name="roundedTextDrawableMid" format="reference" />
+        <attr name="roundedTextDrawableRight" format="reference" />
+    </declare-styleable>
+</resources>

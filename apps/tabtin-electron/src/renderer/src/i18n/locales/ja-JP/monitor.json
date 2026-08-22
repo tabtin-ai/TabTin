@@ -1,0 +1,84 @@
+{
+  "status": {
+    "running": "ランニング",
+    "stopped": "停止しました",
+    "streamEnded": "ストリームが終了しました",
+    "failed": "失敗しました"
+  },
+  "stop": "モニターを停止する",
+  "failReason": {
+    "spawnPtyFailed": "モニターの開始に失敗しました (ビジー状態または制限に達しました)。後でもう一度試してください。",
+    "writePtyFailed": "監視コマンドの実行に失敗しました。再試行してください。",
+    "invalidRegex": "無効なフィルター パターンです。ルールを確認して再試行してください。",
+    "alreadyRunning": "このモニターはすでに実行されています。",
+    "unknownAction": "不明なモニターアクション。"
+  },
+  "emitInterrupted": "モニターのレポートが中断されました (認証の有効期限が切れました)。データが不完全である可能性があります。ログイン状態を確認します。",
+  "resourceMonitor": {
+    "severity": {
+      "healthy": "リラックスした",
+      "attention": "良い",
+      "heavy": "重い"
+    },
+    "tagline": {
+      "healthy": "すべてが穏やか - 簡単に作成できます",
+      "attention": "スムーズに実行 — インスピレーションに従ってください",
+      "heavy": "重いと感じます — 使用していないタブを閉じてみてください?"
+    },
+    "current": "現在",
+    "browser": "ブラウザ",
+    "browserReclaim": {
+      "checkTitle": "ブラウザビューの蓄積をチェックする",
+      "available": "{{count}} アイドル状態のブラウザは再利用可能",
+      "noneIdle": "現在、再利用できるアイドル状態のブラウザはありません",
+      "noBrowsers": "ブラウザビューは追跡されません",
+      "reclaimMany": "{{reason}}。まず、切り離された {{count}} のアイドル状態のブラウザを回収し、全体の使用率が低下するかどうかを確認します。",
+      "reclaimOne": "{{reason}}。まず、切り離されたアイドル状態のブラウザ {{title}} を閉じてから、全体的な使用率が低下するかどうかを確認します。",
+      "overview": "{{reason}}。現在、ブラウザ ビューは {{total}}、合計のうち {{share}} です。",
+      "retained": "{{count}} が切り離されているかプレビュー ブラウザ ビューがまだ使用中または読み込み中です。作業の中断を避けるために、これらは再利用されません。",
+      "metricAvailable": "{{count}} 回収可能",
+      "metricNoneIdle": "アイドル状態なし",
+      "metricNoBrowsers": "なし",
+      "action": "アイドル状態のブラウザを再利用する",
+      "actionUnavailable": "回収可能なアイテムはありません",
+      "actionShort": "回収",
+      "boundaryNote": "メイン ウィンドウで使用されていない、切り離されたブラウザまたはアイドル状態のブラウザのみを再利用します。通常のメイン ウィンドウのタブは閉じられません。"
+    },
+    "spaceSection": "宇宙",
+    "resourcesSection": "リソース",
+    "systemOverhead": "システムのオーバーヘッド",
+    "uiEngine": "UIエンジン",
+    "uiEngineDetail": "{{cpu}} · ページ レンダリング エンジン用の共有メモリ",
+    "appHost": "アプリホスト",
+    "appHostDetail": "{{cpu}} · TabTin アプリ自体のベースライン メモリ",
+    "unassigned": "未割り当て",
+    "unassignedDetail": "{{cpu}} · まだスペースに属していないリソース",
+    "background": "背景",
+    "cpu": "CPU",
+    "cpuCores": "{{count}} コア",
+    "memory": "記憶",
+    "ramShare": "RAMの{{percent}}",
+    "tabs": "タブ",
+    "currentTabs": "現在のタブ",
+    "allSessionTabs": "{{count}} 合計タブ数",
+    "closeAllTabs": "アーカイブされていないすべてのセッションですべてのタブを閉じる",
+    "panes": "{{count}} ペイン",
+    "tabCount": "{{count}} タブ",
+    "runCount": "{{count}} が実行されます",
+    "appCount": "{{label}} × {{count}}",
+    "appBreakdownSeparator": "、",
+    "notCollected": "未回収",
+    "refresh": "リフレッシュ",
+    "refreshLoading": "読み込み中",
+    "trend": {
+      "memoryUp": "メモリアップ {{delta}}",
+      "memoryDown": "メモリダウン {{delta}}",
+      "cpuUp": "CPU アップ {{delta}}",
+      "cpuDown": "CPU ダウン {{delta}}",
+      "stale": "データ遅延 {{duration}}"
+    },
+    "viewDetails": "詳細を見る",
+    "indicatorTitle": "パフォーマンス",
+    "openSettingsAria": "パフォーマンスモニター設定を開く"
+  }
+}

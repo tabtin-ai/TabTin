@@ -1,0 +1,33 @@
+{
+  "libreOffice": {
+    "version": "26.2.5",
+    "downloads": {
+      "darwin-arm64": {
+        "url": "https://download.documentfoundation.org/libreoffice/stable/26.2.5/mac/aarch64/LibreOffice_26.2.5_MacOS_aarch64.dmg",
+        "kind": "dmg",
+        "appName": "LibreOffice.app"
+      },
+      "darwin-x64": {
+        "url": "https://download.documentfoundation.org/libreoffice/stable/26.2.5/mac/x86_64/LibreOffice_26.2.5_MacOS_x86-64.dmg",
+        "kind": "dmg",
+        "appName": "LibreOffice.app"
+      },
+      "win32-x64": {
+        "url": "https://download.documentfoundation.org/libreoffice/stable/26.2.5/win/x86_64/LibreOffice_26.2.5_Win_x86-64.msi",
+        "kind": "msi"
+      },
+      "win32-arm64": {
+        "url": "https://download.documentfoundation.org/libreoffice/stable/26.2.5/win/aarch64/LibreOffice_26.2.5_Win_aarch64.msi",
+        "kind": "msi"
+      }
+    }
+  },
+  "popplerWindows": {
+    "url": "https://github.com/oschwartz10612/poppler-windows/releases/download/v25.07.0-0/Release-25.07.0-0.zip",
+    "kind": "zip"
+  },
+  "popplerMac": {
+    "via": "homebrew",
+    "formula": "poppler"
+  }
+}

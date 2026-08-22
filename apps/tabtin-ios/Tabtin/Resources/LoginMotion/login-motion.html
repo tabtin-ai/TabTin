@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f1eee5">
+  <title>TabTin 登录动画</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #20201c;
+      --paper: #f1eee5;
+      --paper-hi: #fbfaf6;
+      --blue: #086be4;
+      --green: #178739;
+      --gold: #e99b12;
+      --red: #e54419;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--paper); }
+    body { color: var(--ink); }
+    svg { display: block; }
+
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--paper);
+      isolation: isolate;
+    }
+
+    .stage-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 526px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, transparent calc(25% - .5px), rgb(32 32 28 / .11) 25%, transparent calc(25% + .5px)),
+        linear-gradient(90deg, transparent calc(50% - .5px), rgb(32 32 28 / .11) 50%, transparent calc(50% + .5px)),
+        linear-gradient(90deg, transparent calc(75% - .5px), rgb(32 32 28 / .11) 75%, transparent calc(75% + .5px)),
+        var(--paper);
+      transform-origin: top left;
+    }
+
+    .brand-intro,
+    .work-scene,
+    .finale { position: absolute; inset: 0; }
+
+    .brand-intro { z-index: 4; overflow: hidden; background: var(--paper); }
+
+    .brand-lockup {
+      position: absolute;
+      top: 44px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand-mark-field {
+      position: relative;
+      width: 116px;
+      aspect-ratio: 96 / 80;
+      flex: 0 0 auto;
+      opacity: 0;
+      transform-origin: 50% 58%;
+      will-change: transform, opacity;
+    }
+
+    .brand-mark-field svg { width: 100%; height: 100%; overflow: visible; }
+
+    .brand-word {
+      position: relative;
+      display: flex;
+      align-items: baseline;
+      gap: .08em;
+      margin: 0;
+      font-size: clamp(52px, 13.5vw, 60px);
+      font-weight: 950;
+      line-height: 1;
+      letter-spacing: -.045em;
+      white-space: nowrap;
+      transform: translateY(12px);
+    }
+
+    .brand-word span { display: inline-block; opacity: 0; will-change: transform, opacity; }
+    .brand-word span:last-child { color: var(--blue); }
+
+    .manifesto {
+      position: absolute;
+      top: 258px;
+      left: 20px;
+      right: 20px;
+      padding-top: 15px;
+    }
+
+    .manifesto-rule {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--ink);
+      opacity: 0;
+    }
+
+    .manifesto p {
+      margin: 0;
+      font-size: clamp(41px, 12vw, 54px);
+      font-weight: 930;
+      line-height: .89;
+      letter-spacing: -.075em;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .manifesto p span { color: var(--red); }
+
+    .manifesto small {
+      display: block;
+      max-width: 250px;
+      margin-top: 17px;
+      font-size: 11px;
+      font-weight: 650;
+      line-height: 1.45;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .work-scene { z-index: 2; }
+
+    .phase-word {
+      position: absolute;
+      top: 22px;
+      left: 18px;
+      margin: 0;
+      font-size: clamp(51px, 14.5vw, 66px);
+      font-weight: 950;
+      line-height: .82;
+      letter-spacing: -.085em;
+      opacity: 0;
+      transform-origin: left center;
+      will-change: transform, opacity;
+    }
+
+    .phase-word .accent { color: var(--blue); }
+    .phase-word .crossed { position: relative; --strike: 0; }
+    .phase-word .crossed::after {
+      position: absolute;
+      top: 53%;
+      left: -2px;
+      right: -3px;
+      height: 5px;
+      content: "";
+      background: var(--red);
+      transform: rotate(-3deg) scaleX(var(--strike));
+      transform-origin: left;
+    }
+
+    .command {
+      position: absolute;
+      top: 144px;
+      left: 20px;
+      right: 20px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border: 3px solid var(--ink);
+      background: var(--paper-hi);
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .typed {
+      min-width: 0;
+      flex: 1 1 auto;
+      padding-left: 12px;
+      overflow: hidden;
+      font-size: 13px;
+      font-weight: 720;
+      white-space: nowrap;
+    }
+
+    .caret { width: 2px; height: 20px; margin: 0 9px 0 5px; flex: 0 0 auto; background: var(--blue); }
+
+    .command-send {
+      width: 50px;
+      align-self: stretch;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-left: 3px solid var(--ink);
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .command-send svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.6;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+      will-change: transform;
+    }
+
+    .rhythm-rule {
+      position: absolute;
+      top: 234px;
+      left: 20px;
+      right: 20px;
+      height: 1px;
+      background: var(--ink);
+      opacity: 0;
+      transform-origin: left;
+    }
+
+    .app-rhythm {
+      position: absolute;
+      top: 247px;
+      left: 20px;
+      right: 20px;
+      height: 174px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      overflow: hidden;
+    }
+
+    .app-unit {
+      position: relative;
+      min-width: 0;
+      padding-top: 8px;
+      border-bottom: 5px solid var(--ink);
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .app-unit.doc { border-color: var(--blue); }
+    .app-unit.data { border-color: var(--green); }
+    .app-unit.slide { border-color: var(--gold); }
+    .app-number { position: absolute; top: 10px; right: 0; color: #777269; font: 760 8px/1 ui-monospace, monospace; }
+
+    .app-icon {
+      display: block;
+      width: 66px;
+      height: 66px;
+      transform-origin: 50% 78%;
+      filter: drop-shadow(0 3px 0 rgb(32 32 28 / .13));
+      will-change: transform;
+    }
+
+    .app-unit h3 { margin: 5px 0 1px; font-size: 12px; line-height: 1; letter-spacing: -.025em; }
+    .app-detail { height: 26px; margin-top: 9px; opacity: 0; will-change: transform, opacity; }
+    .app-detail i { display: block; background: currentColor; }
+    .doc .app-detail { color: var(--blue); }
+    .doc .app-detail i { width: 82%; height: 3px; margin-bottom: 4px; transform-origin: left; }
+    .doc .app-detail i:nth-child(2) { width: 58%; }
+    .doc .app-detail i:nth-child(3) { width: 72%; }
+    .data .app-detail { display: grid; grid-template-columns: repeat(3, 15px); grid-template-rows: repeat(2, 9px); gap: 3px; color: var(--green); }
+    .data .app-detail i { border: 1px solid currentColor; background: rgb(23 135 57 / .15); }
+    .slide .app-detail { position: relative; width: 48px; border: 2px solid var(--gold); color: var(--gold); }
+    .slide .app-detail i:first-child { width: 28px; height: 3px; margin: 5px 0 0 5px; }
+    .slide .app-detail i:last-child { width: 18px; height: 8px; margin: 4px 0 0 5px; opacity: .38; }
+
+    .beat-bar {
+      position: absolute;
+      z-index: 3;
+      top: 238px;
+      left: 20px;
+      width: 3px;
+      height: 190px;
+      background: var(--red);
+      box-shadow: 7px 0 0 rgb(229 68 25 / .16);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .proof {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 19px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      font: 720 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+      will-change: transform, opacity;
+    }
+
+    .proof-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgb(23 135 57 / .14); }
+
+    .finale {
+      z-index: 10;
+      overflow: hidden;
+      background: var(--ink);
+      color: var(--paper);
+      opacity: 0;
+      clip-path: inset(100% 0 0 0);
+      will-change: clip-path, opacity;
+    }
+
+    .finale-title {
+      position: absolute;
+      z-index: 2;
+      top: 30px;
+      left: 18px;
+      right: 18px;
+      display: grid;
+      gap: 3px;
+      margin: 0;
+      font-size: clamp(49px, 13.33vw, 52px);
+      font-weight: 950;
+      line-height: 1.03;
+      letter-spacing: -.065em;
+    }
+
+    .finale-title span { display: block; opacity: 0; will-change: transform, opacity; }
+    .finale-title em { color: var(--red); font-style: normal; }
+
+    .fold-workbench {
+      position: absolute;
+      z-index: 3;
+      top: 172px;
+      left: 20px;
+      right: 20px;
+      height: 134px;
+      perspective: 720px;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .fold-content,
+    .fold-sheet { position: absolute; inset: 0; transform-style: preserve-3d; }
+    .fold-sheet { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .fold-panel {
+      --fold-accent: var(--blue);
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+      border-top: 1px solid rgb(73 58 39 / .48);
+      border-bottom: 1px solid rgb(73 58 39 / .48);
+      background:
+        repeating-linear-gradient(2deg, rgb(75 58 32 / .018) 0, rgb(75 58 32 / .018) 1px, transparent 1px, transparent 4px),
+        var(--paper);
+      color: var(--ink);
+      opacity: 0;
+      backface-visibility: hidden;
+      will-change: transform, opacity;
+    }
+
+    .fold-panel::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: linear-gradient(90deg, rgb(255 255 255 / .28), transparent 34%, rgb(75 58 32 / .08));
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    .fold-left { border-left: 1px solid rgb(73 58 39 / .48); transform-origin: 100% 50%; }
+    .fold-center { --fold-accent: var(--green); transform-origin: 50% 0; }
+    .fold-right { --fold-accent: var(--gold); border-right: 1px solid rgb(73 58 39 / .48); transform-origin: 0 50%; }
+    .fold-panel strong { position: absolute; z-index: 2; top: 8px; left: 10px; font-size: 22px; line-height: 1; letter-spacing: -.08em; }
+    .fold-panel small { position: absolute; z-index: 2; left: 10px; bottom: 8px; color: #69655e; font: 740 8px/1 ui-monospace, monospace; }
+    .fold-panel > i { position: absolute; z-index: 2; top: 10px; right: 9px; width: 7px; height: 7px; background: var(--fold-accent); }
+    .fold-doc-lines { position: absolute; z-index: 2; top: 48px; left: 10px; right: 10px; }
+    .fold-doc-lines span { display: block; height: 3px; margin-bottom: 6px; background: rgb(32 32 28 / .55); }
+    .fold-doc-lines span:nth-child(2) { width: 72%; }
+    .fold-doc-lines span:nth-child(3) { width: 86%; }
+    .fold-data-grid { position: absolute; z-index: 2; top: 47px; left: 10px; right: 10px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+    .fold-data-grid span { height: 12px; border: 1px solid rgb(32 32 28 / .38); background: rgb(23 135 57 / .08); }
+    .fold-data-grid span:nth-child(2), .fold-data-grid span:nth-child(7), .fold-data-grid span:nth-child(12) { background: rgb(23 135 57 / .36); }
+    .fold-slide-frame { position: absolute; z-index: 2; top: 44px; left: 10px; right: 10px; height: 47px; border: 2px solid var(--gold); }
+    .fold-slide-frame::before { position: absolute; top: 7px; left: 7px; width: 34px; height: 4px; content: ""; background: var(--ink); }
+    .fold-slide-frame::after { position: absolute; right: 7px; bottom: 7px; width: 24px; height: 16px; content: ""; background: rgb(233 155 18 / .38); }
+    .fold-crease { position: absolute; z-index: 5; top: 0; bottom: 0; width: 1px; background: repeating-linear-gradient(to bottom, rgb(32 32 28 / .52) 0 3px, transparent 3px 7px); opacity: 0; }
+    .fold-crease.one { left: 33.333%; }
+    .fold-crease.two { left: 66.666%; }
+
+    .tin-wrap {
+      position: absolute;
+      z-index: 5;
+      right: 18px;
+      bottom: 16px;
+      width: 150px;
+      aspect-ratio: 96 / 80;
+      opacity: 0;
+      transform-origin: 50% 82%;
+      will-change: transform, opacity;
+    }
+
+    .tin-wrap svg { width: 100%; height: 100%; overflow: visible; }
+    .tin-face { fill: #2c2c27; stroke: var(--paper); }
+    .tin-feature { fill: var(--paper); }
+    .tin-antenna { fill: none; stroke: var(--paper); }
+    .tin-signal-point {
+      fill: var(--paper);
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+      will-change: transform, opacity;
+    }
+
+    .finale-note {
+      position: absolute;
+      z-index: 3;
+      left: 20px;
+      bottom: 22px;
+      width: 148px;
+      margin: 0;
+      padding-top: 9px;
+      border-top: 1px solid rgb(241 238 229 / .45);
+      font-size: 10px;
+      font-weight: 650;
+      line-height: 1.45;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .loop-curtain {
+      position: absolute;
+      z-index: 30;
+      inset: 0;
+      background: var(--paper);
+      clip-path: inset(172px 20px 220px 20px);
+      opacity: 0;
+      pointer-events: none;
+      will-change: clip-path, opacity;
+    }
+
+    body[data-lang="en"] .manifesto p { font-size: clamp(38px, 10.8vw, 47px); letter-spacing: -.055em; }
+    body[data-lang="en"] .manifesto small { max-width: 320px; }
+    body[data-lang="en"] .phase-word { font-size: clamp(40px, 10.8vw, 48px); letter-spacing: -.055em; line-height: .94; }
+    body[data-lang="en"] .typed { font-size: 11px; }
+    body[data-lang="en"] .app-unit h3 { font-size: 10px; }
+    body[data-lang="en"] .proof { font-size: 8px; }
+    body[data-lang="en"] .finale-title { font-size: clamp(38px, 10.8vw, 44px); letter-spacing: -.045em; }
+    body[data-lang="en"] .fold-panel small { font-size: 7px; }
+
+    @media (max-width: 355px) {
+      .brand-lockup { left: 12px; right: 12px; gap: 12px; }
+      .brand-mark-field { width: 100px; }
+      .brand-word { transform: translateY(10px); }
+      .manifesto { top: 232px; }
+      .app-icon { width: 58px; height: 58px; }
+      .typed { font-size: 12px; }
+      .finale-title { font-size: 44px; letter-spacing: -.07em; }
+      .fold-panel strong { font-size: 20px; }
+      .fold-panel small { font-size: 7px; }
+      .tin-wrap { right: 12px; width: 132px; }
+    }
+
+    @media (min-width: 560px) and (min-height: 560px) {
+      .stage-canvas { width: 100%; height: 100%; transform: none !important; }
+      .brand-lockup { top: 64px; left: 7%; right: 7%; gap: 28px; }
+      .brand-mark-field { width: 172px; }
+      .brand-word { font-size: clamp(62px, 8vw, 68px); transform: translateY(17px); }
+      .manifesto { top: 284px; left: 7%; right: 7%; }
+      .manifesto p { font-size: clamp(56px, 8vw, 68px); line-height: .9; }
+      .manifesto small { max-width: 420px; margin-top: 20px; font-size: 13px; }
+      .phase-word { top: 36px; left: 48px; font-size: clamp(68px, 8.5vw, 82px); }
+      .command { top: 188px; left: 48px; right: 48px; height: 60px; }
+      .typed { padding-left: 16px; font-size: 15px; }
+      .rhythm-rule { top: 270px; left: 48px; right: 48px; }
+      .app-rhythm { top: 288px; left: 48px; right: 48px; height: 250px; gap: 18px; }
+      .app-unit { padding-top: 12px; }
+      .app-icon { width: 86px; height: 86px; }
+      .app-unit h3 { margin-top: 8px; font-size: 15px; }
+      .app-number { top: 13px; font-size: 9px; }
+      .app-detail { height: 32px; margin-top: 14px; }
+      .beat-bar { top: 280px; left: 48px; height: 270px; }
+      .proof { left: 48px; right: 48px; bottom: 30px; font-size: 10px; }
+      .finale-title { top: 36px; left: 48px; right: 48px; font-size: clamp(60px, 8vw, 72px); }
+      .fold-workbench { top: 210px; left: 48px; right: 48px; height: 170px; }
+      .fold-panel strong { top: 12px; left: 14px; font-size: 28px; }
+      .fold-panel small { left: 14px; bottom: 10px; font-size: 9px; }
+      .fold-panel > i { top: 14px; right: 13px; width: 8px; height: 8px; }
+      .fold-doc-lines { top: 60px; left: 14px; right: 14px; }
+      .fold-data-grid { top: 60px; left: 14px; right: 14px; }
+      .fold-slide-frame { top: 56px; left: 14px; right: 14px; height: 65px; }
+      .tin-wrap { right: 30px; bottom: 82px; width: 180px; }
+      .finale-note { left: 48px; bottom: 30px; width: 210px; font-size: 11px; }
+      body[data-lang="en"] .manifesto p { font-size: clamp(50px, 7vw, 62px); }
+      body[data-lang="en"] .phase-word { font-size: clamp(58px, 7.5vw, 72px); }
+      body[data-lang="en"] .finale-title { font-size: clamp(52px, 6.8vw, 64px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+
+    .capture-mode *, .capture-mode *::before, .capture-mode *::after { animation: none !important; transition: none !important; }
+  </style>
+</head>
+<body>
+  <main class="stage" id="motion" role="img" aria-label="TabTin 从意图到成果的协作动画">
+    <div class="stage-canvas" id="stage-canvas">
+      <section class="brand-intro" id="brand-intro" aria-hidden="true">
+        <div class="brand-lockup">
+          <div class="brand-mark-field" id="brand-mark-field">
+            <svg viewBox="0 0 96 80" aria-hidden="true">
+              <rect x="18" y="28" width="60" height="44" rx="13" fill="#fff" stroke="#262420" stroke-width="5"/>
+              <circle cx="38" cy="50" r="5" fill="#262420"/><circle cx="58" cy="50" r="5" fill="#262420"/>
+              <path d="M48 28V16" fill="none" stroke="#262420" stroke-width="5" stroke-linecap="round"/><circle cx="48" cy="11" r="5.5" fill="#262420"/>
+              <rect x="22" y="7" width="10" height="5" rx="2.5" fill="#262420" transform="rotate(45 27 9.5)"/>
+              <rect x="64" y="7" width="10" height="5" rx="2.5" fill="#262420" transform="rotate(-45 69 9.5)"/>
+            </svg>
+          </div>
+          <h1 class="brand-word"><span>Tab</span><span>Tin</span></h1>
+        </div>
+        <div class="manifesto">
+          <i class="manifesto-rule" id="manifesto-rule"></i>
+          <p id="manifesto-title"><b id="intro-title-0"></b><br><span id="intro-title-1"></span></p>
+          <small id="intro-note"></small>
+        </div>
+      </section>
+
+      <section class="work-scene" aria-hidden="true">
+        <h2 class="phase-word" id="phase-word"><span id="phase-prefix"></span><span class="crossed" id="phase-crossed"></span><br><span class="accent" id="phase-accent"></span></h2>
+        <div class="command" id="command">
+          <span class="typed" id="typed"></span><i class="caret" id="caret"></i>
+          <span class="command-send">
+            <svg id="send-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M14 7l5 5-5 5"/></svg>
+          </span>
+        </div>
+        <i class="rhythm-rule" id="rhythm-rule"></i>
+        <section class="app-rhythm">
+          <article class="app-unit doc" id="app-unit-0">
+            <span class="app-number">01</span>
+            <svg class="app-icon" id="app-icon-0" viewBox="0 0 20 20" aria-hidden="true">
+              <defs><linearGradient id="doc-body" x1="4.5" y1="3.5" x2="15" y2="17" gradientUnits="userSpaceOnUse"><stop stop-color="#0746d7"/><stop offset=".52" stop-color="#086be4"/><stop offset="1" stop-color="#168fea"/></linearGradient><linearGradient id="doc-fold" x1="11.5" y1="3.5" x2="15.5" y2="8" gradientUnits="userSpaceOnUse"><stop stop-color="#719bff"/><stop offset="1" stop-color="#8fc2ff"/></linearGradient></defs>
+              <rect x=".5" y=".5" width="19" height="19" rx="4.5" fill="#fff"/><rect x=".75" y=".75" width="18.5" height="18.5" rx="4.25" fill="none" stroke="#e5e7eb" stroke-width=".5"/><g transform="translate(.375)"><path d="M6 3.25h5.375L16 7.875V14.5a2.75 2.75 0 0 1-2.75 2.75H6a2.75 2.75 0 0 1-2.75-2.75V6A2.75 2.75 0 0 1 6 3.25Z" fill="url(#doc-body)"/><path d="M11.375 3.25v2.375a2.25 2.25 0 0 0 2.25 2.25H16l-4.625-4.625Z" fill="url(#doc-fold)"/><g fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round"><path d="M6.25 9.5H12" stroke-opacity=".96"/><path d="M6.25 11.75H13" stroke-opacity=".88"/><path d="M6.25 14h4.5" stroke-opacity=".8"/></g></g>
+            </svg>
+            <h3 id="app-label-0"></h3><div class="app-detail" id="app-detail-0"><i></i><i></i><i></i></div>
+          </article>
+          <article class="app-unit data" id="app-unit-1">
+            <span class="app-number">02</span>
+            <svg class="app-icon" id="app-icon-1" viewBox="0 0 20 20" aria-hidden="true">
+              <defs><linearGradient id="data-body" x1="4.5" y1="3.5" x2="15" y2="17" gradientUnits="userSpaceOnUse"><stop stop-color="#0a6825"/><stop offset=".52" stop-color="#178739"/><stop offset="1" stop-color="#35a853"/></linearGradient><linearGradient id="data-fold" x1="11.5" y1="3.5" x2="15.5" y2="8" gradientUnits="userSpaceOnUse"><stop stop-color="#65b96d"/><stop offset="1" stop-color="#9bde9e"/></linearGradient></defs>
+              <rect x=".5" y=".5" width="19" height="19" rx="4.5" fill="#fff"/><rect x=".75" y=".75" width="18.5" height="18.5" rx="4.25" fill="none" stroke="#e5e7eb" stroke-width=".5"/><g transform="translate(.375)"><path d="M6 3.25h5.375L16 7.875V14.5a2.75 2.75 0 0 1-2.75 2.75H6a2.75 2.75 0 0 1-2.75-2.75V6A2.75 2.75 0 0 1 6 3.25Z" fill="url(#data-body)"/><path d="M11.375 3.25v2.375a2.25 2.25 0 0 0 2.25 2.25H16l-4.625-4.625Z" fill="url(#data-fold)"/><g fill="none" stroke="#fff" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"><rect x="6.25" y="9.25" width="7.5" height="5.75" rx="1"/><path d="M10 9.25V15M6.25 12.125h7.5"/></g></g>
+            </svg>
+            <h3 id="app-label-1"></h3><div class="app-detail" id="app-detail-1"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+          <article class="app-unit slide" id="app-unit-2">
+            <span class="app-number">03</span>
+            <svg class="app-icon" id="app-icon-2" viewBox="0 0 20 20" aria-hidden="true">
+              <defs><linearGradient id="slide-body" x1="4.5" y1="3.5" x2="15" y2="17" gradientUnits="userSpaceOnUse"><stop stop-color="#d47a00"/><stop offset=".52" stop-color="#e99b12"/><stop offset="1" stop-color="#f2bc32"/></linearGradient><linearGradient id="slide-fold" x1="11.5" y1="3.5" x2="15.5" y2="8" gradientUnits="userSpaceOnUse"><stop stop-color="#f2b23e"/><stop offset="1" stop-color="#ffe18a"/></linearGradient></defs>
+              <rect x=".5" y=".5" width="19" height="19" rx="4.5" fill="#fff"/><rect x=".75" y=".75" width="18.5" height="18.5" rx="4.25" fill="none" stroke="#e5e7eb" stroke-width=".5"/><g transform="translate(.375)"><path d="M6 3.25h5.375L16 7.875V14.5a2.75 2.75 0 0 1-2.75 2.75H6a2.75 2.75 0 0 1-2.75-2.75V6A2.75 2.75 0 0 1 6 3.25Z" fill="url(#slide-body)"/><path d="M11.375 3.25v2.375a2.25 2.25 0 0 0 2.25 2.25H16l-4.625-4.625Z" fill="url(#slide-fold)"/><g fill="none" stroke="#fff" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9.25h6"/><rect x="6.25" y="10.5" width="7.5" height="4.75" rx="1"/></g></g>
+            </svg>
+            <h3 id="app-label-2"></h3><div class="app-detail" id="app-detail-2"><i></i><i></i></div>
+          </article>
+        </section>
+        <i class="beat-bar" id="beat-bar"></i>
+        <div class="proof" id="proof"><i class="proof-dot"></i><span id="proof-text"></span></div>
+      </section>
+
+      <section class="finale" id="finale" aria-hidden="true">
+        <h2 class="finale-title"><span id="final-title-0"></span><span><b id="final-title-prefix"></b> <em id="final-title-accent"></em></span></h2>
+        <section class="fold-workbench" id="fold-workbench">
+          <div class="fold-content" id="fold-content">
+            <div class="fold-sheet">
+              <article class="fold-panel fold-left" id="fold-left"><strong id="fold-action-0">写</strong><i></i><div class="fold-doc-lines"><span></span><span></span><span></span></div><small id="fold-label-0"></small></article>
+              <article class="fold-panel fold-center" id="fold-center"><strong id="fold-action-1">算</strong><i></i><div class="fold-data-grid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><small id="fold-label-1"></small></article>
+              <article class="fold-panel fold-right" id="fold-right"><strong id="fold-action-2">讲</strong><i></i><div class="fold-slide-frame"></div><small id="fold-label-2"></small></article>
+              <span class="fold-crease one"></span><span class="fold-crease two"></span>
+            </div>
+          </div>
+        </section>
+        <div class="tin-wrap" id="tin-wrap">
+          <svg viewBox="0 0 96 80" aria-hidden="true">
+            <rect class="tin-face" x="18" y="28" width="60" height="44" rx="13" stroke-width="5"/>
+            <circle class="tin-feature" cx="38" cy="50" r="5"/><circle class="tin-feature" cx="58" cy="50" r="5"/>
+            <path class="tin-antenna" d="M48 28V16" stroke-width="5" stroke-linecap="round"/><circle class="tin-feature" cx="48" cy="11" r="5.5"/>
+            <g transform="rotate(45 27 9.5)"><rect class="tin-signal-point" x="22" y="7" width="10" height="5" rx="2.5"/></g>
+            <g transform="rotate(-45 69 9.5)"><rect class="tin-signal-point" x="64" y="7" width="10" height="5" rx="2.5"/></g>
+          </svg>
+        </div>
+        <p class="finale-note" id="finale-note"></p>
+      </section>
+
+      <div class="loop-curtain" id="loop-curtain" aria-hidden="true"></div>
+    </div>
+  </main>
+
+  <script>
+  (() => {
+    'use strict';
+
+    const LOOP = 12410;
+    const BASE_STAGE_HEIGHT = 526;
+    const TABLET_WIDTH = 560;
+    const TABLET_HEIGHT = 560;
+    const $ = id => document.getElementById(id);
+    const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
+    const segment = (time, start, end) => clamp((time - start) / (end - start));
+    const lerp = (start, end, progress) => start + (end - start) * progress;
+    const smooth = progress => progress * progress * (3 - 2 * progress);
+    const outCubic = progress => 1 - Math.pow(1 - progress, 3);
+    const inOutCubic = progress => progress < .5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+    const outBack = (progress, amount = 1.2) => 1 + (amount + 1) * Math.pow(progress - 1, 3) + amount * Math.pow(progress - 1, 2);
+    const setOpacity = (element, value) => { element.style.opacity = clamp(value).toFixed(3); };
+    const mixColor = (start, end, progress) => {
+      const value = start.map((channel, index) => Math.round(lerp(channel, end[index], progress)));
+      return `rgb(${value.join(' ')})`;
+    };
+
+    const copies = {
+      zh: {
+        aria: 'TabTin 从意图到成果的协作动画',
+        introTitle: ['不止于对话。', '更在于共事。'],
+        introNote: '每一份意图，都在同一工作现场化为可见、可追溯、可接续的成果。',
+        phasePrefix: '不止', phaseCrossed: '回应', phaseAccent: '付诸行动',
+        command: '将这个网页整理为一份汇报材料',
+        apps: ['撰写文档', '梳理数据', '编排演示'],
+        proof: '全程 7 步留痕 · 进展随时可溯',
+        finalTitle: '你给出方向。', finalPrefix: '成果由此', finalAccent: '展开。',
+        actions: ['写', '算', '讲'],
+        folds: ['文稿成形', '数据归序', '演示成章'],
+        finalNote: '人与智能体并肩共事，过程可见，成果可溯。',
+      },
+      en: {
+        aria: 'TabTin collaboration from intent to outcome',
+        introTitle: ['Beyond chat.', 'Work, together.'],
+        introNote: 'Every intent becomes visible, traceable work inside one shared workspace.',
+        phasePrefix: 'Beyond ', phaseCrossed: 'replies', phaseAccent: 'Into action',
+        command: 'Turn this webpage into a concise briefing',
+        apps: ['Draft document', 'Structure data', 'Build slides'],
+        proof: '7 steps recorded · Progress stays traceable',
+        finalTitle: 'You set direction.', finalPrefix: 'Work takes', finalAccent: 'shape.',
+        actions: ['Write', 'Sort', 'Tell'],
+        folds: ['Draft formed', 'Data ordered', 'Story shaped'],
+        finalNote: 'People and agents work side by side, with every step visible.',
+      },
+    };
+
+    const query = new URLSearchParams(location.search);
+    const language = (query.get('lang') || navigator.language || 'zh').toLowerCase().startsWith('zh') ? 'zh' : 'en';
+    const copy = copies[language];
+    document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
+    document.body.dataset.lang = language;
+    $('motion').setAttribute('aria-label', copy.aria);
+    $('intro-title-0').textContent = copy.introTitle[0];
+    $('intro-title-1').textContent = copy.introTitle[1];
+    $('intro-note').textContent = copy.introNote;
+    $('phase-prefix').textContent = copy.phasePrefix;
+    $('phase-crossed').textContent = copy.phaseCrossed;
+    $('phase-accent').textContent = copy.phaseAccent;
+    copy.apps.forEach((label, index) => { $(`app-label-${index}`).textContent = label; });
+    $('proof-text').textContent = copy.proof;
+    $('final-title-0').textContent = copy.finalTitle;
+    $('final-title-prefix').textContent = copy.finalPrefix;
+    $('final-title-accent').textContent = copy.finalAccent;
+    copy.actions.forEach((label, index) => { $(`fold-action-${index}`).textContent = label; });
+    copy.folds.forEach((label, index) => { $(`fold-label-${index}`).textContent = label; });
+    $('finale-note').textContent = copy.finalNote;
+
+    const stage = $('motion');
+    const canvas = $('stage-canvas');
+    const brandIntro = $('brand-intro');
+    const brandMark = $('brand-mark-field');
+    const brandWords = [...document.querySelectorAll('.brand-word span')];
+    const manifestoRule = $('manifesto-rule');
+    const manifestoTitle = $('manifesto-title');
+    const introNote = $('intro-note');
+    const phaseWord = $('phase-word');
+    const phaseCrossed = $('phase-crossed');
+    const command = $('command');
+    const typed = $('typed');
+    const caret = $('caret');
+    const sendArrow = $('send-arrow');
+    const rhythmRule = $('rhythm-rule');
+    const beatBar = $('beat-bar');
+    const appUnits = [0, 1, 2].map(index => $(`app-unit-${index}`));
+    const appIcons = [0, 1, 2].map(index => $(`app-icon-${index}`));
+    const appDetails = [0, 1, 2].map(index => $(`app-detail-${index}`));
+    const docLines = [...document.querySelectorAll('.doc .app-detail i')];
+    const proof = $('proof');
+    const finale = $('finale');
+    const finaleTitles = [...document.querySelectorAll('.finale-title span')];
+    const foldWorkbench = $('fold-workbench');
+    const foldContent = $('fold-content');
+    const foldPanels = [$('fold-left'), $('fold-center'), $('fold-right')];
+    const creases = [...document.querySelectorAll('.fold-crease')];
+    const tinWrap = $('tin-wrap');
+    const signals = [...document.querySelectorAll('.tin-signal-point')];
+    const finaleNote = $('finale-note');
+    const curtain = $('loop-curtain');
+    let tabletMode = false;
+    let logicalStageHeight = BASE_STAGE_HEIGHT;
+
+    const syncLayout = () => {
+      const bounds = stage.getBoundingClientRect();
+      tabletMode = bounds.width >= TABLET_WIDTH && bounds.height >= TABLET_HEIGHT;
+      if (tabletMode) {
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.transform = 'none';
+        logicalStageHeight = Math.max(BASE_STAGE_HEIGHT, bounds.height);
+      } else {
+        const scale = Math.min(1, bounds.height / BASE_STAGE_HEIGHT);
+        canvas.style.width = `${bounds.width / Math.max(scale, .01)}px`;
+        logicalStageHeight = Math.max(BASE_STAGE_HEIGHT, bounds.height / Math.max(scale, .01));
+        canvas.style.height = `${logicalStageHeight}px`;
+        canvas.style.transform = `scale(${scale})`;
+      }
+    };
+
+    const render = time => {
+      const T = ((time % LOOP) + LOOP) % LOOP;
+
+      const markProgress = outBack(segment(T, 0, 820));
+      setOpacity(brandMark, smooth(segment(T, 0, 380)));
+      brandMark.style.transform = `rotate(${lerp(-9, 0, markProgress).toFixed(2)}deg) scale(${lerp(.45, 1, markProgress).toFixed(3)})`;
+
+      brandWords.forEach((word, index) => {
+        const start = 160 + index * 95;
+        const progress = outCubic(segment(T, start, start + 520));
+        setOpacity(word, smooth(segment(T, start, start + 360)));
+        word.style.transform = `translateX(${lerp(32, 0, progress).toFixed(2)}px)`;
+      });
+      setOpacity(manifestoRule, smooth(segment(T, 80, 440)));
+
+      const manifestoProgress = outCubic(segment(T, 660, 1220));
+      setOpacity(manifestoTitle, smooth(segment(T, 660, 980)));
+      manifestoTitle.style.transform = `translateY(${lerp(24, 0, manifestoProgress).toFixed(2)}px)`;
+      const noteProgress = outCubic(segment(T, 930, 1350));
+      setOpacity(introNote, smooth(segment(T, 930, 1210)));
+      introNote.style.transform = `translateX(${lerp(-15, 0, noteProgress).toFixed(2)}px)`;
+
+      const introExit = inOutCubic(segment(T, 1710, 2430));
+      setOpacity(brandIntro, 1 - introExit * .15);
+      const introDistance = -(logicalStageHeight + 4);
+      brandIntro.style.transform = `translateY(${lerp(0, introDistance, introExit).toFixed(2)}px)`;
+
+      const phaseProgress = outBack(segment(T, 1860, 2510), .7);
+      setOpacity(phaseWord, smooth(segment(T, 1860, 2220)));
+      phaseWord.style.transform = `translateY(${lerp(30, 0, phaseProgress).toFixed(2)}px) scale(${lerp(.9, 1, phaseProgress).toFixed(3)})`;
+      const strikeProgress = outCubic(segment(T, 2420, 2780));
+      phaseCrossed.style.setProperty('--strike', strikeProgress.toFixed(3));
+      phaseCrossed.style.color = mixColor([32, 32, 28], [106, 104, 97], smooth(segment(T, 2420, 2720)));
+
+      const commandProgress = outCubic(segment(T, 2580, 3040));
+      setOpacity(command, smooth(segment(T, 2580, 2870)));
+      command.style.transform = `translateX(${lerp(-34, 0, commandProgress).toFixed(2)}px)`;
+      const typedCount = Math.round(copy.command.length * segment(T, 2890, 3970));
+      const typedValue = copy.command.slice(0, typedCount);
+      if (typed.textContent !== typedValue) typed.textContent = typedValue;
+      const caretVisible = T >= 2860 && T < 4080 && ((T - 2860) % 430 < 260);
+      setOpacity(caret, caretVisible ? 1 : 0);
+      const arrowPress = Math.sin(Math.PI * segment(T, 3860, 4080));
+      sendArrow.style.transform = `translateX(${(2 * arrowPress).toFixed(2)}px) scale(${(1 - .14 * arrowPress).toFixed(3)})`;
+
+      const ruleProgress = outCubic(segment(T, 3950, 4310));
+      setOpacity(rhythmRule, ruleProgress);
+      rhythmRule.style.transform = `scaleX(${ruleProgress.toFixed(3)})`;
+      const beatProgress = inOutCubic(segment(T, 4180, 5460));
+      const beatDistance = Math.max(0, canvas.clientWidth - (tabletMode ? 99 : 40));
+      beatBar.style.transform = `translateX(${(beatDistance * beatProgress).toFixed(2)}px)`;
+      setOpacity(beatBar, Math.sin(Math.PI * segment(T, 4180, 5460)));
+
+      appUnits.forEach((unit, index) => {
+        const start = 4260 + index * 180;
+        const unitProgress = outBack(segment(T, start, start + 650), .75);
+        setOpacity(unit, smooth(segment(T, start, start + 340)));
+        unit.style.transform = `translateY(${lerp(68, 0, unitProgress).toFixed(2)}px)`;
+
+        const pulseProgress = segment(T, 4440 + index * 180, 5120 + index * 180);
+        const pulse = Math.sin(Math.PI * pulseProgress);
+        const wobble = lerp(index === 0 ? -5 : 0, index === 2 ? 5 : 0, outCubic(pulseProgress));
+        appIcons[index].style.transform = `scale(${(1 + .16 * pulse).toFixed(3)}) rotate(${wobble.toFixed(2)}deg)`;
+
+        const detailProgress = outCubic(segment(T, 5120 + index * 120, 5470 + index * 120));
+        setOpacity(appDetails[index], detailProgress);
+        appDetails[index].style.transform = `translateX(${lerp(-8, 0, detailProgress).toFixed(2)}px)`;
+      });
+      docLines.forEach((line, index) => {
+        const lineProgress = outCubic(segment(T, 5180 + index * 55, 5540 + index * 55));
+        line.style.transform = `scaleX(${lineProgress.toFixed(3)})`;
+      });
+
+      const proofProgress = outCubic(segment(T, 5910, 6330));
+      setOpacity(proof, smooth(segment(T, 5910, 6200)));
+      proof.style.transform = `translateY(${lerp(10, 0, proofProgress).toFixed(2)}px)`;
+
+      const finaleProgress = inOutCubic(segment(T, 7120, 7840));
+      setOpacity(finale, finaleProgress);
+      finale.style.clipPath = `inset(${lerp(100, 0, finaleProgress).toFixed(3)}% 0 0 0)`;
+
+      finaleTitles.forEach((title, index) => {
+        const start = 7600 + index * 70;
+        const progress = outCubic(segment(T, start, start + 520));
+        setOpacity(title, smooth(segment(T, start, start + 290)));
+        title.style.transform = `translateX(${lerp(-28, 0, progress).toFixed(2)}px)`;
+      });
+
+      const workbenchProgress = outCubic(segment(T, 8000, 8320));
+      setOpacity(foldWorkbench, workbenchProgress);
+      foldWorkbench.style.transform = `translateY(${lerp(12, 0, workbenchProgress).toFixed(2)}px)`;
+      const leftProgress = inOutCubic(segment(T, 8080, 8640));
+      foldPanels[0].style.transform = `rotateY(${lerp(82, 0, leftProgress).toFixed(2)}deg)`;
+      setOpacity(foldPanels[0], leftProgress);
+      const centerProgress = inOutCubic(segment(T, 8140, 8700));
+      foldPanels[1].style.transform = `rotateX(${lerp(-76, 0, centerProgress).toFixed(2)}deg)`;
+      setOpacity(foldPanels[1], centerProgress);
+      const rightProgress = inOutCubic(segment(T, 8200, 8760));
+      foldPanels[2].style.transform = `rotateY(${lerp(-82, 0, rightProgress).toFixed(2)}deg)`;
+      setOpacity(foldPanels[2], rightProgress);
+      creases.forEach((crease, index) => setOpacity(crease, .62 * smooth(segment(T, 8500 + index * 70, 8760 + index * 70))));
+
+      const tinProgress = outBack(segment(T, 8660, 9440), .42);
+      setOpacity(tinWrap, smooth(segment(T, 8660, 9060)));
+      const breathe = T >= 9680 && T <= 10560 ? -3 * Math.sin(Math.PI * segment(T, 9680, 10560)) : 0;
+      tinWrap.style.transform = `translateY(${(lerp(90, 0, tinProgress) + breathe).toFixed(2)}px) rotate(${lerp(2, 0, tinProgress).toFixed(2)}deg)`;
+      signals.forEach((signal, index) => {
+        const signalIn = outBack(segment(T, 9080 + index * 60, 9440 + index * 60), .35);
+        const signalPulse = Math.sin(Math.PI * segment(T, 10240 + index * 60, 10660 + index * 60));
+        setOpacity(signal, smooth(segment(T, 9080 + index * 60, 9340 + index * 60)));
+        signal.style.scale = (lerp(.6, 1, signalIn) * (1 + .28 * signalPulse)).toFixed(3);
+      });
+
+      const noteIn = outCubic(segment(T, 8940, 9300));
+      setOpacity(finaleNote, smooth(segment(T, 8940, 9200)));
+      finaleNote.style.transform = `translateY(${lerp(12, 0, noteIn).toFixed(2)}px)`;
+
+      const foldFade = 1 - smooth(segment(T, 11320, 11500));
+      setOpacity(foldContent, foldFade);
+      const curtainOpacity = smooth(segment(T, 11320, 11500));
+      setOpacity(curtain, curtainOpacity);
+      const curtainGrow = inOutCubic(segment(T, 11500, 12150));
+      const startTop = tabletMode ? 210 : 172;
+      const startSide = tabletMode ? 48 : 20;
+      const startBottom = Math.max(0, logicalStageHeight - (tabletMode ? 380 : 306));
+      curtain.style.clipPath = `inset(${lerp(startTop, 0, curtainGrow).toFixed(2)}px ${lerp(startSide, 0, curtainGrow).toFixed(2)}px ${lerp(startBottom, 0, curtainGrow).toFixed(2)}px ${lerp(startSide, 0, curtainGrow).toFixed(2)}px)`;
+    };
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const pinned = query.has('t');
+    let hostActive = true;
+    let playing = false;
+    let epoch = performance.now();
+    let frozen = 0;
+    let frameId = 0;
+
+    const tick = now => {
+      if (!playing) return;
+      render((now - epoch) % LOOP);
+      frameId = requestAnimationFrame(tick);
+    };
+    const pausePlayback = () => {
+      if (!playing) return;
+      frozen = (performance.now() - epoch) % LOOP;
+      playing = false;
+      cancelAnimationFrame(frameId);
+    };
+    const resumePlayback = () => {
+      if (!hostActive || playing || pinned || reducedMotion.matches || document.hidden) return;
+      epoch = performance.now() - frozen;
+      playing = true;
+      frameId = requestAnimationFrame(tick);
+    };
+    const setActive = active => {
+      hostActive = Boolean(active);
+      if (hostActive) resumePlayback();
+      else pausePlayback();
+    };
+    const seek = milliseconds => {
+      const nextTime = Number(milliseconds);
+      if (!Number.isFinite(nextTime)) return;
+      pausePlayback();
+      frozen = ((nextTime % LOOP) + LOOP) % LOOP;
+      render(frozen);
+    };
+
+    window.tabtinMotion = { pause: () => setActive(false), resume: () => setActive(true), seek, setActive };
+    document.addEventListener('visibilitychange', () => { if (document.hidden) pausePlayback(); else resumePlayback(); });
+    reducedMotion.addEventListener?.('change', event => {
+      if (event.matches) {
+        pausePlayback();
+        frozen = 6200;
+        render(frozen);
+      } else {
+        frozen = 0;
+        render(0);
+        resumePlayback();
+      }
+    });
+    const syncResponsiveStage = () => {
+      const visibleTime = playing ? (performance.now() - epoch) % LOOP : frozen;
+      syncLayout();
+      render(visibleTime);
+    };
+    if ('ResizeObserver' in window) new ResizeObserver(syncResponsiveStage).observe(stage);
+    else window.addEventListener('resize', syncResponsiveStage, { passive: true });
+
+    if (query.has('capture')) document.documentElement.classList.add('capture-mode');
+    syncLayout();
+    if (reducedMotion.matches) {
+      frozen = 6200;
+      render(frozen);
+    } else if (pinned) {
+      seek(Number.parseFloat(query.get('t')) || 0);
+    } else {
+      render(0);
+      resumePlayback();
+    }
+    document.body.dataset.ready = 'true';
+  })();
+  </script>
+</body>
+</html>

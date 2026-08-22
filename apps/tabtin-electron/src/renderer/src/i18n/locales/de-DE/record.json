@@ -1,0 +1,58 @@
+{
+  "errors": {
+    "noTable": "Keine Tabelle ausgewählt",
+    "submitFailed": "Aktion fehlgeschlagen",
+    "loadHistoryFailed": "Der Verlauf konnte nicht geladen werden",
+    "tryAgainLater": "Bitte versuchen Sie es später noch einmal"
+  },
+  "comments": {
+    "recoverableSubmitFailed": "Der Kommentar wurde nicht gesendet, weil die Netzwerkverbindung fehlgeschlagen ist oder die Anfrage abgelaufen ist. Ihr Entwurf wurde aufbewahrt. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    "title": "Kommentare",
+    "toggle": "Kommentare öffnen",
+    "placeholder": "Kommentar hinzufügen, @ eingeben, um Mitglieder zu erwähnen",
+    "submit": "Kommentar posten",
+    "delete": "Löschen",
+    "deleting": "Löschen...",
+    "retry": "Erneut versuchen",
+    "loading": "Kommentare werden geladen...",
+    "noMentionResults": "Keine passenden Mitglieder",
+    "loadMore": "Ältere Kommentare laden",
+    "loadingMore": "Wird geladen...",
+    "reply": "Antworten",
+    "replyingTo": "Antwort an",
+    "cancelReply": "Antwort abbrechen",
+    "deletedComment": "Ursprünglicher Kommentar gelöscht",
+    "filterOpen": "Offen",
+    "filterResolved": "Gelöst",
+    "filterAll": "Alle",
+    "resolveThread": "Lösen",
+    "reopenThread": "Wieder öffnen",
+    "updatingThread": "Aktualisierung...",
+    "empty": "Keine Kommentare",
+    "countUnit": "Threads"
+  },
+  "systemFields": {
+    "parentRecord": {
+      "name": "Übergeordneter Datensatz",
+      "description": "Übergeordnetes Datensatzfeld für die Unterdatensatz-Hierarchie"
+    }
+  },
+  "apiErrors": {
+    "fetchTrashFailed": "Die gelöschten Datensätze konnten nicht abgerufen werden",
+    "restoreFromTrashFailed": "Datensatz konnte nicht wiederhergestellt werden",
+    "restoreBatchFromTrashFailed": "Datensätze konnten nicht im Stapel wiederhergestellt werden"
+  },
+  "dialog": {
+    "createTitle": "Datensatz zu „{{name}}“ hinzufügen",
+    "editTitle": "Datensatz bearbeiten",
+    "viewTitle": "Datensatz ansehen",
+    "createDescription": "Füllen Sie das Formular aus, um einen neuen Datensatz zu erstellen. Mit * gekennzeichnete Felder sind Pflichtfelder.",
+    "editDescription": "Aktualisieren Sie den Datensatz. Das primäre Feld kann bearbeitet werden. Halten Sie die Bezeichner eindeutig."
+  },
+  "incrementalSync": {
+    "errors": {
+      "aiTimeout": "Zeitüberschreitung bei der KI-Verarbeitung. Bitte aktualisieren Sie die Seite.",
+      "networkError": "Netzwerkfehler. Bitte aktualisieren Sie die Seite."
+    }
+  }
+}

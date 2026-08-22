@@ -1,0 +1,138 @@
+{
+  "id": "tabweb",
+  "name": "Browser",
+  "version": "0.1.0",
+  "description": "网页浏览与自动化 — 页面采集、数据提取、智能交互和多标签管理",
+  "objectModel": {
+    "entities": [
+      "tab",
+      "page"
+    ],
+    "schema": {
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "executionTarget": "frontend",
+  "uiRuntime": "localBundle",
+  "agentRuntime": "frontendBridge",
+  "distribution": "builtin",
+  "surface": "builtin",
+  "uiHints": {
+    "iconAsset": {
+      "default": "assets/icon.svg",
+      "presentation": "selfContained",
+      "aliases": [
+        "browser"
+      ]
+    }
+  },
+  "contextSources": [
+    "tabweb"
+  ],
+  "permissions": [
+    "tabweb"
+  ],
+  "requiredCapabilities": [],
+  "runtimeDependencies": [],
+  "runtimeSupport": {
+    "electron": {
+      "mode": "full",
+      "label": "GUI 浏览器"
+    },
+    "daemon": {
+      "mode": "headless",
+      "label": "Headless 浏览器",
+      "note": "支持网页抓取、页面自动化、截图、PDF 生成、资源探测与下载、流媒体解析，无 GUI 可视化交互"
+    }
+  },
+  "skillsConfig": {
+    "entries": {
+      "browser-operator": {
+        "enabled": true
+      },
+      "browser-collect": {
+        "enabled": true
+      },
+      "browser-media": {
+        "enabled": true
+      },
+      "platform-reach": {
+        "enabled": true
+      }
+    }
+  },
+  "skills": [
+    "skills/browser-operator",
+    "skills/browser-collect",
+    "skills/browser-media",
+    "skills/platform-reach"
+  ],
+  "lifecycleHooks": {},
+  "kind": "app",
+  "runtimeBindings": {
+    "toolProvider": "action-tools:tabweb",
+    "uiProvider": "electron:context-space.tabweb",
+    "skillsProvider": "skills:local"
+  },
+  "icon": "globe",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "contextFields": [
+      {
+        "name": "current_browser_url",
+        "label": "url",
+        "isResourceId": false
+      },
+      {
+        "name": "current_browser_title",
+        "label": "title",
+        "isResourceId": false
+      }
+    ],
+    "toolDomains": [],
+    "hasPromptSection": true,
+    "displayField": "url",
+    "workspaceRootSource": "",
+    "isFrontendDependent": true,
+    "typeAliases": []
+  },
+  "opens": {
+    "types": [
+      {
+        "type": "webpage",
+        "priority": 100
+      },
+      {
+        "type": "web_selection",
+        "priority": 100
+      },
+      {
+        "type": "web_annotation",
+        "priority": 100
+      }
+    ],
+    "schemes": [
+      {
+        "scheme": "http:",
+        "priority": 50
+      },
+      {
+        "scheme": "https:",
+        "priority": 50
+      }
+    ]
+  },
+  "catalog": {
+    "category": "development",
+    "desktopGroup": "capabilities",
+    "canCreate": true,
+    "searchable": false,
+    "isDefaultEnabled": true,
+    "order": 7
+  }
+}

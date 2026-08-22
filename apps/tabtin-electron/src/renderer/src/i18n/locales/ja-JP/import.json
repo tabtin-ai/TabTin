@@ -1,0 +1,31 @@
+{
+  "errors": {
+    "responseInvalid": "サーバーからの応答形式が無効です",
+    "missingStats": "応答に統計データがありません",
+    "missingFieldMapping": "応答にフィールド マッピング データがありません",
+    "previewFailed": "ファイルのプレビューに失敗しました。もう一度試してください。",
+    "previewNetworkUnstable": "ネットワーク接続が不安定です。再試行してプロキシ/VPN を確認してください。",
+    "importFailed": "データのインポートに失敗しました。もう一度試してください。",
+    "importInFlight": "インポートはすでに進行中です。お待ちください。",
+    "templateDownloadFailed": "テンプレートのダウンロードに失敗しました。もう一度試してください。"
+  },
+  "apiErrors": {
+    "previewFailedWithStatus": "プレビューに失敗しました: HTTP {{status}}",
+    "emptyResponse": "サーバーは空のデータを返しました",
+    "missingStats": "サーバー応答に統計フィールドがありません",
+    "missingFieldMapping": "サーバー応答に field_mapping フィールドがありません",
+    "csvImportFailedWithStatus": "CSV インポートに失敗しました: HTTP {{status}}",
+    "excelImportFailedWithStatus": "Excel のインポートに失敗しました: HTTP {{status}}",
+    "jsonImportFailedWithStatus": "JSON インポートに失敗しました: HTTP {{status}}",
+    "templateDownloadFailedWithStatus": "テンプレートのダウンロードに失敗しました: HTTP {{status}}",
+    "unsupportedFileFormat": "サポートされていないファイル形式: {{format}}",
+    "fileEmpty": "ファイルの内容が空です",
+    "fileReadFailed": "ファイルの読み取りに失敗しました"
+  },
+  "template": {
+    "defaultTableName": "テーブル",
+    "filenameExcel": "{{tableName}}_import_template.xlsx",
+    "filename": "{{tableName}}_import_template.csv",
+    "filenameJson": "{{tableName}}_import_template.json"
+  }
+}

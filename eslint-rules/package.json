@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "type": "module",
+  "description": "Internal ESLint rules for TabTin contract governance — see ./README.md. NOT a publishable package.",
+  "scripts": {
+    "test": "node __tests__/no-empty-catch.test.mjs && node __tests__/no-direct-fetch-in-renderer.test.mjs && node __tests__/use-virtualizer-stable-callbacks.test.mjs"
+  }
+}

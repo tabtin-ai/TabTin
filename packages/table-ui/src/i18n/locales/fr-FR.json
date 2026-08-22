@@ -1,0 +1,29 @@
+{
+  "group": {
+    "ungrouped": "Non groupé",
+    "unclassified": "Non classé",
+    "loadedOfTotal": "{{loaded}} de {{total}} chargé"
+  },
+  "attachments": {
+    "missingRequired": "Pièces jointes requises manquantes"
+  },
+  "record": {
+    "createMissingTableTitle": "Impossible de créer un enregistrement",
+    "createMissingTableDesc": "Informations de table manquantes. Veuillez resélectionner le tableau et réessayer.",
+    "createFailedTitle": "Échec de la création",
+    "createFailedDesc": "Échec de la création de l'enregistrement. Veuillez réessayer plus tard.",
+    "createFailedFallback": "Impossible de créer un enregistrement. Veuillez réessayer plus tard.",
+    "createPatchFailedTitle": "Les modifications supplémentaires n'ont pas été enregistrées",
+    "createPatchFailedDesc": "L'enregistrement a été créé, mais les dernières modifications après l'enregistrement n'ont pas été appliquées. Veuillez réessayer.",
+    "createdTitle": "Créé",
+    "createdHiddenDesc": "Les nouveaux enregistrements {{count}} ne sont actuellement pas visibles dans cette vue.",
+    "createdHiddenAction": "Révéler en effaçant les filtres"
+  },
+  "error": {
+    "cellUpdateFailed": "Échec de la mise à jour de la cellule. Veuillez réessayer."
+  },
+  "autoFill": {
+    "createdTimeHint": "Ce champ est rempli automatiquement lors de la création de l'enregistrement",
+    "lastModifiedTimeHint": "Ce champ est mis à jour automatiquement à chaque modification d'enregistrement"
+  }
+}

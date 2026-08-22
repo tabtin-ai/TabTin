@@ -1,0 +1,64 @@
+{
+  "title": "终端",
+  "exitCode": "退出码: {{code}}",
+  "restart": "重启",
+  "scrollToBottom": "滚动到底部",
+  "errors": {
+    "createSessionFailed": "[错误] 无法创建终端会话",
+    "ptyUnavailable": "PTY API 不可用"
+  },
+  "status": {
+    "processExited": "进程已退出，退出码: {{code}}",
+    "idle": "空闲",
+    "running": "运行中",
+    "exited": "已退出"
+  },
+  "restore": {
+    "title": "已恢复历史输出（进程已断开）",
+    "restored": "历史输出已恢复",
+    "startShell": "重新启动 Shell",
+    "dismiss": "关闭"
+  },
+  "split": {
+    "splitRight": "向右分屏",
+    "splitDown": "向下分屏",
+    "maximize": "最大化",
+    "restore": "还原",
+    "close": "关闭面板",
+    "maxPanesReached": "已达最大面板数 ({{max}})",
+    "equalize": "均分所有面板",
+    "doubleClickToEqualize": "双击均分"
+  },
+  "contextMenu": {
+    "copy": "复制",
+    "paste": "粘贴",
+    "search": "搜索",
+    "scrollToBottom": "滚动到底部",
+    "clear": "清除终端",
+    "splitRight": "向右分屏",
+    "splitDown": "向下分屏",
+    "equalize": "均分所有面板",
+    "maximize": "最大化",
+    "restore": "还原",
+    "close": "关闭面板"
+  },
+  "search": {
+    "placeholder": "搜索终端内容…",
+    "noMatch": "无匹配",
+    "matchFound": "已找到",
+    "caseSensitive": "区分大小写",
+    "previous": "上一个",
+    "next": "下一个",
+    "close": "关闭搜索"
+  },
+  "imagePaste": {
+    "saving": "正在保存图片…",
+    "saved": "图片已保存",
+    "failed": "图片粘贴失败",
+    "tooLarge": "图片过大 ({{size}}MB)，最大 10MB"
+  },
+  "dragDrop": {
+    "hint": "松开以插入文件路径",
+    "pathError": "无法读取文件路径"
+  }
+}

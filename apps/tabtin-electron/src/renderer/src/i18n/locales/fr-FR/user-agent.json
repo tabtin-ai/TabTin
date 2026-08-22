@@ -1,0 +1,98 @@
+{
+  "labels": {
+    "strategy": "Stratégie User-Agent",
+    "recommended": "Recommandé",
+    "highestRealism": "💯 Réalisme le plus élevé : {{system}}",
+    "mobileDeviceHint": "📱 Choisi au hasard parmi plus de 42 appareils réels",
+    "desktopPoolHint": "🎲 Choisis au hasard parmi plus de 20 UA de bureau, suivi des versions de Chrome pris en charge",
+    "platform": "Plateforme",
+    "browser": "Navigateur",
+    "preview": "Aperçu en direct",
+    "uaPreview": "Aperçu de l'agent utilisateur",
+    "refreshRandom": "Actualiser l'UA aléatoire",
+    "refreshOne": "Choisissez-en un autre",
+    "previewDesktopPool": "🎲 Exemple de pool de postes de travail : choisi au hasard dans le pool {{platform}} + {{browser}}",
+    "previewMobile": "📱 Exemple mobile : pondération aléatoire du pool d'appareils {{device}}",
+    "previewAuto": "✅ Utilisez le système UA pour un maximum de réalisme",
+    "consistencyTitle": "Vérification de la cohérence de la plateforme",
+    "consistencyLine": "Système actuel : {{current}} → Plateforme cible : {{target}}",
+    "fingerprintTitle": "Aperçu intelligent des empreintes digitales",
+    "gpuVendor": "Fournisseur de GPU",
+    "renderer": "Moteur de rendu",
+    "platformInfo": "Informations sur la plateforme",
+    "clientHints": "Les en-têtes des conseils client sont automatiquement adaptés",
+    "advancedSettings": "Paramètres avancés",
+    "customPlaceholder": "Mozilla/5.0 ..."
+  },
+  "mode": {
+    "auto": {
+      "label": "Détection automatique",
+      "description": "Utilisez l'environnement système pour conserver les empreintes digitales natives du GPU et des indices client pour un réalisme optimal."
+    },
+    "mobile": {
+      "label": "Simulation mobile",
+      "description": "Simulez des appareils mobiles avec de vrais profils d'appareils (plus de 42 appareils, adapte automatiquement le GPU et la résolution)"
+    },
+    "desktop_pool": {
+      "label": "Pool UA de bureau",
+      "description": "Choisissez au hasard parmi plus de 20 UA de bureau. La valeur par défaut est la plate-forme actuelle pour des raisons de cohérence, avec une simulation multiplateforme et des filtres de plate-forme/navigateur en option."
+    },
+    "custom": {
+      "label": "UA personnalisée",
+      "description": "Personnalisez entièrement la chaîne UA pour des besoins spéciaux"
+    }
+  },
+  "platforms": {
+    "current": "Plateforme actuelle (conserver en mode natif)",
+    "windows": "Fenêtres",
+    "macos": "macOS",
+    "linux": "Linux"
+  },
+  "browsers": {
+    "chrome": "Chrome",
+    "edge": "Bord",
+    "firefox": "Firefox",
+    "safari": "Safari"
+  },
+  "mobileDevices": {
+    "iphone": "iPhone (modèles populaires aléatoires)",
+    "android": "Android (modèles populaires aléatoires)",
+    "ipad": "iPad (modèles populaires aléatoires)"
+  },
+  "mobileDevicesShort": {
+    "iphone": "iPhone",
+    "android": "Android",
+    "ipad": "iPad"
+  },
+  "platformNames": {
+    "macOS": "macOS",
+    "Windows": "Fenêtres",
+    "Linux": "Linux",
+    "iOS": "IOS",
+    "iPadOS": "iPadOS",
+    "Android": "Android",
+    "Unknown": "Inconnu"
+  },
+  "fingerprint": {
+    "mobileSummary": "📱 Simulation mobile : {{device}} ({{os}} {{version}}) + {{gpu}}",
+    "androidSummary": "📱 Simulation mobile : {{device}} + {{gpu}}",
+    "mac": {
+      "consistent": "✅ Correspondance de plate-forme : conservez l'empreinte digitale native du GPU Apple",
+      "cross": "⚠️ Simulation multiplateforme : utilisez l'empreinte digitale du GPU Apple"
+    },
+    "windows": {
+      "macToWindows": "⚠️ Simulation multiplateforme : Mac → Windows, le GPU sera usurpé en NVIDIA (injection runtime)",
+      "consistent": "✅ Correspondance de plate-forme : conservez l'empreinte digitale native du GPU NVIDIA/AMD/Intel",
+      "cross": "⚠️ Simulation multiplateforme : utilisez l'empreinte digitale du GPU NVIDIA"
+    },
+    "linux": {
+      "consistent": "✅ Correspondance de plate-forme : conservez l'empreinte digitale native du GPU",
+      "cross": "⚠️ Simulation multiplateforme : utilisez l'empreinte digitale du GPU Intel"
+    },
+    "unknown": "⚠️ UA non reconnu, utilisant l'empreinte digitale GPU Intel par défaut"
+  },
+  "consistency": {
+    "best": "✅ Meilleure configuration ! Garder la cohérence de la plate-forme permet les empreintes digitales natives du GPU et est le plus difficile à détecter",
+    "cross": "⚠️ La simulation multiplateforme modifiera les empreintes digitales du GPU ; envisagez le « mode intelligent » pour maintenir la cohérence de la plateforme"
+  }
+}

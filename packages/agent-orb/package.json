@@ -1,0 +1,33 @@
+{
+  "name": "@tabtin/agent-orb",
+  "version": "0.1.0",
+  "description": "Agent 状态点云球体（orb）—— 状态映射、调参预设、确定性绘制数学与退场编排。零平台依赖，三端共用同一份规格。",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tabtin/contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "5.7.2",
+    "vitest": "^3.1.1"
+  }
+}

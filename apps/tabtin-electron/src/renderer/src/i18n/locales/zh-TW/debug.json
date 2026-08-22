@@ -1,0 +1,11 @@
+{
+  "panelEntry": {
+    "title": "爬蟲除錯",
+    "opening": "打開中..."
+  },
+  "errorBoundary": {
+    "title": "介面渲染異常",
+    "unknown": "未知錯誤",
+    "emptyStack": "暫無組件堆疊資訊"
+  }
+}

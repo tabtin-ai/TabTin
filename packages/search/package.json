@@ -1,0 +1,32 @@
+{
+  "name": "@tabtin/search",
+  "version": "0.1.0",
+  "description": "通用搜索库 — 候选集 × 查询 → 相关子集。当前实现为词法 BM25 + 语义向量的双路 RRF 融合，RecallIndex 按 domain 管理候选集（CRUD + 检索 + 向量预热）；零运行时依赖，语义能力由宿主注入",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.2.2",
+    "vitest": "^1.6.1"
+  },
+  "files": [
+    "dist"
+  ]
+}

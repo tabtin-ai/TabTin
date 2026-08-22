@@ -1,0 +1,84 @@
+{
+  "status": {
+    "running": "运行中",
+    "stopped": "已停止",
+    "streamEnded": "流已结束",
+    "failed": "失败"
+  },
+  "stop": "停止监控",
+  "failReason": {
+    "spawnPtyFailed": "监控任务启动失败（资源繁忙或已达上限），请稍后重试。",
+    "writePtyFailed": "监控命令执行失败，请重试。",
+    "invalidRegex": "监控筛选条件格式有误，请检查后重试。",
+    "alreadyRunning": "该监控任务已在运行中。",
+    "unknownAction": "未知的监控操作。"
+  },
+  "emitInterrupted": "监控上报已中断（认证失效），数据可能不完整。请检查登录状态。",
+  "resourceMonitor": {
+    "severity": {
+      "healthy": "松弛",
+      "attention": "良好",
+      "heavy": "满载"
+    },
+    "tagline": {
+      "healthy": "一切从容，安心创作吧",
+      "attention": "运转顺畅，灵感来了尽管发挥",
+      "heavy": "有点吃力了，试试关几个不用的标签？"
+    },
+    "current": "当前",
+    "browser": "Browser",
+    "browserReclaim": {
+      "checkTitle": "检查 Browser 视图堆积",
+      "available": "可回收 {{count}} 个空闲 Browser",
+      "noneIdle": "暂无可回收的空闲 Browser",
+      "noBrowsers": "当前没有 Browser 视图",
+      "reclaimMany": "{{reason}}，可先回收 {{count}} 个脱屏空闲 Browser，再观察总账是否回落。",
+      "reclaimOne": "{{reason}}，可先关闭脱屏空闲 Browser {{title}}，再观察总账是否回落。",
+      "overview": "{{reason}}，当前共有 {{total}} 个 Browser 视图，占总账 {{share}}。",
+      "retained": "当前有 {{count}} 个脱屏或预览 Browser 仍在使用或加载中，为避免中断任务暂不回收。",
+      "metricAvailable": "可回收 {{count}}",
+      "metricNoneIdle": "暂无空闲",
+      "metricNoBrowsers": "无视图",
+      "action": "一键回收空闲 Browser",
+      "actionUnavailable": "暂无可回收项",
+      "actionShort": "回收",
+      "boundaryNote": "仅会回收脱屏或预览态、且当前不在主窗口使用中的空闲 Browser，不会关闭主窗口里的普通标签。"
+    },
+    "spaceSection": "Space",
+    "resourcesSection": "资源",
+    "systemOverhead": "系统开销",
+    "uiEngine": "界面引擎",
+    "uiEngineDetail": "{{cpu}} · 页面渲染引擎的共享内存开销",
+    "appHost": "应用本体",
+    "appHostDetail": "{{cpu}} · TabTin 应用自身运行所需的基础内存",
+    "unassigned": "未归因",
+    "unassignedDetail": "{{cpu}} · 暂未归属到具体 Space 的资源",
+    "background": "后台",
+    "cpu": "CPU",
+    "cpuCores": "{{count}} 核",
+    "memory": "内存",
+    "ramShare": "占 {{percent}}",
+    "tabs": "标签",
+    "currentTabs": "当前标签",
+    "allSessionTabs": "总标签 {{count}} 个",
+    "closeAllTabs": "关闭所有未归档会话的全部标签",
+    "panes": "{{count}} 个窗格",
+    "tabCount": "{{count}} 个标签",
+    "runCount": "{{count}} 个运行",
+    "appCount": "{{label}} {{count}} 个",
+    "appBreakdownSeparator": "、",
+    "notCollected": "未采集",
+    "refresh": "刷新",
+    "refreshLoading": "加载中",
+    "trend": {
+      "memoryUp": "内存上升 {{delta}}",
+      "memoryDown": "内存下降 {{delta}}",
+      "cpuUp": "CPU上升 {{delta}}",
+      "cpuDown": "CPU下降 {{delta}}",
+      "stale": "数据延迟 {{duration}}"
+    },
+    "viewDetails": "查看详情",
+    "indicatorTitle": "性能监控",
+    "openSettingsAria": "打开性能监控设置页"
+  }
+}

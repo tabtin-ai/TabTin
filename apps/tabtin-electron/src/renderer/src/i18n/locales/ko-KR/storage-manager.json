@@ -1,0 +1,241 @@
+{
+  "panel": {
+    "title": "저장",
+    "subtitle": "TabTin이 컴퓨터에 보관하는 것.",
+    "totalLine": "TabTin은 이 Mac에서 {{size}}를 사용합니다.",
+    "totalLineLoading": "저장용량 측정 중…",
+    "refresh": "재계산",
+    "refreshHint": "모든 데이터 크기를 다시 측정",
+    "loadErrorTitle": "로드하지 못했습니다."
+  },
+  "health": {
+    "healthy": {
+      "label": "충분한 공간",
+      "tagline": "이제 준비가 끝났습니다. 계속해서 창조해 보세요."
+    },
+    "attention": {
+      "label": "꾸준한",
+      "tagline": "일반적인 사용법이므로 걱정할 필요가 없습니다."
+    },
+    "heavy": {
+      "label": "꽉 차는 중",
+      "tagline": "꽤 많이 쌓여 있습니다. 정리할 가치가 있는 것이 있습니까?"
+    },
+    "critical": {
+      "label": "청소할 시간",
+      "tagline": "TabTin은 많은 공간을 차지하고 있습니다. 사용하지 않는 데이터를 정리할 시간입니다."
+    }
+  },
+  "metrics": {
+    "totalUsed": {
+      "label": "중고",
+      "sub": "{{count}} 항목"
+    },
+    "largest": {
+      "label": "가장 큰 항목"
+    },
+    "cache": {
+      "label": "임시 캐시",
+      "tooLow": "모두 최적화됨",
+      "clean": "깨끗하다",
+      "cleaning": "청소"
+    }
+  },
+  "section": {
+    "topItemsTitle": "가장 많은 공간을 차지함"
+  },
+  "topItems": {
+    "loading": "작업 공간 데이터 측정 중…",
+    "empty": "아직 데이터가 없습니다. 한동안 TabTin을 사용하다가 다시 돌아오세요.",
+    "itemCount": "{{count}} 항목",
+    "showAll": "다른 {{count}} 항목 표시",
+    "collapseAll": "접기",
+    "conversation": {
+      "label": "대화 기록",
+      "subtitle_one": "1개의 작업공간에서",
+      "subtitle_other": "{{count}} 작업공간에서",
+      "unscopedLabel": "기타 대화 데이터",
+      "otherLabel": "기타 작업공간"
+    },
+    "checkpoint": {
+      "label": "프로젝트 운영 스냅샷",
+      "subtitle": "{{count}} 프로젝트 · 에이전트 실행 취소 스냅샷",
+      "otherLabel": "할당되지 않은 실행 취소 데이터"
+    },
+    "browserEnv": {
+      "label": "브라우저 로그인 환경",
+      "subtitle": "{{count}} 환경 · 사이트 로그인 및 오프라인 데이터",
+      "otherLabel": "기타 환경"
+    },
+    "agentDownload": {
+      "label": "에이전트 도구 다운로드",
+      "subtitle": "{{count}} 작업공간 · 에이전트가 가져온 파일",
+      "otherLabel": "기타 작업공간"
+    },
+    "appBundle": {
+      "label": "설치된 앱",
+      "subtitle": "{{count}} 로컬 앱 데이터 종류"
+    },
+    "appProject": {
+      "otherLabel": "기타 {{count}}",
+      "tabvideo": {
+        "subtitle": "{{count}} TabVideo 프로젝트"
+      },
+      "tabdoc": {
+        "subtitle": "{{count}} TabDoc 초안"
+      },
+      "tabwhiteboard": {
+        "subtitle": "{{count}} 화이트보드 자산"
+      },
+      "tabslide": {
+        "subtitle": "{{count}} TabSlide 초안"
+      }
+    },
+    "cache": {
+      "label": "임시 캐시",
+      "subtitle": "다음 사용 시 스스로 재구성됨"
+    }
+  },
+  "userGroup": {
+    "conversations": {
+      "title": "대화 및 역사",
+      "description": "에이전트와의 대화 및 작업 스냅샷"
+    },
+    "browser": {
+      "title": "내장된 브라우저 사이트",
+      "description": "로그인한 사이트(Feishu, Notion, ChatGPT 등)"
+    },
+    "media": {
+      "title": "미디어 및 다운로드",
+      "description": "녹음, 스크린샷, PDF, 다운로드"
+    },
+    "apps": {
+      "title": "앱 데이터",
+      "description": "TabDoc 초안, 설치된 앱 등"
+    },
+    "voice": {
+      "title": "음성 핫워드 및 규칙",
+      "description": "음성 입력 사용자 정의"
+    }
+  },
+  "bucketDisplay": {
+    "checkpoint:shadow-git": {
+      "title": "프로젝트 운영 스냅샷",
+      "description": "각 프로젝트에서 에이전트 작업을 실행 취소할 수 있는 스냅샷"
+    },
+    "agent:checkpoints": {
+      "title": "프로젝트 운영 스냅샷",
+      "description": "각 프로젝트에서 에이전트 작업을 실행 취소할 수 있는 스냅샷"
+    },
+    "browser:http-cache-aggregate": {
+      "title": "삽입된 사이트 캐시",
+      "description": "Feishu, Notion, ChatGPT와 같은 내장 사이트를 위한 이미지/스크립트/글꼴 캐시."
+    },
+    "browser:bookmarks": {
+      "title": "브라우저 북마크",
+      "description": "TabTin 내장 브라우저에 저장한 북마크"
+    },
+    "browser:browsing-history": {
+      "title": "검색 기록",
+      "description": "TabTin 내장 브라우저에서 방문한 페이지"
+    },
+    "tin:sandboxes": {
+      "title": "샌드박스 앱 데이터",
+      "description": "Tin 샌드박스 앱의 로컬 데이터 및 캐시"
+    },
+    "marketplace:apps": {
+      "title": "마켓플레이스 앱",
+      "description": "Marketplace에서 설치된 도구에 대한 실행 파일 및 구성"
+    },
+    "mcp:local-connections": {
+      "title": "외부 AI 도구 구성",
+      "description": "Claude Desktop / Cursor / Windsurf 연결을 위한 구성(고급 사용자)"
+    },
+    "media:recordings": {
+      "title": "녹음",
+      "description": "내장된 브라우저에서 파일 기록"
+    },
+    "media:screenshots": {
+      "title": "스크린샷",
+      "description": "~/.tabtin/screenshots에 저장된 스크린샷"
+    },
+    "media:exports-pdf": {
+      "title": "PDF 내보내기",
+      "description": "~/.tabtin/exports에 저장된 PDF 내보내기 파일"
+    },
+    "download:user-downloads": {
+      "title": "다운로드 기록",
+      "description": "TabTin에 의해 실행된 다운로드 내역(기록만 해당)"
+    },
+    "download:agent-sandbox-downloads": {
+      "title": "에이전트 도구 다운로드",
+      "description": "각 작업 영역의 에이전트 도구에서 다운로드한 파일"
+    },
+    "media:tabvideo-render-tmp": {
+      "title": "비디오 렌더링 남은 부분",
+      "description": "비디오 렌더링, 내보내기, 위젯 스냅샷의 임시 파일"
+    },
+    "media:stream-download-tmp": {
+      "title": "스트리밍 다운로드 청크",
+      "description": "HLS/DASH 비디오 다운로드의 임시 청크"
+    },
+    "voice:hotwords-rules": {
+      "title": "음성 핫워드 및 규칙",
+      "description": "음성 입력 사용자 정의(클라우드 백업 없음, 주기적으로 내보내십시오)"
+    },
+    "system:voice-settings": {
+      "title": "음성 핫워드 및 규칙",
+      "description": "음성 입력 사용자 정의(클라우드 백업 없음, 주기적으로 내보내십시오)"
+    }
+  },
+  "totalUsage": "{{size}}",
+  "itemCount": "{{count}} 항목",
+  "groupSummary": "{{size}} · {{count}} 항목",
+  "actions": {
+    "manage": "관리하다",
+    "collapse": "접기",
+    "listItems": "품목",
+    "export": "수출",
+    "exporting": "내보내는 중…",
+    "clear": "지우기",
+    "cancel": "취소",
+    "confirmClear": "삭제 확인",
+    "confirmDestroy": "삭제 확인",
+    "clearing": "삭제 중…",
+    "acknowledgePartial": "알았어"
+  },
+  "errors": {
+    "clearFailed": "지우기 실패",
+    "listFailed": "목록을 로드하지 못했습니다.",
+    "scanFailed": "스캔 실패"
+  },
+  "dialog": {
+    "willFree": "무료로 제공됩니다",
+    "warningsTitle": "클리어 후에는 다음을 잃게 됩니다:",
+    "typeNameLabel": "확인하려면 \"{{name}}\"를 입력하세요.",
+    "fillName": "채우기",
+    "acknowledgeLabel": "나는 이 일이 취소될 수 없음을 이해하고 동의합니다.",
+    "partialFailureTitle": "부분삭제 실패({{count}} 항목)",
+    "partialFailureHint": "일부 항목이 삭제되지 않았습니다(사용 중/권한 거부됨). 닫고 나중에 다시 시도하려면 확인을 클릭하세요.",
+    "L1": {
+      "title": "지우기 {{name}}",
+      "subtitle": "다음 로드 시 다시 빌드됩니다. 데이터는 손실되지 않습니다."
+    },
+    "L2": {
+      "title": "지우기 {{name}}",
+      "subtitle": "다음 로드는 느려질 수 있지만 자산은 손실되지 않습니다."
+    },
+    "L3-soft": {
+      "title": "지우기 {{name}}",
+      "subtitle": "이것은 사용자 데이터입니다. 취소할 수 없습니다."
+    },
+    "L3-hard": {
+      "title": "지우기 {{name}}",
+      "subtitle": "이는 중요한 사용자 데이터입니다. 이름을 입력하고 확인란을 선택하여 확인합니다."
+    },
+    "L4": {
+      "title": "클리어 {{name}} (고위험)",
+      "subtitle": "주의 깊게 확인하세요. 여기에는 계정 또는 장치 ID 데이터가 포함됩니다."
+    }
+  }
+}

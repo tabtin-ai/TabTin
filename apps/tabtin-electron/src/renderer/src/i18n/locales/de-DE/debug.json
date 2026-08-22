@@ -1,0 +1,11 @@
+{
+  "panelEntry": {
+    "title": "Crawler-Debug",
+    "opening": "Eröffnung..."
+  },
+  "errorBoundary": {
+    "title": "Rendering-Fehler",
+    "unknown": "Unbekannter Fehler",
+    "emptyStack": "Kein Komponentenstapel verfügbar"
+  }
+}

@@ -1,0 +1,9 @@
+# PyInstaller / build artifacts
+/build/
+/dist/
+/*.spec
+*.egg-info/
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/

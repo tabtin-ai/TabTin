@@ -1,0 +1,9 @@
+{
+  "id": "tabcode",
+  "name": "TabCode",
+  "icon": "code",
+  "description": "代码项目的上下文注入器与变更审查台",
+  "execution_env": "hybrid",
+  "status": "active",
+  "order": 5
+}

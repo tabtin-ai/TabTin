@@ -1,0 +1,58 @@
+{
+  "outbox": {
+    "banner": {
+      "title": "La bandeja de salida está activa",
+      "body": "El motor de cascada asíncrono ahora está habilitado. Las búsquedas, resúmenes y escrituras de fórmulas entre tablas se procesarán a través de la cola de la Bandeja de salida, lo que mejorará significativamente el rendimiento de las actualizaciones masivas."
+    },
+    "rollback": {
+      "title": "Reversión de emergencia de la bandeja de salida",
+      "body": "El motor de cascada asíncrono de la Bandeja de salida se ha desactivado temporalmente. Todos los recálculos en cascada ahora son sincrónicos. Actualice la página si experimenta retrasos."
+    },
+    "status": {
+      "healthy": "La bandeja de salida está en buen estado",
+      "degraded": "La bandeja de salida está en modo degradado",
+      "paused": "La bandeja de salida está en pausa",
+      "disabled": "La bandeja de salida está deshabilitada"
+    }
+  },
+  "saga": {
+    "in_progress": "Operación masiva en curso…",
+    "failed": "La operación masiva falló y se revirtió",
+    "completed": "Operación masiva completada",
+    "partial": "Operación masiva parcialmente completada ({{success}}/{{total}})",
+    "timeout": "Se agotó el tiempo de espera de la operación masiva. Verifique los resultados antes de volver a intentarlo."
+  },
+  "a3": {
+    "disabled": "La actualización por filtro (A3) está deshabilitada",
+    "enabled": "La actualización por filtro (A3) está habilitada"
+  },
+  "c1": {
+    "restore_disabled": "El administrador ha desactivado temporalmente el campo para deshacer/restaurar. Utilice el Historial de versiones para recuperarlo."
+  },
+  "grayscale": {
+    "enrolled": "Esta organización ha sido inscrita en la beta {{feature}}",
+    "unenrolled": "Esta organización ha sido eliminada de la versión beta de {{feature}}."
+  },
+  "incident": {
+    "title": "[{{severity}}] {{service}} Incidente de Servicio",
+    "body": "Impacto: {{scope}}. Comenzó en: {{startTime}}. Nuestro equipo está investigando activamente.",
+    "update": "[Actualización] {{service}}: {{message}}",
+    "resolution": "Incidente resuelto. Duración: {{duration}}. Causa raíz: {{rootCause}}. Se han programado mejoras de seguimiento."
+  },
+  "maintenance": {
+    "start": "El mantenimiento programado comienza en {{time}}, duración prevista {{duration}}. Es posible que algunas funciones no estén disponibles.",
+    "end": "El mantenimiento programado está completo. Todos los servicios han vuelto a la normalidad."
+  },
+  "changelog": {
+    "title": "Registro de cambios",
+    "version": "Versión {{version}}",
+    "newFeatures": "Nuevas características",
+    "improvements": "Mejoras",
+    "bugFixes": "Corrección de errores"
+  },
+  "notification": {
+    "dismiss": "Lo tengo",
+    "learnMore": "Más información",
+    "doNotShowAgain": "No volver a mostrar"
+  }
+}

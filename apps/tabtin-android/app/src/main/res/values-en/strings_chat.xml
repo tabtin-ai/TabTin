@@ -1,0 +1,820 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="chat_start_hint">Send a message to start</string>
+    <string name="chat_start_conversation">Start a New Conversation</string>
+    <string name="chat_start_conversation_hint">Send a message to start chatting with Agent</string>
+    <string name="chat_input_placeholder">Type a message…</string>
+    <string name="chat_composer_placeholder_default">Chat here…</string>
+    <string name="chat_composer_placeholder_in_workspace">Chat in %s…</string>
+    <string name="chat_composer_placeholder_collapsed">Follow up…</string>
+    <string name="chat_composer_cannot_send">Can\'t send right now</string>
+    <string name="chat_composer_stopping">Stopping task…</string>
+    <string name="chat_composer_pausing">Pausing after the current step</string>
+    <string name="chat_composer_task_settings">Task settings</string>
+    <string name="chat_composer_current_agent">Current Agent</string>
+    <string name="chat_composer_setting_agent">Execution Agent</string>
+    <string name="chat_composer_agent_unavailable">Agent details unavailable</string>
+    <string name="chat_composer_setting_mode">Work mode</string>
+    <string name="chat_composer_setting_approval">Approval</string>
+    <string name="chat_composer_tool_context">Context</string>
+    <string name="chat_composer_tool_photo">Photos</string>
+    <string name="chat_composer_tool_camera">Camera</string>
+    <string name="chat_composer_tool_file">Files</string>
+    <string name="chat_composer_material_title">Materials %1$d · Ready %2$d</string>
+    <string name="chat_composer_material_ready">Attachments and context are ready to send</string>
+    <string name="chat_composer_material_context_only">%1$d context references ready</string>
+    <string name="chat_composer_material_uploading">%1$d attachments uploading — send when complete</string>
+    <string name="chat_composer_material_failed">%1$d attachments failed — retry or remove before sending</string>
+    <string name="chat_composer_cancel_uploads">Cancel all uploads</string>
+    <string name="chat_composer_full_access_title">Enable full access?</string>
+    <string name="chat_composer_full_access_message">Full access reduces confirmation prompts within your organization\'s safety limits. Only enable it when you trust the Agent, execution location, and task.</string>
+    <string name="chat_composer_full_access_confirm">Enable</string>
+    <string name="chat_composer_device_unbound">No execution device linked yet. Bind a computer in Settings before sending tasks.</string>
+    <string name="chat_composer_device_offline">This device is offline (open TabTin on your computer to reconnect)</string>
+    <string name="chat_approval_mode_always_ask_short">Ask first</string>
+    <string name="chat_approval_mode_auto_short">Auto-approve</string>
+    <string name="chat_approval_mode_full_access_short">Full access</string>
+    <string name="chat_approval_mode_always_ask_summary">Ask for approval before actions</string>
+    <string name="chat_approval_mode_auto_summary">Routine ops auto-approved; high-risk still asks</string>
+    <string name="chat_approval_mode_full_access_summary">Run without asking</string>
+    <string name="chat_approval_mode_org_locked">This approval level is not enabled for your organization</string>
+
+    <string name="chat_model_pill_loading">Model</string>
+    <string name="chat_model_load_failed">Failed to load models</string>
+    <string name="chat_model_select">Select model</string>
+    <string name="chat_model_switch_failed">Failed to switch model. Try again.</string>
+    <string name="chat_model_source_platform">Platform models</string>
+    <string name="chat_model_source_organization_byok">Organization BYOK</string>
+    <string name="chat_model_source_user_byok">My BYOK</string>
+    <string name="chat_composer_runtime_settings">Runtime settings</string>
+    <string name="chat_composer_runtime_settings_hint">For the selected model. Hidden when context length is not adjustable and thinking intensity is unsupported.</string>
+    <string name="chat_composer_context_length">Context length</string>
+    <string name="chat_composer_thinking_intensity">Thinking intensity</string>
+    <string name="chat_composer_thinking_mode_off">Off</string>
+    <string name="chat_composer_thinking_mode_standard">Standard</string>
+    <string name="chat_composer_thinking_mode_deep">Deep</string>
+    <string name="chat_composer_context_tier_beta">Beta</string>
+    <string name="chat_composer_runtime_empty">This model has no adjustable runtime settings.</string>
+    <string name="chat_composer_done">Done</string>
+    <string name="chat_mode_ask">Ask</string>
+    <string name="chat_mode_agent">Agent</string>
+    <string name="chat_mode_plan">Plan</string>
+    <string name="chat_mode_group">PMO</string>
+    <string name="chat_mode_study">Study</string>
+    <string name="chat_mode_yolo">YOLO</string>
+    <string name="chat_mode_yolo_org_locked_item">YOLO (not enabled by org)</string>
+    <string name="chat_mode_yolo_org_locked_hint">YOLO requires the organization owner to enable \"Allow members to use relaxed approval\" in team settings.</string>
+    <string name="chat_approval_mode_always_ask">Always ask</string>
+    <string name="chat_approval_mode_auto">Auto-approve low-risk actions</string>
+    <string name="chat_approval_mode_full_access">Full access</string>
+
+    <string name="chat_add_attachment">Add Attachment</string>
+    <string name="chat_pick_album">Photo Album</string>
+    <string name="chat_pick_camera">Camera</string>
+    <string name="chat_pick_files">Files</string>
+    <string name="chat_share_file">Share File</string>
+    <string name="chat_share_image">Share Image</string>
+    <string name="chat_attachment_error">Attachment Error</string>
+    <string name="chat_camera_permission_title">Camera Permission Required</string>
+    <string name="chat_camera_permission_message">Allow TabTin to use the camera in system settings, then return and try again.</string>
+    <string name="chat_camera_open_settings">Open Settings</string>
+    <string name="chat_camera_unavailable_title">Camera Unavailable</string>
+    <string name="chat_camera_unavailable_message">No camera app is available on this device.</string>
+    <string name="chat_camera_launch_failed_message">The camera could not be opened. Please try again.</string>
+
+    <string name="chat_image_preview">Image Preview</string>
+    <string name="chat_saved_to_album">Saved to gallery</string>
+    <string name="chat_cannot_open_file">Cannot open file</string>
+
+    <!-- Wave 5: in-app file preview -->
+    <string name="chat_file_preview_file">File Preview</string>
+    <string name="chat_file_preview_pdf">PDF Preview</string>
+    <string name="chat_file_preview_word">Word Preview</string>
+    <string name="chat_file_preview_excel">Excel Preview</string>
+    <string name="chat_file_preview_ppt">PPT Preview</string>
+    <string name="chat_file_preview_audio">Audio Playback</string>
+    <string name="chat_file_preview_video">Video Playback</string>
+    <string name="chat_file_preview_loading_pdf">Loading PDF…</string>
+    <string name="chat_file_preview_loading_office">Loading document preview…</string>
+    <string name="chat_file_preview_loading_audio">Loading audio…</string>
+    <string name="chat_file_preview_loading_video">Loading video…</string>
+    <string name="chat_file_preview_pdf_failed">Failed to load PDF</string>
+    <string name="chat_file_preview_pdf_failed_desc">Unable to load this PDF. Check your connection or try again later.</string>
+    <string name="chat_file_preview_audio_failed">Failed to load audio</string>
+    <string name="chat_file_preview_video_failed">Failed to load video</string>
+    <string name="chat_file_preview_video_failed_desc">Unable to play this video. Check your connection or file format.</string>
+    <string name="chat_file_preview_pdf_page">PDF page</string>
+    <string name="chat_file_preview_page_count">%1$d / %2$d pages</string>
+    <string name="chat_file_preview_previous_page">Previous</string>
+    <string name="chat_file_preview_next_page">Next</string>
+    <string name="chat_file_preview_play">Play</string>
+    <string name="chat_file_preview_pause">Pause</string>
+    <string name="chat_file_preview_office_fallback">This document can\'t be previewed in the app right now. Tap "Share link" to open it on a computer or send it to a colleague.</string>
+    <!-- Wave 5 independent review 🟡-1: Office preview third-party-service consent. iOS uses
+         QuickLook locally, no consent needed; Android uses Microsoft / Google public viewers
+         and must ask first. -->
+    <string name="chat_file_preview_office_consent_title">Loaded by a third-party service</string>
+    <string name="chat_file_preview_office_consent_message">To display this Office document inside the app we send the file link to Microsoft Office Online or Google Docs for rendering.\n\nThe file contents will leave this device and be handled by those services\' logs and caches. If this file is a contract, internal sheet or other sensitive material, please choose "Download only" and open it with a local app instead.</string>
+    <string name="chat_file_preview_office_consent_hint">Once you agree, further Office files in the same session won\'t re-prompt.</string>
+    <string name="chat_file_preview_office_consent_continue">Continue preview</string>
+    <string name="chat_file_preview_office_consent_download">Download only</string>
+    <string name="chat_file_preview_office_consent_no_handler">No app on this device can open that file. Install WPS / Office or another local viewer first.</string>
+    <string name="chat_file_preview_unsupported_desc">This format cannot be previewed directly yet. The file remains in this conversation.</string>
+    <string name="chat_file_preview_share_link">Share link</string>
+
+    <string name="chat_connecting">Connecting…</string>
+    <string name="chat_reconnecting">Reconnecting (attempt %1$d)…</string>
+    <string name="chat_connected">Connected</string>
+    <string name="chat_disconnected">Disconnected</string>
+    <string name="chat_auth_expired">Login expired, please sign in again</string>
+    <string name="chat_relogin">Sign in</string>
+    <string name="chat_manual_reconnect">Reconnect</string>
+    <string name="chat_reconnect_gave_up">Unable to connect. Check your network and try again</string>
+    <string name="chat_resumed_with_sync">Connection restored, synced %1$d messages</string>
+
+    <string name="chat_step_running">Executing…</string>
+    <string name="chat_step_input">Input</string>
+    <string name="chat_step_output">Output</string>
+    <string name="chat_step_no_details">No details available</string>
+    <string name="chat_reasoning">Thinking Process</string>
+    <string name="chat_step_thinking">Thinking…</string>
+
+    <string name="chat_calling_tool">Calling %s…</string>
+    <string name="chat_agent_planning">Planning…</string>
+    <string name="chat_agent_executing">Executing…</string>
+    <string name="chat_agent_thinking">Thinking…</string>
+    <!-- Align Electron blockTimeline.thinking.planningNext (awaiting shell; capsule keeps agent_capsule_planning_next) -->
+    <string name="chat_awaiting_planning_next">Planning next step...</string>
+
+    <string name="chat_message_center">Message Center</string>
+    <string name="chat_message_center_description">Channel messages, Space replies, and task notifications\nwill be displayed here</string>
+    <string name="chat_all_uploads_failed">All uploads failed. Please try again.</string>
+
+    <!-- Tool cards -->
+    <string name="chat_card_exit_code">Exit %d</string>
+    <string name="chat_card_lines">%d lines</string>
+    <string name="chat_card_write_file">Write file</string>
+    <string name="chat_card_sql_result">Query Result</string>
+    <string name="chat_card_rows">%d rows</string>
+    <string name="chat_card_showing_rows">Showing %1$d / %2$d rows</string>
+    <string name="chat_card_results">%d results</string>
+    <string name="chat_card_matches">%d matches</string>
+    <string name="chat_card_more_items">… +%d items</string>
+    <string name="chat_card_field_file">File</string>
+    <string name="chat_card_field_url">URL</string>
+    <string name="chat_card_field_sql">SQL</string>
+    <string name="chat_card_field_pattern">Match</string>
+
+    <!-- Permission request -->
+    <string name="chat_permission_title">Permission Request</string>
+    <string name="chat_permission_tool">Tool:</string>
+    <string name="chat_permission_expired">Expired</string>
+    <string name="chat_permission_paused">Agent paused — awaiting your approval</string>
+    <string name="chat_permission_approve">Approve</string>
+    <string name="chat_permission_reject">Reject</string>
+    <string name="chat_permission_abort">Abort</string>
+    <string name="chat_permission_risk_low">Low Risk</string>
+    <string name="chat_permission_risk_medium">Medium</string>
+    <string name="chat_permission_risk_high">High Risk</string>
+    <string name="chat_permission_risk_critical">Critical</string>
+
+    <!-- Review panel -->
+    <string name="chat_review_title">Action Review</string>
+    <string name="chat_review_tool_label">Tool:</string>
+    <string name="chat_review_approve_all">Approve All</string>
+    <string name="chat_review_reject_all">Reject All</string>
+    <string name="chat_review_submit_failed">Failed to submit review decision</string>
+    <string name="chat_approval_submit_failed">Failed to submit approval decision</string>
+    <string name="chat_hitl_already_consumed">This request was already handled; the panel was dismissed.</string>
+    <string name="chat_hitl_timeout">Submit timed out. Check your connection and try again.</string>
+    <string name="chat_hitl_disconnected">Connection lost. Reconnect and try again.</string>
+    <string name="chat_hitl_unknown_nak">Submit failed; the server did not return a detailed reason.</string>
+
+    <!-- Wave 4 I8 -->
+    <string name="chat_plan_approval_title">Plan Approval</string>
+    <string name="chat_plan_approval_description">Space has prepared a plan. Please review it before allowing execution.</string>
+    <string name="chat_plan_approval_open_doc">View Plan</string>
+    <string name="chat_plan_approval_approve">Approve &amp; continue</string>
+    <string name="chat_plan_approval_reject">Reject</string>
+    <string name="chat_plan_approval_no_snapshot">Plan details unavailable; tap to view in the Plan document.</string>
+    <string name="chat_plan_approval_todos_label">Todos:</string>
+    <string name="chat_plan_approval_open_failed">Unable to open Plan document</string>
+
+    <!-- v0.4 W1.5-轮 4: legacy review_required path triggered warning -->
+    <string name="chat_review_legacy_path_warning">This approval path is deprecated. Please refresh the session; new approvals will appear in batch form.</string>
+    <!-- v0.4 W1.5-轮 4 -->
+    <string name="chat_approval_title_tool">Tool Permission</string>
+    <string name="chat_approval_title_plan">Plan Approval</string>
+    <string name="chat_approval_summary_default">Space requests permission to perform this action.</string>
+    <!-- N>1 batch summary; %d = tool count -->
+    <string name="chat_approval_batch_summary">Space requests approval for %d tool calls in this turn.</string>
+    <string name="chat_approval_scope_once">Just once</string>
+    <string name="chat_approval_scope_thread">This conversation</string>
+    <string name="chat_approval_scope_always">Always</string>
+    <string name="chat_approval_allow">Allow</string>
+    <string name="chat_approval_deny">Deny</string>
+    <string name="chat_approval_scope_label">Allow scope:</string>
+    <string name="chat_approval_scope_description_once">Allow this tool call only; ask again next time.</string>
+    <string name="chat_approval_scope_description_thread">No more prompts in this session; reset on next session.</string>
+    <string name="chat_approval_scope_description_always">Permanently allow under this Workspace; revoke from settings.</string>
+    <string name="chat_approval_expires_seconds">Expires in %d seconds — please decide soon</string>
+    <string name="chat_approval_expires_minutes">Expires in about %d min</string>
+    <string name="chat_approval_expires_passed">Expiring now</string>
+    <!-- Approval card redesign (#9495): collapsed dock + detail sheet -->
+    <string name="chat_approval_dock_title_multi">Needs your confirmation</string>
+    <string name="chat_approval_dock_title_expired">Approval expired</string>
+    <string name="chat_approval_dock_title_submitting">Submitting…</string>
+    <string name="chat_approval_dock_expired_hint">This request expired — just ask Space to try again.</string>
+    <string name="chat_approval_dock_pending_count">%d actions awaiting confirmation</string>
+    <string name="chat_approval_view_detail">View details</string>
+    <string name="chat_approval_view_and_confirm">Review and confirm</string>
+    <string name="chat_approval_sheet_title">Your approval is needed</string>
+    <string name="chat_approval_sheet_action_count">%d actions</string>
+    <string name="chat_approval_full_params">All parameters</string>
+    <string name="chat_approval_collapse">Collapse</string>
+    <string name="chat_approval_copy_command">Copy command</string>
+    <string name="chat_approval_waiting_owner">Waiting for owner approval</string>
+    <!-- Structured parameter labels (replacing the old raw JSON dump) -->
+    <string name="chat_approval_field_command">Command</string>
+    <string name="chat_approval_field_path">Path</string>
+    <string name="chat_approval_field_directory">Directory</string>
+    <string name="chat_approval_field_url">URL</string>
+    <string name="chat_approval_field_query">Query</string>
+    <string name="chat_approval_field_pattern">Pattern</string>
+    <string name="chat_approval_field_skill">Skill</string>
+    <string name="chat_approval_field_args">Arguments</string>
+    <string name="chat_approval_field_tool">Tool</string>
+    <string name="chat_approval_field_reason">Reason</string>
+    <!-- Risk row: low risk shows nothing, because a low rating is not a safety guarantee -->
+    <string name="chat_approval_risk_high">High risk: may cause irreversible or sensitive impact. Please review carefully.</string>
+    <string name="chat_approval_risk_medium">Heads up: this changes state or touches restricted resources.</string>
+    <string name="chat_approval_risk_zone_sensitive">It will touch protected resources.</string>
+    <string name="chat_approval_risk_zone_outside">The target is outside the current workspace.</string>
+    <string name="chat_approval_reason_plan_guard">Plan-mode guard: please exit plan mode before this action.</string>
+    <string name="chat_approval_reason_hardline">Sensitive command pattern detected.</string>
+    <string name="chat_approval_reason_skill_trust">Third-party skill: not yet trusted or trust downgraded.</string>
+    <string name="chat_approval_reason_high_risk">Policy: high-risk action outside the allowlist.</string>
+    <string name="chat_approval_reason_path">Path policy: target outside the allowed scope.</string>
+    <string name="chat_approval_reason_bash_complex">Complex shell command requires manual confirmation.</string>
+    <string name="chat_approval_reason_user_interactive">Per-action approval required.</string>
+    <!-- L-W6-16 (2026-05-03 W6 M4): W6 v3 judge 16 reason types with field interpolation -->
+    <string name="chat_approval_reason_hardline_command">Matched dangerous command rule %1$s; blocked by the system</string>
+    <string name="chat_approval_reason_hardline_path">Matched system path guard %1$s; blocked by the system</string>
+    <string name="chat_approval_reason_sensitive_in_ask">Space is about to access sensitive file %1$s (%2$s) — please confirm</string>
+    <string name="chat_approval_reason_sensitive_out_deny">%1$s is a sensitive file outside your workspace (%2$s); blocked from writing</string>
+    <string name="chat_approval_reason_memo_allow">Matched an approved memo: %1$s</string>
+    <string name="chat_approval_reason_memo_deny">Matched a denied memo: %1$s</string>
+    <string name="chat_approval_reason_yolo_allow">Super permission enabled — auto-approved</string>
+    <string name="chat_approval_reason_workspace_in">Target path %1$s is inside the workspace — auto-approved</string>
+    <string name="chat_approval_reason_workspace_in_cwd">Command cwd %1$s is inside the workspace — auto-approved</string>
+    <string name="chat_approval_reason_workspace_out">Target path %1$s is outside the workspace — please confirm (add it to TabFolder / TabCode for auto-approval)</string>
+    <string name="chat_approval_reason_workspace_out_cwd">Command cwd %1$s is outside the workspace — please confirm (add it to TabFolder / TabCode for auto-approval)</string>
+    <string name="chat_approval_reason_object_default_allow">Object read auto-approved</string>
+    <string name="chat_approval_reason_object_write_ask">Object write needs your confirmation</string>
+    <string name="chat_approval_reason_mcp_default_ask">MCP tool %1$s call needs your confirmation</string>
+    <string name="chat_approval_reason_mcp_default_ask_no_server">MCP tool call needs your confirmation</string>
+    <string name="chat_approval_reason_device_default_ask">Device action %1$s needs your confirmation</string>
+    <string name="chat_approval_reason_device_default_ask_no_action">Device action needs your confirmation</string>
+    <string name="chat_approval_reason_device_observe_allow">Read-only device action auto-approved</string>
+    <string name="chat_approval_reason_plan_blocked">This tool is not allowed in Plan mode</string>
+    <string name="chat_approval_reason_fallback_ask">This action needs your confirmation</string>
+    <string name="chat_approval_resolved_expired">Approval timed out; the Space applied the default decision.</string>
+    <string name="chat_approval_resolved_cancelled">Resolved on another device; this panel was dismissed.</string>
+    <string name="chat_approval_resolved_rolled_back">Cancelled due to a rollback.</string>
+    <!-- v0.4 W1.5-轮 4 self-fix: cross-device fan-out generic notice -->
+    <string name="chat_approval_resolved_elsewhere">Approval handled on another device.</string>
+    <string name="chat_ask_form_submit">Submit</string>
+    <string name="chat_ask_form_required">Required</string>
+    <string name="chat_ask_form_comma_suffix">, separated by commas</string>
+
+    <!-- Wave 4 S2/A2 + A1 -->
+    <string name="chat_message_action_copy">Copy message</string>
+    <string name="chat_message_action_edit">Edit &amp; resend</string>
+    <string name="chat_message_action_label">Message actions</string>
+    <!-- Wave 6 A3: mirrors iOS L10n.Chat.forkHere -->
+    <string name="chat_message_action_fork">Fork from here</string>
+    <string name="chat_message_fork_failed">Failed to fork the session. Please try again.</string>
+    <!-- Wave 6 A6: mention popover title/empty states (mirrors Electron MentionPopover) -->
+    <string name="chat_mention_title">@ Mention resource</string>
+    <string name="chat_mention_no_match">No matching resource</string>
+    <string name="chat_mention_empty_category">No resources in this Workspace yet</string>
+    <string name="chat_mention_loading">Loading resources…</string>
+    <string name="chat_mention_truncated_hint">Showing first %d. Type to filter.</string>
+    <string name="chat_mention_limit_reached">Up to %d references. Remove one to add more.</string>
+    <string name="chat_mention_already_added">This resource is already referenced</string>
+    <string name="chat_message_copied">Message copied</string>
+    <string name="chat_message_copy_failed">Copy failed</string>
+    <string name="chat_message_edit_send">Send</string>
+    <string name="chat_message_edit_cancel">Cancel</string>
+    <string name="chat_message_edit_placeholder">Edit message…</string>
+    <string name="chat_message_edit_attachments_kept">%d original attachment(s) or context item(s) will be resent</string>
+    <string name="chat_message_edit_restored_blocks_notice">%d original attachment(s) or context item(s) restored and will be sent</string>
+    <string name="chat_message_edit_hint">Review the conversation, files, and resources that will be reverted before sending</string>
+    <string name="chat_message_edit_rollback_reason">Edit message and resend</string>
+    <string name="chat_message_edit_rollback_failed">Failed to roll back and resend. Please try again.</string>
+    <string name="chat_message_edit_file_restore_failed">The conversation was reverted, but workspace files could not be restored. Your edit was not sent and returns to the composer when you close this sheet.</string>
+    <string name="chat_message_edit_resource_restore_failed">The conversation was reverted, but some docs or tables could not be restored. Your edit was not sent and returns to the composer when you close this sheet.</string>
+    <string name="chat_message_edit_refresh_failed">The conversation was reverted, but this screen could not load the rewritten version. Your edit was not sent and returns to the composer when you close this sheet.</string>
+    <string name="chat_message_edit_preview_title">Review edit and resend</string>
+    <string name="chat_message_edit_preview_hint">After confirmation, the conversation returns to before this message, then your edit is sent. A failed step never sends it.</string>
+    <string name="chat_message_edit_confirm_resend">Revert and send</string>
+    <string name="chat_message_edit_confirm_partial_resend">Accept unrestored items and resend</string>
+    <string name="chat_message_edit_conversation_only_ack">I understand unavailable workspace files or resources will stay unchanged</string>
+    <string name="chat_message_edit_completed">Reverted the old conversation and sent your edited message</string>
+    <string name="chat_message_edit_restore_point_section">Restore point</string>
+    <string name="chat_message_edit_restore_point_label">Conversation returns to</string>
+    <string name="chat_message_edit_restore_point_before_message">Before the original message</string>
+    <string name="chat_message_edit_wait_persisted">This message is still syncing. Try editing it later.</string>
+
+    <string name="chat_card_diff_more">%d more lines…</string>
+    <string name="chat_card_copy">Copy</string>
+
+    <!-- Record operations -->
+    <string name="chat_card_record_created">Record Created</string>
+    <string name="chat_card_record_updated">Record Updated</string>
+    <string name="chat_card_record_deleted">Record Deleted</string>
+    <string name="chat_card_table">Table:</string>
+    <string name="chat_card_fields">Fields:</string>
+
+    <!-- Subagent -->
+    <string name="chat_subagent_cancelled">Subtask cancelled</string>
+    <string name="chat_subagent_cancelled_named">Subtask \"%s\" cancelled</string>
+    <string name="chat_subagent_timeout">Subtask timed out</string>
+    <string name="chat_subagent_timeout_named">Subtask \"%s\" timed out</string>
+    <string name="chat_subagent_failed">Subtask failed</string>
+    <string name="chat_subagent_failed_named">Subtask \"%s\" failed</string>
+    <string name="chat_subagent_error_suffix">: %s</string>
+    <string name="chat_subagent_step">Step %d</string>
+    <string name="chat_subagent_running">Subtask running…</string>
+    <string name="chat_subagent_running_detail">Subtask running: %s</string>
+    <!-- Wave 6 S7: subagent progress card (mirrors Electron SubagentProgressCard) -->
+    <string name="chat_subagent_card_default_label">Subtask</string>
+    <string name="chat_subagent_card_status_pending">Starting</string>
+    <string name="chat_subagent_card_status_queued">Queued</string>
+    <string name="chat_subagent_card_status_running">Running</string>
+    <string name="chat_subagent_card_status_completed">Completed</string>
+    <string name="chat_subagent_card_status_failed">Failed</string>
+    <string name="chat_subagent_card_status_cancelled">Cancelled</string>
+    <string name="chat_subagent_card_cancel">Stop subtask</string>
+    <string name="chat_subagent_card_step_count">%d steps</string>
+    <string name="chat_subagent_card_task_prefix">Task: %s</string>
+    <string name="chat_subagent_card_summary_prefix">Summary: %s</string>
+    <string name="chat_subagent_card_error_prefix">Error: %s</string>
+    <string name="chat_subagent_card_tool_calls">Tool calls (%d)</string>
+    <string name="chat_subagent_card_error_count_suffix">%d failed</string>
+    <string name="chat_subagent_card_expand">View subtask details</string>
+    <string name="chat_subagent_card_collapse">Close subtask details</string>
+    <!-- Wave 6 cross-platform protocol verification: subagent stats row -->
+    <string name="chat_subagent_card_tokens_total">Total tokens %d</string>
+    <string name="chat_subagent_card_tokens_input">Input %d</string>
+    <string name="chat_subagent_card_tokens_output">Output %d</string>
+    <string name="chat_subagent_card_credits">Spent %s credits</string>
+    <string name="chat_subagent_transcript_title">Execution stream (%d)</string>
+    <string name="chat_subagent_transcript_thinking">Thinking</string>
+    <string name="chat_subagent_transcript_tool">Tool call</string>
+    <string name="chat_subagent_transcript_rich">Rich content</string>
+    <string name="chat_subagent_transcript_context">Context reference</string>
+    <string name="chat_subagent_transcript_event">Event</string>
+    <string name="chat_subagent_transcript_error">Error</string>
+    <string name="chat_subagent_transcript_hitl">Waiting for user input</string>
+    <string name="chat_subagent_transcript_todo">Updated %d todo items</string>
+    <string name="chat_subagent_transcript_checkpoint_ok">Checkpoint created</string>
+    <string name="chat_subagent_transcript_checkpoint_failed">Checkpoint creation failed</string>
+    <!-- Subagent detail sections (aligns with iOS SubagentDetailView) -->
+    <string name="chat_subagent_detail_instruction">Instruction</string>
+    <string name="chat_subagent_detail_instruction_meta">From parent Agent</string>
+    <string name="chat_subagent_detail_instruction_empty">No task description</string>
+    <string name="chat_subagent_detail_steps">Steps</string>
+    <string name="chat_subagent_detail_steps_empty">No intermediate steps</string>
+    <string name="chat_subagent_detail_result">Result</string>
+    <string name="chat_subagent_detail_result_pending">No result yet</string>
+    <string name="chat_subagent_detail_result_empty">No result</string>
+    <string name="chat_subagent_detail_failure_conclusion">Failure conclusion</string>
+    <string name="chat_subagent_detail_failure_guidance">There is no separate retry path; ask the parent Agent to redelegate based on this conclusion.</string>
+    <string name="chat_subagent_detail_completed_fallback">Subagent finished without a result summary.</string>
+    <string name="chat_subagent_detail_failed_fallback">Subagent failed without a specific error.</string>
+    <string name="chat_subagent_detail_cancelled_fallback">Subagent was cancelled.</string>
+
+    <!-- Todo panel -->
+    <string name="chat_todo_title">Tasks</string>
+    <string name="chat_todo_current">Current: %1$s</string>
+    <string name="chat_todo_paused_current">Paused: %1$s</string>
+    <string name="chat_todo_awaiting_subagents">Waiting on subagents: %1$s</string>
+    <string name="chat_todo_all_done">All tasks done</string>
+    <string name="chat_todo_open_details">View all tasks, %1$d / %2$d completed</string>
+    <string name="chat_todo_expand">Expand</string>
+    <string name="chat_todo_collapse">Collapse</string>
+    <string name="chat_todo_completed">Completed</string>
+    <string name="chat_todo_cancelled">Cancelled</string>
+    <string name="chat_todo_pending">Pending</string>
+    <string name="chat_todo_paused">Paused</string>
+    <string name="chat_session_pending_pill">Pending</string>
+
+    <!-- Agent ask user -->
+    <string name="chat_ask_answer_questions">Please answer the following</string>
+    <string name="chat_ask_skip">Skip</string>
+    <string name="chat_ask_submit">Submit</string>
+    <string name="chat_ask_custom_input">Or type a custom answer…</string>
+    <string name="chat_ask_allow_multiple">Multiple selection</string>
+    <string name="chat_ask_fields_fallback_header">Describe your choices</string>
+    <string name="chat_ask_fields_fallback_placeholder">Describe your answers in plain text…</string>
+    <string name="chat_ask_submit_failed">Failed to submit answer</string>
+    <string name="chat_ask_result_completed">Answered</string>
+    <string name="chat_ask_field_required">Required</string>
+    <string name="chat_ask_field_select_placeholder">Select…</string>
+
+    <!-- Resource references -->
+    <string name="chat_ref_about">About %s</string>
+    <string name="chat_ref_about_with_content">About %1$s: %2$s</string>
+    <string name="chat_context_ref_web">Web reference</string>
+    <string name="chat_context_ref_table">Table reference</string>
+    <string name="chat_context_ref_doc">Document reference</string>
+    <string name="chat_context_ref_slide">Slide reference</string>
+    <string name="chat_context_ref_design">Design reference</string>
+    <string name="chat_context_ref_video">Video reference</string>
+    <string name="chat_context_ref_site">Site reference</string>
+    <string name="chat_context_ref_folder">Folder reference</string>
+    <string name="chat_context_ref_code">Code reference</string>
+    <string name="chat_context_ref_memo">Note reference</string>
+    <string name="chat_context_ref_goal">Task reference</string>
+    <string name="chat_context_ref_canvas">Canvas reference</string>
+    <string name="chat_context_ref_file">File reference</string>
+    <string name="chat_context_ref_generic">Context reference</string>
+    <string name="chat_context_ref_row_one">Row %1$s</string>
+    <string name="chat_context_ref_row_many">%1$d rows</string>
+    <string name="chat_context_ref_field_one">Field %1$s</string>
+    <string name="chat_context_ref_field_many">%1$d fields</string>
+    <string name="chat_context_ref_open_hint">Open referenced resource</string>
+
+    <!-- Voice input -->
+    <string name="chat_voice_input">Voice Input</string>
+    <string name="chat_voice_recording">Recording</string>
+    <string name="chat_voice_processing">Processing…</string>
+    <string name="chat_voice_done">Done</string>
+    <string name="chat_voice_error">Recognition Failed</string>
+    <string name="chat_voice_permission_title">Microphone permission needed</string>
+    <string name="chat_voice_permission_required">Allow microphone access to use voice input</string>
+    <string name="chat_voice_request_permission">Allow microphone</string>
+    <string name="chat_voice_open_settings">Open Settings</string>
+    <string name="chat_voice_fill_draft">Fill Draft</string>
+    <string name="chat_voice_send_directly">Send Directly</string>
+    <string name="chat_voice_empty_result">No speech detected</string>
+    <string name="chat_voice_cancel">Cancel</string>
+    <string name="chat_voice_listening">Listening…</string>
+    <string name="ai_data_sharing_consent_title">Allow AI to process voice</string>
+    <string name="ai_data_sharing_consent_message">Holding to talk uploads audio for transcription so the Agent can understand your instruction. We do not use recordings to train public models. Declining will not start speech recognition; after agreeing, press and hold again to begin.</string>
+    <string name="ai_data_sharing_consent_agree">Agree and continue</string>
+    <string name="ai_data_sharing_consent_disagree">Disagree</string>
+    <string name="agent_capsule_ready">Ready when you are</string>
+    <string name="agent_capsule_preparing">Getting ready</string>
+    <string name="agent_capsule_queued">Queued</string>
+    <string name="agent_capsule_queued_count">Queued · %d waiting</string>
+    <string name="agent_capsule_thinking">Thinking</string>
+    <string name="agent_capsule_planning_next">Planning next</string>
+    <string name="agent_capsule_working">Working</string>
+    <string name="agent_capsule_finishing">Wrapping up</string>
+    <string name="agent_capsule_needs_approval">Waiting for your approval</string>
+    <string name="agent_capsule_needs_answer">Waiting for your answer</string>
+    <string name="agent_capsule_bubble_approval_kind">Approval needed</string>
+    <string name="agent_capsule_bubble_answer_kind">Choose an answer</string>
+    <string name="agent_capsule_bubble_waiting_kind">Waiting</string>
+    <string name="agent_capsule_bubble_approve">Approve</string>
+    <string name="agent_capsule_bubble_review_changes">Review changes</string>
+    <string name="agent_capsule_bubble_view_details">View details</string>
+    <string name="agent_capsule_bubble_details_in_chat">Details are hidden. Open chat to review</string>
+    <string name="agent_capsule_bubble_answer_in_chat">Answer in chat</string>
+    <string name="agent_capsule_bubble_retry_hint">Submission failed. Try again</string>
+    <string name="agent_capsule_bubble_view">View</string>
+    <string name="chat_hitl_readonly_title">Waiting for the execution owner</string>
+    <string name="chat_hitl_readonly_message">Only the execution owner can handle this request. The result will sync to this conversation.</string>
+    <string name="agent_capsule_paused">Task paused</string>
+    <string name="agent_capsule_recovering">Connection lost · Recovering</string>
+    <string name="agent_capsule_complete">Complete</string>
+    <string name="agent_capsule_complete_count">Done · %d updates</string>
+    <string name="agent_capsule_stopped">Stopped</string>
+    <string name="agent_capsule_error">Needs attention · Open to review</string>
+    <string name="agent_capsule_view_full_result">View full results</string>
+    <string name="agent_capsule_pending_items">%d pending</string>
+    <string name="agent_capsule_mode_chat_focus">Chat focus</string>
+    <string name="agent_capsule_mode_split">Split</string>
+    <string name="agent_capsule_mode_app_focus">App focus</string>
+    <string name="agent_capsule_hold_to_talk">Hold to talk</string>
+    <string name="agent_capsule_a11y_drag_hint">Tap to open chat, drag to reposition, or long-press for the text or voice menu</string>
+    <string name="agent_capsule_onboarding_tap_title">Tap to open chat</string>
+    <string name="agent_capsule_onboarding_tap_detail">See the Agent’s full response</string>
+    <string name="agent_capsule_onboarding_drag_title">Drag to reposition</string>
+    <string name="agent_capsule_onboarding_drag_detail">Release to snap to the nearest edge</string>
+    <string name="agent_capsule_onboarding_hold_title">Long-press for quick input</string>
+    <string name="agent_capsule_onboarding_hold_detail">Choose text or voice input</string>
+    <string name="agent_capsule_onboarding_skip">Skip</string>
+    <string name="agent_capsule_onboarding_settings_section">Interaction guides</string>
+    <string name="agent_capsule_onboarding_replay_title">Replay capsule guide</string>
+    <string name="agent_capsule_onboarding_replay_detail">Starts the next time the capsule appears</string>
+    <string name="agent_capsule_onboarding_replay_done">Reset — starts next time the capsule appears</string>
+    <string name="agent_capsule_a11y_return_chat">Open chat</string>
+    <string name="agent_capsule_a11y_dock_left">Move to left edge</string>
+    <string name="agent_capsule_a11y_dock_right">Move to right edge</string>
+    <string name="agent_capsule_a11y_start_voice">Start voice command</string>
+    <string name="agent_capsule_a11y_end_and_send">End and send</string>
+    <string name="agent_capsule_a11y_cancel_voice">Cancel voice</string>
+    <string name="conversation_layer_a11y_grabber">Chat height, drag up or down to resize</string>
+    <string name="conversation_layer_a11y_expand">Expand conversation card</string>
+    <string name="conversation_layer_a11y_collapse">Collapse chat</string>
+    <string name="agent_capsule_menu_text">Text</string>
+    <string name="agent_capsule_menu_voice">Voice</string>
+    <string name="agent_capsule_menu_text_a11y">Choose text input</string>
+    <string name="agent_capsule_menu_voice_a11y">Choose voice input</string>
+    <string name="agent_capsule_text_composer_placeholder">Message…</string>
+    <string name="agent_capsule_text_composer_send_a11y">Send message</string>
+    <string name="agent_capsule_slide_to_cancel">Slide up to cancel</string>
+    <string name="agent_capsule_release_to_send">Release to send</string>
+    <string name="agent_capsule_voice_cancel">Cancel</string>
+    <string name="agent_capsule_voice_send">Send</string>
+    <string name="agent_capsule_voice_listening">Listening</string>
+    <string name="agent_capsule_voice_recognizing">Recognizing</string>
+    <string name="agent_capsule_voice_listening_hint">Start speaking, then tap Send…</string>
+    <string name="agent_capsule_voice_processing_hint">Still working…</string>
+    <string name="agent_capsule_blocked_hitl">Finish the current confirmation or answer first</string>
+    <string name="agent_capsule_blocked_paused">Task is paused; cannot send</string>
+    <string name="agent_capsule_queued_busy">Agent is busy; voice queued</string>
+    <string name="agent_capsule_persisted">Saved locally</string>
+    <string name="agent_capsule_delivered">Delivered</string>
+    <string name="agent_capsule_consent_hold_again">Authorized — hold again to talk</string>
+
+    <!-- Agent errors (SYNC: Backend _classify_agent_error in chat_service.py) -->
+    <string name="chat_error_device_offline">Device is offline. Please check device connection.</string>
+    <string name="chat_error_device_busy">Device is busy. Please try again later.</string>
+    <string name="chat_error_cancelled">Operation cancelled.</string>
+    <string name="chat_error_context_overflow">Conversation context is too long. Please start a new conversation.</string>
+    <string name="chat_error_llm_timeout">AI model response timed out. Please try again later.</string>
+    <string name="chat_error_tool_timeout">A tool call timed out. Please try again.</string>
+    <string name="chat_error_tool_exec">A tool execution error occurred. Please try again.</string>
+    <string name="chat_error_llm_call">Error communicating with AI model. Please try again later.</string>
+    <string name="chat_error_unknown">An unexpected error occurred. Please try again.</string>
+    <string name="chat_error_review_required">Action requires approval.</string>
+    <string name="chat_error_safety_terminated">Conversation terminated by safety policy.</string>
+    <string name="chat_error_empty_reply">AI returned no content. Please try again.</string>
+    <string name="chat_error_ask_user">Space needs more information from you.</string>
+    <string name="chat_error_queued">Message queued. Auto-reply will follow shortly.</string>
+    <string name="chat_message_persisted_execution_failed">Message delivered, but execution did not start. You can retry.</string>
+    <string name="chat_outgoing_retry">Retry</string>
+    <string name="chat_outgoing_retry_execution">Restart execution</string>
+    <string name="chat_outgoing_remove_unsent">Remove pending</string>
+    <string name="chat_outgoing_hide_tracking">Hide local tracking</string>
+
+    <!-- Wave 5 S4: aligned with Electron errorClassMap -->
+    <string name="chat_error_class_llm_provider_title">Model service temporarily unavailable</string>
+    <string name="chat_error_class_llm_provider_suggestion">Please try again later, or try switching to a different model.</string>
+    <string name="chat_error_class_llm_error_title">Network connection interrupted</string>
+    <string name="chat_error_class_llm_error_suggestion">The conversation was disconnected. Retry, or check your network and try again.</string>
+    <string name="chat_error_class_context_overflow_title">Conversation too long</string>
+    <string name="chat_error_class_context_overflow_suggestion">Please start a new conversation to continue.</string>
+    <string name="chat_error_class_tool_execution_title">Tool execution error</string>
+    <string name="chat_error_class_tool_execution_suggestion">Please try again, or describe your request differently.</string>
+    <string name="chat_error_class_iteration_budget_title">Space stopped (step limit reached)</string>
+    <string name="chat_error_class_iteration_budget_suggestion">Space hit the step limit and stopped. Try a more specific instruction, or start a new conversation.</string>
+    <string name="chat_error_class_token_budget_title">Conversation usage limit reached</string>
+    <string name="chat_error_class_token_budget_suggestion">This conversation has reached its usage limit. Please start a new one.</string>
+    <string name="chat_error_class_budget_exhausted_title">AI usage quota exhausted</string>
+    <string name="chat_error_class_budget_exhausted_suggestion">AI usage quota is exhausted. Please contact your admin.</string>
+    <string name="chat_error_class_rate_limited_title">Too many requests</string>
+    <string name="chat_error_class_rate_limited_suggestion">Please wait a moment and try again.</string>
+    <string name="chat_error_class_internal_title">System internal error</string>
+    <string name="chat_error_class_internal_suggestion">The system encountered an unexpected issue. Please try again.</string>
+    <string name="chat_error_class_llm_key_exhausted_title">Current channel temporarily unavailable</string>
+    <string name="chat_error_class_llm_key_exhausted_suggestion">Service is temporarily interrupted. Please try again later or contact your admin.</string>
+    <string name="chat_error_class_abort_title">Conversation aborted</string>
+    <string name="chat_error_class_abort_suggestion">Reply was interrupted. You can retry the same prompt.</string>
+    <string name="chat_error_class_byok_provider_unavailable_title">BYOK Provider Temporarily Unavailable</string>
+    <string name="chat_error_class_byok_provider_unavailable_suggestion">Your organization\'s BYOK channel returned 503/timeout from upstream. Usually this is an upstream outage that auto-recovers in a few minutes.</string>
+    <string name="chat_error_class_byok_rate_limit_title">BYOK Rate Limit Hit</string>
+    <string name="chat_error_class_byok_rate_limit_suggestion">Your BYOK channel\'s API Key hit upstream RPM/TPM limits. Wait a few minutes or add more keys for rotation.</string>
+    <string name="chat_error_class_byok_quota_exhausted_title">BYOK Account Out of Funds</string>
+    <string name="chat_error_class_byok_quota_exhausted_suggestion">Your BYOK channel\'s API Key has exhausted its quota at upstream. Top up at the upstream provider.</string>
+    <string name="chat_error_class_byok_invalid_key_title">BYOK API Key Invalid</string>
+    <string name="chat_error_class_byok_invalid_key_suggestion">Your BYOK channel\'s API Key returned 401 invalid_api_key from upstream. May be revoked or misentered. Replace it in Organization Settings.</string>
+    <string name="chat_error_class_unknown_title">Something went wrong</string>
+    <string name="chat_error_class_unknown_suggestion">Please try again. If the issue persists, let us know.</string>
+
+    <!--
+      W1 (2026-05-13) File pipeline tool errors (aligned with @tabtin/file-pipeline-errors SSoT).
+      Used to route tool_call envelope failures by error_kind to short English text.
+      Mirrors Electron chat.json toolError section one-to-one.
+    -->
+    <!-- W1.2（2026-05-13 第二轮 Review）：mobile-friendly 措辞（attach/+ button on mobile） -->
+    <string name="chat_tool_error_file_not_found">File not found — verify the absolute path is correct</string>
+    <!-- W2 L18 + W2.1 Review 2 fix-5: mobile-friendly action language; strip daemon-side details (5/50MB soft/hard cap is read_file internal). -->
+    <string name="chat_tool_error_file_too_large">AI can\'t read this file right now — it\'s too large; upload via chat (tap + button) for cloud parsing</string>
+    <string name="chat_tool_error_encrypted">File is password-protected — provide an unprotected version (cloud parser can\'t bypass encryption either)</string>
+    <string name="chat_tool_error_corrupted">File is corrupted — ask the sender for a fresh copy or re-export from the source application</string>
+    <!-- W1.2 Review 收尾: drop developer-term "(no text layer)"; "recognition quality" → "extraction is unreliable";
+         UNSUPPORTED_FORMAT split into two cases (office docs cloud-recoverable vs archives/executables not supported),
+         to prevent users from wasting 30s uploading unsupported binaries like .exe / .zip.
+         W2 L29: SCANNED_PDF / GARBLED_TEXT_LAYER add billed-per-page hint (aligned with SSoT Chinese prompt). -->
+    <string name="chat_tool_error_scanned_pdf">Scanned-image PDF — upload via chat (tap + button on mobile) for AI vision extraction (billed per page, takes longer)</string>
+    <string name="chat_tool_error_garbled_text_layer">PDF text extraction unreliable — upload via chat (tap + button on mobile) for AI vision re-extraction (billed per page, takes longer)</string>
+    <string name="chat_tool_error_unsupported_format">Format not supported — for office docs (.pptx / .doc / .xls), upload via chat (tap + button on mobile) for cloud parsing; archives / executables are not supported by either local or cloud pipeline</string>
+    <string name="chat_tool_error_parse_timeout">Local parse timed out — upload via chat (tap + button on mobile) for async parsing (no time limit)</string>
+    <!-- W2 L10: 5 shared-kind strings (permission_denied / network_failed / invalid_param_format /
+         aborted / upstream_error) — full 13-class i18n coverage aligned with iOS / Electron. -->
+    <string name="chat_tool_error_permission_denied">Permission denied — file may be outside workspace or marked sensitive; grant access and retry</string>
+    <string name="chat_tool_error_network_failed">Network error — check connectivity and retry; if it\'s an OSS link the URL may have expired, ask the user to re-upload</string>
+    <string name="chat_tool_error_invalid_param_format">Invalid parameter — check the tool input schema and retry</string>
+    <string name="chat_tool_error_aborted">Stopped — you cancelled this tool run</string>
+    <string name="chat_tool_error_upstream_error">Unknown error — retry once; if it persists, please report it to us</string>
+    <!-- W5 L38 (2026-05-14): IMAGE_RESIZE_FAILED dedicated enum (numeric 19), split from FILE_TOO_LARGE dual semantics.
+         sharp resize failure (unavailable / decode_failed / too_large_after_resize) gets its own copy. -->
+    <string name="chat_tool_error_image_resize_failed">Local image processing failed — upload via chat (tap + button) for cloud parsing</string>
+
+    <!-- Wave 5 S4: Error card actionable buttons (aligned with Electron MessageBubble ACTION_LABELS) -->
+    <string name="chat_error_action_check_billing">Top Up</string>
+    <string name="chat_error_action_relogin">Sign In Again</string>
+    <string name="chat_error_action_new_session">New Conversation</string>
+    <!-- Wave 5 user-perspective Review: ConfirmDialog for relogin suggested_action, aligned with
+         Electron MessageBubble ConfirmDialog (reloginConfirmTitle / reloginConfirmDesc) + iOS alert. -->
+    <string name="chat_error_relogin_confirm_title">Confirm Sign-In</string>
+    <string name="chat_error_relogin_confirm_message">Your login has expired. Please sign in again.\n\nAny unsaved work on this screen will be lost. Continue?</string>
+
+    <!-- Billing errors (SYNC: Backend build_precheck_error / build_budget_error in billed_call.py) -->
+    <string name="chat_billing_insufficient_credits">Insufficient credits. Please top up to continue.</string>
+    <string name="chat_billing_organization_insufficient_credits">Organization credits insufficient. Please ask your admin to top up.</string>
+    <string name="chat_billing_budget_exceeded">Monthly budget exceeded. Please adjust budget or wait for next month.</string>
+    <string name="chat_billing_rate_limited">Too many requests. Please try again later.</string>
+    <string name="chat_billing_conversation_quota_exceeded">Daily conversation limit reached. Please try again tomorrow or upgrade.</string>
+    <string name="chat_billing_go_recharge">Top Up on Website</string>
+    <string name="chat_billing_go_team_recharge">Contact Admin</string>
+    <string name="chat_billing_adjust_budget">View Budget</string>
+    <string name="chat_billing_retry_later">Retry Later</string>
+    <string name="chat_billing_view_quota">View Quota</string>
+
+    <!-- Tool groups -->
+    <string name="chat_tool_group_read_files">Read %d files</string>
+    <string name="chat_tool_group_searched">Searched %d times</string>
+    <string name="chat_tool_group_other">%d other actions</string>
+    <string name="chat_tool_group_steps">%d steps</string>
+    <string name="chat_view_more">View more…</string>
+
+    <!-- Execution group / detail sheet (timeline keeps one anchor row, details go to the sheet) -->
+    <string name="chat_execution_detail">Execution details</string>
+    <string name="chat_execution_detail_headline">Execution details · %d steps</string>
+    <string name="chat_execution_detail_hint">Tap to view execution details</string>
+    <string name="chat_execution_failed_count">%d failed</string>
+    <string name="chat_execution_step_failed">Failed</string>
+    <string name="chat_execution_thinking_done">Thought</string>
+    <string name="chat_execution_thinking_done_seconds">Thought for %ds</string>
+    <string name="chat_tool_verb_terminal">Run command</string>
+    <string name="chat_tool_verb_ssh">SSH</string>
+    <string name="chat_tool_verb_read_file">Read file</string>
+    <string name="chat_tool_verb_write_file">Write file</string>
+    <string name="chat_tool_verb_edit_file">Edit file</string>
+    <string name="chat_tool_verb_delete_file">Delete file</string>
+    <string name="chat_tool_verb_sql">Query</string>
+    <string name="chat_tool_verb_web_search">Web search</string>
+    <string name="chat_tool_verb_web_fetch">Fetch page</string>
+    <string name="chat_tool_verb_code_search">Search code</string>
+    <string name="chat_tool_verb_generic">Tool call</string>
+    <string name="chat_tool_verb_git_status">Git status</string>
+    <string name="chat_tool_verb_git_diff">Git diff</string>
+    <string name="chat_tool_verb_todo">Update todos</string>
+    <string name="chat_tool_verb_subagent">Delegate task</string>
+    <string name="chat_tool_verb_ask_user">Ask user</string>
+    <string name="chat_tool_verb_memory_write">Write memory</string>
+    <string name="chat_tool_verb_memory_delete">Delete memory</string>
+    <string name="chat_tool_verb_show_widget">Show widget</string>
+    <string name="chat_tool_verb_present">Present result</string>
+    <string name="chat_tool_verb_device_info">Read device info</string>
+    <string name="chat_tool_verb_battery">Read battery info</string>
+    <string name="chat_tool_verb_network">Read network info</string>
+    <string name="chat_tool_verb_contacts">Read contacts</string>
+    <string name="chat_tool_verb_read_sms">Read SMS</string>
+    <string name="chat_tool_verb_send_sms">Send SMS</string>
+    <string name="chat_tool_verb_call_log">Read call log</string>
+    <string name="chat_tool_verb_make_call">Make call</string>
+    <string name="chat_tool_verb_calendar">Read calendar</string>
+    <string name="chat_tool_verb_notifications">Read notifications</string>
+    <string name="chat_tool_verb_app_list">List apps</string>
+    <string name="chat_tool_verb_media">Read media</string>
+    <string name="chat_tool_verb_location">Read location</string>
+    <string name="chat_tool_verb_screen_capture">Capture screen</string>
+    <string name="chat_tool_verb_screen_snapshot">Read screen</string>
+    <string name="chat_tool_verb_ui_tree">Read UI tree</string>
+    <string name="chat_tool_verb_screen_tap">Tap screen</string>
+    <string name="chat_tool_verb_screen_swipe">Swipe screen</string>
+    <string name="chat_tool_verb_screen_long_press">Long press</string>
+    <string name="chat_tool_verb_find_element">Find UI element</string>
+    <string name="chat_tool_verb_type_text">Type text</string>
+    <string name="chat_tool_verb_type_secret">Type secret</string>
+    <string name="chat_tool_verb_key_event">Send key</string>
+    <string name="chat_tool_verb_wait_ui">Wait for UI</string>
+    <string name="chat_tool_verb_open_app">Open app</string>
+    <string name="chat_tool_verb_stop_app">Stop app</string>
+    <string name="chat_tool_verb_system_setting">System settings</string>
+    <string name="chat_tool_verb_stealth">Stealth mode</string>
+    <string name="chat_tool_verb_launch_intent">Open link</string>
+    <string name="chat_tool_verb_save_device">Save to device</string>
+    <string name="chat_tool_verb_automation">Read automation status</string>
+    <string name="chat_tool_verb_tab_search">Find content</string>
+    <string name="chat_tool_verb_tab_remove">Remove content</string>
+    <string name="chat_tool_verb_tab_restore">Restore content</string>
+    <string name="chat_tool_verb_tab_create">Create content</string>
+    <string name="chat_tool_verb_tab_update">Update content</string>
+    <string name="chat_tool_verb_tab_publish">Publish content</string>
+    <string name="chat_tool_verb_tab_doc">Process document</string>
+    <string name="chat_tool_verb_tab_memo">Process note</string>
+    <string name="chat_tool_verb_tab_site">Process site</string>
+    <string name="chat_tool_verb_tab_data">Process table</string>
+
+    <!-- Member budget errors -->
+    <string name="chat_billing_member_monthly_limit">Monthly personal quota exhausted. Please contact your admin.</string>
+    <string name="chat_billing_member_daily_limit">Daily personal quota exhausted. Please contact your admin.</string>
+    <string name="chat_billing_member_model_restricted">This model exceeds your permission level. Please contact your admin.</string>
+    <string name="chat_billing_contact_admin">Contact Admin</string>
+
+    <!-- Billing blocked -->
+    <string name="chat_billing_blocked_hint">Insufficient balance. Please top up to continue.</string>
+    <string name="chat_hitl_blocked_hint">Please respond to the pending request above first</string>
+    <string name="chat_add_context">Add Context</string>
+    <string name="chat_context_picker_loading">Loading resources…</string>
+    <string name="chat_context_picker_empty">No referenceable resources in this Workspace</string>
+    <string name="chat_menu_canvas">What the Agent Did</string>
+    <string name="canvas_title">What the Agent Did</string>
+    <string name="canvas_stat_turns">Turns</string>
+    <string name="canvas_stat_tools">Tool Calls</string>
+    <string name="canvas_stat_subagents">Subagents</string>
+    <string name="canvas_empty">No agent activity in this conversation yet</string>
+    <string name="canvas_section_subagents">Subagents</string>
+    <string name="canvas_section_files">File Changes (%d)</string>
+    <string name="canvas_section_commands">Commands (%d)</string>
+    <string name="canvas_section_other_tools">Other Tools (%d)</string>
+    <!-- 环境态软提示（RemoteExecutionNotice，对齐 iOS）：不禁用 Composer，只提示先发送、等设备。 -->
+    <string name="chat_space_device_offline_hint">The execution device isn\'t online yet; you can send now — it\'ll pick up the message once it\'s back.</string>
+    <string name="chat_space_device_unbound_hint">This Workspace has no execution device linked yet; you can send now — it\'ll pick up the message once one is configured.</string>
+
+    <!-- Fork session -->
+    <string name="chat_fork_session">Fork Session</string>
+    <string name="chat_fork_success">Session forked</string>
+
+    <!-- System notice cards -->
+    <string name="chat_notice_max_iterations_title">Agent Paused</string>
+    <string name="chat_notice_max_iterations_continue">Continue</string>
+    <string name="chat_notice_approval_expired_title">Approval Expired</string>
+    <string name="chat_notice_approval_expired_retry">Retry</string>
+
+    <!-- M4.1 L-W6-22: sensitive path category slug → human label -->
+    <string name="chat_approval_sensitive_category_ssh">SSH credentials</string>
+    <string name="chat_approval_sensitive_category_aws">AWS credentials</string>
+    <string name="chat_approval_sensitive_category_gnupg">GnuPG keys</string>
+    <string name="chat_approval_sensitive_category_kube">Kubernetes config</string>
+    <string name="chat_approval_sensitive_category_env">environment secrets</string>
+    <string name="chat_approval_sensitive_category_private_key">private key file</string>
+    <string name="chat_approval_sensitive_category_git">Git credentials</string>
+    <string name="chat_approval_sensitive_category_shell_rc">shell startup script</string>
+    <string name="chat_approval_sensitive_category_cloud_cli">cloud CLI credentials</string>
+    <string name="chat_approval_sensitive_category_package_credentials">package registry credentials</string>
+    <string name="chat_approval_sensitive_category_macos_keychain">macOS Keychain</string>
+    <string name="chat_approval_sensitive_category_browser_credentials">browser credentials</string>
+    <string name="chat_approval_sensitive_category_password_manager">password manager data</string>
+    <string name="chat_approval_sensitive_category_linux_keyring">Linux keyring</string>
+
+    <!-- M4.1 L-W6-23: hardline command/path pattern slug → human label -->
+    <string name="chat_approval_hardline_pattern_rm_rf_root_or_home">recursive delete of home/root directory</string>
+    <string name="chat_approval_hardline_pattern_rm_rf_system_root">recursive delete of system root (rm -rf /)</string>
+    <string name="chat_approval_hardline_pattern_fork_bomb">fork bomb (infinite process creation)</string>
+    <string name="chat_approval_hardline_pattern_dd_to_raw_device">write to raw device (dd)</string>
+    <string name="chat_approval_hardline_pattern_mkfs_format">format filesystem (mkfs)</string>
+    <string name="chat_approval_hardline_pattern_format_disk_windows">format Windows disk</string>
+    <string name="chat_approval_hardline_pattern_redirect_to_raw_disk">redirect write to raw disk</string>
+    <string name="chat_approval_hardline_pattern_curl_pipe_to_shell">download and execute script from network</string>
+    <string name="chat_approval_hardline_pattern_shutdown_reboot">system shutdown or reboot</string>
+    <string name="chat_approval_hardline_pattern_kill_all_processes">force kill all processes</string>
+    <string name="chat_approval_hardline_pattern_mv_to_dev_null">move file to /dev/null (destructive delete)</string>
+    <string name="chat_approval_hardline_pattern_sudo_escalation">privilege escalation (sudo)</string>
+    <string name="chat_approval_hardline_pattern_chmod_777_root">chmod 777 on system root</string>
+    <string name="chat_approval_hardline_pattern_chmod_r_777">recursive chmod 777</string>
+    <string name="chat_approval_hardline_pattern_chown_r_root">recursive chown to root</string>
+    <string name="chat_approval_hardline_pattern_iptables_flush">flush firewall rules (iptables -F)</string>
+    <string name="chat_approval_hardline_pattern_systemctl_stop_critical">stop critical system services</string>
+    <string name="chat_approval_hardline_pattern_eval_expansion">eval with arbitrary command expansion</string>
+    <string name="chat_approval_hardline_pattern_macos_system">macOS system read-only area (/System)</string>
+    <string name="chat_approval_hardline_pattern_macos_library_root">macOS system-level Library (/Library)</string>
+    <string name="chat_approval_hardline_pattern_unix_usr">Unix system directory (/usr)</string>
+    <string name="chat_approval_hardline_pattern_unix_bin">Unix system directory (/bin)</string>
+    <string name="chat_approval_hardline_pattern_unix_sbin">Unix system directory (/sbin)</string>
+    <string name="chat_approval_hardline_pattern_unix_etc">Unix system config directory (/etc)</string>
+    <string name="chat_approval_hardline_pattern_windows_system_root">Windows system directory (C:/Windows)</string>
+    <string name="chat_approval_hardline_pattern_windows_program_files">Windows Program Files directory</string>
+    <string name="chat_citations_count">%1$d sources cited</string>
+    <string name="chat_outgoing_awaiting_device">Message delivered, waiting for an execution device</string>
+    <string name="chat_run_pause">Pause task</string>
+    <string name="chat_run_resume">Resume task</string>
+    <string name="chat_run_paused_hint">Task paused. Resume or stop it.</string>
+
+    <!-- Media image inline delivery surface (align Electron richContent.image*) -->
+    <string name="chat_media_image_generating">Generating image</string>
+    <string name="chat_media_image_failed">Generation failed</string>
+    <string name="chat_media_image_view_details">View details</string>
+    <string name="chat_media_image_hide_details">Hide details</string>
+
+    <!-- #9615 / Electron #6116: neutral Interrupted badge for user-initiated Stop -->
+    <string name="chat_message_interrupted">Interrupted</string>
+</resources>

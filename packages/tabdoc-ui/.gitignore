@@ -1,0 +1,4 @@
+# vitest.config.ts 是唯一配置源；下列为 IDE/tsc 误 emit，勿提交
+vitest.config.js
+vitest.config.d.ts
+vitest.config.d.ts.map

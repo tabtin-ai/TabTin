@@ -1,0 +1,253 @@
+{
+  "appTitle": "TabTin - AI 工作平台",
+  "close": "关闭",
+  "delete": "删除",
+  "up": "上移",
+  "down": "下移",
+  "save": "保存",
+  "cancel": "取消",
+  "edit": "编辑",
+  "logout": "退出登录",
+  "loading": "加载中",
+  "userFallback": "用户",
+  "loadingEllipsis": "加载中...",
+  "errorTitle": "出现错误",
+  "countdown": "{{count}}s",
+  "theme": "切换主题",
+  "switchLanguage": "English",
+  "reload": "重新加载",
+  "home": {
+    "title": "欢迎使用 TabTin",
+    "subtitle": "{{name}}，Web 版本正在建设中，更多功能即将上线。"
+  },
+  "notFound": {
+    "title": "页面不存在",
+    "back": "返回首页"
+  },
+  "errorBoundary": {
+    "title": "页面出现了问题",
+    "description": "应用遇到了意外错误，请尝试重新加载。"
+  },
+  "errors": {
+    "requestFailed": "请求失败",
+    "networkError": "网络错误",
+    "networkErrorDetail": "网络异常，请检查网络连接",
+    "loginFailed": "登录失败",
+    "registerFailed": "注册失败"
+  },
+  "apiErrors": {
+    "VALIDATION_ERROR": "输入数据不合法，请检查后重试",
+    "RATE_LIMITED": "操作过于频繁，请稍后再试",
+    "UNAUTHORIZED": "认证失败，请重新登录",
+    "ACCOUNT_LOCKED": "账号已被锁定，请联系客服",
+    "NOT_FOUND": "请求的资源不存在",
+    "FORBIDDEN": "没有权限执行此操作",
+    "INTERNAL_ERROR": "服务器内部错误，请稍后再试"
+  },
+  "toast": {
+    "registerSuccess": "注册成功，请登录",
+    "resetPasswordSuccess": "密码重置成功，请重新登录"
+  },
+  "webModules": {
+    "previewBadge": "Web 预览版",
+    "backToSpace": "返回 Space",
+    "doc": {
+      "invalidIdTitle": "无效的文档 ID",
+      "invalidIdDesc": "请从 Space 内选择一个文档打开。",
+      "loadFailedTitle": "文档加载失败",
+      "loadFailedDesc": "暂时无法获取文档内容，请稍后重试。",
+      "editorTitle": "文档编辑器",
+      "untitled": "未命名文档",
+      "versionLabel": "版本 {{version}}",
+      "updatedAtLabel": "最近更新：{{value}}",
+      "tagsCount": "{{count}} 个标签",
+      "noTags": "未设置标签",
+      "tagsTitle": "文档标签",
+      "emptyContent": "文档暂时还没有内容"
+    },
+    "slide": {
+      "invalidIdTitle": "无效的演示文稿 ID",
+      "invalidIdDesc": "请从 Space 内选择一个演示文稿打开。",
+      "loadFailedTitle": "演示文稿加载失败",
+      "loadFailedDesc": "暂时无法获取演示文稿内容，请稍后重试。",
+      "readonlyHint": "当前先提供只读预览，完整编辑壳将在后续宿主解耦后接入 Web。",
+      "untitled": "未命名演示文稿",
+      "pageCountLabel": "{{count}} 页",
+      "canvasSizeLabel": "画布 {{width}} × {{height}}",
+      "updatedAtLabel": "最近更新：{{value}}",
+      "noPages": "当前演示文稿还没有页面",
+      "pageListTitle": "页面列表",
+      "pageLabel": "第 {{index}} 页",
+      "currentPage": "当前页"
+    }
+  },
+  "share": {
+    "dialog": {
+      "title": "分享《{{title}}》",
+      "untitled": "未命名",
+      "close": "关闭",
+      "apply": "应用",
+      "copy": "复制链接",
+      "refresh": "刷新链接",
+      "refreshWarning": "刷新后旧链接立即失效，请谨慎操作",
+      "refreshConfirm": "刷新会让旧链接立即失效，确定继续吗？",
+      "refreshConfirmTitle": "刷新分享链接",
+      "cancel": "取消",
+      "retry": "重试",
+      "passwordSwitchWarning": "当前密码栏为空，修改可见范围/权限会清除已设置的密码；如需保留请重新输入。",
+      "password": "密码保护（可选）",
+      "passwordPlaceholder": "可选，留空则无密码",
+      "passwordSetPlaceholder": "已设置（留空则清除）",
+      "visitCount": "访问次数",
+      "readOnlyHint": "你的权限不足以邀请或修改协作者；以下为只读视图。",
+      "collaborators": {
+        "section": "邀请协作者",
+        "sectionReadOnly": "协作者",
+        "confirmRemoveTitle": "移除协作者",
+        "search": "按昵称搜索同事…",
+        "invite": "邀请",
+        "noSelection": "请先选择一个成员",
+        "inviteSuccess": "已邀请 {{count}} 位协作者",
+        "invitePartial": "部分邀请未成功",
+        "inviteFailed": "邀请失败",
+        "permissionUpdated": "权限已更新",
+        "permissionUpdateFailed": "权限更新失败",
+        "confirmRemove": "确定要将 {{name}} 从协作者中移除吗？",
+        "remove": "移除",
+        "removeSuccess": "已移除协作者",
+        "removeFailed": "移除失败",
+        "noResults": "没有匹配的成员",
+        "loadFailed": "加载协作者失败",
+        "empty": "还没有协作者",
+        "ownerBadge": "所有者"
+      },
+      "permission": {
+        "viewer": "可查看",
+        "editor": "可编辑",
+        "admin": "管理员"
+      },
+      "publicLink": {
+        "section": "公开链接",
+        "scope": "链接可见范围",
+        "scopeOption": {
+          "public": "任何人",
+          "organization": "组织内"
+        },
+        "scopeHint": {
+          "public": "任何拿到链接的人都能访问。",
+          "organization": "仅登录的组织成员能通过此链接访问。"
+        },
+        "permission": "权限",
+        "permissionOption": {
+          "view": "只读",
+          "comment": "可评论",
+          "edit": "可编辑"
+        },
+        "enabledToast": "公开链接已开启",
+        "disabledToast": "公开链接已关闭",
+        "toggleFailed": "操作失败",
+        "scopeUpdated": "链接可见范围已更新",
+        "scopeNarrowedToast": "已改为组织内可见，原公开链接已失效",
+        "scopeUpdateFailed": "可见范围更新失败",
+        "permissionUpdated": "权限已更新",
+        "permissionUpdateFailed": "权限更新失败",
+        "passwordUpdated": "密码已更新",
+        "passwordUpdateFailed": "密码更新失败",
+        "copyFailed": "复制失败",
+        "refreshedToast": "链接已重新生成",
+        "refreshFailed": "刷新失败",
+        "disabledHint": "开启后默认仅组织内成员可访问；改为「任何人」需二次确认。",
+        "disabledForRole": "仅所有者可管理",
+        "publicConfirmTitle": "确认设为任何人可访问？",
+        "publicConfirmDescription": "这是高危操作：无需加入组织，任何获得链接的人都能访问内容。确认后立即生效。",
+        "publicConfirmAction": "确认公开"
+      },
+      "skipped": {
+        "notInOrganization": "不在当前组织中",
+        "isOwner": "已是文档/表格所有者",
+        "self": "不能邀请自己"
+      },
+      "permissionUpgrade": "提升为",
+      "permissionDowngrade": "降为"
+    },
+    "toast": {
+      "noLongerAccessible": "你已无访问权限",
+      "summaryNoNavigate": "汇总通知，详情见列表"
+    },
+    "editor": {
+      "removed": {
+        "title": "你已被移出《{{title}}》",
+        "titleAuto": "因离开组织,你已无法访问《{{title}}》",
+        "hint": "你最近的编辑已保留在本地,但不再上传到服务器。",
+        "cta": "返回空间"
+      },
+      "permissionChanged": {
+        "toast": "你的权限已变更为 {{permission}}，编辑器已切换为只读"
+      }
+    },
+    "permission": {
+      "viewerLabel": "查看",
+      "editorLabel": "编辑",
+      "adminLabel": "管理"
+    }
+  },
+  "notification": {
+    "title": "通知",
+    "markAllRead": "全部已读",
+    "loading": "加载中…",
+    "empty": "暂无通知",
+    "navigateFailed": "通知跳转失败",
+    "navigateOrganizationNotFound": "目标组织不存在或无权限访问",
+    "types": {
+      "resource_shared": "资源共享",
+      "unknown": "通知",
+      "invite_received": "收到邀请",
+      "invite_accepted": "邀请已接受",
+      "member_added": "新成员加入",
+      "member_removed": "成员被移除",
+      "owner_reassigned_summary": "成员移除",
+      "role_changed": "角色变更",
+      "ownership_transfer": "所有权转让",
+      "quota_warning": "配额预警",
+      "balance_low": "余额预警",
+      "trash_expiry_warning": "回收站过期预警",
+      "system": "系统通知",
+      "extension_event": "扩展事件",
+      "organization.invitation": "组织邀请",
+      "organization.invitation.cancelled": "邀请已取消",
+      "organization.invitation.responded": "邀请已处理",
+      "organization.invitation.sync": "邀请同步",
+      "agent": {
+        "hitl": {
+          "waiting": "等待确认"
+        },
+        "task": {
+          "completed": "任务已完成",
+          "error": "任务出错",
+          "interrupted": "任务已中断"
+        }
+      },
+      "tabdoc": {
+        "comment": {
+          "mention": "评论提及"
+        }
+      },
+      "tabdata": {
+        "record": {
+          "user_assigned": "成员字段提及"
+        }
+      },
+      "tracker": {
+        "run": {
+          "started": "自动化任务已开始执行",
+          "completed": "自动化任务已完成",
+          "failed": "自动化任务执行失败"
+        },
+        "health_alert": "自动化任务健康预警",
+        "trigger": {
+          "filtered": "触发未匹配条件"
+        }
+      }
+    }
+  }
+}

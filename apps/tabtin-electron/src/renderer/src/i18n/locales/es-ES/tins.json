@@ -1,0 +1,83 @@
+{
+  "title": "latas",
+  "installedCount": "{{count}} instalado",
+  "section": {
+    "installed": "Instalado",
+    "available": "Disponible"
+  },
+  "action": {
+    "install": "Instalar",
+    "uninstall": "Desinstalar",
+    "enable": "Habilitar",
+    "disable": "Desactivar",
+    "pin": "Alfiler",
+    "unpin": "Desanclar",
+    "edit": "Editar",
+    "retry": "Reintentar",
+    "saveAll": "Guardar todo"
+  },
+  "confirm": {
+    "uninstall": "¿Está seguro de que desea desinstalar \"{{name}}\"?",
+    "delete": "¿Está seguro de que desea eliminar \"{{name}}\"? Esta acción no se puede deshacer.",
+    "unsavedChanges": "Tienes cambios sin guardar. ¿Estás seguro de que quieres irte?"
+  },
+  "empty": {
+    "title": "Aún no hay latas",
+    "description": "Dígale al Agente lo que desea lograr: él puede crear e instalar un Tin por usted. Las latas publicadas por los compañeros de equipo aparecerán en la lista Disponible a continuación.",
+    "askAgent": "Pídale al agente que cree una lata",
+    "agentPrompt": "Ayúdame a crear un complemento Tin. Primero pregunte qué escenario quiero resolver (por ejemplo, resaltado automático de páginas, extracción de información o ayudas del navegador), luego créelo e instálelo en este espacio de trabajo.",
+    "errorNoSession": "No se puede iniciar un chat en este momento. Por favor inténtalo de nuevo.",
+    "openPanel": "Panel de latas abiertas"
+  },
+  "sidePanel": {
+    "emptyTitle": "Sin estaño instalado",
+    "emptyDescription": "Los Tins son complementos inteligentes que se activan mientras navega y brindan funciones de ayuda.",
+    "openPanel": "instalar estaño"
+  },
+  "home": {
+    "loading": "Cargando...",
+    "viewAll": "Ver todas las latas {{count}}...",
+    "activeCount": "{{count}} Estaño(s) activo(s)",
+    "loadError": "No se pudieron cargar las latas",
+    "retry": "Reintentar"
+  },
+  "activated": "Activado",
+  "editor": {
+    "tabs": {
+      "panelHtml": "Panel de interfaz de usuario",
+      "contentScript": "Guión de contenido",
+      "backgroundScript": "Guión de fondo",
+      "agentInstructions": "Instrucciones del agente"
+    },
+    "placeholder": {
+      "panelHtml": "<!-- Escriba el HTML del panel Tin UI aquí -->\n<!-- Utilice bibliotecas CDN y comuníquese con el host a través de la API window.tin -->",
+      "contentScript": "// Script inyectado en las páginas navegadas\n// Puede acceder y modificar la página DOM",
+      "backgroundScript": "// Script en segundo plano ejecutándose en el entorno limitado del proceso principal",
+      "agentInstructions": "# Instrucciones del agente\n\nDescribe qué hace esta lata y cómo interactuar con ella..."
+    },
+    "lang": {
+      "html": "HTML",
+      "javascript": "javascript",
+      "markdown": "Rebaja"
+    },
+    "charCount": "{{count}} caracteres"
+  },
+  "toast": {
+    "installSuccess": "\"{{name}}\" instalado correctamente",
+    "installFailed": "La instalación falló",
+    "uninstallSuccess": "\"{{name}}\" desinstalado",
+    "uninstallFailed": "Error de desinstalación",
+    "activateSuccess": "\"{{name}}\" activado",
+    "activateFailed": "La activación falló",
+    "disableSuccess": "\"{{name}}\" deshabilitado",
+    "disableFailed": "Deshabilitar falló",
+    "deleteSuccess": "\"{{name}}\" eliminado",
+    "deleteFailed": "Error al eliminar",
+    "enableFailed": "Habilitar falló",
+    "pinFailed": "Error en la operación del PIN",
+    "loadFailed": "Error de carga",
+    "saveSuccess": "Guardar con éxito",
+    "saveFailed": "Error al guardar",
+    "persistVarFailed": "No se pudo guardar la variable"
+  }
+}

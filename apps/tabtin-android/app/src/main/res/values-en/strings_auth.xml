@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="auth_slogan">AI Creative Workspace</string>
+    <string name="auth_hero_title">Put agents\nto real work</string>
+    <string name="auth_hero_subtitle">Every step stays visible.</string>
+    <string name="auth_login_title">Log in to TabTin</string>
+    <string name="auth_mode_code">Verification code</string>
+    <string name="auth_mode_password">Password</string>
+    <string name="auth_phone_label">Account</string>
+    <string name="auth_phone_placeholder">Email or phone</string>
+    <string name="auth_code_label">Verification Code</string>
+    <string name="auth_code_placeholder">Enter verification code</string>
+    <string name="auth_get_code">Get Code</string>
+    <string name="auth_code_resend">Retry in %ds</string>
+    <string name="auth_password_label">Password</string>
+    <string name="auth_password_placeholder">Enter password</string>
+    <string name="auth_show_password">Show password</string>
+    <string name="auth_hide_password">Hide password</string>
+    <string name="auth_error_invalid_password">Account or password is incorrect. Try again.</string>
+    <string name="auth_error_invalid_code">The code is invalid or expired. Get a new code.</string>
+    <string name="auth_error_send_code">Couldn\'t send the code. Try again later.</string>
+    <string name="auth_error_network">Check your connection and try again.</string>
+    <string name="auth_error_login">Couldn\'t log in. Try again later.</string>
+    <string name="auth_login">Log In</string>
+    <string name="auth_use_password">Log in with password</string>
+    <string name="auth_use_code">Log in with verification code</string>
+    <string name="auth_privacy_agreement_prefix">I have read and agree to the</string>
+    <string name="auth_privacy_policy">Privacy Policy</string>
+    <string name="auth_privacy_consent_title">Privacy Policy</string>
+    <string name="auth_privacy_consent_message">Please read and agree to the Privacy Policy before continuing.</string>
+    <string name="auth_privacy_consent_agree">Agree and Continue</string>
+    <string name="auth_privacy_consent_disagree">Disagree</string>
+    <string name="auth_invite_code_title">Invitation code required</string>
+    <string name="auth_invite_code_description">Complete invitation-code verification before using this account.</string>
+    <string name="auth_invite_code_label">Invitation code</string>
+    <string name="auth_invite_code_required">Enter an invitation code</string>
+    <string name="auth_invite_code_continue">Verify and continue</string>
+    <string name="auth_invite_code_change_account">Use another account</string>
+</resources>

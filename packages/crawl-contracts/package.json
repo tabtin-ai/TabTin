@@ -1,0 +1,74 @@
+{
+  "name": "@tabtin/crawl-contracts",
+  "version": "0.1.0",
+  "description": "Shared contracts for crawl-related types",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./pagination": {
+      "source": "./src/pagination.ts",
+      "types": "./dist/pagination.d.ts",
+      "import": "./dist/pagination.js"
+    },
+    "./preprocess": {
+      "source": "./src/preprocess.ts",
+      "types": "./dist/preprocess.d.ts",
+      "import": "./dist/preprocess.js"
+    },
+    "./task": {
+      "source": "./src/task.ts",
+      "types": "./dist/task.d.ts",
+      "import": "./dist/task.js"
+    },
+    "./standard-schema": {
+      "source": "./src/standard-schema.ts",
+      "types": "./dist/standard-schema.d.ts",
+      "import": "./dist/standard-schema.js"
+    },
+    "./recommendation": {
+      "source": "./src/recommendation.ts",
+      "types": "./dist/recommendation.d.ts",
+      "import": "./dist/recommendation.js"
+    },
+    "./extraction": {
+      "source": "./src/extraction.ts",
+      "types": "./dist/extraction.d.ts",
+      "import": "./dist/extraction.js"
+    },
+    "./anti-detect": {
+      "source": "./src/anti-detect.ts",
+      "types": "./dist/anti-detect.d.ts",
+      "import": "./dist/anti-detect.js"
+    },
+    "./access-result": {
+      "source": "./src/access-result.ts",
+      "types": "./dist/access-result.d.ts",
+      "import": "./dist/access-result.js"
+    },
+    "./network": {
+      "source": "./src/network.ts",
+      "types": "./dist/network.d.ts",
+      "import": "./dist/network.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts src/recommendation.ts src/extraction.ts src/extraction-schema.ts src/standard-schema.ts src/anti-detect.ts src/network.ts src/access-result.ts src/pagination.ts src/preprocess.ts src/task.ts --format esm --dts",
+    "build:dts": "tsup src/index.ts src/recommendation.ts src/extraction.ts src/extraction-schema.ts src/standard-schema.ts src/anti-detect.ts src/network.ts src/access-result.ts src/pagination.ts src/preprocess.ts src/task.ts --format esm --dts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.2.2"
+  },
+  "files": [
+    "dist"
+  ]
+}

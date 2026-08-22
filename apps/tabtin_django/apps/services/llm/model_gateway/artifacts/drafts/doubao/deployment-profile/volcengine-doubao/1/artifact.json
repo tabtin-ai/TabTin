@@ -1,0 +1,35 @@
+{
+  "credential_pool_ref": {
+    "pool_key": "doubao-legacy-opaque-pool"
+  },
+  "credential_type": "bearer",
+  "deployment_tags": [
+    "draft-only",
+    "runtime-disabled"
+  ],
+  "endpoint_key": "volcengine-doubao",
+  "endpoint_policy_ref": {
+    "expected_hash": "sha256:79a24d10dbe0577385a923fef1a3ba811572f154b8ad213984e77ee71e65efc5",
+    "key": "doubao-draft-endpoint-safety",
+    "kind": "platform-safety-policy",
+    "revision": "1"
+  },
+  "endpoint_url": "https://ark.cn-beijing.volces.com/api/v3",
+  "identity": {
+    "canonical_hash": "sha256:c371de54e7bcac029f46bc8d40bf50db0d4e84ddcc56050a611d06e36a519e0e",
+    "key": "volcengine-doubao",
+    "kind": "deployment-profile",
+    "revision": "1"
+  },
+  "lifecycle": "draft",
+  "protocol_readiness_ref": {
+    "expected_hash": "sha256:8c7dc803191e666b1379efbea0fe16b92c23a7b2608de5f28afe7e55e1d80f94",
+    "key": "doubao-openai-chat-draft-readiness",
+    "kind": "protocol-readiness",
+    "revision": "1"
+  },
+  "region": "cn-beijing",
+  "replacement_ref": null,
+  "schema_version": "1",
+  "sunset_at": null
+}

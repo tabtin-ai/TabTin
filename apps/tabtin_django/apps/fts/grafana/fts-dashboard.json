@@ -1,0 +1,283 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "description": "TabTin Unified Search (FTS) — 上线 SLO 监控（Wave 5 PRD 6.3 / 6.4）",
+  "editable": true,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": ["tabtin"],
+      "targetBlank": true,
+      "title": "TabTin docs",
+      "type": "link",
+      "url": "https://github.com/your-org/TabTinAgent/blob/main/support/strategy/2026-04-16-unified-search-engine.md"
+    }
+  ],
+  "panels": [
+    {
+      "type": "row",
+      "title": "Search latency (PRD 2.2 SLO: P95<200ms / P99<500ms)",
+      "id": 100,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Search latency P50 / P95 / P99 (by path)",
+      "id": 1,
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 1 },
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum(rate(fts_search_duration_seconds_bucket[5m])) by (le, path))",
+          "legendFormat": "P50 / {{path}}",
+          "refId": "A"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(fts_search_duration_seconds_bucket[5m])) by (le, path))",
+          "legendFormat": "P95 / {{path}}",
+          "refId": "B"
+        },
+        {
+          "expr": "histogram_quantile(0.99, sum(rate(fts_search_duration_seconds_bucket[5m])) by (le, path))",
+          "legendFormat": "P99 / {{path}}",
+          "refId": "C"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 0.2 },
+              { "color": "red", "value": 0.5 }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "stat",
+      "title": "QPS by path",
+      "id": 2,
+      "gridPos": { "h": 8, "w": 6, "x": 12, "y": 1 },
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "sum(rate(fts_search_duration_seconds_count[1m])) by (path)",
+          "legendFormat": "{{path}}"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Degraded ratio (last 5m)",
+      "id": 3,
+      "gridPos": { "h": 8, "w": 6, "x": 18, "y": 1 },
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "sum(rate(fts_search_duration_seconds_count{degraded=\"true\"}[5m])) / sum(rate(fts_search_duration_seconds_count[5m]))",
+          "legendFormat": "degraded%"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 0.05 },
+              { "color": "red", "value": 0.2 }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "row",
+      "title": "Outbox / Sync pipeline",
+      "id": 200,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 9 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Outbox backlog (告警 > 10000 持续 5min)",
+      "id": 4,
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 10 },
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "fts_outbox_backlog",
+          "legendFormat": "{{db}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 1000 },
+              { "color": "red", "value": 10000 }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Outbox terminal backlog (Critical 告警 > 0 持续 5min)",
+      "id": 5,
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 10 },
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "fts_outbox_terminal_backlog",
+          "legendFormat": "{{db}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "red", "value": 1 }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "row",
+      "title": "Degradation & Health",
+      "id": 300,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 18 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Degrade events / min (Critical 告警 > 1/min)",
+      "id": 6,
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 19 },
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "sum(rate(fts_degrade_total[1m])) by (reason) * 60",
+          "legendFormat": "{{reason}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Zero result rate (突增 3x 告警)",
+      "id": 7,
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 19 },
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "sum(rate(fts_zero_result_total[5m])) / sum(rate(fts_search_duration_seconds_count[5m]))",
+          "legendFormat": "zero_result_ratio"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit"
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "ES cluster health (1 = current state)",
+      "id": 8,
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 27 },
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "fts_health_status",
+          "legendFormat": "{{status}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "FC tabtin.search invocations / min (by notice)",
+      "id": 9,
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 27 },
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "sum(rate(fts_fc_invoke_total[1m])) by (notice) * 60",
+          "legendFormat": "{{notice}}"
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "title": "Sync failures",
+      "id": 400,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 35 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Outbox write failures (R1-08; 告警 > 10/min)",
+      "id": 10,
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 36 },
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "sum(rate(fts_outbox_write_failed_total[1m])) by (model) * 60",
+          "legendFormat": "{{model}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "ACL invalidate failures (R2-10; 告警 > 10/min)",
+      "id": 11,
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 36 },
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "sum(rate(fts_acl_invalidate_failed_total[1m])) * 60",
+          "legendFormat": "acl_invalidate_failed/min"
+        }
+      ]
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["tabtin", "fts", "search"],
+  "templating": {
+    "list": [
+      {
+        "current": { "selected": false, "text": "Prometheus", "value": "Prometheus" },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Datasource",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      }
+    ]
+  },
+  "time": { "from": "now-3h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "TabTin FTS — Unified Search SLO",
+  "uid": "tabtin-fts",
+  "version": 1,
+  "weekStart": ""
+}

@@ -1,0 +1,31 @@
+{
+  "errors": {
+    "responseInvalid": "서버의 응답 형식이 잘못되었습니다.",
+    "missingStats": "응답에 통계 데이터가 누락되었습니다.",
+    "missingFieldMapping": "응답에 필드 매핑 데이터가 누락되었습니다.",
+    "previewFailed": "파일 미리보기에 실패했습니다. 다시 시도해 주세요.",
+    "previewNetworkUnstable": "네트워크 연결이 불안정합니다. 다시 시도하고 프록시/VPN을 확인하세요.",
+    "importFailed": "데이터 가져오기에 실패했습니다. 다시 시도해 주세요.",
+    "importInFlight": "이미 가져오기가 진행 중입니다. 기다리세요.",
+    "templateDownloadFailed": "템플릿 다운로드에 실패했습니다. 다시 시도해 주세요."
+  },
+  "apiErrors": {
+    "previewFailedWithStatus": "미리보기 실패: HTTP {{status}}",
+    "emptyResponse": "서버가 빈 데이터를 반환했습니다.",
+    "missingStats": "서버 응답에 통계 필드가 누락되었습니다.",
+    "missingFieldMapping": "field_mapping 필드가 누락된 서버 응답",
+    "csvImportFailedWithStatus": "CSV 가져오기 실패: HTTP {{status}}",
+    "excelImportFailedWithStatus": "Excel 가져오기 실패: HTTP {{status}}",
+    "jsonImportFailedWithStatus": "JSON 가져오기 실패: HTTP {{status}}",
+    "templateDownloadFailedWithStatus": "템플릿 다운로드 실패: HTTP {{status}}",
+    "unsupportedFileFormat": "지원되지 않는 파일 형식: {{format}}",
+    "fileEmpty": "파일 내용이 비어 있습니다.",
+    "fileReadFailed": "파일을 읽지 못했습니다."
+  },
+  "template": {
+    "defaultTableName": "테이블",
+    "filenameExcel": "{{tableName}}_import_template.xlsx",
+    "filename": "{{tableName}}_import_template.csv",
+    "filenameJson": "{{tableName}}_import_template.json"
+  }
+}

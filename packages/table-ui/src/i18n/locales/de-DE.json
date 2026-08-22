@@ -1,0 +1,29 @@
+{
+  "group": {
+    "ungrouped": "Nicht gruppiert",
+    "unclassified": "Nicht klassifiziert",
+    "loadedOfTotal": "{{loaded}} von {{total}} geladen"
+  },
+  "attachments": {
+    "missingRequired": "Erforderliche Anhänge fehlen"
+  },
+  "record": {
+    "createMissingTableTitle": "Datensatz kann nicht erstellt werden",
+    "createMissingTableDesc": "Fehlende Tabelleninformationen. Bitte wählen Sie die Tabelle erneut aus und versuchen Sie es erneut.",
+    "createFailedTitle": "Erstellen ist fehlgeschlagen",
+    "createFailedDesc": "Der Datensatz konnte nicht erstellt werden. Bitte versuchen Sie es später noch einmal.",
+    "createFailedFallback": "Datensatz kann nicht erstellt werden. Bitte versuchen Sie es später noch einmal.",
+    "createPatchFailedTitle": "Zusätzliche Änderungen wurden nicht gespeichert",
+    "createPatchFailedDesc": "Der Datensatz wurde erstellt, aber die letzten Änderungen nach dem Speichern wurden nicht übernommen. Bitte versuchen Sie es erneut.",
+    "createdTitle": "Erstellt",
+    "createdHiddenDesc": "{{count}} neue Datensätze sind derzeit in dieser Ansicht nicht sichtbar.",
+    "createdHiddenAction": "Durch Löschen der Filter aufdecken"
+  },
+  "error": {
+    "cellUpdateFailed": "Zelle konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut."
+  },
+  "autoFill": {
+    "createdTimeHint": "Dieses Feld wird beim Erstellen des Datensatzes automatisch ausgefüllt",
+    "lastModifiedTimeHint": "Dieses Feld wird bei jeder Datensatzänderung automatisch aktualisiert"
+  }
+}

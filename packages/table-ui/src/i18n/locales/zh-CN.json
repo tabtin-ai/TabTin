@@ -1,0 +1,29 @@
+{
+  "group": {
+    "ungrouped": "未分组",
+    "unclassified": "未归类",
+    "loadedOfTotal": "已加载 {{loaded}} / 共 {{total}}"
+  },
+  "attachments": {
+    "missingRequired": "必填附件缺失"
+  },
+  "record": {
+    "createMissingTableTitle": "无法创建记录",
+    "createMissingTableDesc": "缺少表格信息，请重新选择表格后再试。",
+    "createFailedTitle": "创建失败",
+    "createFailedDesc": "记录创建失败，请稍后重试。",
+    "createFailedFallback": "无法创建记录，请稍后重试。",
+    "createPatchFailedTitle": "补充输入未保存",
+    "createPatchFailedDesc": "记录已创建，但刚刚补充输入的内容未能保存，请重试。",
+    "createdTitle": "已创建",
+    "createdHiddenDesc": "有 {{count}} 条新记录当前未显示在此视图中。",
+    "createdHiddenAction": "清空筛选并定位"
+  },
+  "error": {
+    "cellUpdateFailed": "单元格更新失败，请重试"
+  },
+  "autoFill": {
+    "createdTimeHint": "该字段由系统在创建记录时自动填充",
+    "lastModifiedTimeHint": "该字段由系统在每次修改记录时自动更新"
+  }
+}

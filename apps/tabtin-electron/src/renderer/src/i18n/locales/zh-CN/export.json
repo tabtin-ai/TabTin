@@ -1,0 +1,23 @@
+{
+  "errors": {
+    "loadStatsFailed": "加载导出统计失败",
+    "exportFailed": "导出失败，请稍后重试"
+  },
+  "success": {
+    "exported": "已导出 {{filename}}",
+    "showInFolder": "打开文件位置"
+  },
+  "stats": {
+    "sampledHint": "统计基于采样估算，实际导出包含全部 {{total}} 条选中记录"
+  },
+  "apiErrors": {
+    "exportFailedWithStatus": "导出失败: HTTP {{status}}",
+    "unsupportedFormat": "不支持的导出格式: {{format}}",
+    "unsupportedResponseType": "无法处理的响应数据类型: {{type}}",
+    "downloadBlobRequired": "downloadFile 需要 Blob 类型参数，但收到: {{type}}",
+    "filenameRequired": "filename 必须是非空字符串，但收到: {{type}}"
+  },
+  "filename": {
+    "defaultTableName": "表格"
+  }
+}

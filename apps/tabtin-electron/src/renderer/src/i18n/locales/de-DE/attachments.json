@@ -1,0 +1,68 @@
+{
+  "actions": {
+    "upload": "Anhang hochladen",
+    "uploading": "Hochladen...",
+    "reuse": "Anhang wiederverwenden",
+    "reuseLoading": "Wiederverwendung...",
+    "cancel": "Abbrechen",
+    "remove": "Entfernen",
+    "removeAll": "Alles entfernen",
+    "removingAll": "Entfernen...",
+    "download": "Herunterladen",
+    "downloadAll": "Alle herunterladen"
+  },
+  "labels": {
+    "reuseSection": "Vorhandenen Anhang wiederverwenden",
+    "uploadingList": "Hochladen",
+    "attachmentList": "Anhänge",
+    "unknownType": "Unbekannter Typ",
+    "empty": "Keine Anhänge"
+  },
+  "placeholders": {
+    "reuseFileId": "Geben Sie die ID der vorhandenen Anhangdatei ein"
+  },
+  "tips": {
+    "uploadHelp": "Sie können mehrere Dateien hochladen. Sie werden als Anhangsreferenzen gespeichert.",
+    "saveBeforeUpload": "Speichern Sie den Datensatz, bevor Sie Anhänge hochladen.",
+    "reuseHelp": "Geben Sie eine Datei-ID eines vorhandenen Anhangs ein, um in diesem Datensatz darauf zu verweisen.",
+    "syncing": "Anhänge werden synchronisiert...",
+    "uploadDropHint": "Klicken, einfügen oder Dateien hierher ziehen"
+  },
+  "errors": {
+    "fetchFailed": "Anhänge konnten nicht geladen werden",
+    "uploadFailed": "Anhänge konnten nicht hochgeladen werden",
+    "abortFailed": "Der Upload konnte nicht abgebrochen werden",
+    "removeFailed": "Anhang konnte nicht gelöscht werden",
+    "reuseNeedSave": "Speichern Sie den Datensatz, bevor Sie Anhänge wiederverwenden",
+    "reuseMissingId": "Bitte geben Sie die Datei-ID ein",
+    "reuseFailed": "Anhang konnte nicht wiederverwendet werden",
+    "removeAllFailed": "Anhänge konnten nicht entfernt werden",
+    "fileTooLarge": "Überschreitet die Größenbeschränkung von {{limit}}MB",
+    "fileTypeNotAllowed": "Nicht unterstützter Dateityp",
+    "fileRejectedSingle": "Datei {{name}} übersprungen: {{reason}}",
+    "fileRejectedMultiple": "{{count}}-Dateien wurden übersprungen"
+  },
+  "apiErrors": {
+    "emptyFileList": "Die Dateiliste darf nicht leer sein",
+    "batchUploadFailed": "Batch-Upload fehlgeschlagen",
+    "batchUploadFailedWithReason": "Batch-Upload fehlgeschlagen: {{message}}",
+    "uploadFailed": "Der Upload ist fehlgeschlagen",
+    "createUploadTaskFailed": "Die Aufgabe zum Hochladen von Anhängen konnte nicht erstellt werden",
+    "uploadPartFailed": "Anhangsblock konnte nicht hochgeladen werden",
+    "uploadPartInvalid": "Ungültige Upload-Chunk-Antwort",
+    "completeUploadFailed": "Das Hochladen des Anhangs konnte nicht abgeschlossen werden",
+    "abortUploadFailed": "Das Hochladen des Anhangs konnte nicht abgebrochen werden",
+    "reuseFailed": "Anhang konnte nicht wiederverwendet werden",
+    "removeReferenceFailed": "Der Anhangverweis konnte nicht entfernt werden",
+    "convertFieldFailed": "Der Feldtyp konnte nicht konvertiert werden",
+    "uploadTaskEmpty": "Die Aufgabe zum Hochladen von Anhängen hat keine Dateien zurückgegeben",
+    "uploadTaskMissingItem": "Fehlende Informationen zur Upload-Aufgabe für Anhang {{name}}"
+  },
+  "status": {
+    "pending": "In der Warteschlange",
+    "uploading": "Hochladen",
+    "completed": "Abgeschlossen",
+    "error": "Der Upload ist fehlgeschlagen",
+    "cancelled": "Abgesagt"
+  }
+}

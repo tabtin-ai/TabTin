@@ -1,0 +1,540 @@
+{
+  "$defs": {
+    "ArtifactIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical_hash": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Canonical Hash",
+          "type": "string"
+        },
+        "key": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "model-capability",
+            "product-control-mapping",
+            "runtime-wire-mapping",
+            "protocol-readiness",
+            "extension-target-allowlist",
+            "deployment-profile",
+            "model-deployment-binding",
+            "rate-card",
+            "platform-safety-policy",
+            "rollout-policy",
+            "projection-metadata"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^[1-9][0-9]*$",
+          "title": "Revision",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "key",
+        "revision",
+        "canonical_hash"
+      ],
+      "title": "ArtifactIdentity",
+      "type": "object"
+    },
+    "BudgetRange": {
+      "additionalProperties": false,
+      "properties": {
+        "default": {
+          "title": "Default",
+          "type": "integer"
+        },
+        "maximum": {
+          "title": "Maximum",
+          "type": "integer"
+        },
+        "minimum": {
+          "title": "Minimum",
+          "type": "integer"
+        },
+        "step": {
+          "title": "Step",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "minimum",
+        "default",
+        "maximum",
+        "step"
+      ],
+      "title": "BudgetRange",
+      "type": "object"
+    },
+    "CapabilityEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "budget": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BudgetRange"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "conditions": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ConditionNode"
+          },
+          "title": "Conditions",
+          "type": "array"
+        },
+        "default_value": {
+          "anyOf": [
+            {
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Default Value"
+        },
+        "deployment_tags": {
+          "default": [],
+          "items": {
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "title": "Deployment Tags",
+          "type": "array"
+        },
+        "eligible_rate_card_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ExactRef"
+          },
+          "title": "Eligible Rate Card Refs",
+          "type": "array"
+        },
+        "evidence": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "factual_values": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/FactualValue"
+          },
+          "title": "Factual Values",
+          "type": "array"
+        },
+        "fallback_policy": {
+          "anyOf": [
+            {
+              "enum": [
+                "deny",
+                "explicit-standard"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fallback Policy"
+        },
+        "family": {
+          "anyOf": [
+            {
+              "enum": [
+                "thinking",
+                "performance",
+                "tools",
+                "streaming",
+                "structured-output",
+                "document",
+                "image",
+                "audio",
+                "video",
+                "usage"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Family"
+        },
+        "mime_types": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Mime Types",
+          "type": "array"
+        },
+        "name": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "native_state": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SupportState"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "preprocessing_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ExactRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "preprocessing_state": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SupportState"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "profile_capability_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ExactRef"
+          },
+          "title": "Profile Capability Refs",
+          "type": "array"
+        },
+        "retention_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ExactRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "runtime_mapping_ref": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ExactRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "schema_version": {
+          "const": "1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "selection_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ExactRef"
+          },
+          "title": "Selection Refs",
+          "type": "array"
+        },
+        "shape": {
+          "anyOf": [
+            {
+              "enum": [
+                "unsupported",
+                "binary_toggle",
+                "effort_ladder",
+                "mode_plus_effort",
+                "forced",
+                "fixed",
+                "token_budget",
+                "model_split",
+                "service_profiles"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shape"
+        },
+        "state": {
+          "$ref": "#/$defs/SupportState"
+        },
+        "transports": {
+          "default": [],
+          "items": {
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "title": "Transports",
+          "type": "array"
+        },
+        "user_controllable": {
+          "default": false,
+          "title": "User Controllable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "name",
+        "state"
+      ],
+      "title": "CapabilityEntry",
+      "type": "object"
+    },
+    "ConditionNode": {
+      "additionalProperties": false,
+      "properties": {
+        "children": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ConditionNode"
+          },
+          "title": "Children",
+          "type": "array"
+        },
+        "field": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Field"
+        },
+        "operator": {
+          "enum": [
+            "all",
+            "any",
+            "not",
+            "equals",
+            "present"
+          ],
+          "title": "Operator",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        }
+      },
+      "required": [
+        "operator"
+      ],
+      "title": "ConditionNode",
+      "type": "object"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "locator": {
+          "title": "Locator",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "locator"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    },
+    "ExactRef": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_hash": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Expected Hash",
+          "type": "string"
+        },
+        "key": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "model-capability",
+            "product-control-mapping",
+            "runtime-wire-mapping",
+            "protocol-readiness",
+            "extension-target-allowlist",
+            "deployment-profile",
+            "model-deployment-binding",
+            "rate-card",
+            "platform-safety-policy",
+            "rollout-policy",
+            "projection-metadata"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^[1-9][0-9]*$",
+          "title": "Revision",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "key",
+        "revision",
+        "expected_hash"
+      ],
+      "title": "ExactRef",
+      "type": "object"
+    },
+    "FactualValue": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "key": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Key",
+          "type": "string"
+        },
+        "order": {
+          "title": "Order",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "key",
+        "order",
+        "evidence"
+      ],
+      "title": "FactualValue",
+      "type": "object"
+    },
+    "SupportState": {
+      "enum": [
+        "supported",
+        "unsupported",
+        "conditional",
+        "unknown",
+        "forced"
+      ],
+      "title": "SupportState",
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "capabilities": {
+      "items": {
+        "$ref": "#/$defs/CapabilityEntry"
+      },
+      "title": "Capabilities",
+      "type": "array"
+    },
+    "context_window": {
+      "title": "Context Window",
+      "type": "integer"
+    },
+    "identity": {
+      "$ref": "#/$defs/ArtifactIdentity"
+    },
+    "max_output_tokens": {
+      "title": "Max Output Tokens",
+      "type": "integer"
+    },
+    "modality": {
+      "enum": [
+        "text",
+        "image",
+        "audio",
+        "video",
+        "multimodal"
+      ],
+      "title": "Modality",
+      "type": "string"
+    },
+    "model_family": {
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "title": "Model Family",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "identity",
+    "model_family",
+    "capabilities",
+    "context_window",
+    "max_output_tokens",
+    "modality"
+  ],
+  "title": "ModelCapabilitySpec",
+  "type": "object"
+}

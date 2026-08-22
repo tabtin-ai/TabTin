@@ -1,0 +1,152 @@
+{
+  "id": "tabdata",
+  "name": "Tables",
+  "version": "0.1.0",
+  "description": "多维表格 — 结构化数据管理、处理型字段与任务流",
+  "objectModel": {
+    "entities": [
+      "table",
+      "field",
+      "record",
+      "view"
+    ],
+    "schema": {
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "executionTarget": "backend",
+  "uiRuntime": "localBundle",
+  "agentRuntime": "hostBackend",
+  "distribution": "builtin",
+  "surface": "collaborative",
+  "uiHints": {
+    "iconAsset": {
+      "default": "assets/icon.svg",
+      "presentation": "selfContained",
+      "aliases": [
+        "table"
+      ]
+    }
+  },
+  "uiOnly": false,
+  "contextSources": [
+    "tabdata"
+  ],
+  "permissions": [
+    "tabdata"
+  ],
+  "requiredCapabilities": [],
+  "runtimeDependencies": [],
+  "runtimeSupport": {
+    "electron": {
+      "mode": "full"
+    },
+    "daemon": {
+      "mode": "full"
+    },
+    "mobile": {
+      "mode": "full"
+    }
+  },
+  "skillsConfig": {
+    "entries": {
+      "table-modeling": {
+        "enabled": true,
+        "env": {},
+        "config": {}
+      },
+      "table-operator": {
+        "enabled": true,
+        "env": {},
+        "config": {}
+      },
+      "table-query": {
+        "enabled": true
+      },
+      "table-import-export": {
+        "enabled": true
+      },
+      "table-association": {
+        "enabled": true
+      },
+      "collect-to-table": {
+        "enabled": true
+      },
+      "task-tracker": {
+        "enabled": true,
+        "env": {},
+        "config": {}
+      }
+    }
+  },
+  "lifecycleHooks": {},
+  "kind": "app",
+  "runtimeBindings": {
+    "toolProvider": "django:toolhub.tabdata",
+    "uiProvider": "electron:context-space.tabdata",
+    "skillsProvider": "skills:local"
+  },
+  "skills": [
+    "skills/table-modeling",
+    "skills/table-operator",
+    "skills/table-query",
+    "skills/table-import-export",
+    "skills/table-association",
+    "skills/collect-to-table",
+    "skills/task-tracker"
+  ],
+  "icon": "table",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false
+  },
+  "agentIntegration": {
+    "contextType": "tabdata",
+    "contextFields": [
+      {
+        "name": "current_table_id",
+        "label": "table_id",
+        "isResourceId": true
+      },
+      {
+        "name": "current_view_id",
+        "label": "view_id",
+        "isResourceId": false
+      }
+    ],
+    "toolDomains": [
+      "sql",
+      "tabdata"
+    ],
+    "hasPromptSection": true,
+    "displayField": "",
+    "workspaceRootSource": "",
+    "isFrontendDependent": false,
+    "typeAliases": []
+  },
+  "opens": {
+    "types": [
+      {
+        "type": "table",
+        "priority": 100
+      },
+      {
+        "type": "table_selection",
+        "priority": 100
+      },
+      {
+        "type": "field",
+        "priority": 100
+      }
+    ]
+  },
+  "catalog": {
+    "category": "data",
+    "desktopGroup": "cloudResources",
+    "canCreate": true,
+    "searchable": true,
+    "isDefaultEnabled": true,
+    "order": 1
+  }
+}

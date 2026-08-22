@@ -1,0 +1,56 @@
+# TabMemo 记录偏好话术 —— bundle 可审计资源面（TM-15）
+#
+# 这是什么：memory_capture / task_summary 两 scene 注入 system prompt 的「记录偏好
+# 说明」所用的全部话术措辞（各维度选项 + 风格档 + 框定语 + 连接词）。
+#
+# 为什么在这里：守 AI 能力统一宪法 不变量5「prompt 必须在 bundle、可审计」。这些
+# 话术是平台骨架文案（非用户内容、不由用户改写），prompt 工程师应能在 bundle 资源面
+# 看/改、走 git PR review，而不是埋在 record_preference.py 的 Python 常量里。
+#
+# 谁读它：apps/tabmemo/services/record_preference.py 在模块导入时读入本文件，
+# 按 (user, organization) 的 MemoRecordStyle 配置组装出注入文本；用户的 extra_preference
+# 自由文本仍只作为受控变量追加，不进本文件。
+#
+# 放在 _shared/ 下：下划线开头的目录被 PromptRegistry / SceneRegistry 加载器跳过
+# （不当作 scene），所以放跨 scene 共享话术不会触发「孤立 bundle」启动校验。
+#
+# 改动须知：值要与渲染语义保持一致；`faithful` 故意不在 styles 表里——它等于现状默认
+# （不注入额外指令、返回空串），是存量 (user, organization) 的向后兼容基线，勿补。
+
+# 框定语（TM-16）：注入文本开头的一句平台骨架说明，让蒸馏模型把后面的内容理解为
+# 「用户对记录风格的偏好」，而不是误当成对话指令主体。
+framing_prefix: "以下是用户对你记笔记风格的偏好，请在记录时遵循："
+
+# 预设风格档 → 指令。faithful 不在此表（= 返回空串 = 现状默认，向后兼容）。
+styles:
+  minimal: "记录从简：只保留最关键的结论或事实，惜字如金，能一句别两句；跳过过程细节。"
+  companion: "以「长期协作者」的视角记录：不要复述发生了什么，而是写下你的判断与觉察——对这个人的理解、对问题本质的认识、被纠正后的反思。可用有温度的第一人称，但判断要具体、有依据，避免空泛的感想或流水账。"
+
+# 自定义（style=custom）维度 → 指令片段。各维度合法值与 record_style_service.py 的
+# custom_config 白名单保持同步（那里是写入侧输入校验权威，这里是渲染语义权威）。
+dimensions:
+  density:
+    concise: "记录从简，只留要点。"
+    moderate: "记录详略适中。"
+    detailed: "可以记得详尽些，保留关键过程。"
+  depth:
+    facts_only: "只记客观事实与结论，不做主观判断。"
+    with_judgment: "除了事实，也写下你的判断、推测与对这个人/事的理解。"
+  tone:
+    objective: "口吻客观克制。"
+    natural: "口吻自然。"
+    warm: "口吻可以有温度、带第一人称的感受。"
+
+# focus 是 4 选多选；渲染时拼成「重点关注：A、B。」
+focus:
+  labels:
+    outcome: "任务结果与产出"
+    method: "方法与可复用经验"
+    about_user: "对这个人的理解（偏好 / 习惯 / 决策方式）"
+    emotion: "情绪与协作状态"
+  prefix: "重点关注："
+  separator: "、"
+  suffix: "。"
+
+# 用户 extra_preference 自由文本追加时的前缀标签（用户文本本身是受控变量，不在本文件）。
+extra_preference_label: "用户的额外偏好："

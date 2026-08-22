@@ -1,0 +1,37 @@
+{
+  "name": "@tabtin/desktop-native",
+  "version": "0.1.0",
+  "description": "TabDesktop macOS 原生能力承载包（v2.0 模块零交付）。模块二 ESC CGEventTap PI 防御 + SCContentFilter 合成器级截图过滤、模块四 macOS AXUIElement Accessibility Tree 等需要 Swift / Objective-C 的能力都在这里编译为 N-API binding。模块零阶段仅占位（JS fallback + Swift hello world），实际 native 编译流程由模块二/四落地时启用。",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./capabilities": {
+      "source": "./src/capabilities.ts",
+      "types": "./dist/capabilities.d.ts",
+      "import": "./dist/capabilities.js"
+    }
+  },
+  "files": [
+    "dist",
+    "native"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "build:native": "echo '[desktop-native] native 编译流程在模块二/四落地时启用；模块零阶段无需 cmake-js build'",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "5.7.2",
+    "vitest": "4.0.18"
+  }
+}

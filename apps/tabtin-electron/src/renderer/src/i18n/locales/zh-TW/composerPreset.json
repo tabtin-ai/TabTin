@@ -1,0 +1,34 @@
+{
+  "validation": {
+    "required": "此欄位為必填",
+    "invalidUrl": "請輸入正確的 URL",
+    "invalidEmail": "請輸入正確的信箱",
+    "invalidFormat": "格式不正確",
+    "minValue": "最小值 {{min}}",
+    "maxValue": "最大值 {{max}}",
+    "maxLength": "最多 {{max}} 個字符"
+  },
+  "picker": {
+    "search": "搜尋...",
+    "noResults": "無匹配結果",
+    "empty": "暫無可用的 AI 工具"
+  },
+  "blockCard": {
+    "presetTitle": "提交的參數",
+    "askUserTitle": "回答的參數",
+    "fallbackLabel": "參數"
+  },
+  "card": {
+    "expand": "展開",
+    "collapse": "折疊",
+    "remove": "移除"
+  },
+  "upload": {
+    "clickToUpload": "點擊上傳",
+    "fileTooLarge": "文件過大",
+    "addMore": "添加"
+  },
+  "input": {
+    "presetPicker": "AI 工具"
+  }
+}

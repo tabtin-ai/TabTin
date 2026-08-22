@@ -1,0 +1,31 @@
+{
+  "errors": {
+    "responseInvalid": "伺服器傳回的資料格式不正確",
+    "missingStats": "伺服器傳回的資料缺少統計訊息",
+    "missingFieldMapping": "伺服器傳回的資料缺少字段映射訊息",
+    "previewFailed": "文件預覽失敗，請重試",
+    "previewNetworkUnstable": "網路連線不穩定，請重試並檢查代理程式/VPN",
+    "importFailed": "資料匯入失敗，請重試",
+    "importInFlight": "導入進行中，請勿重複提交",
+    "templateDownloadFailed": "範本下載失敗，請重試"
+  },
+  "apiErrors": {
+    "previewFailedWithStatus": "導入預覽失敗: HTTP {{status}}",
+    "emptyResponse": "伺服器回傳空數據",
+    "missingStats": "伺服器回應缺少 stats 字段",
+    "missingFieldMapping": "伺服器回應缺少 field_mapping 字段",
+    "csvImportFailedWithStatus": "CSV 匯入失敗: HTTP {{status}}",
+    "excelImportFailedWithStatus": "Excel 匯入失敗: HTTP {{status}}",
+    "jsonImportFailedWithStatus": "JSON 導入失敗: HTTP {{status}}",
+    "templateDownloadFailedWithStatus": "下載模板失敗: HTTP {{status}}",
+    "unsupportedFileFormat": "不支援的文件格式: {{format}}",
+    "fileEmpty": "文件內容為空",
+    "fileReadFailed": "文件讀取失敗"
+  },
+  "template": {
+    "defaultTableName": "表格",
+    "filenameExcel": "{{tableName}}_導入模板.xlsx",
+    "filename": "{{tableName}}_導入模板.csv",
+    "filenameJson": "{{tableName}}_導入模板.json"
+  }
+}

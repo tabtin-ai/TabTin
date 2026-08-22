@@ -1,0 +1,21 @@
+{
+  "analyzing": {
+    "title": "Analyse de l'IA...",
+    "modeFlash": "Mode Flash - Analyse rapide",
+    "modeDeep": "Mode profond - Analyse approfondie",
+    "tasksTitle": "Tâches d'analyse",
+    "tip": "💡 L'IA analyse la structure des pages. Veuillez patienter...",
+    "tipDeepSuffix": "Le mode profond analysera également les pages de détails et peut prendre plus de temps.",
+    "cancel": "Annuler l'analyse",
+    "phases": {
+      "initializing": "Initialisation",
+      "detecting_pre_actions": "Détection des pré-actions",
+      "identifying_region": "Identifier la région de la liste",
+      "analyzing_fields": "Analyser la structure du champ",
+      "analyzing_pagination": "Détection de la pagination",
+      "exploring_detail": "Explorer la saisie des détails",
+      "building_schema": "Schéma de construction",
+      "completed": "Terminé"
+    }
+  }
+}

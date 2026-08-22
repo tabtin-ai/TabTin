@@ -1,0 +1,68 @@
+{
+  "actions": {
+    "upload": "Télécharger la pièce jointe",
+    "uploading": "Téléchargement...",
+    "reuse": "Réutiliser la pièce jointe",
+    "reuseLoading": "Réutiliser...",
+    "cancel": "Annuler",
+    "remove": "Supprimer",
+    "removeAll": "Supprimer tout",
+    "removingAll": "Suppression...",
+    "download": "Télécharger",
+    "downloadAll": "Tout télécharger"
+  },
+  "labels": {
+    "reuseSection": "Réutiliser la pièce jointe existante",
+    "uploadingList": "Téléchargement",
+    "attachmentList": "Pièces jointes",
+    "unknownType": "Type inconnu",
+    "empty": "Aucune pièce jointe"
+  },
+  "placeholders": {
+    "reuseFileId": "Saisissez l'ID du fichier de pièce jointe existant"
+  },
+  "tips": {
+    "uploadHelp": "Vous pouvez télécharger plusieurs fichiers. Ils seront enregistrés en tant que références de pièces jointes.",
+    "saveBeforeUpload": "Enregistrez l'enregistrement avant de télécharger les pièces jointes.",
+    "reuseHelp": "Entrez un file_id de pièce jointe existant pour le référencer dans cet enregistrement.",
+    "syncing": "Synchronisation des pièces jointes...",
+    "uploadDropHint": "Cliquez, collez ou faites glisser des fichiers ici"
+  },
+  "errors": {
+    "fetchFailed": "Échec du chargement des pièces jointes",
+    "uploadFailed": "Échec du téléchargement des pièces jointes",
+    "abortFailed": "Échec de l'annulation du téléchargement",
+    "removeFailed": "Échec de la suppression de la pièce jointe",
+    "reuseNeedSave": "Enregistrez l'enregistrement avant de réutiliser les pièces jointes",
+    "reuseMissingId": "Veuillez entrer l'ID du fichier",
+    "reuseFailed": "Échec de la réutilisation de la pièce jointe",
+    "removeAllFailed": "Échec de la suppression des pièces jointes",
+    "fileTooLarge": "Dépasse la limite de taille {{limit}}Mo",
+    "fileTypeNotAllowed": "Type de fichier non pris en charge",
+    "fileRejectedSingle": "Fichier {{name}} ignoré : {{reason}}",
+    "fileRejectedMultiple": "{{count}} fichiers ignorés"
+  },
+  "apiErrors": {
+    "emptyFileList": "La liste des fichiers ne peut pas être vide",
+    "batchUploadFailed": "Échec du téléchargement par lots",
+    "batchUploadFailedWithReason": "Échec du téléchargement par lots : {{message}}",
+    "uploadFailed": "Échec du téléchargement",
+    "createUploadTaskFailed": "Échec de la création de la tâche de téléchargement de pièces jointes",
+    "uploadPartFailed": "Échec du téléchargement du morceau de pièce jointe",
+    "uploadPartInvalid": "Réponse de bloc de téléchargement non valide",
+    "completeUploadFailed": "Échec du téléchargement de la pièce jointe",
+    "abortUploadFailed": "Échec de l'annulation du téléchargement de la pièce jointe",
+    "reuseFailed": "Échec de la réutilisation de la pièce jointe",
+    "removeReferenceFailed": "Échec de la suppression de la référence de la pièce jointe",
+    "convertFieldFailed": "Échec de la conversion du type de champ",
+    "uploadTaskEmpty": "La tâche de téléchargement de pièce jointe n'a renvoyé aucun fichier",
+    "uploadTaskMissingItem": "Informations sur la tâche de téléchargement manquantes pour la pièce jointe {{name}}"
+  },
+  "status": {
+    "pending": "En file d'attente",
+    "uploading": "Téléchargement",
+    "completed": "Terminé",
+    "error": "Échec du téléchargement",
+    "cancelled": "Annulé"
+  }
+}

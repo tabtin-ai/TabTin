@@ -1,0 +1,89 @@
+{
+  "name": "@tabtin/media-core",
+  "version": "0.1.0",
+  "description": "Shared media primitives — fonts, image cache, SVG optimization, pixel effects — used by TabVideo and TabSlide",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./fonts": {
+      "source": "./src/fonts/index.ts",
+      "types": "./dist/fonts/index.d.ts",
+      "import": "./dist/fonts/index.js"
+    },
+    "./fonts/registry": {
+      "source": "./src/fonts/registry.ts",
+      "types": "./dist/fonts/registry.d.ts",
+      "import": "./dist/fonts/registry.js"
+    },
+    "./fonts/scanner": {
+      "source": "./src/fonts/scanner.ts",
+      "types": "./dist/fonts/scanner.d.ts",
+      "import": "./dist/fonts/scanner.js"
+    },
+    "./fonts/preloader": {
+      "source": "./src/fonts/preloader.ts",
+      "types": "./dist/fonts/preloader.d.ts",
+      "import": "./dist/fonts/preloader.js"
+    },
+    "./fonts/types": {
+      "source": "./src/fonts/types.ts",
+      "types": "./dist/fonts/types.d.ts",
+      "import": "./dist/fonts/types.js"
+    },
+    "./fonts/subset": {
+      "source": "./src/fonts/subset.ts",
+      "types": "./dist/fonts/subset.d.ts",
+      "import": "./dist/fonts/subset.js"
+    },
+    "./fonts/local": {
+      "source": "./src/fonts/local-fonts.ts",
+      "types": "./dist/fonts/local-fonts.d.ts",
+      "import": "./dist/fonts/local-fonts.js"
+    },
+    "./assets": {
+      "source": "./src/assets/index.ts",
+      "types": "./dist/assets/index.d.ts",
+      "import": "./dist/assets/index.js"
+    },
+    "./svg": {
+      "source": "./src/svg/index.ts",
+      "types": "./dist/svg/index.d.ts",
+      "import": "./dist/svg/index.js"
+    },
+    "./svg/primitives": {
+      "source": "./src/svg/primitives.ts",
+      "types": "./dist/svg/primitives.d.ts",
+      "import": "./dist/svg/primitives.js"
+    },
+    "./effects": {
+      "source": "./src/effects/index.ts",
+      "types": "./dist/effects/index.d.ts",
+      "import": "./dist/effects/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "subset-font": "^2.4.0"
+  },
+  "devDependencies": {
+    "typescript": "5.7.2",
+    "vitest": "4.0.18"
+  }
+}

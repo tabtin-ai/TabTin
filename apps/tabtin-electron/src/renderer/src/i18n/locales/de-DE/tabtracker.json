@@ -1,0 +1,404 @@
+{
+  "appName": "Automatisierung",
+  "panel": {
+    "header": "Automatisierung",
+    "overview": "Übersicht",
+    "list": "Liste",
+    "viewList": "Liste",
+    "viewAgenda": "Zeitleiste",
+    "viewKanban": "Kanban",
+    "createTask": "Neue Automatisierungsaufgabe",
+    "createAction": "Neu",
+    "search": "Automatisierungsaufgaben suchen…",
+    "filterAll": "Alle",
+    "filterAllStatus": "Alle Status",
+    "filterStatus": "Status",
+    "filterType": "Typ",
+    "loadMore": "Mehr laden",
+    "totalCount": "{{count}} Artikel",
+    "emptyTitle": "Noch keine Automatisierungsaufgaben",
+    "emptyDescription": "Sagen Sie dem Agenten: „Überprüfen Sie jeden Morgen die PRs“ oder füllen Sie das Formular selbst aus.",
+    "emptyHint": "Verwenden Sie „Neue Automatisierungsaufgabe“ – manuell oder durch einen Agenten erstellt",
+    "createFirst": "Erstellen Sie Ihre erste Automatisierungsaufgabe",
+    "selectSpace": "Wählen Sie einen Arbeitsbereich aus",
+    "noResults": "Keine passenden Aufgaben",
+    "workspaceUnavailable": "Arbeitsbereich nicht verfügbar",
+    "agentUnavailable": "Agent nicht verfügbar",
+    "nextRunAt": "Weiter {{time}}",
+    "noNextRun": "Kein nächster Lauf geplant",
+    "pausedPlan": "Angehalten – wird nicht automatisch ausgeführt",
+    "openTaskDetail": "Geplante Aufgabe „{{name}}“ öffnen",
+    "rowActions": {
+      "menu": "Aufgabenaktionen"
+    },
+    "columns": {
+      "task": "Aufgabe",
+      "workspace": "Arbeitsbereich",
+      "status": "Status",
+      "type": "Typ",
+      "instructions": "Anweisungen",
+      "schedule": "Nächster/letzter Lauf",
+      "actions": "Aktionen"
+    }
+  },
+  "overview": {
+    "attention": "Braucht Aufmerksamkeit",
+    "summary": "{{total}} Aufgaben · {{attention}} brauchen Aufmerksamkeit · {{active}} aktiv",
+    "attentionEmpty": "Alles klar",
+    "running": "Laufen",
+    "runningEmpty": "Es werden keine Aufgaben ausgeführt",
+    "scheduled": "Geplant",
+    "scheduledEmpty": "Keine Automatisierungsaufgaben",
+    "dormant": "Entwürfe und Pause",
+    "view": "Ansicht",
+    "runNow": "Lauf jetzt",
+    "activate": "Aktivieren",
+    "resume": "Lebenslauf"
+  },
+  "status": {
+    "draft": "Entwurf",
+    "active": "Aktiv",
+    "paused": "Angehalten",
+    "disabled": "Beendet",
+    "archived": "Archiviert"
+  },
+  "trigger": {
+    "manual": "Handbuch",
+    "cron": "Cron",
+    "interval": "Intervall",
+    "at": "Einmalig",
+    "webhook": "Webhook",
+    "table_event": "Tischveranstaltung",
+    "extension_event": "Erweiterungsveranstaltung",
+    "tracker_completed": "Die Upstream-Aufgabe wurde abgeschlossen"
+  },
+  "scope": {
+    "all": "Alle"
+  },
+  "detail": {
+    "loading": "Laden…",
+    "empty": "Aufgabe nicht gefunden",
+    "retry": "Versuchen Sie es noch einmal",
+    "noRuns": "Noch keine Läufe",
+    "nextRun": "Nächster Lauf",
+    "instructions": "Anweisungen",
+    "noInstructions": "Noch keine Anleitung",
+    "description": "Listennotiz",
+    "taskInfo": "Aufgabeninformationen",
+    "workspace": "Arbeitsbereich",
+    "agent": "Ausführungsagent",
+    "runHistory": "Laufverlauf",
+    "scheduleActive": "{{schedule}}",
+    "schedulePaused": "{{schedule}} · Angehalten",
+    "openRunSession": "Öffne den Chat dieses Laufs",
+    "openRunSessionFailed": "Der Chat dieses Laufs konnte nicht geöffnet werden. Bitte versuchen Sie es erneut.",
+    "refreshRuns": "Aktualisieren",
+    "health": {
+      "disabled": "Angehalten – Fortsetzen, um weiterzulaufen",
+      "missedSkipped": "Der letzte verpasste Lauf wurde wie konfiguriert übersprungen ({{time}}). Insgesamt {{count}} übersprungen."
+    },
+    "resultSummary": "Ergebnis",
+    "errorDetail": "Fehlerdetails",
+    "cancelDetail": "Stornierungsgrund",
+    "runStatus": {
+      "completed": "Abgeschlossen",
+      "failed": "Fehlgeschlagen",
+      "running": "Laufen",
+      "pending": "Ausstehend",
+      "cancelled": "Abgesagt",
+      "waiting_device": "Warten auf Gerät"
+    },
+    "actions": {
+      "edit": "Bearbeiten",
+      "activate": "Aktivieren",
+      "activateDraft": "Aktivieren und starten Sie die Planung",
+      "activateDraftManual": "Aktivieren Sie diese Option, um einen manuellen Auslöser zu ermöglichen",
+      "draftHint": "Entwürfe werden nicht ausgelöst. Aktivieren Sie diese Option, um Ihre Regeln automatisch auszuführen.",
+      "pause": "Pause",
+      "trigger": "Lauf jetzt",
+      "triggerDisabledActiveRun": "Ein Lauf ist bereits im Gange. Warten Sie, bis der Vorgang abgeschlossen ist, oder brechen Sie ihn zunächst ab.",
+      "delete": "Löschen",
+      "confirmDelete": "Bestätigen Sie das Löschen",
+      "confirmDeleteTitle": "Geplante Aufgabe löschen",
+      "confirmDeleteHint": "Die Aufgabenkarte wird aus der Automatisierungsliste entfernt. Wenn ein Ausführungsverlauf vorhanden ist, bleiben der Aufgabenname und die Ausführungseinträge in der Seitenleiste erhalten.",
+      "resume": "Lebenslauf",
+      "paused": "Angehalten",
+      "resumed": "Wieder aufgenommen",
+      "triggered": "Ausgelöst",
+      "deleted": "Gelöscht",
+      "cancelRun": "Brechen Sie diesen Lauf ab",
+      "runCancelled": "Dieser Lauf wurde abgebrochen"
+    },
+    "more": {
+      "title": "Mehr",
+      "note": "Hinweis",
+      "noNote": "Keine Notiz",
+      "catchup": "Richtlinie für verpasste Ausführungen",
+      "authorization": "Autorisierung"
+    },
+    "frequencyLabel": "Häufigkeit",
+    "highFrequencyToast": "Aktiviert · {{summary}}. Pausieren Sie es auf der Detailseite, um es zu ändern."
+  },
+  "frequencyHint": {
+    "manual": "Wird nur manuell ausgelöst – wird nicht von alleine ausgeführt",
+    "cronCustom": "Läuft nach einem benutzerdefinierten Zeitplan",
+    "cronHourly": "Läuft stündlich (~24 Mal pro Tag)",
+    "cronDaily": "Läuft täglich um {{at}}",
+    "cronWeekdays": "Läuft jeden Wochentag um {{at}}",
+    "cronWeekly": "Läuft jeden Montag um {{at}}",
+    "intervalUnknown": "Läuft in einem festen Zeitintervall",
+    "intervalSummary": "{{unit}} (~{{count}} Mal pro Tag)",
+    "atOnce": "Läuft einmal bei {{at}}",
+    "atUnknown": "Wird einmal zur geplanten Zeit ausgeführt",
+    "unitSeconds": "alle {{n}} Sekunden",
+    "unitMinutes": "~alle {{n}} Minuten",
+    "unitHours": "~alle {{n}} Stunden",
+    "webhook": "Wird durch eingehende Webhooks ausgelöst – die Rate hängt vom Anrufer ab",
+    "tableEvent": "Ausgelöst durch Tabellenereignisse (Zeile erstellt/aktualisiert/gelöscht)",
+    "extensionEvent": "Ausgelöst durch Erweiterungsereignisse",
+    "trackerCompleted": "Wird ausgelöst, wenn eine vorgelagerte Automatisierungsaufgabe abgeschlossen ist"
+  },
+  "createDialog": {
+    "title": "Neue Automatisierungsaufgabe",
+    "editTitle": "Automatisierungsaufgabe bearbeiten",
+    "sections": {
+      "what": "Aufgabeninhalt",
+      "when": "Zeitplan"
+    },
+    "cancel": "Abbrechen",
+    "submit": "Erstellen",
+    "save": "Speichern",
+    "moreOptions": "Weitere Optionen",
+    "createModeLabel": "Methode erstellen",
+    "tabs": {
+      "manual": "Handbuch",
+      "agent": "Agent erstellen"
+    },
+    "agentTab": {
+      "hint": "Nach dem Senden erstellt und aktiviert der Agent im Seitenchat es.",
+      "requestLabel": "Welche Automatisierungsaufgabe soll der Agent erstellen?",
+      "placeholder": "z.B. Jeden Tag um 9 Uhr morgens GitHub-PRs, die älter als 24 Stunden sind, in meiner Bewertungswarteschlange auflisten und im Posteingang posten",
+      "submit": "Zum Chat senden",
+      "submitting": "Chat wird geöffnet…"
+    },
+    "fields": {
+      "name": "Aufgabenname",
+      "nameHint": "Wird in der Aufgabenliste angezeigt, damit Sie diese Aufgabe erkennen können.",
+      "title": "Titel",
+      "description": "Listennotiz (optional)",
+      "instructions": "Anweisungen",
+      "instructionsHint": "Wird bei jedem Lauf an den Agenten gesendet. Der Agent wählt bei Bedarf selbständig eine geeignete Fähigkeit aus.",
+      "agent": "Ausführungsagent",
+      "workspace": "Ausführungsagent",
+      "activateOnCreate": "Sofort nach der Erstellung aktivieren",
+      "activateOnCreateHint": "Beginnt direkt nach der Erstellung mit der Planung. Für manuelle Aufgaben ist weiterhin „Jetzt ausführen“ erforderlich.",
+      "schedule": "Zeitplan",
+      "atTime": "Bei",
+      "frequency": "Häufigkeit",
+      "runTime": "Laufzeit",
+      "firstRunTime": "Erste Laufzeit (optional)",
+      "intervalEvery": "Lauffrequenz",
+      "hours": "Stunden",
+      "skillLabel": "Verknüpfter Skill (optional)",
+      "skillHint": "Wählen Sie eine Fähigkeit aus, die der Agent verwenden soll. Lassen Sie das Feld leer, damit der Agent entscheiden kann.",
+      "recurrenceDays": "Wiederholen Sie den Vorgang",
+      "intervalMinutes": "Alle N Minuten",
+      "intervalPrefix": "Jeder",
+      "intervalSuffix": "Minuten",
+      "onceAt": "Datum und Uhrzeit der Ausführung",
+      "catchup": "Wenn ein Lauf verpasst wird",
+      "table": "Wählen Sie eine Tabelle aus",
+      "tableEvents": "Trigger-Ereignisse",
+      "tableConditionNote": "Entspricht derzeit allen Änderungen in dieser Tabelle; Feldbasierte Filter sind bald verfügbar."
+    },
+    "schedule": {
+      "manual": "Handbuch",
+      "recurring": "Wiederkehrend",
+      "interval": "Intervall"
+    },
+    "permissionNotice": {
+      "hint": "Diese Aufgabe wird automatisch nach Zeitplan ausgeführt, ohne bei jedem Schritt nachzufragen. Sie können es jederzeit pausieren."
+    },
+    "schedulePresets": {
+      "manual": "Handbuch",
+      "hourly": "Stündlich",
+      "daily": "Täglich",
+      "weekdays": "Wochentags",
+      "weekly": "Wöchentlich",
+      "interval": "Intervall",
+      "at": "Einmal",
+      "table_event": "Auf Tischwechsel"
+    },
+    "schedulePresetHints": {
+      "manual": "Wird nur ausgeführt, wenn Sie auf „Jetzt ausführen“ klicken.",
+      "hourly": "Läuft einmal zu jeder vollen Stunde.",
+      "daily": "Wird einmal täglich zur angegebenen Zeit ausgeführt.",
+      "weekdays": "Läuft von Montag bis Freitag zur angegebenen Zeit.",
+      "weekly": "Läuft jeden Montag zur angegebenen Zeit.",
+      "interval": "Läuft automatisch in einem festen Zeitintervall.",
+      "at": "Läuft einmal zum von Ihnen gewählten Datum und zur gewählten Uhrzeit und stoppt dann.",
+      "table_event": "Wird automatisch ausgeführt, wenn sich die ausgewählte Tabelle ändert."
+    },
+    "tableEventTypes": {
+      "record_created": "Zeile hinzugefügt",
+      "record_updated": "Zeile aktualisiert",
+      "record_deleted": "Zeile gelöscht"
+    },
+    "recurrence": {
+      "daily": "Täglich",
+      "weekly": "Wöchentlich",
+      "monthly": "Monatlich",
+      "day": {
+        "MO": "Mo",
+        "TU": "Di",
+        "WE": "Wir",
+        "TH": "Th",
+        "FR": "Fr",
+        "SA": "Sa",
+        "SU": "Su"
+      }
+    },
+    "placeholders": {
+      "name": "z.B. Tägliche Datensynchronisierung",
+      "nameTitle": "Geben Sie den Aufgabennamen ein",
+      "title": "Aufgabentitel",
+      "description": "z.B. eine Notiz für Teamkollegen – optional",
+      "instructions": "z.B. Fassen Sie die ungelesene E-Mail von gestern in drei Aufzählungszeichen zusammen und posten Sie sie im Posteingang",
+      "agent": "Wählen Sie einen Agenten aus",
+      "workspace": "Wählen Sie einen Bereich aus",
+      "agentDefault": "Standard (aktueller Chat-Agent)",
+      "workspaceDefault": "Standard (aktueller Speicherplatz)",
+      "agentLoading": "Agenten werden geladen...",
+      "workspaceLoading": "Ladeplätze...",
+      "skillKeyFriendly": "Leer lassen = Agent wählt automatisch aus",
+      "table": "Wählen Sie einen Tisch zum Anschauen aus",
+      "tableLoading": "Laden…",
+      "tableEmpty": "In diesem Bereich gibt es noch keine Tische"
+    },
+    "errors": {
+      "nameRequired": "Bitte geben Sie einen Namen ein.",
+      "instructionsRequired": "Bitte geben Sie Anweisungen ein, was der Agent tun soll.",
+      "agentCreateFailed": "Der Chat konnte nicht gestartet werden. Bitte versuchen Sie es erneut.",
+      "noOrganization": "Die Organisation konnte nicht ermittelt werden. Bitte versuchen Sie es erneut.",
+      "submitFailed": "Fehler beim Erstellen. Bitte versuchen Sie es erneut oder wenden Sie sich an Ihren Administrator.",
+      "intervalRequired": "Bitte geben Sie ein gültiges Intervall in Minuten ein (≥ 1).",
+      "onceAtRequired": "Bitte wählen Sie ein Datum und eine Uhrzeit für die Ausführung aus.",
+      "onceAtMustBeFuture": "Die Laufzeit muss in der Zukunft liegen. Bitte wählen Sie einen späteren Zeitpunkt.",
+      "tableRequired": "Bitte wählen Sie einen Tisch zum Ansehen aus.",
+      "tableEventsRequired": "Bitte wählen Sie mindestens ein Triggerereignis aus."
+    },
+    "lockedTrigger": {
+      "cronValue": "Benutzerdefinierte Zeitplanregel ({{expression}})",
+      "hint": "Der Auslöser dieser Aufgabe kann hier nicht bearbeitet werden. Beim Speichern bleibt der ursprüngliche Auslöser unverändert."
+    },
+    "catchup": {
+      "run_once": "Einmal nachholen",
+      "skip": "Überspringen Sie verpasste Läufe",
+      "hint": "Wenn der Computer ausgeschaltet ist oder die App nicht ausgeführt wird, kann es sein, dass ein Lauf seine geplante Zeit verfehlt. Wählen Sie, was nach der Wiederherstellung passieren soll.",
+      "run_onceHint": "Wird nach der Wiederherstellung einmal automatisch ausgeführt – gut für Berichte und Zusammenfassungen, die Sie nicht verpassen sollten.",
+      "skipHint": "Überspringen Sie den verpassten Lauf und warten Sie auf den nächsten Zyklus – gut für Erinnerungen, die nach Ablauf der Zeit ihre Bedeutung verlieren."
+    },
+    "intentSnapshot": {
+      "title": "Schöpfungsabsicht",
+      "empty": "Es wurde keine ursprüngliche Absicht aufgezeichnet (diese Automatisierungsaufgabe wurde möglicherweise früher erstellt).",
+      "userUtterance": "Was du gesagt hast",
+      "agentProposal": "Vorschlag des Agenten",
+      "finalValues": "Endgültige Werte",
+      "createdVia": "Erstellt über",
+      "via": {
+        "ui": "UI-Formular",
+        "cli": "Befehlszeile",
+        "agent": "Agenten-Chat",
+        "command_palette": "Befehlspalette"
+      }
+    }
+  },
+  "home": {
+    "subtitle": "Erstellen und verwalten Sie Agentenautomatisierungsaufgaben, die nach einem Zeitplan ausgeführt werden",
+    "viewAll": "Alle anzeigen",
+    "nextRun": "Nächster Lauf",
+    "create": "Aufgabe erstellen",
+    "loadFailed": "Laden fehlgeschlagen"
+  },
+  "automation": {
+    "title": "Automatisierung",
+    "subtitle": "Verwenden Sie Automatisierungsaufgaben, um die Ausführung von Agenten nach einem Zeitplan zu ermöglichen"
+  },
+  "schedule": {
+    "prevWeek": "Vorherige Woche",
+    "nextWeek": "Nächste Woche",
+    "prevMonth": "Vorheriger Monat",
+    "nextMonth": "Nächsten Monat",
+    "today": "Heute",
+    "weekView": "Woche",
+    "monthView": "Monat",
+    "scopeOrganization": "Organisationsumfang",
+    "scopeSpace": "Aktueller Arbeitsbereich",
+    "scopeOrganizationShort": "Organisation",
+    "scopeSpaceShort": "Arbeitsbereich",
+    "manage": "Aufgaben verwalten",
+    "truncatedHint": "Zu viele geplante Läufe; Es wird nur ein Teil dieses Datumsbereichs angezeigt.",
+    "loadError": "Der Zeitplan konnte nicht geladen werden",
+    "emptyTitle": "In diesem Zeitraum sind keine Läufe zu erwarten",
+    "emptyDescription": "Zukünftige Ausführungen werden hier angezeigt, nachdem Sie eine Automatisierungsaufgabe erstellt oder aktiviert haben",
+    "narrowList": "Planen Sie nach Datum",
+    "pending": "Ausstehend",
+    "weekGrid": "Wochenkalender",
+    "monthGrid": "Monatskalender",
+    "moreCount": "+{{count}}",
+    "moreAriaLabel": "{{date}}, {{count}} weitere Aufgaben"
+  },
+  "toast": {
+    "activated": "Aktiviert",
+    "createdAndActivated": "Erstellt und aktiviert",
+    "createdAsDraft": "Erstellt",
+    "createdAsDraftHint": "Entwürfe werden nicht automatisch ausgeführt. Klicken Sie in der Detailansicht auf „Aktivieren“, um Trigger zu starten.",
+    "activateAfterCreateFailed": "Gespeichert, aber die Aktivierung ist fehlgeschlagen. Versuchen Sie die Aktivierung erneut in der Detailansicht.",
+    "runCompleted": "Automatisierungsaufgabe abgeschlossen",
+    "runFailed": "Die Automatisierungsaufgabe ist fehlgeschlagen",
+    "error": "Der Vorgang ist fehlgeschlagen"
+  },
+  "notification": {
+    "trackerCompletedBody": "Klicken Sie hier, um diesen Lauf anzusehen",
+    "trackerFailedBody": "Klicken Sie hier, um den Fehler anzuzeigen"
+  },
+  "chatSidebar": {
+    "trackersSection": "Automatisierung",
+    "openModule": "Öffnen Sie das Automatisierungsmodul",
+    "newTracker": "+ Neue Automatisierungsaufgabe",
+    "emptyHint": "Erstellen Sie Ihre erste Automatisierungsaufgabe",
+    "emptyForWorkspace": "In diesem Arbeitsbereich gibt es keine Automatisierungsaufgaben",
+    "emptyCreate": "Neue Automatisierungsaufgabe",
+    "viewAll": "Alle anzeigen ({{count}})",
+    "openTaskDetail": "Aufgabendetail öffnen",
+    "archivedTask": "Gelöschte Aufgabe; Laufverlauf bleibt erhalten",
+    "deleteHistory": "Verlauf löschen",
+    "deleteHistoryTitle": "Automatisierungsverlauf löschen",
+    "deleteHistoryHint": "Dadurch werden alle Laufaufzeichnungen und deren Konversation dauerhaft gelöscht. Dies kann nicht rückgängig gemacht werden.",
+    "deleteHistorySuccess": "Verlauf gelöscht",
+    "deleteHistoryFailed": "Das Löschen ist fehlgeschlagen. Versuchen Sie es erneut.",
+    "expandRuns": "Erweitern Sie den Ausführungsverlauf",
+    "collapseRuns": "Ausführungsverlauf reduzieren",
+    "runsLoading": "Laufverlauf wird geladen…",
+    "runsError": "Laden fehlgeschlagen",
+    "runsRetry": "Versuchen Sie es noch einmal",
+    "runsEmpty": "Noch keine Läufe",
+    "viewAllRuns": "Alle anzeigen ({{count}})"
+  },
+  "timeline": {
+    "today": "Heute",
+    "tomorrow": "Morgen",
+    "thisWeek": "Diese Woche",
+    "later": "Später",
+    "noSchedule": "Außerplanmäßig",
+    "empty": "Keine bevorstehenden Automatisierungsaufgaben"
+  },
+  "kanban": {
+    "empty": "Keine Automatisierungsaufgaben",
+    "colEmpty": "Leer",
+    "colDraft": "Entwurf",
+    "colActive": "Aktiv",
+    "colPaused": "Angehalten",
+    "colDisabled": "Beendet"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "home": {
+    "title": "Bot Space",
+    "noDocs": "No documents in this Space yet",
+    "noTables": "No tables in this Space yet",
+    "loadingContent": "Loading content...",
+    "loadingTables": "Loading tables...",
+    "loadDocsFailed": "Failed to load documents",
+    "loadTablesFailed": "Failed to load tables",
+    "docCount": "{{count}} documents",
+    "docSection": "Documents",
+    "tableCount": "{{count}} tables",
+    "rowCount": "{{count}} rows",
+    "fieldCount": "{{count}} fields",
+    "openDoc": "Open",
+    "openTable": "Open",
+    "createTable": "New Table",
+    "refreshContent": "Refresh",
+    "refreshTables": "Refresh",
+    "backToSpaces": "Back to Spaces",
+    "tableSection": "Tables",
+    "untitledDoc": "Untitled document",
+    "listView": "List view",
+    "gridView": "Grid view",
+    "emptyTitle": "Select a Bot",
+    "emptyDescription": "Choose a Bot Space from the sidebar to view its content"
+  },
+  "panel": {
+    "cloudResources": "Cloud Apps",
+    "viewAll": "View all"
+  },
+  "table": {
+    "visibility": {
+      "system": "System table",
+      "internal": "Internal"
+    }
+  }
+}

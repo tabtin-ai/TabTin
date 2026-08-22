@@ -1,0 +1,73 @@
+{
+  "actions.create": "Nouveau site",
+  "actions.publish": "Publier",
+  "actions.copyUrl": "Copier l'URL",
+  "actions.urlCopied": "URL copiée",
+  "actions.editCode": "Modifier le code",
+  "actions.refresh": "Actualiser",
+  "actions.rollback": "Restauration",
+  "actions.download": "Télécharger la source",
+  "status.draft": "Brouillon",
+  "status.published": "Publié",
+  "status.archived": "Archivé",
+  "stats.views": "{{count}} vues",
+  "preview.empty": "Pas encore d'aperçu. Publiez pour voir votre site.",
+  "preview.desktop": "Aperçu du bureau",
+  "preview.mobile": "Aperçu mobile",
+  "sidebar.info": "Informations sur le site",
+  "sidebar.url": "URL",
+  "sidebar.framework": "Cadre",
+  "sidebar.visibility": "Visibilité",
+  "sidebar.public": "Publique",
+  "sidebar.private": "Privé",
+  "sidebar.versions": "Historique des versions",
+  "sidebar.noVersions": "Pas encore publié",
+  "version.current": "Actuel",
+  "error.siteNotFound": "Site introuvable",
+  "error.publishFailed": "Échec de la publication",
+  "error.noDistUrl": "Veuillez d'abord créer et télécharger des artefacts",
+  "error.noDistUrlHint": "Exécutez le build dans TabCode ou utilisez CLI : build du site tabtin",
+  "actions.publishSuccess": "Publié avec succès",
+  "publish.dialogTitle": "Publier le site",
+  "publish.messageLabel": "Remarque sur la version",
+  "publish.messagePlaceholder": "Décrire les modifications apportées à cette version",
+  "empty.noSites": "Aucun site pour l'instant. Créez votre première application légère.",
+  "home": {
+    "assetBrowser": {
+      "newTabsite": "Nouveau site",
+      "tabsiteEmpty": "Aucun site pour l'instant",
+      "tabsiteUnavailable": "TabSite indisponible",
+      "tabsite": "Sites"
+    }
+  },
+  "label": {
+    "untitled": "Site sans titre",
+    "untitledSite": "Site sans titre"
+  },
+  "dialog": {
+    "createTitle": "Nouveau site",
+    "siteName": "Nom du site",
+    "siteNamePlaceholder": "Entrez le nom du site",
+    "selectTemplate": "Choisissez un modèle",
+    "cancel": "Annuler",
+    "create": "Créer"
+  },
+  "guide": {
+    "initTitle": "Projet de site non initialisé",
+    "initDescription": "Initialisez un projet de modèle pour commencer l'édition dans TabCode",
+    "initButton": "Initialiser le projet",
+    "linkButton": "Lier un répertoire existant",
+    "initSuccess": "Projet initialisé avec succès",
+    "initFailed": "L'initialisation a échoué",
+    "linkSuccess": "Annuaire lié",
+    "linkFailed": "Le lien a échoué",
+    "linkWarning": "Aucun package.json trouvé dans le répertoire",
+    "linkWarningHint": "La construction peut échouer. Assurez-vous qu'il s'agit du bon répertoire de projet."
+  },
+  "template": {
+    "blank": "Site vierge",
+    "blankDesc": "React + Vite + Tailwind, repartir de zéro",
+    "dashboard": "Tableau de bord",
+    "dashboardDesc": "Panneau de visualisation de données alimenté par TabData"
+  }
+}

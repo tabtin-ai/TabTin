@@ -1,0 +1,43 @@
+{
+  "name": "@tabtin/markdown-resource-autolink",
+  "version": "0.1.0",
+  "description": "remark plugin: autolink 裸路径 / 裸 url 为 tabtin://resource/file/<encoded> 链接节点。chat MarkdownRenderer W3 接入。",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/mdast": "^4.0.0",
+    "@types/node": "^20.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.2.2",
+    "unified": "^11.0.0",
+    "vitest": "4.0.18"
+  },
+  "peerDependencies": {
+    "unified": "^11.0.0"
+  }
+}

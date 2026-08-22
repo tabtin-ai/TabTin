@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 无序列表实心圆点。 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/doc_editor_bullet" />
+    <size
+        android:width="@dimen/doc_editor_bullet_size"
+        android:height="@dimen/doc_editor_bullet_size" />
+</shape>

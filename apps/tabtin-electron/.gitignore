@@ -1,0 +1,66 @@
+# 环境变量文件 (private repo — track .env for remote dev)
+# .env              # ← 已放行
+# .env.local        # ← 已放行
+.env.development.local
+.env.test.local
+.env.production.local
+# 本地测试包配置：含开发者本机 LAN IP，每人各填各的，不进 Git。
+# 模板见 .env.localdev.example（首次 clone 后复制改成 .env.localdev）。
+.env.localdev
+
+# 依赖
+node_modules
+
+# 构建输出
+out
+out-test
+# Wave 4 sticky 目录：NON_FATAL=1 抢出包后保存的失败 .map + manifest，给事后 retry 用。
+# .map 文件每个数 MB+，开发者一次 hotfix 攒一堆 → 不 ignore 必污染 git status。
+out-sourcemap-pending
+dist
+dist-app
+dist-app-quick
+dist-electron
+.deploy-work
+.deploy-active
+.deploy-runs
+.deploy-quick
+.deploy-quick-*
+.deploy-*-benchmark-*
+# Windows pnpm deploy 路径叠写误产物（apps/tabtin-electron/apps/tabtin-electron/...）
+/apps/
+
+# 语义召回模型构建缓存（#3306）：fetch-embedding-model.mjs 置入，~130MB 不进 git
+resources/models/
+
+# Wave 2b 任务 E · E2E cookie sync bundle 临时目录
+.e2e-bundle
+
+# 日志
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 编辑器
+.DS_Store
+.idea
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 系统文件
+Thumbs.db
+
+# 测试
+coverage
+.nyc_output
+
+# 临时文件
+*.tmp
+*.temp

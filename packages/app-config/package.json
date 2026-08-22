@@ -1,0 +1,31 @@
+{
+  "name": "@tabtin/app-config",
+  "version": "0.1.0",
+  "description": "TabTin App configSchema 通用 runtime 读取层（v2.0 模块零交付）。把 packages/apps/<id>/app.json 的 configSchema 默认值 + 用户级 override 合并出 runtime config。当前 v2.1 阶段只实现「读取 app.json 默认值 + 实例化时显式 override」；Space 配置热更新留给后续 Wave。",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "5.7.2",
+    "vitest": "4.0.18"
+  }
+}

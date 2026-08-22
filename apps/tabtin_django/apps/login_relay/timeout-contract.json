@@ -1,0 +1,5 @@
+{
+  "protocol_version": "v1",
+  "import_wait_timeout_seconds": 15,
+  "upload_response_grace_ms": 5000
+}

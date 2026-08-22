@@ -1,0 +1,58 @@
+{
+  "errors": {
+    "noTable": "선택한 테이블이 없습니다.",
+    "submitFailed": "작업 실패",
+    "loadHistoryFailed": "기록을 로드하지 못했습니다.",
+    "tryAgainLater": "나중에 다시 시도해 주세요."
+  },
+  "comments": {
+    "recoverableSubmitFailed": "네트워크 연결이 실패했거나 요청 시간이 초과되어 댓글이 전송되지 않았습니다. 초안이 보관되었습니다. 연결을 확인하고 다시 시도하세요.",
+    "title": "댓글",
+    "toggle": "댓글 열기",
+    "placeholder": "댓글을 추가하고 @를 입력해 멤버를 멘션하세요",
+    "submit": "댓글 게시",
+    "delete": "삭제",
+    "deleting": "삭제 중...",
+    "retry": "재시도",
+    "loading": "댓글 로드 중...",
+    "noMentionResults": "일치하는 회원이 없습니다.",
+    "loadMore": "이전 댓글 로드",
+    "loadingMore": "로드 중...",
+    "reply": "답장",
+    "replyingTo": "답장 대상",
+    "cancelReply": "답장 취소",
+    "deletedComment": "원 댓글이 삭제되었습니다",
+    "filterOpen": "열기",
+    "filterResolved": "해결됨",
+    "filterAll": "모두",
+    "resolveThread": "해결",
+    "reopenThread": "재개설",
+    "updatingThread": "업데이트 중...",
+    "empty": "댓글 없음",
+    "countUnit": "스레드"
+  },
+  "systemFields": {
+    "parentRecord": {
+      "name": "상위 레코드",
+      "description": "하위 레코드 계층 구조의 상위 레코드 필드"
+    }
+  },
+  "apiErrors": {
+    "fetchTrashFailed": "휴지통에 있는 기록을 가져오지 못했습니다.",
+    "restoreFromTrashFailed": "기록을 복원하지 못했습니다.",
+    "restoreBatchFromTrashFailed": "레코드를 일괄 복원하지 못했습니다."
+  },
+  "dialog": {
+    "createTitle": "\"{{name}}\"에 레코드 추가",
+    "editTitle": "기록 편집",
+    "viewTitle": "기록 보기",
+    "createDescription": "새 레코드를 만들려면 양식을 작성하세요. *로 표시된 필드는 필수입니다.",
+    "editDescription": "기록을 업데이트하세요. 기본 필드는 편집 가능합니다. 식별자를 고유하게 유지하십시오."
+  },
+  "incrementalSync": {
+    "errors": {
+      "aiTimeout": "AI 처리 시간이 초과되었습니다. 페이지를 새로고침하세요.",
+      "networkError": "네트워크 오류입니다. 페이지를 새로고침하세요."
+    }
+  }
+}

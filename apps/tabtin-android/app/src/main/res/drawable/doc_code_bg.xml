@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 代码块背景：使用共享小圆角 token。 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/doc_editor_bg_code" />
+    <corners android:radius="@dimen/tt_radius_sm" />
+</shape>

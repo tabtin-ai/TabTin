@@ -1,0 +1,29 @@
+{
+  "apiErrors": {
+    "fetchListFailed": "레코드를 가져오지 못했습니다.",
+    "fetchDetailFailed": "기록 세부정보를 가져오지 못했습니다.",
+    "createFailed": "레코드를 생성하지 못했습니다.",
+    "updateFailed": "기록을 업데이트하지 못했습니다.",
+    "deleteFailed": "기록을 삭제하지 못했습니다.",
+    "bulkCreateFailed": "레코드를 일괄 생성하지 못했습니다.",
+    "bulkUpdateFailed": "레코드를 일괄 업데이트하지 못했습니다.",
+    "bulkDeleteFailed": "레코드를 대량 삭제하지 못했습니다."
+  },
+  "logs": {
+    "fetchDetailSuccess": "가져온 레코드 세부정보",
+    "createSuccess": "기록이 생성되었습니다.",
+    "bulkUpdateMissingRecord": "일괄 업데이트 결과 대상 레코드가 누락되었습니다.",
+    "deleteSuccess": "기록이 삭제되었습니다.",
+    "bulkProgress": "일괄작업 진행",
+    "bulkCreateSuccess": "일괄 생성 완료",
+    "bulkCreatePartialFailed": "대량 생성이 부분적으로 실패했습니다.",
+    "bulkUpdateSuccess": "일괄 업데이트 완료",
+    "bulkUpdatePartialFailed": "일괄 업데이트가 부분적으로 실패했습니다.",
+    "syncViewRecordsSuccess": "동기화된 기록 보기",
+    "syncViewRecordsFailed": "보기 기록을 동기화하지 못했습니다.",
+    "bulkDeleteSuccess": "일괄 삭제가 완료되었습니다.",
+    "bulkDeletePartialFailed": "부분적으로 일괄 삭제하지 못했습니다.",
+    "mergeIncremental": "병합된 {{count}} 증분 레코드, 새 버전: {{version}}",
+    "removeByIds": "삭제된 기록"
+  }
+}

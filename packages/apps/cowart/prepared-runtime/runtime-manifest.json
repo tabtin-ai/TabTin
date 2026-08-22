@@ -1,0 +1,23 @@
+{
+  "id": "cowart-prepared-runtime",
+  "version": "0.1.2",
+  "upstream": {
+    "origin": "https://github.com/zhongerxin/cowart",
+    "ref": "v0.1.2",
+    "pinnedRevision": "v0.1.2"
+  },
+  "dependencyInstallRequired": false,
+  "services": {
+    "canvas": {
+      "defaultUrl": "http://127.0.0.1:43217/",
+      "startCommand": ["bash", "./scripts/start-canvas.sh"]
+    },
+    "mcp": {
+      "config": "../.mcp.json"
+    }
+  },
+  "notes": [
+    "This directory is the TabTin prepared-runtime release identity for Cowart.",
+    "The first acceptance slice validates installation metadata and skill visibility; AI image generation is intentionally out of scope."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "saga": {
+    "in_progress": "批量操作执行中…",
+    "failed": "批量操作失败，已自动回滚",
+    "completed": "批量操作已完成",
+    "partial": "批量操作部分完成（{{success}}/{{total}}）",
+    "timeout": "批量操作超时，请检查结果后重试"
+  },
+  "a3": {
+    "disabled": "批量按条件更新（A3）已关闭",
+    "enabled": "批量按条件更新（A3）已启用"
+  },
+  "c1": {
+    "restore_disabled": "字段撤销恢复已被运维临时关闭，请通过「版本历史」还原"
+  },
+  "grayscale": {
+    "enrolled": "当前组织已加入灰度：{{feature}}",
+    "unenrolled": "当前组织已退出灰度：{{feature}}"
+  },
+  "incident": {
+    "title": "[{{severity}}] {{service}} 服务异常",
+    "body": "影响范围：{{scope}}。开始时间：{{startTime}}。我们正在紧急处理中。",
+    "update": "[进展] {{service}}：{{message}}",
+    "resolution": "事故已解决。持续时间：{{duration}}。根因：{{rootCause}}。后续改进措施已安排。"
+  },
+  "maintenance": {
+    "start": "系统维护将于 {{time}} 开始，预计持续 {{duration}}，届时部分功能不可用。",
+    "end": "系统维护已完成，所有功能恢复正常。"
+  },
+  "changelog": {
+    "title": "更新日志",
+    "version": "版本 {{version}}",
+    "newFeatures": "新功能",
+    "improvements": "优化改进",
+    "bugFixes": "问题修复"
+  },
+  "notification": {
+    "dismiss": "知道了",
+    "learnMore": "了解详情",
+    "doNotShowAgain": "不再提示"
+  }
+}

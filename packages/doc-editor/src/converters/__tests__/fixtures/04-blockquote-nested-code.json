@@ -1,0 +1,21 @@
+{
+  "name": "blockquote-nested-code",
+  "description": "Blockquote containing a paragraph and a code block",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "blockquote",
+        "content": [
+          { "type": "paragraph", "content": [{ "type": "text", "text": "A quote" }] },
+          {
+            "type": "codeBlock",
+            "attrs": { "language": "js" },
+            "content": [{ "type": "text", "text": "const x = 1;" }]
+          }
+        ]
+      }
+    ]
+  },
+  "expectedMarkdown": "> A quote\n>\n> ```js\n> const x = 1;\n> ```"
+}

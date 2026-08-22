@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Browser Resource Smoke Fixture</title>
+  </head>
+  <body>
+    <main>
+      <h1>Browser Resource Smoke Fixture</h1>
+      <p id="status">loading</p>
+    </main>
+    <script>
+      (async () => {
+        const status = document.getElementById('status')
+        const url = `./browser-resource-smoke-master.m3u8?probe=${Date.now()}`
+        try {
+          const response = await fetch(url, { cache: 'no-store' })
+          const text = await response.text()
+          status.textContent = response.ok
+            ? `loaded ${text.length} bytes from ${url}`
+            : `http ${response.status} for ${url}`
+        } catch (error) {
+          status.textContent = `fetch failed: ${error instanceof Error ? error.message : String(error)}`
+        }
+      })()
+    </script>
+  </body>
+</html>

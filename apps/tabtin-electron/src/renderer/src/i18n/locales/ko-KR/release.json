@@ -1,0 +1,58 @@
+{
+  "outbox": {
+    "banner": {
+      "title": "보낼편지함이 활성화되었습니다.",
+      "body": "이제 비동기 캐스케이드 엔진이 활성화되었습니다. 테이블 간 조회/롤업/수식 쓰기는 보낼 편지함 대기열을 통해 처리되므로 대량 업데이트 성능이 크게 향상됩니다."
+    },
+    "rollback": {
+      "title": "보낼 편지함 긴급 롤백",
+      "body": "보낼 편지함 비동기 캐스케이드 엔진이 일시적으로 비활성화되었습니다. 이제 모든 계단식 재계산이 동기식으로 수행됩니다. 지연이 발생하는 경우 페이지를 새로 고치십시오."
+    },
+    "status": {
+      "healthy": "보낼편지함 상태가 양호함",
+      "degraded": "보낼편지함이 성능 저하 모드에 있습니다.",
+      "paused": "보낼편지함이 일시중지되었습니다.",
+      "disabled": "보낼편지함이 비활성화되었습니다."
+    }
+  },
+  "saga": {
+    "in_progress": "대량 작업 진행 중…",
+    "failed": "대량 작업이 실패하여 롤백되었습니다.",
+    "completed": "일괄작업 완료",
+    "partial": "일괄작업 일부 완료({{success}}/{{total}})",
+    "timeout": "대량 작업 시간이 초과되었습니다. 다시 시도하기 전에 결과를 확인하세요."
+  },
+  "a3": {
+    "disabled": "필터별 업데이트(A3)가 비활성화되었습니다.",
+    "enabled": "필터별 업데이트(A3)가 활성화되었습니다."
+  },
+  "c1": {
+    "restore_disabled": "관리자가 필드 실행 취소/복원을 일시적으로 비활성화했습니다. 복구하려면 버전 기록을 사용하세요."
+  },
+  "grayscale": {
+    "enrolled": "이 조직은 {{feature}} 베타에 등록되었습니다.",
+    "unenrolled": "이 조직은 {{feature}} 베타에서 제거되었습니다."
+  },
+  "incident": {
+    "title": "[{{severity}}] {{service}} 서비스 사고",
+    "body": "영향: {{scope}}. 시작 시간: {{startTime}}. 우리 팀은 적극적으로 조사하고 있습니다.",
+    "update": "[업데이트] {{service}}: {{message}}",
+    "resolution": "사건이 해결되었습니다. 기간: {{duration}}. 근본 원인: {{rootCause}}. 후속 개선이 예정되어 있습니다."
+  },
+  "maintenance": {
+    "start": "예정된 유지보수는 {{time}}, 예상 기간 {{duration}}에 시작됩니다. 일부 기능을 사용하지 못할 수 있습니다.",
+    "end": "예정된 유지 관리가 완료되었습니다. 모든 서비스가 정상으로 돌아왔습니다."
+  },
+  "changelog": {
+    "title": "변경 내역",
+    "version": "버전 {{version}}",
+    "newFeatures": "새로운 기능",
+    "improvements": "개선 사항",
+    "bugFixes": "버그 수정"
+  },
+  "notification": {
+    "dismiss": "알았어요",
+    "learnMore": "자세히 알아보기",
+    "doNotShowAgain": "다시 표시하지 않음"
+  }
+}

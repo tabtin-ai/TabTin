@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 小米/Redmi -->
+    <string name="oem_guide_title_xiaomi">小米/Redmi 设置指南</string>
+    <string name="oem_guide_xiaomi_step1">设置 → 我的设备 → 全部参数与信息 → 连续点击 MIUI 版本 7 次</string>
+    <string name="oem_guide_xiaomi_step2">设置 → 更多设置（HyperOS：我的设备）→ 开发者选项 → 开启「USB 调试」和「无线调试」</string>
+    <string name="oem_guide_xiaomi_step3">在无线调试页面点击「使用配对码配对设备」</string>
+    <string name="oem_guide_xiaomi_warning1">小米新设备首次开启开发者选项后，需等待 7 天才能使用无线调试</string>
+    <string name="oem_guide_xiaomi_warning2">请在设置 → 电池 → 不限制 TabTin 的后台运行</string>
+
+    <!-- OPPO -->
+    <string name="oem_guide_title_oppo">OPPO 设置指南</string>
+    <string name="oem_guide_oppo_step1">设置 → 关于手机 → 连续点击版本号 7 次</string>
+    <string name="oem_guide_oppo_step2">设置 → 系统设置 → 开发者选项 → 开启「USB 调试」和「无线调试」</string>
+    <string name="oem_guide_oppo_step3">在无线调试页面点击「使用配对码配对设备」</string>
+    <string name="oem_guide_oppo_warning1">请在设置 → 电池 → 应用耗电管理中将 TabTin 设为不受限</string>
+
+    <!-- vivo/iQOO -->
+    <string name="oem_guide_title_vivo">vivo/iQOO 设置指南</string>
+    <string name="oem_guide_vivo_step1">设置 → 关于手机 → 连续点击软件版本号 7 次</string>
+    <string name="oem_guide_vivo_step2">设置 → 系统管理 → 开发者选项 → 开启「USB 调试」和「无线调试」</string>
+    <string name="oem_guide_vivo_step3">在无线调试页面点击「使用配对码配对设备」</string>
+    <string name="oem_guide_vivo_warning1">请在 i 管家 → 应用管理中关闭 TabTin 的省电策略</string>
+
+    <!-- 华为 -->
+    <string name="oem_guide_title_huawei">华为 设置指南</string>
+    <string name="oem_guide_huawei_step1">设置 → 关于手机 → 连续点击版本号 7 次</string>
+    <string name="oem_guide_huawei_step2">设置 → 系统和更新 → 开发人员选项 → 开启「USB 调试」和「无线调试」</string>
+    <string name="oem_guide_huawei_step3">在无线调试页面点击「使用配对码配对设备」</string>
+    <string name="oem_guide_huawei_warning1">HarmonyOS NEXT 设备不支持无线调试功能</string>
+    <string name="oem_guide_huawei_warning2">请在设置 → 电池 → 启动管理中将 TabTin 设为手动管理</string>
+
+    <!-- 荣耀 -->
+    <string name="oem_guide_title_honor">荣耀 设置指南</string>
+    <string name="oem_guide_honor_step1">设置 → 关于手机 → 连续点击版本号 7 次</string>
+    <string name="oem_guide_honor_step2">设置 → 系统和更新 → 开发者选项 → 开启「USB 调试」和「无线调试」</string>
+    <string name="oem_guide_honor_step3">在无线调试页面点击「使用配对码配对设备」</string>
+    <string name="oem_guide_honor_warning1">请在设置 → 电池 → 启动管理中将 TabTin 设为手动管理</string>
+
+    <!-- 三星 -->
+    <string name="oem_guide_title_samsung">三星 设置指南</string>
+    <string name="oem_guide_samsung_step1">设置 → 关于手机 → 软件信息 → 连续点击编译编号 7 次</string>
+    <string name="oem_guide_samsung_step2">设置 → 开发者选项 → 开启「USB 调试」和「无线调试」</string>
+    <string name="oem_guide_samsung_step3">在无线调试页面点击「使用配对码配对设备」</string>
+    <string name="oem_guide_samsung_warning1">三星「智能管理器/设备维护」会自动优化后台应用，请将 TabTin 加入"不受监视的应用"列表</string>
+    <string name="oem_guide_samsung_warning2">如已开启 Knox 安全策略，请确认未限制开发者选项的使用</string>
+
+    <!-- 一加 (OnePlus) -->
+    <string name="oem_guide_title_oneplus">一加 设置指南</string>
+    <string name="oem_guide_oneplus_step1">设置 → 关于手机 → 连续点击版本号 7 次</string>
+    <string name="oem_guide_oneplus_step2">设置 → 系统设置 → 开发者选项 → 开启「USB 调试」和「无线调试」</string>
+    <string name="oem_guide_oneplus_step3">在无线调试页面点击「使用配对码配对设备」</string>
+    <string name="oem_guide_oneplus_warning1">请在设置 → 电池 → 电池优化中将 TabTin 设为不优化</string>
+
+    <!-- Realme -->
+    <string name="oem_guide_title_realme">realme 设置指南</string>
+    <string name="oem_guide_realme_step1">设置 → 关于手机 → 连续点击版本号 7 次</string>
+    <string name="oem_guide_realme_step2">设置 → 系统设置 → 开发者选项 → 开启「USB 调试」和「无线调试」</string>
+    <string name="oem_guide_realme_step3">在无线调试页面点击「使用配对码配对设备」</string>
+    <string name="oem_guide_realme_warning1">请在设置 → 电池 → 电池优化中将 TabTin 设为不优化，并在「手机管家」中关闭自动清理</string>
+
+    <!-- Motorola -->
+    <string name="oem_guide_title_motorola">Motorola 设置指南</string>
+
+    <!-- 通用 -->
+    <string name="oem_guide_title_generic">开发者模式设置指南</string>
+    <string name="oem_guide_generic_step1">设置 → 关于手机 → 连续点击版本号 7 次以开启开发者选项</string>
+    <string name="oem_guide_generic_step2">设置 → 开发者选项 → 开启「USB 调试」和「无线调试」</string>
+    <string name="oem_guide_generic_step3">在无线调试页面点击「使用配对码配对设备」</string>
+</resources>

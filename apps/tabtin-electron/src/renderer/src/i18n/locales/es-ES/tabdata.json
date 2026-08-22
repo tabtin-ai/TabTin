@@ -1,0 +1,252 @@
+{
+  "rewind": {
+    "recordHistoryMissing": "\"{{tableName}}\" no se puede restaurar por completo: las filas {{count}} ya no pertenecen al historial. El rebobinado se detuvo y los datos no cambian. Acciones sugeridas: (1) elija un punto de restauración más reciente o (2) pídale a su administrador que restaure desde la copia de seguridad si debe usar este punto.",
+    "outboxDiscarded": "Los cálculos en segundo plano de {{count}} en \"{{tableName}}\" se descartaron debido al rebobinado. Se están volviendo a calcular todas las columnas de la fórmula (ETA: {{etaSeconds}}s). Algunas celdas pueden mostrar \"Calculando...\" hasta entonces."
+  },
+  "field": {
+    "typeConvertFailed": "No se pudo cambiar \"{{fieldName}}\" de {{oldType}} a {{newType}}: el valor de la fila {{rowNo}} \"{{sample}}\" no se puede convertir. El cambio ha sido revertido. Acciones sugeridas: (1) exportar la columna y limpiarla externamente; (2) utilice la \"Actualización masiva\" para normalizar primero los valores incorrectos; (3) pídale a un administrador que le ayude a manejar las filas afectadas {{count}}.",
+    "renameConflict": "No se puede cambiar el nombre de \"{{oldName}}\" a \"{{newName}}\": ya existe un campo con ese nombre, o se hace referencia a él mediante la fórmula {{count}} o los campos de búsqueda. Primero marque \"Dependencias de campo\" o elija un nombre diferente.",
+    "deleteReferenced": "\"{{fieldName}}\" no se puede eliminar: se hace referencia a él mediante la fórmula/campo(s) de búsqueda {{count}}. Forzar la eliminación romperá esos campos. Primero elimine los dependientes o marque \"Dependencias de campo\" antes de decidir.",
+    "primaryFieldDeleteForbidden": "No se puede eliminar \"{{fieldName}}\": es el campo principal. Eliminarlo directamente puede dañar los datos existentes o las columnas relacionadas. Primero cambie el campo principal en la configuración de la tabla.",
+    "deleteImpactDialog": {
+      "warningHigh": "Otros campos o vistas hacen referencia a este campo; eliminarlo romperá los campos posteriores. Recomendamos revisar la cadena completa en \"Dependencias de campo\" antes de continuar.",
+      "warningMedium": "Algunas vistas hacen referencia a este campo; esas configuraciones de vista se limpiarán automáticamente después de eliminarlas.",
+      "warningLow": "Este campo no tiene dependientes posteriores y se puede eliminar de forma segura.",
+      "noImpactSafe": "¿Eliminar el campo \"{{name}}\"? No tiene dependientes posteriores, por lo que es seguro eliminarlo. Consulte la sugerencia a continuación para saber si esta eliminación se puede deshacer.",
+      "undoSimpleHint": "Deshacer: presione Ctrl+Z (⌘Z) justo después de eliminar para restaurar el campo y su estructura histórica.",
+      "undoComplexHint": "Deshacer: presione Ctrl+Z (⌘Z) justo después de eliminar para restaurar el campo. El gráfico de dependencia se reconstruirá y los valores se volverán a calcular automáticamente (puede tardar unos segundos). Si se eliminó un campo de dependencia requerido, verá un mensaje de error específico.",
+      "undoNotInWaveHint": "No se puede deshacer: este tipo de campo no está en la lista de deshacer rápido de esta versión. Para recuperar, restaure desde el \"Historial de versiones\" o comuníquese con el administrador de su organización.",
+      "undoUnknownHint": "No se puede deshacer: tipo de campo desconocido. Comuníquese con el administrador de su organización.",
+      "openVersionHistory": "Abrir historial de versiones",
+      "fetchErrorFallback": "No se pudo cargar el análisis de dependencia. Aún puede continuar con la eliminación, pero verifique el estado de la tabla inmediatamente después."
+    },
+    "batchRestore": {
+      "title": "Algunos campos no se pudieron deshacer en este paso",
+      "summary": "En este paso de deshacer: {{restorableCount}} los campos simples se pueden restaurar individualmente con Ctrl+Z; Los campos complejos {{unrestorableCount}} deben restaurarse desde el \"Historial de versiones\".",
+      "restorableSection": "Se puede deshacer individualmente ({{count}})",
+      "unrestorableSection": "Necesita historial de versiones ({{count}})",
+      "openVersionHistory": "Abrir historial de versiones",
+      "complexFieldHint": "Los campos de fórmula/búsqueda/vínculo implican la reconstrucción del gráfico de dependencia posterior. La restauración puede tardar unos segundos.",
+      "close": "bien"
+    }
+  },
+  "table": {
+    "deleteReferenced": "\"{{tableName}}\" no se puede eliminar: las habilidades {{skillCount}} y las vistas cruzadas de {{viewCount}} dependen de ello. Forzar la eliminación romperá esas habilidades o vaciará esas vistas. Marque \"Dependencias de campo\" o archive la tabla primero para permitir que los dependientes migren.",
+    "trashedBanner": {
+      "title": "\"{{tableName}}\" movido a la papelera",
+      "description": "Se detienen los cálculos en segundo plano; Las reglas de habilidades y las vistas entre tablas que dependen de esta tabla se pausan automáticamente. Puede restaurar la tabla desde \"Configuración de la organización · Papelera de recursos\" dentro de los 30 días.",
+      "restoreAction": "Restaurar tabla",
+      "viewTrash": "abrir la papelera",
+      "dismiss": "Lo tengo"
+    },
+    "deletedBanner": {
+      "title": "\"{{tableName}}\" eliminado",
+      "description": "Se detienen todos los cálculos en segundo plano en esta tabla y se pausan las reglas de habilidades/vistas entre tablas que dependen de ella. La tabla no se puede restaurar después de una eliminación permanente; comuníquese con el administrador de su organización para recuperar datos históricos de la copia de seguridad si es necesario."
+    }
+  },
+  "bulk": {
+    "checkpointCreating": "La acción de la IA en \"{{tableName}}\" afecta a las filas {{count}}. Creando un punto de restauración automática... Una vez que esté listo, puede \"Deshacer esta acción de IA\" con un clic desde el chat.",
+    "quotaExceeded": "Esta actualización consumirá {{tokens}} tokens de organización, superando el {{remaining}} restante. La verificación previa se detuvo; los datos no cambian. Sugerencias: (1) reducir el filtro; (2) esperar a que se restablezca la cuota mensual; (3) pídale al administrador de su organización que actualice.",
+    "affectedRecords_one": "{{count}} registro afectado",
+    "affectedRecords_other": "{{count}} registros afectados",
+    "updateByFilter": {
+      "previewTitle": "Vista previa de actualización masiva",
+      "matchedRows": "{{count}} filas coincidentes",
+      "samplePreview": "Vista previa (hasta 20 filas de muestra)",
+      "riskLow": "Bajo riesgo",
+      "riskLowDesc": "Pocas filas afectadas; seguro para continuar.",
+      "riskMedium": "Riesgo medio",
+      "riskMediumDesc": "{{count}} filas afectadas. Se creará un punto de restauración automáticamente.",
+      "riskHigh": "Alto riesgo",
+      "riskHighDesc": "{{count}} filas afectadas. Escriba \"CONFIRMAR\" para continuar.",
+      "highRiskConfirmText": "CONFIRMAR",
+      "highRiskInputPlaceholder": "Escribe \"CONFIRMAR\" para continuar",
+      "estimatedDuration": "Estimado ~{{seconds}}s",
+      "estimatedDurationLong": "~{{seconds}} estimados, puede continuar en segundo plano",
+      "checkpointHint": "Se creará un punto de restauración; puedes rebobinar en cualquier momento",
+      "confirm": "Confirmar",
+      "cancel": "Cancelar",
+      "committing": "Ejecutando actualización masiva…",
+      "commitSuccess": "Actualización masiva completada: {{count}} filas actualizadas.",
+      "preflightFailed": "Error en la verificación previa de actualización masiva: {{reason}}. Los datos no cambian. Inténtelo de nuevo más tarde; comuníquese con el administrador de su organización si sigue fallando.",
+      "commitFailed": "Error en la confirmación de actualización masiva: {{reason}}. Los datos no cambian. Inténtelo de nuevo más tarde; comuníquese con el administrador de su organización si sigue fallando.",
+      "rejected": "Supera el límite de actualización única",
+      "rejectedDesc": "{{count}} filas coincidentes, excediendo el límite de actualización única de 10,000 filas. Limite el filtro para procesar en lotes más pequeños o comuníquese con un administrador.",
+      "driftWarning": "Las filas actualizadas reales difieren de la verificación previa en un {{ratio}}% (esperado {{expected}}, real {{actual}}). Por favor verifique sus datos.",
+      "driftDismiss": "Lo tengo",
+      "errorListTitle": "Los registros {{count}} no se pudieron actualizar",
+      "errorItem": "Registro {{recordId}}: {{reason}}",
+      "showMore": "Mostrar {{count}} más",
+      "showLess": "Mostrar menos"
+    }
+  },
+  "compute": {
+    "divisionByZero": "El cálculo automático falló en la fila \"{{fieldName}}\" {{rowNo}}: la fórmula se divide por 0. Esta celda se dejará vacía sin afectar a otras filas. Ajuste las entradas (por ejemplo, \"{{relatedColumn}}\") y se volverá a calcular automáticamente al guardar.",
+    "typeMismatch": "El cálculo automático falló en la fila \"{{fieldName}}\" {{rowNo}}: la fórmula espera un número pero \"{{columnName}}\" en esta fila no es uno. La celda no se puede calcular por ahora. Corrija los datos de esta fila o ajuste la fórmula.",
+    "lookupTargetDeleted": "\"{{fieldName}}\" depende de \"{{targetTable}}.{{targetColumn}}\", que ha sido eliminado o no está disponible. Esta columna detendrá la actualización automática; Es posible que los datos más antiguos ya no sean precisos. Abra la configuración del campo y vuelva a vincular la tabla y la columna de destino.",
+    "circularDependency": "Dependencia circular en \"{{fieldName}}\": {{path}}. El campo está deshabilitado y excluido de los cálculos. Abra el editor de fórmulas y rompa cualquier eslabón de la cadena para arreglarlo.",
+    "recalc": {
+      "queued": "En cola: {{total}} los campos calculados comenzarán a volver a calcularse.",
+      "progress": "Recalcular campos calculados {{percentage}}% ({{done}}/{{total}})",
+      "completed": "{{total}} campo(s) calculado(s) recalculado(s).",
+      "failedSummary": "Los campos {{failed}} no pudieron volver a calcularse: {{names}}. Los otros campos {{succeeded}} tuvieron éxito. Abra la configuración del campo para verificar las dependencias o vuelva a intentarlo más tarde.",
+      "dismiss": "Descartar notificación de progreso"
+    },
+    "outboxWorker": {
+      "recomputing": "Resultados de la tabla actualizados"
+    }
+  },
+  "lookup": {
+    "targetTimeout": "Se agotó el tiempo de espera de la búsqueda en \"{{fieldName}}\" para recuperar desde \"{{targetTable}}\": la tabla de destino es demasiado grande o la red está ocupada. Se muestra el resultado exitoso anterior. Inténtelo de nuevo más tarde o pídale a un administrador que revise los índices en la tabla de destino."
+  },
+  "view": {
+    "filterInvalid": "El filtro de esta vista ya no es válido: el campo \"{{fieldName}}\" al que se hace referencia fue eliminado. La vista ahora muestra todos los registros sin filtrar. Abra la configuración de vista para reconfigurarla."
+  },
+  "record": {
+    "concurrentEditConflict": "Este registro acaba de ser modificado por {{collaboratorName}}: sus cambios aún no se han guardado. Su entrada se conserva: actualice para continuar editando en la última versión o haga clic en \"Confirmo, sobrescribo\" para forzar el guardado.",
+    "restoreConflict": "No se puede restaurar este registro a su ubicación original: {{reason}}. Continuar puede crear datos duplicados o desalineados. Verifique la estructura más reciente en la tabla o utilice \"Duplicar como fila nueva\" en su lugar.",
+    "trash": {
+      "panelTitle": "Grabar basura",
+      "description": "Los registros eliminados en los últimos 30 días se pueden restaurar en la tabla aquí.",
+      "expiryHint": "Los registros de más de 30 días se han limpiado permanentemente y no se pueden restaurar aquí. Para datos más antiguos, comuníquese con el administrador de su organización para recuperarlos desde la copia de seguridad.",
+      "empty": "La papelera está vacía. No se eliminaron registros en los últimos 30 días.",
+      "loading": "Cargando registros eliminados...",
+      "loadFailed": "No se pudo cargar la papelera. Vuelva a intentarlo más tarde. Comuníquese con el administrador de su organización si sigue fallando.",
+      "trashedAt": "Eliminado en {{time}}",
+      "restore": "Restaurar a la mesa",
+      "restoreSelected": "Restaurar seleccionado ({{count}})",
+      "restoreAll": "Restaurar todo",
+      "selectAll": "Seleccionar todo",
+      "clearSelection": "Borrar selección",
+      "refresh": "Actualizar",
+      "close": "Cerrar",
+      "untitled": "(Sin título)",
+      "restoreSuccess": "Se restauró 1 registro en la tabla.",
+      "restoreSuccessBatch": "Se restauraron registros {{count}} en la tabla.",
+      "restoreFailed": "Error de restauración: temporalmente no se puede acceder al servidor. Vuelva a intentarlo más tarde. Comuníquese con el administrador de su organización si sigue fallando.",
+      "restoreBatchPartial": "Registros {{restored}} restaurados, {{failed}} falló: {{firstError}}.",
+      "batchLimit": "Se pueden restaurar hasta 1000 registros por lote. Dividirse en grupos más pequeños."
+    },
+    "degraded": {
+      "badgeLabel": "Datos degradados",
+      "badgeTooltip": "La estructura de filas de este registro se restauró, pero los valores de sus campos caducaron del historial y no se pueden recuperar; las celdas aparecen en blanco.",
+      "toastSingle": "Se restauró 1 registro, pero los valores de sus campos caducaron del historial y no se pueden recuperar; las celdas aparecen en blanco. Comuníquese con su administrador para restaurar desde la copia de seguridad si necesita los datos completos.",
+      "toastBatch": "Registros {{restored}} restaurados, de los cuales {{degraded}} solo tienen restaurada su estructura porque sus valores caducaron del historial; sus celdas aparecen en blanco. Comuníquese con su administrador para restaurar desde la copia de seguridad si necesita los datos completos.",
+      "rowAriaLabel": "Fila degradada: los valores de los campos caducaron y no se pueden restaurar."
+    }
+  },
+  "import": {
+    "fieldUnmapped": "La verificación previa de importación encontró columnas {{count}} sin asignación de campo de destino (por ejemplo, \"{{exampleColumn}}\"). Estas columnas se ignorarán sin afectar a las demás. Asignelos explícitamente en \"Asignación de campos\" o marque \"Ignorar columnas no asignadas\" para continuar.",
+    "failed": "La importación falló en la fila {{rowNo}}: columna \"{{columnName}}\" {{expected}}, pero el archivo tiene \"{{actualValue}}\". La importación ha cesado; Las filas ya importadas siguen la última sugerencia. Corrija la asignación de celdas o columnas y vuelva a importarla; para problemas grandes, pruebe con un archivo más pequeño."
+  },
+  "undo": {
+    "failed": "No se puede deshacer la última acción: {{reason}}. El contenido de la tabla permanece sin cambios. Actualiza y vuelve a intentarlo; Si aún falla, puedes intentar recuperarlo del historial de versiones o de la papelera."
+  },
+  "admin": {
+    "outbox": {
+      "title": "Administrador de cola calculada",
+      "description": "Ver y administrar el estado de las tareas de cálculo en segundo plano.",
+      "summaryTab": "Resumen",
+      "tasksTab": "Tareas",
+      "grayscaleTab": "Escala de grises",
+      "loading": "Cargando…",
+      "loadFailed": "No se pudo cargar. Vuelva a intentarlo más tarde.",
+      "retry": "Reintentar",
+      "noData": "Sin tareas de cálculo",
+      "refresh": "Actualizar",
+      "exportCsv": "Exportar CSV",
+      "summary": {
+        "title": "Resumen de cola",
+        "pending": "Pendiente",
+        "processing": "Procesamiento",
+        "succeeded": "Tuvo éxito (24h)",
+        "failed": "Fallido (24h)",
+        "dlq": "Falló repetidamente",
+        "cancelled": "Cancelado",
+        "oldestPending": "Pendiente más antiguo"
+      },
+      "hotspots": {
+        "title": "Puntos críticos de falla (24h)",
+        "table": "mesa",
+        "count": "Fallos",
+        "lastError": "Último error",
+        "empty": "Sin fallos en las últimas 24 horas"
+      },
+      "task": {
+        "status": "Estado",
+        "table": "mesa",
+        "createdAt": "Creado en",
+        "updatedAt": "Actualizado en",
+        "actions": "Acciones",
+        "retryAction": "Reintentar",
+        "cancelAction": "Cancelar",
+        "pauseAction": "Pausa",
+        "retrySuccess": "Tarea en cola para reintentar",
+        "retryFailed": "Reintento fallido: {{reason}}",
+        "cancelSuccess": "Tarea cancelada",
+        "cancelFailed": "Error al cancelar: {{reason}}",
+        "pauseSuccess": "Tarea pausada",
+        "pauseFailed": "Pausa fallida: {{reason}}",
+        "statusPending": "Pendiente",
+        "statusProcessing": "Procesamiento",
+        "statusSucceeded": "Tuvo éxito",
+        "statusFailed": "Fallido",
+        "statusCancelled": "Cancelado",
+        "statusDlq": "DLQ"
+      },
+      "grayscale": {
+        "title": "Configuración en escala de grises",
+        "mode": "Modo actual",
+        "modeDisabled": "Discapacitado",
+        "modeGlobal": "Habilitado globalmente",
+        "modeAllowlist": "Lista de permitidos",
+        "allowlist": "Lista de permitidos",
+        "allowlistEmpty": "La lista de permitidos está vacía",
+        "description": "Controle el alcance del motor de cálculo asíncrono de la Bandeja de salida. Los cambios sólo afectan el proceso actual; Los cambios en todo el clúster requieren env vars + reinicio continuo.",
+        "warning": "La configuración actual en escala de grises difiere de la predeterminada. Los cambios sólo afectan este proceso."
+      },
+      "filterAll": "Todos",
+      "pagination": {
+        "prev": "Anterior",
+        "next": "Siguiente",
+        "pageInfo": "Página {{page}}"
+      }
+    },
+    "fieldRecycleBin": {
+      "title": "Campos eliminados",
+      "description": "Los campos eliminados dentro del período de retención se pueden restaurar aquí. Los campos se eliminan permanentemente después de {{days}} días.",
+      "empty": "No hay campos eliminados",
+      "loading": "Cargando…",
+      "loadFailed": "No se pudo cargar. Vuelva a intentarlo más tarde.",
+      "fieldName": "Nombre del campo",
+      "fieldType": "Tipo",
+      "deletedAt": "Eliminado en",
+      "daysRemaining": "Días restantes",
+      "daysRemainingValue": "{{days}} días",
+      "actions": "Acciones",
+      "restoreAction": "Restaurar campo",
+      "restoreSuccess": "Campo \"{{name}}\" restaurado.",
+      "restoreFailed": "Error de restauración: {{reason}}",
+      "refresh": "Actualizar",
+      "close": "Cerrar",
+      "ttlHint": "Los campos eliminados se conservan durante {{days}} días y luego se eliminan permanentemente."
+    },
+    "integrity": {
+      "title": "Verificación de integridad",
+      "checkAction": "comprobar",
+      "repairAction": "Reparación",
+      "checking": "Comprobando…",
+      "repairing": "Reparando…",
+      "noDrift": "No se encontró deriva",
+      "driftFound": "{{count}} deriva(s) encontrada(s)",
+      "autoFixable": "Auto-reparable",
+      "manualFix": "Se requiere reparación manual"
+    }
+  },
+  "banner": {
+    "cascadeComputing": "La mesa está computando...",
+    "cascadeComputingDesc": "Los campos calculados en segundo plano se están volviendo a calcular. Los resultados se actualizarán automáticamente.",
+    "dlqWarning": "{{count}} cálculo(s) fallido(s)",
+    "dlqWarningDesc": "{{count}} las tareas de cálculo en segundo plano fallaron. Comuníquese con su administrador para obtener más detalles."
+  }
+}

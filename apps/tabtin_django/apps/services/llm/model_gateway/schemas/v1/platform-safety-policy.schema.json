@@ -1,0 +1,162 @@
+{
+  "$defs": {
+    "ArtifactIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical_hash": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Canonical Hash",
+          "type": "string"
+        },
+        "key": {
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "model-capability",
+            "product-control-mapping",
+            "runtime-wire-mapping",
+            "protocol-readiness",
+            "extension-target-allowlist",
+            "deployment-profile",
+            "model-deployment-binding",
+            "rate-card",
+            "platform-safety-policy",
+            "rollout-policy",
+            "projection-metadata"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "revision": {
+          "pattern": "^[1-9][0-9]*$",
+          "title": "Revision",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "key",
+        "revision",
+        "canonical_hash"
+      ],
+      "title": "ArtifactIdentity",
+      "type": "object"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "locator": {
+          "title": "Locator",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "locator"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "blocked_extension_targets": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Blocked Extension Targets",
+      "type": "array"
+    },
+    "commercial_tier_limit": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Commercial Tier Limit"
+    },
+    "evidence": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/EvidenceRef"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "identity": {
+      "$ref": "#/$defs/ArtifactIdentity"
+    },
+    "platform_ceiling": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Platform Ceiling"
+    },
+    "platform_ceiling_enforceable": {
+      "default": false,
+      "title": "Platform Ceiling Enforceable",
+      "type": "boolean"
+    },
+    "platform_ceiling_verified": {
+      "default": false,
+      "title": "Platform Ceiling Verified",
+      "type": "boolean"
+    },
+    "policy_keys": {
+      "items": {
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "type": "string"
+      },
+      "title": "Policy Keys",
+      "type": "array"
+    },
+    "provider_maximum": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Provider Maximum"
+    },
+    "provider_maximum_verified": {
+      "default": false,
+      "title": "Provider Maximum Verified",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "1",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "identity",
+    "policy_keys",
+    "blocked_extension_targets"
+  ],
+  "title": "PlatformSafetyPolicy",
+  "type": "object"
+}

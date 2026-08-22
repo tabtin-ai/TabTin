@@ -1,0 +1,23 @@
+{
+  "name": "image-with-title",
+  "description": "Image with alt text and title attribute",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "image",
+            "attrs": {
+              "src": "https://img.example.com/photo.png",
+              "alt": "A photo",
+              "title": "My Photo"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "expectedMarkdown": "![A photo](https://img.example.com/photo.png \"My Photo\")"
+}

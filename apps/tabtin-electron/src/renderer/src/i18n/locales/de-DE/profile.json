@@ -1,0 +1,131 @@
+{
+  "title": "Profil",
+  "description": "Zeigen Sie Ihr Profil an und bearbeiten Sie es, einschließlich Grundlagen, Kontaktinformationen und Kontoeinstellungen",
+  "saved": "Profil aktualisiert",
+  "validation": {
+    "usernameLength": "Der Benutzername muss 3–20 Zeichen lang sein",
+    "usernameFormat": "Der Benutzername darf nur Buchstaben, Zahlen und Unterstriche enthalten und muss mit einem Buchstaben beginnen",
+    "nicknameLength": "Der Spitzname darf nicht länger als 50 Zeichen sein",
+    "bioLength": "Die Biografie darf 500 Zeichen nicht überschreiten"
+  },
+  "errors": {
+    "updateFailed": "Das Update ist fehlgeschlagen. Bitte versuchen Sie es später noch einmal",
+    "verificationFailed": "Der Bestätigungscode konnte nicht gesendet werden",
+    "logoutFailed": "Die Abmeldung ist fehlgeschlagen"
+  },
+  "labels": {
+    "nickname": "Spitzname",
+    "username": "Benutzername",
+    "userId": "Benutzer-ID",
+    "phone": "Telefon",
+    "email": "E-Mail",
+    "bio": "Bio",
+    "contact": "Kontakt",
+    "accountInfo": "Kontoinformationen",
+    "registeredAt": "Beigetreten",
+    "loginCount": "Anzahl der Anmeldungen",
+    "lastLogin": "Letzter Login",
+    "buildVersion": "Build-Version"
+  },
+  "placeholders": {
+    "nickname": "Geben Sie einen Spitznamen ein",
+    "username": "Geben Sie einen Benutzernamen ein",
+    "bio": "Erzählen Sie uns etwas über sich..."
+  },
+  "empty": {
+    "nickname": "Kein Spitzname",
+    "username": "Kein Benutzername",
+    "bio": "Dieser Benutzer hat keine Biografie geschrieben...",
+    "contact": "Keine Kontaktinformationen",
+    "email": "Keine E-Mail-Bindung"
+  },
+  "actions": {
+    "editProfile": "Profil bearbeiten",
+    "accountSettings": "Kontoeinstellungen",
+    "copyId": "Ausweis kopieren",
+    "copied": "Kopiert",
+    "logout": "Abmelden",
+    "avatarComingSoon": "Avatar-Upload folgt bald",
+    "logoutConfirmTitle": "Von Ihrem Konto abmelden?",
+    "logoutConfirmDesc": "Alle nicht gespeicherten Arbeiten auf diesem Gerät gehen verloren",
+    "openStorageManager": "Speichermanager",
+    "openStorageManagerHint": "Sehen Sie, was TabTin auf Ihrem Computer gespeichert hat, und bereinigen oder exportieren Sie es",
+    "changePassword": "Passwort ändern",
+    "bindEmail": "E-Mail binden"
+  },
+  "avatar": {
+    "cropTitle": "Avatar zuschneiden",
+    "saved": "Avatar gespeichert",
+    "saveFailed": "Avatar konnte nicht gespeichert werden",
+    "removeUnsupported": "Das Entfernen von Avataren wird noch nicht unterstützt"
+  },
+  "alt": {
+    "avatar": "Avatar"
+  },
+  "stats": {
+    "loginCount": "{{value}} mal"
+  },
+  "changePassword": {
+    "title": "Passwort ändern",
+    "descChange": "Geben Sie Ihr aktuelles Passwort ein, um ein neues festzulegen.",
+    "descReset": "Ein Bestätigungscode wird an {{identifier}} gesendet. Überprüfen Sie es, um ein neues Passwort festzulegen.",
+    "descResetNoContact": "Für dieses Konto gibt es keine E-Mail- oder Telefonbindung, daher ist ein codebasiertes Zurücksetzen nicht möglich.",
+    "labels": {
+      "oldPassword": "Aktuelles Passwort",
+      "verificationCode": "Bestätigungscode",
+      "newPassword": "Neues Passwort",
+      "confirmPassword": "Bestätigen Sie das neue Passwort"
+    },
+    "placeholders": {
+      "oldPassword": "Geben Sie das aktuelle Passwort ein",
+      "verificationCode": "Geben Sie den 6-stelligen Code ein",
+      "newPassword": "Legen Sie ein neues Passwort fest",
+      "confirmPassword": "Geben Sie das neue Passwort erneut ein"
+    },
+    "capsLockHint": "Die Feststelltaste ist aktiviert",
+    "actions": {
+      "sendCode": "Code senden",
+      "submit": "Passwort aktualisieren",
+      "forgotOld": "Aktuelles Passwort vergessen? Mit einem Code zurücksetzen",
+      "useOldPassword": "Zurück zur Verwendung des aktuellen Passworts"
+    },
+    "codeSent": "Bestätigungscode gesendet",
+    "success": "Passwort aktualisiert",
+    "successRelogin": "Bitte melden Sie sich erneut mit Ihrem neuen Passwort an",
+    "errors": {
+      "oldRequired": "Bitte geben Sie Ihr aktuelles Passwort ein",
+      "codeInvalid": "Bitte geben Sie den 6-stelligen Code ein",
+      "newNoWhitespace": "Neues Passwort darf keine Leerzeichen enthalten; Leerzeichen wurden entfernt",
+      "newNoCjk": "Das Passwort darf keine CJK-Zeichen enthalten; Fügen Sie keine anderen Inhalte ein",
+      "newTooShort": "Das neue Passwort muss mindestens 8 Zeichen lang sein",
+      "newNotComplex": "Das neue Passwort muss mindestens drei der folgenden Zeichen enthalten: Großbuchstaben, Kleinbuchstaben, Ziffern und Sonderzeichen",
+      "mismatch": "Die Passwörter stimmen nicht überein",
+      "sendCodeFailed": "Fehler beim Senden des Codes. Bitte versuchen Sie es später noch einmal",
+      "failed": "Das Passwort konnte nicht aktualisiert werden. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut"
+    }
+  },
+  "bindEmail": {
+    "title": "E-Mail binden",
+    "description": "Verwenden Sie es für die Anmeldung, die Wiederherstellung von Passwörtern und für Warnungen bei niedrigem Kontostand in der Organisation.",
+    "labels": {
+      "email": "E-Mail",
+      "verificationCode": "Bestätigungscode"
+    },
+    "placeholders": {
+      "email": "name@example.com",
+      "verificationCode": "Geben Sie den 6-stelligen Code ein"
+    },
+    "actions": {
+      "sendCode": "Code senden",
+      "submit": "E-Mail binden"
+    },
+    "codeSent": "Bestätigungscode gesendet",
+    "success": "E-Mail erfolgreich gebunden",
+    "errors": {
+      "emailInvalid": "Geben Sie eine gültige E-Mail-Adresse ein",
+      "codeInvalid": "Geben Sie den 6-stelligen Code ein",
+      "sendCodeFailed": "Fehler beim Senden des Codes. Bitte versuchen Sie es später noch einmal",
+      "failed": "Fehler beim Binden der E-Mail. Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "heading-all-levels",
+  "description": "Heading H1-H6",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      { "type": "heading", "attrs": { "level": 1 }, "content": [{ "type": "text", "text": "Heading 1" }] },
+      { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Heading 2" }] },
+      { "type": "heading", "attrs": { "level": 3 }, "content": [{ "type": "text", "text": "Heading 3" }] },
+      { "type": "heading", "attrs": { "level": 4 }, "content": [{ "type": "text", "text": "Heading 4" }] },
+      { "type": "heading", "attrs": { "level": 5 }, "content": [{ "type": "text", "text": "Heading 5" }] },
+      { "type": "heading", "attrs": { "level": 6 }, "content": [{ "type": "text", "text": "Heading 6" }] }
+    ]
+  },
+  "expectedMarkdown": "# Heading 1\n\n## Heading 2\n\n### Heading 3\n\n#### Heading 4\n\n##### Heading 5\n\n###### Heading 6"
+}

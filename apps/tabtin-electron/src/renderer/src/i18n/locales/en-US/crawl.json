@@ -1,0 +1,521 @@
+{
+  "addressBar": {
+    "secureTitle": "Secure connection",
+    "insecureTitle": "Insecure connection",
+    "placeholder": "Enter URL...",
+    "copy": "Copy URL",
+    "copied": "Copied"
+  },
+  "toolbarDescriptions": {
+    "annotationLabel": "Annotate page",
+    "annotation": "Select page content and add it to the conversation",
+    "cancelAnnotationLabel": "Cancel annotation",
+    "cancelAnnotation": "Exit page annotation mode",
+    "screenshotLabel": "Screenshot to conversation",
+    "screenshot": "Capture the visible page and add it to the conversation",
+    "bookmarkLabel": "Bookmark this page",
+    "bookmark": "Open it later from browser bookmarks",
+    "removeBookmarkLabel": "Remove bookmark",
+    "removeBookmark": "Remove this page from browser bookmarks"
+  },
+  "toast": {
+    "partitionRebuiltTitle": "Switched to new login environment",
+    "partitionRebuiltDesc": "This tab's browser identity has been updated to match the Workspace binding. If you were filling a form, you'll need to re-enter it."
+  },
+  "embedded": {
+    "loading": "Loading...",
+    "agentLockOverlay": "Agent is in control",
+    "agentLockUntitled": "New task",
+    "logs": {
+      "setViewBoundsUnavailable": "setViewBounds is unavailable",
+      "setViewBoundsFailed": "Failed to update bounds"
+    },
+    "errors": {
+      "missingProfile": "workspace-view missing profile/partition",
+      "showUnavailable": "host.view.show unavailable",
+      "showFailed": "Show failed",
+      "showPrecheckFailed": "Show precheck failed",
+      "pageLoadFailed": "Page load failed",
+      "refreshFailed": "Reload failed",
+      "navigationFailed": "Navigation failed",
+      "navigationDeferredByAgent": "This page is in use by an agent task; navigation was skipped",
+      "goBackFailed": "Go back failed",
+      "goForwardFailed": "Go forward failed",
+      "reloadFailed": "Reload failed",
+      "stopFailed": "Stop loading failed",
+      "actionUnavailable": "{{action}} unavailable",
+      "partitionRebuildFailed": "Failed to switch login environment: {{detail}}. Please close and reopen this tab."
+    }
+  },
+  "urlInput": {
+    "title": "New web crawl",
+    "description": "Enter the webpage URL to crawl",
+    "urlLabel": "URL *",
+    "urlPlaceholder": "https://example.com",
+    "nameLabel": "Label name (optional)",
+    "namePlaceholder": "Auto-generate",
+    "cancel": "Cancel",
+    "create": "Create",
+    "errors": {
+      "required": "Please enter a URL",
+      "invalid": "Please enter a valid URL (e.g., example.com or https://example.com)"
+    },
+    "defaultName": "Page {{time}}"
+  },
+  "diagnosis": {
+    "errors": {
+      "requestFailed": "Diagnosis request failed",
+      "failed": "Diagnosis failed",
+      "invalidResult": "Invalid diagnosis result format",
+      "feedbackFailed": "Submit feedback failed",
+      "missingActiveView": "No active view found",
+      "missingViewOptions": "Missing viewOptions; unable to fetch page content",
+      "getProcessedContentUnavailable": "getProcessedContent is unavailable",
+      "noFeedbackRecord": "No diagnosis record to submit feedback",
+      "noAvailableModel": "No available model found. Please load model list first.",
+      "noWorkspaceSelected": "No workspace selected. Cannot start streaming diagnosis.",
+      "streamDiagnosisFailed": "Streaming diagnosis failed"
+    }
+  },
+  "resource": {
+    "errors": {
+      "downloadFailed": "Download failed",
+      "fileSizeZero": "Downloaded file size is 0",
+      "timeout": "Download timed out ({{ms}}ms)"
+    }
+  },
+  "resourceCenter": {
+    "title": "Resource center",
+    "count": "{{count}} resources",
+    "count_one": "{{count}} resource",
+    "searchPlaceholder": "Search URL / resourceId / MIME",
+    "searchInputLabel": "Search resources",
+    "empty": "No resources available on this page",
+    "previewUnavailable": "Preview unavailable",
+    "sourceUrlTitle": "Source URL",
+    "selectHint": "Select a resource to view details",
+    "segmentBadge": "Segment",
+    "values": {
+      "unknown": "Unknown",
+      "unknownMime": "Unknown MIME",
+      "unknownSize": "Unknown",
+      "none": "None",
+      "fallbackNameSuffix": "resource"
+    },
+    "actions": {
+      "toggleDeveloperMode": "Developer mode (show technical details)",
+      "developerMode": "Developer",
+      "refresh": "Refresh resources",
+      "close": "Close resource center",
+      "downloadStream": "Download stream",
+      "downloadResource": "Download resource",
+      "captureContent": "Capture content",
+      "parseStream": "Parse stream",
+      "copyLink": "Copy link",
+      "copyCliCommand": "Copy CLI command",
+      "copyAgentPrompt": "Copy agent prompt",
+      "downloadCompleteVideo": "Download complete video"
+    },
+    "aria": {
+      "filterAll": "Show all resources",
+      "filterCategory": "Filter by category: {{category}}",
+      "selectResource": "View resource: {{name}}"
+    },
+    "errors": {
+      "loadFailed": "Failed to load resources",
+      "downloadFailed": "Download failed",
+      "captureFailed": "Capture failed",
+      "parseStreamFailed": "Stream parsing failed",
+      "streamDownloadFailed": "Stream download failed"
+    },
+    "toasts": {
+      "copyFailedTitle": "Copy failed",
+      "resourceDownloadedTitle": "Resource downloaded",
+      "capturedTitle": "Resource content captured",
+      "captureCachedTitle": "Resource content already cached",
+      "streamParsedTitle": "Stream parsed",
+      "streamParsedVariants": "Found {{count}} variants",
+      "streamParsedVariants_one": "Found {{count}} variant",
+      "streamParsedUpdated": "Stream metadata updated",
+      "streamDownloadedTitle": "Stream downloaded",
+      "cliCopiedTitle": "CLI command copied",
+      "agentPromptCopiedTitle": "Agent prompt copied",
+      "linkCopiedTitle": "Resource link copied",
+      "actionFailedTitle": "Operation failed"
+    },
+    "categories": {
+      "all": "All",
+      "image": "Image",
+      "video": "Video",
+      "audio": "Audio",
+      "hls": "HLS",
+      "dash": "DASH",
+      "document": "Document",
+      "font": "Font"
+    },
+    "captureStatus": {
+      "metadata_only": "Metadata only",
+      "content_cached": "Content cached",
+      "page_bound_blob": "Page-bound Blob",
+      "stream_manifest": "Stream manifest",
+      "downloaded": "Downloaded",
+      "unsupported": "Unsupported",
+      "failed": "Failed"
+    },
+    "capabilities": {
+      "preview": "Preview",
+      "download": "Download",
+      "import": "Import",
+      "sendToAgent": "Send to agent",
+      "parse": "Parse",
+      "streamDownload": "Stream download"
+    },
+    "sources": {
+      "network": "Network",
+      "dom_probe": "DOM probe",
+      "cdp_capture": "CDP capture",
+      "task_capture": "Task capture",
+      "manual_capture": "Manual capture"
+    },
+    "developer": {
+      "title": "Developer details",
+      "idLabel": "ID",
+      "mimeTypeLabel": "MIME",
+      "statusLabel": "Status",
+      "capabilitiesLabel": "Capabilities",
+      "sourceLabel": "Source"
+    },
+    "qualityLabel": "Quality",
+    "qualityBest": "Highest quality",
+    "qualityWorst": "Lowest quality",
+    "hints": {
+      "pageBoundBlob": "This resource comes from an in-page MediaSource/blob context and must be captured within the page before it can be downloaded reliably.",
+      "dashPhaseOne": "DASH resources support quality selection and full video download. Separate audio tracks are automatically merged via ffmpeg.",
+      "blobResource": "This is a page-bound player resource. Click 'Capture content' to fetch the data, then download.",
+      "encrypted": "This resource may be DRM-protected. Downloaded files may not play correctly."
+    },
+    "streamInfo": {
+      "title": "Stream info",
+      "live": "Live stream",
+      "vod": "On-demand stream",
+      "segmentCount": "{{count}} segments",
+      "segmentCount_one": "{{count}} segment"
+    }
+  },
+  "clients": {
+    "apiUnavailable": "{{api}} API is unavailable",
+    "toolUnavailableTitle": "Tool unavailable",
+    "toolUnavailableDescription": "Action {{action}} is not registered"
+  },
+  "task": {
+    "errors": {
+      "schemaMissingListSelector": "Schema is missing required listSelector",
+      "schemaMissingFields": "Schema has no valid field configuration",
+      "unknown": "Unknown error",
+      "executionFailed": "Task execution failed"
+    },
+    "logs": {
+      "apiUnavailable": "Task API is unavailable",
+      "schemaMissingListSelector": "Invalid schema: missing listSelector",
+      "schemaMissingFields": "presetSchema has no valid fields",
+      "createTaskFailed": "Failed to create task",
+      "updateMetadataFailed": "Failed to update task metadata",
+      "enqueueFailed": "Failed to enqueue task",
+      "createTaskException": "Task creation exception",
+      "cancelTaskFailed": "Failed to cancel task",
+      "resumeUnsupported": "Task API does not support resume",
+      "resumeFailed": "Failed to resume task",
+      "resumeException": "Resume task exception",
+      "resumeWithPaginationUnsupported": "Task API does not support resumeWithPagination",
+      "startPaginationFailed": "Failed to start pagination",
+      "paginationException": "Pagination task exception",
+      "selectRecommendationUnsupported": "Task API does not support selectRecommendation",
+      "selectRecommendationFailed": "Failed to submit recommendation selection",
+      "selectRecommendationException": "Recommendation selection exception",
+      "apiUnavailableEffect": "useEffect: taskAPI unavailable",
+      "exportTraceUnavailable": "Cannot export trace: task not initialized or Task API unavailable",
+      "exportTraceGetUnsupported": "Task API does not support get; cannot export trace",
+      "exportTraceMissingTask": "No task data; cannot export trace",
+      "clipboardCopyFailed": "Failed to copy to clipboard",
+      "exportTraceException": "Export trace exception"
+    }
+  },
+  "tabs": {
+    "defaultName": "Crawl {{count}}",
+    "workspaceDefaultName": "Browser space"
+  },
+  "tabStore": {
+    "errors": {
+      "workspaceViewInTabs": "[CrawlTabStore] Workspace view cannot be written into tabs[]",
+      "createTabWorkspaceNotAllowed": "[CrawlTabStore] createTab cannot create workspace; use createWorkspace",
+      "createWorkspaceExternalIdNotAllowed": "[CrawlTabStore] createWorkspace cannot accept external crawlspaceId",
+      "createWorkspaceMissingProfile": "[CrawlTabStore] createWorkspace missing profile",
+      "createWorkspaceMissingSpaceOrPartition": "[CrawlTabStore] createWorkspace requires spaceId or explicit partition; otherwise the workspace has no session isolation basis.",
+      "createWorkspaceMissingRandomUUID": "[CrawlTabStore] createWorkspace missing crypto.randomUUID",
+      "createWorkspaceIdExists": "[CrawlTabStore] crawlspaceId already exists: {{id}}",
+      "missingCrawlspaceContextCache": "[CrawlTabStore] missing crawlspaceContextCache: {{id}}"
+    },
+    "warnings": {
+      "legacyCreateTab": "⚠️ createTab is a legacy path. Avoid using for new features"
+    }
+  },
+  "host": {
+    "errors": {
+      "viewIdMissingShow": "viewId is empty; cannot show view",
+      "viewIdMissingBounds": "viewId is empty; cannot set bounds",
+      "viewIdMissingDestroy": "viewId is empty; cannot destroy",
+      "viewIdMissingCheck": "viewId is empty; cannot check",
+      "viewIdMissingTouch": "viewId is empty; cannot touch",
+      "viewIdMissingLoadUrl": "viewId is empty; cannot load URL",
+      "viewIdMissingWaitForSelector": "viewId is empty; cannot wait for selector",
+      "viewIdMissingGoBack": "viewId is empty; cannot go back",
+      "viewIdMissingGoForward": "viewId is empty; cannot go forward",
+      "viewIdMissingReload": "viewId is empty; cannot reload",
+      "viewIdMissingStop": "viewId is empty; cannot stop loading"
+    },
+    "logs": {
+      "ipcRendererUnavailable": "ipcRenderer unavailable; skipping pagination subscription"
+    }
+  },
+  "workspaceDefaults": {
+    "errors": {
+      "missingPluginDefaults": "[WorkspaceDefaults] missing plugin defaults: {{id}}"
+    }
+  },
+  "dataImport": {
+    "errors": {
+      "workspaceRequired": "No workspace selected",
+      "noData": "No data to import",
+      "createTableFailed": "Failed to create table",
+      "createFieldFailed": "Failed to create fields: {{details}}",
+      "importFailed": "Failed to import data"
+    },
+    "progress": {
+      "creatingTable": "Creating table...",
+      "creatingFields": "Creating fields...",
+      "tableReady": "Table created. Ready to start crawling...",
+      "loadingCache": "Loading resource cache...",
+      "downloadingResources": "Downloading resources...",
+      "uploadingResources": "Uploading resources to the platform...",
+      "importingData": "Importing data..."
+    },
+    "completion": {
+      "base": "Import completed!",
+      "withFailedAndMissing": "Import completed! {{success}} succeeded, {{failed}} failed, {{missing}} missing attachments",
+      "withFailed": "Import completed! {{success}} succeeded, {{failed}} failed",
+      "withMissing": "Import completed! {{success}} succeeded, {{missing}} missing attachments"
+    },
+    "fieldDescription": {
+      "sourceField": "Extracted field: {{field}}",
+      "originalUrl": "Original URL for {{name}}",
+      "attachment": "Attachment for {{name}}"
+    },
+    "fieldName": {
+      "originalUrl": "{{name}}_Original URL"
+    },
+    "tableDescription": "Crawled from: {{taskId}}",
+    "tableName": {
+      "default": "New Table",
+      "singlePart": "Crawl_{{name}}"
+    }
+  },
+  "stages": {
+    "config": "Config",
+    "executing": "Executing",
+    "mapping": "Field mapping",
+    "completed": "Completed"
+  },
+  "fieldNames": {
+    "name": "Name",
+    "title": "Title",
+    "rating": "Rating",
+    "description": "Description",
+    "price": "Price",
+    "image": "Image",
+    "url": "URL",
+    "date": "Date",
+    "author": "Author",
+    "category": "Category"
+  },
+  "workspace": {
+    "configMissing": "Workspace config is missing. Please recreate.",
+    "loading": "Loading...",
+    "pageLoadFailed": "Page failed to load",
+    "pageLoadFailedDesc": "Unable to reach this page. Check your network or try again later.",
+    "pageLoadErrors": {
+      "dns": {
+        "title": "Domain not found",
+        "hint": "Check that the address is correct"
+      },
+      "offline": {
+        "title": "No network connection",
+        "hint": "Check your network connection and try again"
+      },
+      "connection": {
+        "title": "Unable to connect",
+        "hint": "Try again later, or check that the address is correct"
+      },
+      "server": {
+        "title": "Server error",
+        "hint": "Please try again later"
+      }
+    },
+    "reload": "Reload"
+  },
+  "portal": {
+    "logs": {
+      "noRenderTarget": "⚠️ No render target: slots exist but none active, and parkingHost is unavailable"
+    }
+  },
+  "temporaryTab": {
+    "logs": {
+      "uiEntryDisabled": "⏭️ Temporary tab UI entry is disabled; skipping registration",
+      "listenerAlreadyRegistered": "⏭️ Listener already registered; skipping",
+      "createRequestReceived": "Received create temporary tab request:",
+      "workspaceInternalViewHandled": "⏭️ Workspace internal view handled by Context:",
+      "nonTemporaryIgnored": "⏭️ Non-temporary request ignored:",
+      "tabExistsSkipped": "⚠️ Tab already exists; skipping create:",
+      "tabCreated": "✅ Temporary tab created:",
+      "skipAutoSelect": "Skipped auto-select (background creation)",
+      "closeRequestReceived": "Received close temporary tab request:",
+      "workspaceViewSkipClose": "⏭️ Workspace view handled by Context; skipping close:",
+      "workspaceTabSkipClose": "⏭️ Workspace tab does not use temporary close flow:",
+      "nonTemporarySkipClose": "⏭️ Non-temporary tab; skipping close:",
+      "closeRequestNoTab": "⏭️ No matching tab/view; ignoring close request:",
+      "listenerRegistered": "✅ Temporary tab listener registered",
+      "listenerCleaned": "🧹 Temporary tab listener cleaned"
+    }
+  },
+  "recommendation": {
+    "defaultTitle": "Recommended plan"
+  },
+  "downloads": {
+    "title": "Downloads",
+    "activeCount": "{{count}} downloads in progress",
+    "activeCount_one": "{{count}} download in progress",
+    "noActive": "No active downloads",
+    "searchPlaceholder": "Search file name or URL...",
+    "clearCompleted": "Clear completed",
+    "clearAll": "Clear history",
+    "empty": "No downloads yet",
+    "emptyHint": "Downloads from web browsing will appear here",
+    "noResults": "No matching downloads found",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "paused": "Paused",
+    "cancelled": "Cancelled",
+    "failed": "Download failed",
+    "completed": "Download completed",
+    "remaining": "{{time}} remaining",
+    "pauseAction": "Pause",
+    "resumeAction": "Resume",
+    "cancelAction": "Cancel",
+    "retryAction": "Retry",
+    "openAction": "Open file",
+    "showInFolderAction": "Show in folder",
+    "removeAction": "Remove",
+    "deleteFileAction": "Delete file",
+    "openFile": "Open file",
+    "copyLink": "Copy download link",
+    "cancelDownload": "Cancel download",
+    "started": "Download started: {{name}}",
+    "noSpace": "Please open a workspace first",
+    "ipcError": "{{action}} failed",
+    "actionFailed": "Action failed",
+    "openFileFailed": "Failed to open file",
+    "showInFolderFailed": "Failed to show in folder",
+    "deleteFileFailed": "Failed to delete file",
+    "fileUnavailable": "File unavailable",
+    "fileUnavailableHint": "The file was moved or deleted; you can only remove this entry",
+    "units": {
+      "perSecond": "/s",
+      "seconds": "s",
+      "minutes": "min",
+      "hours": "h"
+    },
+    "downloadCompleted": "Download completed: {{name}}",
+    "downloadFailed": "Download failed: {{name}}",
+    "streamDefaultName": "Streaming video",
+    "streamActive": "Stream Downloads",
+    "streamHistory": "Stream History",
+    "streamResolving": "Resolving playlist...",
+    "streamDownloading": "Downloading",
+    "streamMerging": "Merging segments...",
+    "streamSegments": "segments",
+    "streamCompleted": "Download completed: {{name}}",
+    "streamFailed": "Download failed: {{error}}",
+    "streamErrors": {
+      "ENCRYPTED_STREAM": "This video is DRM-protected and cannot be downloaded",
+      "LIVE_STREAM": "Live stream download is not supported. Try again after the stream ends",
+      "NO_SEGMENTS": "No downloadable video segments found",
+      "NO_QUALITY_MATCH": "No matching quality option found",
+      "SEGMENT_FAILED": "Download failed: some content could not be retrieved (site restriction)",
+      "DOWNLOAD_TIMEOUT": "Download timed out. Check your network and try again",
+      "HTTP_ERROR": "The website blocked the download request",
+      "DOWNLOAD_ABORTED": "Download cancelled",
+      "MERGE_FAILED": "Video merge failed. Please retry",
+      "NETWORK_ERROR": "Network connection failed. Check your network and try again",
+      "PARSE_ERROR": "Unrecognized video URL format. May not be a valid m3u8 file",
+      "UNKNOWN": "Unknown error"
+    }
+  },
+  "bookmarks": {
+    "title": "Bookmarks",
+    "totalCount": "{{count}} bookmarks",
+    "totalCount_one": "{{count}} bookmark",
+    "noBookmarks": "No bookmarks",
+    "searchPlaceholder": "Search bookmarks...",
+    "clearAll": "Clear All",
+    "empty": "No bookmarks",
+    "emptyHint": "Click the star in the address bar to bookmark a page",
+    "noResults": "No matching bookmarks found",
+    "addAction": "Bookmark",
+    "removeAction": "Remove bookmark",
+    "openAction": "Open",
+    "deleteAction": "Delete"
+  },
+  "history": {
+    "title": "Browsing History",
+    "totalCount": "{{count}} records",
+    "totalCount_one": "{{count}} record",
+    "noRecords": "No browsing history",
+    "searchPlaceholder": "Search title or URL...",
+    "clearAll": "Clear All",
+    "empty": "No browsing history",
+    "emptyHint": "Pages you visit will appear here",
+    "noResults": "No matching records found",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "openAction": "Open",
+    "deleteAction": "Delete"
+  },
+  "tabContextMenu": {
+    "rename": "Rename",
+    "close": "Close tab",
+    "delete": "Delete tab",
+    "dialogTitle": "Rename tab",
+    "dialogDescription": "Set a new name for the tab",
+    "newNameLabel": "New name",
+    "newNamePlaceholder": "Enter tab name",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "agentAutofillFailed": {
+    "title": "Auto-login failed",
+    "titleCredential": "Credential may be expired",
+    "titleFill": "Auto-fill could not complete",
+    "descGeneric": "Auto-login failed for {{domain}}. Please check the credential under Settings → Device → Browser.",
+    "descCredential": "The password for {{domain}} may have expired or been disabled. Please update it under Settings → Device → Browser.",
+    "descFill": "The login form on {{domain}} has an unexpected structure; the Agent has been notified to pause. Please log in manually.",
+    "descGenericWithAgent": "{{agentName}} could not auto-login to {{domain}}. Please check the credential under Settings → Device → Browser.",
+    "descCredentialWithAgent": "{{agentName}}'s credential for {{domain}} may have expired. Please update it under Settings → Device → Browser.",
+    "descFillWithAgent": "{{agentName}} could not auto-fill the login form on {{domain}}. The form structure may be unexpected; please log in manually."
+  },
+  "agentAutofillSuccess": {
+    "title": "Agent signed in",
+    "description": "Agent signed in to {{domain}} as {{username}}.",
+    "descriptionWithAgent": "{{agentName}} signed in to {{domain}} as {{username}}."
+  }
+}

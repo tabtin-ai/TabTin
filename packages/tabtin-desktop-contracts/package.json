@@ -1,0 +1,30 @@
+{
+  "name": "@tabtin/desktop-contracts",
+  "version": "0.1.0",
+  "description": "TabDesktop 接口契约 + MCP 命名空间常量（v2.0 模块零交付）。集中定义 DesktopExecutor / DesktopSessionContext / DesktopAuthorizationProfile / DesktopSubGates / DesktopCoordinateMode 五个类型契约，供 Electron 主进程的 DesktopExecutorService 实现 + 路由层消费。",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "5.7.2",
+    "vitest": "4.0.18"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "client": {
+    "token": {
+      "hmac_secret_key": "__CENTRIFUGO_TOKEN_SECRET__"
+    },
+    "allowed_origins": [
+      "http://localhost:5175",
+      "http://127.0.0.1:5175",
+      "tabtin-file://app"
+    ],
+    "proxy": {
+      "connect": {
+        "enabled": true,
+        "endpoint": "http://django:6060/api/im/centrifugo/connect",
+        "timeout": "5s",
+        "http": {
+          "static_headers": {
+            "X-Centrifugo-Proxy-Secret": "__CENTRIFUGO_PROXY_SECRET__"
+          }
+        }
+      },
+      "refresh": {
+        "enabled": true,
+        "endpoint": "http://django:6060/api/im/centrifugo/refresh",
+        "timeout": "5s",
+        "http": {
+          "static_headers": {
+            "X-Centrifugo-Proxy-Secret": "__CENTRIFUGO_PROXY_SECRET__"
+          }
+        }
+      }
+    },
+    "user_connection_limit": 20
+  },
+  "http_api": {
+    "key": "__CENTRIFUGO_API_KEY__"
+  },
+  "health": {
+    "enabled": true
+  },
+  "admin": {
+    "enabled": false
+  },
+  "engine": {
+    "type": "redis",
+    "redis": {
+      "address": "redis://redis:6379/13"
+    }
+  },
+  "channel": {
+    "proxy": {
+      "subscribe": {
+        "endpoint": "http://django:6060/api/im/centrifugo/subscribe",
+        "timeout": "3s",
+        "http": {
+          "static_headers": {
+            "X-Centrifugo-Proxy-Secret": "__CENTRIFUGO_PROXY_SECRET__"
+          }
+        }
+      },
+      "publish": {
+        "endpoint": "http://django:6060/api/im/centrifugo/publish",
+        "timeout": "2s",
+        "http": {
+          "static_headers": {
+            "X-Centrifugo-Proxy-Secret": "__CENTRIFUGO_PROXY_SECRET__"
+          }
+        }
+      }
+    },
+    "namespaces": [
+      {
+        "name": "chat",
+        "history_size": 200,
+        "history_ttl": "720h",
+        "force_recovery": true,
+        "presence": true,
+        "join_leave": true,
+        "force_push_join_leave": true,
+        "subscribe_proxy_enabled": true,
+        "publish_proxy_enabled": true,
+        "allow_history_for_subscriber": true,
+        "allow_presence_for_subscriber": true,
+        "allow_publish_for_subscriber": true
+      },
+      {
+        "name": "personal",
+        "history_size": 50,
+        "history_ttl": "168h",
+        "force_recovery": true,
+        "presence": false,
+        "subscribe_proxy_enabled": true,
+        "publish_proxy_enabled": true
+      },
+      {
+        "name": "space",
+        "presence": true,
+        "join_leave": true,
+        "force_push_join_leave": true,
+        "subscribe_proxy_enabled": true,
+        "allow_presence_for_subscriber": true
+      }
+    ]
+  }
+}

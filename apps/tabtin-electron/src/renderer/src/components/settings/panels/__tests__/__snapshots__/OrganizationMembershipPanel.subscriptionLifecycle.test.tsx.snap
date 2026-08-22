@@ -1,0 +1,3485 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`OrganizationMembershipPanel subscription lifecycle > renders expired lifecycle state from server fields 1`] = `
+<div>
+  <section
+    class="space-y-3"
+  >
+    <div>
+      <div
+        class="flex items-center justify-between gap-2"
+      >
+        <h3
+          class="text-body font-medium text-foreground"
+        >
+          会员与 credits
+        </h3>
+      </div>
+    </div>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              当前订阅
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3 space-y-4"
+      >
+        <div
+          class="flex flex-wrap items-start justify-between gap-3"
+        >
+          <div
+            class="min-w-0"
+          >
+            <div
+              class="flex flex-wrap items-center gap-2"
+            >
+              <span
+                class="text-title font-medium text-foreground"
+              >
+                专业版
+              </span>
+              <span
+                class="text-caption inline-flex items-center px-2 py-0.5 text-destructive bg-destructive/10 rounded-full font-medium"
+              >
+                已过期
+              </span>
+              <span
+                class="text-caption inline-flex items-center px-2 py-0.5 text-muted-foreground/60 bg-muted/30 rounded-full"
+              >
+                月付套餐
+              </span>
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              有效期至 2026-08-01
+            </div>
+          </div>
+          <div
+            class="flex gap-2"
+          >
+            <button
+              type="button"
+              variant="outline"
+            >
+              管理订阅
+            </button>
+            <button
+              type="button"
+            >
+              升级套餐
+            </button>
+          </div>
+        </div>
+        <div
+          class="divide-y divide-border/20"
+        >
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  订阅周期
+                </div>
+                <div
+                  class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-0.5"
+                >
+                  2026-07-01 - 2026-08-01
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <span
+                class="text-body text-foreground"
+              >
+                membership.currentSubscription.remainingToday
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  自动续费
+                </div>
+                <div
+                  class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-0.5"
+                >
+                  自动续费：已关闭
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <input
+                aria-label="switch"
+                type="checkbox"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              Credits 使用
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3 space-y-3"
+      >
+        <div
+          class="grid gap-2 sm:grid-cols-2"
+        >
+          <div
+            class="rounded-interactive bg-muted/10 px-3 py-2"
+          >
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              套餐月度额度
+            </div>
+            <div
+              class="mt-1 text-title font-medium text-foreground"
+            >
+              3,800 点券
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              已用 1,200 点券 / 套餐 5,000 点券
+            </div>
+          </div>
+          <div
+            class="rounded-interactive bg-muted/10 px-3 py-2"
+          >
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              现金钱包点数
+            </div>
+            <div
+              class="mt-1 flex items-center gap-1 text-title font-medium text-foreground"
+            >
+              <svg
+                class="lucide lucide-wallet-cards h-[1em] w-[1em] text-muted-foreground/60"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="18"
+                  rx="2"
+                  width="18"
+                  x="3"
+                  y="3"
+                />
+                <path
+                  d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2"
+                />
+                <path
+                  d="M3 11h3c.8 0 1.6.3 2.1.9l1.1.9c1.6 1.6 4.1 1.6 5.7 0l1.1-.9c.5-.5 1.3-.9 2.1-.9H21"
+                />
+              </svg>
+              9,997 点券
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              预留 3 点券
+            </div>
+          </div>
+        </div>
+        <p
+          class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+        >
+          套餐额度与现金钱包点数分开计算。
+        </p>
+      </div>
+    </section>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              套餐权益
+            </h3>
+            <p
+              class="mt-0.5 text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              套餐权益说明
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3"
+      >
+        <div
+          class="divide-y divide-border/20"
+        >
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  表格
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  20
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  文档
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  10
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  群组
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  3
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  席位
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  1
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  存储
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  0 MB
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  credits
+                </div>
+                <div
+                  class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-0.5"
+                >
+                  套餐 5,000 点券
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  已用 1,200 点券 / 5,000 点券
+                </span>
+                <div
+                  class="h-2 rounded-full bg-muted/30 overflow-hidden w-24 shrink-0"
+                >
+                  <div
+                    class="h-full rounded-full transition-colors bg-info"
+                    style="width: 24%;"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p
+          class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-3"
+        >
+          升级提示
+        </p>
+      </div>
+    </section>
+  </section>
+</div>
+`;
+
+exports[`OrganizationMembershipPanel subscription lifecycle > renders free subscription and separates included credits from wallet credits 1`] = `
+<div>
+  <section
+    class="space-y-3"
+  >
+    <div>
+      <div
+        class="flex items-center justify-between gap-2"
+      >
+        <h3
+          class="text-body font-medium text-foreground"
+        >
+          会员与 credits
+        </h3>
+      </div>
+    </div>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              当前订阅
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3 space-y-4"
+      >
+        <div
+          class="flex flex-wrap items-start justify-between gap-3"
+        >
+          <div
+            class="min-w-0"
+          >
+            <div
+              class="flex flex-wrap items-center gap-2"
+            >
+              <span
+                class="text-title font-medium text-foreground"
+              >
+                免费版
+              </span>
+              <span
+                class="text-caption inline-flex items-center px-2 py-0.5 text-muted-foreground/60 bg-muted/30 rounded-full font-medium"
+              >
+                免费套餐
+              </span>
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              当前未订阅付费套餐
+            </div>
+          </div>
+          <div
+            class="flex gap-2"
+          >
+            <button
+              type="button"
+              variant="outline"
+            >
+              查看套餐
+            </button>
+          </div>
+        </div>
+        <div
+          class="flex items-center gap-2 rounded-interactive bg-muted/10 px-3 py-2 text-body leading-[22px] text-muted-foreground/70 antialiased"
+        >
+          <svg
+            class="lucide lucide-calendar-clock h-[1em] w-[1em]"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"
+            />
+            <path
+              d="M16 2v4"
+            />
+            <path
+              d="M8 2v4"
+            />
+            <path
+              d="M3 10h5"
+            />
+            <path
+              d="M17.5 17.5 16 16.3V14"
+            />
+            <circle
+              cx="16"
+              cy="16"
+              r="6"
+            />
+          </svg>
+          长期有效
+        </div>
+      </div>
+    </section>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              Credits 使用
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3 space-y-3"
+      >
+        <div
+          class="grid gap-2 sm:grid-cols-2"
+        >
+          <div
+            class="rounded-interactive bg-muted/10 px-3 py-2"
+          >
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              套餐月度额度
+            </div>
+            <div
+              class="mt-1 text-title font-medium text-foreground"
+            >
+              3,800 点券
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              已用 1,200 点券 / 套餐 5,000 点券
+            </div>
+          </div>
+          <div
+            class="rounded-interactive bg-muted/10 px-3 py-2"
+          >
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              现金钱包点数
+            </div>
+            <div
+              class="mt-1 flex items-center gap-1 text-title font-medium text-foreground"
+            >
+              <svg
+                class="lucide lucide-wallet-cards h-[1em] w-[1em] text-muted-foreground/60"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="18"
+                  rx="2"
+                  width="18"
+                  x="3"
+                  y="3"
+                />
+                <path
+                  d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2"
+                />
+                <path
+                  d="M3 11h3c.8 0 1.6.3 2.1.9l1.1.9c1.6 1.6 4.1 1.6 5.7 0l1.1-.9c.5-.5 1.3-.9 2.1-.9H21"
+                />
+              </svg>
+              9,997 点券
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              预留 3 点券
+            </div>
+          </div>
+        </div>
+        <p
+          class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+        >
+          套餐额度与现金钱包点数分开计算。
+        </p>
+      </div>
+    </section>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              套餐权益
+            </h3>
+            <p
+              class="mt-0.5 text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              套餐权益说明
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3"
+      >
+        <div
+          class="divide-y divide-border/20"
+        >
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  表格
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  20
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  文档
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  10
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  群组
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  3
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  席位
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  1
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  存储
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  0 MB
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  credits
+                </div>
+                <div
+                  class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-0.5"
+                >
+                  套餐 5,000 点券
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  已用 1,200 点券 / 5,000 点券
+                </span>
+                <div
+                  class="h-2 rounded-full bg-muted/30 overflow-hidden w-24 shrink-0"
+                >
+                  <div
+                    class="h-full rounded-full transition-colors bg-info"
+                    style="width: 24%;"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p
+          class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-3"
+        >
+          升级提示
+        </p>
+      </div>
+    </section>
+  </section>
+</div>
+`;
+
+exports[`OrganizationMembershipPanel subscription lifecycle > renders paid active subscription with cycle, expiry and auto-renew 1`] = `
+<div>
+  <section
+    class="space-y-3"
+  >
+    <div>
+      <div
+        class="flex items-center justify-between gap-2"
+      >
+        <h3
+          class="text-body font-medium text-foreground"
+        >
+          会员与 credits
+        </h3>
+      </div>
+    </div>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              当前订阅
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3 space-y-4"
+      >
+        <div
+          class="flex flex-wrap items-start justify-between gap-3"
+        >
+          <div
+            class="min-w-0"
+          >
+            <div
+              class="flex flex-wrap items-center gap-2"
+            >
+              <span
+                class="text-title font-medium text-foreground"
+              >
+                专业版
+              </span>
+              <span
+                class="text-caption inline-flex items-center px-2 py-0.5 text-accent-text bg-foreground/[0.06] rounded-full font-medium"
+              >
+                有效
+              </span>
+              <span
+                class="text-caption inline-flex items-center px-2 py-0.5 text-muted-foreground/60 bg-muted/30 rounded-full"
+              >
+                月付套餐
+              </span>
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              有效期至 2026-08-01
+            </div>
+          </div>
+          <div
+            class="flex gap-2"
+          >
+            <button
+              type="button"
+              variant="outline"
+            >
+              管理订阅
+            </button>
+            <button
+              type="button"
+            >
+              升级套餐
+            </button>
+          </div>
+        </div>
+        <div
+          class="divide-y divide-border/20"
+        >
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  订阅周期
+                </div>
+                <div
+                  class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-0.5"
+                >
+                  2026-07-01 - 2026-08-01
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <span
+                class="text-body text-foreground"
+              >
+                剩余 18 天
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  自动续费
+                </div>
+                <div
+                  class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-0.5"
+                >
+                  自动续费：已开启
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <input
+                aria-label="switch"
+                checked=""
+                type="checkbox"
+              />
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  membership.currentSubscription.cancelRenewal
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <button
+                class="inline-flex items-center gap-1 text-body transition-colors disabled:opacity-40 text-muted-foreground/60 hover:text-destructive"
+                type="button"
+              >
+                membership.autoRenew.cancelButton
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              Credits 使用
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3 space-y-3"
+      >
+        <div
+          class="grid gap-2 sm:grid-cols-2"
+        >
+          <div
+            class="rounded-interactive bg-muted/10 px-3 py-2"
+          >
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              套餐月度额度
+            </div>
+            <div
+              class="mt-1 text-title font-medium text-foreground"
+            >
+              3,800 点券
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              已用 1,200 点券 / 套餐 5,000 点券
+            </div>
+          </div>
+          <div
+            class="rounded-interactive bg-muted/10 px-3 py-2"
+          >
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              现金钱包点数
+            </div>
+            <div
+              class="mt-1 flex items-center gap-1 text-title font-medium text-foreground"
+            >
+              <svg
+                class="lucide lucide-wallet-cards h-[1em] w-[1em] text-muted-foreground/60"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="18"
+                  rx="2"
+                  width="18"
+                  x="3"
+                  y="3"
+                />
+                <path
+                  d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2"
+                />
+                <path
+                  d="M3 11h3c.8 0 1.6.3 2.1.9l1.1.9c1.6 1.6 4.1 1.6 5.7 0l1.1-.9c.5-.5 1.3-.9 2.1-.9H21"
+                />
+              </svg>
+              9,997 点券
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              预留 3 点券
+            </div>
+          </div>
+        </div>
+        <p
+          class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+        >
+          套餐额度与现金钱包点数分开计算。
+        </p>
+      </div>
+    </section>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              套餐权益
+            </h3>
+            <p
+              class="mt-0.5 text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              套餐权益说明
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3"
+      >
+        <div
+          class="divide-y divide-border/20"
+        >
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  表格
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  20
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  文档
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  10
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  群组
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  3
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  席位
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  1
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  存储
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  0 MB
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  credits
+                </div>
+                <div
+                  class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-0.5"
+                >
+                  套餐 5,000 点券
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  已用 1,200 点券 / 5,000 点券
+                </span>
+                <div
+                  class="h-2 rounded-full bg-muted/30 overflow-hidden w-24 shrink-0"
+                >
+                  <div
+                    class="h-full rounded-full transition-colors bg-info"
+                    style="width: 24%;"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p
+          class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-3"
+        >
+          升级提示
+        </p>
+      </div>
+    </section>
+  </section>
+</div>
+`;
+
+exports[`OrganizationMembershipPanel subscription lifecycle > renders plan actions from server preview and does not use display order as action 1`] = `
+<div>
+  <section
+    class="space-y-3"
+  >
+    <div>
+      <div
+        class="flex items-center justify-between gap-2"
+      >
+        <h3
+          class="text-body font-medium text-foreground"
+        >
+          会员与 credits
+        </h3>
+      </div>
+    </div>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              当前订阅
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3 space-y-4"
+      >
+        <div
+          class="flex flex-wrap items-start justify-between gap-3"
+        >
+          <div
+            class="min-w-0"
+          >
+            <div
+              class="flex flex-wrap items-center gap-2"
+            >
+              <span
+                class="text-title font-medium text-foreground"
+              >
+                专业版
+              </span>
+              <span
+                class="text-caption inline-flex items-center px-2 py-0.5 text-accent-text bg-foreground/[0.06] rounded-full font-medium"
+              >
+                有效
+              </span>
+              <span
+                class="text-caption inline-flex items-center px-2 py-0.5 text-muted-foreground/60 bg-muted/30 rounded-full"
+              >
+                月付套餐
+              </span>
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              有效期至 2026-08-01
+            </div>
+          </div>
+          <div
+            class="flex gap-2"
+          >
+            <button
+              type="button"
+              variant="outline"
+            >
+              管理订阅
+            </button>
+            <button
+              type="button"
+            >
+              升级套餐
+            </button>
+          </div>
+        </div>
+        <div
+          class="divide-y divide-border/20"
+        >
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  订阅周期
+                </div>
+                <div
+                  class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-0.5"
+                >
+                  2026-07-01 - 2026-08-01
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <span
+                class="text-body text-foreground"
+              >
+                剩余 18 天
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  自动续费
+                </div>
+                <div
+                  class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-0.5"
+                >
+                  自动续费：已开启
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <input
+                aria-label="switch"
+                checked=""
+                type="checkbox"
+              />
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  membership.currentSubscription.cancelRenewal
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <button
+                class="inline-flex items-center gap-1 text-body transition-colors disabled:opacity-40 text-muted-foreground/60 hover:text-destructive"
+                type="button"
+              >
+                membership.autoRenew.cancelButton
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              Credits 使用
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3 space-y-3"
+      >
+        <div
+          class="grid gap-2 sm:grid-cols-2"
+        >
+          <div
+            class="rounded-interactive bg-muted/10 px-3 py-2"
+          >
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              套餐月度额度
+            </div>
+            <div
+              class="mt-1 text-title font-medium text-foreground"
+            >
+              3,800 点券
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              已用 1,200 点券 / 套餐 5,000 点券
+            </div>
+          </div>
+          <div
+            class="rounded-interactive bg-muted/10 px-3 py-2"
+          >
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              现金钱包点数
+            </div>
+            <div
+              class="mt-1 flex items-center gap-1 text-title font-medium text-foreground"
+            >
+              <svg
+                class="lucide lucide-wallet-cards h-[1em] w-[1em] text-muted-foreground/60"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="18"
+                  rx="2"
+                  width="18"
+                  x="3"
+                  y="3"
+                />
+                <path
+                  d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2"
+                />
+                <path
+                  d="M3 11h3c.8 0 1.6.3 2.1.9l1.1.9c1.6 1.6 4.1 1.6 5.7 0l1.1-.9c.5-.5 1.3-.9 2.1-.9H21"
+                />
+              </svg>
+              9,997 点券
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              预留 3 点券
+            </div>
+          </div>
+        </div>
+        <p
+          class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+        >
+          套餐额度与现金钱包点数分开计算。
+        </p>
+      </div>
+    </section>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              套餐权益
+            </h3>
+            <p
+              class="mt-0.5 text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              套餐权益说明
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3"
+      >
+        <div
+          class="divide-y divide-border/20"
+        >
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  表格
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  20
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  文档
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  10
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  群组
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  3
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  席位
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  1
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  存储
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  0 MB
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  credits
+                </div>
+                <div
+                  class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-0.5"
+                >
+                  套餐 5,000 点券
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  已用 1,200 点券 / 5,000 点券
+                </span>
+                <div
+                  class="h-2 rounded-full bg-muted/30 overflow-hidden w-24 shrink-0"
+                >
+                  <div
+                    class="h-full rounded-full transition-colors bg-info"
+                    style="width: 24%;"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p
+          class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-3"
+        >
+          升级提示
+        </p>
+      </div>
+    </section>
+  </section>
+  <div
+    data-testid="dialog"
+  >
+    <div>
+      <header>
+        <h2>
+          选择套餐
+        </h2>
+        <p>
+          套餐动作由服务端判断。
+        </p>
+      </header>
+      <div>
+        <div
+          class="flex gap-3 pb-2"
+        >
+          <div
+            class="flex w-[260px] shrink-0 flex-col gap-3 rounded-[12px] border border-border/30 bg-background p-3"
+          >
+            <div>
+              <div
+                class="flex items-center justify-between gap-2"
+              >
+                <span
+                  class="text-body font-medium text-foreground"
+                >
+                  企业版
+                </span>
+              </div>
+              <div
+                class="mt-1 text-subtitle font-medium text-foreground"
+              >
+                ¥399.00
+              </div>
+              <div
+                class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+              >
+                月付套餐
+              </div>
+            </div>
+            <div
+              class="flex-1 space-y-1 text-body"
+            >
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.llmCredits
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  80,000 点券
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.members
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  30
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.storage
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  50 GB
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.documents
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  200
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.tables
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  200
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.groups
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  30
+                </span>
+              </div>
+            </div>
+            <button
+              class="w-full"
+              type="button"
+              variant="default"
+            >
+              升级套餐
+            </button>
+          </div>
+          <div
+            class="flex w-[260px] shrink-0 flex-col gap-3 rounded-[12px] border p-3 border-primary/40 bg-primary/[0.04]"
+          >
+            <div>
+              <div
+                class="flex items-center justify-between gap-2"
+              >
+                <span
+                  class="text-body font-medium text-foreground"
+                >
+                  专业版
+                </span>
+                <span
+                  class="text-caption inline-flex items-center px-2 py-0.5 rounded text-accent-text bg-foreground/[0.06]"
+                >
+                  membership.tiers.current
+                </span>
+              </div>
+              <div
+                class="mt-1 text-subtitle font-medium text-foreground"
+              >
+                ¥69.00
+              </div>
+              <div
+                class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+              >
+                月付套餐
+              </div>
+            </div>
+            <div
+              class="flex-1 space-y-1 text-body"
+            >
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.llmCredits
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  30,000 点券
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.members
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  5
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.storage
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  1 GB
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.documents
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  50
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.tables
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  50
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.groups
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  10
+                </span>
+              </div>
+            </div>
+            <button
+              class="w-full"
+              disabled=""
+              type="button"
+              variant="outline"
+            >
+              下周期切换
+            </button>
+          </div>
+          <div
+            class="flex w-[260px] shrink-0 flex-col gap-3 rounded-[12px] border border-border/30 bg-background p-3"
+          >
+            <div>
+              <div
+                class="flex items-center justify-between gap-2"
+              >
+                <span
+                  class="text-body font-medium text-foreground"
+                >
+                  免费版
+                </span>
+              </div>
+              <div
+                class="mt-1 text-subtitle font-medium text-foreground"
+              >
+                ¥0.00
+              </div>
+              <div
+                class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+              >
+                月付套餐
+              </div>
+            </div>
+            <div
+              class="flex-1 space-y-1 text-body"
+            >
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.llmCredits
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  5,000 点券
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.members
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  1
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.storage
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  0 MB
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.documents
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  10
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.tables
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  20
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.groups
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  3
+                </span>
+              </div>
+            </div>
+            <button
+              class="w-full"
+              type="button"
+              variant="default"
+            >
+              续费
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`OrganizationMembershipPanel subscription lifecycle > renders upgrade quote with server money values and does not create an order 1`] = `
+<div>
+  <section
+    class="space-y-3"
+  >
+    <div>
+      <div
+        class="flex items-center justify-between gap-2"
+      >
+        <h3
+          class="text-body font-medium text-foreground"
+        >
+          会员与 credits
+        </h3>
+      </div>
+    </div>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              当前订阅
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3 space-y-4"
+      >
+        <div
+          class="flex flex-wrap items-start justify-between gap-3"
+        >
+          <div
+            class="min-w-0"
+          >
+            <div
+              class="flex flex-wrap items-center gap-2"
+            >
+              <span
+                class="text-title font-medium text-foreground"
+              >
+                专业版
+              </span>
+              <span
+                class="text-caption inline-flex items-center px-2 py-0.5 text-accent-text bg-foreground/[0.06] rounded-full font-medium"
+              >
+                有效
+              </span>
+              <span
+                class="text-caption inline-flex items-center px-2 py-0.5 text-muted-foreground/60 bg-muted/30 rounded-full"
+              >
+                月付套餐
+              </span>
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              有效期至 2026-08-01
+            </div>
+          </div>
+          <div
+            class="flex gap-2"
+          >
+            <button
+              type="button"
+              variant="outline"
+            >
+              管理订阅
+            </button>
+            <button
+              type="button"
+            >
+              升级套餐
+            </button>
+          </div>
+        </div>
+        <div
+          class="divide-y divide-border/20"
+        >
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  订阅周期
+                </div>
+                <div
+                  class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-0.5"
+                >
+                  2026-07-01 - 2026-08-01
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <span
+                class="text-body text-foreground"
+              >
+                剩余 18 天
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  自动续费
+                </div>
+                <div
+                  class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-0.5"
+                >
+                  自动续费：已开启
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <input
+                aria-label="switch"
+                checked=""
+                type="checkbox"
+              />
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  membership.currentSubscription.cancelRenewal
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <button
+                class="inline-flex items-center gap-1 text-body transition-colors disabled:opacity-40 text-muted-foreground/60 hover:text-destructive"
+                type="button"
+              >
+                membership.autoRenew.cancelButton
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              Credits 使用
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3 space-y-3"
+      >
+        <div
+          class="grid gap-2 sm:grid-cols-2"
+        >
+          <div
+            class="rounded-interactive bg-muted/10 px-3 py-2"
+          >
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              套餐月度额度
+            </div>
+            <div
+              class="mt-1 text-title font-medium text-foreground"
+            >
+              3,800 点券
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              已用 1,200 点券 / 套餐 5,000 点券
+            </div>
+          </div>
+          <div
+            class="rounded-interactive bg-muted/10 px-3 py-2"
+          >
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              现金钱包点数
+            </div>
+            <div
+              class="mt-1 flex items-center gap-1 text-title font-medium text-foreground"
+            >
+              <svg
+                class="lucide lucide-wallet-cards h-[1em] w-[1em] text-muted-foreground/60"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="18"
+                  rx="2"
+                  width="18"
+                  x="3"
+                  y="3"
+                />
+                <path
+                  d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2"
+                />
+                <path
+                  d="M3 11h3c.8 0 1.6.3 2.1.9l1.1.9c1.6 1.6 4.1 1.6 5.7 0l1.1-.9c.5-.5 1.3-.9 2.1-.9H21"
+                />
+              </svg>
+              9,997 点券
+            </div>
+            <div
+              class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+            >
+              预留 3 点券
+            </div>
+          </div>
+        </div>
+        <p
+          class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+        >
+          套餐额度与现金钱包点数分开计算。
+        </p>
+      </div>
+    </section>
+    <section
+      class="rounded-[12px] px-4 py-3 bg-muted/10"
+    >
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div
+          class="flex min-w-0 items-start gap-2.5"
+        >
+          <div
+            class="min-w-0"
+          >
+            <h3
+              class="truncate text-[13px] leading-[18px] font-medium text-muted-foreground/70 antialiased"
+            >
+              套餐权益
+            </h3>
+            <p
+              class="mt-0.5 text-body leading-[22px] text-muted-foreground/70 antialiased"
+            >
+              套餐权益说明
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3"
+      >
+        <div
+          class="divide-y divide-border/20"
+        >
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  表格
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  20
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  文档
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  10
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  群组
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  3
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  席位
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  1
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  存储
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  0 MB
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  credits
+                </div>
+                <div
+                  class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-0.5"
+                >
+                  套餐 5,000 点券
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <div
+                class="flex items-center gap-3"
+              >
+                <span
+                  class="text-body tabular-nums text-foreground"
+                >
+                  已用 1,200 点券 / 5,000 点券
+                </span>
+                <div
+                  class="h-2 rounded-full bg-muted/30 overflow-hidden w-24 shrink-0"
+                >
+                  <div
+                    class="h-full rounded-full transition-colors bg-info"
+                    style="width: 24%;"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p
+          class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-3"
+        >
+          升级提示
+        </p>
+      </div>
+    </section>
+  </section>
+  <div
+    data-testid="dialog"
+  >
+    <div>
+      <header>
+        <h2>
+          选择套餐
+        </h2>
+        <p>
+          套餐动作由服务端判断。
+        </p>
+      </header>
+      <div>
+        <div
+          class="flex gap-3 pb-2"
+        >
+          <div
+            class="flex w-[260px] shrink-0 flex-col gap-3 rounded-[12px] border border-border/30 bg-background p-3"
+          >
+            <div>
+              <div
+                class="flex items-center justify-between gap-2"
+              >
+                <span
+                  class="text-body font-medium text-foreground"
+                >
+                  企业版
+                </span>
+              </div>
+              <div
+                class="mt-1 text-subtitle font-medium text-foreground"
+              >
+                ¥399.00
+              </div>
+              <div
+                class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+              >
+                月付套餐
+              </div>
+            </div>
+            <div
+              class="flex-1 space-y-1 text-body"
+            >
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.llmCredits
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  80,000 点券
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.members
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  30
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.storage
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  50 GB
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.documents
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  200
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.tables
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  200
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.groups
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  30
+                </span>
+              </div>
+            </div>
+            <button
+              class="w-full"
+              type="button"
+              variant="default"
+            >
+              升级套餐
+            </button>
+          </div>
+          <div
+            class="flex w-[260px] shrink-0 flex-col gap-3 rounded-[12px] border p-3 border-primary/40 bg-primary/[0.04]"
+          >
+            <div>
+              <div
+                class="flex items-center justify-between gap-2"
+              >
+                <span
+                  class="text-body font-medium text-foreground"
+                >
+                  专业版
+                </span>
+                <span
+                  class="text-caption inline-flex items-center px-2 py-0.5 rounded text-accent-text bg-foreground/[0.06]"
+                >
+                  membership.tiers.current
+                </span>
+              </div>
+              <div
+                class="mt-1 text-subtitle font-medium text-foreground"
+              >
+                ¥69.00
+              </div>
+              <div
+                class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+              >
+                月付套餐
+              </div>
+            </div>
+            <div
+              class="flex-1 space-y-1 text-body"
+            >
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.llmCredits
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  30,000 点券
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.members
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  5
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.storage
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  1 GB
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.documents
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  50
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.tables
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  50
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.groups
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  10
+                </span>
+              </div>
+            </div>
+            <button
+              class="w-full"
+              disabled=""
+              type="button"
+              variant="outline"
+            >
+              下周期切换
+            </button>
+          </div>
+          <div
+            class="flex w-[260px] shrink-0 flex-col gap-3 rounded-[12px] border border-border/30 bg-background p-3"
+          >
+            <div>
+              <div
+                class="flex items-center justify-between gap-2"
+              >
+                <span
+                  class="text-body font-medium text-foreground"
+                >
+                  免费版
+                </span>
+              </div>
+              <div
+                class="mt-1 text-subtitle font-medium text-foreground"
+              >
+                ¥0.00
+              </div>
+              <div
+                class="text-body leading-[22px] text-muted-foreground/70 antialiased"
+              >
+                月付套餐
+              </div>
+            </div>
+            <div
+              class="flex-1 space-y-1 text-body"
+            >
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.llmCredits
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  5,000 点券
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.members
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  1
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.storage
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  0 MB
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.documents
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  10
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.tables
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  20
+                </span>
+              </div>
+              <div
+                class="flex justify-between gap-3 py-0.5"
+              >
+                <span
+                  class="text-muted-foreground/60"
+                >
+                  membership.tierComparison.groups
+                </span>
+                <span
+                  class="text-right text-foreground"
+                >
+                  3
+                </span>
+              </div>
+            </div>
+            <button
+              class="w-full"
+              type="button"
+              variant="default"
+            >
+              续费
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    data-testid="dialog"
+  >
+    <div>
+      <header>
+        <h2>
+          升级补差报价
+        </h2>
+        <p>
+          报价由服务端计算。
+        </p>
+      </header>
+      <div
+        class="space-y-3"
+      >
+        <div
+          class="rounded-interactive bg-muted/10 px-3 py-2"
+        >
+          <div
+            class="text-body font-medium text-foreground"
+          >
+            专业版
+             → 
+            企业版
+          </div>
+          <div
+            class="text-body leading-[22px] text-muted-foreground/70 antialiased mt-1"
+          >
+            2026-07-01
+             - 
+            2026-08-01
+          </div>
+        </div>
+        <div
+          class="divide-y divide-border/20"
+        >
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  目标完整周期价格
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <span>
+                ¥399.00
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  当前套餐剩余价值
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <span>
+                ¥46.00
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  目标套餐剩余周期价值
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <span>
+                ¥266.00
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  抵扣金额
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <span>
+                ¥46.00
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  应付补差金额
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <span
+                class="text-title font-semibold text-foreground"
+              >
+                ¥220.00
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  报价时间
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <span>
+                2026-07-12
+              </span>
+            </div>
+          </div>
+          <div
+            class="flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
+          >
+            <div
+              class="flex min-w-0 flex-1 items-start gap-2.5"
+            >
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-body font-medium text-foreground-secondary"
+                >
+                  报价过期时间
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex shrink-0 items-center justify-start sm:justify-end"
+            >
+              <span>
+                2026-07-12
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="space-y-1 rounded-interactive bg-primary/[0.06] px-3 py-2 text-body leading-[22px] text-muted-foreground/70 antialiased"
+        >
+          <div>
+            支付成功后立即生效
+          </div>
+          <div>
+            原到期时间不变
+          </div>
+          <div>
+            下周期按目标套餐完整价格续费
+          </div>
+        </div>
+      </div>
+      <footer>
+        <button
+          type="button"
+        >
+          知道了
+        </button>
+      </footer>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,20 @@
+# Gradle — 本地缓存与构建产物（勿提交）
+.gradle/
+build/
+**/build/
+
+# Android SDK 路径（本机路径，勿提交）
+local.properties
+
+# IDE
+*.iml
+.idea/
+.navigation/
+
+# NDK / CMake
+.cxx/
+.externalNativeBuild/
+
+# 本地调试
+captures/
+*.hprof

@@ -1,0 +1,13 @@
+[
+  "environment",
+  "memory-recall",
+  "agent-profile",
+  "referenced",
+  "attached",
+  "quoted-message",
+  "lsp-diagnostic",
+  "tool-eviction",
+  "mode-reminder",
+  "mode-transition-reminder",
+  "active-todos"
+]

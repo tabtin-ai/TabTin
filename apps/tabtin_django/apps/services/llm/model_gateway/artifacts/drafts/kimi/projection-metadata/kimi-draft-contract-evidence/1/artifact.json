@@ -1,0 +1,12 @@
+{
+  "identity": {
+    "canonical_hash": "sha256:ea1ae488fc69215c50cf5aa3954dfdf537e9b6f38613133cfad4f70c4bd18929",
+    "key": "kimi-draft-contract-evidence",
+    "kind": "projection-metadata",
+    "revision": "1"
+  },
+  "projected_at": "2026-08-06T00:00:00Z",
+  "projector_version": "pr5-draft-authoring-1",
+  "schema_version": "1",
+  "source_refs": []
+}

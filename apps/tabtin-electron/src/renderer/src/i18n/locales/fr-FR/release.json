@@ -1,0 +1,58 @@
+{
+  "outbox": {
+    "banner": {
+      "title": "La boîte d'envoi est en ligne",
+      "body": "Le moteur de cascade asynchrone est désormais activé. Les recherches/cumuls/écritures de formules croisées seront traitées via la file d'attente de la boîte d'envoi, améliorant considérablement les performances des mises à jour groupées."
+    },
+    "rollback": {
+      "title": "Restauration d'urgence de la boîte d'envoi",
+      "body": "Le moteur de cascade asynchrone de la boîte d'envoi a été temporairement désactivé. Tous les recalculs en cascade sont désormais synchrones. Veuillez actualiser la page si vous rencontrez des retards."
+    },
+    "status": {
+      "healthy": "La boîte d'envoi est saine",
+      "degraded": "La boîte d'envoi est en mode dégradé",
+      "paused": "La boîte d'envoi est en pause",
+      "disabled": "La boîte d'envoi est désactivée"
+    }
+  },
+  "saga": {
+    "in_progress": "Opération massive en cours…",
+    "failed": "L'opération groupée a échoué et a été annulée",
+    "completed": "Opération groupée terminée",
+    "partial": "Opération groupée partiellement terminée ({{success}}/{{total}})",
+    "timeout": "L’opération groupée a expiré. Veuillez vérifier les résultats avant de réessayer."
+  },
+  "a3": {
+    "disabled": "La mise à jour par filtre (A3) est désactivée",
+    "enabled": "La mise à jour par filtre (A3) est activée"
+  },
+  "c1": {
+    "restore_disabled": "L'annulation/la restauration du champ a été temporairement désactivée par l'administrateur. Veuillez utiliser l'historique des versions pour récupérer."
+  },
+  "grayscale": {
+    "enrolled": "Cette organisation a été inscrite à la version bêta {{feature}}",
+    "unenrolled": "Cette organisation a été supprimée de la version bêta {{feature}}"
+  },
+  "incident": {
+    "title": "[{{severity}}] {{service}} Incident de service",
+    "body": "Impact : {{scope}}. Commencé à : {{startTime}}. Notre équipe enquête activement.",
+    "update": "[Mise à jour] {{service}} : {{message}}",
+    "resolution": "Incident résolu. Durée : {{duration}}. Cause première : {{rootCause}}. Des améliorations de suivi ont été programmées."
+  },
+  "maintenance": {
+    "start": "La maintenance programmée commence à {{time}}, durée prévue {{duration}}. Certaines fonctionnalités peuvent être indisponibles.",
+    "end": "La maintenance programmée est terminée. Tous les services sont revenus à la normale."
+  },
+  "changelog": {
+    "title": "Journal des modifications",
+    "version": "Version {{version}}",
+    "newFeatures": "Nouvelles fonctionnalités",
+    "improvements": "Améliorations",
+    "bugFixes": "Corrections de bugs"
+  },
+  "notification": {
+    "dismiss": "Je l'ai compris",
+    "learnMore": "En savoir plus",
+    "doNotShowAgain": "Ne plus montrer"
+  }
+}

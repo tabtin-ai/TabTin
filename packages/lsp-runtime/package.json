@@ -1,0 +1,41 @@
+{
+  "name": "@tabtin/lsp-runtime",
+  "version": "0.1.0",
+  "description": "LSP runtime — spawn LSP servers, route by file extension, deliver diagnostics as Agent attachments (LSPClient / LSPServerInstance / LSPServerManager / passiveFeedback / LSPDiagnosticRegistry).",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./client": {
+      "source": "./src/client/index.ts",
+      "import": "./dist/client/index.js",
+      "default": "./dist/client/index.js"
+    }
+  },
+  "scripts": {
+    "download-lsp-servers": "node scripts/download-lsp-servers.mjs",
+    "prebuild": "node scripts/download-lsp-servers.mjs",
+    "build": "tsup src/index.ts --format esm --dts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "lru-cache": "^11",
+    "vscode-jsonrpc": "^8.2.1",
+    "vscode-languageserver-protocol": "^3.17.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.2.2",
+    "vitest": "4.0.18"
+  },
+  "files": [
+    "dist"
+  ]
+}

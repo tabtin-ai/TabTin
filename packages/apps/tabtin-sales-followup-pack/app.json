@@ -1,0 +1,74 @@
+{
+  "id": "tabtin-sales-followup-pack",
+  "name": "Sales Follow-up Pack",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "销售跟进：发现通话纪要、方案一页纸、跟进序列、赢单/输单复盘（扩展客户跟进场景）。",
+  "icon": "handshake",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "sales_crm",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 27
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/discovery-call-notes",
+    "skills/proposal-one-pager",
+    "skills/followup-sequence",
+    "skills/win-loss-review"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "discovery-call-notes": {
+        "enabled": true
+      },
+      "proposal-one-pager": {
+        "enabled": true
+      },
+      "followup-sequence": {
+        "enabled": true
+      },
+      "win-loss-review": {
+        "enabled": true
+      }
+    }
+  }
+}

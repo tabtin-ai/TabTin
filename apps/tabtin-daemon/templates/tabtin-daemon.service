@@ -1,0 +1,33 @@
+[Unit]
+Description=TabTin Agent Daemon
+Documentation=https://docs.example.com/daemon
+After=network-online.target
+Wants=network-online.target
+StartLimitBurst=3
+StartLimitIntervalSec=300
+
+[Service]
+Type=simple
+User={{USER}}
+Group={{GROUP}}
+ExecStart={{NODE_PATH}} {{DAEMON_PATH}} start --config-dir {{CONFIG_DIR}}
+Restart=on-failure
+RestartSec=5
+RestartPreventExitStatus=78
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=tabtin-daemon
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths={{CONFIG_DIR}}
+PrivateTmp=true
+
+# Environment
+Environment=NODE_ENV=production
+Environment=HOME={{HOME_DIR}}
+
+[Install]
+WantedBy=multi-user.target

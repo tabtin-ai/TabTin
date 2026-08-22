@@ -1,0 +1,216 @@
+.web-doc-mobile-modebar {
+  display: none;
+}
+
+.web-doc-surface--phone,
+.web-doc-surface--tablet {
+  height: min(100%, var(--tabdoc-mobile-available-height, 100%));
+  max-height: var(--tabdoc-mobile-available-height, 100%);
+  background: hsl(var(--background));
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+.web-doc-surface--phone .web-doc-mobile-modebar {
+  display: flex;
+  min-height: 3rem;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-bottom: 1px solid hsl(var(--border));
+  padding: 0.25rem max(0.75rem, env(safe-area-inset-right)) 0.25rem max(0.75rem, env(safe-area-inset-left));
+  background: hsl(var(--background));
+}
+
+.web-doc-surface--phone .web-doc-mobile-mode-label {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.375rem;
+  overflow: hidden;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.web-doc-surface--phone .web-doc-mobile-mode-label svg,
+.web-doc-surface--phone .web-doc-mobile-modebar button svg {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+.web-doc-surface--phone .web-doc-mobile-modebar button {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: 0.5rem;
+  padding-inline: 0.875rem;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.web-doc-surface--phone .web-doc-mobile-modebar button:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+.web-doc-surface--phone .web-doc-mobile-readonly {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.8125rem;
+}
+
+.web-doc-surface--phone .tabdoc-editor-toolbar {
+  min-height: 2.75rem;
+  flex: none;
+  gap: 0.5rem;
+  border-bottom: 1px solid hsl(var(--border));
+  padding: 0.25rem max(0.5rem, env(safe-area-inset-right)) 0.25rem max(0.75rem, env(safe-area-inset-left));
+}
+
+.web-doc-surface--phone .tabdoc-editor-toolbar-status {
+  flex: 1;
+  font-size: 0.75rem;
+}
+
+.web-doc-surface--phone .tabdoc-editor-toolbar-status > :not(:first-child),
+.web-doc-surface--phone .tabdoc-editor-toolbar-actions > span,
+.web-doc-surface--phone .tabdoc-editor-toolbar-actions > [data-orientation='vertical'] {
+  display: none;
+}
+
+.web-doc-surface--phone .tabdoc-editor-toolbar-actions {
+  gap: 0.125rem;
+}
+
+.web-doc-surface--phone .tabdoc-editor-toolbar-actions button {
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.web-doc-surface--phone .tabdoc-editor-toolbar-actions button svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.web-doc-surface--phone .tabdoc-page {
+  padding-inline: 1rem;
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
+}
+
+.web-doc-surface--phone .tabdoc-page .ProseMirror {
+  min-height: 55vh;
+  margin-left: 0;
+  padding-left: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+/* 表格不能像正文一样压缩到窄屏。让单元格保留可读宽度，并只在表格
+   自己的滚动容器内横向滑动，避免整篇文档跟着左右漂移。 */
+.web-doc-surface--phone .ProseMirror .tableWrapper,
+.web-doc-surface--tablet .ProseMirror .tableWrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y pinch-zoom;
+  -webkit-overflow-scrolling: touch;
+}
+
+.web-doc-surface--phone .ProseMirror table,
+.web-doc-surface--tablet .ProseMirror table {
+  table-layout: auto;
+  width: max-content;
+  min-width: 100%;
+}
+
+.web-doc-surface--phone .ProseMirror table :is(th, td),
+.web-doc-surface--tablet .ProseMirror table :is(th, td) {
+  min-width: 8rem;
+  max-width: 18rem;
+  overflow-wrap: anywhere;
+}
+
+.web-doc-surface--phone.web-doc-surface--editing .tabdoc-page .ProseMirror {
+  padding-bottom: calc(6rem + env(safe-area-inset-bottom));
+}
+
+.web-doc-surface--phone .tabdoc-toolbar-dropdown-menu {
+  width: min(20rem, calc(100vw - 1rem));
+  min-width: 0;
+  max-height: min(70dvh, 32rem);
+  overflow-y: auto;
+}
+
+.web-doc-surface--tablet .tabdoc-editor-toolbar {
+  min-height: 3.5rem;
+  flex: none;
+  border-bottom: 1px solid hsl(var(--border));
+  padding-block: 0.375rem;
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+.web-doc-surface--tablet .tabdoc-editor-toolbar-actions button {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  justify-content: center;
+  padding: 0.625rem;
+}
+
+.web-doc-surface--tablet[data-web-doc-layout='compact'] .tabdoc-editor-toolbar {
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.web-doc-surface--tablet[data-web-doc-layout='compact'] .tabdoc-editor-toolbar-status,
+.web-doc-surface--tablet[data-web-doc-layout='compact'] .tabdoc-editor-toolbar-actions > span,
+.web-doc-surface--tablet[data-web-doc-layout='compact'] .tabdoc-editor-toolbar-actions > [data-orientation='vertical'] {
+  display: none;
+}
+
+.web-doc-surface--tablet[data-web-doc-layout='compact'] .tabdoc-editor-toolbar-actions {
+  min-width: 0;
+  max-width: 100%;
+  flex: 1;
+  justify-content: flex-end;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.web-doc-surface--tablet[data-web-doc-layout='compact'] .tabdoc-editor-toolbar-actions::-webkit-scrollbar {
+  display: none;
+}
+
+.web-doc-surface--tablet .tabdoc-page {
+  width: 100%;
+  max-width: 56rem;
+  padding-inline: max(2rem, env(safe-area-inset-left), env(safe-area-inset-right));
+  padding-bottom: max(3rem, env(safe-area-inset-bottom));
+}
+
+.web-doc-surface--tablet .tabdoc-page .ProseMirror {
+  min-height: 60vh;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.web-doc-surface--tablet.web-doc-surface--editing .tabdoc-page .ProseMirror {
+  padding-bottom: calc(6rem + env(safe-area-inset-bottom));
+}
+
+@media (orientation: landscape) {
+  .web-doc-surface--tablet .tabdoc-page {
+    padding-inline: max(3rem, env(safe-area-inset-left), env(safe-area-inset-right));
+  }
+}

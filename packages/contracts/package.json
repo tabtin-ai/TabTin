@@ -1,0 +1,87 @@
+{
+  "name": "@tabtin/contracts",
+  "version": "0.1.0",
+  "description": "TabTin SDK 统一类型契约 — 跨 SDK 边界共享的类型和 Schema",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./agent": {
+      "source": "./src/agent/index.ts",
+      "types": "./dist/agent/index.d.ts",
+      "import": "./dist/agent/index.js",
+      "default": "./dist/agent/index.js"
+    },
+    "./tool": {
+      "source": "./src/tool/index.ts",
+      "types": "./dist/tool/index.d.ts",
+      "import": "./dist/tool/index.js",
+      "default": "./dist/tool/index.js"
+    },
+    "./channel": {
+      "source": "./src/channel/index.ts",
+      "types": "./dist/channel/index.d.ts",
+      "import": "./dist/channel/index.js",
+      "default": "./dist/channel/index.js"
+    },
+    "./app": {
+      "source": "./src/app/index.ts",
+      "types": "./dist/app/index.d.ts",
+      "import": "./dist/app/index.js",
+      "default": "./dist/app/index.js"
+    },
+    "./common": {
+      "source": "./src/common/index.ts",
+      "types": "./dist/common/index.d.ts",
+      "import": "./dist/common/index.js",
+      "default": "./dist/common/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "agent": [
+        "./dist/agent/index.d.ts"
+      ],
+      "tool": [
+        "./dist/tool/index.d.ts"
+      ],
+      "channel": [
+        "./dist/channel/index.d.ts"
+      ],
+      "app": [
+        "./dist/app/index.d.ts"
+      ],
+      "common": [
+        "./dist/common/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "5.7.2"
+  },
+  "keywords": [
+    "tabtin",
+    "contracts",
+    "sdk",
+    "types"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT"
+}

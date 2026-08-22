@@ -1,0 +1,26 @@
+{
+  "name": "text-style-highlight",
+  "description": "textStyle(color) and highlight marks (D2 decision)",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "colored",
+            "marks": [{ "type": "textStyle", "attrs": { "color": "#ff0000" } }]
+          },
+          { "type": "text", "text": " and " },
+          {
+            "type": "text",
+            "text": "highlighted",
+            "marks": [{ "type": "highlight", "attrs": { "color": "yellow" } }]
+          }
+        ]
+      }
+    ]
+  },
+  "expectedMarkdown": "<span style=\"color:#ff0000\">colored</span> and <mark style=\"background-color:yellow\">highlighted</mark>"
+}

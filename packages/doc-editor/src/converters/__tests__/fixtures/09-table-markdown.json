@@ -1,0 +1,29 @@
+{
+  "name": "table-markdown",
+  "description": "Normal Markdown table without merged cells",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "table",
+        "content": [
+          {
+            "type": "tableRow",
+            "content": [
+              { "type": "tableHeader", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Name" }] }] },
+              { "type": "tableHeader", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Value" }] }] }
+            ]
+          },
+          {
+            "type": "tableRow",
+            "content": [
+              { "type": "tableCell", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Alpha" }] }] },
+              { "type": "tableCell", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "100" }] }] }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expectedMarkdown": "| Name | Value |\n| --- | --- |\n| Alpha | 100 |"
+}

@@ -1,0 +1,23 @@
+{
+  "packages": {
+    "@fortawesome/fontawesome-free": "6.5.0",
+    "chart.js": "4.4.0",
+    "echarts": "5.5.0",
+    "mathjax": "3.2.2"
+  },
+  "source": "https://registry.npmjs.org/",
+  "sha256": {
+    "chartjs/chart.umd.min.js": "321e3a3fa98da4aaa957d10be57cbb514de0989eed8f9d726b5d05902cd01904",
+    "echarts/echarts.min.js": "42f8329d989b6f6539dd2b15bbdf0d82025762ac112fbb60dc57b27d7bcf3946",
+    "fontawesome/css/all.min.css": "c880eb3d25c765d399840aa204fec22b3230310991089f14781f09a35ed80b8a",
+    "fontawesome/webfonts/fa-brands-400.ttf": "5afff0a4df2650e9e2689c6021eb968f983eae2b388c2ce32ad853c0dd7f3788",
+    "fontawesome/webfonts/fa-brands-400.woff2": "b66b3da5ff7b2db79b6cb5a22c3e762e2bf16958a11987e69eeb1980bbbcdfb0",
+    "fontawesome/webfonts/fa-regular-400.ttf": "69ec55d72001a374fe40cd26ab4325e6312d0459b22372527bf539d28e2e2e47",
+    "fontawesome/webfonts/fa-regular-400.woff2": "3a74c08d486310c03731b458616f0172375fe3780e96165f8a1adc02d1355eaa",
+    "fontawesome/webfonts/fa-solid-900.ttf": "4ea5c3ff563052c2bc6534767c009dea4e2801b7a848bafeae87e9790eb0fc64",
+    "fontawesome/webfonts/fa-solid-900.woff2": "f4c5a5b297e623bc159679563a4d1eb16e409ca3b57698fbc00fd2c907dadae0",
+    "fontawesome/webfonts/fa-v4compatibility.ttf": "4694ef58b99d135ec4a4e7cf4b60681dff2cccf06604817a47a53c6ab41d3d2d",
+    "fontawesome/webfonts/fa-v4compatibility.woff2": "33e73fb0656f23945b0d160507dba4dbcd315c3c18eedd0c1fd128ba88272b41",
+    "mathjax/tex-svg.min.js": "d4295dc33744836935c1399feece5159577b34c5c8ffb9f1c6324cd82e03a882"
+  }
+}

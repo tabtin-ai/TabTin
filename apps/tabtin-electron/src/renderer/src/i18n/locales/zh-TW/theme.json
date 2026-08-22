@@ -1,0 +1,35 @@
+{
+  "theme": {
+    "toggle": "切換主題",
+    "light": "淺色模式",
+    "dark": "深色模式",
+    "system": "跟隨系統"
+  },
+  "colorScheme": {
+    "toggle": "切換配色風格",
+    "options": {
+      "orange": "活力橙",
+      "teal": "深青藍",
+      "crimson": "赤橙",
+      "slate": "商務灰",
+      "emerald": "翠綠",
+      "blue": "商務藍",
+      "carbon": "樸實黑",
+      "rose": "玫紅",
+      "violet": "雅紫",
+      "sky": "清爽藍"
+    },
+    "descriptions": {
+      "orange": "溫暖活力，創新高效",
+      "teal": "專業沉穩，數據商務",
+      "crimson": "熱情行動，快速回應",
+      "slate": "中性專業，嚴肅正式",
+      "emerald": "清新高效，成長協作",
+      "blue": "經典商務，企業正式",
+      "carbon": "極簡低調，專注內容",
+      "rose": "活力時尚，創意表達",
+      "violet": "沉靜優雅，低調內斂",
+      "sky": "純淨清爽，輕盈明快"
+    }
+  }
+}

@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 输入区 -->
+    <string name="chat_start_hint">发送消息开始对话</string>
+    <string name="chat_start_conversation">开始新对话</string>
+    <string name="chat_start_conversation_hint">发送一条消息开始与 Agent 交流</string>
+    <string name="chat_input_placeholder">输入消息…</string>
+    <string name="chat_composer_placeholder_default">在此对话…</string>
+    <string name="chat_composer_placeholder_in_workspace">在%s中对话…</string>
+    <string name="chat_composer_placeholder_collapsed">继续对话…</string>
+    <string name="chat_composer_cannot_send">暂不可发送</string>
+    <string name="chat_composer_stopping">正在停止任务…</string>
+    <string name="chat_composer_pausing">正在暂停，当前步骤完成后生效</string>
+    <string name="chat_composer_task_settings">任务设置</string>
+    <string name="chat_composer_current_agent">当前 Agent</string>
+    <string name="chat_composer_setting_agent">执行 Agent</string>
+    <string name="chat_composer_agent_unavailable">Agent 信息未提供</string>
+    <string name="chat_composer_setting_mode">工作方式</string>
+    <string name="chat_composer_setting_approval">审批权限</string>
+    <string name="chat_composer_tool_context">上下文</string>
+    <string name="chat_composer_tool_photo">照片</string>
+    <string name="chat_composer_tool_camera">拍照</string>
+    <string name="chat_composer_tool_file">文件</string>
+    <string name="chat_composer_material_title">资料 %1$d 项 · 已就绪 %2$d 项</string>
+    <string name="chat_composer_material_ready">附件与上下文已准备好，可随本条消息发送</string>
+    <string name="chat_composer_material_context_only">%1$d 条上下文引用已准备好</string>
+    <string name="chat_composer_material_uploading">%1$d 个附件正在上传，完成后才能发送</string>
+    <string name="chat_composer_material_failed">%1$d 个附件上传失败，请重试或移除后发送</string>
+    <string name="chat_composer_cancel_uploads">取消全部上传</string>
+    <string name="chat_composer_full_access_title">开启完全访问？</string>
+    <string name="chat_composer_full_access_message">完全访问会在组织安全上限内尽量减少操作前的打断。请仅在你信任当前 Agent、执行位置和任务内容时开启。</string>
+    <string name="chat_composer_full_access_confirm">继续开启</string>
+    <string name="chat_composer_device_unbound">尚未关联执行设备。请先在设置里绑定电脑，再发送任务。</string>
+    <string name="chat_composer_device_offline">该设备离线（请在电脑打开 TabTin 恢复连接）</string>
+    <string name="chat_approval_mode_always_ask_short">请求权限</string>
+    <string name="chat_approval_mode_auto_short">自动通过</string>
+    <string name="chat_approval_mode_full_access_short">全部允许</string>
+    <string name="chat_approval_mode_always_ask_summary">操作前先请求授权</string>
+    <string name="chat_approval_mode_auto_summary">常规操作自动批准，高风险仍会询问</string>
+    <string name="chat_approval_mode_full_access_summary">无需授权直接执行</string>
+    <string name="chat_approval_mode_org_locked">当前组织未开放此审批权限</string>
+    <string name="chat_model_unavailable">没有可用模型：请在管理后台配置并激活聊天模型后重试。</string>
+
+    <!-- Composer 模型/mode 切换（对齐 iOS ComposerSettingsBar） -->
+    <string name="chat_model_pill_loading">模型</string>
+    <string name="chat_model_load_failed">模型加载失败</string>
+    <string name="chat_model_select">选择模型</string>
+    <string name="chat_model_switch_failed">模型切换失败，请重试</string>
+    <string name="chat_model_source_platform">平台模型</string>
+    <string name="chat_model_source_organization_byok">组织 BYOK</string>
+    <string name="chat_model_source_user_byok">我的 BYOK</string>
+    <string name="chat_composer_runtime_settings">运行设置</string>
+    <string name="chat_composer_runtime_settings_hint">针对当前选中模型。无可调上下文长度且不支持思考强度时，此入口会隐藏。</string>
+    <string name="chat_composer_context_length">上下文长度</string>
+    <string name="chat_composer_thinking_intensity">思考强度</string>
+    <string name="chat_composer_thinking_mode_off">关闭</string>
+    <string name="chat_composer_thinking_mode_standard">标准</string>
+    <string name="chat_composer_thinking_mode_deep">深度</string>
+    <string name="chat_composer_context_tier_beta">Beta</string>
+    <string name="chat_composer_runtime_empty">当前模型没有可调的运行设置。</string>
+    <string name="chat_composer_done">完成</string>
+    <string name="chat_mode_ask">问答</string>
+    <string name="chat_mode_agent">执行</string>
+    <string name="chat_mode_plan">规划</string>
+    <string name="chat_mode_group">PMO</string>
+    <string name="chat_mode_study">学习</string>
+    <string name="chat_mode_yolo">超级权限</string>
+    <string name="chat_mode_yolo_org_locked_item">超级权限（组织未开放）</string>
+    <string name="chat_mode_yolo_org_locked_hint">超级权限（YOLO）需要组织所有者在团队设置中开启「允许成员使用宽松审批」后才能使用。</string>
+    <string name="chat_approval_mode_always_ask">每次询问</string>
+    <string name="chat_approval_mode_auto">自动批准低风险操作</string>
+    <string name="chat_approval_mode_full_access">完全访问</string>
+
+    <!-- 附件 -->
+    <string name="chat_add_attachment">添加附件</string>
+    <string name="chat_pick_album">相册</string>
+    <string name="chat_pick_camera">拍照</string>
+    <string name="chat_pick_files">文件</string>
+    <string name="chat_share_file">分享文件</string>
+    <string name="chat_share_image">分享图片</string>
+    <string name="chat_attachment_error">附件错误</string>
+    <string name="chat_camera_permission_title">需要相机权限</string>
+    <string name="chat_camera_permission_message">请在系统设置中允许 TabTin 使用相机，然后返回重试。</string>
+    <string name="chat_camera_open_settings">前往设置</string>
+    <string name="chat_camera_unavailable_title">无法使用相机</string>
+    <string name="chat_camera_unavailable_message">这台设备上没有可用的相机应用。</string>
+    <string name="chat_camera_launch_failed_message">相机未能打开，请稍后重试。</string>
+
+    <!-- 图片预览 -->
+    <string name="chat_image_preview">图片预览</string>
+    <string name="chat_saved_to_album">已保存到相册</string>
+    <string name="chat_cannot_open_file">无法打开文件</string>
+
+    <!-- Wave 5: 文件应用内预览 -->
+    <string name="chat_file_preview_file">文件预览</string>
+    <string name="chat_file_preview_pdf">PDF 预览</string>
+    <string name="chat_file_preview_word">Word 文档预览</string>
+    <string name="chat_file_preview_excel">Excel 表格预览</string>
+    <string name="chat_file_preview_ppt">PPT 演示预览</string>
+    <string name="chat_file_preview_audio">音频播放</string>
+    <string name="chat_file_preview_video">视频播放</string>
+    <string name="chat_file_preview_loading_pdf">正在加载 PDF…</string>
+    <string name="chat_file_preview_loading_office">正在加载文档预览…</string>
+    <string name="chat_file_preview_loading_audio">正在加载音频…</string>
+    <string name="chat_file_preview_loading_video">正在加载视频…</string>
+    <string name="chat_file_preview_pdf_failed">PDF 加载失败</string>
+    <string name="chat_file_preview_pdf_failed_desc">无法加载此 PDF，请检查网络或稍后重试。</string>
+    <string name="chat_file_preview_audio_failed">音频加载失败</string>
+    <string name="chat_file_preview_video_failed">视频加载失败</string>
+    <string name="chat_file_preview_video_failed_desc">无法播放此视频，请检查网络或文件格式。</string>
+    <string name="chat_file_preview_pdf_page">PDF 页面</string>
+    <string name="chat_file_preview_page_count">%1$d / %2$d 页</string>
+    <string name="chat_file_preview_previous_page">上一页</string>
+    <string name="chat_file_preview_next_page">下一页</string>
+    <string name="chat_file_preview_play">播放</string>
+    <string name="chat_file_preview_pause">暂停</string>
+    <string name="chat_file_preview_office_fallback">暂时无法在应用内预览这个文档。可以点"分享链接"发给电脑或同事打开。</string>
+    <!-- Wave 5 独立验证 🟡-1：Office 预览知情提示（第三方服务合规风险提醒）。
+         iOS 用 QuickLook 完全本地，没有合规问题；Android 走 Microsoft/Google 公网 viewer 必须
+         先征得用户同意。文案语气："保守可控"——不吓人但说清楚数据会送到哪。 -->
+    <string name="chat_file_preview_office_consent_title">此预览由第三方服务加载</string>
+    <string name="chat_file_preview_office_consent_message">为了在应用内显示这个 Office 文档，我们需要把文件链接发送给 Microsoft Office Online 或 Google Docs 进行渲染。\n\n文件内容会离开设备进入第三方服务的日志与缓存。如果这份文件涉及合同、内部表格或其他敏感信息，建议选择"仅下载"用本地应用打开。</string>
+    <string name="chat_file_preview_office_consent_hint">同意后当前会话内再次打开 Office 文件不会重复提示。</string>
+    <string name="chat_file_preview_office_consent_continue">继续预览</string>
+    <string name="chat_file_preview_office_consent_download">仅下载</string>
+    <string name="chat_file_preview_office_consent_no_handler">系统里没有可以打开这个文件的应用。建议安装 WPS / Office 等本地阅读器后再试。</string>
+    <string name="chat_file_preview_unsupported_desc">当前格式暂不支持直接预览，文件仍保留在当前对话中。</string>
+    <string name="chat_file_preview_share_link">分享链接</string>
+
+    <!-- 连接状态 -->
+    <string name="chat_connecting">正在连接…</string>
+    <string name="chat_reconnecting">重新连接中（第 %1$d 次）…</string>
+    <string name="chat_connected">已连接</string>
+    <string name="chat_disconnected">连接断开</string>
+    <string name="chat_auth_expired">登录已过期，请重新登录</string>
+    <string name="chat_relogin">重新登录</string>
+    <string name="chat_manual_reconnect">手动重连</string>
+    <string name="chat_reconnect_gave_up">无法连接服务器，请检查网络后手动重连</string>
+    <string name="chat_resumed_with_sync">连接已恢复，同步了 %1$d 条消息</string>
+
+    <!-- Agent 步骤卡片 -->
+    <string name="chat_step_running">执行中…</string>
+    <string name="chat_step_input">输入</string>
+    <string name="chat_step_output">输出</string>
+    <string name="chat_step_no_details">暂无详细信息</string>
+    <string name="chat_reasoning">思考过程</string>
+    <string name="chat_step_thinking">思考中…</string>
+    <string name="chat_step_compaction">正在压缩上下文...</string>
+    <!-- 对齐 Electron chat:agentSteps.compactionInProgress / compactionCheckpoint -->
+    <string name="chat_compaction_in_progress">正在压缩上下文...</string>
+    <string name="chat_compaction_checkpoint">上下文已压缩到此，后续对话将使用摘要继续</string>
+    <string name="chat_step_lifecycle">生命周期事件</string>
+    <string name="chat_step_system_notice">系统通知</string>
+    <string name="chat_notice_max_iterations_title">Agent 已暂停</string>
+    <string name="chat_notice_max_iterations_continue">继续执行</string>
+    <string name="chat_notice_approval_expired_title">审批已超时</string>
+    <string name="chat_notice_approval_expired_retry">重试</string>
+
+    <!-- Agent 状态 -->
+    <string name="chat_calling_tool">正在调用 %s…</string>
+    <string name="chat_agent_planning">正在规划…</string>
+    <string name="chat_agent_executing">正在执行…</string>
+    <string name="chat_agent_thinking">思考中…</string>
+    <!-- 对齐 Electron blockTimeline.thinking.planningNext（等待壳；胶囊仍用 agent_capsule_planning_next） -->
+    <string name="chat_awaiting_planning_next">正在计划下一步...</string>
+
+    <!-- 消息中心 -->
+    <string name="chat_message_center">消息中心</string>
+    <string name="chat_message_center_description">渠道消息、Space 回复、任务通知\n将在这里统一展示</string>
+    <string name="chat_all_uploads_failed">所有附件上传失败，请重试后发送</string>
+
+    <!-- 工具卡片 -->
+    <string name="chat_card_exit_code">退出码 %d</string>
+    <string name="chat_card_lines">%d 行</string>
+    <string name="chat_card_write_file">写入文件</string>
+    <string name="chat_card_sql_result">查询结果</string>
+    <string name="chat_card_rows">%d 行</string>
+    <string name="chat_card_showing_rows">显示 %1$d / %2$d 行</string>
+    <string name="chat_card_results">%d 个结果</string>
+    <string name="chat_card_matches">%d 个匹配</string>
+    <string name="chat_card_more_items">… +%d 项</string>
+    <string name="chat_card_field_file">文件</string>
+    <string name="chat_card_field_url">网址</string>
+    <string name="chat_card_field_sql">SQL</string>
+    <string name="chat_card_field_pattern">匹配</string>
+
+    <!-- 权限请求 -->
+    <string name="chat_permission_title">权限请求</string>
+    <string name="chat_permission_tool">工具:</string>
+    <string name="chat_permission_expired">已过期</string>
+    <string name="chat_permission_paused">Agent 已暂停 — 等待你的批准</string>
+    <string name="chat_permission_approve">批准</string>
+    <string name="chat_permission_reject">拒绝</string>
+    <string name="chat_permission_abort">中止</string>
+    <string name="chat_permission_risk_low">低风险</string>
+    <string name="chat_permission_risk_medium">中风险</string>
+    <string name="chat_permission_risk_high">高风险</string>
+    <string name="chat_permission_risk_critical">危险</string>
+
+    <!-- 工具审批 -->
+    <string name="chat_review_title">操作审批</string>
+    <string name="chat_review_tool_label">工具:</string>
+    <string name="chat_review_approve_all">全部允许</string>
+    <string name="chat_review_reject_all">全部拒绝</string>
+    <string name="chat_review_submit_failed">提交审批决定失败</string>
+    <string name="chat_approval_submit_failed">提交批准决定失败</string>
+    <string name="chat_hitl_already_consumed">这个请求已被处理，当前面板已关闭。</string>
+    <string name="chat_hitl_timeout">提交超时，请检查网络后重试。</string>
+    <string name="chat_hitl_disconnected">连接已断开，恢复连接后再试。</string>
+    <string name="chat_hitl_unknown_nak">提交未成功，服务端没有返回详细原因。</string>
+
+    <!-- Wave 4 I8：plan.exit 审批 -->
+    <string name="chat_plan_approval_title">Plan 审批</string>
+    <string name="chat_plan_approval_description">Space 已经制定了计划，请确认后允许它继续执行。</string>
+    <string name="chat_plan_approval_open_doc">查看 Plan 文档</string>
+    <string name="chat_plan_approval_approve">同意并继续</string>
+    <string name="chat_plan_approval_reject">拒绝</string>
+    <string name="chat_plan_approval_no_snapshot">Plan 详情待加载，可在 Plan 文档中查看完整内容。</string>
+    <string name="chat_plan_approval_todos_label">Todos:</string>
+    <string name="chat_plan_approval_open_failed">无法打开 Plan 文档</string>
+
+    <!-- v0.4 W1.5-轮 4：legacy review_required 路径触发警告（runtime 已不发；replay 兜底） -->
+    <string name="chat_review_legacy_path_warning">该审批路径已废弃，请刷新会话；新审批将以批量形式重新弹出。</string>
+    <!-- v0.4 W1.5-轮 4：批量审批面板 -->
+    <string name="chat_approval_title_tool">工具调用授权</string>
+    <string name="chat_approval_title_plan">Plan 审批</string>
+    <string name="chat_approval_summary_default">Space 请求执行此操作，是否允许？</string>
+    <!-- N>1 batch 摘要文案（%d = 工具数）；与 iOS unifiedApproval.batchSummary 一致 -->
+    <string name="chat_approval_batch_summary">Space 本轮请求批准 %d 个工具调用</string>
+    <string name="chat_approval_scope_once">仅本次</string>
+    <string name="chat_approval_scope_thread">本次对话内</string>
+    <string name="chat_approval_scope_always">始终</string>
+    <string name="chat_approval_allow">允许</string>
+    <string name="chat_approval_deny">拒绝</string>
+    <string name="chat_approval_scope_label">允许范围:</string>
+    <string name="chat_approval_scope_description_once">仅放行此次工具调用；之后再问。</string>
+    <string name="chat_approval_scope_description_thread">本会话内不再询问相同操作；下个会话恢复询问。</string>
+    <string name="chat_approval_scope_description_always">在该 Workspace 下永久放行；可在设置内撤回。</string>
+    <string name="chat_approval_expires_seconds">还剩 %d 秒，请尽快确认</string>
+    <string name="chat_approval_expires_minutes">约 %d 分钟后过期</string>
+    <string name="chat_approval_expires_passed">即将过期</string>
+    <!-- 审批卡片改造（#9495）：收起态 Dock + 展开态详情 Sheet -->
+    <string name="chat_approval_dock_title_multi">需要确认</string>
+    <string name="chat_approval_dock_title_expired">审批已过期</string>
+    <string name="chat_approval_dock_title_submitting">正在提交…</string>
+    <string name="chat_approval_dock_expired_hint">请求已过期，让 Space 重新发起即可。</string>
+    <string name="chat_approval_dock_pending_count">%d 个操作待确认</string>
+    <string name="chat_approval_view_detail">查看详情</string>
+    <string name="chat_approval_view_and_confirm">查看并确认</string>
+    <string name="chat_approval_sheet_title">需要你的批准</string>
+    <string name="chat_approval_sheet_action_count">%d 个操作</string>
+    <string name="chat_approval_full_params">完整参数</string>
+    <string name="chat_approval_collapse">收起</string>
+    <string name="chat_approval_copy_command">拷贝命令</string>
+    <string name="chat_approval_waiting_owner">等待 Owner 审批</string>
+    <!-- 结构化参数的字段名（替代过去直接甩 raw JSON） -->
+    <string name="chat_approval_field_command">命令</string>
+    <string name="chat_approval_field_path">路径</string>
+    <string name="chat_approval_field_directory">目录</string>
+    <string name="chat_approval_field_url">地址</string>
+    <string name="chat_approval_field_query">查询</string>
+    <string name="chat_approval_field_pattern">模式</string>
+    <string name="chat_approval_field_skill">Skill</string>
+    <string name="chat_approval_field_args">参数</string>
+    <string name="chat_approval_field_tool">工具</string>
+    <string name="chat_approval_field_reason">原因</string>
+    <!-- 风险提示行：低风险不展示，因为分级低不等于担保安全 -->
+    <string name="chat_approval_risk_high">高风险：可能产生不可逆或敏感影响，请仔细核对。</string>
+    <string name="chat_approval_risk_medium">需留意：此操作会修改状态或访问受限资源。</string>
+    <string name="chat_approval_risk_zone_sensitive">将触达受保护资源。</string>
+    <string name="chat_approval_risk_zone_outside">目标位于当前工作区之外。</string>
+    <string name="chat_approval_reason_plan_guard">Plan 模式守卫拦截：当前操作需要先退出计划模式。</string>
+    <string name="chat_approval_reason_hardline">敏感命令模式：检测到高风险操作。</string>
+    <string name="chat_approval_reason_skill_trust">第三方 Skill：未充分授权或可信度降档。</string>
+    <string name="chat_approval_reason_high_risk">规则判定：高风险操作不在白名单内。</string>
+    <string name="chat_approval_reason_path">路径策略：操作目标超出可访问范围。</string>
+    <string name="chat_approval_reason_bash_complex">命令解析受限：复杂 shell 命令需人工确认。</string>
+    <string name="chat_approval_reason_user_interactive">需要你逐条审批本次操作。</string>
+    <!-- L-W6-16（2026-05-03 W6 M4）：W6 v3 judge 16 种 reason 人话文案 -->
+    <string name="chat_approval_reason_hardline_command">命中危险命令规则 %1$s，系统直接拒绝</string>
+    <string name="chat_approval_reason_hardline_path">命中系统路径保护 %1$s，系统直接拒绝</string>
+    <string name="chat_approval_reason_sensitive_in_ask">Space 即将访问敏感文件 %1$s（%2$s），请确认</string>
+    <string name="chat_approval_reason_sensitive_out_deny">%1$s 是工作区外的敏感文件（%2$s），系统已禁止写入</string>
+    <string name="chat_approval_reason_memo_allow">命中已批准记忆：%1$s</string>
+    <string name="chat_approval_reason_memo_deny">命中已拒绝记忆：%1$s</string>
+    <string name="chat_approval_reason_yolo_allow">已开启超级权限，自动放行</string>
+    <string name="chat_approval_reason_workspace_in">目标路径 %1$s 在工作区内，自动放行</string>
+    <string name="chat_approval_reason_workspace_in_cwd">命令工作目录 %1$s 在工作区内，自动放行</string>
+    <string name="chat_approval_reason_workspace_out">目标路径 %1$s 在工作区外，请确认（将其加入 TabFolder / TabCode 后可自动放行）</string>
+    <string name="chat_approval_reason_workspace_out_cwd">命令工作目录 %1$s 在工作区外，请确认（将其加入 TabFolder / TabCode 后可自动放行）</string>
+    <string name="chat_approval_reason_object_default_allow">对象读取操作自动放行</string>
+    <string name="chat_approval_reason_object_write_ask">对象写入操作需要你确认</string>
+    <string name="chat_approval_reason_mcp_default_ask">MCP 工具 %1$s 调用需要你确认</string>
+    <string name="chat_approval_reason_mcp_default_ask_no_server">MCP 工具调用需要你确认</string>
+    <string name="chat_approval_reason_device_default_ask">设备操作 %1$s 需要你确认</string>
+    <string name="chat_approval_reason_device_default_ask_no_action">设备操作需要你确认</string>
+    <string name="chat_approval_reason_device_observe_allow">设备只读操作自动放行</string>
+    <string name="chat_approval_reason_plan_blocked">Plan 模式下不允许执行此工具</string>
+    <string name="chat_approval_reason_fallback_ask">该操作需要你确认</string>
+    <string name="chat_approval_resolved_expired">审批已超时，Space 当成默认决策处理。</string>
+    <string name="chat_approval_resolved_cancelled">审批被另一端处理，本端面板已关闭。</string>
+    <string name="chat_approval_resolved_rolled_back">因回退操作，本次审批已被取消。</string>
+    <!-- v0.4 W1.5-轮 4 自修：跨端 fan-out 通用提示（allow/deny 也提示，不静默消失） -->
+    <string name="chat_approval_resolved_elsewhere">审批已在另一设备处理。</string>
+    <string name="chat_ask_form_submit">提交</string>
+    <string name="chat_ask_form_required">此项必填</string>
+    <string name="chat_ask_form_comma_suffix">，用逗号分隔</string>
+
+    <!-- Wave 4 S2/A2 + A1：消息上下文菜单 -->
+    <string name="chat_message_action_copy">复制消息</string>
+    <string name="chat_message_action_edit">编辑后重发</string>
+    <string name="chat_message_action_label">消息操作</string>
+    <!-- Wave 6 A3：对齐 iOS L10n.Chat.forkHere -->
+    <string name="chat_message_action_fork">从此分叉</string>
+    <string name="chat_message_fork_failed">分叉会话失败，请稍后重试</string>
+    <!-- Wave 6 A6：对齐 Electron MentionPopover 标题/空态文案 -->
+    <string name="chat_mention_title">@ 提及资源</string>
+    <string name="chat_mention_no_match">没有匹配的资源</string>
+    <string name="chat_mention_empty_category">当前 Workspace 暂无可引用的资源</string>
+    <string name="chat_mention_loading">正在加载资源…</string>
+    <string name="chat_mention_truncated_hint">仅展示前 %d 条，输入关键词可精确筛选</string>
+    <string name="chat_mention_limit_reached">最多引用 %d 个资源，先移除一个再继续</string>
+    <string name="chat_mention_already_added">该资源已在引用列表中</string>
+    <string name="chat_message_copied">消息已复制</string>
+    <string name="chat_message_copy_failed">复制失败</string>
+    <string name="chat_message_edit_send">发送</string>
+    <string name="chat_message_edit_cancel">取消</string>
+    <string name="chat_message_edit_placeholder">编辑消息内容…</string>
+    <string name="chat_message_edit_attachments_kept">重发时将带上原先的 %d 项附件或上下文</string>
+    <string name="chat_message_edit_restored_blocks_notice">已恢复 %d 项原附件或上下文，将随消息发送</string>
+    <string name="chat_message_edit_hint">发送前会先确认将回退的对话、文件和资源</string>
+    <string name="chat_message_edit_rollback_reason">编辑消息并重发</string>
+    <string name="chat_message_edit_rollback_failed">回滚对话后重发失败，请稍后重试</string>
+    <string name="chat_message_edit_file_restore_failed">对话已回退，但工作区文件未能恢复。编辑内容尚未发送；关闭后会回到输入框。</string>
+    <string name="chat_message_edit_resource_restore_failed">对话已回退，但部分文档或表格未能恢复。编辑内容尚未发送；关闭后会回到输入框。</string>
+    <string name="chat_message_edit_refresh_failed">对话已回退，但当前页面未能同步到回退后的版本。编辑内容尚未发送；关闭后会回到输入框。</string>
+    <string name="chat_message_edit_preview_title">确认编辑并重发</string>
+    <string name="chat_message_edit_preview_hint">确认后会先回退到这条消息之前，再发送编辑后的内容。任一步骤失败都不会发送。</string>
+    <string name="chat_message_edit_confirm_resend">确认回退并发送</string>
+    <string name="chat_message_edit_confirm_partial_resend">接受未恢复内容并重新发送</string>
+    <string name="chat_message_edit_conversation_only_ack">我了解无法恢复的工作区文件或资源将保持当前状态</string>
+    <string name="chat_message_edit_completed">已回退旧对话并发送编辑后的消息</string>
+    <string name="chat_message_edit_restore_point_section">回退位置</string>
+    <string name="chat_message_edit_restore_point_label">对话将回到</string>
+    <string name="chat_message_edit_restore_point_before_message">这条原消息发送前</string>
+    <string name="chat_message_edit_wait_persisted">这条消息还在同步中，稍后再编辑。</string>
+
+    <string name="chat_card_diff_more">还有 %d 行…</string>
+    <string name="chat_card_copy">复制</string>
+
+    <!-- 记录操作 -->
+    <string name="chat_card_record_created">记录已创建</string>
+    <string name="chat_card_record_updated">记录已更新</string>
+    <string name="chat_card_record_deleted">记录已删除</string>
+    <string name="chat_card_table">表格:</string>
+    <string name="chat_card_fields">字段数:</string>
+
+    <!-- 子任务 -->
+    <string name="chat_subagent_cancelled">子任务已取消</string>
+    <string name="chat_subagent_cancelled_named">子任务「%s」已取消</string>
+    <string name="chat_subagent_timeout">子任务超时</string>
+    <string name="chat_subagent_timeout_named">子任务「%s」超时</string>
+    <string name="chat_subagent_failed">子任务失败</string>
+    <string name="chat_subagent_failed_named">子任务「%s」失败</string>
+    <string name="chat_subagent_error_suffix">：%s</string>
+    <string name="chat_subagent_step">步骤 %d</string>
+    <string name="chat_subagent_running">子任务执行中…</string>
+    <string name="chat_subagent_running_detail">子任务执行中：%s</string>
+    <!-- Wave 6 S7：子 Agent 进度卡（对齐 Electron SubagentProgressCard） -->
+    <string name="chat_subagent_card_default_label">子任务</string>
+    <string name="chat_subagent_card_status_pending">启动中</string>
+    <string name="chat_subagent_card_status_queued">排队中</string>
+    <string name="chat_subagent_card_status_running">执行中</string>
+    <string name="chat_subagent_card_status_completed">已完成</string>
+    <string name="chat_subagent_card_status_failed">失败</string>
+    <string name="chat_subagent_card_status_cancelled">已取消</string>
+    <string name="chat_subagent_card_cancel">停止子任务</string>
+    <string name="chat_subagent_card_step_count">%d 步</string>
+    <string name="chat_subagent_card_task_prefix">任务：%s</string>
+    <string name="chat_subagent_card_summary_prefix">摘要：%s</string>
+    <string name="chat_subagent_card_error_prefix">错误：%s</string>
+    <string name="chat_subagent_card_tool_calls">工具调用 (%d)</string>
+    <string name="chat_subagent_card_error_count_suffix">%d 个失败</string>
+    <string name="chat_subagent_card_expand">查看子任务详情</string>
+    <string name="chat_subagent_card_collapse">关闭子任务详情</string>
+    <!-- Wave 6 跨端协议验证：子 Agent stats 行 token / credits 透明度文案，对齐 iOS L10n.Chat.Subagent.* 与 Electron SubagentProgressCard 计费展示 -->
+    <string name="chat_subagent_card_tokens_total">总 token %d</string>
+    <string name="chat_subagent_card_tokens_input">输入 %d</string>
+    <string name="chat_subagent_card_tokens_output">输出 %d</string>
+    <string name="chat_subagent_card_credits">消耗 %s credits</string>
+    <string name="chat_subagent_transcript_title">执行流 (%d)</string>
+    <string name="chat_subagent_transcript_thinking">思考</string>
+    <string name="chat_subagent_transcript_tool">工具调用</string>
+    <string name="chat_subagent_transcript_rich">富内容</string>
+    <string name="chat_subagent_transcript_context">上下文引用</string>
+    <string name="chat_subagent_transcript_event">事件</string>
+    <string name="chat_subagent_transcript_error">错误</string>
+    <string name="chat_subagent_transcript_hitl">等待用户输入</string>
+    <string name="chat_subagent_transcript_todo">更新待办事项 %d 项</string>
+    <string name="chat_subagent_transcript_checkpoint_ok">Checkpoint 已创建</string>
+    <string name="chat_subagent_transcript_checkpoint_failed">Checkpoint 创建失败</string>
+    <!-- 子 Agent 详情三块（对齐 iOS SubagentDetailView） -->
+    <string name="chat_subagent_detail_instruction">指令</string>
+    <string name="chat_subagent_detail_instruction_meta">来自父 Agent</string>
+    <string name="chat_subagent_detail_instruction_empty">暂无任务说明</string>
+    <string name="chat_subagent_detail_steps">中间步骤</string>
+    <string name="chat_subagent_detail_steps_empty">暂无中间步骤</string>
+    <string name="chat_subagent_detail_result">结果</string>
+    <string name="chat_subagent_detail_result_pending">尚未给出结果</string>
+    <string name="chat_subagent_detail_result_empty">暂无结果</string>
+    <string name="chat_subagent_detail_failure_conclusion">失败结论</string>
+    <string name="chat_subagent_detail_failure_guidance">当前没有独立重试通道；可让父 Agent 根据此结论重新委派。</string>
+    <string name="chat_subagent_detail_completed_fallback">子 Agent 已完成，但未提供结果摘要。</string>
+    <string name="chat_subagent_detail_failed_fallback">子 Agent 执行失败，未返回具体错误。</string>
+    <string name="chat_subagent_detail_cancelled_fallback">已收到子 Agent 取消终态。</string>
+
+    <!-- 待办事项 -->
+    <string name="chat_todo_title">待办事项</string>
+    <string name="chat_todo_current">当前：%1$s</string>
+    <string name="chat_todo_paused_current">已暂停：%1$s</string>
+    <string name="chat_todo_awaiting_subagents">等待子任务：%1$s</string>
+    <string name="chat_todo_all_done">待办已完成</string>
+    <string name="chat_todo_open_details">查看全部待办，已完成 %1$d / %2$d</string>
+    <string name="chat_todo_expand">展开</string>
+    <string name="chat_todo_collapse">折叠</string>
+    <string name="chat_todo_completed">已完成</string>
+    <string name="chat_todo_cancelled">已取消</string>
+    <string name="chat_todo_pending">待处理</string>
+    <string name="chat_todo_paused">已暂停</string>
+    <string name="chat_session_pending_pill">待处理</string>
+
+    <!-- Agent 追问 -->
+    <string name="chat_ask_answer_questions">请回答以下问题</string>
+    <string name="chat_ask_skip">跳过</string>
+    <string name="chat_ask_submit">提交回答</string>
+    <string name="chat_ask_custom_input">或输入自定义回答…</string>
+    <string name="chat_ask_allow_multiple">可多选</string>
+    <string name="chat_ask_fields_fallback_header">请按说明填写</string>
+    <string name="chat_ask_fields_fallback_placeholder">请用一句话或列表描述你的选择…</string>
+    <string name="chat_ask_submit_failed">提交回答失败</string>
+    <string name="chat_ask_result_completed">已回答</string>
+    <string name="chat_ask_field_required">必填</string>
+    <string name="chat_ask_field_select_placeholder">请选择…</string>
+
+    <!-- 资源引用 -->
+    <string name="chat_ref_about">关于 %s</string>
+    <string name="chat_ref_about_with_content">关于 %1$s：%2$s</string>
+    <string name="chat_context_ref_web">网页引用</string>
+    <string name="chat_context_ref_table">表格引用</string>
+    <string name="chat_context_ref_doc">文档引用</string>
+    <string name="chat_context_ref_slide">演示引用</string>
+    <string name="chat_context_ref_design">设计引用</string>
+    <string name="chat_context_ref_video">视频引用</string>
+    <string name="chat_context_ref_site">站点引用</string>
+    <string name="chat_context_ref_folder">文件夹引用</string>
+    <string name="chat_context_ref_code">代码引用</string>
+    <string name="chat_context_ref_memo">笔记引用</string>
+    <string name="chat_context_ref_goal">任务引用</string>
+    <string name="chat_context_ref_canvas">画板引用</string>
+    <string name="chat_context_ref_file">文件引用</string>
+    <string name="chat_context_ref_generic">上下文引用</string>
+    <string name="chat_context_ref_row_one">记录 %1$s</string>
+    <string name="chat_context_ref_row_many">%1$d 条记录</string>
+    <string name="chat_context_ref_field_one">字段 %1$s</string>
+    <string name="chat_context_ref_field_many">%1$d 个字段</string>
+    <string name="chat_context_ref_open_hint">打开引用资源</string>
+
+    <!-- 语音输入 -->
+    <string name="chat_voice_input">语音输入</string>
+    <string name="chat_voice_recording">录音中</string>
+    <string name="chat_voice_processing">识别中…</string>
+    <string name="chat_voice_done">识别完成</string>
+    <string name="chat_voice_error">识别失败</string>
+    <string name="chat_voice_permission_title">需要麦克风权限</string>
+    <string name="chat_voice_permission_required">请允许录音权限后再使用语音输入</string>
+    <string name="chat_voice_request_permission">授权录音</string>
+    <string name="chat_voice_open_settings">去设置</string>
+    <string name="chat_voice_fill_draft">填入草稿</string>
+    <string name="chat_voice_send_directly">直接发送</string>
+    <string name="chat_voice_empty_result">未识别到内容</string>
+    <string name="chat_voice_cancel">取消</string>
+    <string name="chat_voice_listening">正在聆听…</string>
+    <string name="ai_data_sharing_consent_title">允许 AI 处理语音</string>
+    <string name="ai_data_sharing_consent_message">按住说话会将音频上传并转写为文字，供 Agent 理解你的指令。我们不会把录音用于训练公开模型。拒绝后不会启动语音识别；同意后请再次按住开始。</string>
+    <string name="ai_data_sharing_consent_agree">同意并继续</string>
+    <string name="ai_data_sharing_consent_disagree">不同意</string>
+    <string name="agent_capsule_ready">随时待命</string>
+    <string name="agent_capsule_preparing">正在准备</string>
+    <string name="agent_capsule_queued">排队中</string>
+    <string name="agent_capsule_queued_count">等待执行 · %d 项排队</string>
+    <string name="agent_capsule_thinking">正在思考</string>
+    <string name="agent_capsule_planning_next">计划下一步</string>
+    <string name="agent_capsule_working">执行中</string>
+    <string name="agent_capsule_finishing">整理结果</string>
+    <string name="agent_capsule_needs_approval">等待你确认</string>
+    <string name="agent_capsule_needs_answer">等待你回答</string>
+    <string name="agent_capsule_bubble_approval_kind">需要你确认</string>
+    <string name="agent_capsule_bubble_answer_kind">需要你选择</string>
+    <string name="agent_capsule_bubble_waiting_kind">等待处理中</string>
+    <string name="agent_capsule_bubble_approve">同意</string>
+    <string name="agent_capsule_bubble_review_changes">看改动</string>
+    <string name="agent_capsule_bubble_view_details">查看详情</string>
+    <string name="agent_capsule_bubble_details_in_chat">详情已隐藏，请打开对话查看</string>
+    <string name="agent_capsule_bubble_answer_in_chat">去对话中回答</string>
+    <string name="agent_capsule_bubble_retry_hint">提交失败，可以重试</string>
+    <string name="agent_capsule_bubble_view">查看</string>
+    <string name="chat_hitl_readonly_title">等待执行负责人处理</string>
+    <string name="chat_hitl_readonly_message">仅执行负责人可处理这项请求，处理结果会同步到当前对话。</string>
+    <string name="agent_capsule_paused">任务已暂停</string>
+    <string name="agent_capsule_recovering">连接中断，正在恢复</string>
+    <string name="agent_capsule_complete">已完成</string>
+    <string name="agent_capsule_complete_count">已完成 · %d 条更新</string>
+    <string name="agent_capsule_stopped">已停止</string>
+    <string name="agent_capsule_error">遇到问题，点击查看</string>
+    <string name="agent_capsule_view_full_result">查看完整结果</string>
+    <string name="agent_capsule_pending_items">%d 项待处理</string>
+    <string name="agent_capsule_mode_chat_focus">对话聚焦</string>
+    <string name="agent_capsule_mode_split">分屏</string>
+    <string name="agent_capsule_mode_app_focus">应用聚焦</string>
+    <string name="agent_capsule_hold_to_talk">按住说话</string>
+    <string name="agent_capsule_a11y_drag_hint">轻点展开对话，拖动调整位置，长按打开文字或语音菜单</string>
+    <string name="agent_capsule_onboarding_tap_title">轻点，展开对话</string>
+    <string name="agent_capsule_onboarding_tap_detail">查看 Agent 的完整回复</string>
+    <string name="agent_capsule_onboarding_drag_title">拖动，调整位置</string>
+    <string name="agent_capsule_onboarding_drag_detail">松手后自动吸附到屏幕边缘</string>
+    <string name="agent_capsule_onboarding_hold_title">长按，快速输入</string>
+    <string name="agent_capsule_onboarding_hold_detail">选择文字或语音输入</string>
+    <string name="agent_capsule_onboarding_skip">跳过</string>
+    <string name="agent_capsule_onboarding_settings_section">操作教学</string>
+    <string name="agent_capsule_onboarding_replay_title">重新播放胶囊教学</string>
+    <string name="agent_capsule_onboarding_replay_detail">下次胶囊出现时从轻点开始</string>
+    <string name="agent_capsule_onboarding_replay_done">已重置，下次胶囊出现时播放</string>
+    <string name="agent_capsule_a11y_return_chat">展开对话</string>
+    <string name="agent_capsule_a11y_dock_left">挪到左侧</string>
+    <string name="agent_capsule_a11y_dock_right">挪到右侧</string>
+    <string name="agent_capsule_a11y_start_voice">开始语音指令</string>
+    <string name="agent_capsule_a11y_end_and_send">结束并发送</string>
+    <string name="agent_capsule_a11y_cancel_voice">取消语音</string>
+    <string name="conversation_layer_a11y_grabber">对话高度，上下拖动调整</string>
+    <string name="conversation_layer_a11y_expand">展开对话卡片</string>
+    <string name="conversation_layer_a11y_collapse">收起对话</string>
+    <string name="agent_capsule_menu_text">文字</string>
+    <string name="agent_capsule_menu_voice">语音</string>
+    <string name="agent_capsule_menu_text_a11y">选择文字输入</string>
+    <string name="agent_capsule_menu_voice_a11y">选择语音输入</string>
+    <string name="agent_capsule_text_composer_placeholder">发消息…</string>
+    <string name="agent_capsule_text_composer_send_a11y">发送消息</string>
+    <string name="agent_capsule_slide_to_cancel">上滑取消</string>
+    <string name="agent_capsule_release_to_send">松开发送</string>
+    <string name="agent_capsule_voice_cancel">取消</string>
+    <string name="agent_capsule_voice_send">发送</string>
+    <string name="agent_capsule_voice_listening">正在聆听</string>
+    <string name="agent_capsule_voice_recognizing">正在识别</string>
+    <string name="agent_capsule_voice_listening_hint">开始说话，说完点发送…</string>
+    <string name="agent_capsule_voice_processing_hint">继续整理…</string>
+    <string name="agent_capsule_blocked_hitl">请先完成当前确认或回答</string>
+    <string name="agent_capsule_blocked_paused">任务已暂停，无法发送</string>
+    <string name="agent_capsule_queued_busy">Agent 忙碌，语音已加入队列</string>
+    <string name="agent_capsule_persisted">已保存到本机</string>
+    <string name="agent_capsule_delivered">已送达</string>
+    <string name="agent_capsule_consent_hold_again">已授权，请再次按住说话</string>
+
+    <!-- Agent 错误 (SYNC: Backend _classify_agent_error in chat_service.py) -->
+    <string name="chat_error_device_offline">设备离线，Agent 无法执行。请确认设备已连接。</string>
+    <string name="chat_error_device_busy">设备正忙，请稍后重试。</string>
+    <string name="chat_error_cancelled">操作已取消。</string>
+    <string name="chat_error_context_overflow">对话上下文过长，请开始新对话或压缩上下文。</string>
+    <string name="chat_error_llm_timeout">AI 模型响应超时，请稍后重试。</string>
+    <string name="chat_error_tool_timeout">工具调用超时，请重试。</string>
+    <string name="chat_error_tool_exec">工具执行出错，请重试。</string>
+    <string name="chat_error_llm_call">与 AI 模型通信出错，请稍后重试。</string>
+    <string name="chat_error_unknown">出现意外错误，请重试。</string>
+    <string name="chat_error_review_required">操作需要审批确认。</string>
+    <string name="chat_error_safety_terminated">对话因安全策略终止。</string>
+    <string name="chat_error_empty_reply">AI 未返回有效内容，请重试。</string>
+    <string name="chat_error_ask_user">Space 需要你提供更多信息。</string>
+    <string name="chat_error_queued">消息已排队，稍后自动回复。</string>
+    <string name="chat_message_persisted_execution_failed">消息已送达，但执行未启动，可重试</string>
+    <string name="chat_outgoing_retry">重试</string>
+    <string name="chat_outgoing_retry_execution">重新启动执行</string>
+    <string name="chat_outgoing_remove_unsent">移除待发送</string>
+    <string name="chat_outgoing_hide_tracking">隐藏本机跟踪</string>
+
+    <!-- Wave 5 S4：对齐 Electron errorClassMap -->
+    <string name="chat_error_class_llm_provider_title">模型服务暂时不可用</string>
+    <string name="chat_error_class_llm_provider_suggestion">请稍后重试，如果持续出现可尝试切换模型。</string>
+    <string name="chat_error_class_llm_error_title">网络连接异常</string>
+    <string name="chat_error_class_llm_error_suggestion">对话连接中断，可重试或检查网络后再试。</string>
+    <string name="chat_error_class_context_overflow_title">对话内容过长</string>
+    <string name="chat_error_class_context_overflow_suggestion">请开始新对话继续。</string>
+    <string name="chat_error_class_tool_execution_title">工具执行出错</string>
+    <string name="chat_error_class_tool_execution_suggestion">请重试，或换一种方式描述你的需求。</string>
+    <string name="chat_error_class_iteration_budget_title">Space 已停止（达到步数上限）</string>
+    <string name="chat_error_class_iteration_budget_suggestion">Space 已触发步数限制被中止，请用更具体的指令重试或开始新对话。</string>
+    <string name="chat_error_class_token_budget_title">对话用量已达上限</string>
+    <string name="chat_error_class_token_budget_suggestion">本次对话的用量已到限制，请开始新对话。</string>
+    <string name="chat_error_class_budget_exhausted_title">AI 使用额度已用尽</string>
+    <string name="chat_error_class_budget_exhausted_suggestion">当前账户的 AI 使用额度已耗尽，请联系管理员。</string>
+    <string name="chat_error_class_rate_limited_title">请求过于频繁</string>
+    <string name="chat_error_class_rate_limited_suggestion">请稍等片刻后重试。</string>
+    <string name="chat_error_class_internal_title">系统内部错误</string>
+    <string name="chat_error_class_internal_suggestion">系统遇到意外问题，请重试。</string>
+    <string name="chat_error_class_llm_key_exhausted_title">当前渠道暂时不可用</string>
+    <string name="chat_error_class_llm_key_exhausted_suggestion">服务暂时中断，请稍后重试或联系管理员。</string>
+    <string name="chat_error_class_abort_title">对话已中止</string>
+    <string name="chat_error_class_abort_suggestion">回复在此中断，你可以重新执行同样的指令。</string>
+    <string name="chat_error_class_byok_provider_unavailable_title">自备 Key 的 Provider 暂时无法访问</string>
+    <string name="chat_error_class_byok_provider_unavailable_suggestion">您组织配置的 BYOK 渠道调用上游服务时返回 503/超时。这通常是上游服务商临时故障，过几分钟会自动恢复。</string>
+    <string name="chat_error_class_byok_rate_limit_title">自备 Key 触发了上游限速</string>
+    <string name="chat_error_class_byok_rate_limit_suggestion">BYOK 渠道的 API Key 触发了上游的 RPM/TPM 限制。请等几分钟再试，或在组织设置中启用更多 Key 轮询。</string>
+    <string name="chat_error_class_byok_quota_exhausted_title">自备 Key 的账号余额耗尽</string>
+    <string name="chat_error_class_byok_quota_exhausted_suggestion">BYOK 渠道的 API Key 在上游服务商的账号余额已耗尽，需要您前往上游服务商充值。</string>
+    <string name="chat_error_class_byok_invalid_key_title">自备 Key 已失效</string>
+    <string name="chat_error_class_byok_invalid_key_suggestion">BYOK 渠道的 API Key 上游返回 401 invalid_api_key，可能已被吊销或填写错误。请到组织设置中替换该 Key。</string>
+    <string name="chat_error_class_unknown_title">出了点问题</string>
+    <string name="chat_error_class_unknown_suggestion">请重试，如果持续出现请反馈给我们。</string>
+
+    <!--
+      W1（2026-05-13）File pipeline 工具错误 i18n（与 @tabtin/file-pipeline-errors SSoT 对齐）。
+      用于 tool_call envelope 失败时按 error_kind 路由到中文短文案。与 Electron
+      chat.json toolError 段一一对应。
+    -->
+    <!-- W1.2（2026-05-13 第二轮 Review）：对齐 Electron 详细版 + mobile-friendly 措辞
+         （用「点 + 按钮上传」替代「拖入聊天」——Android 没拖拽手势）。 -->
+    <string name="chat_tool_error_file_not_found">文件不存在 — 请确认绝对路径是否正确</string>
+    <!-- W2 L18 + W2.1 Review 2 fix-5：mobile 文案剥离 daemon 实现细节
+         （5MB 软上限 / 自动缩放等是 read_file 临时通道概念，对 mobile 用户
+         没有意义——他们只关心"AI 看不了" + "下一步怎么办"）。-->
+    <string name="chat_tool_error_file_too_large">AI 暂时看不了这个文件 — 文件较大，请用聊天附件上传（点 + 按钮）让 AI 走云端解析</string>
+    <string name="chat_tool_error_encrypted">文件已加密 — 请提供未加密版本（云端也无法绕过密码）</string>
+    <string name="chat_tool_error_corrupted">文件已损坏 — 请联系发件方或在源应用里重新导出后再试</string>
+    <!-- W1.2 Review 收尾：删去"（无文字层）"开发者术语；"识别质量差"→"提取不准"避免歧义；
+         UNSUPPORTED_FORMAT 与 Electron 同步分二段（办公文档可云端 vs 压缩包/可执行文件无救），
+         避免用户白白上传 .exe / .zip 等待 30 秒。
+         W2 L29：SCANNED_PDF / GARBLED_TEXT_LAYER 补"按页计费"提醒（与 SSoT 中文 prompt 对齐）。 -->
+    <string name="chat_tool_error_scanned_pdf">扫描件 PDF — 请用聊天上传（点 + 按钮），AI 会用图像识别提取文字（按页计费，处理时间较长）</string>
+    <string name="chat_tool_error_garbled_text_layer">PDF 文字提取不准 — 请用聊天上传（点 + 按钮），AI 会用图像识别重新提取（按页计费，处理时间较长）</string>
+    <string name="chat_tool_error_unsupported_format">格式不支持 — 如果是 PPTX/DOC/XLS 等办公文档，请用聊天上传（点 + 按钮）走云端解析；压缩包 / 可执行文件等格式本地与云端都不支持</string>
+    <string name="chat_tool_error_parse_timeout">本地解析超时 — 请用聊天上传（点 + 按钮）走异步解析（云端无时间上限）</string>
+    <!-- W2 L10 补 5 类共享 kind（permission_denied / network_failed / invalid_param_format /
+         aborted / upstream_error），与 iOS / Electron 三端 13 类完整对齐。 -->
+    <string name="chat_tool_error_permission_denied">权限被拒 — 文件可能在工作区外或被标记敏感，请授权后重试</string>
+    <string name="chat_tool_error_network_failed">网络异常 — 请检查网络后重试；若是 OSS 链接过期建议重新上传</string>
+    <string name="chat_tool_error_invalid_param_format">参数格式错误 — 请检查工具入参后重试</string>
+    <string name="chat_tool_error_aborted">已停止 — 你中止了本次工具运行</string>
+    <string name="chat_tool_error_upstream_error">未知错误 — 请重试一次；持续失败请反馈给我们</string>
+    <!-- W5 L38 (2026-05-14): IMAGE_RESIZE_FAILED 拆为独立 enum 数字码 19，与 FILE_TOO_LARGE 双语义脱耦。
+         sharp 缩放失败（未装 / decode 失败 / too_large_after_resize）走专属语义，不再误显示"文件过大"。 -->
+    <string name="chat_tool_error_image_resize_failed">图片自动缩放失败 — 请用聊天附件上传（点 + 按钮）让 AI 走云端解析</string>
+
+    <!-- Wave 5 S4：错误卡 actionable 按钮（对齐 Electron MessageBubble ACTION_LABELS） -->
+    <string name="chat_error_action_check_billing">去充值</string>
+    <string name="chat_error_action_relogin">重新登录</string>
+    <string name="chat_error_action_new_session">新建对话</string>
+    <!-- Wave 5 用户视角 Review：relogin suggested_action 的 ConfirmDialog 文案，对齐 Electron
+         MessageBubble ConfirmDialog（reloginConfirmTitle / reloginConfirmDesc） + iOS alert 文案。 -->
+    <string name="chat_error_relogin_confirm_title">确认重新登录</string>
+    <string name="chat_error_relogin_confirm_message">登录状态已过期，需要重新登录。\n\n退出后当前页面未保存的内容将丢失，确定继续？</string>
+
+    <!-- 计费错误 (SYNC: Backend build_precheck_error / build_budget_error in billed_call.py) -->
+    <string name="chat_billing_insufficient_credits">credits 余额不足，请充值后继续使用。</string>
+    <string name="chat_billing_organization_insufficient_credits">组织credits余额不足，请联系管理员充值。</string>
+    <string name="chat_billing_budget_exceeded">月度预算已用尽，请调整预算或等待下月重置。</string>
+    <string name="chat_billing_rate_limited">请求过于频繁，请稍后再试。</string>
+    <string name="chat_billing_conversation_quota_exceeded">今日对话次数已达上限，请明天再试或升级会员。</string>
+    <string name="chat_billing_go_recharge">前往官网充值</string>
+    <string name="chat_billing_go_team_recharge">联系管理员</string>
+    <string name="chat_billing_adjust_budget">查看预算</string>
+    <string name="chat_billing_retry_later">稍后重试</string>
+    <string name="chat_billing_view_quota">查看配额</string>
+
+    <!-- 工具分组 -->
+    <string name="chat_tool_group_read_files">读取了 %d 个文件</string>
+    <string name="chat_tool_group_searched">搜索了 %d 次</string>
+    <string name="chat_tool_group_other">%d 个其他操作</string>
+    <string name="chat_tool_group_steps">%d 步</string>
+    <string name="chat_view_more">查看更多…</string>
+
+    <!-- 执行组 / 执行详情抽屉（时间线只留一行锚点，详情进抽屉） -->
+    <string name="chat_execution_detail">执行详情</string>
+    <string name="chat_execution_detail_headline">执行详情 · %d 步</string>
+    <string name="chat_execution_detail_hint">轻点查看执行详情</string>
+    <string name="chat_execution_failed_count">%d 个失败</string>
+    <string name="chat_execution_step_failed">失败</string>
+    <string name="chat_execution_thinking_done">已思考</string>
+    <string name="chat_execution_thinking_done_seconds">已思考 %d 秒</string>
+    <string name="chat_tool_verb_terminal">执行命令</string>
+    <string name="chat_tool_verb_ssh">SSH</string>
+    <string name="chat_tool_verb_read_file">读取文件</string>
+    <string name="chat_tool_verb_write_file">写入文件</string>
+    <string name="chat_tool_verb_edit_file">编辑文件</string>
+    <string name="chat_tool_verb_delete_file">删除文件</string>
+    <string name="chat_tool_verb_sql">查询</string>
+    <string name="chat_tool_verb_web_search">网络搜索</string>
+    <string name="chat_tool_verb_web_fetch">抓取网页</string>
+    <string name="chat_tool_verb_code_search">代码搜索</string>
+    <string name="chat_tool_verb_generic">工具调用</string>
+    <string name="chat_tool_verb_git_status">查看 Git 状态</string>
+    <string name="chat_tool_verb_git_diff">查看 Git 差异</string>
+    <string name="chat_tool_verb_todo">更新清单</string>
+    <string name="chat_tool_verb_subagent">派发子任务</string>
+    <string name="chat_tool_verb_ask_user">询问用户</string>
+    <string name="chat_tool_verb_memory_write">写入记忆</string>
+    <string name="chat_tool_verb_memory_delete">删除记忆</string>
+    <string name="chat_tool_verb_show_widget">展示组件</string>
+    <string name="chat_tool_verb_present">呈现结果</string>
+    <string name="chat_tool_verb_device_info">读取设备信息</string>
+    <string name="chat_tool_verb_battery">读取电池信息</string>
+    <string name="chat_tool_verb_network">读取网络信息</string>
+    <string name="chat_tool_verb_contacts">读取联系人</string>
+    <string name="chat_tool_verb_read_sms">读取短信</string>
+    <string name="chat_tool_verb_send_sms">发送短信</string>
+    <string name="chat_tool_verb_call_log">读取通话记录</string>
+    <string name="chat_tool_verb_make_call">拨打电话</string>
+    <string name="chat_tool_verb_calendar">读取日历</string>
+    <string name="chat_tool_verb_notifications">读取通知</string>
+    <string name="chat_tool_verb_app_list">读取应用列表</string>
+    <string name="chat_tool_verb_media">读取媒体</string>
+    <string name="chat_tool_verb_location">读取位置</string>
+    <string name="chat_tool_verb_screen_capture">截取屏幕</string>
+    <string name="chat_tool_verb_screen_snapshot">读取屏幕</string>
+    <string name="chat_tool_verb_ui_tree">读取界面结构</string>
+    <string name="chat_tool_verb_screen_tap">点击屏幕</string>
+    <string name="chat_tool_verb_screen_swipe">滑动屏幕</string>
+    <string name="chat_tool_verb_screen_long_press">长按屏幕</string>
+    <string name="chat_tool_verb_find_element">查找界面元素</string>
+    <string name="chat_tool_verb_type_text">输入文本</string>
+    <string name="chat_tool_verb_type_secret">输入敏感文本</string>
+    <string name="chat_tool_verb_key_event">发送按键</string>
+    <string name="chat_tool_verb_wait_ui">等待界面</string>
+    <string name="chat_tool_verb_open_app">打开应用</string>
+    <string name="chat_tool_verb_stop_app">停止应用</string>
+    <string name="chat_tool_verb_system_setting">系统设置</string>
+    <string name="chat_tool_verb_stealth">隐身模式</string>
+    <string name="chat_tool_verb_launch_intent">打开链接</string>
+    <string name="chat_tool_verb_save_device">保存到设备</string>
+    <string name="chat_tool_verb_automation">读取自动化状态</string>
+    <string name="chat_tool_verb_tab_search">查找内容</string>
+    <string name="chat_tool_verb_tab_remove">移除内容</string>
+    <string name="chat_tool_verb_tab_restore">恢复内容</string>
+    <string name="chat_tool_verb_tab_create">创建内容</string>
+    <string name="chat_tool_verb_tab_update">更新内容</string>
+    <string name="chat_tool_verb_tab_publish">发布内容</string>
+    <string name="chat_tool_verb_tab_doc">处理文档</string>
+    <string name="chat_tool_verb_tab_memo">处理笔记</string>
+    <string name="chat_tool_verb_tab_site">处理站点</string>
+    <string name="chat_tool_verb_tab_data">处理表格</string>
+
+    <!-- 成员级费用管控错误 -->
+    <string name="chat_billing_member_monthly_limit">本月个人额度已用完，请联系管理员提额。</string>
+    <string name="chat_billing_member_daily_limit">今日个人额度已用完，请联系管理员提额。</string>
+    <string name="chat_billing_member_model_restricted">当前模型超出你的权限等级，请联系管理员。</string>
+    <string name="chat_billing_contact_admin">联系管理员</string>
+
+    <!-- 计费阻断 -->
+    <string name="chat_billing_blocked_hint">余额不足，请充值后继续使用</string>
+
+    <!-- 环境态软提示（RemoteExecutionNotice，对齐 iOS）：不禁用 Composer，只提示先发送、等设备。 -->
+    <string name="chat_space_device_offline_hint">执行设备暂未在线；消息可先发送，等待设备接手。</string>
+    <string name="chat_space_device_unbound_hint">此 Workspace 尚未关联执行设备；消息可先发送，等待设备配置完成。</string>
+
+    <!-- HITL 阻断 -->
+    <string name="chat_hitl_blocked_hint">请先处理上方待确认的请求</string>
+
+    <!-- 添加上下文 -->
+    <string name="chat_add_context">添加上下文</string>
+    <string name="chat_context_picker_loading">正在加载资源…</string>
+    <string name="chat_context_picker_empty">当前 Workspace 暂无可引用的资源</string>
+
+    <!-- Canvas「Agent 干了什么」 -->
+    <string name="chat_menu_canvas">Agent 干了什么</string>
+    <string name="canvas_title">Agent 干了什么</string>
+    <string name="canvas_stat_turns">轮次</string>
+    <string name="canvas_stat_tools">工具调用</string>
+    <string name="canvas_stat_subagents">子 Agent</string>
+    <string name="canvas_empty">本次会话还没有 Agent 活动</string>
+    <string name="canvas_section_subagents">子 Agent</string>
+    <string name="canvas_section_files">文件改动（%d）</string>
+    <string name="canvas_section_commands">执行的命令（%d）</string>
+    <string name="canvas_section_other_tools">其他工具（%d）</string>
+
+    <!-- 分叉会话 -->
+    <string name="chat_fork_session">分叉会话</string>
+    <string name="chat_fork_success">会话已分叉</string>
+
+    <!-- M4.1 L-W6-22：敏感路径 category slug → 业务名 -->
+    <string name="chat_approval_sensitive_category_ssh">SSH 凭据</string>
+    <string name="chat_approval_sensitive_category_aws">AWS 凭据</string>
+    <string name="chat_approval_sensitive_category_gnupg">GnuPG 密钥</string>
+    <string name="chat_approval_sensitive_category_kube">Kubernetes 配置</string>
+    <string name="chat_approval_sensitive_category_env">环境变量密钥</string>
+    <string name="chat_approval_sensitive_category_private_key">私钥文件</string>
+    <string name="chat_approval_sensitive_category_git">Git 凭据</string>
+    <string name="chat_approval_sensitive_category_shell_rc">Shell 启动脚本</string>
+    <string name="chat_approval_sensitive_category_cloud_cli">云服务 CLI 凭据</string>
+    <string name="chat_approval_sensitive_category_package_credentials">包管理器凭据</string>
+    <string name="chat_approval_sensitive_category_macos_keychain">macOS 钥匙串</string>
+    <string name="chat_approval_sensitive_category_browser_credentials">浏览器凭据</string>
+    <string name="chat_approval_sensitive_category_password_manager">密码管理器数据</string>
+    <string name="chat_approval_sensitive_category_linux_keyring">Linux 凭据环</string>
+
+    <!-- M4.1 L-W6-23：hardline 命令/路径 pattern slug → 业务名 -->
+    <string name="chat_approval_hardline_pattern_rm_rf_root_or_home">递归删除家目录或根目录</string>
+    <string name="chat_approval_hardline_pattern_rm_rf_system_root">递归删除系统根（rm -rf /）</string>
+    <string name="chat_approval_hardline_pattern_fork_bomb">Fork 炸弹（无限创建进程）</string>
+    <string name="chat_approval_hardline_pattern_dd_to_raw_device">向裸设备写入（dd）</string>
+    <string name="chat_approval_hardline_pattern_mkfs_format">格式化文件系统（mkfs）</string>
+    <string name="chat_approval_hardline_pattern_format_disk_windows">格式化 Windows 磁盘</string>
+    <string name="chat_approval_hardline_pattern_redirect_to_raw_disk">重定向写入裸磁盘</string>
+    <string name="chat_approval_hardline_pattern_curl_pipe_to_shell">从网络下载并直接执行脚本</string>
+    <string name="chat_approval_hardline_pattern_shutdown_reboot">系统关机或重启</string>
+    <string name="chat_approval_hardline_pattern_kill_all_processes">强制终止所有进程</string>
+    <string name="chat_approval_hardline_pattern_mv_to_dev_null">将文件移入 /dev/null（变相删除）</string>
+    <string name="chat_approval_hardline_pattern_sudo_escalation">提权执行（sudo）</string>
+    <string name="chat_approval_hardline_pattern_chmod_777_root">对系统根目录 chmod 777</string>
+    <string name="chat_approval_hardline_pattern_chmod_r_777">递归 chmod 777</string>
+    <string name="chat_approval_hardline_pattern_chown_r_root">递归 chown 到 root</string>
+    <string name="chat_approval_hardline_pattern_iptables_flush">清空防火墙规则（iptables -F）</string>
+    <string name="chat_approval_hardline_pattern_systemctl_stop_critical">停止关键系统服务</string>
+    <string name="chat_approval_hardline_pattern_eval_expansion">eval 展开任意命令</string>
+    <string name="chat_approval_hardline_pattern_macos_system">macOS 系统只读区（/System）</string>
+    <string name="chat_approval_hardline_pattern_macos_library_root">macOS 系统级 Library（/Library）</string>
+    <string name="chat_approval_hardline_pattern_unix_usr">Unix 系统目录（/usr）</string>
+    <string name="chat_approval_hardline_pattern_unix_bin">Unix 系统目录（/bin）</string>
+    <string name="chat_approval_hardline_pattern_unix_sbin">Unix 系统目录（/sbin）</string>
+    <string name="chat_approval_hardline_pattern_unix_etc">Unix 系统配置目录（/etc）</string>
+    <string name="chat_approval_hardline_pattern_windows_system_root">Windows 系统目录（C:/Windows）</string>
+    <string name="chat_approval_hardline_pattern_windows_program_files">Windows 程序目录</string>
+    <string name="chat_citations_count">引用 %1$d 个来源</string>
+    <string name="chat_outgoing_awaiting_device">消息已送达，等待执行设备</string>
+    <string name="chat_run_pause">暂停任务</string>
+    <string name="chat_run_resume">继续任务</string>
+    <string name="chat_run_paused_hint">任务已暂停，可继续或停止</string>
+
+    <!-- 文生图内联交付面（对齐 Electron richContent.image*） -->
+    <string name="chat_media_image_generating">正在生成图片</string>
+    <string name="chat_media_image_failed">生成失败</string>
+    <string name="chat_media_image_view_details">查看详情</string>
+    <string name="chat_media_image_hide_details">收起详情</string>
+
+    <!-- #9615 / Electron #6116：用户主动 Stop 的中性「已中断」徽标 -->
+    <string name="chat_message_interrupted">已中断</string>
+</resources>

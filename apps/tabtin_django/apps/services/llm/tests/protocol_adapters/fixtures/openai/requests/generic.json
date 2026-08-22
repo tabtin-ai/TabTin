@@ -1,0 +1,1 @@
+{"model":"synthetic-model","messages":[{"role":"user","content":"synthetic fixture text"}],"stream":true,"thinking":{"type":"enabled"},"reasoning_effort":"high","extension":{"safe":true}}

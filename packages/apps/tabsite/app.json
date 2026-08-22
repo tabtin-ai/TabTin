@@ -1,0 +1,81 @@
+{
+  "id": "tabsite",
+  "name": "Sites",
+  "version": "0.1.0",
+  "description": "站点云应用 — 创建、预览、发布轻量级网站和 Dashboard",
+  "kind": "app",
+  "executionTarget": "backend",
+  "uiRuntime": "localBundle",
+  "agentRuntime": "hostBackend",
+  "distribution": "builtin",
+  "surface": "collaborative",
+  "contextSources": [
+    "tabsite"
+  ],
+  "permissions": [
+    "tabsite"
+  ],
+  "skills": [
+    "skills/tabsite-operator"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "tabsite-operator": {
+        "enabled": true
+      }
+    }
+  },
+  "icon": "globe-2",
+  "runtimeBindings": {
+    "toolProvider": "django:toolhub.tabsite",
+    "uiProvider": "electron:context-space.tabsite",
+    "skillsProvider": "skills:local"
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "full"
+    },
+    "daemon": {
+      "mode": "full"
+    }
+  },
+  "agentIntegration": {
+    "contextType": "tabsite",
+    "contextFields": [
+      {
+        "name": "current_site_id",
+        "label": "site_id",
+        "isResourceId": true
+      },
+      {
+        "name": "current_site_title",
+        "label": "title",
+        "isResourceId": false
+      }
+    ],
+    "toolDomains": [
+      "tabsite"
+    ],
+    "hasPromptSection": false,
+    "displayField": "",
+    "workspaceRootSource": "",
+    "isFrontendDependent": false,
+    "typeAliases": []
+  },
+  "opens": {
+    "types": [
+      {
+        "type": "site",
+        "priority": 100
+      }
+    ]
+  },
+  "catalog": {
+    "category": "creation",
+    "desktopGroup": "cloudResources",
+    "canCreate": false,
+    "searchable": false,
+    "isDefaultEnabled": false,
+    "order": 14
+  }
+}

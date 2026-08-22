@@ -1,0 +1,82 @@
+{
+  "id": "tabtin-engineering-discipline-pack",
+  "name": "Engineering Discipline Pack",
+  "kind": "app",
+  "version": "0.2.0",
+  "description": "工程纪律：克制改动、垂直切片 TDD、PR 就绪检查、多视角评审、CI 失败分诊与问题跟踪闭环。",
+  "icon": "code",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "developer",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 26
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/surgical-changes",
+    "skills/tdd-vertical-slice",
+    "skills/pr-ready-checklist",
+    "skills/parallel-review-pass",
+    "skills/ci-failure-triage",
+    "skills/issue-tracker-workflow"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "surgical-changes": {
+        "enabled": true
+      },
+      "tdd-vertical-slice": {
+        "enabled": true
+      },
+      "pr-ready-checklist": {
+        "enabled": true
+      },
+      "parallel-review-pass": {
+        "enabled": true
+      },
+      "ci-failure-triage": {
+        "enabled": true
+      },
+      "issue-tracker-workflow": {
+        "enabled": true
+      }
+    }
+  }
+}

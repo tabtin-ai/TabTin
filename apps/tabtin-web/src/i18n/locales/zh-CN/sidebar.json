@@ -1,0 +1,30 @@
+{
+  "workspaceFallback": "工作空间",
+  "loadingWorkspaces": "加载工作空间...",
+  "personalIdentity": "个人身份",
+  "teamGroup": "组织",
+  "newTeam": "创建组织",
+  "newWorkspace": "新建工作空间",
+  "workspaceSettings": "工作空间设置",
+  "loadFailed": "加载失败",
+  "retryLoad": "重试",
+  "mobile": {
+    "navigation": "导航",
+    "openNavigation": "打开导航",
+    "closeNavigation": "关闭导航"
+  },
+  "search": {
+    "tooltip": "搜索 (⌘K)"
+  },
+  "space": {
+    "emptyTitle": "开始工作",
+    "emptyHint": "当前工作空间还没有 Bot，点击上方 + 创建一个",
+    "newBot": "新建 Bot"
+  },
+  "tooltips": {
+    "newAgent": "新建助手"
+  },
+  "deviceOnline": "在线",
+  "deviceBusy": "忙碌",
+  "deviceOffline": "离线"
+}

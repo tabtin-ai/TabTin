@@ -1,0 +1,15 @@
+{
+  "protocol_version": "v2",
+  "min_compatible_version": "v2",
+  "trace_id": "trace_abc123",
+  "thread_id": "thread_xyz789",
+  "_seq": 1,
+  "event_type": "agent.stream.message_start",
+  "message_id": "msg_01",
+  "role": "assistant",
+  "model_id": "claude-sonnet-4-7-20260321",
+  "model_name": "Claude Sonnet 4.7",
+  "started_at": "2026-05-10T22:00:00Z",
+  "run_id": "run_xyz",
+  "message_kind": "llm"
+}

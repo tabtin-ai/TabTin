@@ -1,0 +1,26 @@
+# Source files
+src/
+
+# Config files
+tsconfig.json
+.gitignore
+
+# Development files
+*.test.ts
+*.spec.ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

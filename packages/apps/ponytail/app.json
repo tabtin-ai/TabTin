@@ -1,0 +1,58 @@
+{
+  "id": "ponytail",
+  "name": "Ponytail",
+  "kind": "app",
+  "version": "4.9.0",
+  "description": "像资深工程师一样优先复用现有实现、标准库与平台原生能力，只写完成任务所需的最小正确代码。",
+  "icon": "scissors",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "developer",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 27
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": ["skills"]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": ["skills"]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/ponytail"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "ponytail": {
+        "enabled": true
+      }
+    }
+  }
+}

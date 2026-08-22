@@ -1,0 +1,36 @@
+{
+  "name": "@tabtin/local-embedding",
+  "version": "0.1.0",
+  "description": "本地 ONNX 向量服务 — skill/CLI/MCP 语义双路召回的宿主侧实现（本地模型加载、向量计算、磁盘缓存；零下载）",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anush008/tokenizers": "0.6.0",
+    "@tabtin/search": "workspace:*",
+    "onnxruntime-node": "^1.24.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.2.2",
+    "vitest": "^1.6.1"
+  },
+  "files": [
+    "dist"
+  ]
+}

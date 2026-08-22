@@ -1,0 +1,16 @@
+{
+  "name": "tabwhiteboard-block",
+  "description": "TabWhiteboard embedded block",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "tabwhiteboard",
+        "attrs": {
+          "canvasId": "canvas_789"
+        }
+      }
+    ]
+  },
+  "expectedMarkdown": ":::tabwhiteboard{canvasId=\"canvas_789\"}\n:::"
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 复选框选中态：圆角矩形填充 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/doc_editor_checkbox_checked" />
+    <corners android:radius="@dimen/tt_radius_xs" />
+    <size
+        android:width="@dimen/tt_spacing_xxl"
+        android:height="@dimen/tt_spacing_xxl" />
+</shape>

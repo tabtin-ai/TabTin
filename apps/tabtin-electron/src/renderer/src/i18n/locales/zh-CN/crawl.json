@@ -1,0 +1,521 @@
+{
+  "addressBar": {
+    "secureTitle": "安全连接",
+    "insecureTitle": "不安全连接",
+    "placeholder": "输入网址...",
+    "copy": "复制网址",
+    "copied": "已复制"
+  },
+  "toolbarDescriptions": {
+    "annotationLabel": "网页注释",
+    "annotation": "选择页面内容添加到对话",
+    "cancelAnnotationLabel": "取消网页注释",
+    "cancelAnnotation": "退出网页注释模式",
+    "screenshotLabel": "截图到对话",
+    "screenshot": "截取当前网页可视区域添加到对话",
+    "bookmarkLabel": "收藏当前网页",
+    "bookmark": "稍后可从浏览器收藏中打开",
+    "removeBookmarkLabel": "取消收藏",
+    "removeBookmark": "从浏览器收藏中移除当前网页"
+  },
+  "toast": {
+    "partitionRebuiltTitle": "已切换到新登录环境",
+    "partitionRebuiltDesc": "此标签的浏览器身份已根据工作空间绑定自动更新；如刚才在填写表单未提交，请重新输入。"
+  },
+  "embedded": {
+    "loading": "加载中...",
+    "agentLockOverlay": "Agent 正在控制",
+    "agentLockUntitled": "新任务",
+    "logs": {
+      "setViewBoundsUnavailable": "setViewBounds 不可用",
+      "setViewBoundsFailed": "更新 bounds 失败"
+    },
+    "errors": {
+      "missingProfile": "workspace-view 缺少 profile/partition",
+      "showUnavailable": "host.view.show 不可用",
+      "showFailed": "显示失败",
+      "showPrecheckFailed": "显示前置校验失败",
+      "pageLoadFailed": "页面加载失败",
+      "refreshFailed": "刷新失败",
+      "navigationFailed": "导航失败",
+      "navigationDeferredByAgent": "页面正在被 Agent 任务使用，本次导航未执行",
+      "goBackFailed": "后退失败",
+      "goForwardFailed": "前进失败",
+      "reloadFailed": "刷新失败",
+      "stopFailed": "停止加载失败",
+      "actionUnavailable": "{{action}} 不可用",
+      "partitionRebuildFailed": "登录环境切换失败：{{detail}}。请关闭并重新打开此标签。"
+    }
+  },
+  "urlInput": {
+    "title": "新建网页抓取",
+    "description": "输入要抓取的网页地址",
+    "urlLabel": "网址 *",
+    "urlPlaceholder": "https://example.com",
+    "nameLabel": "标签名称（可选）",
+    "namePlaceholder": "自动生成",
+    "cancel": "取消",
+    "create": "创建",
+    "errors": {
+      "required": "请输入网址",
+      "invalid": "请输入有效的网址（例如：baidu.com 或 https://baidu.com）"
+    },
+    "defaultName": "网页 {{time}}"
+  },
+  "diagnosis": {
+    "errors": {
+      "requestFailed": "诊断请求失败",
+      "failed": "诊断失败",
+      "invalidResult": "诊断结果格式错误",
+      "feedbackFailed": "提交反馈失败",
+      "missingActiveView": "未找到活动视图",
+      "missingViewOptions": "缺少 viewOptions，无法获取页面内容",
+      "getProcessedContentUnavailable": "getProcessedContent 不可用",
+      "noFeedbackRecord": "没有可反馈的诊断记录",
+      "noAvailableModel": "未找到可用模型，请先加载模型列表",
+      "noWorkspaceSelected": "未选择工作空间，无法发起流式诊断",
+      "streamDiagnosisFailed": "流式诊断失败"
+    }
+  },
+  "resource": {
+    "errors": {
+      "downloadFailed": "下载失败",
+      "fileSizeZero": "下载的文件大小为 0",
+      "timeout": "下载超时 ({{ms}}ms)"
+    }
+  },
+  "resourceCenter": {
+    "title": "资源中心",
+    "count": "{{count}} 个资源",
+    "count_one": "{{count}} 个资源",
+    "searchPlaceholder": "搜索 URL / resourceId / MIME",
+    "searchInputLabel": "搜索资源",
+    "empty": "当前页面暂无可展示资源",
+    "previewUnavailable": "无预览",
+    "sourceUrlTitle": "源地址",
+    "selectHint": "选择资源查看详情",
+    "segmentBadge": "分片",
+    "values": {
+      "unknown": "未知",
+      "unknownMime": "未知 MIME",
+      "unknownSize": "未知",
+      "none": "无",
+      "fallbackNameSuffix": "资源"
+    },
+    "actions": {
+      "toggleDeveloperMode": "开发者模式（显示详细技术信息）",
+      "developerMode": "开发者",
+      "refresh": "刷新资源",
+      "close": "关闭资源中心",
+      "downloadStream": "下载流",
+      "downloadResource": "下载资源",
+      "captureContent": "捕获内容",
+      "parseStream": "解析流",
+      "copyLink": "复制链接",
+      "copyCliCommand": "复制 CLI 命令",
+      "copyAgentPrompt": "复制 Agent 指令",
+      "downloadCompleteVideo": "下载完整视频"
+    },
+    "aria": {
+      "filterAll": "显示全部资源",
+      "filterCategory": "按类别筛选：{{category}}",
+      "selectResource": "查看资源：{{name}}"
+    },
+    "errors": {
+      "loadFailed": "加载资源失败",
+      "downloadFailed": "下载失败",
+      "captureFailed": "捕获失败",
+      "parseStreamFailed": "流解析失败",
+      "streamDownloadFailed": "流下载失败"
+    },
+    "toasts": {
+      "copyFailedTitle": "复制失败",
+      "resourceDownloadedTitle": "资源已下载",
+      "capturedTitle": "资源内容已捕获",
+      "captureCachedTitle": "资源内容已在缓存中",
+      "streamParsedTitle": "流解析完成",
+      "streamParsedVariants": "发现 {{count}} 个质量档位",
+      "streamParsedVariants_one": "发现 {{count}} 个质量档位",
+      "streamParsedUpdated": "已更新流媒体元信息",
+      "streamDownloadedTitle": "流媒体已下载",
+      "cliCopiedTitle": "CLI 命令已复制",
+      "agentPromptCopiedTitle": "Agent 指令片段已复制",
+      "linkCopiedTitle": "资源链接已复制",
+      "actionFailedTitle": "操作失败"
+    },
+    "categories": {
+      "all": "全部",
+      "image": "图片",
+      "video": "视频",
+      "audio": "音频",
+      "hls": "HLS",
+      "dash": "DASH",
+      "document": "文档",
+      "font": "字体"
+    },
+    "captureStatus": {
+      "metadata_only": "仅元数据",
+      "content_cached": "内容已缓存",
+      "page_bound_blob": "页面绑定 Blob",
+      "stream_manifest": "流清单",
+      "downloaded": "已下载",
+      "unsupported": "不支持",
+      "failed": "失败"
+    },
+    "capabilities": {
+      "preview": "预览",
+      "download": "下载",
+      "import": "导入",
+      "sendToAgent": "发送给 Agent",
+      "parse": "解析",
+      "streamDownload": "流下载"
+    },
+    "sources": {
+      "network": "网络",
+      "dom_probe": "DOM 探测",
+      "cdp_capture": "CDP 捕获",
+      "task_capture": "任务捕获",
+      "manual_capture": "手动捕获"
+    },
+    "developer": {
+      "title": "开发者信息",
+      "idLabel": "ID",
+      "mimeTypeLabel": "MIME",
+      "statusLabel": "状态",
+      "capabilitiesLabel": "能力",
+      "sourceLabel": "来源"
+    },
+    "qualityLabel": "画质",
+    "qualityBest": "最高画质",
+    "qualityWorst": "最低画质",
+    "hints": {
+      "pageBoundBlob": "当前资源来自页面内 `MediaSource/blob`，必须在该页面上下文中捕获后才能稳定下载。",
+      "dashPhaseOne": "DASH 资源支持画质选择和完整视频下载。独立音频轨通过 ffmpeg 自动合并。",
+      "blobResource": "这是页面内播放器资源。点击「捕获内容」可尝试获取资源数据，然后再下载。",
+      "encrypted": "此资源可能使用了 DRM 加密，下载后可能无法正常播放。"
+    },
+    "streamInfo": {
+      "title": "流媒体信息",
+      "live": "直播流",
+      "vod": "点播流",
+      "segmentCount": "{{count}} 分片",
+      "segmentCount_one": "{{count}} 分片"
+    }
+  },
+  "clients": {
+    "apiUnavailable": "{{api}} API 不可用",
+    "toolUnavailableTitle": "工具不可用",
+    "toolUnavailableDescription": "动作 {{action}} 未注册，无法执行"
+  },
+  "task": {
+    "errors": {
+      "schemaMissingListSelector": "Schema 缺少必需的 listSelector 字段",
+      "schemaMissingFields": "Schema 缺少有效的字段配置",
+      "unknown": "未知错误",
+      "executionFailed": "任务执行失败"
+    },
+    "logs": {
+      "apiUnavailable": "TaskAPI 不可用",
+      "schemaMissingListSelector": "Schema 格式错误，缺少 listSelector",
+      "schemaMissingFields": "presetSchema 缺少有效的 fields",
+      "createTaskFailed": "创建任务失败",
+      "updateMetadataFailed": "更新任务元数据失败",
+      "enqueueFailed": "任务入队失败",
+      "createTaskException": "创建任务异常",
+      "cancelTaskFailed": "取消任务失败",
+      "resumeUnsupported": "TaskAPI 不支持 resume 方法",
+      "resumeFailed": "恢复任务失败",
+      "resumeException": "恢复任务异常",
+      "resumeWithPaginationUnsupported": "TaskAPI 不支持 resumeWithPagination 方法",
+      "startPaginationFailed": "启动翻页失败",
+      "paginationException": "翻页任务异常",
+      "selectRecommendationUnsupported": "TaskAPI 不支持 selectRecommendation 方法",
+      "selectRecommendationFailed": "提交推荐选择失败",
+      "selectRecommendationException": "提交推荐选择异常",
+      "apiUnavailableEffect": "useEffect: taskAPI 不可用",
+      "exportTraceUnavailable": "无法导出流转记录：任务尚未初始化或 TaskAPI 不可用",
+      "exportTraceGetUnsupported": "TaskAPI 不支持 get 方法，无法导出流转记录",
+      "exportTraceMissingTask": "未获取到任务数据，无法导出流转记录",
+      "clipboardCopyFailed": "复制到剪贴板失败",
+      "exportTraceException": "导出流转记录时发生异常"
+    }
+  },
+  "tabs": {
+    "defaultName": "抓取 {{count}}",
+    "workspaceDefaultName": "浏览器空间"
+  },
+  "tabStore": {
+    "errors": {
+      "workspaceViewInTabs": "[CrawlTabStore] 禁止将 workspace view 写入 tabs[]",
+      "createTabWorkspaceNotAllowed": "[CrawlTabStore] createTab 不允许创建 workspace，请使用 createWorkspace",
+      "createWorkspaceExternalIdNotAllowed": "[CrawlTabStore] createWorkspace 禁止外部传入 crawlspaceId",
+      "createWorkspaceMissingProfile": "[CrawlTabStore] createWorkspace 缺少 profile",
+      "createWorkspaceMissingSpaceOrPartition": "[CrawlTabStore] createWorkspace 必须传 spaceId 或显式 partition，否则 workspace 没有 session 隔离依据。",
+      "createWorkspaceMissingRandomUUID": "[CrawlTabStore] createWorkspace 缺少 crypto.randomUUID",
+      "createWorkspaceIdExists": "[CrawlTabStore] crawlspaceId 已存在: {{id}}",
+      "missingCrawlspaceContextCache": "[CrawlTabStore] 缺少 crawlspaceContextCache: {{id}}"
+    },
+    "warnings": {
+      "legacyCreateTab": "⚠️ createTab 为遗留路径，请勿用于新功能"
+    }
+  },
+  "host": {
+    "errors": {
+      "viewIdMissingShow": "viewId 为空，无法显示",
+      "viewIdMissingBounds": "viewId 为空，无法设置 bounds",
+      "viewIdMissingDestroy": "viewId 为空，无法销毁",
+      "viewIdMissingCheck": "viewId 为空，无法检查",
+      "viewIdMissingTouch": "viewId 为空，无法 touch",
+      "viewIdMissingLoadUrl": "viewId 为空，无法加载 URL",
+      "viewIdMissingWaitForSelector": "viewId 为空，无法等待选择器",
+      "viewIdMissingGoBack": "viewId 为空，无法后退",
+      "viewIdMissingGoForward": "viewId 为空，无法前进",
+      "viewIdMissingReload": "viewId 为空，无法刷新",
+      "viewIdMissingStop": "viewId 为空，无法停止加载"
+    },
+    "logs": {
+      "ipcRendererUnavailable": "ipcRenderer 不可用，跳过 pagination 事件订阅"
+    }
+  },
+  "workspaceDefaults": {
+    "errors": {
+      "missingPluginDefaults": "[工作空间Defaults] 未找到插件默认配置: {{id}}"
+    }
+  },
+  "dataImport": {
+    "errors": {
+      "workspaceRequired": "未选择工作空间",
+      "noData": "没有数据可导入",
+      "createTableFailed": "创建表格失败",
+      "createFieldFailed": "字段创建失败：{{details}}",
+      "importFailed": "导入数据失败"
+    },
+    "progress": {
+      "creatingTable": "正在创建表格...",
+      "creatingFields": "正在创建字段...",
+      "tableReady": "表格创建完成，准备开始采集...",
+      "loadingCache": "正在加载资源缓存...",
+      "downloadingResources": "正在下载资源...",
+      "uploadingResources": "正在上传资源到平台...",
+      "importingData": "正在导入数据..."
+    },
+    "completion": {
+      "base": "数据导入完成！",
+      "withFailedAndMissing": "数据导入完成！成功 {{success}} 条，失败 {{failed}} 条，{{missing}} 条缺少附件",
+      "withFailed": "数据导入完成！成功 {{success}} 条，失败 {{failed}} 条",
+      "withMissing": "数据导入完成！成功 {{success}} 条，{{missing}} 条缺少附件"
+    },
+    "fieldDescription": {
+      "sourceField": "抓取字段: {{field}}",
+      "originalUrl": "{{name}}的原始URL",
+      "attachment": "{{name}}的附件"
+    },
+    "fieldName": {
+      "originalUrl": "{{name}}_原始链接"
+    },
+    "tableDescription": "抓取自: {{taskId}}",
+    "tableName": {
+      "default": "新表格",
+      "singlePart": "抓取数据_{{name}}"
+    }
+  },
+  "stages": {
+    "config": "配置",
+    "executing": "执行中",
+    "mapping": "字段映射",
+    "completed": "完成"
+  },
+  "fieldNames": {
+    "name": "名称",
+    "title": "标题",
+    "rating": "评分",
+    "description": "描述",
+    "price": "价格",
+    "image": "图片",
+    "url": "链接",
+    "date": "日期",
+    "author": "作者",
+    "category": "分类"
+  },
+  "workspace": {
+    "configMissing": "工作区配置缺失，请重新创建该工作区。",
+    "loading": "加载中...",
+    "pageLoadFailed": "页面加载失败",
+    "pageLoadFailedDesc": "无法连接到该网页，请检查网络或稍后重试",
+    "pageLoadErrors": {
+      "dns": {
+        "title": "域名无法解析",
+        "hint": "请检查网址是否正确"
+      },
+      "offline": {
+        "title": "网络断开",
+        "hint": "请检查网络连接后重试"
+      },
+      "connection": {
+        "title": "无法连接服务器",
+        "hint": "请稍后重试，或检查网址是否正确"
+      },
+      "server": {
+        "title": "服务器错误",
+        "hint": "请稍后重试"
+      }
+    },
+    "reload": "重新加载"
+  },
+  "portal": {
+    "logs": {
+      "noRenderTarget": "⚠️ 无渲染目标：有 slot 注册但都未激活，且 parkingHost 不可用"
+    }
+  },
+  "temporaryTab": {
+    "logs": {
+      "uiEntryDisabled": "⏭️ 临时标签 UI 入口未开启，跳过注册",
+      "listenerAlreadyRegistered": "⏭️ 监听器已注册，跳过重复注册",
+      "createRequestReceived": "收到创建临时标签请求:",
+      "workspaceInternalViewHandled": "⏭️ workspace 内部 view 由 Context 接管:",
+      "nonTemporaryIgnored": "⏭️ 非临时任务，忽略创建请求:",
+      "tabExistsSkipped": "⚠️ 标签已存在，跳过创建:",
+      "tabCreated": "✅ 临时标签已创建:",
+      "skipAutoSelect": "已跳过自动选中（用于后台创建）",
+      "closeRequestReceived": "收到关闭临时标签请求:",
+      "workspaceViewSkipClose": "⏭️ workspace view 由 Context 处理，跳过关闭:",
+      "workspaceTabSkipClose": "⏭️ workspace tab 不走临时标签关闭链路:",
+      "nonTemporarySkipClose": "⏭️ 非临时标签，跳过关闭:",
+      "closeRequestNoTab": "⏭️ 未找到对应 tab/view，忽略关闭请求:",
+      "listenerRegistered": "✅ 临时标签监听器已注册",
+      "listenerCleaned": "🧹 临时标签监听器已清理"
+    }
+  },
+  "recommendation": {
+    "defaultTitle": "推荐方案"
+  },
+  "downloads": {
+    "title": "下载管理",
+    "activeCount": "{{count}} 个下载进行中",
+    "activeCount_one": "{{count}} 个下载进行中",
+    "noActive": "暂无进行中的下载",
+    "searchPlaceholder": "搜索文件名或 URL...",
+    "clearCompleted": "清除已完成",
+    "clearAll": "清除历史",
+    "empty": "暂无下载记录",
+    "emptyHint": "浏览网页时的下载将会显示在这里",
+    "noResults": "没有找到匹配的下载",
+    "today": "今天",
+    "yesterday": "昨天",
+    "paused": "已暂停",
+    "cancelled": "已取消",
+    "failed": "下载失败",
+    "completed": "下载完成",
+    "remaining": "剩余 {{time}}",
+    "pauseAction": "暂停",
+    "resumeAction": "恢复",
+    "cancelAction": "取消",
+    "retryAction": "重试",
+    "openAction": "打开文件",
+    "showInFolderAction": "在文件夹中显示",
+    "removeAction": "移除记录",
+    "deleteFileAction": "删除文件",
+    "openFile": "打开文件",
+    "copyLink": "复制下载链接",
+    "cancelDownload": "取消下载",
+    "started": "开始下载：{{name}}",
+    "noSpace": "请先打开一个工作空间",
+    "ipcError": "{{action}} 失败",
+    "actionFailed": "操作失败",
+    "openFileFailed": "打开文件失败",
+    "showInFolderFailed": "在文件夹中显示失败",
+    "deleteFileFailed": "删除文件失败",
+    "fileUnavailable": "文件已失效",
+    "fileUnavailableHint": "文件已被移动或删除，仅可从列表移除记录",
+    "units": {
+      "perSecond": "/s",
+      "seconds": "秒",
+      "minutes": "分钟",
+      "hours": "小时"
+    },
+    "downloadCompleted": "下载完成：{{name}}",
+    "downloadFailed": "下载失败：{{name}}",
+    "streamDefaultName": "流媒体视频",
+    "streamActive": "流媒体下载",
+    "streamHistory": "流媒体历史",
+    "streamResolving": "解析播放列表...",
+    "streamDownloading": "下载中",
+    "streamMerging": "合并分片中...",
+    "streamSegments": "分片",
+    "streamCompleted": "视频下载完成：{{name}}",
+    "streamFailed": "视频下载失败：{{error}}",
+    "streamErrors": {
+      "ENCRYPTED_STREAM": "该视频受版权保护（DRM），暂不支持下载",
+      "LIVE_STREAM": "直播流不支持下载，请等待直播结束后重试",
+      "NO_SEGMENTS": "未找到可下载的视频分片",
+      "NO_QUALITY_MATCH": "未找到匹配的画质选项",
+      "SEGMENT_FAILED": "视频下载失败，部分内容无法获取（可能是网站限制）",
+      "DOWNLOAD_TIMEOUT": "下载超时，请检查网络连接后重试",
+      "HTTP_ERROR": "该网站阻止了下载请求",
+      "DOWNLOAD_ABORTED": "下载已取消",
+      "MERGE_FAILED": "视频合并失败，请重试",
+      "NETWORK_ERROR": "网络连接失败，请检查网络后重试",
+      "PARSE_ERROR": "视频地址格式无法识别，可能不是有效的 m3u8 文件",
+      "UNKNOWN": "未知错误"
+    }
+  },
+  "bookmarks": {
+    "title": "书签",
+    "totalCount": "{{count}} 个书签",
+    "totalCount_one": "{{count}} 个书签",
+    "noBookmarks": "暂无书签",
+    "searchPlaceholder": "搜索书签...",
+    "clearAll": "清除全部",
+    "empty": "暂无书签",
+    "emptyHint": "点击地址栏的星标收藏网页",
+    "noResults": "没有找到匹配的书签",
+    "addAction": "收藏",
+    "removeAction": "取消收藏",
+    "openAction": "打开",
+    "deleteAction": "删除"
+  },
+  "history": {
+    "title": "浏览历史",
+    "totalCount": "{{count}} 条记录",
+    "totalCount_one": "{{count}} 条记录",
+    "noRecords": "暂无浏览记录",
+    "searchPlaceholder": "搜索标题或 URL...",
+    "clearAll": "清除全部",
+    "empty": "暂无浏览记录",
+    "emptyHint": "浏览的网页将会记录在这里",
+    "noResults": "没有找到匹配的记录",
+    "today": "今天",
+    "yesterday": "昨天",
+    "thisWeek": "本周",
+    "thisMonth": "本月",
+    "openAction": "打开",
+    "deleteAction": "删除"
+  },
+  "tabContextMenu": {
+    "rename": "重命名",
+    "close": "关闭标签",
+    "delete": "删除标签",
+    "dialogTitle": "重命名标签",
+    "dialogDescription": "为标签设置一个新名称",
+    "newNameLabel": "新名称",
+    "newNamePlaceholder": "请输入标签名称",
+    "cancel": "取消",
+    "confirm": "确定"
+  },
+  "agentAutofillFailed": {
+    "title": "自动登录失败",
+    "titleCredential": "凭据可能已失效",
+    "titleFill": "自动填充未完成",
+    "descGeneric": "{{domain}} 自动登录失败，请前往「设置 → 设备 → 浏览器」检查凭据",
+    "descCredential": "{{domain}} 的密码可能已过期或被禁用，请前往「设置 → 设备 → 浏览器」更新",
+    "descFill": "{{domain}} 的登录表单结构异常，已通知 Agent 暂停。请尝试手动登录",
+    "descGenericWithAgent": "{{agentName}} 自动登录 {{domain}} 失败，请前往「设置 → 设备 → 浏览器」检查凭据",
+    "descCredentialWithAgent": "{{agentName}} 自动登录 {{domain}} 时凭据失效，请前往「设置 → 设备 → 浏览器」更新密码",
+    "descFillWithAgent": "{{agentName}} 自动填充 {{domain}} 的登录表单失败，可能是表单结构异常，请尝试手动登录"
+  },
+  "agentAutofillSuccess": {
+    "title": "Agent 已自动登录",
+    "description": "Agent 已用 {{username}} 自动登录 {{domain}}",
+    "descriptionWithAgent": "{{agentName}} 已用 {{username}} 自动登录 {{domain}}"
+  }
+}

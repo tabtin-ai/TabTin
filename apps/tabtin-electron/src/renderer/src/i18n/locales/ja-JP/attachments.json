@@ -1,0 +1,68 @@
+{
+  "actions": {
+    "upload": "添付ファイルをアップロードする",
+    "uploading": "アップロード中...",
+    "reuse": "添付ファイルを再利用する",
+    "reuseLoading": "再利用...",
+    "cancel": "キャンセル",
+    "remove": "削除",
+    "removeAll": "すべて削除する",
+    "removingAll": "削除中...",
+    "download": "ダウンロード",
+    "downloadAll": "すべてダウンロード"
+  },
+  "labels": {
+    "reuseSection": "既存の添付ファイルを再利用する",
+    "uploadingList": "アップロード中",
+    "attachmentList": "添付ファイル",
+    "unknownType": "不明なタイプ",
+    "empty": "添付ファイルなし"
+  },
+  "placeholders": {
+    "reuseFileId": "既存の添付ファイル ID を入力してください"
+  },
+  "tips": {
+    "uploadHelp": "複数のファイルをアップロードできます。これらは添付ファイル参照として保存されます。",
+    "saveBeforeUpload": "添付ファイルをアップロードする前にレコードを保存してください。",
+    "reuseHelp": "このレコード内で参照するには、既存の添付ファイルの file_id を入力します。",
+    "syncing": "添付ファイルを同期しています...",
+    "uploadDropHint": "ここをクリック、貼り付け、またはファイルをドラッグ"
+  },
+  "errors": {
+    "fetchFailed": "添付ファイルの読み込みに失敗しました",
+    "uploadFailed": "添付ファイルのアップロードに失敗しました",
+    "abortFailed": "アップロードのキャンセルに失敗しました",
+    "removeFailed": "添付ファイルの削除に失敗しました",
+    "reuseNeedSave": "添付ファイルを再利用する前にレコードを保存してください",
+    "reuseMissingId": "ファイルIDを入力してください",
+    "reuseFailed": "添付ファイルの再利用に失敗しました",
+    "removeAllFailed": "添付ファイルの削除に失敗しました",
+    "fileTooLarge": "{{limit}}MB サイズ制限を超えています",
+    "fileTypeNotAllowed": "サポートされていないファイル形式です",
+    "fileRejectedSingle": "ファイル {{name}} がスキップされました: {{reason}}",
+    "fileRejectedMultiple": "{{count}} ファイルはスキップされました"
+  },
+  "apiErrors": {
+    "emptyFileList": "ファイルリストを空にすることはできません",
+    "batchUploadFailed": "バッチアップロードに失敗しました",
+    "batchUploadFailedWithReason": "バッチアップロードに失敗しました: {{message}}",
+    "uploadFailed": "アップロードに失敗しました",
+    "createUploadTaskFailed": "添付ファイルのアップロードタスクの作成に失敗しました",
+    "uploadPartFailed": "添付ファイルチャンクのアップロードに失敗しました",
+    "uploadPartInvalid": "無効なアップロードチャンク応答",
+    "completeUploadFailed": "添付ファイルのアップロードを完了できませんでした",
+    "abortUploadFailed": "添付ファイルのアップロードをキャンセルできませんでした",
+    "reuseFailed": "添付ファイルの再利用に失敗しました",
+    "removeReferenceFailed": "添付ファイルの参照を削除できませんでした",
+    "convertFieldFailed": "フィールドタイプの変換に失敗しました",
+    "uploadTaskEmpty": "添付ファイルのアップロード タスクでファイルが返されませんでした",
+    "uploadTaskMissingItem": "添付ファイル {{name}} のアップロード タスク情報がありません"
+  },
+  "status": {
+    "pending": "キューに入れられました",
+    "uploading": "アップロード中",
+    "completed": "完了",
+    "error": "アップロードに失敗しました",
+    "cancelled": "キャンセルされました"
+  }
+}

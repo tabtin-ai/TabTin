@@ -1,0 +1,8 @@
+# python runtime 归档 staging（L2 构建产物落点）
+#
+# 打包期由 scripts/electron/package/build-python-runtime.sh 在此放入：
+#   - manifest.json                 （运行时元数据 + sha256）
+#   - tabtin-python-runtime.tar.gz  （python-build-standalone + 冻结依赖）
+#
+# electron-builder 通过 extraResources 把本目录复制到 Resources/native/tabtin-python-runtime。
+# 仓库内保持空（仅本占位文件），真实产物不入库，与 packages/office-preview-runtime/runtime 同范式。

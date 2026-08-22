@@ -1,0 +1,48 @@
+{
+  "binding_ref": {
+    "expected_hash": "sha256:2dcd2395c1ed41af9a7ac42ae8274ec120f6d8f90ced340c60e657a5344036ca",
+    "key": "kimi-k3-draft-binding",
+    "kind": "model-deployment-binding",
+    "revision": "1"
+  },
+  "deployment_ref": {
+    "expected_hash": "sha256:ad2eb97e0e591ee49e7451516aca1e3c3850b40b084b8f7a97788cb52d3f0c9b",
+    "key": "moonshot",
+    "kind": "deployment-profile",
+    "revision": "1"
+  },
+  "identity": {
+    "canonical_hash": "sha256:63c0f901d6de0c6db5d45d798ff175b97fa9339c2dd4469c4a28a9381f22545d",
+    "key": "kimi-k3-draft-legacy-rate",
+    "kind": "rate-card",
+    "revision": "1"
+  },
+  "non_billed_reason": null,
+  "pricing_scheme": "metered",
+  "rates": [
+    {
+      "amount": "0.02",
+      "currency": "CNY",
+      "schema_version": "1",
+      "unit": "input-token"
+    },
+    {
+      "amount": "0.1",
+      "currency": "CNY",
+      "schema_version": "1",
+      "unit": "output-token"
+    },
+    {
+      "amount": "0.002",
+      "currency": "CNY",
+      "schema_version": "1",
+      "unit": "cached-input-token"
+    }
+  ],
+  "schema_version": "1",
+  "service_profile": null,
+  "validity": {
+    "valid_from": "2026-08-06T00:00:00Z",
+    "valid_until": null
+  }
+}

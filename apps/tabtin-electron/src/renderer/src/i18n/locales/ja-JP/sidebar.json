@@ -1,0 +1,177 @@
+{
+  "primaryNav": {
+    "newTask": "新しいタスク",
+    "apps": "作業台",
+    "automation": "自動化",
+    "importData": "データのインポート",
+    "importDataDetected": "インポートデータ（履歴検出）",
+    "externalHistory": "外部履歴",
+    "agents": "AIアバター",
+    "skills": "スキルとコネクタ",
+    "collaboration": "コラボレーション",
+    "messages": "メッセージ"
+  },
+  "rail": {
+    "tasks": "タスク",
+    "messages": "メッセージ",
+    "cloudDocs": "クラウドドキュメント",
+    "projects": "プロジェクト",
+    "more": "もっと見る",
+    "customerSupport": "サポート",
+    "customerSupportTitle": "サポートに連絡する",
+    "customerSupportHint": "WeChat でスキャンして WeCom に追加してください",
+    "customerSupportQrAlt": "WeComカスタマーサポートQRコード"
+  },
+  "cloudDocs": {
+    "browse": {
+      "label": "クラウドドキュメントを閲覧する",
+      "all": "すべて",
+      "recent": "最近の",
+      "shared": "私と共有しました",
+      "recentHint": "現在開いているものだけでなく、最後の訪問順に並べ替えられた履歴",
+      "sharedHint": "あなたと共有されるドキュメント、表、ファイル"
+    },
+    "openTabs": {
+      "label": "今すぐオープン",
+      "count": "{{count}}",
+      "close": "{{title}}を閉じる",
+      "hint": "エディターで開かれたドキュメント、表、ファイル"
+    },
+    "tree": {
+      "empty": "まだ文書や表がありません",
+      "emptyFolder": "中にページはありません",
+      "searchPlaceholder": "ドキュメントとテーブルを検索…",
+      "searchResults": "検索結果",
+      "newChildDoc": "新しいサブドキュメント",
+      "newChildTable": "新しいサブテーブル",
+      "moveTo": "に移動します…",
+      "foldersRetired": "フォルダーは廃止され、代わりにドキュメントとテーブルがネストされます",
+      "loadingChildren": "読み込み中…",
+      "maxNestingDepth": "最大ネストは 4 レベルです。これ以上サブドキュメントを追加できません"
+    }
+  },
+  "appHome": {
+    "aiAgents": "AIアバター",
+    "aiAgentsSubtitle": "組織内の AI アバターを管理: ペルソナとスキル バンドルを作成、名前変更、設定します。",
+    "skillLibrary": "スキルとコネクタ",
+    "collaborationSubtitle": "チームとして共同作業するプロジェクトを選択します。タスク、アセット、ディスカッションの範囲はそのプロジェクトに留まります。"
+  },
+  "filter": "フィルター...",
+  "personalOrganization": "個人的な",
+  "emptyTables": "テーブルなし",
+  "emptyHint": "項目がありません",
+  "actions": {
+    "agentOrganization": "ワークスペース",
+    "shellTest": "シェルテスト",
+    "taskExecution": "タスクの実行"
+  },
+  "plugins": {
+    "taskExecution": {
+      "description": "手動スキーマ入力による直接実行モード"
+    }
+  },
+  "tooltips": {
+    "collapse": "サイドバーを折りたたむ (⌘B)",
+    "expand": "サイドバーを展開 (⌘B)",
+    "newAgent": "新しいワークスペース"
+  },
+  "theme": {
+    "lightToggle": "ライトモード (クリックして切り替えます)",
+    "darkToggle": "ダークモード (クリックして切り替えます)",
+    "systemToggle": "システム (クリックして切り替え)",
+    "light": "ライト",
+    "dark": "ダーク",
+    "system": "システム"
+  },
+  "search": {
+    "tooltip": "検索(⌘K)"
+  },
+  "organizationFallback": "組織",
+  "loadingOrganizations": "組織を読み込んでいます...",
+  "loadingAgents": "ワークスペースを読み込んでいます...",
+  "personalIdentity": "個人的な",
+  "teamGroup": "組織",
+  "newTeam": "組織の作成",
+  "newOrganization": "新組織",
+  "personalSettings": "個人設定",
+  "organizationSettings": "組織設定",
+  "memberManagement": "メンバー管理",
+  "loadFailed": "読み込みに失敗しました",
+  "deviceOnline": "オンライン",
+  "deviceBusy": "忙しい",
+  "deviceOffline": "オフライン",
+  "deviceLocal": "このデバイス",
+  "deviceDraining": "タスクを受け付けていない",
+  "deviceUnknown": "ステータス不明",
+  "unknownDevice": "不明なデバイス",
+  "unboundDevice": "実行装置なし",
+  "deviceNeedsWorkspace": "まずこのデバイス上にワークスペースを作成します",
+  "sharedFrom": "{{name}} から共有",
+  "memo": "メモ",
+  "moreAgents": "さらに多くのワークスペース...",
+  "filterAgents": "ワークスペースをフィルタリング...",
+  "currentWorkspace": "現在のワークスペース",
+  "pinAgent": "ピンワークスペース",
+  "unpinAgent": "固定を解除する",
+  "workingDirMeta": "ルート: {{name}}",
+  "workingDirTitle": "作業ディレクトリ: {{dir}}",
+  "tabConversations": "会話",
+  "tabDesktop": "デスクトップ",
+  "tabMessages": "メッセージ",
+  "aiAvatars": "AIアバター",
+  "skillLibrary": "スキルとコネクタ",
+  "mainNav": {
+    "im": "メッセージ",
+    "agent": "スペース",
+    "memo": "記憶",
+    "me": "私",
+    "openIMWindow": "メッセージウィンドウを開く",
+    "openSettings": "設定を開く",
+    "unreadLabel": "{{label}} ({{count}} 未読)",
+    "pendingInviteLabel": "{{label}} ({{count}} 保留中の招待)"
+  },
+  "conversations": {
+    "title": "すべての会話",
+    "back": "ワークスペースに戻る",
+    "new": "新しいタスク",
+    "search": "会話を検索...",
+    "empty": "まだ会話はありません",
+    "emptyHint": "ワークスペースを作成してチャットを開始する",
+    "today": "今日",
+    "yesterday": "昨日",
+    "thisWeek": "今週",
+    "earlier": "以前",
+    "agentDeleted": "ワークスペースが削除されました",
+    "agentWorking": "働いています...",
+    "unread": "新しい返信",
+    "sharedFrom": "{{name}} から",
+    "selectAgent": "ワークスペースを選択してください",
+    "importAgentHistory": "外部エージェント履歴をインポートする",
+    "newTopic": "新しいタスク",
+    "searchAgent": "スペースを検索...",
+    "noAgents": "空きスペースがありません",
+    "filteringAgent": "フィルター: {{name}}",
+    "filteringOrganization": "組織フィルター: {{name}}",
+    "clearFilter": "クリアフィルター",
+    "justNow": "たった今",
+    "minutesAgo": "{{count}}分前",
+    "hoursAgo": "{{count}}時間前",
+    "daysAgo": "{{count}}前",
+    "untitledSession": "{{agent}}の会話",
+    "spaceNotFound": "会話のワークスペースは存在しないか、アーカイブされています",
+    "noResults": "一致する会話が見つかりませんでした",
+    "noResultsHint": "別のキーワードを試すか、フィルターをクリアしてください",
+    "createFailed": "会話を作成できませんでした。もう一度お試しください。",
+    "openFailed": "会話を開けませんでした。もう一度お試しください。",
+    "personalIdentity": "個人的な"
+  },
+  "space": {
+    "emptyTitle": "旅を始めましょう",
+    "emptyHint": "ワークスペース、グループ チャット、または DM を作成して始めましょう",
+    "loginHint": "サインイン",
+    "newAgent": "新しいワークスペース",
+    "newGroup": "新しいグループチャット",
+    "newDM": "新しいDM"
+  },
+  "untitled": "名前のないユーザー"
+}

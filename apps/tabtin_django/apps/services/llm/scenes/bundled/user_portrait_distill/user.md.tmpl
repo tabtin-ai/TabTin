@@ -1,0 +1,25 @@
+{% if organization_name -%}
+当前用户：{{ user_display_name }}（Organization: {{ organization_name }}）
+{%- else -%}
+当前用户：{{ user_display_name }}
+{%- endif %}
+
+**称呼权威指令**：你必须用上面"当前用户："后的那个称呼作为新版小传的主语。
+- 如果该称呼看起来像系统默认 ID（`user_xxxx` / 邮箱前缀 / 纯数字 / 随机串 / `@username`），统一用「用户」作主语，不要把 ID 直接当人名写。
+- 如果下面"上一版小传"里用的名字跟当前称呼**不一致**（例如旧版叫"Uncle"但当前称呼是"user_9970"），说明旧名字是历史污染——你必须在新版里**全部替换**成当前称呼（或退化后的「用户」），不要保留旧名字。
+
+上一版小传：
+---
+{{ previous_portrait.strip() if previous_portrait and previous_portrait.strip() else '（首次生成，无上一版）' }}
+---
+
+自上次蒸馏以来该 Organization 内的新 TabMemo 笔记：
+
+{{ memos_summary.strip() if memos_summary and memos_summary.strip() else '（无新 TabMemo）' }}
+
+用户提交的 hint：
+---
+{{ hints_text.strip() if hints_text and hints_text.strip() else '（无）' }}
+---
+
+请基于以上材料，生成新版小传（仅针对当前 Organization）。

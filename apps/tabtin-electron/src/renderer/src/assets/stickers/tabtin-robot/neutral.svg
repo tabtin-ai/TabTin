@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+  <g stroke="#111111" stroke-linecap="round" stroke-linejoin="round">
+    <!-- stubby antenna -->
+    <path d="M64 18v14" stroke-width="6"/>
+    <circle cx="64" cy="16" r="9" fill="#111111" stroke="none"/>
+    <circle cx="61" cy="13" r="2.8" fill="#FFFFFF" stroke="none"/>
+    
+    <path d="M48 18l-7-8" stroke-width="5"/>
+    <path d="M80 18l7-8" stroke-width="5"/>
+  
+    <!-- squishy TV head -->
+    <rect x="18" y="34" width="92" height="78" rx="28" ry="28" fill="#FFFFFF" stroke-width="7"/>
+    
+    <!-- big soft eyes -->
+    <circle cx="46" cy="70" r="9" fill="#111111" stroke="none"/>
+    <circle cx="82" cy="70" r="9" fill="#111111" stroke="none"/>
+    <circle cx="49" cy="66.5" r="3.2" fill="#FFFFFF" stroke="none"/>
+    <circle cx="85" cy="66.5" r="3.2" fill="#FFFFFF" stroke="none"/>
+    <!-- tiny smile -->
+    <path d="M56 90c3 5 13 5 16 0" stroke-width="4" fill="none"/>
+    
+    <!-- blush -->
+    <ellipse cx="36" cy="78" rx="7" ry="4" fill="#111111" opacity="0.12" stroke="none"/>
+    <ellipse cx="92" cy="78" rx="7" ry="4" fill="#111111" opacity="0.12" stroke="none"/>
+
+  
+  </g>
+</svg>

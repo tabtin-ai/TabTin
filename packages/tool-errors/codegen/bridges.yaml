@@ -1,0 +1,62 @@
+# String bridges: browser-core / action-tools ToolErrorCode literals →
+# agent-runtime error_kind literals.
+#
+# Wave 2 only generates the map + types + verify. Do NOT force-unify
+# `network_error` / `network_failed` string literals in producers.
+# Wave 3 may migrate producers onto runtime kinds; numeric codes stay out.
+
+bridges:
+  - from: network_error
+    source: browser-core
+    to: network_failed
+    note: Distinct literals retained; bridge only.
+
+  - from: invalid_parameter
+    source: browser-core
+    to: invalid_param_format
+    note: browser ToolErrorCode → runtime kind
+
+  - from: timeout
+    source: browser-core
+    to: request_timeout
+    note: browser generic timeout → runtime request_timeout
+
+  - from: stale_read
+    source: browser-core
+    to: tool_stale_read
+    note: action-tools TOCTOU code → runtime kind
+
+  - from: missing_required_param
+    source: browser-core
+    to: missing_required_param
+    note: identity
+
+  - from: permission_denied
+    source: browser-core
+    to: permission_denied
+    note: identity
+
+  - from: rate_limited
+    source: browser-core
+    to: rate_limited
+    note: identity
+
+  - from: old_string_not_found
+    source: browser-core
+    to: old_string_not_found
+    note: identity
+
+  - from: old_string_not_unique
+    source: browser-core
+    to: old_string_not_unique
+    note: identity
+
+  - from: file_too_large
+    source: browser-core
+    to: file_too_large
+    note: identity (file-pipeline kind)
+
+  - from: file_not_found
+    source: browser-core
+    to: file_not_found
+    note: identity (file-pipeline kind)

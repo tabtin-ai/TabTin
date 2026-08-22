@@ -1,0 +1,70 @@
+{
+  "id": "terminal",
+  "name": "Terminal",
+  "version": "0.1.0",
+  "kind": "app",
+  "icon": "terminal",
+  "description": "终端模拟器，支持命令行操作与远程 SSH 连接",
+  "objectModel": {
+    "entities": ["session"],
+    "schema": {
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "executionTarget": "frontend",
+  "uiRuntime": "localBundle",
+  "agentRuntime": "frontendBridge",
+  "distribution": "builtin",
+  "surface": "builtin",
+  "uiHints": {
+    "iconAsset": {
+      "default": "assets/icon.svg",
+      "presentation": "selfContained"
+    }
+  },
+  "contextSources": ["terminal"],
+  "permissions": ["terminal"],
+  "requiredCapabilities": [],
+  "runtimeDependencies": [],
+  "runtimeSupport": {
+    "electron": { "mode": "full" },
+    "daemon": { "mode": "full" }
+  },
+  "skills": ["skills/terminal-operator"],
+  "skillsConfig": {
+    "entries": {
+      "terminal-operator": { "enabled": true }
+    }
+  },
+  "lifecycleHooks": {},
+  "runtimeBindings": {
+    "toolProvider": "action-tools:terminal",
+    "uiProvider": "electron:context-space.terminal",
+    "skillsProvider": "skills:local"
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "contextFields": [
+      { "name": "current_terminal_cwd", "label": "cwd", "isResourceId": false }
+    ],
+    "toolDomains": ["terminal"],
+    "hasPromptSection": true,
+    "displayField": "session_id",
+    "workspaceRootSource": "",
+    "isFrontendDependent": true,
+    "typeAliases": []
+  },
+  "catalog": {
+    "category": "development",
+    "desktopGroup": "localResources",
+    "canCreate": true,
+    "searchable": false,
+    "isDefaultEnabled": false,
+    "order": 9
+  }
+}

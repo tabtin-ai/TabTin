@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	  仅 iOS Simulator 构建使用（project.yml 里以 [sdk=iphonesimulator*] 条件挂载）。
+
+	  模拟器上的 Keychain 由 macOS securityd 承载，会按进程 entitlements 里的
+	  keychain-access-groups / application-identifier 决定访问组；两者都没有时
+	  SecItemAdd / SecItemUpdate 一律返回 -34018 errSecMissingEntitlement，
+	  表现为「验证码校验通过但登录失败」（写 access_token 被系统拒绝后走回滚，
+	  回滚同样失败，弹出 Keychain partial write failure）。
+
+	  真机构建不用这个文件：entitlements 由 provisioning profile 派生，
+	  application-identifier 天然存在，签名口径与发布流程保持不变。
+	-->
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.tabtin.mobile</string>
+	</array>
+</dict>
+</plist>

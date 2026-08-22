@@ -1,0 +1,38 @@
+# 强制所有文本文件使用 LF 换行符
+* text=auto eol=lf
+
+# Python 文件
+*.py text eol=lf
+*.pyx text eol=lf
+*.pyi text eol=lf
+
+# Shell 脚本
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Markdown 文件
+*.md text eol=lf
+
+# JSON 文件
+*.json text eol=lf
+
+# YAML 文件
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# 配置文件
+*.ini text eol=lf
+*.cfg text eol=lf
+*.conf text eol=lf
+*.config text eol=lf
+
+# 二进制文件
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary

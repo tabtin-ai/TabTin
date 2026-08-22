@@ -1,0 +1,845 @@
+{
+  "$comment": "授权策略 v3 §7 硬红线 SSoT — TS hardline-v3.ts + Python generated_hardline.py + TS terminal-core/sensitive-paths.generated.ts + TS terminal-core/hardline-command-denylist.generated.ts 共同消费本文件。修改后必须跑 `python scripts/codegen-hardline.py` 重新生成所有 codegen 产物，否则 CI `--check` 失败 + scripts/infra-gate.sh 阻断。",
+  "$comment_decision_tree": "新加敏感路径规则的决策树（W7/B2 codegen 接入后）：\n  Q1: 你想保护的是什么形态？\n    A. 整路径四态判决（写敏感 + 工作区内 → ask；读敏感 + 工作区内 → allow；写敏感 + 工作区外 → deny；读敏感 + 工作区外 → ask）\n       → 加 `sensitive_path_list`（path-anchor 形态：(^|/)X(/|$) / X$）\n       消费方：hardline-v3.ts:checkSensitivePath（LLM judge 链路用）\n    B. shell 命令字符串里出现的敏感路径片段（如 `cat ~/.ssh/...`）\n       → 加 `path_scan_rules`（substring 形态：X\\b / 无锚点）\n       消费方：terminal-core/allowlist.ts:matchSensitivePath（终端命令扫描）+ Python path_safety 全路径 substring 兜底\n    C. Python 后端 sandbox 兜底：纯 basename 文件名级匹配（如 `.env`、`*.pem`、`id_rsa*`）\n       → 加 `path_basename_patterns`（fullmatch on basename 形态：^X$ / .*X$）\n       消费方：仅 Python path_safety.matches_sensitive_path 的 basename 检查\n  Q2: 大多数凭证 / 密钥（如 *.pem、id_rsa）应该三个 list 都加 —— 三个消费方各自独立，缺哪一份就在该消费方留漂移。\n  Q3: 改完跑 `python scripts/codegen-hardline.py` 重生成两个 codegen 产物（Python `apps/tabtin_django/apps/services/common/generated_hardline.py` + TS `packages/terminal-core/src/sensitive-paths.generated.ts`）；CI 用 `python scripts/codegen-hardline.py --check` 校验一致性（已接入 scripts/infra-gate.sh）。",
+  "schema_version": 1,
+  "absolute_command_denylist": [
+    {
+      "name": "rm -rf root or home",
+      "pattern": "rm\\s+(-[a-zA-Z]*\\s+)*-r[a-zA-Z]*\\s+(/\\s*\\*?|~|\\$HOME)(\\s|$)",
+      "flags": "",
+      "description": "递归删除根目录 / 家目录 / $HOME"
+    },
+    {
+      "name": "rm -rf system root",
+      "pattern": "rm\\s+(-[a-zA-Z]*\\s+)*-r[a-zA-Z]*\\s+/(\\s|$)",
+      "flags": "",
+      "description": "递归删除系统根（rm -rf /）"
+    },
+    {
+      "name": "fork bomb",
+      "pattern": ":\\s*\\(\\s*\\)\\s*\\{",
+      "flags": "",
+      "description": "Bash fork bomb :(){:|:&};:"
+    },
+    {
+      "name": "dd to raw device",
+      "pattern": "dd\\s+if=.*of=/dev/(sd|nvme|hd|disk)",
+      "flags": "",
+      "description": "dd 直写裸设备（破坏性磁盘写入）"
+    },
+    {
+      "name": "mkfs format",
+      "pattern": "\\bmkfs(\\.[a-zA-Z0-9]+)?\\b",
+      "flags": "",
+      "description": "格式化文件系统"
+    },
+    {
+      "name": "format disk windows",
+      "pattern": "\\bformat\\s+[A-Za-z]:",
+      "flags": "i",
+      "description": "Windows format 格式化盘符"
+    },
+    {
+      "name": "redirect to raw disk",
+      "pattern": ">\\s*/dev/(sd|nvme|hd|disk)[a-z0-9]*",
+      "flags": "",
+      "description": "Shell 重定向写裸设备"
+    },
+    {
+      "name": "curl pipe to shell",
+      "pattern": "(curl|wget)\\s.*\\|\\s*(ba|z|k)?sh\\b",
+      "flags": "",
+      "description": "从网上下载直接执行（curl|sh / wget|bash 等）"
+    },
+    {
+      "name": "shutdown / reboot",
+      "pattern": "\\b(shutdown|reboot|halt|poweroff)\\b",
+      "flags": "",
+      "description": "系统级关机 / 重启"
+    },
+    {
+      "name": "kill all processes",
+      "pattern": "\\bkill\\s+-9\\s+-1\\b|\\bkillall\\s+-9\\s",
+      "flags": "",
+      "description": "粗暴杀光所有进程"
+    },
+    {
+      "name": "mv to /dev/null",
+      "pattern": "\\bmv\\s+.+\\s+/dev/null\\b",
+      "flags": "",
+      "description": "把文件 mv 到 /dev/null（变相删除）"
+    },
+    {
+      "name": "sudo escalation",
+      "pattern": "(^|[\\s;&|`$\\(])sudo(\\s|$)",
+      "flags": "",
+      "description": "提权（sudo）—— 即使 yolo 也不自动批"
+    },
+    {
+      "name": "chmod 777 root",
+      "pattern": "chmod\\s+(-[a-zA-Z]*\\s+)*0?777\\s+(/|~)(\\s|$)",
+      "flags": "",
+      "description": "递归 chmod 777 系统根 / 家目录"
+    },
+    {
+      "name": "chmod -R 777",
+      "pattern": "chmod\\s+-R\\s+0?777\\b",
+      "flags": "",
+      "description": "递归 chmod 777"
+    },
+    {
+      "name": "chown -R root",
+      "pattern": "chown\\s+-R\\s+root\\b",
+      "flags": "",
+      "description": "递归 chown 到 root"
+    },
+    {
+      "name": "iptables flush",
+      "pattern": "\\biptables\\s+-F\\b|\\bufw\\s+(disable|reset)\\b",
+      "flags": "",
+      "description": "破坏防火墙规则（iptables -F / ufw disable）"
+    },
+    {
+      "name": "systemctl stop critical",
+      "pattern": "\\bsystemctl\\s+(stop|disable|mask)\\s+(sshd|networking|firewalld|systemd-)",
+      "flags": "",
+      "description": "停掉关键系统服务"
+    },
+    {
+      "name": "eval expansion",
+      "pattern": "\\beval\\s+[\"']?\\$[A-Za-z_]",
+      "flags": "",
+      "description": "eval 展开变量（任意命令注入）"
+    }
+  ],
+  "absolute_path_denylist": [
+    {
+      "name": "macOS /System",
+      "pattern": "^(/private)?/System(/|$)",
+      "flags": "",
+      "description": "macOS 系统只读区"
+    },
+    {
+      "name": "macOS /Library root",
+      "pattern": "^(/private)?/Library(/|$)",
+      "flags": "",
+      "description": "macOS 系统级 Library"
+    },
+    {
+      "name": "Unix /usr",
+      "pattern": "^(/private)?/usr(/|$)",
+      "flags": "",
+      "description": "Unix /usr 系统目录"
+    },
+    {
+      "name": "Unix /bin",
+      "pattern": "^(/private)?/bin(/|$)",
+      "flags": "",
+      "description": "Unix /bin 系统目录"
+    },
+    {
+      "name": "Unix /sbin",
+      "pattern": "^(/private)?/sbin(/|$)",
+      "flags": "",
+      "description": "Unix /sbin 系统目录"
+    },
+    {
+      "name": "Unix /etc",
+      "pattern": "^(/private)?/etc(/|$)",
+      "flags": "",
+      "description": "Unix /etc 系统配置（含 macOS firmlink /private/etc）"
+    },
+    {
+      "name": "Windows system root",
+      "pattern": "^[A-Z]:/Windows(/|$)",
+      "flags": "i",
+      "description": "Windows 系统目录"
+    },
+    {
+      "name": "Windows program files",
+      "pattern": "^[A-Z]:/Program Files( \\(x86\\))?(/|$)",
+      "flags": "i",
+      "description": "Windows 程序目录"
+    }
+  ],
+  "sensitive_path_list": [
+    {
+      "name": "ssh keys",
+      "pattern": "(^|/)\\.ssh(/|$)",
+      "flags": "",
+      "category": "ssh",
+      "description": "SSH 凭据目录"
+    },
+    {
+      "name": "aws credentials",
+      "pattern": "(^|/)\\.aws(/|$)",
+      "flags": "",
+      "category": "aws",
+      "description": "AWS 凭据目录"
+    },
+    {
+      "name": "gnupg",
+      "pattern": "(^|/)\\.gnupg(/|$)",
+      "flags": "",
+      "category": "gnupg",
+      "description": "GnuPG 密钥目录"
+    },
+    {
+      "name": "kube config",
+      "pattern": "(^|/)\\.kube(/|$)",
+      "flags": "",
+      "category": "kube",
+      "description": "Kubernetes 配置目录"
+    },
+    {
+      "name": "env file",
+      "pattern": "(^|/)\\.env(\\.[a-zA-Z0-9_-]+)?$",
+      "flags": "",
+      "category": "env",
+      "description": ".env / .env.* 配置文件"
+    },
+    {
+      "name": "pem key",
+      "pattern": "\\.pem$",
+      "flags": "",
+      "category": "private-key",
+      "description": "PEM 私钥"
+    },
+    {
+      "name": "key file",
+      "pattern": "\\.key$",
+      "flags": "",
+      "category": "private-key",
+      "description": ".key 私钥"
+    },
+    {
+      "name": "pfx key",
+      "pattern": "\\.pfx$",
+      "flags": "i",
+      "category": "private-key",
+      "description": "PFX 私钥"
+    },
+    {
+      "name": "p12 key",
+      "pattern": "\\.p12$",
+      "flags": "i",
+      "category": "private-key",
+      "description": "P12 私钥"
+    },
+    {
+      "name": "p8 key",
+      "pattern": "\\.p8$",
+      "flags": "i",
+      "category": "private-key",
+      "description": "P8 私钥"
+    },
+    {
+      "name": "crt cert (pem-like)",
+      "pattern": "\\.crt$",
+      "flags": "i",
+      "category": "private-key",
+      "description": "X.509 证书（保守按敏感处理 —— 常与私钥成对存放）"
+    },
+    {
+      "name": "kdbx password database",
+      "pattern": "\\.kdbx$",
+      "flags": "i",
+      "category": "password-manager",
+      "description": "KeePass 密码数据库"
+    },
+    {
+      "name": "git config",
+      "pattern": "(^|/)\\.git/config$",
+      "flags": "",
+      "category": "git",
+      "description": "git 仓库 config"
+    },
+    {
+      "name": "git hooks",
+      "pattern": "(^|/)\\.git/hooks(/|$)",
+      "flags": "",
+      "category": "git",
+      "description": "git 仓库钩子"
+    },
+    {
+      "name": "bashrc / zshrc",
+      "pattern": "(^|/)\\.(bash|zsh)(rc|_profile|_history|env)$",
+      "flags": "",
+      "category": "shell-rc",
+      "description": "shell 启动脚本"
+    },
+    {
+      "name": "gitconfig",
+      "pattern": "(^|/)\\.gitconfig$",
+      "flags": "",
+      "category": "git",
+      "description": "全局 gitconfig"
+    },
+    {
+      "name": "ssh private key by name",
+      "pattern": "(^|/)id_(rsa|ed25519|ecdsa|dsa)(\\.pub)?$",
+      "flags": "",
+      "category": "ssh",
+      "description": "命名 SSH 私钥（即使不在 .ssh/ 目录里）"
+    },
+    {
+      "name": "git credentials store",
+      "pattern": "(^|/)\\.git-credentials$",
+      "flags": "",
+      "category": "git",
+      "description": "Git credential.helper=store 明文凭据文件（用户名 / 密码 / token）"
+    },
+    {
+      "name": "git xdg credentials",
+      "pattern": "(^|/)\\.config/git/credentials$",
+      "flags": "",
+      "category": "git",
+      "description": "Git XDG credential 存储（用户名 / 密码 / token）"
+    },
+    {
+      "name": "terraform cloud credentials",
+      "pattern": "(^|/)\\.terraform\\.d/credentials\\.tfrc\\.json$",
+      "flags": "",
+      "category": "cloud-cli",
+      "description": "Terraform Cloud 凭据 JSON（terraform login 落盘）"
+    },
+    {
+      "name": "rubygems credentials",
+      "pattern": "(^|/)\\.gem/credentials$",
+      "flags": "",
+      "category": "package-credentials",
+      "description": "RubyGems 发布凭据（gem push token）"
+    },
+    {
+      "name": "macos keychain",
+      "pattern": "(^|/)Library/Keychains(/|$)",
+      "flags": "",
+      "category": "macos-keychain",
+      "description": "macOS Keychain（钥匙串 / 系统凭据 / Wi-Fi / 应用密码 / 证书私钥）"
+    },
+    {
+      "name": "macos system cookies",
+      "pattern": "(^|/)Library/Cookies(/|$)",
+      "flags": "",
+      "category": "browser-credentials",
+      "description": "macOS 系统 Cookies 容器"
+    },
+    {
+      "name": "password manager apps (macOS)",
+      "pattern": "(^|/)Library/Application Support/(1Password|Bitwarden|Dashlane|LastPass|Keeper|KeePass)",
+      "flags": "i",
+      "category": "password-manager",
+      "description": "密码管理器数据（1Password / Bitwarden / Dashlane / LastPass / Keeper / KeePass）"
+    },
+    {
+      "name": "chrome credentials (macOS)",
+      "pattern": "(^|/)Library/Application Support/Google/Chrome/[^/]+/(Cookies|Login Data|Web Data|Login Data For Account)(-[a-z]+)?$",
+      "flags": "",
+      "category": "browser-credentials",
+      "description": "Chrome 浏览器凭据 / Cookies / 表单数据 (macOS)"
+    },
+    {
+      "name": "chrome credentials (Linux)",
+      "pattern": "(^|/)\\.config/(google-chrome|chromium)/[^/]+/(Cookies|Login Data|Web Data|Login Data For Account)(-[a-z]+)?$",
+      "flags": "",
+      "category": "browser-credentials",
+      "description": "Chrome / Chromium 浏览器凭据 / Cookies (Linux)"
+    },
+    {
+      "name": "chrome credentials (Windows)",
+      "pattern": "(^|/)AppData/Local/Google/Chrome/User Data/[^/]+/(Cookies|Login Data|Web Data|Login Data For Account)(-[a-z]+)?$",
+      "flags": "i",
+      "category": "browser-credentials",
+      "description": "Chrome 浏览器凭据 / Cookies (Windows)"
+    },
+    {
+      "name": "firefox credentials (macOS)",
+      "pattern": "(^|/)Library/Application Support/Firefox/Profiles/[^/]+/(key[34]\\.db|logins\\.json|cookies\\.sqlite)$",
+      "flags": "",
+      "category": "browser-credentials",
+      "description": "Firefox 浏览器凭据 / Cookies (macOS)"
+    },
+    {
+      "name": "firefox credentials (Linux)",
+      "pattern": "(^|/)\\.mozilla/firefox/[^/]+/(key[34]\\.db|logins\\.json|cookies\\.sqlite)$",
+      "flags": "",
+      "category": "browser-credentials",
+      "description": "Firefox 浏览器凭据 / Cookies (Linux)"
+    },
+    {
+      "name": "firefox credentials (Windows)",
+      "pattern": "(^|/)AppData/Roaming/Mozilla/Firefox/Profiles/[^/]+/(key[34]\\.db|logins\\.json|cookies\\.sqlite)$",
+      "flags": "i",
+      "category": "browser-credentials",
+      "description": "Firefox 浏览器凭据 / Cookies (Windows)"
+    },
+    {
+      "name": "safari preferences",
+      "pattern": "(^|/)Library/Application Support/com\\.apple\\.Safari(/|$)",
+      "flags": "",
+      "category": "browser-credentials",
+      "description": "Safari 偏好设置容器"
+    },
+    {
+      "name": "safari cookies / history",
+      "pattern": "(^|/)Library/Safari/(Cookies\\.binarycookies|History\\.(plist|db))$",
+      "flags": "",
+      "category": "browser-credentials",
+      "description": "Safari Cookies / 历史数据库"
+    },
+    {
+      "name": "edge credentials (macOS)",
+      "pattern": "(^|/)Library/Application Support/Microsoft Edge/[^/]+/(Cookies|Login Data)(-[a-z]+)?$",
+      "flags": "",
+      "category": "browser-credentials",
+      "description": "Edge 浏览器凭据 / Cookies (macOS)"
+    },
+    {
+      "name": "edge credentials (Linux)",
+      "pattern": "(^|/)\\.config/microsoft-edge/[^/]+/(Cookies|Login Data)(-[a-z]+)?$",
+      "flags": "",
+      "category": "browser-credentials",
+      "description": "Edge 浏览器凭据 / Cookies (Linux)"
+    },
+    {
+      "name": "edge credentials (Windows)",
+      "pattern": "(^|/)AppData/Local/Microsoft/Edge/User Data/[^/]+/(Cookies|Login Data)(-[a-z]+)?$",
+      "flags": "i",
+      "category": "browser-credentials",
+      "description": "Edge 浏览器凭据 / Cookies (Windows)"
+    },
+    {
+      "name": "docker config",
+      "pattern": "(^|/)\\.docker/config\\.json$",
+      "flags": "",
+      "category": "cloud-cli",
+      "description": "Docker 配置 / 仓库登录 token"
+    },
+    {
+      "name": "npmrc",
+      "pattern": "(^|/)\\.npmrc$",
+      "flags": "",
+      "category": "package-credentials",
+      "description": ".npmrc（npm registry token）"
+    },
+    {
+      "name": "pypirc",
+      "pattern": "(^|/)\\.pypirc$",
+      "flags": "",
+      "category": "package-credentials",
+      "description": ".pypirc（PyPI 上传凭据）"
+    },
+    {
+      "name": "netrc",
+      "pattern": "(^|/)\\.netrc$",
+      "flags": "",
+      "category": "cloud-cli",
+      "description": ".netrc（HTTP / FTP 凭据）"
+    },
+    {
+      "name": "github cli config",
+      "pattern": "(^|/)\\.config/gh(/|$)",
+      "flags": "",
+      "category": "cloud-cli",
+      "description": "GitHub CLI 配置 / token"
+    },
+    {
+      "name": "azure cli",
+      "pattern": "(^|/)\\.azure(/|$)",
+      "flags": "",
+      "category": "cloud-cli",
+      "description": "Azure CLI 凭据"
+    },
+    {
+      "name": "gcloud config",
+      "pattern": "(^|/)\\.config/gcloud(/|$)",
+      "flags": "",
+      "category": "cloud-cli",
+      "description": "Google Cloud SDK 凭据"
+    },
+    {
+      "name": "terraform credentials",
+      "pattern": "(^|/)\\.(terraformrc|tfrc)$",
+      "flags": "",
+      "category": "cloud-cli",
+      "description": "Terraform 凭据 (.terraformrc / .tfrc)"
+    },
+    {
+      "name": "helm config",
+      "pattern": "(^|/)\\.config/helm(/|$)",
+      "flags": "",
+      "category": "cloud-cli",
+      "description": "Helm 配置（含 repo token）"
+    },
+    {
+      "name": "pulumi credentials",
+      "pattern": "(^|/)\\.config/pulumi(/|$)",
+      "flags": "",
+      "category": "cloud-cli",
+      "description": "Pulumi 凭据"
+    },
+    {
+      "name": "databricks config",
+      "pattern": "(^|/)\\.config/databricks(/|$)",
+      "flags": "",
+      "category": "cloud-cli",
+      "description": "Databricks CLI 凭据"
+    },
+    {
+      "name": "linux gnome keychain",
+      "pattern": "(^|/)\\.config/keychain(/|$)",
+      "flags": "",
+      "category": "linux-keyring",
+      "description": "Gnome Keychain 配置（Linux 桌面凭据）"
+    },
+    {
+      "name": "linux keyrings",
+      "pattern": "(^|/)\\.local/share/keyrings(/|$)",
+      "flags": "",
+      "category": "linux-keyring",
+      "description": "Linux Keyrings（gnome-keyring 数据）"
+    },
+    {
+      "name": "cargo credentials",
+      "pattern": "(^|/)\\.cargo/credentials(\\.toml)?$",
+      "flags": "",
+      "category": "package-credentials",
+      "description": "Rust cargo 凭据（crates.io 发布 token）"
+    },
+    {
+      "name": "gradle properties",
+      "pattern": "(^|/)\\.gradle/gradle\\.properties$",
+      "flags": "",
+      "category": "package-credentials",
+      "description": "Gradle 全局 properties（常含 repo token）"
+    },
+    {
+      "name": "maven settings",
+      "pattern": "(^|/)\\.m2/settings\\.xml$",
+      "flags": "",
+      "category": "package-credentials",
+      "description": "Maven 全局 settings.xml（含 repo 凭据）"
+    }
+  ],
+  "$comment_path_scan_rules": "shell 命令扫描 / 全路径 substring 扫描规则。语义与 sensitive_path_list 不同：sensitive_path_list 是 path-anchor 形态（^...$ / (^|/)），用于扫绝对路径整体（hardline-v3.ts:checkSensitivePath）；path_scan_rules 是 substring 形态（无锚点 / 用 \\b 边界），同时供两端消费：(1) terminal-core matchSensitivePath 扫 shell 命令字符串（如 `cat ~/.ssh/id_rsa` 中 `\\.ssh/` 子串）；(2) Python path_safety.matches_sensitive_path 全路径 substring 检查（sandbox short-circuit fail-closed 兜底）。每条规则字段同 sensitive_path_list（name / pattern / flags / category / description）。",
+  "path_scan_rules": [
+    {
+      "name": "/etc/shadow",
+      "pattern": "/etc/shadow\\b",
+      "flags": "",
+      "category": "system-auth",
+      "description": "Unix /etc/shadow 用户密码哈希"
+    },
+    {
+      "name": "/etc/gshadow",
+      "pattern": "/etc/gshadow\\b",
+      "flags": "",
+      "category": "system-auth",
+      "description": "Unix /etc/gshadow 用户组密码哈希"
+    },
+    {
+      "name": "/etc/master.passwd",
+      "pattern": "/etc/master\\.passwd\\b",
+      "flags": "",
+      "category": "system-auth",
+      "description": "BSD /etc/master.passwd"
+    },
+    {
+      "name": "/etc/passwd",
+      "pattern": "/etc/passwd\\b",
+      "flags": "",
+      "category": "system-auth",
+      "description": "Unix /etc/passwd 用户账户表"
+    },
+    {
+      "name": "/etc/sudoers",
+      "pattern": "/etc/sudoers\\b",
+      "flags": "",
+      "category": "system-auth",
+      "description": "sudoers 配置（提权）"
+    },
+    {
+      "name": "/etc/sudoers.d",
+      "pattern": "/etc/sudoers\\.d\\b",
+      "flags": "",
+      "category": "system-auth",
+      "description": "sudoers drop-in 目录"
+    },
+    {
+      "name": "/etc/security/",
+      "pattern": "/etc/security/",
+      "flags": "",
+      "category": "system-auth",
+      "description": "PAM 认证配置目录"
+    },
+    {
+      "name": "/etc/login.defs",
+      "pattern": "/etc/login\\.defs\\b",
+      "flags": "",
+      "category": "system-auth",
+      "description": "Unix login.defs 配置"
+    },
+    {
+      "name": ".ssh/",
+      "pattern": "\\.ssh/",
+      "flags": "",
+      "category": "ssh",
+      "description": "用户 SSH 凭据目录"
+    },
+    {
+      "name": "/etc/ssh/*_key",
+      "pattern": "/etc/ssh/[^/]*key\\b",
+      "flags": "i",
+      "category": "ssh",
+      "description": "系统 SSH 主机密钥"
+    },
+    {
+      "name": ".gnupg/",
+      "pattern": "\\.gnupg/",
+      "flags": "",
+      "category": "gnupg",
+      "description": "GnuPG 密钥目录"
+    },
+    {
+      "name": "/etc/ssl/private/",
+      "pattern": "/etc/ssl/private/",
+      "flags": "",
+      "category": "private-key",
+      "description": "系统 SSL 私钥目录"
+    },
+    {
+      "name": "/etc/pki/*/private",
+      "pattern": "/etc/pki/[^/]*/private/",
+      "flags": "i",
+      "category": "private-key",
+      "description": "RHEL PKI 私钥目录"
+    },
+    {
+      "name": "/proc/*/environ",
+      "pattern": "/proc/[^/]+/environ\\b",
+      "flags": "",
+      "category": "proc-leak",
+      "description": "Linux /proc/*/environ（进程环境变量泄露）"
+    },
+    {
+      "name": "/proc/*/mem",
+      "pattern": "/proc/[^/]+/mem\\b",
+      "flags": "",
+      "category": "proc-leak",
+      "description": "Linux /proc/*/mem（进程内存）"
+    },
+    {
+      "name": "/proc/*/maps",
+      "pattern": "/proc/[^/]+/maps\\b",
+      "flags": "",
+      "category": "proc-leak",
+      "description": "Linux /proc/*/maps（进程内存映射）"
+    },
+    {
+      "name": "/proc/kcore",
+      "pattern": "/proc/kcore\\b",
+      "flags": "",
+      "category": "proc-leak",
+      "description": "Linux /proc/kcore（内核内存）"
+    },
+    {
+      "name": "shell-history",
+      "pattern": "\\.(bash_history|zsh_history|sh_history|python_history|node_repl_history)\\b",
+      "flags": "",
+      "category": "shell-history",
+      "description": "shell / REPL 历史（可能含交互输入的密码）"
+    },
+    {
+      "name": "Keychains/",
+      "pattern": "/Library/Keychains/",
+      "flags": "i",
+      "category": "macos-keychain",
+      "description": "macOS Keychain 容器"
+    },
+    {
+      "name": "/var/db/dslocal/",
+      "pattern": "/var/db/dslocal/",
+      "flags": "",
+      "category": "macos-directory-service",
+      "description": "macOS Directory Service 本地账户库"
+    },
+    {
+      "name": "auth-log",
+      "pattern": "/var/log/(auth\\.log|secure)\\b",
+      "flags": "",
+      "category": "auth-log",
+      "description": "Linux 认证日志（含登录失败痕迹 / 临时密码）"
+    },
+    {
+      "name": "/run/secrets/",
+      "pattern": "/run/secrets/",
+      "flags": "",
+      "category": "container-secrets",
+      "description": "Docker / Kubernetes secrets 挂载点"
+    },
+    {
+      "name": ".netrc",
+      "pattern": "\\.netrc\\b",
+      "flags": "",
+      "category": "cloud-cli",
+      "description": ".netrc（HTTP / FTP 凭据）"
+    },
+    {
+      "name": ".pgpass",
+      "pattern": "\\.pgpass\\b",
+      "flags": "",
+      "category": "db-credentials",
+      "description": "PostgreSQL .pgpass 凭据"
+    },
+    {
+      "name": ".my.cnf",
+      "pattern": "\\.my\\.cnf\\b",
+      "flags": "",
+      "category": "db-credentials",
+      "description": "MySQL .my.cnf 凭据"
+    },
+    {
+      "name": ".aws/credentials",
+      "pattern": "\\.aws/credentials\\b",
+      "flags": "",
+      "category": "aws",
+      "description": "AWS 凭据文件"
+    },
+    {
+      "name": ".azure/",
+      "pattern": "\\.azure/[^/]*\\.json\\b",
+      "flags": "",
+      "category": "cloud-cli",
+      "description": "Azure CLI JSON 凭据"
+    },
+    {
+      "name": ".config/gcloud/",
+      "pattern": "\\.config/gcloud/",
+      "flags": "",
+      "category": "cloud-cli",
+      "description": "Google Cloud SDK 凭据目录"
+    },
+    {
+      "name": ".docker/config.json",
+      "pattern": "\\.docker/config\\.json\\b",
+      "flags": "",
+      "category": "cloud-cli",
+      "description": "Docker 配置 / 仓库登录 token"
+    },
+    {
+      "name": ".kube/config",
+      "pattern": "\\.kube/config\\b",
+      "flags": "",
+      "category": "kube",
+      "description": "Kubernetes kubeconfig"
+    },
+    {
+      "name": "*.crt",
+      "pattern": "\\.crt\\b",
+      "flags": "i",
+      "category": "private-key",
+      "description": "X.509 证书后缀（保守按敏感处理 —— 常与私钥成对存放）"
+    },
+    {
+      "name": "*.kdbx",
+      "pattern": "\\.kdbx\\b",
+      "flags": "i",
+      "category": "password-manager",
+      "description": "KeePass 密码数据库后缀"
+    },
+    {
+      "name": "ssh private key by name (substring)",
+      "pattern": "(^|[^a-zA-Z0-9_])id_(rsa|ed25519|ecdsa|dsa)\\b",
+      "flags": "",
+      "category": "ssh",
+      "description": "命名 SSH 私钥 substring 命中（W7/B2：补 terminal-core 端 id_dsa / id_ecdsa 漂移）。前置必须是非 word 字符或 string 起始，避免误命中 `my_id_rsa_helper` 这类。"
+    }
+  ],
+  "$comment_path_basename_patterns": "basename fullmatch 形态规则。仅给 Python path_safety.matches_sensitive_path 的 basename 检查使用（terminal-core 不消费——shell 命令字符串扫描走 substring 形态走 path_scan_rules）。fullmatch on basename 语义：rsplit('/')[-1] 后 re.fullmatch(pattern, basename)。每条规则字段同其他列表（name / pattern / flags / category / description）。",
+  "path_basename_patterns": [
+    {
+      "name": "env file",
+      "pattern": "^\\.env(?:\\..*)?$",
+      "flags": "i",
+      "category": "env",
+      "description": ".env / .env.* 配置文件 (basename fullmatch)"
+    },
+    {
+      "name": "*.pem",
+      "pattern": ".*\\.pem$",
+      "flags": "i",
+      "category": "private-key",
+      "description": "PEM 私钥 (basename fullmatch)"
+    },
+    {
+      "name": "*.key",
+      "pattern": ".*\\.key$",
+      "flags": "i",
+      "category": "private-key",
+      "description": ".key 私钥 (basename fullmatch)"
+    },
+    {
+      "name": "*.crt (basename)",
+      "pattern": ".*\\.crt$",
+      "flags": "i",
+      "category": "private-key",
+      "description": "X.509 证书 (basename fullmatch)"
+    },
+    {
+      "name": "*.pfx",
+      "pattern": ".*\\.pfx$",
+      "flags": "i",
+      "category": "private-key",
+      "description": "PFX 私钥 (basename fullmatch)"
+    },
+    {
+      "name": "*.p12",
+      "pattern": ".*\\.p12$",
+      "flags": "i",
+      "category": "private-key",
+      "description": "P12 私钥 (basename fullmatch)"
+    },
+    {
+      "name": "*.p8",
+      "pattern": ".*\\.p8$",
+      "flags": "i",
+      "category": "private-key",
+      "description": "P8 私钥 (basename fullmatch)"
+    },
+    {
+      "name": "id_rsa*",
+      "pattern": "^id_rsa.*$",
+      "flags": "i",
+      "category": "ssh",
+      "description": "命名 RSA SSH 私钥 (basename fullmatch)"
+    },
+    {
+      "name": "id_dsa*",
+      "pattern": "^id_dsa.*$",
+      "flags": "i",
+      "category": "ssh",
+      "description": "命名 DSA SSH 私钥 (basename fullmatch)"
+    },
+    {
+      "name": "id_ecdsa*",
+      "pattern": "^id_ecdsa.*$",
+      "flags": "i",
+      "category": "ssh",
+      "description": "命名 ECDSA SSH 私钥 (basename fullmatch)"
+    },
+    {
+      "name": "id_ed25519*",
+      "pattern": "^id_ed25519.*$",
+      "flags": "i",
+      "category": "ssh",
+      "description": "命名 Ed25519 SSH 私钥 (basename fullmatch)"
+    },
+    {
+      "name": "*.kdbx (basename)",
+      "pattern": ".*\\.kdbx$",
+      "flags": "i",
+      "category": "password-manager",
+      "description": "KeePass 密码数据库 (basename fullmatch)"
+    }
+  ]
+}

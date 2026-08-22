@@ -1,0 +1,131 @@
+{
+  "title": "Perfil",
+  "description": "Ver y editar su perfil, incluidos los conceptos básicos, la información de contacto y la configuración de la cuenta.",
+  "saved": "Perfil actualizado",
+  "validation": {
+    "usernameLength": "El nombre de usuario debe tener entre 3 y 20 caracteres.",
+    "usernameFormat": "El nombre de usuario solo puede contener letras, números y guiones bajos, y debe comenzar con una letra.",
+    "nicknameLength": "El apodo no puede exceder los 50 caracteres.",
+    "bioLength": "La biografía no puede exceder los 500 caracteres."
+  },
+  "errors": {
+    "updateFailed": "La actualización falló, inténtelo de nuevo más tarde",
+    "verificationFailed": "No se pudo enviar el código de verificación",
+    "logoutFailed": "Error al cerrar sesión"
+  },
+  "labels": {
+    "nickname": "Apodo",
+    "username": "Nombre de usuario",
+    "userId": "ID de usuario",
+    "phone": "Teléfono",
+    "email": "Correo electrónico",
+    "bio": "Biografía",
+    "contact": "Contacto",
+    "accountInfo": "Información de la cuenta",
+    "registeredAt": "Se unió",
+    "loginCount": "Recuento de inicios de sesión",
+    "lastLogin": "Último inicio de sesión",
+    "buildVersion": "Versión de compilación"
+  },
+  "placeholders": {
+    "nickname": "Introduce un apodo",
+    "username": "Introduzca un nombre de usuario",
+    "bio": "Cuéntanos sobre ti..."
+  },
+  "empty": {
+    "nickname": "Sin apodo",
+    "username": "Sin nombre de usuario",
+    "bio": "Este usuario no ha escrito una biografía...",
+    "contact": "Sin información de contacto",
+    "email": "Sin correo electrónico enlazado"
+  },
+  "actions": {
+    "editProfile": "Editar perfil",
+    "accountSettings": "Configuración de la cuenta",
+    "copyId": "Copiar identificación",
+    "copied": "copiado",
+    "logout": "Cerrar sesión",
+    "avatarComingSoon": "Próximamente carga de avatar",
+    "logoutConfirmTitle": "¿Cerrar sesión en su cuenta?",
+    "logoutConfirmDesc": "Cualquier trabajo no guardado en este dispositivo se perderá.",
+    "openStorageManager": "Administrador de almacenamiento",
+    "openStorageManagerHint": "Vea lo que TabTin ha almacenado en su máquina, luego limpie o exporte",
+    "changePassword": "Cambiar contraseña",
+    "bindEmail": "Vincular correo electrónico"
+  },
+  "avatar": {
+    "cropTitle": "avatar de cultivo",
+    "saved": "Avatar guardado",
+    "saveFailed": "No se pudo guardar el avatar",
+    "removeUnsupported": "Aún no se admite la eliminación de avatar"
+  },
+  "alt": {
+    "avatar": "avatar"
+  },
+  "stats": {
+    "loginCount": "{{value}} veces"
+  },
+  "changePassword": {
+    "title": "Cambiar contraseña",
+    "descChange": "Ingrese su contraseña actual para establecer una nueva.",
+    "descReset": "Se enviará un código de verificación a {{identifier}}. Verifíquelo para establecer una nueva contraseña.",
+    "descResetNoContact": "Esta cuenta no tiene correo electrónico ni teléfono vinculado, por lo que el restablecimiento basado en código no está disponible.",
+    "labels": {
+      "oldPassword": "Contraseña actual",
+      "verificationCode": "Código de verificación",
+      "newPassword": "Nueva contraseña",
+      "confirmPassword": "Confirmar nueva contraseña"
+    },
+    "placeholders": {
+      "oldPassword": "Ingrese la contraseña actual",
+      "verificationCode": "Ingrese el código de 6 dígitos",
+      "newPassword": "Establecer una nueva contraseña",
+      "confirmPassword": "Vuelva a ingresar la nueva contraseña"
+    },
+    "capsLockHint": "El bloqueo de mayúsculas está activado",
+    "actions": {
+      "sendCode": "Enviar código",
+      "submit": "Actualizar contraseña",
+      "forgotOld": "¿Olvidaste tu contraseña actual? Restablecer con un código",
+      "useOldPassword": "Volver a usar la contraseña actual"
+    },
+    "codeSent": "Código de verificación enviado",
+    "success": "Contraseña actualizada",
+    "successRelogin": "Por favor inicie sesión nuevamente con su nueva contraseña",
+    "errors": {
+      "oldRequired": "Por favor ingrese su contraseña actual",
+      "codeInvalid": "Por favor ingresa el código de 6 dígitos",
+      "newNoWhitespace": "La nueva contraseña no puede contener espacios; los espacios han sido eliminados",
+      "newNoCjk": "La contraseña no puede contener caracteres CJK; no pegues otro contenido",
+      "newTooShort": "La nueva contraseña debe tener al menos 8 caracteres",
+      "newNotComplex": "La nueva contraseña debe incluir al menos 3 de: mayúsculas, minúsculas, dígitos y caracteres especiales.",
+      "mismatch": "Las contraseñas no coinciden",
+      "sendCodeFailed": "No se pudo enviar el código, inténtelo nuevamente más tarde",
+      "failed": "No se pudo actualizar la contraseña, verifique su entrada y vuelva a intentarlo"
+    }
+  },
+  "bindEmail": {
+    "title": "Vincular correo electrónico",
+    "description": "Úselo para iniciar sesión, recuperar contraseña y alertas de saldo bajo de la organización.",
+    "labels": {
+      "email": "Correo electrónico",
+      "verificationCode": "Código de verificación"
+    },
+    "placeholders": {
+      "email": "nombre@ejemplo.com",
+      "verificationCode": "Ingrese el código de 6 dígitos"
+    },
+    "actions": {
+      "sendCode": "Enviar código",
+      "submit": "Vincular correo electrónico"
+    },
+    "codeSent": "Código de verificación enviado",
+    "success": "Correo electrónico enlazado correctamente",
+    "errors": {
+      "emailInvalid": "Introduzca una dirección de correo electrónico válida",
+      "codeInvalid": "Ingrese el código de 6 dígitos",
+      "sendCodeFailed": "No se pudo enviar el código, inténtelo nuevamente más tarde",
+      "failed": "No se pudo vincular el correo electrónico. Verifique su entrada y vuelva a intentarlo."
+    }
+  }
+}

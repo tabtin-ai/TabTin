@@ -1,0 +1,11 @@
+{
+  "panelEntry": {
+    "title": "Depuración del rastreador",
+    "opening": "Abriendo..."
+  },
+  "errorBoundary": {
+    "title": "Error de renderizado",
+    "unknown": "Error desconocido",
+    "emptyStack": "No hay pila de componentes disponible"
+  }
+}

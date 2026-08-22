@@ -1,0 +1,98 @@
+{
+  "labels": {
+    "strategy": "User-Agent 模擬策略",
+    "recommended": "推薦",
+    "highestRealism": "💯 最高真實度：{{system}}",
+    "mobileDeviceHint": "📱 從42+真實設備庫中隨機選擇",
+    "desktopPoolHint": "🎲 從20+桌面UA中隨機選擇，支援Chrome版本追蹤",
+    "platform": "平台",
+    "browser": "瀏覽器",
+    "preview": "即時預覽",
+    "uaPreview": "User-Agent 預覽",
+    "refreshRandom": "刷新隨機UA",
+    "refreshOne": "換一個",
+    "previewDesktopPool": "🎲 桌面池範例：實際從{{platform}} + {{browser}}的UA池中隨機",
+    "previewMobile": "📱 行動裝置範例：實際從{{device}}設備庫中加權隨機",
+    "previewAuto": "✅ 使用系統原生UA，保持最高真實度",
+    "consistencyTitle": "平台一致性檢查",
+    "consistencyLine": "目前系統: {{current}} → 目標平台: {{target}}",
+    "fingerprintTitle": "智慧指紋預覽",
+    "gpuVendor": "顯示卡廠商 (Vendor)",
+    "renderer": "渲染器 (Renderer)",
+    "platformInfo": "平台資訊",
+    "clientHints": "Client Hints 協定頭已自動適配",
+    "advancedSettings": "進階設定",
+    "customPlaceholder": "Mozilla/5.0 ..."
+  },
+  "mode": {
+    "auto": {
+      "label": "自動偵測",
+      "description": "使用系統真實環境，維持顯示卡、Client Hints等原生指紋，最真實、最難偵測"
+    },
+    "mobile": {
+      "label": "行動裝置模擬",
+      "description": "模擬行動設備，使用真實設備配置（42+設備庫，自動適配GPU、解析度等）"
+    },
+    "desktop_pool": {
+      "label": "桌面UA池",
+      "description": "從20+桌面UA中隨機選擇，預設選擇目前平台保持一致性，也可跨平台模擬。支援按平台/瀏覽器篩選"
+    },
+    "custom": {
+      "label": "自訂UA",
+      "description": "完全自訂UA字串，適合特殊需求"
+    }
+  },
+  "platforms": {
+    "current": "當前平台（保持原生）",
+    "windows": "Windows",
+    "macos": "macOS",
+    "linux": "Linux"
+  },
+  "browsers": {
+    "chrome": "Chrome",
+    "edge": "Edge",
+    "firefox": "Firefox",
+    "safari": "Safari"
+  },
+  "mobileDevices": {
+    "iphone": "iPhone（隨機熱門機型）",
+    "android": "Android（隨機熱門機型）",
+    "ipad": "iPad（隨機熱門機型）"
+  },
+  "mobileDevicesShort": {
+    "iphone": "iPhone",
+    "android": "Android",
+    "ipad": "iPad"
+  },
+  "platformNames": {
+    "macOS": "macOS",
+    "Windows": "Windows",
+    "Linux": "Linux",
+    "iOS": "iOS",
+    "iPadOS": "iPadOS",
+    "Android": "Android",
+    "Unknown": "未知"
+  },
+  "fingerprint": {
+    "mobileSummary": "📱 行動裝置模擬：{{device}} ({{os}} {{version}}) + {{gpu}}",
+    "androidSummary": "📱 行動裝置模擬：{{device}} + {{gpu}}",
+    "mac": {
+      "consistent": "✅ 平台一致：保持原生Apple GPU指紋",
+      "cross": "⚠️ 跨平台模擬：使用Apple GPU指紋"
+    },
+    "windows": {
+      "macToWindows": "⚠️ 跨平台模擬：Mac → Windows，GPU將偽裝為NVIDIA (運行時自動注入)",
+      "consistent": "✅ 平台一致：保持原生NVIDIA/AMD/Intel GPU指紋",
+      "cross": "⚠️ 跨平台模擬：使用NVIDIA GPU指紋"
+    },
+    "linux": {
+      "consistent": "✅ 平台一致：維持原生GPU指紋",
+      "cross": "⚠️ 跨平台模擬：使用Intel GPU指紋"
+    },
+    "unknown": "⚠️ 未識別的UA，使用預設Intel GPU指紋"
+  },
+  "consistency": {
+    "best": "✅ 最佳配置！保持平台一致可使用原生GPU指紋，最真實、最難偵測",
+    "cross": "⚠️ 跨平台模擬會更換GPU指紋，建議使用\"智慧模式\"保持平台一致性"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "panelEntry": {
+    "title": "Débogage du robot",
+    "opening": "Ouverture..."
+  },
+  "errorBoundary": {
+    "title": "Erreur de rendu",
+    "unknown": "Erreur inconnue",
+    "emptyStack": "Aucune pile de composants disponible"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "validation": {
+    "required": "このフィールドは必須です",
+    "invalidUrl": "有効な URL を入力してください",
+    "invalidEmail": "有効なメールアドレスを入力してください",
+    "invalidFormat": "無効な形式",
+    "minValue": "最小値は {{min}}",
+    "maxValue": "最大値は {{max}}",
+    "maxLength": "最大 {{max}} 文字"
+  },
+  "picker": {
+    "search": "検索...",
+    "noResults": "一致する結果はありません",
+    "empty": "利用可能な AI ツールはありません"
+  },
+  "blockCard": {
+    "presetTitle": "提出されたパラメータ",
+    "askUserTitle": "回答されたパラメータ",
+    "fallbackLabel": "パラメータ"
+  },
+  "card": {
+    "expand": "拡大する",
+    "collapse": "崩壊する",
+    "remove": "削除"
+  },
+  "upload": {
+    "clickToUpload": "クリックしてアップロード",
+    "fileTooLarge": "ファイルが大きすぎます",
+    "addMore": "追加"
+  },
+  "input": {
+    "presetPicker": "AIツール"
+  }
+}

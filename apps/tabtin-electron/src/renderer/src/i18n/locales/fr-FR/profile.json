@@ -1,0 +1,131 @@
+{
+  "title": "Profil",
+  "description": "Afficher et modifier votre profil, y compris les informations de base, les informations de contact et les paramètres du compte",
+  "saved": "Profil mis à jour",
+  "validation": {
+    "usernameLength": "Le nom d'utilisateur doit comporter entre 3 et 20 caractères",
+    "usernameFormat": "Le nom d'utilisateur ne peut contenir que des lettres, des chiffres et des traits de soulignement et doit commencer par une lettre.",
+    "nicknameLength": "Le pseudo ne peut pas dépasser 50 caractères",
+    "bioLength": "La biographie ne peut pas dépasser 500 caractères"
+  },
+  "errors": {
+    "updateFailed": "La mise à jour a échoué, veuillez réessayer plus tard",
+    "verificationFailed": "Échec de l'envoi du code de vérification",
+    "logoutFailed": "Échec de la déconnexion"
+  },
+  "labels": {
+    "nickname": "Surnom",
+    "username": "Nom d'utilisateur",
+    "userId": "Identifiant utilisateur",
+    "phone": "Téléphone",
+    "email": "Courriel",
+    "bio": "Biographie",
+    "contact": "Contacter",
+    "accountInfo": "Informations sur le compte",
+    "registeredAt": "Rejoint",
+    "loginCount": "Nombre de connexions",
+    "lastLogin": "Dernière connexion",
+    "buildVersion": "Version de construction"
+  },
+  "placeholders": {
+    "nickname": "Entrez un pseudo",
+    "username": "Entrez un nom d'utilisateur",
+    "bio": "Parlez-nous de vous..."
+  },
+  "empty": {
+    "nickname": "Pas de pseudo",
+    "username": "Aucun nom d'utilisateur",
+    "bio": "Cet utilisateur n'a pas écrit de biographie...",
+    "contact": "Aucune information de contact",
+    "email": "Aucun e-mail lié"
+  },
+  "actions": {
+    "editProfile": "Modifier le profil",
+    "accountSettings": "Paramètres du compte",
+    "copyId": "Copier l'identifiant",
+    "copied": "Copié",
+    "logout": "Se déconnecter",
+    "avatarComingSoon": "Téléchargement de l'avatar bientôt disponible",
+    "logoutConfirmTitle": "Vous déconnecter de votre compte ?",
+    "logoutConfirmDesc": "Tout travail non enregistré sur cet appareil sera perdu",
+    "openStorageManager": "Gestionnaire de stockage",
+    "openStorageManagerHint": "Voyez ce que TabTin a stocké sur votre machine, puis nettoyez ou exportez",
+    "changePassword": "Changer le mot de passe",
+    "bindEmail": "Lier un e-mail"
+  },
+  "avatar": {
+    "cropTitle": "Recadrer l'avatar",
+    "saved": "Avatar enregistré",
+    "saveFailed": "Échec de l'enregistrement de l'avatar",
+    "removeUnsupported": "La suppression de l'avatar n'est pas encore prise en charge"
+  },
+  "alt": {
+    "avatar": "avatar"
+  },
+  "stats": {
+    "loginCount": "{{value}} fois"
+  },
+  "changePassword": {
+    "title": "Changer le mot de passe",
+    "descChange": "Entrez votre mot de passe actuel pour en définir un nouveau.",
+    "descReset": "Un code de vérification sera envoyé à {{identifier}}. Vérifiez-le pour définir un nouveau mot de passe.",
+    "descResetNoContact": "Ce compte n'est pas lié à une adresse e-mail ou à un téléphone, la réinitialisation basée sur le code n'est donc pas disponible.",
+    "labels": {
+      "oldPassword": "Mot de passe actuel",
+      "verificationCode": "Code de vérification",
+      "newPassword": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le nouveau mot de passe"
+    },
+    "placeholders": {
+      "oldPassword": "Entrez le mot de passe actuel",
+      "verificationCode": "Entrez le code à 6 chiffres",
+      "newPassword": "Définir un nouveau mot de passe",
+      "confirmPassword": "Ressaisissez le nouveau mot de passe"
+    },
+    "capsLockHint": "Le verrouillage des majuscules est activé",
+    "actions": {
+      "sendCode": "Envoyer le code",
+      "submit": "Mettre à jour le mot de passe",
+      "forgotOld": "Mot de passe actuel oublié ? Réinitialiser avec un code",
+      "useOldPassword": "Retour à l'utilisation du mot de passe actuel"
+    },
+    "codeSent": "Code de vérification envoyé",
+    "success": "Mot de passe mis à jour",
+    "successRelogin": "Veuillez vous reconnecter avec votre nouveau mot de passe",
+    "errors": {
+      "oldRequired": "Veuillez entrer votre mot de passe actuel",
+      "codeInvalid": "Veuillez saisir le code à 6 chiffres",
+      "newNoWhitespace": "Le nouveau mot de passe ne peut pas contenir d'espaces ; des espaces ont été supprimés",
+      "newNoCjk": "Le mot de passe ne peut pas contenir de caractères CJK ; ne collez pas d'autre contenu",
+      "newTooShort": "Le nouveau mot de passe doit comporter au moins 8 caractères",
+      "newNotComplex": "Le nouveau mot de passe doit inclure au moins 3 des éléments suivants : majuscules, minuscules, chiffres et caractères spéciaux.",
+      "mismatch": "Les mots de passe ne correspondent pas",
+      "sendCodeFailed": "Échec de l'envoi du code, veuillez réessayer plus tard",
+      "failed": "Échec de la mise à jour du mot de passe, veuillez vérifier votre saisie et réessayer"
+    }
+  },
+  "bindEmail": {
+    "title": "Lier un e-mail",
+    "description": "Utilisez-le pour la connexion, la récupération de mot de passe et les alertes de solde faible de l'organisation.",
+    "labels": {
+      "email": "Courriel",
+      "verificationCode": "Code de vérification"
+    },
+    "placeholders": {
+      "email": "nom@exemple.com",
+      "verificationCode": "Entrez le code à 6 chiffres"
+    },
+    "actions": {
+      "sendCode": "Envoyer le code",
+      "submit": "Lier un e-mail"
+    },
+    "codeSent": "Code de vérification envoyé",
+    "success": "E-mail lié avec succès",
+    "errors": {
+      "emailInvalid": "Entrez une adresse e-mail valide",
+      "codeInvalid": "Entrez le code à 6 chiffres",
+      "sendCodeFailed": "Échec de l'envoi du code, veuillez réessayer plus tard",
+      "failed": "Échec de la liaison de l'e-mail, veuillez vérifier votre saisie et réessayer"
+    }
+  }
+}

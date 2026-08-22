@@ -1,0 +1,34 @@
+{
+  "name": "@tabtin/api-client",
+  "version": "0.1.0",
+  "description": "Type-safe API client generated from OpenAPI spec for TabTin",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src/generated"
+  ],
+  "scripts": {
+    "generate": "openapi-typescript ../../contracts/openapi/tabtin-api.yaml -o src/generated/schema.d.ts",
+    "build": "pnpm generate && tsc",
+    "test": "tsx --test tests/*.test.ts",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "openapi-fetch": "^0.13.0"
+  },
+  "devDependencies": {
+    "openapi-typescript": "^7.0.0",
+    "typescript": "5.7.2"
+  }
+}

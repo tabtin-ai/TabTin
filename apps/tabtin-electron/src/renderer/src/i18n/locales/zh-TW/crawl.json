@@ -1,0 +1,520 @@
+{
+  "addressBar": {
+    "secureTitle": "安全連線",
+    "insecureTitle": "不安全連接",
+    "placeholder": "輸入網址...",
+    "copy": "複製網址",
+    "copied": "已複製"
+  },
+  "toolbarDescriptions": {
+    "annotationLabel": "網頁註釋",
+    "annotation": "選擇頁面內容加入對話",
+    "cancelAnnotationLabel": "取消網頁註釋",
+    "cancelAnnotation": "退出網頁註釋模式",
+    "screenshotLabel": "截圖到對話",
+    "screenshot": "截取目前網頁視覺區域新增至對話",
+    "bookmarkLabel": "收藏目前網頁",
+    "bookmark": "稍後可從瀏覽器收藏開啟",
+    "removeBookmarkLabel": "取消收藏",
+    "removeBookmark": "從瀏覽器收藏中移除目前網頁"
+  },
+  "toast": {
+    "partitionRebuiltTitle": "已切換至新登入環境",
+    "partitionRebuiltDesc": "此標籤的瀏覽器身分已根據工作空間綁定自動更新；如剛才在填寫表單未提交，請重新輸入。"
+  },
+  "embedded": {
+    "loading": "加載中...",
+    "agentLockOverlay": "Agent 正在使用此瀏覽器",
+    "logs": {
+      "setViewBoundsUnavailable": "setViewBounds 不可用",
+      "setViewBoundsFailed": "更新 bounds 失敗"
+    },
+    "errors": {
+      "missingProfile": "workspace-view 缺少 profile/partition",
+      "showUnavailable": "host.view.show 不可用",
+      "showFailed": "顯示失敗",
+      "showPrecheckFailed": "顯示前置校驗失敗",
+      "pageLoadFailed": "頁面載入失敗",
+      "refreshFailed": "刷新失敗",
+      "navigationFailed": "導航失敗",
+      "navigationDeferredByAgent": "頁面正在被 Agent 任務使用，本次導航未執行",
+      "goBackFailed": "後退失敗",
+      "goForwardFailed": "前進失敗",
+      "reloadFailed": "刷新失敗",
+      "stopFailed": "停止載入失敗",
+      "actionUnavailable": "{{action}} 不可用",
+      "partitionRebuildFailed": "登入環境切換失敗：{{detail}}。請關閉並重新開啟此標籤。"
+    }
+  },
+  "urlInput": {
+    "title": "新網頁抓取",
+    "description": "輸入要抓取的網頁位址",
+    "urlLabel": "網址 *",
+    "urlPlaceholder": "https://example.com",
+    "nameLabel": "標籤名稱（可選）",
+    "namePlaceholder": "自動生成",
+    "cancel": "取消",
+    "create": "創建",
+    "errors": {
+      "required": "請輸入網址",
+      "invalid": "請輸入有效的網址（例如：baidu.com 或 https://baidu.com）"
+    },
+    "defaultName": "網頁 {{time}}"
+  },
+  "diagnosis": {
+    "errors": {
+      "requestFailed": "診斷請求失敗",
+      "failed": "診斷失敗",
+      "invalidResult": "診斷結果格式錯誤",
+      "feedbackFailed": "提交回饋失敗",
+      "missingActiveView": "未找到活動視圖",
+      "missingViewOptions": "缺少 viewOptions，無法取得頁面內容",
+      "getProcessedContentUnavailable": "getProcessedContent 不可用",
+      "noFeedbackRecord": "沒有可回饋的診斷記錄",
+      "noAvailableModel": "未找到可用模型，請先載入模型列表",
+      "noWorkspaceSelected": "未選擇工作空間，無法啟動串流診斷",
+      "streamDiagnosisFailed": "流式診斷失敗"
+    }
+  },
+  "resource": {
+    "errors": {
+      "downloadFailed": "下載失敗",
+      "fileSizeZero": "下載的檔案大小為 0",
+      "timeout": "下載逾時 ({{ms}}ms)"
+    }
+  },
+  "resourceCenter": {
+    "title": "資源中心",
+    "count": "{{count}} 個資源",
+    "count_one": "{{count}} 個資源",
+    "searchPlaceholder": "搜尋 URL / resourceId / MIME",
+    "searchInputLabel": "搜尋資源",
+    "empty": "目前頁面暫無可展示資源",
+    "previewUnavailable": "無預覽",
+    "sourceUrlTitle": "來源位址",
+    "selectHint": "選擇資源查看詳情",
+    "segmentBadge": "分片",
+    "values": {
+      "unknown": "未知",
+      "unknownMime": "未知 MIME",
+      "unknownSize": "未知",
+      "none": "無",
+      "fallbackNameSuffix": "資源"
+    },
+    "actions": {
+      "toggleDeveloperMode": "開發者模式（顯示詳細技術資訊）",
+      "developerMode": "開發者",
+      "refresh": "刷新資源",
+      "close": "關閉資源中心",
+      "downloadStream": "下載串流",
+      "downloadResource": "下載資源",
+      "captureContent": "捕捉內容",
+      "parseStream": "解析串流",
+      "copyLink": "複製連結",
+      "copyCliCommand": "複製 CLI 命令",
+      "copyAgentPrompt": "複製 Agent 指令",
+      "downloadCompleteVideo": "下載完整視頻"
+    },
+    "aria": {
+      "filterAll": "顯示全部資源",
+      "filterCategory": "依類別篩選：{{category}}",
+      "selectResource": "查看資源：{{name}}"
+    },
+    "errors": {
+      "loadFailed": "載入資源失敗",
+      "downloadFailed": "下載失敗",
+      "captureFailed": "捕獲失敗",
+      "parseStreamFailed": "流解析失敗",
+      "streamDownloadFailed": "串流下載失敗"
+    },
+    "toasts": {
+      "copyFailedTitle": "複製失敗",
+      "resourceDownloadedTitle": "資源已下載",
+      "capturedTitle": "資源內容已捕獲",
+      "captureCachedTitle": "資源內容已在快取中",
+      "streamParsedTitle": "串流解析完成",
+      "streamParsedVariants": "發現 {{count}} 個品質檔位",
+      "streamParsedVariants_one": "發現 {{count}} 個品質檔位",
+      "streamParsedUpdated": "已更新串流媒體元信息",
+      "streamDownloadedTitle": "串流媒體已下載",
+      "cliCopiedTitle": "CLI 指令已複製",
+      "agentPromptCopiedTitle": "Agent 指令片段已複製",
+      "linkCopiedTitle": "資源連結已複製",
+      "actionFailedTitle": "操作失敗"
+    },
+    "categories": {
+      "all": "全部",
+      "image": "圖片",
+      "video": "影片",
+      "audio": "音訊",
+      "hls": "HLS",
+      "dash": "DASH",
+      "document": "文檔",
+      "font": "字體"
+    },
+    "captureStatus": {
+      "metadata_only": "僅元數據",
+      "content_cached": "內容已快取",
+      "page_bound_blob": "頁面綁定 Blob",
+      "stream_manifest": "流清單",
+      "downloaded": "已下載",
+      "unsupported": "不支援",
+      "failed": "失敗"
+    },
+    "capabilities": {
+      "preview": "預覽",
+      "download": "下載",
+      "import": "導入",
+      "sendToAgent": "發送給 Agent",
+      "parse": "解析",
+      "streamDownload": "串流下載"
+    },
+    "sources": {
+      "network": "網路",
+      "dom_probe": "DOM 探測",
+      "cdp_capture": "CDP 捕獲",
+      "task_capture": "任務捕獲",
+      "manual_capture": "手動捕獲"
+    },
+    "developer": {
+      "title": "開發者資訊",
+      "idLabel": "ID",
+      "mimeTypeLabel": "MIME",
+      "statusLabel": "狀態",
+      "capabilitiesLabel": "能力",
+      "sourceLabel": "來源"
+    },
+    "qualityLabel": "畫質",
+    "qualityBest": "最高畫質",
+    "qualityWorst": "最低畫質",
+    "hints": {
+      "pageBoundBlob": "目前資源來自頁面內 `MediaSource/blob`，必須在該頁面上下文中擷取後才能穩定下載。",
+      "dashPhaseOne": "DASH 資源支援畫質選擇和完整影片下載。獨立音頻軌透過 ffmpeg 自動合併。",
+      "blobResource": "這是頁面內播放器資源。點選「擷取內容」可嘗試取得資源數據，然後再下載。",
+      "encrypted": "此資源可能使用了 DRM 加密，下載後可能無法正常播放。"
+    },
+    "streamInfo": {
+      "title": "串流媒體訊息",
+      "live": "直播串流",
+      "vod": "點播流",
+      "segmentCount": "{{count}} 分片",
+      "segmentCount_one": "{{count}} 分片"
+    }
+  },
+  "clients": {
+    "apiUnavailable": "{{api}} API 不可用",
+    "toolUnavailableTitle": "工具不可用",
+    "toolUnavailableDescription": "動作 {{action}} 未註冊，無法執行"
+  },
+  "task": {
+    "errors": {
+      "schemaMissingListSelector": "Schema 缺少必要的 listSelector 字段",
+      "schemaMissingFields": "Schema 缺少有效的字段配置",
+      "unknown": "未知錯誤",
+      "executionFailed": "任務執行失敗"
+    },
+    "logs": {
+      "apiUnavailable": "TaskAPI 不可用",
+      "schemaMissingListSelector": "Schema 格式錯誤，缺少 listSelector",
+      "schemaMissingFields": "presetSchema 缺少有效的 fields",
+      "createTaskFailed": "建立任務失敗",
+      "updateMetadataFailed": "更新任務元資料失敗",
+      "enqueueFailed": "任務入隊失敗",
+      "createTaskException": "建立任務異常",
+      "cancelTaskFailed": "取消任務失敗",
+      "resumeUnsupported": "TaskAPI 不支援 resume 方法",
+      "resumeFailed": "恢復任務失敗",
+      "resumeException": "恢復任務異常",
+      "resumeWithPaginationUnsupported": "TaskAPI 不支援 resumeWithPagination 方法",
+      "startPaginationFailed": "啟動翻頁失敗",
+      "paginationException": "翻頁任務異常",
+      "selectRecommendationUnsupported": "TaskAPI 不支援 selectRecommendation 方法",
+      "selectRecommendationFailed": "提交推薦選擇失敗",
+      "selectRecommendationException": "提交推薦選擇異常",
+      "apiUnavailableEffect": "useEffect: taskAPI 不可用",
+      "exportTraceUnavailable": "無法匯出流轉記錄：任務尚未初始化或 TaskAPI 不可用",
+      "exportTraceGetUnsupported": "TaskAPI 不支援 get 方法，無法匯出串流記錄",
+      "exportTraceMissingTask": "未取得任務數據，無法匯出流轉記錄",
+      "clipboardCopyFailed": "複製到剪貼簿失敗",
+      "exportTraceException": "匯出流轉記錄時發生異常"
+    }
+  },
+  "tabs": {
+    "defaultName": "抓取 {{count}}",
+    "workspaceDefaultName": "瀏覽器空間"
+  },
+  "tabStore": {
+    "errors": {
+      "workspaceViewInTabs": "[CrawlTabStore] 禁止將 workspace view 寫入 tabs[]",
+      "createTabWorkspaceNotAllowed": "[CrawlTabStore] createTab 不允許建立 workspace，請使用 createWorkspace",
+      "createWorkspaceExternalIdNotAllowed": "[CrawlTabStore] createWorkspace 禁止外部傳入 crawlspaceId",
+      "createWorkspaceMissingProfile": "[CrawlTabStore] createWorkspace 缺少 profile",
+      "createWorkspaceMissingSpaceOrPartition": "[CrawlTabStore] createWorkspace 必須傳 spaceId 或明確 partition，否則 workspace 沒有 session 隔離依據。",
+      "createWorkspaceMissingRandomUUID": "[CrawlTabStore] createWorkspace 缺少 crypto.randomUUID",
+      "createWorkspaceIdExists": "[CrawlTabStore] crawlspaceId 已存在: {{id}}",
+      "missingCrawlspaceContextCache": "[CrawlTabStore] 缺少 crawlspaceContextCache: {{id}}"
+    },
+    "warnings": {
+      "legacyCreateTab": "⚠️ createTab 為遺留路徑，請勿用於新功能"
+    }
+  },
+  "host": {
+    "errors": {
+      "viewIdMissingShow": "viewId 為空，無法顯示",
+      "viewIdMissingBounds": "viewId 為空，無法設定 bounds",
+      "viewIdMissingDestroy": "viewId 為空，無法銷毀",
+      "viewIdMissingCheck": "viewId 為空，無法檢查",
+      "viewIdMissingTouch": "viewId 為空，無法 touch",
+      "viewIdMissingLoadUrl": "viewId 為空，無法載入 URL",
+      "viewIdMissingWaitForSelector": "viewId 為空，無法等待選擇器",
+      "viewIdMissingGoBack": "viewId 為空，無法後退",
+      "viewIdMissingGoForward": "viewId 為空，無法前進",
+      "viewIdMissingReload": "viewId 為空，無法刷新",
+      "viewIdMissingStop": "viewId 為空，無法停止載入"
+    },
+    "logs": {
+      "ipcRendererUnavailable": "ipcRenderer 不可用，跳過 pagination 事件訂閱"
+    }
+  },
+  "workspaceDefaults": {
+    "errors": {
+      "missingPluginDefaults": "[工作空間Defaults] 未找到外掛預設配置: {{id}}"
+    }
+  },
+  "dataImport": {
+    "errors": {
+      "workspaceRequired": "未選擇工作空間",
+      "noData": "沒有數據可導入",
+      "createTableFailed": "建立表格失敗",
+      "createFieldFailed": "欄位建立失敗：{{details}}",
+      "importFailed": "導入資料失敗"
+    },
+    "progress": {
+      "creatingTable": "正在建立表格...",
+      "creatingFields": "正在建立字段...",
+      "tableReady": "表格建立完成，準備開始採集...",
+      "loadingCache": "正在加載資源快取...",
+      "downloadingResources": "正在下載資源...",
+      "uploadingResources": "正在上傳資源到平台...",
+      "importingData": "正在導入資料..."
+    },
+    "completion": {
+      "base": "資料導入完成！",
+      "withFailedAndMissing": "資料導入完成！成功 {{success}} 條，失敗 {{failed}} 條，{{missing}} 條缺少附件",
+      "withFailed": "資料導入完成！成功 {{success}} 條，失敗 {{failed}} 條",
+      "withMissing": "資料導入完成！成功 {{success}} 條，{{missing}} 條缺少附件"
+    },
+    "fieldDescription": {
+      "sourceField": "抓取字段: {{field}}",
+      "originalUrl": "{{name}}的原始URL",
+      "attachment": "{{name}}的附件"
+    },
+    "fieldName": {
+      "originalUrl": "{{name}}_原始鏈接"
+    },
+    "tableDescription": "抓取自: {{taskId}}",
+    "tableName": {
+      "default": "新表格",
+      "singlePart": "抓取資料_{{name}}"
+    }
+  },
+  "stages": {
+    "config": "配置",
+    "executing": "執行中",
+    "mapping": "字段映射",
+    "completed": "完成"
+  },
+  "fieldNames": {
+    "name": "名稱",
+    "title": "標題",
+    "rating": "評分",
+    "description": "描述",
+    "price": "價格",
+    "image": "圖片",
+    "url": "連結",
+    "date": "日期",
+    "author": "作者",
+    "category": "分類"
+  },
+  "workspace": {
+    "configMissing": "工作區配置缺失，請重新建立該工作區。",
+    "loading": "加載中...",
+    "pageLoadFailed": "頁面載入失敗",
+    "pageLoadFailedDesc": "無法連線到該網頁，請檢查網路或稍後重試",
+    "pageLoadErrors": {
+      "dns": {
+        "title": "網域無法解析",
+        "hint": "請檢查網址是否正確"
+      },
+      "offline": {
+        "title": "網路斷開",
+        "hint": "請檢查網路連線後重試"
+      },
+      "connection": {
+        "title": "無法連接伺服器",
+        "hint": "請稍後重試，或檢查網址是否正確"
+      },
+      "server": {
+        "title": "伺服器錯誤",
+        "hint": "請稍後重試"
+      }
+    },
+    "reload": "重新載入"
+  },
+  "portal": {
+    "logs": {
+      "noRenderTarget": "⚠️ 無渲染目標：有 slot 註冊但都未激活，且 parkingHost 不可用"
+    }
+  },
+  "temporaryTab": {
+    "logs": {
+      "uiEntryDisabled": "⏭️ 臨時標籤 UI 入口未開啟，跳過註冊",
+      "listenerAlreadyRegistered": "⏭️ 監聽器已註冊，跳過重複註冊",
+      "createRequestReceived": "收到建立臨時標籤請求:",
+      "workspaceInternalViewHandled": "⏭️ workspace 內部 view 由 Context 接管:",
+      "nonTemporaryIgnored": "⏭️ 非臨時任務，忽略創建請求:",
+      "tabExistsSkipped": "⚠️ 標籤存在，跳過創建:",
+      "tabCreated": "✅ 臨時標籤已建立:",
+      "skipAutoSelect": "已跳過自動選取（用於背景建立）",
+      "closeRequestReceived": "收到關閉臨時標籤請求:",
+      "workspaceViewSkipClose": "⏭️ workspace view 由 Context 處理，跳過關閉:",
+      "workspaceTabSkipClose": "⏭️ workspace tab 不走臨時標籤關閉連結:",
+      "nonTemporarySkipClose": "⏭️ 非臨時標籤，跳過關閉:",
+      "closeRequestNoTab": "⏭️ 未找到對應 tab/view，忽略關閉請求:",
+      "listenerRegistered": "✅ 臨時標籤監聽器已註冊",
+      "listenerCleaned": "🧹 臨時標籤監聽器已清理"
+    }
+  },
+  "recommendation": {
+    "defaultTitle": "推薦方案"
+  },
+  "downloads": {
+    "title": "下載管理",
+    "activeCount": "{{count}} 個下載進行中",
+    "activeCount_one": "{{count}} 個下載進行中",
+    "noActive": "暫無進行中的下載",
+    "searchPlaceholder": "搜尋檔案名稱或 URL...",
+    "clearCompleted": "清除已完成",
+    "clearAll": "清除歷史",
+    "empty": "暫無下載紀錄",
+    "emptyHint": "瀏覽網頁時的下載將會顯示在這裡",
+    "noResults": "沒有找到符合的下載",
+    "today": "今天",
+    "yesterday": "昨天",
+    "paused": "已暫停",
+    "cancelled": "已取消",
+    "failed": "下載失敗",
+    "completed": "下載完成",
+    "remaining": "剩餘 {{time}}",
+    "pauseAction": "暫停",
+    "resumeAction": "恢復",
+    "cancelAction": "取消",
+    "retryAction": "重試",
+    "openAction": "開啟文件",
+    "showInFolderAction": "在資料夾中顯示",
+    "removeAction": "移除記錄",
+    "deleteFileAction": "刪除文件",
+    "openFile": "開啟文件",
+    "copyLink": "複製下載連結",
+    "cancelDownload": "取消下載",
+    "started": "開始下載：{{name}}",
+    "noSpace": "請先開啟一個工作空間",
+    "ipcError": "{{action}} 失敗",
+    "actionFailed": "操作失敗",
+    "openFileFailed": "開啟檔案失敗",
+    "showInFolderFailed": "在資料夾中顯示失敗",
+    "deleteFileFailed": "刪除檔案失敗",
+    "fileUnavailable": "文件已失效",
+    "fileUnavailableHint": "文件已被移動或刪除，僅可從清單移除記錄",
+    "units": {
+      "perSecond": "/s",
+      "seconds": "秒",
+      "minutes": "分分鐘",
+      "hours": "小時"
+    },
+    "downloadCompleted": "下載完成：{{name}}",
+    "downloadFailed": "下載失敗：{{name}}",
+    "streamDefaultName": "串流媒體影片",
+    "streamActive": "串流媒體下載",
+    "streamHistory": "串流媒體史",
+    "streamResolving": "解析播放清單...",
+    "streamDownloading": "下載中",
+    "streamMerging": "合併分片中...",
+    "streamSegments": "分片",
+    "streamCompleted": "影片下載完成：{{name}}",
+    "streamFailed": "影片下載失敗：{{error}}",
+    "streamErrors": {
+      "ENCRYPTED_STREAM": "該影片受版權保護（DRM），暫不支援下載",
+      "LIVE_STREAM": "直播串流不支援下載，請等待直播結束後重試",
+      "NO_SEGMENTS": "未找到可下載的影片分片",
+      "NO_QUALITY_MATCH": "未找到符合的畫質選項",
+      "SEGMENT_FAILED": "影片下載失敗，部分內容無法取得（可能是網站限制）",
+      "DOWNLOAD_TIMEOUT": "下載逾時，請檢查網路連線後重試",
+      "HTTP_ERROR": "該網站阻止了下載請求",
+      "DOWNLOAD_ABORTED": "下載已取消",
+      "MERGE_FAILED": "視訊合併失敗，請重試",
+      "NETWORK_ERROR": "網路連線失敗，請檢查網路後重試",
+      "PARSE_ERROR": "視訊位址格式無法識別，可能不是有效的 m3u8 文件",
+      "UNKNOWN": "未知錯誤"
+    }
+  },
+  "bookmarks": {
+    "title": "書籤",
+    "totalCount": "{{count}} 個書籤",
+    "totalCount_one": "{{count}} 個書籤",
+    "noBookmarks": "暫無書籤",
+    "searchPlaceholder": "搜尋書籤...",
+    "clearAll": "清除全部",
+    "empty": "暫無書籤",
+    "emptyHint": "點擊網址列的星標收藏網頁",
+    "noResults": "沒有找到匹配的書籤",
+    "addAction": "收藏",
+    "removeAction": "取消收藏",
+    "openAction": "打開",
+    "deleteAction": "刪除"
+  },
+  "history": {
+    "title": "瀏覽歷史",
+    "totalCount": "{{count}} 筆記錄",
+    "totalCount_one": "{{count}} 筆記錄",
+    "noRecords": "暫無瀏覽紀錄",
+    "searchPlaceholder": "搜尋標題或 URL...",
+    "clearAll": "清除全部",
+    "empty": "暫無瀏覽紀錄",
+    "emptyHint": "瀏覽的網頁將會記錄在這裡",
+    "noResults": "沒有找到符合的記錄",
+    "today": "今天",
+    "yesterday": "昨天",
+    "thisWeek": "本週",
+    "thisMonth": "本月",
+    "openAction": "打開",
+    "deleteAction": "刪除"
+  },
+  "tabContextMenu": {
+    "rename": "重新命名",
+    "close": "關閉標籤",
+    "delete": "刪除標籤",
+    "dialogTitle": "重新命名標籤",
+    "dialogDescription": "為標籤設定一個新名稱",
+    "newNameLabel": "新名稱",
+    "newNamePlaceholder": "請輸入標籤名稱",
+    "cancel": "取消",
+    "confirm": "確定"
+  },
+  "agentAutofillFailed": {
+    "title": "自動登入失敗",
+    "titleCredential": "憑證可能已失效",
+    "titleFill": "自動填充未完成",
+    "descGeneric": "{{domain}} 自動登入失敗，請前往「設定 → 裝置 → 瀏覽器」檢查憑證",
+    "descCredential": "{{domain}} 的密碼可能已過期或停用，請前往「設定 → 裝置 → 瀏覽器」更新",
+    "descFill": "{{domain}} 的登入表單結構異常，已通知 Agent 暫停。請嘗試手動登入",
+    "descGenericWithAgent": "{{agentName}} 自動登入 {{domain}} 失敗，請前往「設定 → 裝置 → 瀏覽器」檢查憑證",
+    "descCredentialWithAgent": "{{agentName}} 自動登入 {{domain}} 時憑證失效，請前往「設定 → 裝置 → 瀏覽器」更新密碼",
+    "descFillWithAgent": "{{agentName}} 自動填入 {{domain}} 的登入表單失敗，可能是表單結構異常，請嘗試手動登入"
+  },
+  "agentAutofillSuccess": {
+    "title": "Agent 已自動登入",
+    "description": "Agent 已用 {{username}} 自動登入 {{domain}}",
+    "descriptionWithAgent": "{{agentName}} 已用 {{username}} 自動登入 {{domain}}"
+  }
+}

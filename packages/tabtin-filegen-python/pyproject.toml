@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tabtin-filegen"
+version = "0.1.0"
+description = "TabTin file generation CLI — produce xlsx/docx/pptx/pdf from JSON specs"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [{ name = "TabTin Team" }]
+keywords = ["tabtin", "cli", "xlsx", "docx", "pptx", "pdf", "filegen"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Office/Business :: Office Suites",
+    "Typing :: Typed",
+]
+dependencies = [
+    "openpyxl>=3.1",
+    "python-docx>=1.1",
+    "python-pptx>=1.0",
+    "reportlab>=4.0",
+    "pypdf>=4.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+build = ["pyinstaller"]
+
+[project.scripts]
+tabtin-filegen = "tabtin_filegen.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tabtin_filegen"]
+
+[tool.ruff]
+line-length = 100

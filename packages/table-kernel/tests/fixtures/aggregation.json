@@ -1,0 +1,19 @@
+[
+  { "func": "sum", "values": [1, 2, 3, 4, 5], "expected": 15 },
+  { "func": "sum", "values": [], "expected": 0 },
+  { "func": "average", "values": [10, 20, 30], "expected": 20 },
+  { "func": "average", "values": [], "expected": null },
+  { "func": "avg", "values": [2, 4], "expected": 3 },
+  { "func": "min", "values": [5, 3, 8, 1], "expected": 1 },
+  { "func": "min", "values": [], "expected": null },
+  { "func": "max", "values": [5, 3, 8, 1], "expected": 8 },
+  { "func": "count", "values": ["a", "b", null, "c"], "expected": 4 },
+  { "func": "count_not_empty", "values": ["a", "", null, "c"], "expected": 2 },
+  { "func": "count_empty", "values": ["a", "", null, "c"], "expected": 2 },
+  { "func": "count_distinct", "values": ["a", "b", "a", "c", null], "expected": 3 },
+  { "func": "percent_empty", "values": ["a", null, "", "d"], "expected": 50 },
+  { "func": "percent_not_empty", "values": ["a", null, "", "d"], "expected": 50 },
+  { "func": "array_join", "values": ["a", null, "b", "c"], "expected": "a, b, c" },
+  { "func": "array_unique", "values": ["a", "b", "a", "c"], "expected": ["a", "b", "c"] },
+  { "func": "array_compact", "values": ["a", null, "", "b"], "expected": ["a", "b"] }
+]

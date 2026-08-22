@@ -1,0 +1,11 @@
+# Go 编译产物本地生成，不入库（build-binaries.sh 每次本地重新拷贝）
+/binaries/*
+!/binaries/.gitkeep
+
+# Skill bundle：由 scripts/generate-skills-bundle.cjs 生成，prepack/build 时产出
+/skills/
+/.skills-staging/
+/skills.bak-*/
+
+# npm pack 产物
+*.tgz

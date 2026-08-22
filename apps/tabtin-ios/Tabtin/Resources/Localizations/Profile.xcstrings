@@ -1,0 +1,1322 @@
+{
+  "sourceLanguage" : "zh-Hans",
+  "strings" : {
+    "profile.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Me" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "我的" } }
+      }
+    },
+    "profile.defaultName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "User" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "用户" } }
+      }
+    },
+    "profile.deviceId" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Device ID" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "设备 ID" } }
+      }
+    },
+    "profile.logout" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Log Out" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "退出登录" } }
+      }
+    },
+    "profile.appearance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Appearance" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "外观" } }
+      }
+    },
+    "profile.theme.system" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "System" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "跟随系统" } }
+      }
+    },
+    "profile.theme.light" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Light" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "浅色" } }
+      }
+    },
+    "profile.theme.dark" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Dark" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "深色" } }
+      }
+    },
+    "profile.language" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Language" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "语言" } }
+      }
+    },
+    "profile.language.system" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "System" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "跟随系统" } }
+      }
+    },
+    "profile.editTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit Profile" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "编辑资料" } }
+      }
+    },
+    "profile.changeAvatar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change Avatar" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "更换头像" } }
+      }
+    },
+    "profile.changePassword" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change Password" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "修改密码" } }
+      }
+    },
+    "profile.changePasswordSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Update your sign-in password" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "更新登录密码" } }
+      }
+    },
+    "profile.changePassword.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Change Password" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "修改密码" } }
+      }
+    },
+    "profile.changePassword.descChange" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter your current password and choose a new one." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "输入当前密码并设置新密码。" } }
+      }
+    },
+    "profile.changePassword.descReset" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "A verification code will be sent to %@." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "验证码会发送到 %@。" } }
+      }
+    },
+    "profile.changePassword.descResetNoContact" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No verified phone or email is available for password recovery." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "当前账号没有可用于找回密码的已验证手机或邮箱。" } }
+      }
+    },
+    "profile.changePassword.current" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Current password" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "当前密码" } }
+      }
+    },
+    "profile.changePassword.verificationCode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Verification code" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "验证码" } }
+      }
+    },
+    "profile.changePassword.new" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "New password" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "新密码" } }
+      }
+    },
+    "profile.changePassword.confirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Confirm new password" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "确认新密码" } }
+      }
+    },
+    "profile.changePassword.placeholderOld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter current password" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "输入当前密码" } }
+      }
+    },
+    "profile.changePassword.placeholderCode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "6-digit code" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "6 位验证码" } }
+      }
+    },
+    "profile.changePassword.placeholderNew" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "At least 8 characters" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "至少 8 个字符" } }
+      }
+    },
+    "profile.changePassword.placeholderConfirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter the new password again" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "再次输入新密码" } }
+      }
+    },
+    "profile.changePassword.sendCode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Send code" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "发送验证码" } }
+      }
+    },
+    "profile.changePassword.submit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Save password" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "保存密码" } }
+      }
+    },
+    "profile.changePassword.forgotOld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Forgot current password? Use a verification code" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "忘记当前密码？使用验证码找回" } }
+      }
+    },
+    "profile.changePassword.useOld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Use current password instead" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "改用当前密码修改" } }
+      }
+    },
+    "profile.changePassword.codeSent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Code sent" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "验证码已发送" } }
+      }
+    },
+    "profile.changePassword.success" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Password updated" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "密码已更新" } }
+      }
+    },
+    "profile.changePassword.successRelogin" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "For your security, you will need to sign in again on all devices." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "出于安全考虑，所有设备都需要重新登录。" } }
+      }
+    },
+    "profile.changePassword.errorOldRequired" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter your current password." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请输入当前密码。" } }
+      }
+    },
+    "profile.changePassword.errorCodeInvalid" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter the 6-digit verification code." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请输入 6 位验证码。" } }
+      }
+    },
+    "profile.changePassword.errorNewRequired" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter a new password." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请输入新密码。" } }
+      }
+    },
+    "profile.changePassword.errorNewNoWhitespace" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Passwords cannot contain spaces." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "密码不能包含空格。" } }
+      }
+    },
+    "profile.changePassword.errorNewNoCJK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Passwords cannot contain Chinese characters." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "密码不能包含中文字符。" } }
+      }
+    },
+    "profile.changePassword.errorNewTooShort" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Use at least 8 characters." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "密码至少需要 8 个字符。" } }
+      }
+    },
+    "profile.changePassword.errorNewNotComplex" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Use at least 3 of uppercase, lowercase, numbers, and symbols." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请至少组合大写字母、小写字母、数字和符号中的 3 类。" } }
+      }
+    },
+    "profile.changePassword.errorMismatch" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "The passwords do not match." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "两次输入的密码不一致。" } }
+      }
+    },
+    "profile.changePassword.errorSendCode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Could not send the verification code. Try again." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "验证码发送失败，请重试。" } }
+      }
+    },
+    "profile.changePassword.errorFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Could not update the password. Try again." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "密码更新失败，请重试。" } }
+      }
+    },
+    "profile.nicknameLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Nickname" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "昵称" } }
+      }
+    },
+    "profile.nicknamePlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter your nickname" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请输入昵称" } }
+      }
+    },
+    "profile.nicknameRequired" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Nickname is required" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "昵称不能为空" } }
+      }
+    },
+    "profile.nicknameTooLong" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Nickname cannot exceed 50 characters" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "昵称不能超过 50 个字符" } }
+      }
+    },
+    "profile.usernameLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Username" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "用户名" } }
+      }
+    },
+    "profile.usernamePlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Letters, numbers, underscores" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "字母、数字、下划线" } }
+      }
+    },
+    "profile.usernameLength" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Username must be 3-20 characters" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "用户名需要 3-20 个字符" } }
+      }
+    },
+    "profile.usernameFormat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Only letters, numbers and underscores, and cannot start with a number" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "只能包含字母、数字和下划线，不能以数字开头" } }
+      }
+    },
+    "profile.bioLabel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Bio" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "个人简介" } }
+      }
+    },
+    "profile.bioPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tell us about yourself" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "介绍一下自己" } }
+      }
+    },
+    "profile.bioTooLong" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Bio cannot exceed 500 characters" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "简介不能超过 500 个字符" } }
+      }
+    },
+    "profile.bioEmpty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No bio yet" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "还没有简介" } }
+      }
+    },
+    "profile.basicInfoHeader" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Basic Info" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "基本信息" } }
+      }
+    },
+    "profile.aboutHeader" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "About" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "关于" } }
+      }
+    },
+    "profile.contactHeader" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Contact" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "联系方式" } }
+      }
+    },
+    "profile.verified" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Verified" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已验证" } }
+      }
+    },
+    "profile.verify" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Verify" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "验证" } }
+      }
+    },
+    "profile.accountHeader" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Account" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "账户信息" } }
+      }
+    },
+    "profile.registeredAt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Registered" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "注册时间" } }
+      }
+    },
+    "profile.loginCount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Login Count" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "登录次数" } }
+      }
+    },
+    "profile.lastLogin" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Last Login" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "最近登录" } }
+      }
+    },
+    "profile.version" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Version" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "版本" } }
+      }
+    },
+    "profile.discardTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Discard Changes?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "放弃修改？" } }
+      }
+    },
+    "profile.discardMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You have unsaved changes. Are you sure you want to discard them?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你有未保存的修改，确定要放弃吗？" } }
+      }
+    },
+    "profile.discardAction" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Discard" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "放弃" } }
+      }
+    },
+    "profile.keepEditing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Keep Editing" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "继续编辑" } }
+      }
+    },
+    "profile.about.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "About" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "关于" } }
+      }
+    },
+    "profile.about.versionFormat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Version %@ (Build %@)" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "版本 %@（构建 %@）" } }
+      }
+    },
+    "profile.about.website" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Official Website" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "官方网站" } }
+      }
+    },
+    "profile.about.help" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Help Center" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "帮助中心" } }
+      }
+    },
+    "profile.about.privacy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Privacy Policy" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "隐私政策" } }
+      }
+    },
+    "profile.about.terms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Terms of Service" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "服务条款" } }
+      }
+    },
+    "profile.notifications.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notifications" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "通知" } }
+      }
+    },
+    "profile.notifications.permission" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Permission" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "权限" } }
+      }
+    },
+    "profile.notifications.enabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notifications Enabled" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "通知已开启" } }
+      }
+    },
+    "profile.notifications.enabledDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You will receive push notifications for important updates." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "您将收到重要更新的推送通知。" } }
+      }
+    },
+    "profile.notifications.denied" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notifications Disabled" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "通知已关闭" } }
+      }
+    },
+    "profile.notifications.deniedDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Please enable notifications in system settings to receive updates." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请在系统设置中开启通知以接收更新。" } }
+      }
+    },
+    "profile.notifications.openSettings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Open System Settings" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "打开系统设置" } }
+      }
+    },
+    "profile.notifications.notDetermined" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enable Notifications" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "开启通知" } }
+      }
+    },
+    "profile.notifications.notDeterminedDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Get notified when your agent completes tasks or needs your attention." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "当 Agent 完成任务或需要您关注时，及时收到通知。" } }
+      }
+    },
+    "profile.notifications.enable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enable Notifications" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "开启通知" } }
+      }
+    },
+    "profile.notifications.categories" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notification Types" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "通知类型" } }
+      }
+    },
+    "profile.notifications.approval.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Approvals and Input Requests" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "审批与输入请求" } }
+      }
+    },
+    "profile.notifications.chat.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Messages" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "消息" } }
+      }
+    },
+    "profile.notifications.mentions.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Messages That Mention Me" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "接收 @ 我的消息" } }
+      }
+    },
+    "profile.notifications.chat.desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notifications for new messages from agents." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "收到 Agent 新消息时通知。" } }
+      }
+    },
+    "profile.notifications.task.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Completed Tasks" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "完成任务" } }
+      }
+    },
+    "profile.notifications.task.desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notifications when tasks complete, fail, or need approval." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "任务完成、失败或需要审批时通知。" } }
+      }
+    },
+    "profile.notifications.system.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "System" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "系统通知" } }
+      }
+    },
+    "profile.notifications.system.desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "System announcements and account notifications." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "系统公告和账号相关通知。" } }
+      }
+    },
+    "profile.logoutConfirmTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Log Out?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "确认退出？" } }
+      }
+    },
+    "profile.logoutConfirmMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You will need to log in again to access your account." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "退出后需要重新登录才能访问你的账号。" } }
+      }
+    },
+    "profile.privacyAndData" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Privacy & Data" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "隐私与数据" } }
+      }
+    },
+    "profile.deleteAccountTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete Account" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "注销账号" } }
+      }
+    },
+    "profile.deleteAccountAction" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Request Account Deletion" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "申请注销账号" } }
+      }
+    },
+    "profile.deleteAccountIntroTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Permanently delete your account" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "永久删除你的账号" } }
+      }
+    },
+    "profile.deleteAccountIntroBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You can request deletion of your TabTin account and associated personal data directly in the app." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "你可以在应用内直接申请注销 TabTin 账号及关联的个人数据。" } }
+      }
+    },
+    "profile.deleteAccountWarningTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This action cannot be undone after the grace period" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "冷静期结束后将无法恢复" } }
+      }
+    },
+    "profile.deleteAccountWarningBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your profile, conversations, and workspace data linked to this account will be permanently deleted." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "与该账号关联的个人资料、对话记录和工作区数据将被永久删除。" } }
+      }
+    },
+    "profile.deleteAccountGraceTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "30-day grace period" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "30 天冷静期" } }
+      }
+    },
+    "profile.deleteAccountGraceBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "After you submit the request, your account enters a %lld-day grace period. You can log in again during this time to cancel the deletion." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "提交申请后，账号将进入 %lld 天冷静期。期间你可重新登录并取消注销。" } }
+      }
+    },
+    "profile.deleteAccountConfirmTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Confirm account deletion?" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "确认申请注销？" } }
+      }
+    },
+    "profile.deleteAccountConfirmMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your deletion request will be scheduled. You will be logged out after confirmation." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "注销申请将被受理，确认后你将退出登录。" } }
+      }
+    },
+    "profile.deleteAccountConfirmAction" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Confirm Deletion" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "确认注销" } }
+      }
+    },
+    "profile.deleteAccountSubmittedTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deletion Request Submitted" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "注销申请已提交" } }
+      }
+    },
+    "profile.deleteAccountSubmittedMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your account is scheduled for deletion on %@. Log in before that date if you change your mind." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "账号将于 %@ 完成注销。若改变主意，请在该日期前重新登录。" } }
+      }
+    },
+    "profile.deleteAccountPendingTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deletion in progress" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "注销申请处理中" } }
+      }
+    },
+    "profile.deleteAccountPendingBody" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your account is scheduled for deletion on %@." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "账号将于 %@ 完成注销。" } }
+      }
+    },
+    "profile.deleteAccountPendingNote" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You can cancel this request below if you change your mind." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "若改变主意，可在下方取消注销申请。" } }
+      }
+    },
+    "profile.deleteAccountCancelRequest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel Deletion Request" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "取消注销申请" } }
+      }
+    },
+    "profile.verifyTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter Verification Code" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "输入验证码" } }
+      }
+    },
+    "profile.verifyCodeSentEmail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "A verification code has been sent to your email." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "验证码已发送至你的邮箱。" } }
+      }
+    },
+    "profile.verifyCodeSentPhone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "A verification code has been sent to your phone." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "验证码已发送至你的手机。" } }
+      }
+    },
+    "profile.verifyCodePlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "000000" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "000000" } }
+      }
+    },
+    "profile.verifyResend" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Resend Code" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "重新发送" } }
+      }
+    },
+    "profile.verifySubmit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Verify" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "验证" } }
+      }
+    },
+    "profile.voice.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Voice Settings" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "语音设置" } }
+      }
+    },
+    "profile.voice.platform.header" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "PLATFORM HOTWORDS" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "平台热词" } }
+      }
+    },
+    "profile.voice.platform.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Always Enabled" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "始终启用" } }
+      }
+    },
+    "profile.voice.platform.desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Built-in product terms are automatically boosted for better recognition." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "内置产品术语自动增强，提升语音识别准确率。" } }
+      }
+    },
+    "profile.voice.platform.footer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Showing examples only. The full list covers all TabTin product and feature terms." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "仅展示部分示例，完整词库涵盖所有 TabTin 产品和功能术语。" } }
+      }
+    },
+    "profile.voice.context.header" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "CONTEXT ENHANCEMENT" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "上下文增强" } }
+      }
+    },
+    "profile.voice.appContext.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "App Context" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "应用上下文" } }
+      }
+    },
+    "profile.voice.appContext.desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Auto-extract organization & workspace names as hotwords." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自动提取组织、工作空间名称作为热词。" } }
+      }
+    },
+    "profile.voice.dialogContext.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Dialog Context" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "对话上下文" } }
+      }
+    },
+    "profile.voice.dialogContext.desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Use recent chat history for context-aware recognition." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "传入最近对话，让语音识别更懂上下文。" } }
+      }
+    },
+    "profile.voice.hotword.header" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "CUSTOM DICTIONARY" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自定义词库" } }
+      }
+    },
+    "profile.voice.hotword.desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add custom words to boost their recognition probability." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加自定义词汇，提升识别概率。" } }
+      }
+    },
+    "profile.voice.hotword.empty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No custom words yet" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂无自定义词汇" } }
+      }
+    },
+    "profile.voice.hotword.emptyDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add names, terms, or jargon that voice recognition often gets wrong." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加语音识别容易出错的人名、术语或专业词汇。" } }
+      }
+    },
+    "profile.voice.hotword.placeholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Enter a word..." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "输入词汇…" } }
+      }
+    },
+    "profile.voice.hotword.add" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Word" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加词汇" } }
+      }
+    },
+    "profile.voice.hotword.footer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Custom words boost recognition probability but don't guarantee exact matches." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自定义词汇提升识别概率，但不保证完全匹配。如需确定性纠正，请使用替换词。" } }
+      }
+    },
+    "profile.voice.replacement.header" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "REPLACEMENT WORDS" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "替换词" } }
+      }
+    },
+    "profile.voice.replacement.desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Auto-correct specific recognition errors, e.g. 张恺 → 张凯." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自动纠正特定识别错误，如 张恺 → 张凯。" } }
+      }
+    },
+    "profile.voice.replacement.empty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No replacement rules" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂无替换规则" } }
+      }
+    },
+    "profile.voice.replacement.emptyDesc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Define rules to auto-correct specific recognition errors, e.g. wrong names." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "定义替换规则，自动纠正特定识别错误，如人名误识别。" } }
+      }
+    },
+    "profile.voice.replacement.fromPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Wrong text" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "识别错误" } }
+      }
+    },
+    "profile.voice.replacement.toPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Correct text" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "正确文本" } }
+      }
+    },
+    "profile.voice.replacement.add" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Rule" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加规则" } }
+      }
+    },
+    "profile.voice.replacement.confirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加" } }
+      }
+    },
+    "profile.voice.replacement.footer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Replacement rules apply deterministic text correction after voice recognition." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "替换词在语音识别完成后进行确定性文本纠正。" } }
+      }
+    },
+    "profile.usernameUnavailable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This username is unavailable" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "这个用户名不可用" } }
+      }
+    },
+    "profile.pending" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Pending" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "待处理" } }
+      }
+    },
+    "profile.editProfileAccessibility" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Edit profile" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "编辑资料" } }
+      }
+    },
+    "profile.imageReadFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Could not read image" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "图片读取失败" } }
+      }
+    },
+    "profile.imageProcessFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Could not process image" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "图片处理失败" } }
+      }
+    },
+    "profile.avatarUploadFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Avatar upload failed" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "头像上传失败" } }
+      }
+    },
+    "profile.voice.autoEnabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Auto" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自动启用" } }
+      }
+    },
+    "profile.nicknameTooLong.format" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Nickname cannot exceed %lld characters" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "昵称最多 %lld 个字符" } }
+      }
+    },
+    "profile.bioTooLong.format" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Bio cannot exceed %lld characters" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "简介最多 %lld 个字符" } }
+      }
+    },
+    "profile.voice.category.product" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Product Terms" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "产品名词" } }
+      }
+    },
+    "profile.voice.category.agent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "AI & Agent" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "AI 与 Agent" } }
+      }
+    },
+    "profile.voice.category.feature" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Feature Terms" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "功能术语" } }
+      }
+    },
+    "debug.scan.invalid" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This is not a valid TabTin mobile environment QR code." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "这不是有效的 TabTin 移动端环境二维码" } }
+      }
+    },
+    "debug.scan.prompt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Align the QR code shown in TabTin Desktop" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "对准 TabTin 电脑端展示的二维码" } }
+      }
+    },
+    "debug.scan.succeeded" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "URLs filled in. Review them, then tap Apply." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "地址已填入，请核对后点击应用" } }
+      }
+    },
+    "debug.scan.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Scan environment QR code" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "扫描环境二维码" } }
+      }
+    },
+    "debug.scanQRCode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Scan QR code" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "扫描二维码" } }
+      }
+    },
+    "debug.scanQRCode.hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Use the QR code from TabTin Desktop > Settings > About & Updates." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "使用 TabTin 电脑端“设置 > 关于与更新”中的二维码" } }
+      }
+    },
+    "debug.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Debug" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Debug" } }
+      }
+    },
+    "debug.entry" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Debug Tools" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Debug 工具" } }
+      }
+    },
+    "debug.network.section" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Network Environment" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "网络环境" } }
+      }
+    },
+    "debug.current.section" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Current Values" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "当前生效" } }
+      }
+    },
+    "debug.apiBaseURL" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "API Base URL" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "API Base URL" } }
+      }
+    },
+    "debug.wsBaseURL" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "WebSocket Base URL" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "WebSocket Base URL" } }
+      }
+    },
+    "debug.customAPIBaseURL" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Custom API URL" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自定义 API URL" } }
+      }
+    },
+    "debug.customWSBaseURL" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Custom WS URL" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自定义 WS URL" } }
+      }
+    },
+    "debug.preset.production" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Production" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "生产环境" } }
+      }
+    },
+    "debug.preset.test" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Test" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "测试环境" } }
+      }
+    },
+    "debug.preset.custom" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Custom" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自定义" } }
+      }
+    },
+    "debug.debugSwift.section" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "DebugSwift" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "DebugSwift" } }
+      }
+    },
+    "debug.debugSwift.floatingWindow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Show Floating Window" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "外露悬浮窗" } }
+      }
+    },
+    "debug.apply" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Apply" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "应用" } }
+      }
+    },
+    "debug.reset" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reset to Project Config" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "恢复项目配置" } }
+      }
+    },
+    "debug.applied" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Saved. The app will quit now." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已保存，应用即将退出" } }
+      }
+    },
+    "debug.invalidAPIURL" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "API URL must start with http:// or https://" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "API URL 需要以 http:// 或 https:// 开头" } }
+      }
+    },
+    "debug.invalidWSURL" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "WS URL must start with ws:// or wss://" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "WS URL 需要以 ws:// 或 wss:// 开头" } }
+      }
+    },
+    "debug.sentry.section" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Error reporting" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "错误上报" } }
+      }
+    },
+    "debug.sentryDSN" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sentry DSN" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Sentry DSN" } }
+      }
+    },
+    "debug.sentryDSN.hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Leave empty to disable. Apply to take effect immediately." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "留空即关闭。填写后点应用立即生效。" } }
+      }
+    },
+    "debug.invalidSentryDSN" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sentry DSN must be an http(s) URL with a public key." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Sentry DSN 需要是带公钥的 http(s) 地址。" } }
+      }
+    },
+    "debug.sentryApplied" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Sentry DSN saved." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Sentry DSN 已保存。" } }
+      }
+    },
+    "debug.projectDefault.format" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Project default: %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "项目默认：%@" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

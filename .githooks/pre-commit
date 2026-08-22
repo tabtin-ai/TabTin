@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "${ROOT}"
+
+run_pnpm() {
+  if command -v pnpm >/dev/null 2>&1; then
+    pnpm "$@"
+    return
+  fi
+  if command -v corepack >/dev/null 2>&1; then
+    corepack pnpm "$@"
+    return
+  fi
+  echo "[pre-commit] Missing pnpm/corepack. Install pnpm 9 or run: corepack enable && corepack prepare pnpm@9.15.0 --activate"
+  return 127
+}
+
+run_eslint_in_batches() {
+  local batch_size="${ESLINT_STAGED_BATCH_SIZE:-50}"
+  local -a batch=()
+  local path
+
+  for path in "$@"; do
+    batch+=("${path}")
+    if (( ${#batch[@]} >= batch_size )); then
+      run_pnpm exec eslint "${batch[@]}"
+      batch=()
+    fi
+  done
+
+  if (( ${#batch[@]} > 0 )); then
+    run_pnpm exec eslint "${batch[@]}"
+  fi
+}
+
+STAGED="$(git diff --cached --name-only --diff-filter=ACMR)"
+electron_staged_eslint_files=()
+if [[ -n "${STAGED}" ]]; then
+  while IFS= read -r path; do
+    case "${path}" in
+      apps/tabtin-electron/src/*.ts|apps/tabtin-electron/src/*.tsx)
+        electron_staged_eslint_files+=("${path}")
+        ;;
+    esac
+  done <<< "${STAGED}"
+fi
+
+if [[ ${#electron_staged_eslint_files[@]} -gt 0 ]]; then
+  echo "[pre-commit] Electron source staged — running ESLint on staged TS files..."
+  run_eslint_in_batches "${electron_staged_eslint_files[@]}"
+fi
+
+# Desktop bundle gate: typecheck catches TS/export drift before packaging.
+ELECTRON_BUILD_PATH_PATTERN='^(apps/tabtin-electron/|packages/).*\.(ts|tsx|mts|cts|js|jsx|mjs|cjs|json)$|^(pnpm-lock\.yaml|pnpm-workspace\.yaml|package\.json|tsconfig.*\.json)$'
+if [[ -n "${STAGED}" ]] && echo "${STAGED}" | grep -qE "${ELECTRON_BUILD_PATH_PATTERN}"; then
+  echo "[pre-commit] Electron workspace changed — running tabtin-electron typecheck..."
+  run_pnpm --filter tabtin-electron typecheck
+fi

@@ -1,0 +1,51 @@
+{
+  "aliases": [],
+  "capability_ref": {
+    "expected_hash": "sha256:5a3bfb3bcac06b12f58626df131e9c5f58b93424da02ca79a47b8da6727d691c",
+    "key": "doubao-seed-2-1-pro-draft-capability",
+    "kind": "model-capability",
+    "revision": "1"
+  },
+  "control_key": "thinking-mode",
+  "exposed_values": [
+    "off",
+    "standard",
+    "deep"
+  ],
+  "identity": {
+    "canonical_hash": "sha256:7bbfc9a15dabb0a049a2f62d53cf7170eff685035caefe60741e2fd47b72bedf",
+    "key": "doubao-seed-2-1-pro-draft-thinking-control",
+    "kind": "product-control-mapping",
+    "revision": "1"
+  },
+  "operations": [
+    {
+      "input_value": "off",
+      "operation": "set",
+      "schema_version": "1",
+      "source": null,
+      "target": "thinking-mode",
+      "value": "off",
+      "when": null
+    },
+    {
+      "input_value": "standard",
+      "operation": "set",
+      "schema_version": "1",
+      "source": null,
+      "target": "thinking-mode",
+      "value": "medium",
+      "when": null
+    },
+    {
+      "input_value": "deep",
+      "operation": "set",
+      "schema_version": "1",
+      "source": null,
+      "target": "thinking-mode",
+      "value": "high",
+      "when": null
+    }
+  ],
+  "schema_version": "1"
+}

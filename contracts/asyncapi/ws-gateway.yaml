@@ -1,0 +1,1547 @@
+asyncapi: "2.6.0"
+
+info:
+  title: TabTin WebSocket Gateway
+  version: 1.0.0
+  description: |
+    TabTin WebSocket 网关协议规范。
+    所有消息均使用 GatewayEnvelope 统一信封格式。
+  license:
+    name: Proprietary
+
+servers:
+  development:
+    url: ws://localhost:6060/ws/v1/gateway
+    protocol: ws
+    description: 本地开发环境
+  production:
+    url: wss://api.example.com/ws/v1/gateway
+    protocol: ws
+    description: 生产环境
+
+defaultContentType: application/json
+
+# ─────────────────────────────────────────────
+# 连接约束与扩展元数据
+# ─────────────────────────────────────────────
+x-connection-constraints:
+  auth_timeout_seconds: 15
+  heartbeat_interval_seconds: 30
+  client_silence_timeout_seconds: 120
+  max_connections_per_user: 10
+  max_subscriptions_per_connection: 50
+  rate_limit:
+    window_seconds: 10
+    max_messages: 100
+  max_message_bytes: 1000000
+
+x-roles:
+  electron:
+    scope: session
+    description: Electron 桌面客户端，接收全部事件
+  mobile:
+    scope: user
+    description: 移动端客户端，不接收 agent.action.*
+    excluded_topics: ["agent.action.*"]
+  daemon:
+    scope: device
+    description: 后台守护进程，不接收 context.sync、table.events、docparse.events
+    excluded_topics: ["context.sync", "table.events", "docparse.events"]
+  admin:
+    scope: user
+    description: 管理端，不接收 agent.action.*
+    excluded_topics: ["agent.action.*"]
+  channel:
+    scope: channel
+    description: 渠道接入，使用 HMAC 认证
+    auth_method: hmac
+  backend:
+    scope: internal
+    description: 服务端内部角色
+
+x-topic-capabilities:
+  context.sync: context.sync
+  agent.stream: agent.stream
+  agent.action: agent.action
+  table.events: table.events
+  trace.stream: trace.stream
+  llm.stream: llm.stream
+  docparse.events: docparse.events
+  goal.events: goal.events
+  git.status: git.status
+  notifications: notifications
+  extension.events: extension.events
+
+x-close-codes:
+  1000:
+    description: 正常关闭
+  1001:
+    description: 正常关闭（客户端离开）
+  4001:
+    description: 认证超时或认证失败
+  4002:
+    description: 心跳超时（客户端静默超过 120 秒）
+  4003:
+    description: 认证失败或连接数超限
+
+x-error-codes:
+  WS_1000_AUTH_REQUIRED:
+    description: 需要先发送 auth 消息
+  WS_1001_AUTH_INVALID:
+    description: 认证凭据无效或过期
+  WS_1002_VERSION_UNSUPPORTED:
+    description: 协议版本不受支持
+  WS_1003_SCHEMA_INVALID:
+    description: 消息格式不符合信封规范
+  WS_1004_TYPE_UNKNOWN:
+    description: 未知的消息类型
+  WS_1005_PERMISSION_DENIED:
+    description: 当前角色无权发送/接收该类型消息
+  WS_1006_NOT_FOUND:
+    description: 目标资源不存在
+  WS_1007_RATE_LIMITED:
+    description: 消息发送频率超限
+  WS_1008_CONFLICT:
+    description: 资源冲突（如重复订阅）
+  WS_1009_TIMEOUT:
+    description: 操作超时
+  WS_1010_INTERNAL_ERROR:
+    description: 服务端内部错误
+  WS_1011_CONNECTION_LIMIT:
+    description: 用户并发连接数超限
+  WS_1012_SUBSCRIPTION_LIMIT:
+    description: 单连接订阅数超限
+
+# ─────────────────────────────────────────────
+# 通道定义
+# ─────────────────────────────────────────────
+channels:
+
+  # ==================== 客户端 → 服务端 ====================
+
+  auth:
+    publish:
+      operationId: sendAuth
+      summary: 认证握手
+      description: 连接建立后客户端必须在 15 秒内发送此消息完成认证
+      message:
+        $ref: "#/components/messages/Auth"
+
+  subscribe:
+    publish:
+      operationId: sendSubscribe
+      summary: 订阅 topic
+      message:
+        $ref: "#/components/messages/Subscribe"
+
+  unsubscribe:
+    publish:
+      operationId: sendUnsubscribe
+      summary: 取消订阅 topic
+      message:
+        $ref: "#/components/messages/Unsubscribe"
+
+  resume:
+    publish:
+      operationId: sendResume
+      summary: 断线重连重放
+      description: 客户端断线重连后发送，服务端从 last_event_id 之后开始重放
+      message:
+        $ref: "#/components/messages/Resume"
+
+  ping:
+    publish:
+      operationId: sendPing
+      summary: 客户端心跳
+      message:
+        $ref: "#/components/messages/Ping"
+
+  agent.action.result:
+    publish:
+      operationId: sendActionResult
+      summary: Action 执行结果
+      description: daemon/electron 将 action 执行结果回传给服务端
+      message:
+        $ref: "#/components/messages/AgentActionResult"
+
+  agent.action.approval_request:
+    publish:
+      operationId: sendApprovalRequest
+      summary: 审批请求（electron 发起）
+      description: electron 客户端请求用户审批某个 action
+      message:
+        $ref: "#/components/messages/AgentActionApprovalRequest"
+
+  agent.action.approval_response:
+    publish:
+      operationId: sendApprovalResponse
+      summary: 审批响应（daemon 发起）
+      description: daemon 将用户审批结果回传
+      message:
+        $ref: "#/components/messages/AgentActionApprovalResponse"
+
+  git.status.report:
+    publish:
+      operationId: sendGitStatusReport
+      summary: Git 状态上报（daemon）
+      message:
+        $ref: "#/components/messages/GitStatusReport"
+
+  git.diff.request:
+    publish:
+      operationId: sendGitDiffRequest
+      summary: 请求 Git diff（前端）
+      message:
+        $ref: "#/components/messages/GitDiffRequest"
+
+  git.diff.response:
+    publish:
+      operationId: sendGitDiffResponse
+      summary: 返回 Git diff（daemon）
+      message:
+        $ref: "#/components/messages/GitDiffResponse"
+
+  # ==================== 服务端 → 客户端 ====================
+
+  auth.ok:
+    subscribe:
+      operationId: onAuthOk
+      summary: 认证成功
+      message:
+        $ref: "#/components/messages/AuthOk"
+
+  subscribe.ok:
+    subscribe:
+      operationId: onSubscribeOk
+      summary: 订阅确认
+      message:
+        $ref: "#/components/messages/SubscribeOk"
+
+  unsubscribe.ok:
+    subscribe:
+      operationId: onUnsubscribeOk
+      summary: 取消订阅确认
+      message:
+        $ref: "#/components/messages/UnsubscribeOk"
+
+  resume.ok:
+    subscribe:
+      operationId: onResumeOk
+      summary: 重放确认
+      message:
+        $ref: "#/components/messages/ResumeOk"
+
+  pong:
+    subscribe:
+      operationId: onPong
+      summary: 心跳响应
+      message:
+        $ref: "#/components/messages/Pong"
+
+  tick:
+    subscribe:
+      operationId: onTick
+      summary: 服务端心跳 tick（每 30 秒）
+      message:
+        $ref: "#/components/messages/Tick"
+
+  error:
+    subscribe:
+      operationId: onError
+      summary: 错误通知
+      message:
+        $ref: "#/components/messages/Error"
+
+  agent.stream.lifecycle:
+    subscribe:
+      operationId: onStreamLifecycle
+      summary: Agent 运行生命周期变化
+      message:
+        $ref: "#/components/messages/AgentStreamLifecycle"
+
+  agent.stream.chunk:
+    subscribe:
+      operationId: onStreamChunk
+      summary: Agent 文本增量 (deprecated — 请使用 agent.stream.assistant)
+      message:
+        $ref: "#/components/messages/AgentStreamChunk"
+
+  agent.stream.reasoning:
+    subscribe:
+      operationId: onStreamReasoning
+      summary: Agent 推理增量
+      message:
+        $ref: "#/components/messages/AgentStreamReasoning"
+
+  agent.stream.tool:
+    subscribe:
+      operationId: onStreamTool
+      summary: Agent 工具调用
+      message:
+        $ref: "#/components/messages/AgentStreamTool"
+
+  agent.stream.step:
+    subscribe:
+      operationId: onStreamStep
+      summary: Agent 步骤更新
+      message:
+        $ref: "#/components/messages/AgentStreamStep"
+
+  agent.stream.done:
+    subscribe:
+      operationId: onStreamDone
+      summary: Agent 流结束
+      message:
+        $ref: "#/components/messages/AgentStreamDone"
+
+  agent.stream.message_persisted:
+    subscribe:
+      operationId: onStreamMessagePersisted
+      summary: 消息已持久化
+      message:
+        $ref: "#/components/messages/AgentStreamMessagePersisted"
+
+  # ─────────────────────────────────────────────
+  # 用户级广播（agent.user.*）
+  # ─────────────────────────────────────────────
+  # W1 用户级事件治理：把"以用户为粒度"的事件从原 stream/notifications topic
+  # 迁到 user.{user_id} group。前端无需 subscribe，auth.ok 时自动加入。
+  # 后端入口：apps/services/common/ws/bus.publish_to_user(user_id, envelope)。
+  # 实时 group_send，不写 inbox，离线/重连不补送（2026-05 删除 inbox 兜底机制）。
+
+  agent.user.title_updated:
+    subscribe:
+      operationId: onUserTitleUpdated
+      summary: 会话标题更新（用户级广播）
+      description: |
+        LLM 生成对话标题就绪后，后端 ChatStreamPublisher.publish_title_update
+        通过 `agent.user.title_updated` 投递给"该会话所属的用户"，无论用户当前
+        停留在哪个会话。取代旧的 `agent.stream.title_updated`（已废弃，stream
+        会话结束后客户端订阅 slot 已 cleanup，会丢标题）。
+      message:
+        $ref: "#/components/messages/AgentUserTitleUpdated"
+
+  agent.user.notification.new:
+    subscribe:
+      operationId: onUserNotificationNew
+      summary: 用户通知到达（含邀请等）
+      description: |
+        notification.new 事件统一通过用户级 group 投递。前端按 payload.type 二级
+        路由（如 `organization.invitation` → 拉取邀请收件箱）。取代旧的
+        `notifications.{user_id}` topic 订阅。
+      message:
+        $ref: "#/components/messages/AgentUserNotificationNew"
+
+  agent.user.permission.changed:
+    subscribe:
+      operationId: onUserPermissionChanged
+      summary: 用户权限/角色变更，刷新本地缓存
+      description: |
+        当用户在某 Organization 的角色 / 套餐 / Space 权限发生变化时，后端
+        BaseService.broadcast_permission_changed 通过本事件广播。前端按
+        payload.organization_id / space_id 决定刷新粒度（Electron SpaceAccessPanel
+        按 space_id 精准 reload；其它组件 invalidate react-query membership /
+        members / memberBudget cache）。
+      message:
+        $ref: "#/components/messages/AgentUserPermissionChanged"
+
+  agent.stream.subagent_started:
+    subscribe:
+      operationId: onSubagentStarted
+      summary: 子 Agent 启动
+      message:
+        $ref: "#/components/messages/AgentStreamSubagentStarted"
+
+  agent.stream.subagent_completed:
+    subscribe:
+      operationId: onSubagentCompleted
+      summary: 子 Agent 完成
+      message:
+        $ref: "#/components/messages/AgentStreamSubagentCompleted"
+
+  agent.stream.subagent_failed:
+    subscribe:
+      operationId: onSubagentFailed
+      summary: 子 Agent 失败
+      message:
+        $ref: "#/components/messages/AgentStreamSubagentFailed"
+
+  agent.stream.assistant:
+    subscribe:
+      operationId: onStreamAssistant
+      summary: Agent 助手内容（delta/final）
+      message:
+        $ref: "#/components/messages/AgentStreamAssistant"
+
+  agent.stream.todo:
+    subscribe:
+      operationId: onStreamTodo
+      summary: Todo 列表更新
+      message:
+        $ref: "#/components/messages/AgentStreamTodo"
+
+  agent.stream.ssh_output:
+    subscribe:
+      operationId: onStreamSshOutput
+      summary: SSH 终端输出
+      message:
+        $ref: "#/components/messages/AgentStreamSshOutput"
+
+  agent.stream.compaction:
+    subscribe:
+      operationId: onStreamCompaction
+      summary: 上下文压缩通知
+      message:
+        $ref: "#/components/messages/AgentStreamCompaction"
+
+  agent.stream.subagent_progress:
+    subscribe:
+      operationId: onSubagentProgress
+      summary: 子 Agent 执行进度
+      message:
+        $ref: "#/components/messages/AgentStreamSubagentProgress"
+
+  agent.stream.context_pressure:
+    subscribe:
+      operationId: onStreamContextPressure
+      summary: 上下文压力预警
+      message:
+        $ref: "#/components/messages/AgentStreamContextPressure"
+
+  agent.stream.review_required:
+    subscribe:
+      operationId: onStreamReviewRequired
+      summary: 需要人工审核
+      message:
+        $ref: "#/components/messages/AgentStreamReviewRequired"
+
+  agent.stream.persist_error:
+    subscribe:
+      operationId: onStreamPersistError
+      summary: 消息持久化失败
+      message:
+        $ref: "#/components/messages/AgentStreamPersistError"
+
+  agent.action.request:
+    subscribe:
+      operationId: onActionRequest
+      summary: Action 请求（下发给 daemon/electron）
+      message:
+        $ref: "#/components/messages/AgentActionRequest"
+
+  agent.action.approval_request_down:
+    subscribe:
+      operationId: onApprovalRequestDown
+      summary: 审批请求下发（服务端 → 客户端）
+      message:
+        $ref: "#/components/messages/AgentActionApprovalRequestDown"
+
+  agent.action.approval_response_down:
+    subscribe:
+      operationId: onApprovalResponseDown
+      summary: 审批响应下发（服务端 → 客户端）
+      message:
+        $ref: "#/components/messages/AgentActionApprovalResponseDown"
+
+  agent.action.resolved:
+    subscribe:
+      operationId: onActionResolved
+      summary: Action 审批流完成
+      message:
+        $ref: "#/components/messages/AgentActionResolved"
+
+  context.sync:
+    subscribe:
+      operationId: onContextSync
+      summary: 上下文同步
+      message:
+        $ref: "#/components/messages/ContextSync"
+
+  device.status:
+    subscribe:
+      operationId: onDeviceStatus
+      summary: 设备在线/离线状态
+      message:
+        $ref: "#/components/messages/DeviceStatus"
+
+  table.events.delta:
+    subscribe:
+      operationId: onTableDelta
+      summary: 表格数据增量变更
+      message:
+        $ref: "#/components/messages/TableEventsDelta"
+
+  table.events.field:
+    subscribe:
+      operationId: onTableField
+      summary: 表格字段变更
+      message:
+        $ref: "#/components/messages/TableEventsField"
+
+  table.events.view:
+    subscribe:
+      operationId: onTableView
+      summary: 表格视图变更
+      message:
+        $ref: "#/components/messages/TableEventsView"
+
+  app.update.available:
+    subscribe:
+      operationId: onAppUpdateAvailable
+      summary: 新版本可用
+      message:
+        $ref: "#/components/messages/AppUpdateAvailable"
+
+# ─────────────────────────────────────────────
+# 组件
+# ─────────────────────────────────────────────
+components:
+
+  schemas:
+    GatewayEnvelope:
+      $ref: "../models/shared-models.yaml#/$defs/GatewayEnvelope"
+
+    AuthPayload:
+      type: object
+      required: [access_token, organization_id]
+      properties:
+        access_token:
+          type: string
+        organization_id:
+          type: string
+          format: uuid
+        capabilities:
+          type: array
+          items:
+            type: string
+          description: 客户端声明的能力列表
+        device:
+          type: string
+          nullable: true
+          description: 设备标识
+        client_version:
+          type: string
+          nullable: true
+          description: 客户端版本号
+        platform:
+          type: string
+          nullable: true
+          description: "平台标识（electron, android, ios, web）"
+        arch:
+          type: string
+          nullable: true
+          description: "CPU 架构（x64, arm64）"
+        channel:
+          type: string
+          nullable: true
+          description: 渠道标识
+
+    SubscribePayload:
+      type: object
+      required: [topics]
+      properties:
+        topics:
+          type: array
+          items:
+            type: string
+          description: 要订阅的 topic 列表
+
+    UnsubscribePayload:
+      type: object
+      required: [topics]
+      properties:
+        topics:
+          type: array
+          items:
+            type: string
+          description: 要取消订阅的 topic 列表
+
+    ResumePayload:
+      type: object
+      required: [last_event_id]
+      properties:
+        last_event_id:
+          type: string
+          description: 最后收到的 event_id（Redis Stream ID）
+
+    AuthOkPayload:
+      type: object
+      required: [user_id, organization_id, roles, connection_scope, server_ts]
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        organization_id:
+          type: string
+          format: uuid
+        roles:
+          type: array
+          items:
+            type: string
+        connection_scope:
+          type: string
+          description: "连接作用域（session, user, device）"
+        server_ts:
+          type: integer
+          description: 服务端时间戳
+
+    ErrorPayload:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          description: 错误码（WS_1xxx 系列）
+        message:
+          type: string
+          description: 人类可读的错误描述
+
+    AgentActionResultPayload:
+      type: object
+      properties:
+        action_id:
+          type: string
+        status:
+          type: string
+          enum: [success, failure]
+        result:
+          type: object
+          nullable: true
+        error:
+          type: string
+          nullable: true
+
+    AgentActionApprovalRequestPayload:
+      type: object
+      properties:
+        action_id:
+          type: string
+        action_type:
+          type: string
+        description:
+          type: string
+          nullable: true
+        risk_level:
+          type: string
+          enum: [low, medium, high]
+          nullable: true
+
+    AgentActionApprovalResponsePayload:
+      type: object
+      properties:
+        action_id:
+          type: string
+        approved:
+          type: boolean
+        reason:
+          type: string
+          nullable: true
+
+    GitStatusReportPayload:
+      type: object
+      properties:
+        git_status:
+          type: object
+          description: 结构化 Git 状态摘要
+        space_id:
+          type: string
+          nullable: true
+        device_id:
+          type: string
+          nullable: true
+
+    GitDiffRequestPayload:
+      type: object
+      properties:
+        space_id:
+          type: string
+          nullable: true
+        file_path:
+          type: string
+        staged:
+          type: boolean
+        reply_to:
+          type: string
+          nullable: true
+
+    GitDiffResponsePayload:
+      type: object
+      properties:
+        diff:
+          type: string
+        file_path:
+          type: string
+          nullable: true
+        reply_to:
+          type: string
+          nullable: true
+
+    AgentStreamLifecyclePayload:
+      $ref: "../models/shared-models.yaml#/$defs/StreamLifecyclePayload"
+
+    AgentStreamChunkPayload:
+      allOf:
+        - $ref: "../models/shared-models.yaml#/$defs/StreamChunkPayload"
+      description: "agent.stream.chunk - 文本增量 (deprecated — 请使用 agent.stream.assistant)"
+      deprecated: true
+
+    AgentStreamReasoningPayload:
+      $ref: "../models/shared-models.yaml#/$defs/StreamReasoningPayload"
+
+    AgentStreamToolPayload:
+      $ref: "../models/shared-models.yaml#/$defs/StreamToolPayload"
+
+    AgentStreamStepPayload:
+      $ref: "../models/shared-models.yaml#/$defs/StreamStepPayload"
+
+    AgentStreamDonePayload:
+      $ref: "../models/shared-models.yaml#/$defs/StreamDonePayload"
+
+    AgentStreamMessagePersistedPayload:
+      $ref: "../models/shared-models.yaml#/$defs/StreamMessagePersistedPayload"
+
+    AgentStreamSubagentPayload:
+      $ref: "../models/shared-models.yaml#/$defs/StreamSubagentPayload"
+
+    # ─────────────────────────────────────────────
+    # 用户级广播 payload schemas（W1 用户级事件治理）
+    # ─────────────────────────────────────────────
+
+    AgentUserTitleUpdatedPayload:
+      $ref: "../models/shared-models.yaml#/$defs/UserTitleUpdatedPayload"
+
+    AgentUserNotificationNewPayload:
+      $ref: "../models/shared-models.yaml#/$defs/UserNotificationNewPayload"
+
+    AgentUserPermissionChangedPayload:
+      $ref: "../models/shared-models.yaml#/$defs/UserPermissionChangedPayload"
+
+    AgentStreamAssistantPayload:
+      type: object
+      description: "agent.stream.assistant - 助手内容（新格式，替代 chunk）"
+      properties:
+        phase:
+          type: string
+          enum: [delta, final]
+        content:
+          type: string
+        message_id:
+          type: string
+          nullable: true
+        run_id:
+          type: string
+          nullable: true
+
+    AgentStreamTodoPayload:
+      type: object
+      description: "agent.stream.todo - Todo 列表更新"
+      properties:
+        todos:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              content:
+                type: string
+              status:
+                type: string
+        run_id:
+          type: string
+          nullable: true
+
+    AgentStreamSshOutputPayload:
+      type: object
+      description: "agent.stream.ssh_output - SSH 终端输出"
+      properties:
+        output:
+          type: string
+        stream:
+          type: string
+          enum: [stdout, stderr]
+        run_id:
+          type: string
+          nullable: true
+
+    AgentStreamCompactionPayload:
+      type: object
+      description: "agent.stream.compaction - 上下文压缩通知"
+      properties:
+        mode:
+          type: string
+        original_count:
+          type: integer
+        compacted_count:
+          type: integer
+        session_id:
+          type: string
+          nullable: true
+
+    AgentStreamContextPressurePayload:
+      type: object
+      description: "agent.stream.context_pressure - 上下文压力预警"
+      properties:
+        level:
+          type: string
+          enum: [warning, critical]
+        current_tokens:
+          type: integer
+        max_tokens:
+          type: integer
+        suggestion:
+          type: string
+          nullable: true
+
+    AgentStreamReviewRequiredPayload:
+      type: object
+      description: "agent.stream.review_required - 需要人工审核"
+      properties:
+        action_type:
+          type: string
+        description:
+          type: string
+          nullable: true
+        risk_level:
+          type: string
+          enum: [low, medium, high]
+          nullable: true
+
+    AgentStreamPersistErrorPayload:
+      type: object
+      description: "agent.stream.persist_error - 消息持久化失败"
+      properties:
+        error:
+          type: string
+        message_id:
+          type: string
+          nullable: true
+
+    AgentActionRequestPayload:
+      type: object
+      properties:
+        action_id:
+          type: string
+        action_type:
+          type: string
+        params:
+          type: object
+        requires_approval:
+          type: boolean
+          default: false
+
+    ContextSyncPayload:
+      type: object
+      properties:
+        scope:
+          type: string
+        data:
+          type: object
+
+    DeviceStatusPayload:
+      type: object
+      required: [device_id, user_id, fingerprint, name, device_type, status]
+      properties:
+        device_id:
+          type: string
+        user_id:
+          type: string
+        fingerprint:
+          type: string
+        name:
+          type: string
+        device_type:
+          type: string
+        role:
+          type: string
+          enum: [control, data]
+        status:
+          type: string
+          enum: [online, busy, offline]
+        capabilities:
+          type: array
+          items:
+            type: string
+          nullable: true
+
+    TableEventsDeltaPayload:
+      type: object
+      properties:
+        table_id:
+          type: string
+        changes:
+          type: array
+          items:
+            type: object
+
+    TableEventsFieldPayload:
+      type: object
+      properties:
+        table_id:
+          type: string
+        field_id:
+          type: string
+        action:
+          type: string
+          enum: [created, updated, deleted]
+
+    TableEventsViewPayload:
+      type: object
+      properties:
+        table_id:
+          type: string
+        view_id:
+          type: string
+        action:
+          type: string
+          enum: [created, updated, deleted]
+
+    AppUpdateAvailablePayload:
+      type: object
+      required: [version]
+      properties:
+        version:
+          type: string
+        release_notes:
+          type: string
+          nullable: true
+        download_url:
+          type: string
+          nullable: true
+        mandatory:
+          type: boolean
+          default: false
+
+  messages:
+
+    # ── 客户端 → 服务端 ──
+
+    Auth:
+      name: auth
+      title: 认证握手
+      summary: 连接建立后 15 秒内必须发送
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: auth
+              payload:
+                $ref: "#/components/schemas/AuthPayload"
+
+    Subscribe:
+      name: subscribe
+      title: 订阅 topic
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: subscribe
+              payload:
+                $ref: "#/components/schemas/SubscribePayload"
+
+    Unsubscribe:
+      name: unsubscribe
+      title: 取消订阅
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: unsubscribe
+              payload:
+                $ref: "#/components/schemas/UnsubscribePayload"
+
+    Resume:
+      name: resume
+      title: 断线重连重放
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: resume
+              payload:
+                $ref: "#/components/schemas/ResumePayload"
+
+    Ping:
+      name: ping
+      title: 客户端心跳
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: ping
+
+    AgentActionResult:
+      name: agent.action.result
+      title: Action 执行结果
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.action.result
+              payload:
+                $ref: "#/components/schemas/AgentActionResultPayload"
+
+    AgentActionApprovalRequest:
+      name: agent.action.approval_request
+      title: 审批请求（electron → 服务端）
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.action.approval_request
+              payload:
+                $ref: "#/components/schemas/AgentActionApprovalRequestPayload"
+
+    AgentActionApprovalResponse:
+      name: agent.action.approval_response
+      title: 审批响应（daemon → 服务端）
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.action.approval_response
+              payload:
+                $ref: "#/components/schemas/AgentActionApprovalResponsePayload"
+
+    GitStatusReport:
+      name: git.status.report
+      title: Git 状态上报
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: git.status.report
+              payload:
+                $ref: "#/components/schemas/GitStatusReportPayload"
+
+    GitDiffRequest:
+      name: git.diff.request
+      title: 请求 Git diff
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: git.diff.request
+              payload:
+                $ref: "#/components/schemas/GitDiffRequestPayload"
+
+    GitDiffResponse:
+      name: git.diff.response
+      title: 返回 Git diff
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: git.diff.response
+              payload:
+                $ref: "#/components/schemas/GitDiffResponsePayload"
+
+    # ── 服务端 → 客户端 ──
+
+    AuthOk:
+      name: auth.ok
+      title: 认证成功
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: auth.ok
+              payload:
+                $ref: "#/components/schemas/AuthOkPayload"
+
+    SubscribeOk:
+      name: subscribe.ok
+      title: 订阅确认
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: subscribe.ok
+
+    UnsubscribeOk:
+      name: unsubscribe.ok
+      title: 取消订阅确认
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: unsubscribe.ok
+
+    ResumeOk:
+      name: resume.ok
+      title: 重放确认
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: resume.ok
+
+    Pong:
+      name: pong
+      title: 心跳响应
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: pong
+
+    Tick:
+      name: tick
+      title: 服务端心跳 tick
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: tick
+
+    Error:
+      name: error
+      title: 错误通知
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: error
+              payload:
+                $ref: "#/components/schemas/ErrorPayload"
+
+    AgentStreamLifecycle:
+      name: agent.stream.lifecycle
+      title: Agent 运行生命周期
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.lifecycle
+              payload:
+                $ref: "#/components/schemas/AgentStreamLifecyclePayload"
+
+    AgentStreamChunk:
+      name: agent.stream.chunk
+      title: Agent 文本增量
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.chunk
+              payload:
+                $ref: "#/components/schemas/AgentStreamChunkPayload"
+
+    AgentStreamReasoning:
+      name: agent.stream.reasoning
+      title: Agent 推理增量
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.reasoning
+              payload:
+                $ref: "#/components/schemas/AgentStreamReasoningPayload"
+
+    AgentStreamTool:
+      name: agent.stream.tool
+      title: Agent 工具调用
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.tool
+              payload:
+                $ref: "#/components/schemas/AgentStreamToolPayload"
+
+    AgentStreamStep:
+      name: agent.stream.step
+      title: Agent 步骤更新
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.step
+              payload:
+                $ref: "#/components/schemas/AgentStreamStepPayload"
+
+    AgentStreamDone:
+      name: agent.stream.done
+      title: Agent 流结束
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.done
+              payload:
+                $ref: "#/components/schemas/AgentStreamDonePayload"
+
+    AgentStreamMessagePersisted:
+      name: agent.stream.message_persisted
+      title: 消息已持久化
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.message_persisted
+              payload:
+                $ref: "#/components/schemas/AgentStreamMessagePersistedPayload"
+
+    # ─────────────────────────────────────────────
+    # 用户级广播 messages
+    # ─────────────────────────────────────────────
+
+    AgentUserTitleUpdated:
+      name: agent.user.title_updated
+      title: 会话标题更新（用户级广播）
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.user.title_updated
+              payload:
+                $ref: "#/components/schemas/AgentUserTitleUpdatedPayload"
+
+    AgentUserNotificationNew:
+      name: agent.user.notification.new
+      title: 用户通知到达
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.user.notification.new
+              payload:
+                $ref: "#/components/schemas/AgentUserNotificationNewPayload"
+
+    AgentUserPermissionChanged:
+      name: agent.user.permission.changed
+      title: 用户权限变更
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.user.permission.changed
+              payload:
+                $ref: "#/components/schemas/AgentUserPermissionChangedPayload"
+
+    AgentStreamSubagentStarted:
+      name: agent.stream.subagent_started
+      title: 子 Agent 启动
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.subagent_started
+              payload:
+                $ref: "#/components/schemas/AgentStreamSubagentPayload"
+
+    AgentStreamSubagentCompleted:
+      name: agent.stream.subagent_completed
+      title: 子 Agent 完成
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.subagent_completed
+              payload:
+                $ref: "#/components/schemas/AgentStreamSubagentPayload"
+
+    AgentStreamSubagentFailed:
+      name: agent.stream.subagent_failed
+      title: 子 Agent 失败
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.subagent_failed
+              payload:
+                $ref: "#/components/schemas/AgentStreamSubagentPayload"
+
+    AgentStreamAssistant:
+      name: agent.stream.assistant
+      title: Agent 助手内容（delta/final）
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.assistant
+              payload:
+                $ref: "#/components/schemas/AgentStreamAssistantPayload"
+
+    AgentStreamTodo:
+      name: agent.stream.todo
+      title: Todo 列表更新
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.todo
+              payload:
+                $ref: "#/components/schemas/AgentStreamTodoPayload"
+
+    AgentStreamSshOutput:
+      name: agent.stream.ssh_output
+      title: SSH 终端输出
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.ssh_output
+              payload:
+                $ref: "#/components/schemas/AgentStreamSshOutputPayload"
+
+    AgentStreamCompaction:
+      name: agent.stream.compaction
+      title: 上下文压缩通知
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.compaction
+              payload:
+                $ref: "#/components/schemas/AgentStreamCompactionPayload"
+
+    AgentStreamSubagentProgress:
+      name: agent.stream.subagent_progress
+      title: 子 Agent 执行进度
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.subagent_progress
+              payload:
+                $ref: "#/components/schemas/AgentStreamSubagentPayload"
+
+    AgentStreamContextPressure:
+      name: agent.stream.context_pressure
+      title: 上下文压力预警
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.context_pressure
+              payload:
+                $ref: "#/components/schemas/AgentStreamContextPressurePayload"
+
+    AgentStreamReviewRequired:
+      name: agent.stream.review_required
+      title: 需要人工审核
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.review_required
+              payload:
+                $ref: "#/components/schemas/AgentStreamReviewRequiredPayload"
+
+    AgentStreamPersistError:
+      name: agent.stream.persist_error
+      title: 消息持久化失败
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.stream.persist_error
+              payload:
+                $ref: "#/components/schemas/AgentStreamPersistErrorPayload"
+
+    AgentActionRequest:
+      name: agent.action.request
+      title: Action 请求下发
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.action.request
+              payload:
+                $ref: "#/components/schemas/AgentActionRequestPayload"
+
+    AgentActionApprovalRequestDown:
+      name: agent.action.approval_request
+      title: 审批请求下发
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.action.approval_request
+              payload:
+                $ref: "#/components/schemas/AgentActionApprovalRequestPayload"
+
+    AgentActionApprovalResponseDown:
+      name: agent.action.approval_response
+      title: 审批响应下发
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.action.approval_response
+              payload:
+                $ref: "#/components/schemas/AgentActionApprovalResponsePayload"
+
+    AgentActionResolved:
+      name: agent.action.resolved
+      title: Action 审批流完成
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: agent.action.resolved
+
+    ContextSync:
+      name: context.sync
+      title: 上下文同步
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: context.sync
+              payload:
+                $ref: "#/components/schemas/ContextSyncPayload"
+
+    DeviceStatus:
+      name: device.status
+      title: 设备在线/离线
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: device.status
+              payload:
+                $ref: "#/components/schemas/DeviceStatusPayload"
+
+    TableEventsDelta:
+      name: table.events.delta
+      title: 表格数据增量
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: table.events.delta
+              payload:
+                $ref: "#/components/schemas/TableEventsDeltaPayload"
+
+    TableEventsField:
+      name: table.events.field
+      title: 表格字段变更
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: table.events.field
+              payload:
+                $ref: "#/components/schemas/TableEventsFieldPayload"
+
+    TableEventsView:
+      name: table.events.view
+      title: 表格视图变更
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: table.events.view
+              payload:
+                $ref: "#/components/schemas/TableEventsViewPayload"
+
+    AppUpdateAvailable:
+      name: app.update.available
+      title: 新版本可用
+      payload:
+        allOf:
+          - $ref: "#/components/schemas/GatewayEnvelope"
+          - type: object
+            properties:
+              type:
+                const: app.update.available
+              payload:
+                $ref: "#/components/schemas/AppUpdateAvailablePayload"

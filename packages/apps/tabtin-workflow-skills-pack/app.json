@@ -1,0 +1,78 @@
+{
+  "id": "tabtin-workflow-skills-pack",
+  "name": "Agent Workflow Pack",
+  "kind": "app",
+  "version": "0.1.0",
+  "description": "Agent 工作流编排：开干前拷问、可执行计划、会话交接、完成前验收、编写新技能。",
+  "icon": "git-branch",
+  "distribution": "marketplace",
+  "installScope": "organization",
+  "executionTarget": "backend",
+  "uiRuntime": "none",
+  "agentRuntime": "hostBackend",
+  "runtimeBindings": {
+    "toolProvider": null,
+    "uiProvider": null,
+    "skillsProvider": "skills:local"
+  },
+  "agentIntegration": {
+    "contextType": null,
+    "toolDomains": [],
+    "hasPromptSection": false,
+    "contextFields": [],
+    "isFrontendDependent": false
+  },
+  "catalog": {
+    "category": "workflow",
+    "desktopGroup": "extensions",
+    "canCreate": false,
+    "searchable": true,
+    "isDefaultEnabled": false,
+    "order": 21
+  },
+  "runtimeSupport": {
+    "electron": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "daemon": {
+      "mode": "headless",
+      "capabilities": [
+        "skills"
+      ]
+    },
+    "mobile": {
+      "mode": "unsupported",
+      "capabilities": []
+    }
+  },
+  "embeddedWeb": null,
+  "skills": [
+    "skills/grill-before-build",
+    "skills/write-execution-plan",
+    "skills/session-handoff",
+    "skills/verify-before-done",
+    "skills/skill-authoring"
+  ],
+  "skillsConfig": {
+    "entries": {
+      "grill-before-build": {
+        "enabled": true
+      },
+      "write-execution-plan": {
+        "enabled": true
+      },
+      "session-handoff": {
+        "enabled": true
+      },
+      "verify-before-done": {
+        "enabled": true
+      },
+      "skill-authoring": {
+        "enabled": true
+      }
+    }
+  }
+}

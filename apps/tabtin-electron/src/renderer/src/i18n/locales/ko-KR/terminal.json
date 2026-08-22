@@ -1,0 +1,64 @@
+{
+  "title": "터미널",
+  "exitCode": "종료 코드: {{code}}",
+  "restart": "다시 시작",
+  "scrollToBottom": "맨 아래로 스크롤",
+  "errors": {
+    "createSessionFailed": "[오류] 터미널 세션을 생성할 수 없습니다",
+    "ptyUnavailable": "PTY API를 사용할 수 없습니다."
+  },
+  "status": {
+    "processExited": "프로세스가 종료되었습니다. 종료 코드: {{code}}",
+    "idle": "유휴",
+    "running": "달리기",
+    "exited": "종료됨"
+  },
+  "restore": {
+    "title": "이전 출력 복원(프로세스 연결 끊김)",
+    "restored": "기록 출력이 복원되었습니다.",
+    "startShell": "셸 다시 시작",
+    "dismiss": "닫기"
+  },
+  "split": {
+    "splitRight": "오른쪽 분할",
+    "splitDown": "분할",
+    "maximize": "최대화",
+    "restore": "복원",
+    "close": "창 닫기",
+    "maxPanesReached": "최대 창 수에 도달함({{max}})",
+    "equalize": "모든 창 균등화",
+    "doubleClickToEqualize": "균등화하려면 두 번 클릭하세요."
+  },
+  "contextMenu": {
+    "copy": "복사",
+    "paste": "붙여넣기",
+    "search": "검색",
+    "scrollToBottom": "맨 아래로 스크롤",
+    "clear": "터미널 지우기",
+    "splitRight": "오른쪽 분할",
+    "splitDown": "분할",
+    "equalize": "모든 창 균등화",
+    "maximize": "최대화",
+    "restore": "복원",
+    "close": "창 닫기"
+  },
+  "search": {
+    "placeholder": "터미널 검색…",
+    "noMatch": "일치하지 않음",
+    "matchFound": "발견됨",
+    "caseSensitive": "대소문자 구분",
+    "previous": "이전",
+    "next": "다음",
+    "close": "검색 닫기"
+  },
+  "imagePaste": {
+    "saving": "이미지 저장 중…",
+    "saved": "이미지가 저장되었습니다",
+    "failed": "이미지 붙여넣기 실패",
+    "tooLarge": "이미지가 너무 큽니다({{size}}MB). 최대 10MB"
+  },
+  "dragDrop": {
+    "hint": "파일 경로를 삽입하려면 드롭하세요.",
+    "pathError": "파일 경로를 읽을 수 없습니다"
+  }
+}

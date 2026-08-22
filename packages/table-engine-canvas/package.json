@@ -1,0 +1,91 @@
+{
+  "name": "@tabtin/table-engine-canvas",
+  "version": "0.1.0",
+  "description": "Canvas renderer engine for TabTin table",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./engine": {
+      "source": "./src/engine.ts",
+      "types": "./dist/engine.d.ts",
+      "import": "./dist/engine.js"
+    },
+    "./overlays": {
+      "source": "./src/overlays/index.ts",
+      "types": "./dist/overlays/index.d.ts",
+      "import": "./dist/overlays/index.js"
+    },
+    "./statistics": {
+      "source": "./src/overlays/statistics.ts",
+      "types": "./dist/overlays/statistics.d.ts",
+      "import": "./dist/overlays/statistics.js"
+    },
+    "./i18n": {
+      "source": "./src/grid/shims/i18n.ts",
+      "types": "./dist/grid/shims/i18n.d.ts",
+      "import": "./dist/grid/shims/i18n.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "tabtin",
+    "table",
+    "engine",
+    "canvas"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "dependencies": {
+    "@floating-ui/react": "0.27.16",
+    "@tabtin/app-shell": "workspace:*",
+    "@tabtin/smartsheet-ui": "workspace:*",
+    "@tabtin/table-engine": "workspace:*",
+    "@teable/core": "1.10.0",
+    "@teable/ui-lib": "1.10.0",
+    "date-fns": "4.1.0",
+    "date-fns-tz": "3.2.0",
+    "dayjs": "1.11.13",
+    "lodash": "4.17.23",
+    "lru-cache": "11.2.5",
+    "react-hammerjs": "1.0.1",
+    "react-hotkeys-hook": "5.2.4",
+    "react-textarea-autosize": "8.5.9",
+    "react-use": "17.6.0",
+    "scroller": "0.0.3",
+    "tailwindcss": "4.1.18",
+    "ts-key-enum": "3.0.13",
+    "ts-keycode-enum": "1.0.6",
+    "zustand": "^5.0.3"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "4.17.23",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "5.7.2",
+    "vitest": "4.0.18"
+  }
+}

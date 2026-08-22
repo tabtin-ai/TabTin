@@ -1,0 +1,121 @@
+{
+  "name": "tabtin-workspace",
+  "version": "1.0.0",
+  "description": "TabTin - AI-powered creative workbench with Table, Docs, Design, Browser and more",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "prepare": "git config core.hooksPath .githooks",
+    "runtimes:fetch": "bash scripts/electron/runtime/fetch-desktop-runtimes.sh",
+    "build": "pnpm -r build",
+    "build:report:electron": "pnpm --filter tabtin-electron build:report",
+    "dev": "node scripts/dev.mjs",
+    "dev:backend": "node scripts/dev.mjs backend",
+    "dev:admindash": "node scripts/dev.mjs admindash",
+    "dev:electron": "node scripts/dev.mjs electron",
+    "dev:tabtin-web": "node scripts/dev.mjs tabtin-web",
+    "dev:workspaces": "pnpm -r dev",
+    "dev:community": "node scripts/dev.mjs community",
+    "deploy:env:init": "node deployment/init-compose-env.mjs",
+    "security:opensource": "python3 scripts/shared/open_source_security_audit.py",
+    "test": "pnpm -r test",
+    "e2e": "tsx tests/electron/runner/cli.ts",
+    "e2e:doctor": "tsx tests/electron/runner/cli.ts doctor",
+    "e2e:list": "tsx tests/electron/runner/cli.ts list",
+    "e2e:ask": "tsx tests/electron/runner/cli.ts ask",
+    "e2e:create": "tsx tests/electron/runner/create-scenario.ts",
+    "e2e:prepare": "tsx tests/electron/runner/cli.ts prepare",
+    "e2e:run": "tsx tests/electron/runner/cli.ts run",
+    "e2e:baseline": "tsx tests/electron/runner/cli.ts baseline",
+    "e2e:cleanup": "tsx tests/electron/runner/cli.ts cleanup",
+    "lint": "eslint .",
+    "lint:electron": "eslint apps/tabtin-electron/src/",
+    "lint:workspaces": "pnpm -r lint",
+    "lint:admindash": "pnpm --filter admindash lint",
+    "typecheck:admindash": "pnpm --filter admindash typecheck",
+    "guard:predev-topology": "node apps/tabtin-electron/scripts/predev-build.mjs --check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "clean": "pnpm -r clean && rm -rf node_modules",
+    "install:all": "pnpm install",
+    "bootstrap:electron": "node scripts/electron/install-dependencies.mjs --region global",
+    "bootstrap:electron:cn": "node scripts/electron/install-dependencies.mjs --region cn",
+    "bootstrap:electron:doctor": "node scripts/electron/install-dependencies.mjs --doctor",
+    "codegen:surface": "tsx scripts/electron/codegen-surface-preload.ts",
+    "package": "node scripts/package.mjs",
+    "package:backend": "node scripts/package.mjs backend",
+    "package:admindash": "node scripts/package.mjs admindash",
+    "package:electron": "node scripts/package.mjs electron",
+    "package:tabtin-web": "node scripts/package.mjs tabtin-web",
+    "package:ios": "node scripts/package.mjs ios",
+    "package:android": "node scripts/package.mjs android",
+    "wire:codegen": "pnpm --filter @tabtin/wire-codegen codegen",
+    "wire:codegen:check": "pnpm --filter @tabtin/wire-codegen codegen:check"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@types/node": "^20.0.0",
+    "eslint": "^9.0.0",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "7.0.1",
+    "madge": "8.0.0",
+    "prettier": "^3.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "typescript-eslint": "8.57.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "pnpm": {
+    "overrides": {
+      "react": "19.2.6",
+      "react-dom": "19.2.6",
+      "@types/react": "19.2.14",
+      "@types/react-dom": "19.2.3",
+      "lucide-react": "0.487.0",
+      "framer-motion": "12.29.0",
+      "@radix-ui/react-presence": "1.1.10"
+    },
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "react": ">=18 <20",
+        "react-dom": ">=18 <20",
+        "@types/react": ">=18 <20",
+        "@types/react-dom": ">=18 <20",
+        "marked": ">=4 <15"
+      }
+    }
+  },
+  "keywords": [
+    "ai",
+    "creative-workbench",
+    "table",
+    "design",
+    "docs",
+    "browser",
+    "agent",
+    "electron",
+    "typescript",
+    "react"
+  ],
+  "author": "TabTin Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/TabTinSheet.git"
+  },
+  "dependencies": {
+    "@emotion/is-prop-valid": "1.4.0",
+    "@vscode/ripgrep": "1.18.0",
+    "encoding": "0.1.13",
+    "iconv-lite": "0.7.2",
+    "react": "19.2.6",
+    "safer-buffer": "2.1.2"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "tabdata-block",
+  "description": "TabData embedded block with escaped directive attrs shared by TS and Python",
+  "pmJson": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "tabdataBlock",
+        "attrs": {
+          "tableId": "tbl_\"123",
+          "viewId": "vw_\\456",
+          "title": "User tableId=\"not-attr\" \\ Summary",
+          "maxHeight": 400
+        }
+      }
+    ]
+  },
+  "expectedMarkdown": ":::tabdata{tableId=\"tbl_\\\"123\" viewId=\"vw_\\\\456\" title=\"User tableId=\\\"not-attr\\\" \\\\ Summary\"}\n:::",
+  "invalidMarkdown": [
+    ":::tabdata{stableId=\"tbl-x\"}\n:::",
+    ":::tabdata{mytableId=\"tbl-x\"}\n:::",
+    ":::tabdata{tableId=\"tbl-a\" tableId=\"tbl-b\"}\n:::"
+  ]
+}

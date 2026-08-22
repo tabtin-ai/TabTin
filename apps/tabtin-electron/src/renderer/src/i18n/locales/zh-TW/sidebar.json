@@ -1,0 +1,177 @@
+{
+  "primaryNav": {
+    "newTask": "新任務",
+    "apps": "工作台",
+    "automation": "自動化",
+    "importData": "導入數據",
+    "importDataDetected": "導入資料（偵測到可導入的歷史）",
+    "externalHistory": "外部歷史",
+    "agents": "AI 分身",
+    "skills": "技能和連接器",
+    "collaboration": "協作",
+    "messages": "訊息"
+  },
+  "rail": {
+    "tasks": "任務",
+    "messages": "訊息",
+    "cloudDocs": "雲端文檔",
+    "projects": "專案",
+    "more": "更多",
+    "customerSupport": "客服",
+    "customerSupportTitle": "聯絡客服",
+    "customerSupportHint": "微信掃碼新增企業微信",
+    "customerSupportQrAlt": "企業微信客服二維碼"
+  },
+  "cloudDocs": {
+    "browse": {
+      "label": "雲端文檔瀏覽",
+      "all": "全部",
+      "recent": "最近",
+      "shared": "分享給我",
+      "recentHint": "按訪問時間排序的歷史記錄，不限於當前是否還開著",
+      "sharedHint": "他人分享給你的文檔、表格與檔案"
+    },
+    "openTabs": {
+      "label": "目前開啟",
+      "count": "{{count}}",
+      "close": "關閉 {{title}}",
+      "hint": "正在編輯區開啟的文檔、表格與檔案"
+    },
+    "tree": {
+      "empty": "還沒有文檔或表格",
+      "emptyFolder": "內無頁面",
+      "searchPlaceholder": "搜尋文檔與表格…",
+      "searchResults": "搜尋結果",
+      "newChildDoc": "新建子文檔",
+      "newChildTable": "新建子表格",
+      "moveTo": "移動到…",
+      "foldersRetired": "已改用文檔/表格樹，不再支援新資料夾",
+      "loadingChildren": "加載中…",
+      "maxNestingDepth": "最多嵌套 4 層，無法繼續新增子文檔"
+    }
+  },
+  "appHome": {
+    "aiAgents": "AI 分身",
+    "aiAgentsSubtitle": "管理組織內的 AI 分身：新建、改名、設定人設與技能攜帶集。",
+    "skillLibrary": "技能和連接器",
+    "collaborationSubtitle": "選擇一個 Project 進入團隊協作；任務、資產和討論都按 Project 分開。"
+  },
+  "filter": "篩選...",
+  "personalOrganization": "個人",
+  "emptyTables": "暫無表格",
+  "emptyHint": "進入工作空間後建立表格",
+  "actions": {
+    "agentOrganization": "工作空間",
+    "shellTest": "Shell 測試",
+    "taskExecution": "任務執行"
+  },
+  "plugins": {
+    "taskExecution": {
+      "description": "手動輸入 Schema 的直接執行模式"
+    }
+  },
+  "tooltips": {
+    "collapse": "收起側邊欄 (⌘B)",
+    "expand": "展開側邊欄 (⌘B)",
+    "newAgent": "新建工作空間"
+  },
+  "theme": {
+    "lightToggle": "淺色模式 (點擊切換)",
+    "darkToggle": "深色模式 (點擊切換)",
+    "systemToggle": "跟隨系統 (點擊切換)",
+    "light": "淺色模式",
+    "dark": "深色模式",
+    "system": "跟隨系統"
+  },
+  "search": {
+    "tooltip": "搜尋 (⌘K)"
+  },
+  "organizationFallback": "組織",
+  "loadingOrganizations": "加載組織...",
+  "loadingAgents": "正在載入工作空間...",
+  "personalIdentity": "個人身分",
+  "teamGroup": "組織",
+  "newTeam": "創建組織",
+  "newOrganization": "新建組織",
+  "personalSettings": "個人設定",
+  "organizationSettings": "組織設定",
+  "memberManagement": "成員管理",
+  "loadFailed": "載入失敗",
+  "deviceOnline": "網路",
+  "deviceBusy": "忙碌",
+  "deviceOffline": "離線",
+  "deviceLocal": "本機",
+  "deviceDraining": "暫停接單",
+  "deviceUnknown": "狀態未知",
+  "unknownDevice": "未知設備",
+  "unboundDevice": "未綁定執行設備",
+  "deviceNeedsWorkspace": "需先在該設備建立 Workspace",
+  "sharedFrom": "來自 {{name}} 的共享",
+  "memo": "碎片筆記",
+  "moreAgents": "更多工作空間...",
+  "filterAgents": "篩選工作空間...",
+  "currentWorkspace": "目前工作空間",
+  "pinAgent": "固定工作空間",
+  "unpinAgent": "取消固定",
+  "workingDirMeta": "執行根：{{name}}",
+  "workingDirTitle": "工作目錄：{{dir}}",
+  "tabConversations": "任務",
+  "tabDesktop": "應用",
+  "tabMessages": "訊息",
+  "aiAvatars": "AI 分身",
+  "skillLibrary": "技能和連接器",
+  "mainNav": {
+    "im": "私訊",
+    "agent": "工作空間",
+    "memo": "記憶",
+    "me": "我的",
+    "openIMWindow": "打開私訊窗口",
+    "openSettings": "開啟設定",
+    "unreadLabel": "{{label}}（{{count}} 條未讀）",
+    "pendingInviteLabel": "{{label}}（{{count}} 條待加入）"
+  },
+  "conversations": {
+    "title": "所有對話",
+    "back": "返回工作空間列表",
+    "new": "新任務",
+    "search": "搜尋對話...",
+    "empty": "暫無對話",
+    "emptyHint": "創造工作空間開始對話",
+    "today": "今天",
+    "yesterday": "昨天",
+    "thisWeek": "本週",
+    "earlier": "更早",
+    "agentDeleted": "工作空間已刪除",
+    "agentWorking": "執行中...",
+    "unread": "新回覆",
+    "sharedFrom": "來自 {{name}}",
+    "selectAgent": "選擇工作空間",
+    "importAgentHistory": "導入外部 Agent 歷史",
+    "newTopic": "新任務",
+    "searchAgent": "搜尋工作空間...",
+    "noAgents": "暫無可用工作空間",
+    "filteringAgent": "篩選: {{name}}",
+    "filteringOrganization": "篩選組織：{{name}}",
+    "clearFilter": "清除篩選",
+    "justNow": "剛剛",
+    "minutesAgo": "{{count}}分鐘前",
+    "hoursAgo": "{{count}}小時前",
+    "daysAgo": "{{count}}天前",
+    "untitledSession": "{{agent}} 的對話",
+    "spaceNotFound": "該對話所屬工作空間不存在或已歸檔",
+    "noResults": "未找到匹配的對話",
+    "noResultsHint": "嘗試更換搜尋字詞或清除篩選條件",
+    "createFailed": "建立對話失敗，請重試",
+    "openFailed": "開啟對話失敗，請重試",
+    "personalIdentity": "個人身分"
+  },
+  "space": {
+    "emptyTitle": "開始工作",
+    "emptyHint": "創造一個工作空間、群組聊天或私訊來開始",
+    "loginHint": "登入開始",
+    "newAgent": "新建工作空間",
+    "newGroup": "新建群聊",
+    "newDM": "發起私訊"
+  },
+  "untitled": "未命名用戶"
+}

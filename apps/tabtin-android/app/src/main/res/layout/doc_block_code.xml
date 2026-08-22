@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 代码块 -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/doc_code_bg"
+    android:layout_marginHorizontal="@dimen/tt_spacing_lg">
+
+    <!-- 语言选择菜单 -->
+    <TextView
+        android:id="@+id/languageMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:padding="@dimen/tt_spacing_sm"
+        android:textSize="@dimen/tt_font_caption"
+        android:textColor="@color/doc_editor_text_tertiary"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <!-- 横向可滚动的代码编辑区 -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/doc_editor_code_toolbar_clearance"
+        android:scrollbars="none">
+
+        <com.tabtin.mobile.features.doc.editor.core.DocTextInputWidget
+            android:id="@+id/textContent"
+            style="@style/DocBlockCodeContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:textColorHint="@color/doc_editor_text_tertiary" />
+    </HorizontalScrollView>
+</FrameLayout>

@@ -1,0 +1,217 @@
+# File Pipeline error_kind SSoT YAML 真相源（W5 L17 / Wave 3）
+#
+# 这是 file pipeline 14 类字符串 error_kind 的**唯一**真相源。下方 codegen
+# `pnpm --filter @tabtin/file-pipeline-errors codegen` 从本文件派生：
+#   1. packages/file-pipeline-errors/src/_generated/error-codes.generated.ts
+#      （FilePipelineErrorCode enum + FILE_PIPELINE_ERROR_KINDS 数组 +
+#      FILE_PIPELINE_ERROR_I18N_KEYS i18n key 表）
+#      Wave 3：数字协议已删除，不再生成 FILE_PIPELINE_ERROR_NUMERIC。
+#   2. apps/tabtin-electron/src/renderer/src/i18n/locales/zh-CN/chat.json#toolError
+#      （仅替换 14 个 file pipeline kind keys，不动其他 toolError entry）
+#   3. apps/tabtin-electron/src/renderer/src/i18n/locales/en-US/chat.json#toolError 同款
+#   4. apps/tabtin-android/app/src/main/res/values/strings_chat.xml
+#      （仅替换 14 个 <string name="chat_tool_error_*"> elements，其它 string 不动）
+#   5. apps/tabtin-android/app/src/main/res/values-en/strings_chat.xml 同款
+#
+# 不在 codegen 范围（因复杂动态文案 / 跨包 jsdoc 引用难自动派生）：
+#   - packages/file-pipeline-errors/src/format.ts 的 message / suggestion 文案：
+#     大量 case-by-case ctx 字段消费（subject / rawMessage / actualBytes 分支），
+#     codegen 从扁平 yaml 派生有歧义。**手动维护**。新加错误码时在 format.ts
+#     switch 加新 case + 写 LLM-facing 英文 message + suggestion；
+#     `formatFilePipelineErrorChinesePrompt` 同款手加 case
+#   - packages/agent-runtime/src/engine/error-kinds.ts 的 file pipeline 字面值：
+#     已经是 `re-export FilePipelineErrorCode.XXX`（W1.3 fix-3），新加 enum 自动跟随
+#   - packages/agent-runtime/src/tools/read-file-state.ts::defaultTabcodeHint：
+#     已经委托 SSoT，新加 enum 自动跟随
+#   - apps/tabtin-electron/src/renderer/src/components/chat/toolErrorClassification.ts：
+#     已经从 SSoT `FILE_PIPELINE_ERROR_KINDS` 自动遍历（W1.4 收尾），新加 enum 自动跟随
+#   - **iOS** `apps/tabtin-ios/.../ChatErrorClassCard.swift::Configs` Swift 字典：
+#     iOS 不像 web/Android 有 i18n key catalog 文件，是 Swift literal 字面值。
+#     **iOS 不进 codegen 范围**——加新错误码后手动改 iOS Configs 字典
+#     （登记 §七 L69 让未来 iOS 大维度推进时一起做 Swift 模板派生）。
+#
+# 加新 file pipeline 错误码：
+#   1. 在本 yaml `codes:` 下加一条新 entry（enum/kind/i18n_key/description/i18n
+#      必填）。**禁止新增 numeric 或任何数字码字段**；历史对照只写入
+#      `packages/agent-runtime/docs/wave3-error-kind-migration.md`
+#   2. 跑 `pnpm --filter @tabtin/file-pipeline-errors codegen`
+#   3. 跑 `pnpm --filter @tabtin/file-pipeline-errors codegen:verify` 校验 diff 0
+#   4. 在 format.ts switch 加 case（LLM-facing 英文 message + suggestion）
+#   5. 在 formatFilePipelineErrorChinesePrompt switch 加 case（中文 prompt）
+#   6. 手动改 iOS ChatErrorClassCard.swift::Configs 字典加新 case
+#   7. 跑测试 `pnpm --filter @tabtin/file-pipeline-errors test`
+
+codes:
+  - enum: FILE_NOT_FOUND
+    kind: file_not_found
+    i18n_key: file_not_found
+    description: 文件 / URL 不存在
+    i18n:
+      electron:
+        zh: "文件不存在 — 请确认绝对路径是否正确"
+        en: "File not found — verify the absolute path is correct"
+      android:
+        zh: "文件不存在 — 请确认绝对路径是否正确"
+        en: "File not found — verify the absolute path is correct"
+
+  - enum: FILE_TOO_LARGE
+    kind: file_too_large
+    i18n_key: file_too_large
+    description: 图 > 50MB（>5MB 自动缩放） 或 文档 > 50MB
+    i18n:
+      electron:
+        zh: "文件过大 — 图片硬上限 50MB（>5MB 自动缩放） / 文档限 50MB，请把文件直接拖到输入框走云端解析"
+        en: "File too large — images hard cap 50MB (>5MB auto-resized) / documents 50MB; drag the file into chat for cloud parsing"
+      android:
+        zh: "AI 暂时看不了这个文件 — 文件较大，请用聊天附件上传（点 + 按钮）让 AI 走云端解析"
+        en: "AI can't read this file right now — it's too large; upload via chat (tap + button) for cloud parsing"
+
+  - enum: PERMISSION_DENIED
+    kind: permission_denied
+    i18n_key: permission_denied
+    description: 路径敏感 / 工作区外
+    i18n:
+      electron:
+        zh: "权限不足 — 请检查 Space 或资源访问权限"
+        en: "Permission denied — check access to this Space or resource"
+      android:
+        zh: "权限被拒 — 文件可能在工作区外或被标记敏感，请授权后重试"
+        en: "Permission denied — file may be outside workspace or marked sensitive; grant access and retry"
+
+  - enum: ENCRYPTED
+    kind: encrypted
+    i18n_key: encrypted
+    description: PDF 密码保护
+    i18n:
+      electron:
+        zh: "文件已加密 — 请提供未加密版本（云端也无法绕过密码）"
+        en: "File is password-protected — provide an unprotected version (cloud parser can't bypass encryption either)"
+      android:
+        zh: "文件已加密 — 请提供未加密版本（云端也无法绕过密码）"
+        en: "File is password-protected — provide an unprotected version (cloud parser can't bypass encryption either)"
+
+  - enum: CORRUPTED
+    kind: corrupted
+    i18n_key: corrupted
+    description: zip 解不开 / 非法结构
+    i18n:
+      electron:
+        zh: "文件已损坏 — 请联系发件方或在源应用里重新导出后再试"
+        en: "File is corrupted — ask the sender for a fresh copy or re-export from the source application"
+      android:
+        zh: "文件已损坏 — 请联系发件方或在源应用里重新导出后再试"
+        en: "File is corrupted — ask the sender for a fresh copy or re-export from the source application"
+
+  - enum: SCANNED_PDF
+    kind: scanned_pdf
+    i18n_key: scanned_pdf
+    description: PDF 纯图无文本层
+    i18n:
+      electron:
+        zh: "扫描件 PDF — 请把文件拖到输入框，AI 会用图像识别提取文字（按页计费，处理时间较长）"
+        en: "Scanned-image PDF — drag the file into chat for AI vision extraction (billed per page, takes longer)"
+      android:
+        zh: "扫描件 PDF — 请用聊天上传（点 + 按钮），AI 会用图像识别提取文字（按页计费，处理时间较长）"
+        en: "Scanned-image PDF — upload via chat (tap + button on mobile) for AI vision extraction (billed per page, takes longer)"
+
+  - enum: GARBLED_TEXT_LAYER
+    kind: garbled_text_layer
+    i18n_key: garbled_text_layer
+    description: OCR 伪文本
+    i18n:
+      electron:
+        zh: "PDF 文字提取不准 — 请把文件拖到输入框，AI 会用图像识别重新提取（按页计费，处理时间较长）"
+        en: "PDF text extraction is unreliable — drag the file into chat for AI vision re-extraction (billed per page, takes longer)"
+      android:
+        zh: "PDF 文字提取不准 — 请用聊天上传（点 + 按钮），AI 会用图像识别重新提取（按页计费，处理时间较长）"
+        en: "PDF text extraction unreliable — upload via chat (tap + button on mobile) for AI vision re-extraction (billed per page, takes longer)"
+
+  - enum: UNSUPPORTED_FORMAT
+    kind: unsupported_format
+    i18n_key: unsupported_format
+    description: 未知 mime / 真二进制 / PPTX
+    i18n:
+      electron:
+        zh: "格式不支持 — 如果是 PPTX/DOC/XLS 等办公文档，请把文件拖到输入框走云端解析；压缩包 / 可执行文件等格式本地与云端都不支持"
+        en: "Format not supported — for office docs (.pptx / .doc / .xls), drag the file into chat for cloud parsing; archives / executables are not supported by either local or cloud pipeline"
+      android:
+        zh: "格式不支持 — 如果是 PPTX/DOC/XLS 等办公文档，请用聊天上传（点 + 按钮）走云端解析；压缩包 / 可执行文件等格式本地与云端都不支持"
+        en: "Format not supported — for office docs (.pptx / .doc / .xls), upload via chat (tap + button on mobile) for cloud parsing; archives / executables are not supported by either local or cloud pipeline"
+
+  - enum: PARSE_TIMEOUT
+    kind: parse_timeout
+    i18n_key: parse_timeout
+    description: 解析超时
+    i18n:
+      electron:
+        zh: "本地解析超时 — 请把文件拖到输入框走异步解析（云端无时间上限）"
+        en: "Local parse timed out — drag the file into chat for async parsing (no time limit)"
+      android:
+        zh: "本地解析超时 — 请用聊天上传（点 + 按钮）走异步解析（云端无时间上限）"
+        en: "Local parse timed out — upload via chat (tap + button on mobile) for async parsing (no time limit)"
+
+  - enum: USER_ABORTED
+    kind: aborted
+    i18n_key: aborted
+    description: abortSignal 触发；字面值与顶层 runtime catalog `aborted` 共享 string kind
+    i18n:
+      electron:
+        zh: "已停止 — 你中止了本次运行"
+        en: "Stopped — you cancelled this run"
+      android:
+        zh: "已停止 — 你中止了本次工具运行"
+        en: "Stopped — you cancelled this tool run"
+
+  - enum: NETWORK_ERROR
+    kind: network_failed
+    i18n_key: network_failed
+    description: OSS 下载失败
+    i18n:
+      electron:
+        zh: "网络请求失败 — 检查网络后重试；如涉及云端文件，URL 可能已过期请重新上传"
+        en: "Network request failed — check connectivity and retry; for cloud files, the URL may have expired so ask the user to re-upload"
+      android:
+        zh: "网络异常 — 请检查网络后重试；若是 OSS 链接过期建议重新上传"
+        en: "Network error — check connectivity and retry; if it's an OSS link the URL may have expired, ask the user to re-upload"
+
+  - enum: INVALID_PARAMETER
+    kind: invalid_param_format
+    i18n_key: invalid_param_format
+    description: 参数缺失 / 类型错
+    i18n:
+      electron:
+        zh: "参数格式不正确 — 检查输入后重试"
+        en: "Invalid parameter format — check the input and retry"
+      android:
+        zh: "参数格式错误 — 请检查工具入参后重试"
+        en: "Invalid parameter — check the tool input schema and retry"
+
+  - enum: UNKNOWN_ERROR
+    kind: upstream_error
+    i18n_key: upstream_error
+    description: 兜底
+    i18n:
+      electron:
+        zh: "出了点问题 — 如涉及文件请把文件拖到输入框走云端解析，其他请稍后重试或联系支持"
+        en: "Something went wrong — for file operations, drag the file into chat for cloud parsing; otherwise retry later or contact support"
+      android:
+        zh: "未知错误 — 请重试一次；持续失败请反馈给我们"
+        en: "Unknown error — retry once; if it persists, please report it to us"
+
+  # **W5 L38（2026-05-14）拆 IMAGE_RESIZE_FAILED 独立 kind**
+  # 历史背景：W2.1 引入 sharp 缩放失败时 SSoT format.ts 通过 rawMessage 字符串
+  # 前缀检测（"Auto-resize failed" / "exceeds the 50MB"）来区分两种语义，导致
+  # image FILE_TOO_LARGE 双语义复用（原图 > 50MB 硬上限 vs sharp 缩放本身失败），
+  # 跨包字符串契约脆弱。W5 拆为独立 enum，sharp 失败直接派 IMAGE_RESIZE_FAILED 不
+  # 再走 FILE_TOO_LARGE rawMessage 注入。
+  - enum: IMAGE_RESIZE_FAILED
+    kind: image_resize_failed
+    i18n_key: image_resize_failed
+    description: sharp 缩放失败（unavailable / decode_failed / too_large_after_resize）
+    i18n:
+      electron:
+        zh: "图片自动缩放失败 — 请把图片拖到输入框走云端解析（本地图像处理失败，可能是 sharp 未安装或文件变体不支持）"
+        en: "Local image processing failed — upload the image via chat (drag-and-drop or attach/+ button); the local resizer (sharp) couldn't process this file (often unsupported variant or sharp not installed)"
+      android:
+        zh: "图片自动缩放失败 — 请用聊天附件上传（点 + 按钮）让 AI 走云端解析"
+        en: "Local image processing failed — upload via chat (tap + button) for cloud parsing"

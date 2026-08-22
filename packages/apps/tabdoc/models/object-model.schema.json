@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tabdoc Object Model",
+  "description": "Defines the entity contracts for the Tabdoc TinApp. These schemas describe the data shapes exchanged between the UI layer, agent tools, and the backend runtime.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "document": {
+      "type": "object",
+      "description": "An organization-scoped document (+ owner). Documents form a tree via parent_id and carry versioned content through revisions. space_id is legacy optional context only.",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "organization_id": { "type": "string", "format": "uuid" },
+        "space_id": { "type": ["string", "null"], "format": "uuid", "description": "Legacy optional context; not required for org-owned documents." },
+        "parent_id": { "type": ["string", "null"], "format": "uuid", "description": "Parent document UUID for tree hierarchy. Null for root documents." },
+        "title": { "type": "string", "maxLength": 255 },
+        "status": { "type": "string", "enum": ["active", "archived"] },
+        "latest_version": { "type": "integer", "minimum": 0 },
+        "created_by": { "type": ["string", "null"], "description": "User ID of the creator" },
+        "updated_by": { "type": ["string", "null"], "description": "User ID of the last editor" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "organization_id", "title", "status", "latest_version"]
+    },
+    "revision": {
+      "type": "object",
+      "description": "An immutable content snapshot of a document at a given version number. Supports ProseMirror JSON, Markdown, and plaintext representations.",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "document_id": { "type": "string", "format": "uuid" },
+        "version": { "type": "integer", "minimum": 1 },
+        "content_pm_json": { "type": ["object", "null"], "description": "ProseMirror document JSON (used by the Tiptap editor)" },
+        "content_markdown": { "type": "string", "description": "Markdown representation of the content" },
+        "content_plaintext": { "type": "string", "description": "Plain text representation for search indexing" },
+        "editor": { "type": ["string", "null"], "description": "User ID of the revision author" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "document_id", "version"]
+    },
+    "permission": {
+      "type": "object",
+      "description": "Access control entry binding a subject (user or role) to a document with a permission level.",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "document_id": { "type": "string", "format": "uuid" },
+        "subject_type": { "type": "string", "enum": ["user", "role"] },
+        "subject_id": { "type": "string", "maxLength": 64 },
+        "permission": { "type": "string", "enum": ["viewer", "editor", "admin"] },
+        "is_active": { "type": "boolean" },
+        "created_by": { "type": ["string", "null"], "description": "User ID who granted this permission" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "document_id", "subject_type", "subject_id", "permission", "is_active"]
+    }
+  }
+}

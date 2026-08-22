@@ -1,0 +1,984 @@
+{
+  "title": "TabSlideのプレゼンテーション",
+  "untitled": "無題のプレゼンテーション",
+  "preset": {
+    "ppt": "プレゼンテーション（1920×1080）",
+    "xiaohongshu": "小紅書ノート (1080×1440)",
+    "poster": "ポスター",
+    "custom": "カスタムサイズ"
+  },
+  "toolbar": {
+    "font": "フォント",
+    "fontSize": "フォントサイズ",
+    "fontColor": "文字の色",
+    "bold": "太字",
+    "italic": "イタリック体",
+    "underline": "下線",
+    "strikethrough": "取り消し線",
+    "link": "リンク",
+    "alignLeft": "左揃え",
+    "alignCenter": "センター",
+    "alignRight": "右揃え",
+    "alignJustify": "正当化する",
+    "lineHeight": "線の高さ",
+    "letterSpacing": "文字間隔",
+    "bulletList": "箇条書きリスト",
+    "orderedList": "番号付きリスト",
+    "indent": "インデントを増やす",
+    "outdent": "インデントを減らす",
+    "superscript": "上付き文字",
+    "subscript": "下付き文字",
+    "backgroundColor": "ハイライト",
+    "themeColor": "テーマカラー"
+  },
+  "font": {
+    "default": "デフォルト",
+    "system": "システムフォント",
+    "document": "文書",
+    "chinese": "中国語",
+    "sansSerif": "サンセリフ",
+    "serif": "セリフ",
+    "monospace": "等空間"
+  },
+  "color": {
+    "default": "デフォルト",
+    "themeColors": "テーマカラー",
+    "textColors": "文字の色",
+    "highlightColors": "ハイライトカラー",
+    "red": "赤",
+    "orange": "オレンジ",
+    "yellow": "黄色",
+    "green": "緑",
+    "blue": "ブルー",
+    "purple": "紫",
+    "pink": "ピンク",
+    "gray": "グレー",
+    "black": "ブラック",
+    "white": "ホワイト",
+    "none": "なし",
+    "dark1": "ダーク1",
+    "light1": "ライト1",
+    "accent1": "アクセント1",
+    "accent2": "アクセント2",
+    "accent3": "アクセント3",
+    "accent4": "アクセント4",
+    "accent5": "アクセント5",
+    "accent6": "アクセント6",
+    "dark2": "ダーク2",
+    "light2": "ライト2",
+    "background1": "背景1",
+    "background2": "背景2",
+    "text1": "テキスト1",
+    "text2": "テキスト 2"
+  },
+  "link": {
+    "placeholder": "https://... またはページ 2",
+    "confirm": "確認する",
+    "remove": "削除"
+  },
+  "letterSpacing": {
+    "default": "デフォルト",
+    "tight": "きつい"
+  },
+  "canvas": {
+    "zoomIn": "ズームイン",
+    "zoomOut": "ズームアウト",
+    "fitToScreen": "画面に合わせる",
+    "fit": "フィット",
+    "reset100": "100%にリセット",
+    "noData": "利用可能なスライド データがありません",
+    "dropImage": "ドロップして画像を挿入"
+  },
+  "versionHistory": "バージョン履歴",
+  "slideshow": {
+    "prev": "前へ",
+    "next": "次へ",
+    "exit": "スライドショーを終了する",
+    "start": "プレゼント",
+    "endTitle": "プレゼンテーションの終了",
+    "endSubtitle": "任意の場所をクリックするか、ESC キーを押して終了します",
+    "hintNavigate": "スライドを移動する",
+    "hintNext": "次のステップ",
+    "hintExit": "終了",
+    "autoplayRestricted": "自動再生が制限されています",
+    "autoplayMuted": "自動再生ミュート",
+    "clickToPlay": "クリックして再生",
+    "unmute": "ミュートを解除する"
+  },
+  "image": {
+    "crop": "作物",
+    "cropCircle": "円にトリミング",
+    "removeCrop": "トリミングを削除",
+    "replace": "画像を置き換える",
+    "delete": "削除",
+    "confirm": "確認する",
+    "cancel": "キャンセル",
+    "reset": "リセット",
+    "loadFailed": "画像の読み込みに失敗しました"
+  },
+  "export": {
+    "title": "エクスポート",
+    "format": "エクスポート形式",
+    "pptx": "PPTXとしてエクスポート",
+    "pdf": "PDFとしてエクスポート",
+    "image": "画像",
+    "images": "画像としてエクスポート",
+    "exporting": "エクスポート中...",
+    "success": "エクスポートに成功しました",
+    "failed": "エクスポートに失敗しました"
+  },
+  "import": {
+    "title": "インポート",
+    "pptx": "PPTXのインポート",
+    "importing": "インポート中...",
+    "success": "インポート成功",
+    "failed": "インポートに失敗しました"
+  },
+  "label": {
+    "user": "ユーザー"
+  },
+  "host": {
+    "loading": "プレゼンテーションを読み込んでいます...",
+    "reload": "リロード",
+    "preset": {
+      "title": "プレゼンテーションの作成",
+      "description": "開始するキャンバスの比率を選択するか、既存の PPTX ファイルをインポートします。",
+      "or": "または",
+      "importButton": "PPTXファイルをインポートする",
+      "option": {
+        "widescreen": {
+          "label": "16:9 ワイドスクリーン",
+          "description": "1920×1080"
+        },
+        "classic": {
+          "label": "4:3 クラシック",
+          "description": "1024×768"
+        },
+        "xiaohongshu": {
+          "label": "小紅書",
+          "description": "1080×1440"
+        }
+      }
+    },
+    "importing": {
+      "title": "PPTX ファイルをインポートしています...",
+      "description": "スライドの内容を解析中です。お待ちください。"
+    },
+    "import": {
+      "successWithStats": "正常にインポートされました: {{slides}} スライド、{{elements}} 要素。",
+      "failedWithReason": "インポートに失敗しました: {{reason}}"
+    },
+    "export": {
+      "failedWithReason": "エクスポートに失敗しました: {{reason}}"
+    },
+    "exportWarning": {
+      "imagePlaceholderFallback": "{{count}} リモート画像はインライン化できなかったため、プレースホルダーに置き換えられました。",
+      "imageProxyFailed": "{{count}} 画像の画像プロキシが失敗しました。エクスポートされた PPTX では空白で表示される場合があります。",
+      "imageProxyNormalized": "{{count}} リモート イメージのクロスオリジン プロキシ正規化が成功しました。",
+      "imageRasterizeFailed": "{{count}} 画像はラスタライズに失敗したため、プレースホルダーに置き換えられました。"
+    },
+    "error": {
+      "saveMissingContext": "保存に失敗しました。組織/エージェントのコンテキストが回復するのを待っています...",
+      "saveRetryExceeded": "最大限の再試行の後、保存に失敗しました。ネットワークを確認して更新してください。",
+      "loadFailedRetry": "ロードに失敗しました。更新してもう一度お試しください。",
+      "uploadEmptyUrl": "アップロードは成功しましたが、画像 URL が返されませんでした。",
+      "uploadValidation": "ファイルの検証に失敗しました: サポートされていないタイプまたはサイズを超えました。",
+      "imageTooLarge": "画像ファイルが大きすぎます (最大 {{maxSize}})",
+      "imageTypeNotSupported": "サポートされていない画像形式です。",
+      "imageUploadFallback": "画像が挿入されました。オンライン時に自動アップロードされます。",
+      "imageLoadFailed": "画像の読み込みに失敗しました。"
+    },
+    "reupload": {
+      "success": "{{count}} オフライン画像がクラウドにアップロードされました",
+      "failed": "{{count}} オフライン画像のアップロードに失敗しました。次回再試行します",
+      "partialFailed": "{{success}} 画像のアップロード、{{failed}} が失敗しました"
+    },
+    "longOfflineWarning": "長い間オフラインでした",
+    "longOfflineWarningDesc": "プレゼンテーションの内容に一貫性があるかどうかを確認することをお勧めします。オフライン中に行われた編集は自動的にマージされます。",
+    "versionRestored": "バージョンは正常に復元されました",
+    "versionRestoreFailed": "バージョンの復元に失敗しました",
+    "collabSyncWarning": "バージョンは復元されましたが、一部のオンライン コラボレーターは同期されていない可能性があります。ページを更新するように依頼してください。",
+    "versionMigrationNotice": "古いバージョンは移行中のため、一時的に表示されなくなる場合があります",
+    "storeFailedWarning": "コンテンツを保存できませんでした。ネットワーク接続を確認してください",
+    "concurrentEditWarning": "別の共同作業者もこの要素を編集中です。変更は上書きされる可能性があります"
+  },
+  "history": {
+    "title": "バージョン履歴",
+    "restore": "このバージョンを復元する",
+    "createVersion": "名前付きバージョンの作成",
+    "versionName": "バージョン名",
+    "unnamed": "名前のないバージョン",
+    "restoreSuccess": "バージョンは正常に復元されました",
+    "restoreFailed": "バージョンの復元に失敗しました"
+  },
+  "error": {
+    "projectNotFound": "プレゼンテーションが見つかりません",
+    "loadFailed": "ロードに失敗しました",
+    "saveFailed": "保存に失敗しました",
+    "versionConflict": "バージョンが競合しています。更新して再試行してください",
+    "exportFailed": "エクスポートに失敗しました",
+    "importFailed": "インポートに失敗しました"
+  },
+  "message": {
+    "saved": "保存されました",
+    "saving": "保存中...",
+    "autoSave": "自動保存",
+    "unsavedChanges": "未保存の変更",
+    "editing": "編集",
+    "saveError": "保存に失敗しました"
+  },
+  "common": {
+    "cancel": "キャンセル",
+    "delete": "削除"
+  },
+  "file": {
+    "title": "ファイル",
+    "importPptx": "PPTXのインポート",
+    "exportPptx": "PPTXとしてエクスポート",
+    "exportPdf": "PDFとしてエクスポート",
+    "versionHistory": "バージョン履歴"
+  },
+  "page": {
+    "title": "ページ",
+    "totalCount": "{{count}} 合計ページ数",
+    "addFirst": "最初のページを追加",
+    "addAfterCurrent": "現在のページの後に新しいページを追加",
+    "expandList": "ページリストを展開する",
+    "dropHere": "ここにドロップしてください",
+    "insertHere": "ここにスライドを挿入",
+    "context": {
+      "duplicateCurrent": "現在のページを複製します",
+      "addAfter": "後にページを追加",
+      "addRemark": "コメントを追加",
+      "copyToClipboard": "クリップボードにコピー",
+      "cut": "カットページ",
+      "pasteAfter": "このページの後に貼り付けます",
+      "delete": "ページの削除"
+    },
+    "deleteConfirm": {
+      "title": "ページ {{index}} を削除しますか?",
+      "desc": "このページにはコンテンツがあります。元に戻す (Ctrl/Cmd+Z) で元に戻すことができます。"
+    },
+    "addSlide": "スライドを追加"
+  },
+  "align": {
+    "left": "左揃え",
+    "horizontalCenter": "水平方向の中心を揃える",
+    "right": "右揃え",
+    "top": "上揃え",
+    "verticalCenter": "垂直方向の中心を揃える",
+    "bottom": "下揃え",
+    "distributeH": "水平方向に分配する",
+    "distributeV": "垂直方向に配置",
+    "enableSmartGuides": "スマートガイドスナップを有効にする",
+    "disableSmartGuides": "スマートガイドスナップを無効にする",
+    "enableGridSnap": "グリッドスナップを有効にする",
+    "disableGridSnap": "グリッドスナップを無効にする",
+    "showGrid": "グリッドを表示",
+    "hideGrid": "グリッドを非表示にする",
+    "tidyUp": "整理整頓"
+  },
+  "contextMenu": {
+    "copy": "コピー",
+    "cut": "カット",
+    "paste": "ペースト",
+    "duplicate": "重複",
+    "selectAll": "すべて選択",
+    "layer": "レイヤー",
+    "bringToFront": "手前に持ってくる",
+    "bringForward": "前倒し",
+    "sendBackward": "逆方向に送信",
+    "sendToBack": "背面に送信",
+    "group": "グループ",
+    "ungroup": "グループを解除する",
+    "lock": "ロック",
+    "unlock": "ロックを解除する",
+    "lockSelected": "選択されたロック",
+    "unlockSelected": "選択したロックを解除します",
+    "show": "表示する",
+    "hide": "隠す",
+    "showSelected": "選択したものを表示",
+    "hideSelected": "選択したものを非表示にする",
+    "delete": "削除",
+    "align": "整列"
+  },
+  "moveable": {
+    "partialLocked": "一部の要素はロックされています"
+  },
+  "animation": {
+    "title": "アニメーション",
+    "add": "アニメーションを追加する",
+    "empty": "要素を選択し、アニメーション効果を追加します。",
+    "emptyWithSelection": "「+ アニメーションの追加」で効果を選択し、選択した要素をアニメーション化します。",
+    "delete": "アニメーションの削除",
+    "elementDeleted": "(削除されました)",
+    "effect": {
+      "fadeIn": "フェードイン",
+      "fadeInDown": "フェードインダウン",
+      "fadeInUp": "フェードインアップ",
+      "fadeInLeft": "フェードイン左",
+      "fadeInRight": "右にフェードイン",
+      "zoomIn": "ズームイン",
+      "zoomInDown": "ズームインダウン",
+      "zoomInUp": "ズームインアップ",
+      "zoomInLeft": "左にズームイン",
+      "zoomInRight": "右にズームイン",
+      "bounceIn": "バウンスイン",
+      "bounceInDown": "バウンスインダウン",
+      "bounceInUp": "バウンス・イン・アップ",
+      "bounceInLeft": "左にバウンス",
+      "bounceInRight": "右にバウンス",
+      "slideInDown": "スライドインダウン",
+      "slideInUp": "スライドインアップ",
+      "slideInLeft": "左にスライドイン",
+      "slideInRight": "右にスライドイン",
+      "rotateIn": "内側に回転",
+      "rotateInDownLeft": "左下に回転",
+      "rotateInDownRight": "右下に回転",
+      "rotateInUpLeft": "左上に回転",
+      "rotateInUpRight": "右上に回転",
+      "flipInX": "フリップインX",
+      "flipInY": "フリップインY",
+      "backInDown": "バック・イン・ダウン",
+      "backInUp": "バックインアップ",
+      "backInLeft": "バックインレフト",
+      "backInRight": "右に戻る",
+      "lightSpeedInRight": "右の光速",
+      "lightSpeedInLeft": "左の光速",
+      "fadeOut": "フェードアウト",
+      "fadeOutDown": "フェードアウトダウン",
+      "fadeOutUp": "フェードアウトアップ",
+      "fadeOutLeft": "左にフェードアウト",
+      "fadeOutRight": "右にフェードアウト",
+      "zoomOut": "ズームアウト",
+      "zoomOutDown": "下にズームアウト",
+      "zoomOutUp": "ズームアウトアップ",
+      "zoomOutLeft": "左にズームアウト",
+      "zoomOutRight": "右にズームアウト",
+      "bounceOut": "バウンスアウト",
+      "bounceOutDown": "バウンスアウトダウン",
+      "bounceOutUp": "バウンスアウトアップ",
+      "bounceOutLeft": "左にバウンスアウト",
+      "bounceOutRight": "右にバウンスアウト",
+      "slideOutDown": "下にスライドアウト",
+      "slideOutUp": "上にスライドアウト",
+      "slideOutLeft": "左にスライドアウト",
+      "slideOutRight": "右にスライドアウト",
+      "bounce": "バウンス",
+      "shakeX": "シェイクX",
+      "shakeY": "シェイクY",
+      "wobble": "ぐらつく",
+      "swing": "スイング",
+      "headShake": "首を振る",
+      "jello": "ゼリー",
+      "rubberBand": "輪ゴム",
+      "tada": "多田",
+      "flash": "フラッシュ",
+      "pulse": "パルス",
+      "heartBeat": "ハートビート",
+      "flip": "フリップ"
+    },
+    "triggerLabel": "トリガー",
+    "duration": "期間",
+    "type": {
+      "in": "入口",
+      "out": "終了",
+      "attention": "強調"
+    },
+    "trigger": {
+      "click": "クリック時",
+      "meantime": "以前のものと",
+      "auto": "前回以降"
+    },
+    "group": {
+      "fade": "フェード",
+      "zoom": "ズーム",
+      "bounce": "バウンス",
+      "slide": "スライド",
+      "rotate": "回転",
+      "flip": "フリップ",
+      "shake": "シェイク",
+      "other": "その他"
+    },
+    "effectLabel": "効果"
+  },
+  "element": {
+    "type": {
+      "text": "テキスト",
+      "image": "画像",
+      "shape": "形状",
+      "line": "ライン",
+      "chart": "チャート",
+      "table": "テーブル",
+      "latex": "計算式",
+      "video": "ビデオ",
+      "audio": "オーディオ"
+    }
+  },
+  "insert": {
+    "defaultText": "ダブルクリックしてテキストを編集します",
+    "text": "テキスト",
+    "image": "メディア",
+    "shape": "形状",
+    "line": {
+      "title": "ライン",
+      "presets": {
+        "straight": "ストレート",
+        "singleArrow": "シングルアロー",
+        "doubleArrow": "二重矢印",
+        "diamondArrow": "ダイヤモンドアロー",
+        "stealthArrow": "ステルスアロー",
+        "dotEnd": "ドットエンド",
+        "dashed": "破線",
+        "dashedArrow": "破線の矢印",
+        "dotted": "点線",
+        "curve": "曲線",
+        "broken": "破線",
+        "broken2": "二重破線",
+        "cubic": "3次曲線"
+      },
+      "category": {
+        "basic": "基本",
+        "arrows": "矢",
+        "paths": "パス"
+      }
+    },
+    "table": {
+      "chooseSize": "テーブルサイズを選択してください",
+      "preview": "{{rows}} × {{cols}}表",
+      "title": "テーブル"
+    },
+    "chart": {
+      "title": "チャート",
+      "types": {
+        "bar": {
+          "label": "棒グラフ",
+          "desc": "縦棒の比較"
+        },
+        "column": {
+          "label": "縦棒グラフ",
+          "desc": "横棒比較"
+        },
+        "line": {
+          "label": "折れ線グラフ",
+          "desc": "トレンドの変化"
+        },
+        "area": {
+          "label": "面グラフ",
+          "desc": "トレンドとボリューム"
+        },
+        "pie": {
+          "label": "円グラフ",
+          "desc": "構成比"
+        },
+        "ring": {
+          "label": "ドーナツチャート",
+          "desc": "構成比（中空）"
+        },
+        "radar": {
+          "label": "レーダーチャート",
+          "desc": "多次元の比較"
+        },
+        "scatter": {
+          "label": "散布図",
+          "desc": "相関分布"
+        }
+      },
+      "default": {
+        "pieTitle": "シェア分析",
+        "ringTitle": "成分分析",
+        "lineTitle": "傾向分析",
+        "areaTitle": "エリアトレンド",
+        "compareTitle": "データの比較",
+        "radarTitle": "寸法比較",
+        "scatterTitle": "散乱分布",
+        "labels": {
+          "a": "カテゴリーA",
+          "b": "カテゴリーB",
+          "c": "カテゴリーC",
+          "d": "カテゴリーD"
+        },
+        "legendShare": "シェアする",
+        "series1": "シリーズ 1",
+        "series2": "シリーズ 2",
+        "dimension1": "次元 1",
+        "dimension2": "ディメンション 2",
+        "dimension3": "次元 3",
+        "dimension4": "ディメンション 4",
+        "dimension5": "ディメンション 5",
+        "sampleA": "サンプルA",
+        "sampleB": "サンプルB"
+      }
+    },
+    "latex": {
+      "title": "計算式",
+      "placeholder": "LaTeX を入力します。例: x=\\\\frac{-b\\\\pm\\\\sqrt{b^2-4ac}}{2a}",
+      "color": "色",
+      "submit": "数式を挿入",
+      "processing": "処理中...",
+      "previewUnavailable": "数式プレビューは使用できません",
+      "presets": {
+        "quadratic": "二次公式",
+        "gaussian": "ガウス分布",
+        "euler": "オイラー恒等式"
+      },
+      "errors": {
+        "empty": "数式を入力してください。",
+        "renderFailed": "数式のレンダリングに失敗しました。構文を確認してください。"
+      }
+    },
+    "title": "挿入"
+  },
+  "chart": {
+    "noData": "データなし"
+  },
+  "name": {
+    "editHint": "クリックまたはダブルクリックして名前を編集します"
+  },
+  "property": {
+    "toolbar": {
+      "page": "ページ",
+      "position": "ポジション",
+      "transform": "トランスフォーム",
+      "layer": "レイヤー"
+    },
+    "multiSelection": "{{count}} 要素が選択されました",
+    "page": "ページ",
+    "collapse": "崩壊する",
+    "pageLayout": {
+      "title": "ページレイアウト",
+      "unbound": "束縛されていない",
+      "index": "インデックス: {{index}}",
+      "noOriginMeta": "このページでは元のレイアウトのメタデータは利用できません。",
+      "noSnapshots": "使用可能なレイアウト スナップショットはありません。",
+      "unnamed": "名前のないレイアウト",
+      "master": "マスター: {{name}}",
+      "layoutIndex": "レイアウト {{index}}"
+    },
+    "pageTransition": {
+      "title": "スライドトランジション",
+      "option": {
+        "no": "なし",
+        "fade": "フェード",
+        "slideX": "水平にスライド",
+        "slideY": "垂直にスライド",
+        "slideX3D": "水平にスライド (3D)",
+        "slideY3D": "垂直方向にスライド (3D)",
+        "rotate": "回転",
+        "scaleY": "垂直方向に拡張",
+        "scaleX": "水平方向に拡張",
+        "scale": "ズームイン",
+        "scaleReverse": "ズームアウト",
+        "random": "ランダム"
+      }
+    },
+    "pageBackground": {
+      "title": "ページの背景",
+      "themeKey": "テーマキー",
+      "resolvedColor": "解決された色",
+      "themePalette": "テーマパレット",
+      "switchToNormal": "無地の背景に切り替える",
+      "imageFit": "画像のフィット",
+      "imageFitCover": "カバー（トリミングされる場合があります）",
+      "imageFitContain": "含む",
+      "imageFitRepeat": "リピート",
+      "useTheme": "テーマの背景を使用する",
+      "typeImage": "画像",
+      "typeGradient": "グラデーション"
+    },
+    "themeFont": {
+      "title": "テーマフォント",
+      "heading": "見出しフォント",
+      "headingPlaceholder": "見出しのフォントファミリーを入力してください",
+      "body": "本文フォント",
+      "bodyPlaceholder": "本文のフォントファミリーを入力してください"
+    },
+    "canvasAssist": {
+      "title": "キャンバスアシスト",
+      "snapToGuides": "スマートガイドスナップ",
+      "snapToGrid": "グリッドスナップ",
+      "showGrid": "グリッドを表示"
+    },
+    "currentValue": "現在: {{value}}",
+    "default": "デフォルト",
+    "remark": "注意事項",
+    "remarkPlaceholder": "このページに講演者ノートを追加…",
+    "positionSize": "位置とサイズ",
+    "transform": "トランスフォーム",
+    "rotate": "回転",
+    "opacity": "不透明度",
+    "flipHorizontal": "水平方向に反転",
+    "flipVertical": "垂直方向に反転",
+    "fixedRatio": "ロック率",
+    "elementName": "要素名",
+    "lock": "ロック",
+    "unlock": "ロックを解除する",
+    "show": "表示する",
+    "hide": "隠す",
+    "color": "色",
+    "font": "フォント",
+    "none": "なし",
+    "enabled": "有効",
+    "apply": "申し込む",
+    "clear": "クリア",
+    "layer": {
+      "action": {
+        "toFront": "前面に移動",
+        "forward": "前倒し",
+        "backward": "逆方向に送信",
+        "toBack": "背面に移動",
+        "hideAll": "すべて隠す",
+        "showAll": "すべて表示",
+        "lockAll": "すべてをロック",
+        "unlockAll": "すべてのロックを解除する",
+        "lockedHint": "レイヤーがロックされています"
+      },
+      "empty": "要素がありません",
+      "show": "表示する",
+      "hide": "隠す",
+      "lock": "ロック",
+      "unlock": "ロックを解除する",
+      "group": {
+        "defaultName": "グループ ({{count}})",
+        "collapse": "グループを折りたたむ",
+        "expand": "グループを展開する",
+        "placeholder": "グループ名を入力してください",
+        "renameHint": "Enterを押して保存します",
+        "show": "グループを表示",
+        "hide": "グループを非表示にする",
+        "hidePartial": "表示されている項目を非表示にする",
+        "lock": "ロックグループ",
+        "lockPartial": "ロック解除されたアイテムをロックする",
+        "unlock": "グループのロックを解除する"
+      }
+    },
+    "style": {
+      "chart": {
+        "title": "チャート"
+      },
+      "fill": {
+        "title": "埋める",
+        "modeSolid": "固体",
+        "modeGradient": "グラデーション",
+        "modeImage": "画像",
+        "opacity": "不透明度",
+        "gradientType": "タイプ",
+        "gradientTypeLinear": "リニア",
+        "gradientTypeRadial": "ラジアル",
+        "angle": "角度",
+        "positionPercent": "順位%",
+        "addStop": "+ 停止",
+        "removeStop": "- 停止",
+        "selectImage": "画像の選択",
+        "uploadLocalImage": "ローカル画像をアップロードする",
+        "inputImageUrl": "または画像のURLを入力してください"
+      },
+      "themeColor": "テーマカラー",
+      "corners": {
+        "title": "コーナー半径（4コーナー）",
+        "topLeft": "左上",
+        "topRight": "右上",
+        "bottomRight": "右下",
+        "bottomLeft": "左下"
+      },
+      "shapeText": {
+        "title": "シェイプテキスト",
+        "content": "テキストコンテンツ",
+        "fontFamily": "フォントファミリー",
+        "fontFamilyPlaceholder": "例えばマイクロソフト ヤヘイ",
+        "fontSize": "フォントサイズ (pt)",
+        "color": "文字の色",
+        "align": "水平揃え",
+        "alignLeft": "L",
+        "alignCenter": "C",
+        "alignRight": "R",
+        "verticalAlign": "垂直方向の整列",
+        "verticalAlignTop": "T",
+        "verticalAlignMiddle": "M",
+        "verticalAlignBottom": "B"
+      },
+      "image": {
+        "src": "画像URL",
+        "altText": "代替テキスト",
+        "altTextPlaceholder": "アクセシビリティに関する画像の説明",
+        "radius": "コーナー半径",
+        "effects": {
+          "title": "画像効果",
+          "fitMode": "フィットモード",
+          "fit": {
+            "cover": "カバー（トリミングされる場合があります）",
+            "contain": "含む",
+            "fill": "埋める（伸ばす）"
+          },
+          "colorMask": "カラーマスク",
+          "enableMask": "マスクを有効にする",
+          "filters": "フィルター",
+          "filterBrightness": "明るさ",
+          "filterContrast": "コントラスト",
+          "filterSaturation": "彩度",
+          "filterBlur": "ぼかし",
+          "filterGrayscale": "グレースケール",
+          "filterInvert": "反転",
+          "filterHueRotate": "色相の回転",
+          "filterSepia": "セピア",
+          "cropHint": "画像をダブルクリックしてトリミング モード (長方形/円) に入ります。",
+          "resetFilters": "フィルターをリセットする"
+        }
+      },
+      "textDefault": {
+        "title": "テキストスタイル",
+        "defaultColor": "文字の色",
+        "background": "テキストの背景",
+        "fontFamily": "フォントファミリー",
+        "fontFamilyPlaceholder": "例えばマイクロソフト ヤヘイ",
+        "fontSize": "フォントサイズ (pt)",
+        "lineHeight": "線の高さ",
+        "lineHeightPlaceholder": "乗数、例: 1.5",
+        "wordSpace": "文字間隔",
+        "paragraphSpace": "段落の間隔",
+        "verticalAlign": "垂直方向の整列",
+        "verticalAlignTop": "トップへ",
+        "verticalAlignMiddle": "ミドル",
+        "verticalAlignBottom": "下",
+        "verticalText": "縦書きテキスト",
+        "autoFit": "テキストフィット",
+        "autoFitNone": "なし",
+        "autoFitShrink": "テキストの縮小",
+        "autoFitResize": "ボックスのサイズを変更する",
+        "margin": "パディング",
+        "marginTop": "トップへ",
+        "marginRight": "右",
+        "marginBottom": "下",
+        "marginLeft": "左"
+      },
+      "link": {
+        "title": "エレメントリンク",
+        "type": {
+          "web": "外部リンク",
+          "slide": "ページジャンプ"
+        },
+        "placeholder": {
+          "web": "https://example.com",
+          "slide": "ページ-2 / 2 / slide2.xml"
+        },
+        "save": "リンクを保存",
+        "remove": "リンクを削除",
+        "noTarget": "リンク先がありません",
+        "pageLabel": "ページ"
+      },
+      "tableRichText": {
+        "title": "表のリッチテキスト",
+        "tip": "表のセルをダブルクリックしてリッチ テキストを編集し、ここでフォント、色、配置を制御します。",
+        "align": {
+          "left": "L",
+          "center": "C",
+          "right": "R",
+          "justify": "J"
+        },
+        "fontSize": "フォントサイズ (pt)",
+        "fontPlaceholder": "例えばマイクロソフト ヤヘイ",
+        "unorderedList": "箇条書きリスト",
+        "orderedList": "番号付きリスト",
+        "linkPrompt": "リンクを入力してください (https://... または page-2 をサポート)",
+        "linkPlaceholder": "https://... またはページ 2",
+        "link": "リンク",
+        "unlink": "リンクを解除する",
+        "cellBg": "セルの背景",
+        "cellVerticalAlign": "垂直方向の整列",
+        "clearFormatting": "書式設定のクリア"
+      },
+      "tableTheme": {
+        "title": "テーブルのテーマ",
+        "color": "テーマカラー",
+        "headerRow": "ヘッダー行",
+        "headerCol": "最初の列",
+        "footerRow": "フッター行",
+        "lastCol": "最後の列",
+        "stripedRows": "縞模様の行",
+        "stripedCols": "縞模様の列"
+      },
+      "tableBorders": {
+        "title": "表の境界線",
+        "top": "トップへ",
+        "bottom": "下",
+        "left": "左",
+        "right": "右",
+        "insideH": "インサイドH",
+        "insideV": "インサイドV"
+      },
+      "latex": {
+        "title": "計算式",
+        "placeholder": "LaTeX 式を入力してください",
+        "stroke": "脳卒中",
+        "hintApply": "Ctrl/Cmd + Enter を押して適用します",
+        "rendering": "レンダリング中…",
+        "errorEmpty": "数式を空にすることはできません。",
+        "errorRenderFailed": "数式のレンダリングに失敗しました。"
+      },
+      "line": {
+        "title": "線のスタイル",
+        "width": "幅",
+        "style": "スタイル",
+        "styleOptions": {
+          "solid": "固体",
+          "dashed": "破線",
+          "dotted": "点線",
+          "dashDot": "ダッシュ ドット",
+          "longDash": "ロングダッシュ",
+          "longDashDot": "長鎖点"
+        },
+        "type": "線種",
+        "typeOptions": {
+          "straight": "ストレート",
+          "broken": "壊れた",
+          "broken2": "ダブルブロークン",
+          "curve": "二次曲線",
+          "cubic": "3次曲線"
+        },
+        "startCap": "スタートキャップ",
+        "endCap": "エンドキャップ",
+        "cap": {
+          "none": "なし",
+          "arrow": "矢印",
+          "triangle": "トライアングル",
+          "stealth": "ステルス",
+          "diamond": "ダイヤモンド",
+          "dot": "ドット"
+        }
+      },
+      "outline": {
+        "title": "概要",
+        "none": "輪郭なし",
+        "width": "幅",
+        "style": "スタイル"
+      },
+      "shadow": {
+        "title": "シャドウ",
+        "none": "影なし",
+        "offsetX": "オフセット X",
+        "offsetY": "オフセットY",
+        "blur": "ぼかし",
+        "colorPlaceholder": "rgba(0,0,0,0.15)"
+      },
+      "video": {
+        "title": "ビデオ",
+        "src": "動画のURL",
+        "poster": "ポスター",
+        "posterPlaceholder": "ポスター画像のURL（任意）",
+        "autoplay": "自動再生"
+      },
+      "audio": {
+        "title": "オーディオ",
+        "src": "音声 URL",
+        "iconColor": "アイコンの色",
+        "autoplay": "自動再生",
+        "loop": "ループ"
+      }
+    },
+    "chart": {
+      "type": "タイプ",
+      "title": "タイトル",
+      "titlePlaceholder": "チャートのタイトル",
+      "labelsField": "カテゴリラベル (カンマ区切り)",
+      "labelsFieldScatter": "X 軸の値 (デフォルト/最初のシリーズ、カンマ区切り)",
+      "labelsPlaceholder": "第1四半期、第2四半期、第3四半期、第4四半期",
+      "labelsPlaceholderScatter": "1、2、3、4",
+      "legendsField": "凡例名 (カンマ区切り)",
+      "legendsFieldPie": "シリーズ名 (最初の 1 つだけが使用されます)",
+      "legendsPlaceholder": "シリーズ1、シリーズ2",
+      "legendsPlaceholderPie": "シェアする",
+      "seriesField": "データシリーズ (1 行に 1 つのシリーズ、カンマ区切り)",
+      "seriesFieldPie": "値 (単一行、カンマ区切り)",
+      "xSeriesField": "シリーズごとの X 値 (1 行に 1 つのシリーズ、オプション)",
+      "xSeriesPlaceholder": "1、2、3、4\n10、20、30、40",
+      "xSeriesHint": "空の場合、上記の値が使用され、各シリーズの長さに合わせて調整されます。",
+      "pieHint": "円グラフ/ドーナツでは、最初のデータ行と最初の凡例名のみが使用されます。",
+      "showLegend": "凡例を表示",
+      "legendPosition": "凡例の位置",
+      "legendPositionBottom": "下",
+      "legendPositionTop": "トップへ",
+      "legendPositionLeft": "左",
+      "legendPositionRight": "右",
+      "showDataLabel": "データラベルを表示",
+      "stack": "スタック",
+      "smooth": "滑らかな曲線",
+      "smoothScatter": "滑らかなライン",
+      "radarFilled": "塗りつぶし領域",
+      "themeMapping": "テーマのカラーマッピング",
+      "themeMappingHint": "シリーズをテーマ キーにバインドして、色がテーマの変更に自動的に追従するようにします。",
+      "resetByTheme": "テーマごとにリセット",
+      "removeColor": "色を削除する",
+      "customColor": "カスタムカラー",
+      "addColor": "+ カラー",
+      "chartFillColor": "チャートの背景",
+      "axisTextColor": "軸のテキストの色",
+      "gridLineColor": "グリッド線の色",
+      "defaultCategory": "カテゴリ {{index}}",
+      "defaultLegendShare": "シェアする",
+      "defaultSeries": "シリーズ {{index}}"
+    },
+    "noSelection": "編集を開始する要素を選択してください",
+    "slideStyle": "スライドスタイル",
+    "pageProperties": "ページのプロパティ"
+  },
+  "tab": {
+    "slide": "スライド",
+    "design": "デザイン",
+    "properties": "プロパティ",
+    "layers": "レイヤー",
+    "insert": "挿入",
+    "edit": "編集",
+    "animation": "アニメーション"
+  },
+  "colorPicker": {
+    "themeColors": "テーマカラー",
+    "documentColors": "ドキュメントの色"
+  },
+  "present": {
+    "title": "プレゼント",
+    "fromBeginning": "最初から",
+    "fromCurrent": "現在のスライドから"
+  },
+  "insertShape": {
+    "category": {
+      "rect": "長方形",
+      "basic": "基本的な形状",
+      "basic2": "基本の形2",
+      "arrows": "矢",
+      "stars": "星"
+    },
+    "presets": {
+      "rect": "長方形",
+      "roundRect": "角丸長方形",
+      "roundRectSingle": "単一の角の丸い長方形",
+      "cutRect": "長方形の切り取り",
+      "ellipse": "楕円",
+      "circle": "サークル",
+      "triangle": "トライアングル",
+      "diamond": "ダイヤモンド",
+      "parallelogram": "平行四辺形",
+      "trapezoid": "台形",
+      "pentagon": "ペンタゴン",
+      "hexagon": "ヘキサゴン",
+      "octagon": "オクタゴン",
+      "cross": "クロス",
+      "rightTriangle": "直角三角形",
+      "heart": "ハート",
+      "lightning": "稲妻",
+      "cloud": "クラウド",
+      "chevron": "シェブロン",
+      "callout": "吹き出し",
+      "roundCallout": "丸い吹き出し",
+      "rightArrow": "右矢印",
+      "leftArrow": "左矢印",
+      "upArrow": "上矢印",
+      "downArrow": "下矢印",
+      "leftRightArrow": "左右矢印",
+      "upDownArrow": "上下矢印",
+      "notchedRightArrow": "ノッチ付き右矢印",
+      "star5": "5ポイントスター",
+      "star4": "4ポイントスター",
+      "star6": "6ポイントスター"
+    }
+  }
+}

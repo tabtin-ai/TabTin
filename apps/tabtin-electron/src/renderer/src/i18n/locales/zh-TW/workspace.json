@@ -1,0 +1,469 @@
+{
+  "welcomeTitle": "歡迎使用 TabTin",
+  "welcomeSubtitle": "AI 驅動的工作平台。建立一個新工作空間，或從左側選擇現有工作空間。",
+  "welcomeSubtitleGuest": "登入後即可建立工作空間並開始協作。",
+  "welcome": {
+    "title": "TabTin",
+    "tagline": "你的 AI 工作平台",
+    "conceptIntro": "在 TabTin 中，工作空間是持續存在的工作現場，綁定執行設備和工作目錄，承載對話、App、資源和執行上下文；你可以組合表格、文檔、程式碼、瀏覽器、設備控制、自動化、郵件和第三方整合等工作面，讓 Agent 在這個邊界裡幫你完成任務。",
+    "loginCta": "登入 / 註冊",
+    "learnMore": "了解更多 →",
+    "readyTitle": "準備好了！",
+    "readyDesc": "創造你的第一個工作空間開始工作。工作空間綁定執行設備和工作目錄，承載對話、App、資源和執行上下文。",
+    "defaultAgentName": "預設工作空間",
+    "createFirstAgent": "創建第一個工作空間",
+    "creating": "創建中...",
+    "orCollaborate": "或者，與他人協作",
+    "createGroupRoom": "建立 Agent 群房間",
+    "createDM": "發起私訊",
+    "createFailed": "創建工作空間失敗",
+    "noOrganization": "請先選擇組織",
+    "moreApps": "還有影片、白板、備忘錄、目標管理、郵件等更多能力",
+    "apps": {
+      "tabdata": "TabData",
+      "tabdataDesc": "AI 驅動的智慧表格",
+      "tabdoc": "TabDoc",
+      "tabdocDesc": "協作文檔編輯",
+      "tabslide": "TabSlide",
+      "tabslideDesc": "簡報製作",
+      "browser": "Browser",
+      "browserDesc": "智慧網頁瀏覽",
+      "tabcode": "TabCode",
+      "tabcodeDesc": "代碼與終端"
+    }
+  },
+  "actions": {
+    "createAgent": "建立新工作空間",
+    "loginToStart": "登入開始",
+    "viewDocs": "查看文檔"
+  },
+  "selector": {
+    "loginRequired": "請先登入",
+    "placeholder": "選擇組織",
+    "defaultBadge": "預設",
+    "empty": "暫無組織",
+    "pendingInvitations": "待處理邀請",
+    "invitedAs": "邀請為{{role}}",
+    "actions": {
+      "create": "建立新組織",
+      "settings": "組織設定",
+      "members": "成員管理"
+    }
+  },
+  "invitationResponse": {
+    "title": "組織邀請",
+    "description": "你被邀請加入以下組織",
+    "workspaceName": "組織",
+    "invitedBy": "由 {{name}} 邀請",
+    "role": "角色",
+    "expiresAt": "過期時間",
+    "accept": "接受邀請",
+    "reject": "拒絕",
+    "accepting": "加入中...",
+    "rejecting": "拒絕中...",
+    "accepted": "已加入組織「{{name}}」",
+    "rejected": "已拒絕邀請"
+  },
+  "invitationList": {
+    "title": "待處理邀請",
+    "description": "你有 {{count}} 條待處理的組織邀請",
+    "from": "來自 {{name}}"
+  },
+  "create": {
+    "errors": {
+      "failed": "創建失敗"
+    }
+  },
+  "views": {
+    "newTab": "新標籤"
+  },
+  "settings": {
+    "title": "組織設定",
+    "tabs": {
+      "general": "基礎設定",
+      "llm": "模型設定"
+    },
+    "validation": {
+      "nameRequired": "組織名稱不能為空",
+      "nameMismatch": "組織名稱不符",
+      "nameTooLong": "組織名稱不能超過100個字符"
+    },
+    "errors": {
+      "updateFailed": "更新失敗",
+      "deleteFailed": "刪除失敗",
+      "leaveFailed": "離開失敗"
+    },
+    "fields": {
+      "icon": "圖示",
+      "avatar": "組織頭像",
+      "name": "名稱",
+      "namePlaceholder": "組織名稱",
+      "nameHint": "{{count}}/100 字符",
+      "description": "描述（可選）",
+      "descriptionPlaceholder": "描述組織的用途",
+      "descriptionHint": "{{count}}/500 字符"
+    },
+    "avatar": {
+      "pendingSave": "頭像已裁剪，儲存組織資料後生效",
+      "pendingRemove": "頭像將在儲存後移除",
+      "hint": "支援 JPG、PNG、GIF、WebP，最大 5MB。 GIF 將轉為靜態圖。",
+      "cropTitle": "裁剪組織頭像"
+    },
+    "actions": {
+      "save": "儲存變更",
+      "saving": "儲存中...",
+      "saved": "已儲存",
+      "delete": "刪除組織",
+      "leave": "離開組織",
+      "cancel": "取消",
+      "confirmDelete": "確認刪除",
+      "deleting": "刪除中...",
+      "transfer": "轉讓"
+    },
+    "danger": {
+      "title": "危險操作",
+      "deleteTitle": "刪除組織",
+      "deleteDefault": "預設組織不能被刪除",
+      "deleteDesc": "此操作將永久刪除組織及其所有數據，且不可恢復",
+      "leaveTitle": "離開組織",
+      "leaveDesc": "離開後將失去存取權限，需要重新邀請加入",
+      "transferTitle": "轉讓所有權",
+      "transferDesc": "將所有權轉讓給現有成員"
+    },
+    "confirm": {
+      "title": "確認刪除組織？",
+      "subtitle": "此操作將永久刪除：",
+      "items": {
+        "organization": "組織 \"{{name}}\"",
+        "spaces": "所有 Agent 和表格",
+        "records": "所有數據記錄",
+        "members": "所有成員關係"
+      },
+      "warning": "⚠️ 此操作不可恢復！",
+      "inputLabel": "請輸入組織名稱以確認刪除："
+    },
+    "permissions": {
+      "ownerOnly": "💡 僅組織所有者可以編輯設置"
+    }
+  },
+  "llm": {
+    "defaultConfig": {
+      "title": "預設模型配置",
+      "subtitle": "團隊成員在未單獨指定模型時，優先使用這裡的預設模型。",
+      "configured": "已配置",
+      "notConfigured": "未配置",
+      "currentModel": "目前預設模型",
+      "pickHint": "選擇預設模型",
+      "unavailableCurrent": "目前不可用",
+      "selectHelp": "預設模型會用於新會話和未指定模型的任務。"
+    },
+    "presetSection": {
+      "title": "TabTin 預置模型",
+      "subtitle": "平台內建模型，開箱即用，可直接設為默認，無需配置頻道。",
+      "collapse": "收起預置模型",
+      "expandHint": "還有 {{count}} 個平台模型，展開查看全部。"
+    },
+    "providers": {
+      "title": "通路管理",
+      "desc": "新增雲端模型頻道（OpenAI 相容）",
+      "provider": "提供者",
+      "providerKey": "頻道標識",
+      "displayName": "顯示名稱",
+      "baseUrl": "API Base URL",
+      "apiKey": "API Key",
+      "scope": "可見範圍",
+      "scopeOrganization": "組織",
+      "scopeUser": "個人",
+      "scopeHint": "目前角色僅能創建個人管道",
+      "save": "儲存修改",
+      "cancel": "取消",
+      "edit": "編輯",
+      "delete": "刪除",
+      "enable": "啟用",
+      "disable": "停用",
+      "validate": "測試連接",
+      "validating": "驗證中...",
+      "validateSuccess": "通路連接正常",
+      "validateFailed": "連線失敗",
+      "statusEnabled": "已啟用",
+      "statusDisabled": "已停用",
+      "create": "新增頻道",
+      "creating": "新增中...",
+      "empty": "暫無通路配置",
+      "modelCount": "{{count}} 個模型",
+      "createSuccess": "頻道已新增",
+      "updateSuccess": "頻道已更新",
+      "deleteSuccess": "頻道已刪除",
+      "enableSuccess": "頻道已啟用",
+      "disableSuccess": "頻道已禁用",
+      "confirmDelete": "確認刪除頻道「{{name}}」？",
+      "validation": {
+        "required": "請填寫 Base URL 與 API Key",
+        "providerKeyInvalid": "頻道識別格式不正確"
+      }
+    },
+    "models": {
+      "title": "模型管理",
+      "desc": "在指定渠道下方新增模型",
+      "provider": "頻道",
+      "providerPlaceholder": "請選擇頻道",
+      "searchKeyword": "搜尋模型（LiteLLM）",
+      "searchPlaceholder": "例如 gpt-4o、claude-3.5",
+      "search": "搜尋",
+      "searching": "搜尋中...",
+      "clearSearch": "清空",
+      "searchResults": "搜尋結果（點選填充模型名稱）",
+      "searchValidation": "請輸入搜尋關鍵字",
+      "searchEmpty": "未找到匹配的模型",
+      "modelName": "模型名稱",
+      "displayName": "顯示名稱",
+      "maxTokens": "上下文長度",
+      "supportsVision": "支援影像",
+      "supportsStreaming": "支援流式",
+      "save": "儲存修改",
+      "cancel": "取消",
+      "edit": "編輯",
+      "delete": "刪除",
+      "enable": "啟用",
+      "disable": "停用",
+      "statusEnabled": "已啟用",
+      "statusDisabled": "已停用",
+      "statusReady": "可用",
+      "statusProviderDisabled": "頻道未啟用",
+      "statusNotReady": "未就緒",
+      "globalOnly": "系統",
+      "organizationOnly": "組織",
+      "providerDisabled": "頻道已停用，模型暫不可用",
+      "create": "新增模型",
+      "creating": "新增中...",
+      "empty": "暫無模型",
+      "userOnly": "個人",
+      "createSuccess": "模型已新增",
+      "updateSuccess": "模型已更新",
+      "deleteSuccess": "模型已刪除",
+      "enableSuccess": "模型已啟用",
+      "disableSuccess": "模型已禁用",
+      "confirmDelete": "確認刪除模型「{{name}}」？",
+      "validation": {
+        "required": "請填寫必填字段",
+        "providerRequired": "請先選擇頻道",
+        "maxTokens": "請輸入有效的上下文長度"
+      }
+    },
+    "default": {
+      "title": "預設模型",
+      "desc": "組織預設模型用於新會話",
+      "select": "選擇預設模型",
+      "save": "設為預設",
+      "saving": "設定中...",
+      "current": "目前預設：{{name}}"
+    },
+    "errors": {
+      "loadProvidersFailed": "載入頻道失敗",
+      "loadModelsFailed": "載入模型失敗",
+      "createProviderFailed": "建立頻道失敗",
+      "updateProviderFailed": "更新頻道失敗",
+      "deleteProviderFailed": "刪除頻道失敗",
+      "validateProviderFailed": "驗證頻道失敗",
+      "createModelFailed": "建立模型失敗",
+      "updateModelFailed": "更新模型失敗",
+      "deleteModelFailed": "刪除模型失敗",
+      "searchModelFailed": "搜尋模型失敗",
+      "setDefaultModelFailed": "設定預設模型失敗"
+    }
+  },
+  "trashedSpaces": {
+    "title": "工作空間回收站",
+    "subtitle": "被移入回收站的工作空間，保留期內可恢復，過期後將自動永久刪除",
+    "empty": "回收站為空",
+    "emptyHint": "沒有被移入回收站的工作空間",
+    "trashedAt": "刪除於 {{date}}",
+    "daysLeft": "{{days}} 天后自動刪除",
+    "restore": "恢復",
+    "restoring": "恢復中...",
+    "restoreSuccess": "已恢復工作空間「{{name}}」",
+    "restoreFailed": "恢復失敗",
+    "permanentDelete": "永久刪除",
+    "deleteConfirmTitle": "永久刪除工作空間",
+    "deleteConfirm": "確定要永久刪除「{{name}}」嗎？此操作不可撤銷。",
+    "deleteSuccess": "已永久刪除工作空間「{{name}}」",
+    "deleteFailed": "永久刪除失敗",
+    "loading": "加載中...",
+    "loadFailed": "載入回收站失敗",
+    "count": "{{count}} 個工作空間"
+  },
+  "apiErrors": {
+    "listNoResponse": "取得組織清單失敗：無回應",
+    "listHttpFailed": "取得組織清單失敗：HTTP {{status}}",
+    "listFailed": "取得組織清單失敗",
+    "listInvalid": "取得組織清單失敗：資料格式錯誤",
+    "detailFailed": "取得組織詳情失敗",
+    "detailInvalid": "取得組織詳情失敗：資料格式錯誤",
+    "createFailed": "創建組織失敗",
+    "createInvalid": "建立組織失敗：資料格式錯誤",
+    "updateFailed": "更新組織失敗",
+    "updateInvalid": "更新組織失敗：資料格式錯誤",
+    "deleteFailed": "刪除組織失敗",
+    "leaveFailed": "離開組織失敗",
+    "healthUnknownStatus": "未知狀態",
+    "healthUnexpected": "健康檢查回傳異常響應",
+    "healthUnavailable": "服務不可用"
+  },
+  "members": {
+    "title": "成員管理",
+    "subtitle": "{{name}} · {{count}} 位成員",
+    "actions": {
+      "add": "新增成員",
+      "addTitle": "新增成員",
+      "cancel": "取消",
+      "confirmAdd": "確認新增",
+      "sendInvitation": "發送邀請",
+      "adding": "新增中...",
+      "setViewer": "設為查看者",
+      "setEditor": "設為編輯者",
+      "remove": "移除成員",
+      "invite": "邀請",
+      "changeRole": "角色",
+      "cancelInvitation": "取消邀請"
+    },
+    "fields": {
+      "userId": "使用者 ID",
+      "userIdPlaceholder": "貼上對方的用戶 ID",
+      "userIdHint": "對方可在「設定 → 個人資料」中複製自己的使用者 ID",
+      "role": "角色"
+    },
+    "roles": {
+      "owner": "擁有者",
+      "admin": "管理員",
+      "editor": "編輯者",
+      "viewer": "查看者"
+    },
+    "roleDescriptions": {
+      "owner": "完全控制權",
+      "admin": "可管理成員和組織設置",
+      "editor": "可編輯內容",
+      "viewer": "只能查看"
+    },
+    "errors": {
+      "loadFailed": "載入成員清單失敗",
+      "loadInvalid": "取得成員清單失敗：資料格式錯誤",
+      "userIdRequired": "用戶ID不能為空",
+      "roleInvalid": "角色必須是 editor 或 viewer",
+      "addFailed": "新增成員失敗",
+      "addInvalid": "新增成員失敗：資料格式錯誤",
+      "updateRoleFailed": "更新角色失敗",
+      "removeFailed": "移除成員失敗",
+      "cancelInvitationFailed": "取消邀請失敗",
+      "permissionDenied": "無權限存取該組織"
+    },
+    "pendingInvitations": "待處理邀請 ({{count}})",
+    "linkInvitations": "邀請連結 ({{count}})",
+    "linkInvitation": "連結邀請",
+    "linkInvitationActive": "可使用",
+    "linkInvitationUsed": "已加入 {{count}} 人",
+    "directInvitation": "用戶id {{userId}}",
+    "phoneInvitation": "手機號碼 {{phone}}",
+    "statusPending": "待接受",
+    "expiresAt": "過期於 {{date}}",
+    "confirmRemove": "確定要移除該成員嗎？",
+    "ownerSection": "擁有者",
+    "memberSection": "成員 ({{count}})",
+    "you": "你",
+    "joinedAt": "加入於 {{date}}",
+    "empty": {
+      "title": "暫無其他成員",
+      "hint": "點擊上方按鈕新增成員"
+    },
+    "permissions": {
+      "ownerOnly": "💡 僅組織所有者可以管理成員"
+    }
+  },
+  "search": {
+    "placeholder": "搜尋表格、文檔、設計...",
+    "all": "全部",
+    "tables": "表格",
+    "documents": "文檔",
+    "designs": "設計",
+    "presentations": "幻燈片",
+    "code": "程式碼",
+    "videos": "影片",
+    "canvases": "白板",
+    "memos": "備忘錄",
+    "sites": "站點",
+    "functions": "雲函數",
+    "searching": "搜尋中...",
+    "error": "搜尋失敗，請稍後重試",
+    "noResults": "未找到匹配結果",
+    "hint": "輸入關鍵字搜尋所有 Agent 中的資源",
+    "navigate": "導航",
+    "open": "打開",
+    "close": "關閉",
+    "results": "個結果",
+    "shortcutHint": "開啟搜尋",
+    "dialogLabel": "全域搜尋",
+    "inputLabel": "搜尋關鍵字",
+    "typeFilter": "類型篩選",
+    "resultsList": "搜尋結果",
+    "shortcuts": "鍵盤快速鍵",
+    "navigateFailedTitle": "無法開啟資源",
+    "navigateFailedSpace": "目標工作空間未加載，請先在側邊欄中選擇",
+    "navigateFailedType": "不支援的資源類型",
+    "clearScope": "搜尋全部項目",
+    "scopedPlaceholder": "在“{{name}}”中搜尋...",
+    "scopedHint": "在「{{name}}」中搜索，按退格鍵切換到全域搜尋",
+    "globalMode": "全域搜尋"
+  },
+  "logs": {
+    "loadListSuccess": "✅ 組織清單載入成功:",
+    "loadListFailed": "❌ 載入組織失敗:",
+    "selectSuccess": "✅ 組織已選擇:",
+    "selectFailed": "❌ 選擇組織失敗:",
+    "createSuccess": "✅ 組織創建成功:",
+    "createFailed": "❌ 建立組織失敗:",
+    "updateSuccess": "✅ 組織更新成功:",
+    "updateFailed": "❌ 更新組織失敗:",
+    "deleteSuccess": "✅ 組織刪除成功",
+    "deleteFailed": "❌ 刪除組織失敗:",
+    "leaveSuccess": "✅ 已離開組織",
+    "leaveFailed": "❌ 離開組織失敗:",
+    "membersLoadSuccess": "✅ 成員列表載入成功:",
+    "membersLoadFailed": "❌ 載入成員失敗:",
+    "memberAddSuccess": "✅ 成員添加成功",
+    "memberAddFailed": "❌ 新增成員失敗:",
+    "memberRoleUpdateSuccess": "✅ 成員角色更新成功",
+    "memberRoleUpdateFailed": "❌ 更新成員角色失敗:",
+    "memberRemoveSuccess": "✅ 成員移除成功",
+    "memberRemoveFailed": "❌ 移除成員失敗:",
+    "memberRoleFetchFailed": "❌ 取得使用者角色失敗:",
+    "getDefaultFailed": "❌ 取得預設組織失敗:",
+    "healthCheckFailed": "❌ 組織服務健康檢查失敗:",
+    "cleared": "✅ 組織資料已清除"
+  },
+  "invitation": {
+    "errors": {
+      "sendFailed": "邀請發送失敗",
+      "createLinkFailed": "邀請連結建立失敗",
+      "listFailed": "取得邀請清單失敗",
+      "cancelFailed": "取消邀請失敗",
+      "notFound": "邀請不存在",
+      "acceptFailed": "接受邀請失敗",
+      "respondFailed": "處理邀請失敗",
+      "rateLimited": "邀請創建過於頻繁，請稍後再試"
+    },
+    "accept": {
+      "title": "組織邀請",
+      "confirm": "接受邀請",
+      "accepting": "加入中...",
+      "invalid": "此邀請失效",
+      "success": "已成功加入組織",
+      "successDesc": "你已加入「{{organization}}」",
+      "goToOrganization": "進入組織",
+      "loginRequired": "請先登入後再接受邀請",
+      "status": {
+        "expired": "邀請已過期",
+        "accepted": "邀請已被使用",
+        "cancelled": "邀請已取消"
+      }
+    }
+  }
+}

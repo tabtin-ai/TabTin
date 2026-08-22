@@ -1,0 +1,128 @@
+{
+  "rewind": {
+    "recordHistoryMissing": "\"{{tableName}}\" cannot be fully restored: {{count}} rows have aged out of history. The rewind has stopped and data is unchanged. Suggested actions: (1) pick a more recent restore point, or (2) ask your admin to restore from backup if you must use this point."
+  },
+  "field": {
+    "typeConvertFailed": "Could not change \"{{fieldName}}\" from {{oldType}} to {{newType}}: row {{rowNo}} value \"{{sample}}\" cannot be converted. The change has been reverted. Suggested actions: (1) export the column and clean it externally; (2) use \"Bulk update\" to normalize bad values first; (3) ask an admin to help handle the {{count}} affected rows.",
+    "renameConflict": "Cannot rename \"{{oldName}}\" to \"{{newName}}\": a field with that name already exists, or it is referenced by {{count}} linked field(s). Check \"Field dependencies\" first, or pick a different name.",
+    "deleteReferenced": "\"{{fieldName}}\" cannot be deleted: it is referenced by {{count}} linked field(s). Remove the dependents first, or check \"Field dependencies\" before deciding.",
+    "primaryFieldDeleteForbidden": "Cannot delete \"{{fieldName}}\": it is the primary field. Deleting it directly may corrupt existing data or related columns. Change the primary field in table settings first.",
+    "deleteImpactDialog": {
+      "warningHigh": "This field is referenced by other fields or views; deleting it will break downstream fields. We recommend reviewing the full chain in \"Field dependencies\" before continuing.",
+      "warningMedium": "This field is referenced by some views; those view configurations will be cleaned up automatically after delete.",
+      "warningLow": "This field has no downstream dependents and can be safely deleted.",
+      "noImpactSafe": "Delete field \"{{name}}\"? It has no downstream dependents, so it's safe to remove. See the hint below to learn whether this delete is undoable.",
+      "undoSimpleHint": "Undoable: press Ctrl+Z (⌘Z) right after delete to restore the field and its history structure.",
+      "undoComplexHint": "Undoable: press Ctrl+Z (⌘Z) right after delete to restore the field. The dependency graph will be rebuilt and values recomputed automatically (may take a few seconds). If a required dependency field has been deleted, you'll see a specific error message.",
+      "undoNotInWaveHint": "Cannot be undone: this field type is not in the quick-undo allowlist this release. To recover, restore from \"Version history\" or contact your organization admin.",
+      "undoUnknownHint": "Cannot be undone: unknown field type. Please contact your organization admin.",
+      "openVersionHistory": "Open version history",
+      "fetchErrorFallback": "Failed to load dependency analysis. You can still continue with the delete, but please verify the table state immediately afterwards."
+    },
+    "batchRestore": {
+      "title": "Some fields could not be undone in this step",
+      "summary": "In this undo step: {{restorableCount}} simple field(s) can be restored individually with Ctrl+Z; {{unrestorableCount}} complex field(s) need to be restored from \"Version history\".",
+      "restorableSection": "Can be undone individually ({{count}})",
+      "unrestorableSection": "Need version history ({{count}})",
+      "openVersionHistory": "Open version history",
+      "complexFieldHint": "Some system-managed fields require restoring from version history.",
+      "close": "OK"
+    }
+  },
+  "table": {
+    "deleteReferenced": "\"{{tableName}}\" cannot be deleted: {{skillCount}} Skill(s) and {{viewCount}} cross-table view(s) depend on it. Forcing delete will break those Skills or empty those views. Check \"Field dependencies\", or archive the table first to let dependents migrate.",
+    "trashedBanner": {
+      "title": "\"{{tableName}}\" moved to trash",
+      "description": "Background calculations are stopped; Skill rules and cross-table views that depend on this table are auto-paused. You can restore the table from \"Organization settings · Resource Trash\" within 30 days.",
+      "restoreAction": "Restore table",
+      "viewTrash": "Open trash",
+      "dismiss": "Got it"
+    },
+    "deletedBanner": {
+      "title": "\"{{tableName}}\" deleted",
+      "description": "All background calculations on this table are stopped, and Skill rules / cross-table views that depend on it are paused. The table cannot be restored after permanent delete; contact your organization admin to recover historical data from backup if needed."
+    }
+  },
+  "bulk": {
+    "checkpointCreating": "AI action on \"{{tableName}}\" affects {{count}} rows. Creating an auto restore point... Once ready, you can \"Undo this AI action\" with one click from the chat.",
+    "quotaExceeded": "This update will consume {{tokens}} organization tokens, exceeding the remaining {{remaining}}. Preflight stopped; data is unchanged. Suggestions: (1) narrow the filter; (2) wait for monthly quota reset; (3) ask your organization admin to upgrade.",
+    "affectedRecords_one": "{{count}} record affected",
+    "affectedRecords_other": "{{count}} records affected",
+    "updateByFilter": {
+      "previewTitle": "Bulk Update Preview",
+      "matchedRows": "{{count}} rows matched",
+      "samplePreview": "Preview (up to 20 sample rows)",
+      "riskLow": "Low risk",
+      "riskLowDesc": "Few rows affected; safe to proceed.",
+      "riskMedium": "Medium risk",
+      "riskMediumDesc": "{{count}} rows affected. A restore point will be created automatically.",
+      "riskHigh": "High risk",
+      "riskHighDesc": "{{count}} rows affected. Type \"CONFIRM\" to proceed.",
+      "highRiskConfirmText": "CONFIRM",
+      "highRiskInputPlaceholder": "Type \"CONFIRM\" to continue",
+      "estimatedDuration": "Estimated ~{{seconds}}s",
+      "estimatedDurationLong": "Estimated ~{{seconds}}s, can continue in background",
+      "checkpointHint": "A restore point will be created; you can rewind anytime",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "committing": "Executing bulk update…",
+      "commitSuccess": "Bulk update completed: {{count}} rows updated.",
+      "preflightFailed": "Bulk update preflight failed: {{reason}}. Data is unchanged. Please try again later; contact your organization admin if it keeps failing.",
+      "commitFailed": "Bulk update commit failed: {{reason}}. Data is unchanged. Please try again later; contact your organization admin if it keeps failing.",
+      "rejected": "Exceeds single update limit",
+      "rejectedDesc": "{{count}} rows matched, exceeding the 10,000-row single update limit. Narrow the filter to process in smaller batches, or contact an admin.",
+      "driftWarning": "Actual updated rows differ from preflight by {{ratio}}% (expected {{expected}}, actual {{actual}}). Please verify your data.",
+      "driftDismiss": "Got it",
+      "errorListTitle": "{{count}} records failed to update",
+      "errorItem": "Record {{recordId}}: {{reason}}",
+      "showMore": "Show {{count}} more",
+      "showLess": "Show less"
+    }
+  },
+  "view": {
+    "filterInvalid": "This view's filter is no longer valid: the referenced \"{{fieldName}}\" field was deleted. The view now shows all records without filtering. Open view settings to reconfigure."
+  },
+  "record": {
+    "concurrentEditConflict": "This record was just modified by {{collaboratorName}}: your changes are not saved yet. Your input is preserved — refresh to continue editing on the latest version, or click \"I confirm, overwrite\" to force-save.",
+    "restoreConflict": "Cannot restore this record to its original location: {{reason}}. Continuing may create duplicate or misaligned data. Verify the latest structure in the table, or use \"Duplicate as new row\" instead."
+  },
+  "import": {
+    "fieldUnmapped": "Import preflight found {{count}} columns without target field mapping (e.g. \"{{exampleColumn}}\"). These columns will be ignored without affecting others. Map them explicitly in \"Field mapping\", or check \"Ignore unmapped columns\" to continue.",
+    "failed": "Import failed at row {{rowNo}}: column \"{{columnName}}\" {{expected}}, but the file has \"{{actualValue}}\". The import has stopped; rows already imported follow the latest hint. Fix the cell or column mapping and re-import; for large issues, try a smaller file."
+  },
+  "undo": {
+    "failed": "Cannot undo the last action: {{reason}}. The table contents remain unchanged. Refresh and try again; if it still fails, you can try recovering from version history."
+  },
+  "admin": {
+    "fieldRecycleBin": {
+      "title": "Deleted Fields",
+      "description": "Deleted fields within the retention period can be restored here. Fields are permanently removed after {{days}} days.",
+      "empty": "No deleted fields",
+      "loading": "Loading…",
+      "loadFailed": "Failed to load. Please retry later.",
+      "fieldName": "Field Name",
+      "fieldType": "Type",
+      "deletedAt": "Deleted At",
+      "daysRemaining": "Days Remaining",
+      "daysRemainingValue": "{{days}} days",
+      "actions": "Actions",
+      "restoreAction": "Restore Field",
+      "restoreSuccess": "Field \"{{name}}\" restored.",
+      "restoreFailed": "Restore failed: {{reason}}",
+      "refresh": "Refresh",
+      "close": "Close",
+      "ttlHint": "Deleted fields are retained for {{days}} days, then permanently removed."
+    },
+    "integrity": {
+      "title": "Integrity Check",
+      "checkAction": "Check",
+      "repairAction": "Repair",
+      "checking": "Checking…",
+      "repairing": "Repairing…",
+      "noDrift": "No drift found",
+      "driftFound": "{{count}} drift(s) found",
+      "autoFixable": "Auto-fixable",
+      "manualFix": "Manual fix required"
+    }
+  }
+}

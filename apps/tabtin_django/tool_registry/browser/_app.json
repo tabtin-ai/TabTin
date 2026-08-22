@@ -1,0 +1,12 @@
+{
+  "id": "browser",
+  "name": "Browser",
+  "icon": "globe",
+  "description": "TabTin 一等公民应用 — Browser",
+  "capability_summary": "网页浏览、内容采集、结构化数据提取、Observe-Act 自动化操作、多标签管理",
+  "tool_hints": "crawl_clean_html / crawl_http_fetch 提取页面文本; execute_observe + execute_act 实现页面交互; eval 执行 JS 提取数据; open_tab/close_tab/switch_tab 管理标签",
+  "skill_name": "browser-operator",
+  "execution_env": "hybrid",
+  "status": "active",
+  "order": 5
+}
