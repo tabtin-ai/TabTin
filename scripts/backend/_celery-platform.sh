@@ -137,30 +137,6 @@ _celery_tracker_agent_queue() {
   echo "tracker_agent"
 }
 
-# CELERY_PROFILE：
-#   unset / community / lite → 社区默认只起 critical + default + realtime（beat 另起）
-#   full → 8 个 worker 全起
-# lite 仍只负责降并发（见 celery-start.sh），不另开一套 worker 名单。
-_celery_resolved_profile() {
-  local raw
-  raw="$(_to_lower "${CELERY_PROFILE:-community}")"
-  case "${raw}" in
-    full) echo "full" ;;
-    *) echo "community" ;;
-  esac
-}
-
-_celery_should_start_worker() {
-  local name="$1"
-  if [[ "$(_celery_resolved_profile)" == "full" ]]; then
-    return 0
-  fi
-  case "${name}" in
-    critical | default | realtime) return 0 ;;
-    *) return 1 ;;
-  esac
-}
-
 _celery_map_tracker_agent_queue_arg() {
   local queues="$1" tracker_queue="$2"
   local IFS=',' part out=""
