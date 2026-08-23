@@ -80,6 +80,14 @@
 
 未经人类审阅的大批量原始 AI 输出不会被接受。
 
+TabTin 的官方编程代理身份是 [TabTin Agent](https://github.com/tabtinagent)。公开联系邮箱是 `tabtinagent@tabtin.com`。由该代理协助的提交可以在说明末尾加上：
+
+```text
+Co-authored-by: TabTin Agent <tabtinagent@tabtin.com>
+```
+
+GitHub 会据此把共同作者链到这个账号。提交作者仍是贡献者本人，不改为代理账号。
+
 ## 提交与文档风格
 
 - 使用清晰、可检索的提交说明，描述“做了什么”，不要只写 `fix` 或 `update`。
