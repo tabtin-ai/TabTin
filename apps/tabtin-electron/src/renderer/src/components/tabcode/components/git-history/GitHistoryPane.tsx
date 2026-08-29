@@ -84,11 +84,14 @@ function clampListWidth(width: number): number {
 export interface GitHistoryPaneProps {
   rootPath: string
   refreshToken?: number
+  /** 外层 Context 标签是否激活；保活 pane 隐藏时清掉 body portal 浮层。 */
+  isPaneActive?: boolean
 }
 
 export function GitHistoryPane({
   rootPath,
   refreshToken = 0,
+  isPaneActive = true,
 }: GitHistoryPaneProps): React.ReactElement {
   const { t } = useTranslation('tabcode')
   const [commits, setCommits] = useState<GitCommitListItem[]>([])
@@ -119,6 +122,11 @@ export function GitHistoryPane({
     hoverContentRef.current = null
     setHoverTip(null)
   }, [])
+
+  useEffect(() => {
+    if (isPaneActive) return
+    clearHoverTip()
+  }, [clearHoverTip, isPaneActive])
 
   const scheduleHoverTip = useCallback((content: CommitHoverTipContent, event: React.MouseEvent) => {
     hoverOriginRef.current = { x: event.clientX, y: event.clientY }
@@ -331,7 +339,7 @@ export function GitHistoryPane({
     )
   }
 
-  const hoverTipNode = hoverTip && typeof document !== 'undefined'
+  const hoverTipNode = isPaneActive && hoverTip && typeof document !== 'undefined'
     ? createPortal(
       <div
         role="tooltip"

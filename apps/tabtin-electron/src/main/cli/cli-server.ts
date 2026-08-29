@@ -62,7 +62,11 @@ import {
   readHeaderString,
   runWithAgentRequestContext,
 } from './agent-request-context'
-import { errorResponse, djangoRequest } from './routes/shared/error-handler'
+import {
+  errorResponse,
+  djangoRequest,
+  sendBrowserTabUserInControlError,
+} from './routes/shared/error-handler'
 import { ensureCliProfileBootstrap } from './cli-profile-bootstrap'
 import { okResponse, errResponse } from '@tabtin/agent-wire'
 import { runWithHumanInteractionContext } from '@tabtin/agent-runtime'
@@ -86,10 +90,24 @@ import {
   runWithBrowserPolicyPreapproval,
 } from './browser-policy-middleware'
 import { ELECTRON_BROWSER_ACT_EXECUTION_TIMEOUT_MS } from './routes/browser/interaction'
+import { buildBrowserRequestScope } from './routes/browser/_helpers'
+import {
+  BROWSER_TAB_USER_IN_CONTROL_MESSAGE,
+  consumeHandBackNotice,
+  isUserControllingSession,
+} from '../browser-tab-lock/browserTabInputLock'
 
 const cliLog = createLogger('CLIServer')
 
 const codeGrepRateLimiter = new SlidingWindowRateLimiter(20, 60_000)
+const BROWSER_CONTROL_RETURNED_NOTICE = {
+  code: 'BROWSER_CONTROL_RETURNED',
+  message: '用户接管期间可能改变了页面状态；继续操作前先重新 observe 当前页面。',
+} as const
+const CAN_ACCEPT_BROWSER_RESPONSE = Symbol('canAcceptBrowserResponse')
+type DeadlineGuardedSendJSON = typeof sendJSON & {
+  [CAN_ACCEPT_BROWSER_RESPONSE]: (res: http.ServerResponse) => boolean
+}
 export const BROWSER_CLI_REQUEST_TIMEOUT_GRACE_MS = 5_000
 export const BROWSER_CLI_REQUEST_TIMEOUT_MS =
   BROWSER_CLI_APPROVAL_TIMEOUT_MS +
@@ -111,12 +129,14 @@ export async function runBrowserRequestWithDeadline(
     }
   }
 
-  const guardedSendJSON: typeof sendJSON = (targetRes, status, data) => {
+  const guardedSendJSON = ((targetRes, status, data) => {
     if (settled || targetRes.writableEnded || targetRes.destroyed) return
     settled = true
     clearTimer()
     sendJSON(targetRes, status, data)
-  }
+  }) as DeadlineGuardedSendJSON
+  guardedSendJSON[CAN_ACCEPT_BROWSER_RESPONSE] = targetRes =>
+    !settled && !targetRes.writableEnded && !targetRes.destroyed
 
   await new Promise<void>((resolve, reject) => {
     timer = setTimeout(() => {
@@ -149,6 +169,74 @@ export async function runBrowserRequestWithDeadline(
       },
     )
   }).finally(clearTimer)
+}
+
+function makeBrowserControlAwareSendJSON(
+  sessionId: string | undefined,
+  baseSendJSON: typeof sendJSON,
+): typeof sendJSON {
+  return (res, status, payload) => {
+    const canAcceptResponse =
+      (baseSendJSON as Partial<DeadlineGuardedSendJSON>)[CAN_ACCEPT_BROWSER_RESPONSE]?.(res)
+      ?? true
+    if (
+      sessionId
+      && canAcceptResponse
+      && status >= 200
+      && status < 300
+      && payload?.ok === true
+      && payload.data
+      && typeof payload.data === 'object'
+      && !Array.isArray(payload.data)
+      && consumeHandBackNotice(sessionId)
+    ) {
+      baseSendJSON(res, status, {
+        ...payload,
+        data: {
+          ...payload.data,
+          _browser_control_notice: BROWSER_CONTROL_RETURNED_NOTICE,
+        },
+      })
+      return
+    }
+    baseSendJSON(res, status, payload)
+  }
+}
+
+export async function dispatchBrowserRequest({
+  url,
+  method,
+  body,
+  res,
+  sendJSON: baseSendJSON,
+}: {
+  url: string
+  method: string
+  body: unknown
+  res: http.ServerResponse
+  sendJSON: typeof sendJSON
+}): Promise<void> {
+  const sessionId = buildBrowserRequestScope(body)._thread_id ?? undefined
+  if (sessionId && isUserControllingSession(sessionId)) {
+    baseSendJSON(res, 409, errorResponse(
+      'BROWSER_TAB_USER_IN_CONTROL',
+      BROWSER_TAB_USER_IN_CONTROL_MESSAGE,
+      { retryable: false, detail: { sessionId } },
+    ))
+    return
+  }
+
+  const browserSendJSON = makeBrowserControlAwareSendJSON(sessionId, baseSendJSON)
+  const policy = await evaluateElectronBrowserCLIPolicy(url, body)
+  if (policy.action === 'deny') {
+    browserSendJSON(res, policy.status, errorResponse(policy.code as any, policy.message, {
+      detail: policy.detail,
+    }))
+    return
+  }
+  await runWithBrowserPolicyPreapproval(policy.preapprovedActionIds, () =>
+    handleBrowserRoute(url, method, body, res, browserSendJSON)
+  )
 }
 
 // ── W7：marketplace App 命令缓存（懒加载）──────────────────────────
@@ -320,7 +408,11 @@ async function handleRequest(
 
     // PlatformSurface 路由分发（Wave 3）：在手写路由之前查找 registry，
     // 命中则走 surface HTTP adapter（内部自行 parseBody），不再落入下方手写路由。
-    const matchedSurface = getSurfaceByHttpPath(url)
+    // Browser URL 必须进入下方唯一控制权入口，不能被当前或未来的
+    // PlatformSurface 提前截获而绕过用户接管 gate。
+    const matchedSurface = url.startsWith('/browser/')
+      ? undefined
+      : getSurfaceByHttpPath(url)
     if (matchedSurface) {
       const surfaceHandler = createSurfaceHttpHandler(matchedSurface)
       await surfaceHandler(req, res)
@@ -350,18 +442,14 @@ async function handleRequest(
 
     if (url.startsWith('/browser/')) {
       const browserBody = enrichBrowserBodyWithAgentThread(body, req)
-      const dispatchBrowserRoute = async (browserSendJSON: typeof sendJSON) => {
-        const policy = await evaluateElectronBrowserCLIPolicy(url, browserBody)
-        if (policy.action === 'deny') {
-          browserSendJSON(res, policy.status, errorResponse(policy.code as any, policy.message, {
-            detail: policy.detail,
-          }))
-          return
-        }
-        await runWithBrowserPolicyPreapproval(policy.preapprovedActionIds, () =>
-          handleBrowserRoute(url, method, browserBody, res, browserSendJSON)
-        )
-      }
+      const dispatchBrowserRoute = (browserSendJSON: typeof sendJSON) =>
+        dispatchBrowserRequest({
+          url,
+          method,
+          body: browserBody,
+          res,
+          sendJSON: browserSendJSON,
+        })
       if (url === '/browser/act') {
         await runBrowserRequestWithDeadline(url, res, dispatchBrowserRoute)
       } else if (url === '/browser/collect/table' || url.startsWith('/browser/collect/table?')) {
@@ -520,6 +608,8 @@ async function handleRequest(
 
     sendJSON(res, 404, errResponse('UNKNOWN_ROUTE', `Unknown route: ${url}`))
   } catch (err: any) {
+    if (sendBrowserTabUserInControlError(err, sendJSON, res)) return
+
     cliLog.error(`Request error (${method} ${url}):`, err)
     if (err instanceof Error) {
       if (err.message === 'Invalid JSON body') {

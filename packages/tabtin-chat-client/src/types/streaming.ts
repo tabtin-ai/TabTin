@@ -24,6 +24,12 @@ export type SSEEventType =
   | 'ask_user_required'
   | 'ask_form_required'
   | 'request_approval_required'
+  // Access Barrier HITL：
+  // 浏览器撞上登录墙 / 人机校验时系统专用 HITL kind（发起方是系统，非模型，
+  // 故不复用 ask_user_required）。渲染前置：本联合类型纳入即可，Electron 本地
+  // IPC 路径直接按 `event.type` 字符串匹配 `StreamEvents.ACCESS_BARRIER_REQUIRED`
+  // （`agent.stream.access_barrier_required`），不经本文件的 SSE 分发链路。
+  | 'access_barrier_required'
   | 'step'            // Agent 执行步骤
   | 'tool'            // 工具调用事件
   | 'lifecycle'       // 生命周期事件
@@ -229,6 +235,8 @@ export const ASK_USER_INTERACTION_TYPE = 'ask_user' as const
 export const ASK_USER_REQUIRED_EVENT = 'ask_user_required' as const
 export const ASK_FORM_REQUIRED_EVENT = 'ask_form_required' as const
 export const REQUEST_APPROVAL_REQUIRED_EVENT = 'request_approval_required' as const
+/** Access Barrier HITL wire 短名（完整事件名 `agent.stream.access_barrier_required`）。 */
+export const ACCESS_BARRIER_REQUIRED_EVENT = 'access_barrier_required' as const
 
 export type StructuredInteractionType = 'ask_user' | 'review' | 'preset_input' | 'app_form'
 export type StructuredInteractionBlockingPolicy = 'soft' | 'hard'
@@ -342,6 +350,32 @@ export interface AskUserRequiredEventData {
   /** request_approval 展示用结构化明细；只读，不作为表单字段回传 */
   details?: unknown;
 }
+
+/**
+ * Access Barrier HITL payload——与 `@tabtin/agent-wire::AccessBarrierRequiredPayload` 同结构。
+ * 发起方是系统（能力层），不是模型，故不复用 `AskUserRequiredEventData`。
+ */
+export interface AccessBarrierEventBarrier {
+  kind: 'login' | 'captcha' | 'geetest' | 'mfa' | 'unknown_wall'
+  reason: string
+  domain: string
+  pageUrl?: string
+  tabId?: string
+  captchaType?: string
+  sourceTool?: string
+  detectedAt: string
+  actions: Array<'resume_same_tab' | 'alternate_source' | 'abort_this_target'>
+}
+
+export interface AccessBarrierRequiredEventData {
+  request_id: string
+  barrier: AccessBarrierEventBarrier
+  expires_at?: number
+  interrupt_id?: string
+  thread_id?: string
+  message_id?: string
+}
+
 export interface AskUserAnswer {
   question_id: string; selected_options: string[]; free_text?: string;
 }
@@ -470,7 +504,6 @@ export interface ActionResultRequest {
   /** 自定义数据（任意 JSON 对象） */
   data?: Record<string, any>
 }
-
 
 
 

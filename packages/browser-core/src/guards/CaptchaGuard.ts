@@ -6,7 +6,7 @@
  * - 缓存检测结果（节流）
  * - Cloudflare Turnstile 自动等待
  * - 需要人工处理时：非阻塞通知宿主（可选）；不再 await 用户
- *   （人工路径由 wire `captcha_required` + Agent captcha-wall-gate 接手）
+ *   （人工路径由 wire `captcha_required` / Access Barrier HITL 接手）
  */
 
 import { buildDetectionScript, analyzeDetectionResult, type CaptchaInfo } from '../captcha/CaptchaDetector';
@@ -117,7 +117,7 @@ export class CaptchaGuard {
     } else if (captchaNeedsUserIntervention(captcha)) {
       // 人工验证码不再阻塞 RPC 等待用户（旧路径 await 最长 120s → CLI 先超时，
       // Agent 只看到 CONNECTION_TIMEOUT 并空转 glance）。墙信号由编排层投影为
-      // captcha_required，Agent 侧 captcha-wall-gate + ask_user 卡片接手。
+      // captcha_required / Access Barrier，能力层 HITL 弹卡挂起。
       // interventionCallback 若仍注册：仅作非阻塞通知（例如把 Tab 提到前台），
       // 不得依赖其返回值决定是否清除 detected。
       if (this.interventionCallback) {

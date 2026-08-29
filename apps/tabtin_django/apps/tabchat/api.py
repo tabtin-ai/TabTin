@@ -922,13 +922,7 @@ def send_message(request, conversation_id: str, payload: SendMessageRequest):
             client_request_id=payload.client_request_id,
         )
         return ApiResponse(
-            data={
-                "id": msg.id,
-                "tabtin_message_id": str(msg.id),
-                "seq": msg.seq,
-                "conversation_id": str(msg.conversation_id),
-                "created_at": msg.created_at.isoformat() if msg.created_at else None,
-            },
+            data=MessageService.build_send_result(msg, str(user.id)),
             code=201,
         )
     except (ValueError, PermissionError) as e:

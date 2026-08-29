@@ -88,6 +88,28 @@ describe('buildFieldDefaultValueFromState', () => {
     })
   })
 
+  it('builds boolean literal defaults for checkbox fields', () => {
+    expect(buildFieldDefaultValueFromState({
+      ...baseState,
+      fieldType: 'checkbox',
+      defaultMode: 'literal',
+      defaultLiteral: 'true',
+    })).toEqual({
+      mode: 'literal',
+      value: true,
+    })
+
+    expect(buildFieldDefaultValueFromState({
+      ...baseState,
+      fieldType: 'checkbox',
+      defaultMode: 'literal',
+      defaultLiteral: 'false',
+    })).toEqual({
+      mode: 'literal',
+      value: false,
+    })
+  })
+
   it('builds list literal defaults for multi-select and multi-user fields', () => {
     expect(buildFieldDefaultValueFromState({
       ...baseState,

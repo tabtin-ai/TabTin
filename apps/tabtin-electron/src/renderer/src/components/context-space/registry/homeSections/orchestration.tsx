@@ -42,6 +42,7 @@ const OrchestrationSection: React.FC<HomeSectionProps> = ({
   spaceId,
   tabScopeKey,
   contextTabKey,
+  isPaneActive,
 }) => {
   const { t } = useTranslation('space')
   const space = useSpaceStore((state) => state.spaces.find((p) => p.id === spaceId) ?? null)
@@ -266,6 +267,7 @@ const OrchestrationSection: React.FC<HomeSectionProps> = ({
       preferredView={preferredView}
       contextScopeKey={tabScopeKey}
       contextTabKey={contextTabKey}
+      isPaneActive={isPaneActive}
     />
   )
 }

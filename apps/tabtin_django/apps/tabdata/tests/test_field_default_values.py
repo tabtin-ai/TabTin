@@ -53,6 +53,18 @@ class FieldDefaultValueTests(SimpleTestCase):
         self.assertEqual(missing[field.id.hex], "待处理")
         self.assertEqual(explicit_empty[field.id.hex], "")
 
+    def test_checkbox_literal_default_is_preserved_and_applied_as_boolean(self):
+        field = StubField(uuid4(), "checkbox", {"mode": "literal", "value": True}, {})
+        data = {}
+
+        self.assertEqual(
+            validate_default_value("checkbox", {"mode": "literal", "value": True}),
+            {"mode": "literal", "value": True},
+        )
+        apply_record_defaults(data, [field], is_create=True)
+
+        self.assertIs(data[field.id.hex], True)
+
     def test_dynamic_values_have_distinct_lifecycles(self):
         created = StubField(uuid4(), "datetime", {"mode": "created_time"}, {})
         created_date = StubField(uuid4(), "date", {"mode": "created_time"}, {})

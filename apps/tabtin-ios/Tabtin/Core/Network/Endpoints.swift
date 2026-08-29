@@ -255,11 +255,6 @@ enum Endpoints {
             "/context/organizations/\(organizationId)/mcp-connections"
         }
 
-        /// Agent 在当前用户在线 Electron 上已挂载且启用的 MCP（只读查询，经设备 action）。
-        static func localMcpAttachments(agentId: String) -> String {
-            "/context/agents/\(agentId)/local-mcp/attachments"
-        }
-
         /// 当前执行会话绑定的 Project Task Workbench（含  `resources`）。
         /// 必须带真实 chat session id：`X-Tabtin-Session-Id`，不能用标题或 Workspace ID。
         static let currentTaskWorkbench = "/context/projects/tasks/current"

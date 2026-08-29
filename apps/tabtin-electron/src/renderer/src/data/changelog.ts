@@ -10,15 +10,6 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
-    version: '1.1.2',
-    date: '2026-08-22',
-    title: '公开源码快照',
-    changes: [
-      { type: 'new', text: '公开仓库源码与产品版本 1.1.2 对齐，便于问题和安全报告对照' },
-      { type: 'new', text: 'Community 支持本地自托管 Server、桌面客户端和 BYOK 模型配置' },
-    ],
-  },
-  {
     version: '1.0.0',
     date: '2026-03-29',
     title: '正式版发布',

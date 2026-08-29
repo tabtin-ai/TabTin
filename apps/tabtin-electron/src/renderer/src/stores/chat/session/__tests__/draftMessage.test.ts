@@ -15,6 +15,7 @@ import {
   rehomeDraftSessionForMessage,
 } from '../draftSession'
 import {
+  cancelDraftMessageByScopeKey,
   getDraftMessageById,
   getDraftMessageByScopeKey,
   isDraftMessageActive,
@@ -222,6 +223,20 @@ describe('draftMessage ( draftScopeKey lifecycle)', () => {
     expect(getDraftSessionBySessionId('sess-hidden')).toMatchObject({
       status: 'pending',
       phase: 'open',
+    })
+  })
+
+  it('发送 ACK 先清空 DraftMessage 时，成功收尾仍认领 DraftSession', () => {
+    bindDraftSessionToMessage(SCOPE_1, 'sess-ack-race', { phase: 'sending' })
+    const firstDraftMessage = getDraftMessageByScopeKey(SCOPE_1)!
+
+    cancelDraftMessageByScopeKey(SCOPE_1)
+    completeDraftMessageSend('sess-ack-race', true)
+
+    expect(getDraftMessageById(firstDraftMessage.draftMessageId)).toBeUndefined()
+    expect(getDraftSessionBySessionId('sess-ack-race')).toMatchObject({
+      draftMessageId: firstDraftMessage.draftMessageId,
+      status: 'claimed',
     })
   })
 

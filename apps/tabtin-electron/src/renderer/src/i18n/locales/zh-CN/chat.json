@@ -590,7 +590,15 @@
     "title": "代码改动",
     "files": "个文件",
     "viewDiff": "查看 Diff",
-    "open": "查看代码改动 Diff"
+    "open": "查看代码改动 Diff",
+    "editedFiles": "已编辑 {{count}} 个文件",
+    "review": "审阅",
+    "fileList": "已编辑文件",
+    "reviewFile": "审阅 {{file}}",
+    "expandRemaining": "展开剩余 {{count}} 个文件",
+    "collapse": "收起文件",
+    "expandRemainingAria": "展开剩余 {{count}} 个文件",
+    "collapseAria": "收起文件"
   },
   "turnArtifacts": {
     "title": "产物",

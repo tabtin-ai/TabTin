@@ -4,7 +4,8 @@ import { mkdirSync, writeFileSync } from 'node:fs'
 import { pathToFileURL } from 'node:url'
 import { okResponse } from '@tabtin/agent-wire'
 import { getHomeTabtinPath } from '@tabtin/shared/storage-paths'
-import type { BrowserPolicyHostHooks } from '@tabtin/browser-core'
+import type { BrowserPolicyHostHooks, BrowserOrchestratorHostHooks } from '@tabtin/browser-core'
+import { requestAccessBarrierResolution } from '@tabtin/agent-runtime'
 import {
   getCLIActionExecutor,
   getCLIViewGetter,
@@ -14,7 +15,10 @@ import {
   getCLIWorkspaceScopeKey,
   getCLIOrganizationRoot,
 } from '../../cli-context'
-import { errorResponse } from '../shared/error-handler'
+import {
+  errorResponse,
+  sendBrowserTabUserInControlError,
+} from '../shared/error-handler'
 import { getCrawlspaceContextHub } from '../../../crawlspace/CrawlspaceContextHub'
 import { getViewFactory } from '../../../view-factory/ViewFactory'
 import { fileUrlToLocalPath, isPathWithinRoot } from '../../../crawl-view/utils'
@@ -26,7 +30,11 @@ import {
 } from '../../browser-policy-middleware'
 import { isScheduledRuntimeThread } from '../../../agent/policy/interaction-mode-context'
 import { shouldBypassConfirmApproval } from '../../../agent/policy/approval-mode-context'
-import { lock } from '../../../browser-tab-lock/browserTabInputLock'
+import {
+  assertBrowserTabAvailableForAgent as assertBrowserTabAvailableForAgentInRegistry,
+  BrowserTabUserInControlError,
+  lock,
+} from '../../../browser-tab-lock/browserTabInputLock'
 
 export type SendJSON = (
   res: http.ServerResponse,
@@ -321,6 +329,35 @@ export const electronPolicyHooks: BrowserPolicyHostHooks = {
   },
 }
 
+// ─── Access Barrier HITL ────────────────────────────────────────────────────
+
+/**
+ * 把 `BrowserOrchestrator` 的撞墙暂停接到当前会话 HITL 通道。
+ *
+ * `requestAccessBarrierResolution` 读 `runWithBrowserApprovalContext` 建立的
+ * AsyncLocalStorage 上下文（threadId + interactionMode），再委托进程级
+ * `setHumanInteractionHooks({ resolveAccessBarrier })` 注册的实装
+ * （`ElectronAgentHost` → `AgentHost.presentAccessBarrier`）落到真实卡片 + 挂起。
+ * 拿不到 threadId 或进程级未注册 → 诚实失败 `host_unavailable`（不空转 glance、
+ * 不假装成功）。
+ *
+ * 只需注入到 `interaction.ts` 的 act/glance/eval hostHooks——这是本仓库里
+ * `BrowserOrchestrator` 唯一会走到 act/observe 投影分支（即可能撞登录墙/验证码）
+ * 的 Electron route；record/run/resources/introspect 系 actionId 不经该分支，
+ * 注入了也是 no-op，故未逐一加（省得每条 route 都要记一遍这段说明）。
+ */
+export function resolveAccessBarrierHostHook(): BrowserOrchestratorHostHooks['resolveAccessBarrier'] {
+  return async (barrier) => {
+    const resolution = await requestAccessBarrierResolution(barrier)
+    // HITL 超时：记下 tab，同 run 下次 open 跳过 reuse，避免粘死登录墙旧页。
+    if (resolution.action === 'timeout') {
+      const { markAccessBarrierTabTimedOut } = await import('./access-barrier-tab-reuse')
+      markAccessBarrierTabTimedOut(barrier.tabId)
+    }
+    return resolution
+  }
+}
+
 function resolveFromMainSnapshot(
   requestedMode: 'active_only' | 'active_or_first',
   crawlspaceId?: string | null,
@@ -350,6 +387,15 @@ function resolveFromMainSnapshot(
   return fallback?.viewId
 }
 
+export function assertBrowserTabAvailableForAgent(viewId: string): void {
+  assertBrowserTabAvailableForAgentInRegistry(viewId)
+}
+
+function acceptResolvedTabId(viewId: string): string {
+  assertBrowserTabAvailableForAgent(viewId)
+  return viewId
+}
+
 export async function resolveTabId(
   tabId: string | undefined,
   scope?: ResolveTabScope,
@@ -357,7 +403,7 @@ export async function resolveTabId(
   const requestedMode = tabId === 'auto' ? 'active_only' : 'active_or_first'
 
   if (tabId && tabId !== 'auto') {
-    if (validateViewExists(tabId)) return tabId
+    if (validateViewExists(tabId)) return acceptResolvedTabId(tabId)
     return undefined
   }
 
@@ -370,7 +416,7 @@ export async function resolveTabId(
   if (!hasWorkspaceScope) {
     const snapshotResolved = resolveFromMainSnapshot(requestedMode, scope?.crawlspaceId)
     if (snapshotResolved) {
-      return snapshotResolved
+      return acceptResolvedTabId(snapshotResolved)
     }
   }
   if (!bridge || !spaceId) return undefined
@@ -402,7 +448,7 @@ export async function resolveTabId(
       const parts = activeTabKey.split(':')
       const resolved =
         parts.length > 1 ? parts.slice(1).join(':') : activeTabKey
-      if (visibleBrowserViewIdSet.has(resolved)) return resolved
+      if (visibleBrowserViewIdSet.has(resolved)) return acceptResolvedTabId(resolved)
     }
     if (requestedMode === 'active_only') {
       return undefined
@@ -411,9 +457,10 @@ export async function resolveTabId(
       (candidate: string) => visibleBrowserViewIdSet.has(candidate),
     )
     if (fallbackBrowserViewId) {
-      return fallbackBrowserViewId
+      return acceptResolvedTabId(fallbackBrowserViewId)
     }
-  } catch {
+  } catch (error) {
+    if (error instanceof BrowserTabUserInControlError) throw error
     /* bridge failed, fall through */
   }
   return undefined
@@ -457,7 +504,7 @@ export async function resolveContextBrowserTabId(
     const browserViewIdSet = new Set(browserViewIds)
 
     if (tabId !== 'auto') {
-      return browserViewIdSet.has(tabId) ? tabId : undefined
+      return browserViewIdSet.has(tabId) ? acceptResolvedTabId(tabId) : undefined
     }
 
     const activeTabKey = typeof result?.data?.activeTabKey === 'string'
@@ -465,8 +512,11 @@ export async function resolveContextBrowserTabId(
       : null
     if (!activeTabKey?.startsWith('tabweb:')) return undefined
     const activeViewId = activeTabKey.slice('tabweb:'.length)
-    return browserViewIdSet.has(activeViewId) ? activeViewId : undefined
-  } catch {
+    return browserViewIdSet.has(activeViewId)
+      ? acceptResolvedTabId(activeViewId)
+      : undefined
+  } catch (error) {
+    if (error instanceof BrowserTabUserInControlError) throw error
     return undefined
   }
 }
@@ -750,6 +800,8 @@ export function handleRouteError(
   sendJSON: SendJSON,
   res: http.ServerResponse,
 ): void {
+  if (sendBrowserTabUserInControlError(err, sendJSON, res)) return
+
   if (!enhanceErrorResponse(err?.message || String(err), sendJSON, res)) {
     sendJSON(
       res,

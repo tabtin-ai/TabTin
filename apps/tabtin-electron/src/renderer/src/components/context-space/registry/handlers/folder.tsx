@@ -179,6 +179,7 @@ export const folderHandler: ContextTypeHandler = {
             preferredView={preferredView}
             contextScopeKey={ctx.tabScopeKey ?? ctx.spaceId}
             contextTabKey={item.tabKey}
+            isPaneActive={ctx?.isPaneActive !== false}
           />
         </React.Suspense>
       )

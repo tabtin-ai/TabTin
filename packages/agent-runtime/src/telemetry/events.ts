@@ -241,35 +241,29 @@ export const TelemetryEvents = {
   TOOL_REPETITION_TERMINATE: 'tool_repetition.terminate',
 
   /**
-   * 登录墙硬门禁 engage：工具结果里侦测到确定性 `login_required` 信号，
-   * 下一轮工具面收窄到只剩 ask_user（scheduled/batch 档降级为提醒注入）。
+   * Access Barrier HITL：`presentAccessBarrier` 在能力出口发起专用 HITL kind 前发一条。
+   * 接替已拆除的 login/captcha wall-gate engage 遥测。
    *
-   * payload：`domain` / `source_tool` / `iteration_index`。
-   *
-   * **运维价值**：登录墙命中率 + 门禁触发频次；对比 RELEASED 可看用户答复
-   * 转化（engage 无 release = 模型文字收尾或 run 中断）。
+   * payload：`kind`（AccessBarrierKind）/ `domain` / `source_tool`。
    */
-  LOGIN_WALL_GATE_ENGAGED: 'login_wall_gate.engaged',
-
+  ACCESS_BARRIER_PRESENTED: 'access_barrier.presented',
   /**
-   * 登录墙硬门禁 release：ask_user 出结果（含超时/跳过），门禁解除且该域
-   * 本 run 内免再拦。payload：`domain` / `ask_errored` / `iteration_index`。
+   * 用户在卡片上选完三选一之一（`resume_same_tab` / `alternate_source` /
+   * `abort_this_target`）。payload：`kind` / `domain` / `action` / `duration_ms`
+   * （挂起到用户答复的耗时）。
    */
-  LOGIN_WALL_GATE_RELEASED: 'login_wall_gate.released',
-
+  ACCESS_BARRIER_RESOLVED: 'access_barrier.resolved',
   /**
-   * 验证码硬门禁 engage：工具结果带确定性 captcha_required，
-   * 下一轮工具面收窄到只剩 ask_user（scheduled/batch 档降级为提醒注入）。
-   *
-   * payload：`domain` / `source_tool` / `iteration_index`。
+   * 挂起超时未获答复（`InterruptOutcome.status==='timeout'`）。
+   * payload：`kind` / `domain` / `duration_ms`。
    */
-  CAPTCHA_WALL_GATE_ENGAGED: 'captcha_wall_gate.engaged',
-
+  ACCESS_BARRIER_TIMEOUT: 'access_barrier.timeout',
   /**
-   * 验证码硬门禁 release：ask_user 出结果（含超时/跳过），门禁解除且该域
-   * 本 run 内免再拦。payload：`domain` / `ask_errored` / `iteration_index`。
+   * 无人值守（scheduled/batch）或宿主未注入 HITL 通道（`isAvailable()===false`）
+   * 时的诚实失败结局。payload：`kind` / `domain` / `runtime_mode` /
+   * `reason`（`'scheduled_or_batch' | 'host_unavailable'`）。
    */
-  CAPTCHA_WALL_GATE_RELEASED: 'captcha_wall_gate.released',
+  ACCESS_BARRIER_HOST_UNAVAILABLE: 'access_barrier.host_unavailable',
 
   /**
    * ：流式 assistant 文本复读硬停——单轮 LLM 流内检测到完全相同

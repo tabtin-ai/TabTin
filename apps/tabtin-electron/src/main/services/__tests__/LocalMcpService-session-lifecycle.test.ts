@@ -78,7 +78,10 @@ vi.mock('../mcp-oauth-window', () => ({
 
 vi.mock('../mcp-remote-client', () => ({
   ensureMcpRemoteClientName: vi.fn(),
-  extractMcpRemoteServerUrl: vi.fn(),
+  extractMcpRemoteServerUrl: vi.fn((args?: string[]) =>
+    args?.find(arg => /^https?:\/\//i.test(arg)) ?? null,
+  ),
+  clearMcpRemoteAuth: vi.fn(() => 0),
 }))
 
 vi.mock('../../logger', () => ({
@@ -129,6 +132,7 @@ vi.mock('../../security/agent-access-guard', () => ({
 
 import { LocalMcpService } from '../LocalMcpService'
 import { restoreConnectorOAuthClient } from '../mcp-oauth-window'
+import { clearMcpRemoteAuth } from '../mcp-remote-client'
 
 describe('LocalMcpService 会话撤销原子性', () => {
   beforeEach(() => {
@@ -619,6 +623,48 @@ describe('LocalMcpService 会话撤销原子性', () => {
     expect(publicDetail.transport.kind === 'http' && publicDetail.transport.headers?.Authorization).toBe('***')
 
     vi.unstubAllGlobals()
+    await service.dispose()
+  })
+
+  it('卸载会清掉该 URL 的 mcp-remote 授权缓存', async () => {
+    const service = new LocalMcpService()
+    const connection = await service.saveManualConnection({
+      name: 'stripe',
+      transport: {
+        kind: 'stdio',
+        command: 'npx',
+        args: ['-y', 'mcp-remote@0.1.38', 'https://mcp.stripe.com'],
+      },
+    })
+
+    await service.deleteConnection(connection.id)
+
+    expect(clearMcpRemoteAuth).toHaveBeenCalledWith('https://mcp.stripe.com')
+    await service.dispose()
+  })
+
+  it('同 URL 还有另一条连接时卸载不删授权缓存', async () => {
+    const service = new LocalMcpService()
+    const first = await service.saveManualConnection({
+      name: 'stripe-a',
+      transport: {
+        kind: 'stdio',
+        command: 'npx',
+        args: ['-y', 'mcp-remote@0.1.38', 'https://mcp.stripe.com'],
+      },
+    })
+    await service.saveManualConnection({
+      name: 'stripe-b',
+      transport: {
+        kind: 'stdio',
+        command: 'npx',
+        args: ['-y', 'mcp-remote@0.1.38', 'https://mcp.stripe.com'],
+      },
+    })
+
+    await service.deleteConnection(first.id)
+
+    expect(clearMcpRemoteAuth).not.toHaveBeenCalled()
     await service.dispose()
   })
 })

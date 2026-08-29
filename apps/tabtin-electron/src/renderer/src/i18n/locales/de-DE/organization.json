@@ -440,6 +440,7 @@
       "scopeOrganization": "Organisation",
       "scopeUser": "Persönlich",
       "scopeHint": "Ihre Rolle kann nur persönliche Kanäle erstellen",
+      "scopePersonalAccountHint": "Persönliche Konten können nur für Sie sichtbare Dienste hinzufügen",
       "save": "Änderungen speichern",
       "cancel": "Abbrechen",
       "edit": "Bearbeiten",

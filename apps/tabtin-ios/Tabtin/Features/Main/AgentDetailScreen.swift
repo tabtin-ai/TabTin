@@ -1,14 +1,31 @@
 import SwiftUI
 
-/// 「最近任务」把 Chat 会话和 Project 任务混在一张时间线里，需要一个统一的行标识。
-private enum AgentActivityItem: Identifiable {
-    case session(RecentSession)
-    case task(AgentProjectTask)
+private enum AgentDetailSection: String, CaseIterable, Identifiable {
+    case memory
+    case recentTasks
+    case skills
 
-    var id: String {
+    var id: String { rawValue }
+
+    var title: String {
         switch self {
-        case .session(let session): return "session:\(session.id)"
-        case .task(let task): return "task:\(task.id)"
+        case .skills: return L10n.Project.myAgentsSkills
+        case .memory: return L10n.Project.myAgentsMemory
+        case .recentTasks: return L10n.Project.myAgentsRecentTasks
+        }
+    }
+
+}
+
+private enum AgentMemorySection: String, CaseIterable, Identifiable {
+    case overview
+    case records
+
+    var id: String { rawValue }
+    var title: String {
+        switch self {
+        case .overview: return L10n.Project.myAgentsMemoryOverview
+        case .records: return L10n.Project.myAgentsMemoryRecords
         }
     }
 }
@@ -35,9 +52,6 @@ func agentMemoryDisplayTitle(memoryType: String, title: String) -> String {
 
 /// AI分身的移动工作台：保留桌面端的身份、人设、携带技能、记忆与近期任务语义，
 /// 以手机上更自然的纵向详情页承载，而不是把信息塞回列表弹层。
-///
-/// 版式为「卡片感」：强调色身份证 + 一列抬起的圆角卡片，每张卡一个区，
-/// 不再用顶部分段把四个区藏进标签里。
 struct AgentDetailScreen: View {
     @State private var detailStore: AgentDetailStore
     @State private var agentsStore = MyAgentsStore.shared
@@ -49,8 +63,9 @@ struct AgentDetailScreen: View {
     @State private var memoryToForget: AgentMemoryRecord?
     @State private var memoryToCorrect: AgentMemoryRecord?
     @State private var actionError: String?
+    @State private var selectedSection: AgentDetailSection = .memory
+    @State private var selectedMemorySection: AgentMemorySection = .overview
     @State private var portraitStore = UserPortraitObservable()
-    @Environment(\.colorScheme) private var colorScheme
 
     let onOpenConversation: (ConversationTarget) -> Void
     let onDeactivated: () -> Void
@@ -94,10 +109,9 @@ struct AgentDetailScreen: View {
                 }
             }
         }
-        .background(pageColor)
+        .background(.tt.bgCanvasDefault)
         .navigationTitle(L10n.Project.segmentAiAvatar)
         .navigationBarTitleDisplayMode(.inline)
-        .ttToolbarBackground(color: Color.tt.bgCanvasDefault)
         .task(id: detailStore.agentId) { await detailStore.load() }
         .sheet(isPresented: $showEdit) {
             if let agent = detailStore.agent {
@@ -217,469 +231,303 @@ struct AgentDetailScreen: View {
         .animation(.spring(duration: 0.3), value: skillAddedToast)
     }
 
-    // MARK: - 版式
-
-    /// 页底压深一档、卡片抬亮一档，卡片才浮得起来。
-    private var pageColor: Color {
-        colorScheme == .dark ? Color.tt.bgCanvasDefault : Color.tt.bgSubtle
-    }
-
-    private var cardColor: Color {
-        colorScheme == .dark ? Color.tt.bgSubtleSecondary : Color.tt.bgCanvasDefault
-    }
-
-    /// 身份证铺当前 scheme 的强调色，不再用白底。
-    private var plateColor: Color { Color.tt.bgAccent }
-
-    /// 深色底上投影看不见，只在浅色抬卡片。
-    private var cardShadow: Color {
-        colorScheme == .dark ? .clear : Color.black.opacity(0.06)
-    }
-
     private func detail(_ agent: OrganizationAgent) -> some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: TTSpacing.lg) {
-                identityCard(agent)
-                personaCard(agent)
-                skillsCard
-                memoryCard(agent)
-                memoryRecordsCard
-                recentTasksCard
-                toolsCard
+            VStack(alignment: .leading, spacing: 0) {
+                profileCard(agent)
+                    .padding(.top, TTSpacing.xl)
+
+                Picker(L10n.Project.segmentAiAvatar, selection: $selectedSection) {
+                    ForEach(AgentDetailSection.allCases) { section in
+                        Text(section.title).tag(section)
+                    }
+                }
+                .pickerStyle(.segmented)
+                    .padding(.top, TTSpacing.xxl)
+
+                sectionContent
+                    .padding(.top, TTSpacing.xxl)
+
                 if agent.isDefault != true {
-                    deactivateCard
+                    Button(role: .destructive) { showDeactivateConfirm = true } label: {
+                        Label(L10n.Project.myAgentsDeactivate, systemImage: "minus.circle")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(.tt.textCritical)
+                    .disabled(agentsStore.isMutating)
+                    .padding(.top, TTSpacing.xxl)
                 }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, TTSpacing.lg)
-            .padding(.top, TTSpacing.lg)
-            .padding(.bottom, TTSpacing.xxxl)
+            .padding(.bottom, TTSpacing.huge)
         }
         .refreshable { await detailStore.load() }
     }
 
-    /// 身份证：沿用原来的竖排（头像、名字、整行编辑），只是收进一张抬起的圆角卡。
-    private func identityCard(_ agent: OrganizationAgent) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            AgentAvatarView(agent: agent, size: 60)
-            Text(agent.displayName)
-                .font(.tt.headingSemibold)
-                .foregroundStyle(.tt.textOnAccent)
-                .lineLimit(2)
-                .padding(.top, TTSpacing.md)
-            Text(plateMeta(agent))
-                .font(.tt.caption)
-                .foregroundStyle(.tt.textOnAccent.opacity(0.78))
-                .padding(.top, TTSpacing.xs)
-            Button { showEdit = true } label: {
-                Label(L10n.Project.myAgentsEdit, systemImage: "pencil")
-                    .font(.tt.bodySemibold)
-                    .foregroundStyle(plateColor)
-                    .frame(maxWidth: .infinity, minHeight: TTSpacing.Control.minimumTouchTarget)
-                    .background(.tt.textOnAccent, in: Capsule())
-            }
-            .buttonStyle(.plain)
-            .disabled(agentsStore.isMutating)
-            .opacity(agentsStore.isMutating ? 0.5 : 1)
-            .padding(.top, TTSpacing.xl)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(TTSpacing.xl)
-        .background(plateColor, in: RoundedRectangle(cornerRadius: TTRadius.xl, style: .continuous))
-        .shadow(color: cardShadow, radius: 12, y: 6)
-    }
-
-    private func plateMeta(_ agent: OrganizationAgent) -> String {
-        var parts = [
-            agent.isFromTemplate
-                ? L10n.Project.myAgentsSourceTemplate
-                : L10n.Project.myAgentsSourceCustom,
-        ]
-        if agent.isDefault == true {
-            parts.append(L10n.Project.myAgentsDefault)
-        }
-        if let time = RelativeTime.format(agent.updatedAt ?? agent.createdAt ?? "") {
-            parts.append(L10n.Project.myAgentsUpdatedAt(time))
-        }
-        return parts.joined(separator: " · ")
-    }
-
-    // MARK: - 卡片零件
-
-    private func card<Content: View>(
-        footnote: String? = nil,
-        @ViewBuilder content: () -> Content
-    ) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            VStack(alignment: .leading, spacing: 0, content: content)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(cardColor, in: RoundedRectangle(cornerRadius: TTRadius.xl, style: .continuous))
-                .shadow(color: cardShadow, radius: 12, y: 6)
-            if let footnote {
-                Text(footnote)
-                    .font(.tt.caption)
-                    .foregroundStyle(.tt.textTertiary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, TTSpacing.xs)
-                    .padding(.top, TTSpacing.sm)
-            }
+    @ViewBuilder
+    private var sectionContent: some View {
+        switch selectedSection {
+        case .skills:
+            skillsCard
+        case .memory:
+            memoryCard
+        case .recentTasks:
+            recentTasksCard
         }
     }
 
-    /// 区标题：一根强调色短标 + 标题 + 计数，右侧可挂一个文字动作。
-    private func cardHeader(
-        _ title: String,
-        count: Int? = nil,
-        actionTitle: String? = nil,
-        actionEnabled: Bool = true,
-        action: (() -> Void)? = nil
-    ) -> some View {
-        HStack(spacing: TTSpacing.sm) {
-            Capsule()
-                .fill(Color.tt.bgAccent)
-                .frame(width: 3, height: 13)
-            Text(title)
-                .font(.tt.bodySemibold)
-                .foregroundStyle(.tt.textPrimary)
-            if let count {
-                Text("\(count)")
-                    .font(.tt.caption)
-                    .monospacedDigit()
-                    .foregroundStyle(.tt.textTertiary)
-            }
-            Spacer(minLength: 0)
-            if let actionTitle, let action {
-                Button(actionTitle, action: action)
-                    .buttonStyle(.borderless)
-                    .font(.tt.captionMedium)
-                    .disabled(!actionEnabled)
-            }
-        }
-        .padding(.horizontal, TTSpacing.lg)
-        .padding(.top, TTSpacing.md)
-        .padding(.bottom, TTSpacing.xs)
-    }
-
-    private func cardRows<Item: Identifiable, Row: View>(
-        _ items: [Item],
-        @ViewBuilder row: @escaping (Item) -> Row
-    ) -> some View {
-        VStack(spacing: 0) {
-            ForEach(items) { item in
-                row(item)
-                if item.id != items.last?.id {
-                    Divider()
-                        .overlay(.tt.borderLight)
-                        .padding(.horizontal, TTSpacing.lg)
+    private func profileCard(_ agent: OrganizationAgent) -> some View {
+        VStack(alignment: .leading, spacing: TTSpacing.lg) {
+            HStack(alignment: .top, spacing: TTSpacing.md) {
+                AgentAvatarView(agent: agent, size: 72)
+                VStack(alignment: .leading, spacing: TTSpacing.sm) {
+                    Text(agent.displayName)
+                        .font(.tt.heading)
+                        .foregroundStyle(.tt.textPrimary)
+                        .lineLimit(2)
+                    HStack(spacing: TTSpacing.xs) {
+                        detailPill(agent.isFromTemplate
+                            ? L10n.Project.myAgentsSourceTemplate
+                            : L10n.Project.myAgentsSourceCustom)
+                        if agent.isDefault == true {
+                            detailPill(L10n.Project.myAgentsDefault, accent: true)
+                        }
+                    }
+                    if let time = RelativeTime.format(agent.updatedAt ?? agent.createdAt ?? "") {
+                        Label(L10n.Project.myAgentsUpdatedAt(time), systemImage: "clock")
+                            .font(.tt.caption)
+                            .foregroundStyle(.tt.textTertiary)
+                    }
                 }
+                Spacer(minLength: 0)
+                Button {
+                    showEdit = true
+                } label: {
+                    Label(L10n.Project.myAgentsEdit, systemImage: "square.and.pencil")
+                        .font(.tt.metaMedium)
+                }
+                .buttonStyle(.bordered)
+                .tint(.tt.textAccent)
+                    .disabled(agentsStore.isMutating)
             }
-        }
-        .padding(.bottom, TTSpacing.sm)
-    }
 
-    private func cardEmpty(_ title: String) -> some View {
-        Text(title)
-            .font(.tt.meta)
-            .foregroundStyle(.tt.textTertiary)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, TTSpacing.lg)
-            .padding(.top, TTSpacing.xs)
-            .padding(.bottom, TTSpacing.lg)
-    }
-
-    private func cardLoading() -> some View {
-        ProgressView()
-            .controlSize(.small)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, TTSpacing.lg)
-            .padding(.top, TTSpacing.xs)
-            .padding(.bottom, TTSpacing.lg)
-    }
-
-    /// 卡内的一段说明，可带重试（工具携带集读不到电脑端时用）。
-    private func cardNote(_ text: String, tint: Color, retry: Bool = false) -> some View {
-        VStack(alignment: .leading, spacing: TTSpacing.sm) {
-            Text(text)
-                .font(.tt.meta)
-                .foregroundStyle(tint)
-            if retry {
-                Button(L10n.Common.retry) { Task { await detailStore.load() } }
-                    .buttonStyle(.borderless)
-                    .font(.tt.captionMedium)
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, TTSpacing.lg)
-        .padding(.top, TTSpacing.xs)
-        .padding(.bottom, TTSpacing.lg)
-    }
-
-    // MARK: - 各区卡片
-
-    private func personaCard(_ agent: OrganizationAgent) -> some View {
-        let rules = agent.customRules?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        return card(footnote: L10n.Project.myAgentsPersonaScopeHint) {
-            cardHeader(L10n.Project.myAgentsPersonaRules)
+            Divider().overlay(.tt.borderLight)
             Button { showEdit = true } label: {
-                Text(rules.isEmpty ? L10n.Project.myAgentsDetailRulesEmpty : rules)
-                    .font(.tt.body)
-                    .lineSpacing(TTSpacing.xs)
-                    .foregroundStyle(rules.isEmpty ? .tt.textTertiary : .tt.textPrimary)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(4)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, TTSpacing.lg)
-                    .padding(.top, TTSpacing.xs)
-                    .padding(.bottom, TTSpacing.lg)
+                HStack(alignment: .top, spacing: TTSpacing.sm) {
+                    Image(systemName: "person.text.rectangle")
+                        .font(.tt.iconSubtitle)
+                        .foregroundStyle(.tt.iconAccent)
+                        .frame(width: 24, alignment: .leading)
+                    VStack(alignment: .leading, spacing: TTSpacing.xs) {
+                        Text(L10n.Project.myAgentsPersonaRules)
+                            .font(.tt.subtitleSemibold)
+                            .foregroundStyle(.tt.textPrimary)
+                        let rules = agent.customRules?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                        Text(rules.isEmpty ? L10n.Project.myAgentsDetailRulesEmpty : rules)
+                            .font(.tt.body)
+                            .foregroundStyle(rules.isEmpty ? .tt.textTertiary : .tt.textSecondary)
+                            .lineLimit(3)
+                            .multilineTextAlignment(.leading)
+                    }
+                    Spacer(minLength: 0)
+                    Image(systemName: "chevron.right")
+                        .font(.tt.iconCaption)
+                        .foregroundStyle(.tt.textTertiary)
+                        .padding(.top, TTSpacing.xs)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
             .buttonStyle(.plain)
             .disabled(agentsStore.isMutating)
-            .accessibilityHint(L10n.Project.myAgentsEdit)
         }
     }
 
     private var skillsCard: some View {
-        card(footnote: L10n.Project.myAgentsSkillsHint) {
-            cardHeader(
-                L10n.Project.myAgentsSkills,
-                count: detailStore.skills.isEmpty ? nil : detailStore.skills.count,
-                actionTitle: L10n.Project.myAgentsAddSkill,
-                actionEnabled: detailStore.agent?.organizationId?.isEmpty == false,
-                action: { showSkillPicker = true }
-            )
-            if detailStore.isLoading && detailStore.skills.isEmpty {
-                cardLoading()
-            } else if detailStore.skills.isEmpty {
-                cardEmpty(L10n.Project.myAgentsSkillsEmpty)
-            } else {
-                cardRows(detailStore.skills) { skill in skillRow(skill) }
-            }
-        }
-    }
-
-    private func skillRow(_ skill: AgentSkillLink) -> some View {
-        HStack(spacing: TTSpacing.md) {
-            SkillGlyphView(size: 28)
-            VStack(alignment: .leading, spacing: TTSpacing.xxs) {
-                Text(skill.name)
-                    .font(.tt.bodyMedium)
-                    .foregroundStyle(.tt.textPrimary)
-                    .lineLimit(1)
-                if let description = skill.description?.trimmingCharacters(in: .whitespacesAndNewlines),
-                   !description.isEmpty {
-                    Text(description)
-                        .font(.tt.caption)
-                        .foregroundStyle(.tt.textSecondary)
-                        .lineLimit(2)
-                }
-                if skill.locked {
-                    Text(L10n.Project.myAgentsSkillLocked)
-                        .font(.tt.captionMedium)
-                        .foregroundStyle(.tt.textTertiary)
-                }
-            }
-            Spacer(minLength: 0)
-            // 锁定项不摆按不动的开关和移除按钮，右侧留空。
-            if !skill.locked {
-                Toggle("", isOn: Binding(
-                    get: { skill.enabled },
-                    set: { enabled in
-                        Task { await setSkillEnabled(skill, enabled: enabled) }
-                    }
-                ))
-                .labelsHidden()
-                .disabled(detailStore.mutatingSkillKeys.contains(skill.id))
-                Button { skillToRemove = skill } label: {
-                    Image(systemName: "minus.circle")
-                        .font(.tt.iconCaption)
-                        .foregroundStyle(.tt.textTertiary)
-                }
-                .buttonStyle(.borderless)
-                .accessibilityLabel(L10n.Project.myAgentsRemoveSkill)
-                .disabled(detailStore.mutatingSkillKeys.contains(skill.id))
-            }
-        }
-        .padding(.horizontal, TTSpacing.lg)
-        .padding(.vertical, TTSpacing.md)
-    }
-
-    /// 记忆概览：TA 对你的综合理解。
-    private func memoryCard(_ agent: OrganizationAgent) -> some View {
-        card(footnote: L10n.Project.myAgentsMemoryOverviewHint) {
-            cardHeader(L10n.Project.myAgentsMemory)
-            UserPortraitPanelView(
-                observable: portraitStore,
-                organizationId: agent.organizationId ?? "",
-                agentId: agent.id,
-                canManage: true
-            )
-            .padding(.horizontal, TTSpacing.lg)
-            .padding(.top, TTSpacing.xs)
-            .padding(.bottom, TTSpacing.lg)
-        }
-    }
-
-    private var memoryRecordsCard: some View {
-        card(footnote: L10n.Project.myAgentsMemoryRecordsHint) {
-            cardHeader(
-                L10n.Project.myAgentsMemoryRecords,
-                count: detailStore.memories.isEmpty ? nil : detailStore.memories.count
-            )
-            if detailStore.isLoading && detailStore.memories.isEmpty {
-                cardLoading()
-            } else if detailStore.memories.isEmpty {
-                cardEmpty(L10n.Project.myAgentsMemoryEmpty)
-            } else {
-                cardRows(detailStore.memories) { memory in memoryRow(memory) }
-            }
-        }
-    }
-
-    private func memoryRow(_ memory: AgentMemoryRecord) -> some View {
-        let isBusy = detailStore.forgettingMemoryIds.contains(memory.id)
-            || detailStore.correctingMemoryIds.contains(memory.id)
-        return VStack(alignment: .leading, spacing: TTSpacing.xs) {
-            HStack(alignment: .firstTextBaseline, spacing: TTSpacing.sm) {
-                Text(agentMemoryDisplayTitle(
-                    memoryType: memory.memoryType,
-                    title: memory.title
-                ))
-                    .font(.tt.bodyMedium)
-                    .foregroundStyle(.tt.textPrimary)
-                    .lineLimit(1)
-                Spacer(minLength: 0)
-                // 纠正 / 忘记收进一个菜单，行里只留一个控件。
-                Menu {
-                    Button(L10n.Project.myAgentsCorrectMemory) { memoryToCorrect = memory }
-                    Button(L10n.Project.myAgentsForgetMemory, role: .destructive) {
-                        memoryToForget = memory
-                    }
-                } label: {
-                    Image(systemName: "ellipsis")
-                        .font(.tt.iconCaption)
-                        .foregroundStyle(.tt.textTertiary)
-                        .frame(width: 32, height: 24, alignment: .trailing)
-                        .contentShape(Rectangle())
-                }
-                .disabled(isBusy)
-                .accessibilityLabel(L10n.Project.myAgentsMemory)
-            }
-            Text(memory.content)
-                .font(.tt.meta)
+        VStack(alignment: .leading, spacing: TTSpacing.md) {
+            Text(L10n.Project.myAgentsSkillsHint)
+                .font(.tt.caption)
                 .foregroundStyle(.tt.textSecondary)
-                .lineLimit(3)
-            if !memory.tags.isEmpty {
-                Text(memory.tags.prefix(3).map { "#\($0)" }.joined(separator: "  "))
-                    .font(.tt.caption)
-                    .foregroundStyle(.tt.textTertiary)
-                    .lineLimit(1)
+
+            Button {
+                showSkillPicker = true
+            } label: {
+                Label(L10n.Project.myAgentsAddSkill, systemImage: "plus")
+                    .font(.tt.meta)
+            }
+            .buttonStyle(.bordered)
+            .disabled(detailStore.agent?.organizationId?.isEmpty != false)
+
+            if detailStore.isLoading && detailStore.skills.isEmpty {
+                ProgressView().frame(maxWidth: .infinity)
+            } else if detailStore.skills.isEmpty {
+                emptySection(L10n.Project.myAgentsSkillsEmpty, systemImage: "puzzlepiece.extension")
+            } else {
+                VStack(spacing: TTSpacing.xs) {
+                    ForEach(detailStore.skills) { skill in
+                        HStack(spacing: TTSpacing.sm) {
+                            SkillGlyphView(size: 28)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(skill.name)
+                                    .font(.tt.metaSemibold)
+                                    .foregroundStyle(.tt.textPrimary)
+                                    .lineLimit(1)
+                                if let description = skill.description?.trimmingCharacters(in: .whitespacesAndNewlines),
+                                   !description.isEmpty {
+                                    Text(description)
+                                        .font(.tt.caption)
+                                        .foregroundStyle(.tt.textSecondary)
+                                        .lineLimit(2)
+                                }
+                                if skill.locked {
+                                    Text(L10n.Project.myAgentsSkillLocked)
+                                        .font(.tt.captionMedium)
+                                        .foregroundStyle(.tt.textTertiary)
+                                }
+                            }
+                            Spacer(minLength: 0)
+                            Toggle("", isOn: Binding(
+                                get: { skill.enabled },
+                                set: { enabled in
+                                    Task { await setSkillEnabled(skill, enabled: enabled) }
+                                }
+                            ))
+                            .labelsHidden()
+                            .disabled(skill.locked || detailStore.mutatingSkillKeys.contains(skill.id))
+                            if !skill.locked {
+                                Button(role: .destructive) { skillToRemove = skill } label: {
+                                    Image(systemName: "minus.circle")
+                                }
+                                .buttonStyle(.borderless)
+                                .accessibilityLabel(L10n.Project.myAgentsRemoveSkill)
+                                .disabled(detailStore.mutatingSkillKeys.contains(skill.id))
+                            }
+                        }
+                        .padding(.vertical, TTSpacing.xs)
+                        if skill.id != detailStore.skills.last?.id {
+                            Divider().overlay(.tt.borderLight)
+                        }
+                    }
+                }
             }
         }
-        .padding(.horizontal, TTSpacing.lg)
-        .padding(.vertical, TTSpacing.md)
+        .agentDetailSection()
+    }
+
+    private var memoryCard: some View {
+        VStack(alignment: .leading, spacing: TTSpacing.lg) {
+            HStack(alignment: .firstTextBaseline) {
+                Text(selectedMemorySection.title)
+                    .font(.tt.subtitleSemibold)
+                    .foregroundStyle(.tt.textPrimary)
+                Spacer()
+                Button {
+                    selectedMemorySection = selectedMemorySection == .overview ? .records : .overview
+                } label: {
+                    HStack(spacing: TTSpacing.xs) {
+                        Text(selectedMemorySection == .overview
+                             ? L10n.Project.myAgentsMemoryRecords
+                             : L10n.Project.myAgentsMemoryOverview)
+                        Image(systemName: "chevron.right")
+                    }
+                    .font(.tt.metaMedium)
+                }
+                .accessibilityLabel(selectedMemorySection == .overview
+                                    ? L10n.Project.myAgentsMemoryRecords
+                                    : L10n.Project.myAgentsMemoryOverview)
+            }
+
+            if selectedMemorySection == .overview, let agent = detailStore.agent {
+                UserPortraitPanelView(
+                    observable: portraitStore,
+                    organizationId: agent.organizationId ?? "",
+                    agentId: agent.id,
+                    canManage: true
+                )
+            } else if detailStore.isLoading && detailStore.memories.isEmpty {
+                ProgressView().frame(maxWidth: .infinity)
+            } else if detailStore.memories.isEmpty {
+                emptySection(L10n.Project.myAgentsMemoryEmpty, systemImage: "brain")
+            } else {
+                VStack(spacing: TTSpacing.md) {
+                    ForEach(detailStore.memories) { memory in
+                        VStack(alignment: .leading, spacing: TTSpacing.xs) {
+                            HStack(alignment: .firstTextBaseline, spacing: TTSpacing.sm) {
+                                Text(agentMemoryDisplayTitle(
+                                    memoryType: memory.memoryType,
+                                    title: memory.title
+                                ))
+                                    .font(.tt.metaSemibold)
+                                    .foregroundStyle(.tt.textPrimary)
+                                    .lineLimit(1)
+                                Spacer()
+                                Button(L10n.Project.myAgentsCorrectMemory) {
+                                    memoryToCorrect = memory
+                                }
+                                .buttonStyle(.borderless)
+                                .font(.tt.captionMedium)
+                                .disabled(
+                                    detailStore.forgettingMemoryIds.contains(memory.id) ||
+                                    detailStore.correctingMemoryIds.contains(memory.id)
+                                )
+                                Button(L10n.Project.myAgentsForgetMemory, role: .destructive) {
+                                    memoryToForget = memory
+                                }
+                                .buttonStyle(.borderless)
+                                .font(.tt.captionMedium)
+                                .disabled(
+                                    detailStore.forgettingMemoryIds.contains(memory.id) ||
+                                    detailStore.correctingMemoryIds.contains(memory.id)
+                                )
+                            }
+                            Text(memory.content)
+                                .font(.tt.meta)
+                                .foregroundStyle(.tt.textSecondary)
+                                .lineLimit(3)
+                            if !memory.tags.isEmpty {
+                                Text(memory.tags.prefix(3).map { "#\($0)" }.joined(separator: "  "))
+                                    .font(.tt.captionMedium)
+                                    .foregroundStyle(.tt.textTertiary)
+                                    .lineLimit(1)
+                            }
+                        }
+                        if memory.id != detailStore.memories.last?.id {
+                            Divider().overlay(.tt.borderLight)
+                        }
+                    }
+                }
+            }
+        }
+        .agentDetailSection()
     }
 
     private var recentTasksCard: some View {
-        card(footnote: L10n.Project.myAgentsRecentTasksHint) {
-            cardHeader(
-                L10n.Project.myAgentsRecentTasks,
-                count: activityItems.isEmpty ? nil : activityItems.count
-            )
-            if detailStore.isLoading && activityItems.isEmpty {
-                cardLoading()
-            } else if activityItems.isEmpty {
-                cardEmpty(L10n.Project.myAgentsRecentTasksEmpty)
+        VStack(alignment: .leading, spacing: TTSpacing.md) {
+            Text(L10n.Project.myAgentsRecentTasksHint)
+                .font(.tt.caption)
+                .foregroundStyle(.tt.textSecondary)
+
+            if detailStore.isLoading && detailStore.sessions.isEmpty && detailStore.projectTasks.isEmpty {
+                ProgressView().frame(maxWidth: .infinity)
+            } else if detailStore.sessions.isEmpty && detailStore.projectTasks.isEmpty {
+                emptySection(L10n.Project.myAgentsRecentTasksEmpty, systemImage: "checklist")
             } else {
-                cardRows(activityItems) { item in
-                    switch item {
-                    case .session(let session): recentSessionRow(session)
-                    case .task(let task): projectTaskRow(task)
+                VStack(spacing: TTSpacing.xs) {
+                    ForEach(detailStore.sessions.prefix(10)) { session in
+                        recentSessionRow(session)
+                    }
+                    ForEach(detailStore.projectTasks.prefix(10)) { task in
+                        projectTaskRow(task)
                     }
                 }
             }
         }
-    }
-
-    private var activityItems: [AgentActivityItem] {
-        detailStore.sessions.prefix(10).map(AgentActivityItem.session)
-            + detailStore.projectTasks.prefix(10).map(AgentActivityItem.task)
-    }
-
-    /// 工具携带集：问在线 Electron 的已挂载 MCP（只读列表，挂载请在电脑端管理）。
-    private var toolsCard: some View {
-        card(footnote: L10n.Project.myAgentsToolsHint) {
-            cardHeader(
-                L10n.Project.myAgentsTools,
-                count: detailStore.mcpConnections.isEmpty ? nil : detailStore.mcpConnections.count
-            )
-            if detailStore.mcpDeviceOffline {
-                cardNote(L10n.Project.myAgentsToolsDeviceOffline, tint: .tt.textWarning, retry: true)
-            } else if let mcpLoadError = detailStore.mcpLoadError {
-                cardNote(mcpLoadError, tint: .tt.textWarning, retry: true)
-            } else if detailStore.isLoading && detailStore.mcpConnections.isEmpty {
-                cardLoading()
-            } else if detailStore.mcpConnections.isEmpty {
-                cardEmpty(L10n.Project.myAgentsToolsNotMounted)
-            } else {
-                cardRows(detailStore.mcpConnections) { connection in connectorRow(connection) }
-            }
-        }
-    }
-
-    private func connectorRow(_ connection: AgentLocalMcpAttachment) -> some View {
-        HStack(spacing: TTSpacing.md) {
-            ConnectorBrandGlyphView(
-                query: .init(
-                    name: connection.name,
-                    endpointUrl: connection.endpointForBrand
-                ),
-                size: 28
-            )
-            VStack(alignment: .leading, spacing: TTSpacing.xxs) {
-                Text(connection.name.isEmpty ? connection.id : connection.name)
-                    .font(.tt.bodyMedium)
-                    .foregroundStyle(.tt.textPrimary)
-                    .lineLimit(1)
-                if !connection.description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    Text(connection.description)
-                        .font(.tt.caption)
-                        .foregroundStyle(.tt.textSecondary)
-                        .lineLimit(2)
-                }
-            }
-            Spacer(minLength: 0)
-            Text(connection.source?.isOrganization == true
-                 ? L10n.Project.myAgentsToolsSourceOrg
-                 : L10n.Project.myAgentsToolsSourceLocal)
-                .font(.tt.captionMedium)
-                .foregroundStyle(.tt.textTertiary)
-                .padding(.horizontal, TTSpacing.sm)
-                .padding(.vertical, 3)
-                .background(Color.tt.bgSubtle, in: Capsule())
-        }
-        .padding(.horizontal, TTSpacing.lg)
-        .padding(.vertical, TTSpacing.md)
-        .accessibilityHint(L10n.Project.myAgentsToolsManageOnDesktop)
-    }
-
-    private var deactivateCard: some View {
-        card {
-            Button(role: .destructive) { showDeactivateConfirm = true } label: {
-                Text(L10n.Project.myAgentsDeactivate)
-                    .font(.tt.bodyMedium)
-                    .foregroundStyle(.tt.textCritical)
-                    .frame(maxWidth: .infinity, minHeight: TTSpacing.Control.minimumTouchTarget)
-            }
-            .buttonStyle(.plain)
-            .disabled(agentsStore.isMutating)
-        }
+        .agentDetailSection()
     }
 
     @ViewBuilder
     private func recentSessionRow(_ session: RecentSession) -> some View {
-        let subtitle = activitySubtitle(
-            kind: L10n.Project.myAgentsChat,
-            scope: session.spaceName ?? session.projectName
-        )
         if let target = RecentConversationTargetResolver.resolve(
             session,
             fallbackOrganizationId: WorkspaceStore.shared.selectedOrganizationId
@@ -687,16 +535,18 @@ struct AgentDetailScreen: View {
             Button { onOpenConversation(target) } label: {
                 activityRow(
                     title: session.displayTitle,
-                    subtitle: subtitle,
-                    time: session.displayTime
+                    subtitle: session.spaceName ?? session.projectName ?? L10n.Project.myAgentsChat,
+                    time: session.displayTime,
+                    systemImage: "bubble.left.and.bubble.right"
                 )
             }
             .buttonStyle(.plain)
         } else {
             activityRow(
                 title: session.displayTitle,
-                subtitle: subtitle,
-                time: session.displayTime
+                subtitle: session.spaceName ?? session.projectName ?? L10n.Project.myAgentsChat,
+                time: session.displayTime,
+                systemImage: "bubble.left.and.bubble.right"
             )
         }
     }
@@ -704,31 +554,24 @@ struct AgentDetailScreen: View {
     private func projectTaskRow(_ task: AgentProjectTask) -> some View {
         activityRow(
             title: task.title,
-            subtitle: activitySubtitle(
-                kind: L10n.Project.myAgentsProjectTask,
-                scope: task.project?.name ?? task.workStatus ?? task.assignmentStatus
-            ),
-            time: RelativeTime.format(task.updatedAt ?? "")
+            subtitle: task.project?.name ?? task.workStatus ?? task.assignmentStatus ?? L10n.Project.myAgentsProjectTask,
+            time: RelativeTime.format(task.updatedAt ?? ""),
+            systemImage: "checkmark.circle"
         )
     }
 
-    /// Chat 会话和 Project 任务混在一张列表里，类型必须写进副标题——行里没有图标区分。
-    private func activitySubtitle(kind: String, scope: String?) -> String {
-        guard let scope = scope?.trimmingCharacters(in: .whitespacesAndNewlines), !scope.isEmpty else {
-            return kind
-        }
-        return "\(kind) · \(scope)"
-    }
-
-    /// 任务行不放前置图标：类型已经写在副标题里，图标只会把标题挤窄。
-    private func activityRow(title: String, subtitle: String, time: String?) -> some View {
-        HStack(alignment: .center, spacing: TTSpacing.md) {
-            VStack(alignment: .leading, spacing: TTSpacing.xxs) {
+    private func activityRow(title: String, subtitle: String, time: String?, systemImage: String) -> some View {
+        HStack(alignment: .top, spacing: TTSpacing.sm) {
+            Image(systemName: systemImage)
+                .font(.tt.iconCaption)
+                .foregroundStyle(.tt.iconAccent)
+                .frame(width: 22, height: 22)
+                .padding(.top, 1)
+            VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(.tt.bodyMedium)
+                    .font(.tt.meta)
                     .foregroundStyle(.tt.textPrimary)
                     .lineLimit(2)
-                    .multilineTextAlignment(.leading)
                 Text(subtitle)
                     .font(.tt.caption)
                     .foregroundStyle(.tt.textSecondary)
@@ -737,14 +580,31 @@ struct AgentDetailScreen: View {
             Spacer(minLength: 0)
             if let time {
                 Text(time)
-                    .font(.tt.caption)
-                    .monospacedDigit()
+                    .font(.tt.captionMedium)
                     .foregroundStyle(.tt.textTertiary)
                     .lineLimit(1)
             }
         }
-        .padding(.horizontal, TTSpacing.lg)
-        .padding(.vertical, TTSpacing.md)
+        .padding(.vertical, TTSpacing.xs)
+    }
+
+    private func detailPill(_ title: String, accent: Bool = false) -> some View {
+        Text(title)
+            .font(.tt.captionMedium)
+            .foregroundStyle(accent ? .tt.textAccent : .tt.textSecondary)
+            .padding(.horizontal, TTSpacing.xs)
+            .padding(.vertical, 3)
+            .background(
+                accent ? Color.tt.bgAccent.opacity(0.12) : Color.tt.bgSubtle,
+                in: Capsule()
+            )
+    }
+
+    private func emptySection(_ title: String, systemImage: String) -> some View {
+        Label(title, systemImage: systemImage)
+            .font(.tt.meta)
+            .foregroundStyle(.tt.textTertiary)
+            .frame(maxWidth: .infinity, minHeight: 76)
     }
 
     private func setSkillEnabled(_ skill: AgentSkillLink, enabled: Bool) async {
@@ -868,6 +728,17 @@ private struct MemoryCorrectSheet: View {
             guard !error.isCancellation else { return }
             errorMessage = error.localizedDescription
         }
+    }
+}
+
+private struct AgentDetailSectionHeader: View {
+    let title: String
+    let systemImage: String
+
+    var body: some View {
+        Label(title, systemImage: systemImage)
+            .font(.tt.bodySemibold)
+            .foregroundStyle(.tt.textPrimary)
     }
 }
 
@@ -1129,16 +1000,22 @@ private struct AgentSkillPickerCatalogEntry: Decodable {
     }
 }
 
+private extension View {
+    func agentDetailSection() -> some View {
+        padding(.bottom, TTSpacing.xxl)
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .fill(.tt.borderLight)
+                    .frame(height: 1)
+            }
+    }
+}
+
 @MainActor @Observable
 final class AgentDetailStore {
     let agentId: String
     private(set) var agent: OrganizationAgent?
     private(set) var skills: [AgentSkillLink] = []
-    /// Electron 本机已挂载且启用的 MCP（不是组织全量列表）。
-    private(set) var mcpConnections: [AgentLocalMcpAttachment] = []
-    /// 电脑离线 / 无可用 Electron / 查询超时。
-    private(set) var mcpDeviceOffline = false
-    private(set) var mcpLoadError: String?
     private(set) var memories: [AgentMemoryRecord] = []
     private(set) var sessions: [RecentSession] = []
     private(set) var projectTasks: [AgentProjectTask] = []
@@ -1157,8 +1034,6 @@ final class AgentDetailStore {
         guard !agentId.isEmpty else { return }
         isLoading = agent == nil
         errorMessage = nil
-        mcpDeviceOffline = false
-        mcpLoadError = nil
         defer { isLoading = false }
 
         do {
@@ -1170,16 +1045,11 @@ final class AgentDetailStore {
             guard !organizationId.isEmpty else { return }
 
             async let skillsResponse = loadSkills()
-            async let mcpResult = loadMcpAttachments()
             async let memoriesResponse = loadMemories(organizationId: organizationId)
             async let sessionsResponse = loadSessions(organizationId: organizationId)
             async let tasksResponse = loadProjectTasks(organizationId: organizationId)
 
             skills = await skillsResponse?.skills ?? []
-            let mcp = await mcpResult
-            mcpConnections = mcp.connections
-            mcpDeviceOffline = mcp.deviceOffline
-            mcpLoadError = mcp.errorMessage
             memories = await memoriesResponse?.items ?? []
             sessions = await sessionsResponse?.sessions ?? []
             projectTasks = await tasksResponse?.tasks ?? []
@@ -1302,39 +1172,6 @@ final class AgentDetailStore {
         try? await APIClient.shared.get(path: Endpoints.Agent.skills(agentId))
     }
 
-    /// 按 agentId 问在线 Electron；离线码映射为 deviceOffline，其它失败记 mcpLoadError。
-    private func loadMcpAttachments() async -> McpAttachmentsLoadResult {
-        do {
-            let response: AgentLocalMcpAttachmentListResponse = try await APIClient.shared.get(
-                path: Endpoints.Context.localMcpAttachments(agentId: agentId)
-            )
-            return McpAttachmentsLoadResult(connections: response.connections)
-        } catch {
-            guard !error.isCancellation else { return McpAttachmentsLoadResult() }
-            if Self.isDeviceRuntimeUnavailable(error) {
-                return McpAttachmentsLoadResult(deviceOffline: true)
-            }
-            let message = (error as? LocalizedError)?.errorDescription ?? error.localizedDescription
-            return McpAttachmentsLoadResult(errorMessage: message)
-        }
-    }
-
-    /// HTTP 409 `DEVICE_RUNTIME_*` 与 504 `TASK_TIMEOUT` 均视为电脑侧不可达。
-    private static func isDeviceRuntimeUnavailable(_ error: Error) -> Bool {
-        let code = (error as? APIError)?.businessCode?.uppercased() ?? ""
-        if code == "DEVICE_RUNTIME_OFFLINE"
-            || code == "DEVICE_RUNTIME_UNAVAILABLE"
-            || code == "TASK_TIMEOUT" {
-            return true
-        }
-        if let apiError = error as? APIError,
-           case .serverError(let status, _) = apiError {
-            // 裸 409/504 且无业务码时也按不可达处理（契约未合入时的兜底）。
-            return (status == 409 || status == 504) && code.isEmpty
-        }
-        return false
-    }
-
     private func loadMemories(organizationId: String) async -> AgentMemoryRecordListResponse? {
         try? await APIClient.shared.get(
             path: Endpoints.AgentMemory.memories,
@@ -1365,10 +1202,4 @@ final class AgentDetailStore {
             query: ["limit": "10"]
         )
     }
-}
-
-private struct McpAttachmentsLoadResult: Sendable {
-    var connections: [AgentLocalMcpAttachment] = []
-    var deviceOffline = false
-    var errorMessage: String?
 }

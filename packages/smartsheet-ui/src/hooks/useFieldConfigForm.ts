@@ -171,7 +171,7 @@ const SYSTEM_READONLY_TYPES = new Set<FieldType>([
 
 const DEFAULT_VALUE_SUPPORTED_TYPES = new Set<FieldType>([
   'text', 'long_text', 'number',
-  'select', 'multi_select', 'date', 'user',
+  'select', 'multi_select', 'checkbox', 'date', 'user',
 ])
 
 const DEFAULT_STATE: FieldSettingFormState = {
@@ -216,7 +216,9 @@ export function buildFieldDefaultValueFromState(state: FieldSettingFormState): F
 
   if (state.defaultMode === 'literal') {
     let value: unknown = state.defaultLiteral
-    if (state.fieldType === 'number') {
+    if (state.fieldType === 'checkbox') {
+      value = state.defaultLiteral === 'true'
+    } else if (state.fieldType === 'number') {
       value = Number(state.defaultLiteral)
     } else if (state.fieldType === 'multi_select' || (state.fieldType === 'user' && state.userMultiple)) {
       value = state.defaultLiteral.split(',').map((item) => item.trim()).filter(Boolean)

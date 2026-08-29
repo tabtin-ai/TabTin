@@ -422,6 +422,26 @@ export type {
   SingleHitlResolvedEvent,
 } from './approval.js';
 
+// ─── Access Barrier HITL ────────────────────────────────────────────────────
+export {
+  AccessBarrierKindSchema,
+  AccessBarrierActionIdSchema,
+  AccessBarrierSchema,
+  AccessBarrierResolutionSchema,
+  ACCESS_BARRIER_REQUIRED_EVENT_TYPE,
+  AccessBarrierRequiredPayloadSchema,
+  AccessBarrierRequiredEventSchema,
+} from './access-barrier.js';
+
+export type {
+  AccessBarrierKind,
+  AccessBarrierActionId,
+  AccessBarrier,
+  AccessBarrierResolution,
+  AccessBarrierRequiredPayload,
+  AccessBarrierRequiredEvent,
+} from './access-barrier.js';
+
 // ─── CLI Envelope ────────────────────────────────────────────────────
 export { okResponse, errResponse } from './cli-envelope.js';
 export type {

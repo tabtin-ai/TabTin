@@ -9,6 +9,8 @@
 // 50 之外、还是根本没感知过，只要链接真在页面里就放行；真不在（凭空猜的 URL）就拦。
 // 这条「事实源 = 实时页面」的不变量，取代了「靠三个感知源被动累积、还受 limit/TTL
 // 截断」的旧模型，一次性抹平证据缺口。
+import { BrowserTabUserInControlError } from '../../../browser-tab-lock/browserTabInputLock'
+
 type SiteNavigationEvidence = {
   recordedAt: number
   verifiedHrefs: Set<string>
@@ -187,7 +189,8 @@ export async function verifyNavigationAgainstLivePage(
   let live: { pageUrl: string; hrefs: string[] } | undefined
   try {
     live = await fetchLiveAnchors()
-  } catch {
+  } catch (error) {
+    if (error instanceof BrowserTabUserInControlError) throw error
     return known
   }
   if (!live) return known

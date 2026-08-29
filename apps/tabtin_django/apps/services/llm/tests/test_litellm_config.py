@@ -6,9 +6,13 @@ openrouter 等多 vendor 路由）时，model_name 的 `<vendor>/<model>` 前缀
 被 LiteLLM 当作内部 provider segment 剥掉——那是上游网关自己的路由 alias。
 剥了就撞 upstream 404。
 """
+from types import SimpleNamespace
+
 from apps.services.llm.litellm_config import (
+    collect_channel_search_hints,
     compose_litellm_model_name,
     get_litellm_provider_set,
+    resolve_litellm_provider,
 )
 
 
@@ -200,3 +204,64 @@ class TestPreloadLitellmInBackground:
         assert thread is not None
         thread.join(timeout=5)
         assert not thread.is_alive()
+
+
+class TestCollectChannelSearchHints:
+    def test_dashscope_url_wins_over_openai_compatible_name(self):
+        hints = collect_channel_search_hints(SimpleNamespace(
+            name="dashscope",
+            provider_key="dashscope",
+            default_base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+        ))
+        assert hints == {"dashscope", "qwen"}
+
+    def test_openrouter_url_does_not_use_openai_catalog(self):
+        hints = collect_channel_search_hints(SimpleNamespace(
+            name="openai",
+            provider_key="openai-openrouter",
+            default_base_url="https://openrouter.ai/api/v1",
+        ))
+        assert hints == {"openrouter"}
+
+
+class TestLiteLLMChannelSearchFilter:
+    def test_keyword_match_stays_inside_channel(self, monkeypatch):
+        from apps.services.llm.services.litellm_model_info import LiteLLMModelInfoService
+
+        monkeypatch.setattr(
+            LiteLLMModelInfoService,
+            "_get_model_database",
+            classmethod(lambda cls: {
+                "gpt-4o": {"litellm_provider": "openai"},
+                "qwen-max": {"litellm_provider": "dashscope"},
+                "dashscope/qwen-plus": {"litellm_provider": "dashscope"},
+            }),
+        )
+        matched = LiteLLMModelInfoService.search_models("qwen", provider_hints={"dashscope", "qwen"})
+        assert set(matched) == {"qwen-max", "dashscope/qwen-plus"}
+        assert "gpt-4o" not in LiteLLMModelInfoService.search_models(
+            "gpt", provider_hints={"dashscope", "qwen"},
+        )
+
+
+class TestOpenAICompatibleGatewayKeepsVendorPrefix:
+    def test_non_official_openai_compatible_gateway_uses_custom_openai(self):
+        resolved = resolve_litellm_provider(
+            SimpleNamespace(name="openai", provider_key="openai-ppio"),
+            KNOWN,
+            model=SimpleNamespace(base_url="https://api.ppio.com/openai/v1"),
+        )
+        assert resolved == "custom_openai"
+        assert compose_litellm_model_name(
+            model_name="deepseek/deepseek-v4-flash-vision-exp",
+            litellm_provider=resolved,
+            known_providers=KNOWN,
+        ) == "custom_openai/deepseek/deepseek-v4-flash-vision-exp"
+
+    def test_official_openai_keeps_direct_provider_behavior(self):
+        resolved = resolve_litellm_provider(
+            SimpleNamespace(name="openai", provider_key="openai"),
+            KNOWN,
+            model=SimpleNamespace(base_url="https://api.openai.com/v1"),
+        )
+        assert resolved == "openai"

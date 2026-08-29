@@ -133,6 +133,63 @@ describe('localGitStatusShared', () => {
     unsub()
   })
 
+  it('同一路径丢弃至干净后再次修改不复用旧 contentRevision', async () => {
+    const fullStatus = vi
+      .fn()
+      .mockResolvedValueOnce({
+        success: true,
+        isRepo: true,
+        branch: 'main',
+        status: { entries: { tabtest: { x: ' ', y: 'M' } } },
+      } as unknown as FullStatusResult)
+      .mockResolvedValueOnce({
+        success: true,
+        isRepo: true,
+        branch: 'main',
+        status: { entries: {} },
+      } as unknown as FullStatusResult)
+      .mockResolvedValueOnce({
+        success: true,
+        isRepo: true,
+        branch: 'main',
+        status: { entries: { tabtest: { x: ' ', y: 'M' } } },
+      } as unknown as FullStatusResult)
+
+    Object.defineProperty(window, 'tabtin', {
+      value: {
+        git: { fullStatus },
+        fileSystem: {
+          watch: vi.fn(async () => ({ success: false })),
+          unwatch: vi.fn(),
+          onWatchEvent: vi.fn(() => () => undefined),
+        },
+      },
+      writable: true,
+      configurable: true,
+    })
+
+    const unsub = subscribeLocalGitStatus(rootPath, () => undefined)
+    await vi.waitFor(() => {
+      expect(getLocalGitStatusSnapshot(rootPath).statusRevision).toBe(1)
+    })
+    const firstRevision = getLocalGitStatusSnapshot(rootPath).contentRevisions.tabtest
+
+    refreshLocalGitStatus(rootPath)
+    await vi.waitFor(() => {
+      expect(getLocalGitStatusSnapshot(rootPath).statusRevision).toBe(2)
+    })
+    expect(getLocalGitStatusSnapshot(rootPath).contentRevisions.tabtest).toBeUndefined()
+
+    refreshLocalGitStatus(rootPath)
+    await vi.waitFor(() => {
+      expect(getLocalGitStatusSnapshot(rootPath).statusRevision).toBe(3)
+    })
+    const secondRevision = getLocalGitStatusSnapshot(rootPath).contentRevisions.tabtest
+
+    expect(secondRevision).toBeGreaterThan(firstRevision ?? 0)
+    unsub()
+  })
+
   it('watch 指定路径时只抬高该路径 contentRevision（状态码可变可不变）', async () => {
     let watchHandler: ((payload: {
       watchId: string

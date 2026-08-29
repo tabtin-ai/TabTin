@@ -123,7 +123,7 @@ export interface FieldConfigFormBodyProps {
 
 const DEFAULT_VALUE_FIELD_TYPES: FieldType[] = [
   'text', 'long_text', 'number',
-  'select', 'multi_select', 'date', 'user',
+  'select', 'multi_select', 'checkbox', 'date', 'user',
 ]
 
 // 常见货币符号（默认 ¥，与列渲染 / 记录表单编辑器保持一致）
@@ -458,7 +458,17 @@ export const FieldConfigFormBody: React.FC<FieldConfigFormBodyProps> = ({
               placeholder={t('fieldSettingPanel.defaultUserPlaceholder')}
             />
           )}
-          {state.defaultMode === 'literal' && !isSelectField && (state.fieldType !== 'user' || organizationMembers.length === 0) && (
+          {state.defaultMode === 'literal' && state.fieldType === 'checkbox' && (
+            <label htmlFor="field-default-checkbox" className="flex items-center gap-2 text-body cursor-pointer">
+              <Checkbox
+                id="field-default-checkbox"
+                checked={state.defaultLiteral === 'true'}
+                onCheckedChange={(checked) => setField('defaultLiteral', checked === true ? 'true' : 'false')}
+              />
+              {t('fieldSettingPanel.defaultCheckboxLabel', { defaultValue: '新记录默认选中' })}
+            </label>
+          )}
+          {state.defaultMode === 'literal' && !isSelectField && state.fieldType !== 'checkbox' && (state.fieldType !== 'user' || organizationMembers.length === 0) && (
             <Input
               type={state.fieldType === 'number' || state.fieldType === 'percent' || state.fieldType === 'currency' ? 'number' : state.fieldType === 'date' ? 'date' : 'text'}
               value={state.defaultLiteral}

@@ -580,6 +580,20 @@ export interface AskUserRequestStateBase {
    * 语义与 ApprovalRequestState.openedAt 一致。
    */
   openedAt?: number
+  /**
+   * Access Barrier HITL（系统撞墙卡片）：有此字段时，提交把选项 id 映射为
+   * `{ action }` 决议（而非 ask_user answers[]），供 `presentAccessBarrier` 消费。
+   */
+  accessBarrierMeta?: {
+    tabId?: string
+    domain?: string
+    kind?: string
+  }
+  /**
+   * 权威过期时刻（unix ms）。Access Barrier 从 `access_barrier_required.expires_at`
+   * 写入；前端可据此到期兜底收卡（主路径仍靠 `single_hitl_resolved`）。
+   */
+  expiresAt?: number
 }
 
 /** ask_user：让用户从 2-4 个选项中选择（自动注入 Other 选项）。 */

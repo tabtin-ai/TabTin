@@ -49,6 +49,8 @@ type ContentDropProps = React.HTMLAttributes<HTMLDivElement> & {
 
 interface TabCodePreviewProps {
   rootPath: string
+  /** 外层 Context 标签是否激活；保活 pane 隐藏时清掉 body 浮层。 */
+  isPaneActive?: boolean
   editorSessionKey: string
   editorGroupId: string
   filePath: string | null
@@ -59,6 +61,8 @@ interface TabCodePreviewProps {
   isGitRepo: boolean
   /** Git 状态快照版本，用于分支/HEAD 变化后刷新正常预览的基线。 */
   gitStatusRevision?: number
+  /** 当前路径的 Git 内容版本，用于使 Diff 已解析缓存失效。 */
+  gitContentRevision?: number
   viewMode?: ViewMode
   gitDiffMode?: DiffMode
   /** 当前文件 git 状态（A/?/D/M…），用于 Diff 顶栏 New/Deleted 徽章 */
@@ -98,6 +102,7 @@ function viewModeToDiffMode(viewMode?: ViewMode, gitDiffMode?: DiffMode): DiffMo
 
 export const TabCodePreview: React.FC<TabCodePreviewProps> = ({
   rootPath,
+  isPaneActive = true,
   editorSessionKey,
   editorGroupId,
   filePath,
@@ -107,6 +112,7 @@ export const TabCodePreview: React.FC<TabCodePreviewProps> = ({
   findRequest,
   isGitRepo,
   gitStatusRevision = 0,
+  gitContentRevision = 0,
   viewMode,
   gitDiffMode,
   fileGitStatus = null,
@@ -143,6 +149,13 @@ export const TabCodePreview: React.FC<TabCodePreviewProps> = ({
   const [contentFilePath, setContentFilePath] = useState<string | null>(null)
   const [contentFileVersion, setContentFileVersion] = useState<number | null>(null)
 
+  useEffect(() => {
+    if (isPaneActive) return
+    // 选区工具条通过 body portal 挂载，保活 pane 隐藏时不能让旧选区浮层留在新标签上。
+    selectionDataRef.current = null
+    setSelection(null)
+  }, [isPaneActive])
+
   const handleEditorStateChange = useCallback((nextState: TextEditorState) => {
     setEditorState(nextState)
     if (filePath) onEditorStateChange?.(editorSessionKey, editorGroupId, filePath, nextState)
@@ -150,6 +163,10 @@ export const TabCodePreview: React.FC<TabCodePreviewProps> = ({
 
   const isAutoGitView = Boolean(gitDiffMode) || viewMode === 'staged' || viewMode === 'unstaged'
   const fileVersion = useFileContentWatch(filePath)
+  const diffMode = viewModeToDiffMode(viewMode, gitDiffMode)
+  const diffContentRevision = diffMode === 'commit' || diffMode === 'branch'
+    ? fileVersion
+    : `${gitContentRevision}:${fileVersion}`
   const cachedPreview = filePath && fileVersion !== FILE_DELETED_VERSION
     ? activePreviewCache.get(filePath)
     : null
@@ -700,9 +717,9 @@ export const TabCodePreview: React.FC<TabCodePreviewProps> = ({
               rootPath={rootPath}
               filePath={filePath}
               language={language}
-              diffMode={viewModeToDiffMode(viewMode, gitDiffMode)}
+              diffMode={diffMode}
               sideBySide={sideBySide}
-              contentRevision={fileVersion}
+              contentRevision={diffContentRevision}
               initialLine={initialLine}
               initialLineKey={initialLineKey}
               onDiffStats={setDiffStats}
@@ -747,7 +764,7 @@ export const TabCodePreview: React.FC<TabCodePreviewProps> = ({
         {contentOverlay}
       </div>
 
-      {!showDiff && !showMarkdownRendered && (
+      {isPaneActive && !showDiff && !showMarkdownRendered && (
         <CodeSelectionToolbar
           selection={selection}
           onAddToChat={sendSelectionToChat}

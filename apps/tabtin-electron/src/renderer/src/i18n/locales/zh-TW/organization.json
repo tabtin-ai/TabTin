@@ -440,6 +440,7 @@
       "scopeOrganization": "組織",
       "scopeUser": "個人",
       "scopeHint": "目前角色僅能創建個人管道",
+      "scopePersonalAccountHint": "個人帳戶下只能新增僅自己可見的服務",
       "save": "儲存修改",
       "cancel": "取消",
       "edit": "編輯",

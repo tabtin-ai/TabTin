@@ -220,12 +220,17 @@ describe('handleBrowserAction —— observe 登录墙 surfacing（login_require
     })
     const result = await handleBrowserAction('observe', {}, hooks)
     const data = (result as { ok: true; data: any }).data
-    expect(Object.keys(data)[0]).toBe('login_required')
-    expect(data.login_required).toEqual({
+    // Access Barrier HITL（设计 2026-08-07）：新键 access_barrier 置顶，
+    // 旧 login_required 过渡期双写、紧随其后（未注入 resolveAccessBarrier → host_unavailable）。
+    expect(Object.keys(data)[0]).toBe('access_barrier')
+    expect(data.access_barrier).toMatchObject({ kind: 'login', domain: 'xiaohongshu.com' })
+    expect(data.access_barrier_resolution).toEqual({ action: 'host_unavailable' })
+    expect(data.login_required).toMatchObject({
       reason: '内容需要登录后才能查看',
-      hint: LOGIN_REQUIRED_HINT,
+      hint: expect.stringContaining('访问障碍人机确认已结束'),
       tab_id: 'tab-xhs',
     })
+    expect(String(data.login_required.hint)).toMatch(/不要再次用 ask_user/)
     expect(data.observed_elements).toHaveLength(1)
   })
 
@@ -289,12 +294,16 @@ describe('handleBrowserAction —— observe/act 验证码 surfacing（captcha_r
     })
     const result = await handleBrowserAction('observe', {}, hooks)
     const data = (result as { ok: true; data: any }).data
-    expect(data.captcha_required).toEqual({
+    expect(data.captcha_required).toMatchObject({
       reason: '页面需要完成验证码（recaptcha-v2）',
-      hint: CAPTCHA_REQUIRED_HINT,
+      hint: expect.stringContaining('访问障碍人机确认已结束'),
       type: 'recaptcha-v2',
     })
-    expect(Object.keys(data)[0]).toBe('captcha_required')
+    expect(String(data.captcha_required.hint)).toMatch(/不要再次用 ask_user/)
+    // Access Barrier HITL（设计 2026-08-07）：新键 access_barrier 置顶，旧 captcha_required 双写紧随其后。
+    expect(Object.keys(data)[0]).toBe('access_barrier')
+    expect(data.access_barrier).toMatchObject({ kind: 'captcha', domain: 'google.com' })
+    expect(data.access_barrier_resolution).toEqual({ action: 'host_unavailable' })
   })
 
   it('Electron act 投影保留 captcha_required（不再丢掉）', async () => {

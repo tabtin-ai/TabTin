@@ -309,15 +309,16 @@ describe('engine hook refactor contracts', () => {
     const stages = buildDefaultPolicyPostStages(makeConfig(), deps, runState);
 
     // 装配契约：必须是多段数组。若回退成 composeHooks 单段再包一层，
-    // length===1，本测会红。
-    expect(stages).toHaveLength(7);
-    expect(new Set(stages).size).toBe(7);
+    // length===1，本测会红。登录/验证码墙已迁出本栈（Access Barrier HITL），
+    // 现为 5 段：governance → budget → tool-loop-guard → overflow → fallback。
+    expect(stages).toHaveLength(5);
+    expect(new Set(stages).size).toBe(5);
     const beforeModels = stages.map((stage) => stage.beforeModel).filter(Boolean);
-    expect(beforeModels.length).toBeGreaterThanOrEqual(4);
+    expect(beforeModels.length).toBeGreaterThanOrEqual(3);
     expect(new Set(beforeModels).size).toBe(beforeModels.length);
 
     // 用真实装配产物接 HookRunner：毒化 governance 段后，后续段仍执行
-    // （不仅 budget——guard / login-wall 等也不连坐）。
+    // （不仅 budget——guard 等也不连坐）。
     let laterStageCount = 0;
     const instrumented = stages.map((stage, index) => {
       if (index === 0) {

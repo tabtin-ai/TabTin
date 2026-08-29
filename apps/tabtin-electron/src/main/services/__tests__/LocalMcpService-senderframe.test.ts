@@ -47,6 +47,7 @@ vi.mock('../mcp-oauth-window', () => ({
 vi.mock('../mcp-remote-client', () => ({
   ensureMcpRemoteClientName: vi.fn(),
   extractMcpRemoteServerUrl: vi.fn(),
+  clearMcpRemoteAuth: vi.fn(() => 0),
 }))
 
 vi.mock('../../logger', () => ({

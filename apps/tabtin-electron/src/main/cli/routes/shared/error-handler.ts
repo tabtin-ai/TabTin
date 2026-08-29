@@ -21,6 +21,10 @@ import {
   errorResponse as coreErrorResponse,
 } from '@tabtin/cli-server-core'
 import { createLogger } from '../../../logger'
+import {
+  BROWSER_TAB_USER_IN_CONTROL_MESSAGE,
+  BrowserTabUserInControlError,
+} from '../../../browser-tab-lock/browserTabInputLock'
 
 const log = createLogger('CLIProxy')
 
@@ -55,6 +59,7 @@ export type ErrorCode =
   | 'NOT_A_FILE'
   | 'FILE_TOO_LARGE'
   | 'UPLOAD_ERROR'
+  | 'BROWSER_TAB_USER_IN_CONTROL'
   | 'UNKNOWN_ROUTE'
 
 export type { SendJSON, DjangoProxyResult }
@@ -74,6 +79,24 @@ export function errorResponse(
 ) {
   const suggestions = opts?.suggestions ?? ELECTRON_SUGGESTIONS[code]
   return coreErrorResponse(code, message, { ...opts, suggestions })
+}
+
+export function sendBrowserTabUserInControlError(
+  err: unknown,
+  sendJSON: SendJSON,
+  res: http.ServerResponse,
+): boolean {
+  if (!(err instanceof BrowserTabUserInControlError)) return false
+
+  sendJSON(res, 409, errorResponse(
+    'BROWSER_TAB_USER_IN_CONTROL',
+    BROWSER_TAB_USER_IN_CONTROL_MESSAGE,
+    {
+      retryable: false,
+      detail: { viewId: err.viewId },
+    },
+  ))
+  return true
 }
 
 // ── Django HTTP proxy ────────────────────────────────────────────

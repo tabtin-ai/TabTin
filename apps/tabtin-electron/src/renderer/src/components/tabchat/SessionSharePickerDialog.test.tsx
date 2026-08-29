@@ -51,6 +51,27 @@ vi.mock('@components/ui', () => ({
   DialogContent: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   DialogFooter: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   DialogTitle: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+  ConfirmDialog: ({
+    open,
+    title,
+    confirmText,
+    cancelText,
+    onConfirm,
+    onOpenChange,
+  }: {
+    open: boolean
+    title: string
+    confirmText: string
+    cancelText: string
+    onConfirm: () => Promise<void>
+    onOpenChange: (open: boolean) => void
+  }) => open ? (
+    <div role="alertdialog">
+      <div>{title}</div>
+      <button onClick={() => onOpenChange(false)}>{cancelText}</button>
+      <button onClick={() => { void onConfirm() }}>{confirmText}</button>
+    </div>
+  ) : null,
   toast: vi.fn(),
 }))
 
@@ -101,6 +122,12 @@ vi.mock('@stores/useIMStore', () => ({
 vi.mock('@/services/tabchatApi', () => ({
   createSessionContinuation: mockCreateSessionContinuation,
   createSessionShare: mockCreateSessionShare,
+  isContinuationLocalFileTooLargeError: (error: unknown) => (
+    typeof error === 'object'
+    && error !== null
+    && 'code' in error
+    && (error as { code?: string }).code === 'LOCAL_FILE_TOO_LARGE'
+  ),
   listSessionSharesBySession: mockListSessionSharesBySession,
 }))
 
@@ -344,6 +371,55 @@ describe('SessionSharePickerDialog', () => {
     expect(mockCreateSessionShare).not.toHaveBeenCalled()
     expect(setSessionContinuation).toHaveBeenCalledWith(
       expect.objectContaining({ object_id: 'continuation-1' }),
+    )
+    expect(onClose).toHaveBeenCalledOnce()
+  })
+
+  it('can retry an oversized task handoff as dialogue only', async () => {
+    const onClose = vi.fn()
+    mockCreateSessionContinuation
+      .mockRejectedValueOnce(Object.assign(new Error('分享会话文件超过50MB'), {
+        code: 'LOCAL_FILE_TOO_LARGE',
+        status: 409,
+      }))
+      .mockResolvedValueOnce({
+        object_id: 'continuation-text-only',
+        version: 2,
+        role: 'owner',
+        title_snapshot: 'Task one',
+      })
+    const { SessionSharePickerDialog } = await import('./SessionSharePickerDialog')
+    render(
+      <SessionSharePickerDialog
+        isOpen
+        onClose={onClose}
+        conversationId="conversation-1"
+        organizationId="org-1"
+        granteeUserId="user-2"
+      />,
+    )
+
+    fireEvent.click(await screen.findByRole('button', { name: 'session-1' }))
+    fireEvent.change(screen.getByRole('combobox', { name: '协作方式' }), {
+      target: { value: 'continue' },
+    })
+    fireEvent.click(screen.getByRole('button', { name: '发送转交' }))
+
+    expect(await screen.findByText(
+      '分享会话文件超过50MB，是否选择只交接对话，不交接上下文',
+    )).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: '确定' }))
+
+    await waitFor(() => expect(mockCreateSessionContinuation).toHaveBeenCalledTimes(2))
+    expect(mockCreateSessionContinuation).toHaveBeenNthCalledWith(2, {
+      sourceSessionId: 'session-1',
+      recipientUserId: 'user-2',
+      conversationId: 'conversation-1',
+      clientRequestId: '0198c96d-a000-7000-8000-000000000099',
+      includeContext: false,
+    })
+    expect(setSessionContinuation).toHaveBeenCalledWith(
+      expect.objectContaining({ object_id: 'continuation-text-only' }),
     )
     expect(onClose).toHaveBeenCalledOnce()
   })

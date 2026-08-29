@@ -965,7 +965,15 @@ export const TabCodeFileTree: React.FC<TabCodeFileTreeProps> = ({
           ${isFolder && isDropTarget(data.path) ? 'ring-1 ring-primary/40 bg-primary/8' : ''}
           ${isDragging(data.path) ? 'opacity-40' : ''}
         `}
-        style={{ paddingLeft: level * TREE_INDENT, height: ROW_HEIGHT, width: 'calc(100% - 8px)' }}
+        // Keep the full row in the scrollable width. A fixed 100% width makes
+        // deep nesting consume the available filename area permanently, even
+        // when the tree itself is scrolled horizontally.
+        style={{
+          paddingLeft: level * TREE_INDENT,
+          height: ROW_HEIGHT,
+          width: 'max-content',
+          minWidth: 'calc(100% - 8px)',
+        }}
         role="treeitem"
         aria-expanded={isFolder ? isExpanded : undefined}
         aria-selected={selected}
@@ -1011,7 +1019,7 @@ export const TabCodeFileTree: React.FC<TabCodeFileTreeProps> = ({
           className="h-3.5 w-3.5 shrink-0 mr-1"
         />
 
-        <span className={`min-w-0 flex-1 truncate ${
+        <span className={`flex-1 whitespace-nowrap ${
           isFolder ? descendantBadge?.color ?? '' : stBadge?.color ?? ''
         }`}>{data.name}</span>
 
@@ -1293,7 +1301,7 @@ export const TabCodeFileTree: React.FC<TabCodeFileTreeProps> = ({
       <div
         ref={scrollRef}
         className={cn(
-          'scrollbar-hover min-h-0 flex-1 overflow-y-auto select-none',
+          'scrollbar-hover min-h-0 flex-1 overflow-x-auto overflow-y-auto select-none',
           isDropTarget(rootPath) && 'bg-primary/5',
         )}
         {...getRootDropHandlers(rootPath)}

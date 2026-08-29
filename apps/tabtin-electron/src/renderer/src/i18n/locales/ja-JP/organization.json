@@ -440,6 +440,7 @@
       "scopeOrganization": "組織",
       "scopeUser": "個人的な",
       "scopeHint": "あなたの役割で作成できるのは個人チャンネルのみです",
+      "scopePersonalAccountHint": "個人アカウントでは自分だけに表示されるサービスのみ追加できます",
       "save": "変更を保存する",
       "cancel": "キャンセル",
       "edit": "編集",

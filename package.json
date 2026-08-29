@@ -1,6 +1,6 @@
 {
   "name": "tabtin-workspace",
-  "version": "1.1.2",
+  "version": "1.0.0",
   "description": "TabTin - AI-powered creative workbench with Table, Docs, Design, Browser and more",
   "private": true,
   "workspaces": [

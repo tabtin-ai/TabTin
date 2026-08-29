@@ -132,6 +132,15 @@ export const StreamEvents = {
    * payload schema 见 `approval.ts::SingleHitlResolvedPayloadSchema`。
    */
   SINGLE_HITL_RESOLVED: 'agent.stream.single_hitl_resolved',
+  /**
+   * Access Barrier HITL：浏览器撞上登录墙 / 人机校验时，系统（非模型）在能力出口发起本事件挂起，
+   * 与三件套并列但**专用 kind**——不复用 `ask_user`，因为发起方是系统而非模型
+   * （设计 §6.3）。用户答复走既有 user_response / `SINGLE_HITL_RESOLVED` 管线，
+   * outcome 映射到 `AccessBarrierResolution`。
+   *
+   * payload schema 见 `access-barrier.ts::AccessBarrierRequiredPayloadSchema`。
+   */
+  ACCESS_BARRIER_REQUIRED: 'agent.stream.access_barrier_required',
   MESSAGE_PERSISTED: 'agent.stream.message_persisted',
   /**
    * Backend → frontend: emitted only after a ChatMessage row is committed/readable.

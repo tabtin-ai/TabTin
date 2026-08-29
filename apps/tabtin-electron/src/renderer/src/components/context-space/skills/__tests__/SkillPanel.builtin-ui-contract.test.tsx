@@ -345,6 +345,11 @@ describe('SkillPanel builtin UI contract', () => {
     expect(mcpSource).toContain('const sharedByMe = isOrgConnectionSharedByCurrentUser(')
     expect(mcpSource).toContain('relationLabel={sharedByMe')
     expect(mcpSource).toContain('hideAction={sharedByMe}')
+    expect(mcpSource).toContain('canUninstallMarketplaceConnector')
+    expect(mcpSource).toContain('shouldShowMarketplaceUninstall')
+    expect(mcpSource).toContain('action: state.action')
+    expect(mcpSource).toContain('onUninstall={')
+    expect(mcpSource).toContain('requestUninstallConnection')
     expect(mcpSource).toContain('className="ml-auto text-caption font-medium text-primary-text"')
     expect(mcpSource).not.toContain(
       "forceManageAction\n                      onOpen={() => setCatalogDetail({\n                        kind: 'organization'",

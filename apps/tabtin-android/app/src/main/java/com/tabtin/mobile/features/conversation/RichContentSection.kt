@@ -582,29 +582,29 @@ private fun RichImage(block: BlockItem) {
 
 @EntryPoint
 @InstallIn(SingletonComponent::class)
-internal interface RichImageAssetEntryPoint {
+internal interface RichOssAssetEntryPoint {
     fun ossUploadService(): OSSUploadService
 }
 
 /**
- * 正式图片优先凭 file_id 换当前有效地址；网络失败时保留协议内 HTTP(S) 兜底。
- * 资源身份 URI 从不进入 Coil。
+ * 正式 OSS 资产优先凭 file_id 换当前有效地址；网络失败时保留协议内 HTTP(S) 兜底。
+ * 资源身份 URI 不会进入图片或文件预览器。
  */
 @Composable
-private fun rememberResolvedRichImageUrl(block: BlockItem): String? {
+private fun rememberResolvedRichOssUrl(fileId: String?, fallbackUrl: String?): String? {
     val context = LocalContext.current
-    val fallback = block.url?.takeIf(::isHttpImageUrl)
-    var resolvedUrl by remember(block.fileId, fallback) { mutableStateOf(fallback) }
+    val fallback = fallbackUrl?.takeIf(::isHttpImageUrl)
+    var resolvedUrl by remember(fileId, fallback) { mutableStateOf(fallback) }
 
-    LaunchedEffect(block.fileId, fallback) {
+    LaunchedEffect(fileId, fallback) {
         resolvedUrl = fallback
-        val fileId = block.fileId?.trim()?.takeIf { it.isNotEmpty() } ?: return@LaunchedEffect
+        val resolvedFileId = fileId?.trim()?.takeIf { it.isNotEmpty() } ?: return@LaunchedEffect
         val service = EntryPointAccessors.fromApplication(
             context.applicationContext,
-            RichImageAssetEntryPoint::class.java,
+            RichOssAssetEntryPoint::class.java,
         ).ossUploadService()
         val freshUrl = try {
-            service.resolveFile(fileId).displayUrl.takeIf { it.isNotEmpty() }
+            service.resolveFile(resolvedFileId).displayUrl.takeIf { it.isNotEmpty() }
         } catch (_: Exception) {
             null
         }
@@ -612,6 +612,11 @@ private fun rememberResolvedRichImageUrl(block: BlockItem): String? {
     }
     return resolvedUrl
 }
+
+/** 正式图片优先凭 file_id 换当前有效地址；资源身份 URI 从不进入 Coil。 */
+@Composable
+private fun rememberResolvedRichImageUrl(block: BlockItem): String? =
+    rememberResolvedRichOssUrl(fileId = block.fileId, fallbackUrl = block.url)
 
 /**
  * RichImage 的 loading / error 占位框。
@@ -900,9 +905,10 @@ internal fun navigateToResource(
 private fun RichFile(block: BlockItem) {
     val context = LocalContext.current
     val filename = block.filename ?: stringResource(R.string.common_file)
-    var showPreview by remember(block.url) { mutableStateOf(false) }
-    val canPreview = remember(block.url) {
-        val scheme = block.url?.let { runCatching { Uri.parse(it).scheme?.lowercase() }.getOrNull() }
+    val resolvedUrl = rememberResolvedRichOssUrl(fileId = block.fileId, fallbackUrl = block.url)
+    var showPreview by remember(resolvedUrl) { mutableStateOf(false) }
+    val canPreview = remember(resolvedUrl) {
+        val scheme = resolvedUrl?.let { runCatching { Uri.parse(it).scheme?.lowercase() }.getOrNull() }
         scheme == "http" || scheme == "https"
     }
 
@@ -965,9 +971,9 @@ private fun RichFile(block: BlockItem) {
         }
     }
 
-    if (showPreview && canPreview && !block.url.isNullOrEmpty()) {
+    if (showPreview && canPreview && !resolvedUrl.isNullOrEmpty()) {
         ChatFilePreviewDialog(
-            fileUrl = block.url,
+            fileUrl = resolvedUrl,
             filename = block.filename,
             mimeType = block.mimeType,
             onDismiss = { showPreview = false },

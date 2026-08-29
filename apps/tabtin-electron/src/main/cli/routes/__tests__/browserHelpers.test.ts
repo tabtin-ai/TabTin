@@ -65,12 +65,19 @@ import {
   resolveTabId,
   resolveContextBrowserTabId,
 } from '../browser/_helpers'
+import {
+  BrowserTabUserInControlError,
+  lock,
+  resetBrowserTabInputLockForTests,
+  takeOverByUser,
+} from '../../../browser-tab-lock/browserTabInputLock'
 
 // ─── BT-001: validateViewExists 逻辑修正 ────────────────────────────────────
 
 describe('BT-001: validateViewExists', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    resetBrowserTabInputLockForTests()
   })
 
   it('viewGetter 不存在时应返回 false（修复前返回 true）', () => {
@@ -166,6 +173,25 @@ describe('resolveTabId · workspace scope', () => {
       crawlspaceId: 'cs-1',
     })
   })
+
+  it('workspace bridge 解析到用户控制 view 时透传独占租约错误', async () => {
+    mockGetCLIContextSpaceBridge.mockReturnValue(vi.fn().mockResolvedValue({
+      success: true,
+      data: {
+        activeTabKey: 'tabweb:view-controlled',
+        tabs: [{ type: 'tabweb', id: 'view-controlled' }],
+      },
+    }))
+    mockGetCLIViewGetter.mockReturnValue(() => ({
+      webContents: { isDestroyed: () => false },
+    }))
+    lock('view-controlled', 'session-1')
+    takeOverByUser('view-controlled')
+
+    await expect(resolveTabId('auto', buildBrowserRequestScope({
+      _thread_id: 'session-2',
+    }))).rejects.toBeInstanceOf(BrowserTabUserInControlError)
+  })
 })
 
 describe('buildBrowserRequestScope', () => {
@@ -191,6 +217,7 @@ describe('buildBrowserRequestScope', () => {
 describe('resolveContextBrowserTabId · deferred browser tab', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    resetBrowserTabInputLockForTests()
     mockGetCLISpaceId.mockReturnValue('space-1')
     mockGetCLICrawlspaceId.mockReturnValue('cs-1')
     mockGetCLIWorkspaceScopeKey.mockReturnValue('conversation:session-1')
@@ -228,6 +255,21 @@ describe('resolveContextBrowserTabId · deferred browser tab', () => {
     mockGetCLIContextSpaceBridge.mockReturnValue(bridge)
 
     await expect(resolveContextBrowserTabId('auto')).resolves.toBe('view-deferred')
+  })
+
+  it('renderer 清单解析到用户控制 view 时透传独占租约错误', async () => {
+    mockGetCLIContextSpaceBridge.mockReturnValue(vi.fn().mockResolvedValue({
+      success: true,
+      data: {
+        activeTabKey: 'tabweb:view-controlled',
+        tabs: [{ type: 'tabweb', id: 'view-controlled' }],
+      },
+    }))
+    lock('view-controlled', 'session-1')
+    takeOverByUser('view-controlled')
+
+    await expect(resolveContextBrowserTabId('view-controlled'))
+      .rejects.toBeInstanceOf(BrowserTabUserInControlError)
   })
 })
 

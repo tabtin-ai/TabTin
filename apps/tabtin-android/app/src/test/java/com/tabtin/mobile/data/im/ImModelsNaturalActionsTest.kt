@@ -13,6 +13,22 @@ import org.junit.Test
 class ImModelsNaturalActionsTest {
 
     @Test
+    fun `external direct message send requires an active friendship with that peer`() {
+        val contacts = listOf(
+            ExternalContact(peerUserId = "friend", relationship = "friend"),
+            ExternalContact(peerUserId = "removed", relationship = "removed"),
+            ExternalContact(peerUserId = "blocked", relationship = "blocked"),
+            ExternalContact(peerUserId = "suspended", relationship = "suspended"),
+        )
+
+        assertTrue(canSendExternalDirectMessage(contacts, " friend "))
+        assertFalse(canSendExternalDirectMessage(contacts, "removed"))
+        assertFalse(canSendExternalDirectMessage(contacts, "blocked"))
+        assertFalse(canSendExternalDirectMessage(contacts, "suspended"))
+        assertFalse(canSendExternalDirectMessage(contacts, "unknown"))
+    }
+
+    @Test
     fun `handoff card keeps a transport neutral locator and decodes authoritative detail`() {
         val message = json.decodeFromString<ImMessage>(
             """{

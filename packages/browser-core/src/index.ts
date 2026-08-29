@@ -221,6 +221,25 @@ export {
 } from './orchestration';
 export type { ObserveStatus } from './orchestration';
 
+// Access Barrier（登录墙 / 人机校验 HITL）
+export {
+  buildAccessBarrierFromObserveRaw,
+  defaultActionsForKind,
+  buildUnattendedResolution,
+  mergeBarrierIntoPayload,
+  ACCESS_BARRIER_HITL_ENDED_HINT,
+  ACCESS_BARRIER_RESUME_CLEARED_HINT,
+  ACCESS_BARRIER_RESUME_STILL_BLOCKED_HINT,
+} from './access-barrier';
+export type { MergeBarrierOptions } from './access-barrier';
+export type {
+  AccessBarrier,
+  AccessBarrierKind,
+  AccessBarrierActionId,
+  AccessBarrierResolution,
+  BuildAccessBarrierContext,
+} from './access-barrier';
+
 // BR-9 P0：browser action 安全策略纯判定（electron-free）。P1 接 Orchestrator 闸门。
 export {
   evaluateBrowserActionPolicy,

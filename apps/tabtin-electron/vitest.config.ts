@@ -163,6 +163,7 @@ export default defineConfig({
       '@tabtin/shared/use-caps-lock-warning': resolve(packagesRoot, 'tabtin-shared/src/use-caps-lock-warning.ts'),
       '@tabtin/shared/storage-paths': resolve(packagesRoot, 'tabtin-shared/src/storage-paths.ts'),
       '@tabtin/shared/identity-avatar': resolve(packagesRoot, 'tabtin-shared/src/identity-avatar.ts'),
+      '@tabtin/shared/auth-forms': resolve(packagesRoot, 'tabtin-shared/src/auth-forms/index.ts'),
       '@tabtin/shared/diagnostics-redact': resolve(packagesRoot, 'tabtin-shared/src/diagnostics-redact.ts'),
       '@tabtin/shared/sentry-scrub': resolve(packagesRoot, 'tabtin-shared/src/sentry-scrub.ts'),
       '@tabtin/shared': resolve(packagesRoot, 'tabtin-shared/src/index.ts'),

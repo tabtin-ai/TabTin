@@ -30,7 +30,7 @@ def preload_litellm_in_background() -> threading.Thread | None:
     """在 AppConfig.ready() 中调用：后台线程预热 litellm 惰性导入。
 
     litellm 冷 import 需数秒且持 GIL；不预热时这笔税由 worker 重启后
-    第一个 LLM proxy 请求承担（实测 proxy 前置 ~95ms → ~3.4s，见 ）。
+    第一个 LLM proxy 请求承担（实测 proxy 前置 ~95ms → ~3.4s，见 #3806）。
     幂等：重复调用只启动一个线程。失败仅记日志，不影响请求路径上的
     惰性导入兜底。
 
@@ -131,6 +131,97 @@ def expand_provider_hints(
     return normalized
 
 
+_CHANNEL_SEARCH_NAME_ALIASES = {
+    "qwen": ("dashscope", "qwen"),
+    "dashscope": ("dashscope", "qwen"),
+    "moonshot": ("moonshot", "kimi"),
+    "kimi": ("moonshot", "kimi"),
+    "bytedance": ("volcengine", "bytedance"),
+    "volcengine": ("volcengine", "bytedance"),
+    "claude": ("anthropic", "claude"),
+    "anthropic": ("anthropic", "claude"),
+    "zhipu": ("zhipu", "zhipuai"),
+    "glm": ("zhipu", "zhipuai"),
+}
+
+
+def collect_channel_search_hints(provider: Any) -> set[str]:
+    """给模型目录搜索收窄到当前渠道。有明确地址时以地址为准。"""
+    base_url = str(
+        getattr(provider, "default_base_url", "")
+        or getattr(provider, "base_url", "")
+        or ""
+    ).strip().lower()
+    url_hints = _channel_search_hints_from_url(base_url)
+    if url_hints:
+        return url_hints
+
+    hints: set[str] = set()
+    for raw in (getattr(provider, "name", ""), getattr(provider, "provider_key", "")):
+        key = str(raw or "").strip().lower()
+        if not key:
+            continue
+        hints.add(key)
+        hints.update(_CHANNEL_SEARCH_NAME_ALIASES.get(key, ()))
+        if "_" in key:
+            hints.add(key.split("_", 1)[0])
+    return {item for item in hints if item}
+
+
+def _channel_search_hints_from_url(base_url: str) -> set[str]:
+    if not base_url:
+        return set()
+    hints: set[str] = set()
+    if "dashscope.aliyuncs.com" in base_url:
+        hints.update({"dashscope", "qwen"})
+    if "bigmodel.cn" in base_url:
+        hints.add("zhipu")
+    if "anthropic.com" in base_url:
+        hints.add("anthropic")
+    if "minimaxi.com" in base_url or "minimax.chat" in base_url:
+        hints.add("minimax")
+    if "volces.com" in base_url or "volcengineapi.com" in base_url:
+        hints.update({"volcengine", "bytedance"})
+    if "openrouter.ai" in base_url:
+        hints.add("openrouter")
+    if "moonshot.cn" in base_url or "kimi.com" in base_url:
+        hints.update({"moonshot", "kimi"})
+    if "api.openai.com" in base_url:
+        hints.add("openai")
+    if "siliconflow" in base_url:
+        hints.add("siliconflow")
+    return hints
+
+
+# OpenAI Compatible 使用官方端点时可按协议处理模型名；第三方中转站（PPIO、
+# OpenRouter 等）必须走 custom_openai，把用户填写的 `<vendor>/<model>` 完整透传。
+_OFFICIAL_FIRST_PARTY_HOSTS = frozenset({
+    "api.openai.com", "api.deepseek.com", "api.anthropic.com", "api.moonshot.cn",
+    "api.minimaxi.com", "api.minimax.chat", "dashscope.aliyuncs.com", "open.bigmodel.cn",
+    "ark.cn-beijing.volces.com", "generativelanguage.googleapis.com", "chatgpt.com",
+})
+
+
+def _hostname_from_base_url(base_url: str) -> str:
+    raw = str(base_url or "").strip()
+    if not raw:
+        return ""
+    if "://" not in raw:
+        raw = f"https://{raw}"
+    try:
+        from urllib.parse import urlparse
+
+        return (urlparse(raw).hostname or "").strip().lower().removeprefix("www.")
+    except ValueError:
+        return ""
+
+
+def _is_openai_compatible_byok(provider: Any) -> bool:
+    name = str(getattr(provider, "name", "") or "").strip().lower()
+    key = str(getattr(provider, "provider_key", "") or "").strip().lower()
+    return name == "openai" or key == "openai" or key.startswith("openai-") or key.startswith("openai_")
+
+
 def resolve_litellm_provider(
     provider: Any,
     known_providers: set[str],
@@ -172,6 +263,10 @@ def resolve_litellm_provider(
         if "volces.com" in base_url or "volcengineapi.com" in base_url:
             candidates.append("volcengine")
             candidates.append("custom_openai")
+
+    host = _hostname_from_base_url(base_url)
+    if _is_openai_compatible_byok(provider) and host and host not in _OFFICIAL_FIRST_PARTY_HOSTS:
+        candidates.append("custom_openai")
 
     provider_name = str(getattr(provider, "name", "") or "")
     provider_key = str(getattr(provider, "provider_key", "") or "")
@@ -263,7 +358,7 @@ def build_litellm_config(model_id: str) -> dict:
         raise RuntimeError(f"model_id 不存在: {model_id}")
 
     provider = model.provider
-    # ：禁用渠道不得继续拼装上游配置（防御会话粘性 / 直查 UUID 绕过 catalog）。
+    # #7397：禁用渠道不得继续拼装上游配置（防御会话粘性 / 直查 UUID 绕过 catalog）。
     if not getattr(provider, "routing_enabled", False):
         raise RuntimeError(
             f"model_id={model_id} 的 Provider '{getattr(provider, 'name', '?')}' "

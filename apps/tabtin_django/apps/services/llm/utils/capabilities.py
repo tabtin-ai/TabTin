@@ -756,8 +756,8 @@ def _get_service_capabilities(provider: Any) -> Optional[Dict[str, Any]]:
     """从 Provider 拿到 Service 类的 ``CAPABILITIES`` dict(W1a 第 2 级 fallback)。
 
     Provider 可以是:
-    - LLMProvider 实例:用 ``provider.name`` 经 Registry 查 Service 类。
-    - str:直接当 provider name。
+    - LLMProvider 实例:用统一 Resolver 查 Service 类。
+    - str:直接当 adapter name。
     - None:返回 None(走第 3 级)。
 
     任何异常(Service 类未注册 / Registry 未初始化)都返回 None,确保 fallback 链
@@ -766,14 +766,22 @@ def _get_service_capabilities(provider: Any) -> Optional[Dict[str, Any]]:
     if provider is None:
         return None
     try:
+        from apps.services.llm.adapter_resolver import (
+            resolve_adapter_name,
+            resolve_provider_adapter,
+        )
         from apps.services.llm.registry import ProviderRegistry
+
         if isinstance(provider, str):
-            name = provider
+            adapter_name = str(provider or "").strip().lower()
+            if not adapter_name:
+                return None
+            service_class = ProviderRegistry.get_service_class(adapter_name)
         else:
-            name = getattr(provider, "name", None)
-        if not name:
-            return None
-        service_class = ProviderRegistry.get_service_class(name)
+            adapter_name = resolve_adapter_name(provider)
+            if not adapter_name:
+                return None
+            service_class = resolve_provider_adapter(provider)
         caps = getattr(service_class, "CAPABILITIES", None)
         if isinstance(caps, dict):
             return caps

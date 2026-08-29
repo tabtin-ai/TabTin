@@ -7,7 +7,8 @@ import { trackRawDiff, trackReadPreview, trackShowFile } from '../../context-spa
 import { relativePath } from '../utils/path'
 import { createLogger } from '@/utils/logger'
 
-export type DiffMode = 'head' | 'staged' | 'unstaged' | 'commit'
+export type DiffMode = 'head' | 'staged' | 'unstaged' | 'commit' | 'branch'
+export type DiffContentRevision = string | number
 
 export interface DiffSideContents {
   left: string
@@ -75,13 +76,15 @@ function cacheKey(
   filePath: string,
   diffMode: DiffMode,
   commitHash: string | undefined,
-  contentRevision: number,
+  baseCommitHash: string | undefined,
+  contentRevision: DiffContentRevision,
 ): string {
   return [
     rootPath,
     filePath,
     diffMode,
     commitHash || '',
+    baseCommitHash || '',
     String(contentRevision),
   ].join('\0')
 }
@@ -116,6 +119,7 @@ async function loadSides(
   filePath: string,
   diffMode: DiffMode,
   commitHash?: string,
+  baseCommitHash?: string,
 ): Promise<DiffSideContents> {
   const filePathInRepo = relativePath(rootPath, filePath)
   const git = window.tabtin.git
@@ -144,10 +148,10 @@ async function loadSides(
       throw error
     })
   }
-  const getAtCommit = (parent?: boolean) => {
-    if (!commitHash || !git.getFileAtCommit) {
+  const getAtCommit = (hash: string | undefined, parent?: boolean) => {
+    if (!hash || !git.getFileAtCommit) {
       return Promise.reject(new Error(
-        !commitHash
+        !hash
           ? 'missing commit hash'
           : 'git getFileAtCommit unavailable; restart the client',
       ))
@@ -155,9 +159,14 @@ async function loadSides(
     trackShowFile()
     return git.getFileAtCommit(rootPath, {
       filePath: filePathInRepo,
-      commitHash,
+      commitHash: hash,
       parent,
-    }).then(r => r?.content ?? '')
+    }).then((result) => {
+      if (result?.success === false && result.reason === 'too_large') {
+        throw new Error(result.error || 'file content exceeds preview limit')
+      }
+      return result?.content ?? ''
+    })
   }
 
   let leftPromise: Promise<string>
@@ -173,8 +182,12 @@ async function loadSides(
       rightPromise = getWorktree()
       break
     case 'commit':
-      leftPromise = getAtCommit(true)
-      rightPromise = getAtCommit(false)
+      leftPromise = getAtCommit(commitHash, true)
+      rightPromise = getAtCommit(commitHash, false)
+      break
+    case 'branch':
+      leftPromise = getAtCommit(baseCommitHash)
+      rightPromise = getAtCommit(commitHash)
       break
     case 'head':
     default:
@@ -183,7 +196,7 @@ async function loadSides(
       break
   }
 
-  const metadataPromise = diffMode !== 'commit' && typeof git.rawDiff === 'function'
+  const metadataPromise = diffMode !== 'commit' && diffMode !== 'branch' && typeof git.rawDiff === 'function'
     ? (() => {
         const diffArgs = diffMode === 'staged'
           ? ['--cached', '--', filePathInRepo]
@@ -215,7 +228,8 @@ export function loadDiffContents(params: {
   filePath: string
   diffMode: DiffMode
   commitHash?: string
-  contentRevision: number
+  baseCommitHash?: string
+  contentRevision: DiffContentRevision
   priority?: boolean
 }): Promise<DiffSideContents> {
   const key = cacheKey(
@@ -223,6 +237,7 @@ export function loadDiffContents(params: {
     params.filePath,
     params.diffMode,
     params.commitHash,
+    params.baseCommitHash,
     params.contentRevision,
   )
   const hit = cache.get(key)
@@ -243,6 +258,7 @@ export function loadDiffContents(params: {
         params.filePath,
         params.diffMode,
         params.commitHash,
+        params.baseCommitHash,
       )
       cache.set(key, { value, at: Date.now() })
       trimCache()

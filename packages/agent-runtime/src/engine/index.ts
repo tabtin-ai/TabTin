@@ -115,6 +115,10 @@ export type {
   PermissionDecisionResult,
   SerializedPendingApproval,
   SerializedPendingSingleHitl,
+  InterruptKind,
+  InterruptRequest,
+  InterruptOutcome,
+  InterruptPort,
 } from './contracts/hitl.js';
 
 // SystemPromptProvider 端口（ Stage 2b）

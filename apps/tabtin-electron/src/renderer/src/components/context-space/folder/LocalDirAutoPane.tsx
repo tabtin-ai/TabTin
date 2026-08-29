@@ -52,6 +52,8 @@ interface LocalDirAutoPaneProps {
   /** Chat 上下文焦点归属；二者同时存在时才上报。 */
   contextScopeKey?: string | null
   contextTabKey?: ContextTabKey | null
+  /** 外层 Context 标签是否激活；保活 pane 隐藏时透传给 TabCode。 */
+  isPaneActive?: boolean
 }
 
 type RepoProbeState = 'checking' | 'repo' | 'not-repo'
@@ -72,6 +74,7 @@ export const LocalDirAutoPane: React.FC<LocalDirAutoPaneProps> = ({
   preferredView,
   contextScopeKey,
   contextTabKey,
+  isPaneActive = true,
 }) => {
   const { t } = useTranslation('context')
   const [probeState, setProbeState] = useState<RepoProbeState>('checking')
@@ -310,6 +313,7 @@ export const LocalDirAutoPane: React.FC<LocalDirAutoPaneProps> = ({
           resourceId={resourceId}
           gitFlowSwitch={gitFlowSwitch}
           assumeGitRepo
+          isPaneActive={isPaneActive}
           tabScopeKey={contextScopeKey}
           contextTabKey={contextTabKey}
         />

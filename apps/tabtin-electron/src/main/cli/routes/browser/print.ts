@@ -13,8 +13,18 @@ import {
   renderPrintContent,
 } from '@tabtin/action-tools/impl'
 import type { SendJSON, ActionExecutor } from './_helpers'
-import { buildBrowserRequestScope, resolveTabId, requireTabWithView, makeTaskId, errorResponse, sanitizeSavePath, isSafeUrl } from './_helpers'
+import {
+  buildBrowserRequestScope,
+  resolveTabId,
+  requireTabWithView,
+  makeTaskId,
+  errorResponse,
+  handleRouteError,
+  sanitizeSavePath,
+  isSafeUrl,
+} from './_helpers'
 import { recordBrowserNavigationEvidenceFromHtml } from './navigation-evidence'
+import { BrowserTabUserInControlError, lock } from '../../../browser-tab-lock/browserTabInputLock'
 
 /**
  * `/browser/print` — 导出页面内容到文件（命令面重设计：原 extract + markdown + pdf 收编）。
@@ -76,6 +86,10 @@ export async function handlePrintRoute(
       page = fetched
     }
   } catch (err: any) {
+    if (err instanceof BrowserTabUserInControlError) {
+      handleRouteError(err, sendJSON, res)
+      return true
+    }
     sendJSON(res, 500, errorResponse('INTERNAL_ERROR', err?.message || '页面内容获取失败', { retryable: true }))
     return true
   }
@@ -111,6 +125,10 @@ export async function handlePrintRoute(
       ...(rendered.warnings?.length ? { schema_warnings: rendered.warnings } : {}),
     }))
   } catch (error: any) {
+    if (error instanceof BrowserTabUserInControlError) {
+      handleRouteError(error, sendJSON, res)
+      return true
+    }
     // 渲染器抛错 = 入参校验失败（如 --as json 缺 schema）
     sendJSON(res, 400, errorResponse('VALIDATION_ERROR', error?.message || '内容渲染失败', {
       suggestions: ['--as json 需要 --schema，例如 \'{"type":"object","properties":{"title":{"type":"string"}}}\''],
@@ -212,6 +230,9 @@ async function fetchPageViaTab(
     return null
   }
 
+  // 读取 tab 渲染后 DOM 属于「使用这个标签」——盖膜，不按命令种类分流（对齐 tabs.ts eval 先例）。
+  lock(tabId, typeof body?._thread_id === 'string' ? body._thread_id : undefined)
+
   const evalResult = await executor({
     task_id: makeTaskId('print-tab'),
     type: 'eval',
@@ -251,16 +272,25 @@ async function resolvePrintCaptchaRequired(
   page: { html: string; title: string; url: string },
   body: any,
 ): Promise<CaptchaRequiredWire | undefined> {
-  const tabId = body?.url
-    ? undefined
-    : await resolveTabId(body?.tabId ?? body?.tab_id, buildBrowserRequestScope(body)).catch(() => undefined)
+  let tabId: string | undefined
+  if (!body?.url) {
+    try {
+      tabId = await resolveTabId(
+        body?.tabId ?? body?.tab_id,
+        buildBrowserRequestScope(body),
+      )
+    } catch (error) {
+      if (error instanceof BrowserTabUserInControlError) throw error
+    }
+  }
 
   if (tabId) {
     try {
       const live = await getSharedCaptchaGuard().detect(tabId)
       const fromLive = projectCaptchaRequired(live)
       if (fromLive) return fromLive
-    } catch {
+    } catch (error) {
+      if (error instanceof BrowserTabUserInControlError) throw error
       // 探测失败不阻断 print；回落页面元信息。
     }
   }

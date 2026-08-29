@@ -63,7 +63,7 @@ export interface BeforeModelHookOutcome {
   graceTurn: boolean;
   /**
    * 本轮工具面白名单（`ctx.restrictToolsForTurn` 写入；null = 不收窄）。
-   * grace turn 优先（全扣工具时白名单无效）。当前唯一写者：login-wall-gate。
+   * grace turn 优先（全扣工具时白名单无效）。默认策略栈无写者；API 保留供宿主钩子。
    */
   toolAllowlist: readonly string[] | null;
   /** 本轮是否协议层强制调工具（`tool_choice: 'required'`）。 */

@@ -74,7 +74,10 @@ export const FileTreeItem: React.FC<FileTreeItemProps> = React.memo(({
         isDropTarget && 'ring-1 ring-primary/40 bg-primary/8',
         isDragging && 'opacity-40',
       )}
-      style={{ paddingLeft, width: 'calc(100% - 8px)' }}
+      // Keep the full row in the scrollable width. A fixed 100% width makes
+      // deep nesting consume the available filename area permanently, even
+      // when the tree itself is scrolled horizontally.
+      style={{ paddingLeft, width: 'max-content', minWidth: 'calc(100% - 8px)' }}
       aria-pressed={isSelected}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
@@ -101,7 +104,7 @@ export const FileTreeItem: React.FC<FileTreeItemProps> = React.memo(({
         className="h-3.5 w-3.5 shrink-0 mr-1"
       />
 
-      <span className="min-w-0 flex-1 truncate">{entry.name}</span>
+      <span className="flex-1 whitespace-nowrap">{entry.name}</span>
     </button>
   )
 })

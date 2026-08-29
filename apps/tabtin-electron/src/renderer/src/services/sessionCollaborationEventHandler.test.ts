@@ -28,6 +28,48 @@ describe('handleSessionCollaborationEnvelope', () => {
     expect(loadSessionShareV2).toHaveBeenCalledWith('share-1', 3)
   })
 
+  it('reloads a stopped sibling whose session_id was cleared after revoke', () => {
+    sessionShares['share-old'] = {
+      detail: {
+        session_id: null,
+        shared_session_id: 'session-1',
+        effective_share_id: 'share-latest',
+      },
+    }
+    sessionShares['share-latest'] = {
+      detail: { session_id: null, shared_session_id: 'session-1' },
+    }
+
+    expect(handleSessionCollaborationEnvelope({
+      type: 'session.collaboration.changed',
+      payload: {
+        object_id: 'share-latest',
+        session_id: 'session-1',
+        version: 5,
+      },
+    })).toBe(true)
+
+    expect(loadSessionShareV2).toHaveBeenCalledWith('share-latest', 5)
+    expect(loadSessionShareV2).toHaveBeenCalledWith('share-old')
+  })
+
+  it('reloads a stopped sibling by effective_share_id when no session id remains', () => {
+    sessionShares['share-old'] = {
+      detail: { session_id: null, effective_share_id: 'share-latest' },
+    }
+
+    expect(handleSessionCollaborationEnvelope({
+      type: 'session.collaboration.changed',
+      payload: {
+        object_id: 'share-latest',
+        session_id: 'session-1',
+        version: 6,
+      },
+    })).toBe(true)
+
+    expect(loadSessionShareV2).toHaveBeenCalledWith('share-old')
+  })
+
   it('reloads every cached card for the same shared task', () => {
     sessionShares['share-old'] = { detail: { session_id: 'session-1' } }
     sessionShares['share-latest'] = { detail: { session_id: 'session-1' } }

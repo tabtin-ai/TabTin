@@ -29,7 +29,12 @@ import {
   trackMonacoDispose,
   trackMonacoMount,
 } from '../../context-space/code-workspace/changesPerfMetrics'
-import { loadDiffContents, type DiffMetadata, type DiffMode } from './diffContentCache'
+import {
+  loadDiffContents,
+  type DiffContentRevision,
+  type DiffMetadata,
+  type DiffMode,
+} from './diffContentCache'
 import { disposeDiffEditorSafely } from './disposeDiffEditor'
 import { EmptyBaselineDiffView } from './EmptyBaselineDiffView'
 import {
@@ -97,7 +102,7 @@ interface TabCodeDiffViewProps {
   commitHash?: string
   sideBySide?: boolean
   /** 磁盘 / git 状态修订；外部改文件后递增以重拉左右两侧内容。 */
-  contentRevision?: number
+  contentRevision?: DiffContentRevision
   /** 1-based；内容就绪后滚到 modified 侧该行（DiffCard 变更区）。 */
   initialLine?: number
   initialLineKey?: number

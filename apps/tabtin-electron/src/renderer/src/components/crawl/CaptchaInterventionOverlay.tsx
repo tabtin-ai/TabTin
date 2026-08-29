@@ -1,6 +1,6 @@
 /**
- * @deprecated 验证码人工介入已改走对话 ask_user + wire `captcha_required`
- *（captcha-wall-gate），不再挂 ContentArea。保留文件仅供对照，勿重新挂载。
+ * @deprecated 验证码人工介入已改走 Access Barrier HITL + wire `captcha_required`，
+ * 不再挂 ContentArea。保留文件仅供对照，勿重新挂载。
  */
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'

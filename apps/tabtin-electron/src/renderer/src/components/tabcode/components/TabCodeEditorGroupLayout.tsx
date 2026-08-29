@@ -18,16 +18,20 @@ import { cn } from '@utils/cn'
 import type { LayoutNode, SplitSide } from '@/utils/split-layout'
 import type { TabCodeEditorWorkspace } from '../utils/editorGroupLayout'
 import { GitHistoryPane } from './git-history/GitHistoryPane'
+import { relativePath } from '../utils/path'
 
 export const GIT_HISTORY_TAB_ID = 'git-history'
 
 interface TabCodeEditorGroupLayoutProps {
   rootPath: string
+  /** 外层 Context 标签是否激活；保活 pane 隐藏时禁止 body portal 浮层残留。 */
+  isPaneActive?: boolean
   workspace: TabCodeEditorWorkspace
   previewFilesByGroup?: Record<string, string>
   previewActiveByGroup?: Record<string, boolean>
   isGitRepo: boolean
   gitStatusRevision?: number
+  gitContentRevisions?: Record<string, number>
   gitStatus: GitStatusMap
   selectedLine?: { line: number; ts: number }
   findRequest?: EditorFindRequest
@@ -109,11 +113,13 @@ function normalizeSizes(values: number[]): number[] | null {
 
 export function TabCodeEditorGroupLayout({
   rootPath,
+  isPaneActive = true,
   workspace,
   previewFilesByGroup = {},
   previewActiveByGroup = {},
   isGitRepo,
   gitStatusRevision = 0,
+  gitContentRevisions = {},
   gitStatus,
   selectedLine,
   findRequest,
@@ -322,7 +328,11 @@ export function TabCodeEditorGroupLayout({
                   className="relative h-full min-h-0"
                   {...contentDropProps}
                 >
-                  <GitHistoryPane rootPath={rootPath} refreshToken={gitHistoryRefreshToken} />
+                  <GitHistoryPane
+                    rootPath={rootPath}
+                    refreshToken={gitHistoryRefreshToken}
+                    isPaneActive={isPaneActive}
+                  />
                   {dropOverlay}
                 </div>
               )
@@ -331,6 +341,7 @@ export function TabCodeEditorGroupLayout({
             return (
               <TabCodePreview
                 rootPath={rootPath}
+                isPaneActive={isPaneActive}
                 editorSessionKey={editorSessionKey}
                 editorGroupId={groupId}
                 filePath={displayFile}
@@ -340,6 +351,9 @@ export function TabCodeEditorGroupLayout({
                 findRequest={isActiveGroup ? findRequest : undefined}
                 isGitRepo={isGitRepo}
                 gitStatusRevision={gitStatusRevision}
+                gitContentRevision={displayFile
+                  ? (gitContentRevisions[relativePath(rootPath, displayFile)] ?? 0)
+                  : 0}
                 viewMode="all"
                 gitDiffMode={isActiveGroup ? selectedGitDiffMode : undefined}
                 fileGitStatus={displayFile ? (gitStatus.get(displayFile) ?? null) : null}
@@ -365,6 +379,7 @@ export function TabCodeEditorGroupLayout({
     )
   }, [
     workspace,
+    isPaneActive,
     previewFilesByGroup,
     previewActiveByGroup,
     draggedTab,
@@ -372,6 +387,7 @@ export function TabCodeEditorGroupLayout({
     rootPath,
     isGitRepo,
     gitStatusRevision,
+    gitContentRevisions,
     gitStatus,
     selectedLine,
     findRequest,

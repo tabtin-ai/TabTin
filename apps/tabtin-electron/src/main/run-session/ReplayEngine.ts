@@ -11,6 +11,10 @@
 
 import { getEventPersistence, type PersistedEvent } from './EventPersistence'
 import { createLogger } from '../logger'
+import {
+  assertBrowserTabAvailableForAgent,
+  BrowserTabUserInControlError,
+} from '../browser-tab-lock/browserTabInputLock'
 
 const log = createLogger('ReplayEngine')
 
@@ -154,6 +158,12 @@ export class ReplayEngine {
           options?.onProgress?.({ currentEventIndex: i, completed: replayed, total: events.length })
         } catch (err: any) {
           if (err?.name === 'AbortError' || err?.message === 'Replay aborted') break
+          if (err instanceof BrowserTabUserInControlError) {
+            this.status.state = 'error'
+            this.status.error = err.message
+            this.abortController = null
+            throw err
+          }
           const errorMsg = err?.message || String(err)
           errors.push({ eventIndex: i, type: event.type, error: errorMsg })
           log.warn('回放事件失败', { runId, eventIndex: i, type: event.type }, err)
@@ -206,12 +216,16 @@ export class ReplayEngine {
   private async replayEvent(event: PersistedEvent): Promise<void> {
     if (!this.executor) return
     if (this.abortController?.signal.aborted) throw replayAbortError()
+    const assertViewAvailable = (viewId: string | undefined) => {
+      if (viewId) assertBrowserTabAvailableForAgent(viewId)
+    }
 
     switch (event.type) {
       case 'execute_act': {
         const actions = event.data?.actions || []
         if (actions.length === 0) return
 
+        assertViewAvailable(event.viewId)
         await this.executor({
           task_id: `replay-act-${Date.now()}`,
           type: 'execute_act',
@@ -229,6 +243,7 @@ export class ReplayEngine {
       case 'TAB_OPENED': {
         const url = event.data?.url || event.context?.url
         if (url) {
+          assertViewAvailable(event.viewId)
           await this.executor({
             task_id: `replay-open-${Date.now()}`,
             type: 'open_tab',
@@ -242,6 +257,7 @@ export class ReplayEngine {
       case 'TAB_SWITCHED': {
         const tabId = event.data?.tabId || event.viewId
         if (tabId) {
+          assertViewAvailable(tabId)
           await this.executor({
             task_id: `replay-switch-${Date.now()}`,
             type: 'switch_tab',
@@ -255,6 +271,7 @@ export class ReplayEngine {
       case 'TAB_CLOSED': {
         const tabId = event.data?.tabId || event.viewId
         if (tabId) {
+          assertViewAvailable(tabId)
           await this.executor({
             task_id: `replay-close-${Date.now()}`,
             type: 'close_tab',
@@ -267,6 +284,7 @@ export class ReplayEngine {
 
       case 'execute_observe': {
         const selector = event.data?.selector
+        assertViewAvailable(event.viewId)
         await this.executor({
           task_id: `replay-observe-${Date.now()}`,
           type: 'execute_observe',
@@ -284,6 +302,7 @@ export class ReplayEngine {
       case 'load_tab_url': {
         const url = event.data?.url
         if (url) {
+          assertViewAvailable(event.viewId)
           await this.executor({
             task_id: `replay-nav-${Date.now()}`,
             type: 'load_tab_url',

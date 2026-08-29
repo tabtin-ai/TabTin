@@ -144,6 +144,28 @@ describe('GitHistoryPane', () => {
     expect(screen.queryByTestId('git-history-hover-tip')).toBeNull()
   })
 
+  it('切换到非活动保活 pane 时清除历史悬浮提示和待显示计时器', async () => {
+    const { rerender } = render(<GitHistoryPane rootPath="/repo" isPaneActive />)
+    await waitFor(() => {
+      expect(screen.getByTestId('git-history-item')).toBeTruthy()
+    })
+
+    vi.useFakeTimers()
+    const item = screen.getByTestId('git-history-item')
+    fireEvent.mouseEnter(item, { clientX: 80, clientY: 40 })
+    act(() => {
+      vi.advanceTimersByTime(1000)
+    })
+    expect(screen.getByTestId('git-history-hover-tip')).toBeTruthy()
+
+    rerender(<GitHistoryPane rootPath="/repo" isPaneActive={false} />)
+    expect(screen.queryByTestId('git-history-hover-tip')).toBeNull()
+    act(() => {
+      vi.advanceTimersByTime(1000)
+    })
+    expect(screen.queryByTestId('git-history-hover-tip')).toBeNull()
+  })
+
   it('clears the previous commit detail while the next commit is loading', async () => {
     let resolveSecondDetail: ((value: unknown) => void) | undefined
     const firstDetail = {

@@ -440,6 +440,7 @@
       "scopeOrganization": "Organisation",
       "scopeUser": "Personnel",
       "scopeHint": "Votre rôle ne peut créer que des chaînes personnelles",
+      "scopePersonalAccountHint": "Un compte personnel ne peut ajouter que des services visibles par vous",
       "save": "Enregistrer les modifications",
       "cancel": "Annuler",
       "edit": "Modifier",

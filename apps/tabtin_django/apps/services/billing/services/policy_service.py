@@ -19,10 +19,23 @@ class OrganizationBillingPolicyService:
     DEFAULT_CURRENCY = "CREDITS"
 
     # 自动补充默认值（与 OrganizationBillingPolicy 字段默认保持一致）
-    DEFAULT_AUTO_TOPUP_ENABLED = False
-    DEFAULT_AUTO_TOPUP_SPEND_YUAN = Decimal("10")
+    # 月上限 0 = 不限额（前端展示「不限额」）；用户填写正数后按该额度限制。
+    DEFAULT_AUTO_TOPUP_ENABLED = True
+    DEFAULT_AUTO_TOPUP_SPEND_YUAN = Decimal("1")
     DEFAULT_AUTO_TOPUP_THRESHOLD_CREDITS = Decimal("0")
-    DEFAULT_AUTO_TOPUP_MONTHLY_CAP_YUAN = Decimal("100")
+    DEFAULT_AUTO_TOPUP_MONTHLY_CAP_YUAN = Decimal("0")
+
+    @classmethod
+    def default_policy_create_kwargs(cls) -> Dict[str, Any]:
+        return {
+            "storage_billing_mode": cls.DEFAULT_STORAGE_BILLING_MODE,
+            "llm_billing_mode": cls.DEFAULT_LLM_BILLING_MODE,
+            "is_active": True,
+            "auto_topup_enabled": cls.DEFAULT_AUTO_TOPUP_ENABLED,
+            "auto_topup_spend_yuan": cls.DEFAULT_AUTO_TOPUP_SPEND_YUAN,
+            "auto_topup_threshold_credits": cls.DEFAULT_AUTO_TOPUP_THRESHOLD_CREDITS,
+            "auto_topup_monthly_cap_yuan": cls.DEFAULT_AUTO_TOPUP_MONTHLY_CAP_YUAN,
+        }
 
     @staticmethod
     def _to_decimal(value) -> Decimal:

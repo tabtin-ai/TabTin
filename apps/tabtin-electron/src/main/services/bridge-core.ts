@@ -180,8 +180,8 @@ export function setupCoreAPIs(mainWindow: BrowserWindow): BridgeCoreResult {
   })
 
   // 验证码人工介入：不再弹全局 toast、不再 await 用户（旧路径最长 120s，
-  // CLI 先超时 → Agent 空转 glance）。墙信号由 browser-core 投影 captcha_required，
-  // Agent captcha-wall-gate + 对话 ask_user 卡片接手。此处仅把相关 Tab 提到前台。
+  // CLI 先超时 → Agent 空转 glance）。墙信号由 browser-core 投影
+  // captcha_required / Access Barrier，能力层 HITL 弹卡挂起。此处仅把相关 Tab 提到前台。
   browserImpl.setCaptchaInterventionCallback(async (tabId: string, _captchaInfo: any) => {
     try {
       const rsm = getRunSessionManager()

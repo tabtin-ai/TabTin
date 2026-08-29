@@ -185,7 +185,8 @@ export const CreateConversationDialog: React.FC<Props> = ({
   }, [organizationId, isCreating, tab, selectedIds, selectedExternalIds, groupName, t, createConversationAndActivate, onClose, resetState])
 
   const selectedCount = selectedIds.size + selectedExternalIds.size
-  const canCreate = tab === 'dm' ? selectedCount === 1 : selectedCount >= 2
+  // 群组创建者会自动加入成员列表，因此群聊无需再额外选择成员。
+  const canCreate = tab === 'dm' ? selectedCount === 1 : true
   const isGroupTab = tab === 'group'
 
   return (

@@ -51,6 +51,94 @@ import { BrowserViewRecoveryPanel } from '@components/context-space/registry/han
 import { reconcileBrowserRestorePlaceholders } from './browserRestorePlaceholders'
 
 const log = createLogger('CrawlWorkspace')
+const VIEW_CONTROL_INHERIT_TIMEOUT_MS = 5500
+
+interface WorkspaceCreateViewIpc {
+  send: (channel: string, ...args: any[]) => void
+  on: (channel: string, listener: (...args: any[]) => void) => (() => void) | void
+}
+
+interface ViewControlInheritanceOptions {
+  timeoutMs?: number
+  closeView: () => void | Promise<void>
+  onFailure?: (
+    reason: 'aborted' | 'missing-request-id' | 'send-failed' | 'timeout',
+    error?: unknown,
+  ) => void
+  signal?: AbortSignal
+}
+
+export async function runAfterViewControlInheritance(
+  ipc: WorkspaceCreateViewIpc,
+  payload: { requestId?: string; viewId: string },
+  activateView: () => void | Promise<void>,
+  options: ViewControlInheritanceOptions,
+): Promise<void> {
+  type InheritanceOutcome = {
+    status: 'aborted' | 'confirmed' | 'missing-request-id' | 'send-failed' | 'timeout'
+    error?: unknown
+  }
+
+  const waitForConfirmation = (): Promise<InheritanceOutcome> => {
+    if (!payload.requestId) {
+      return Promise.resolve({ status: 'missing-request-id' })
+    }
+    if (options.signal?.aborted) {
+      return Promise.resolve({ status: 'aborted' })
+    }
+
+    return new Promise<InheritanceOutcome>((resolve) => {
+      let settled = false
+      const cleanupState: {
+        timer?: ReturnType<typeof setTimeout>
+        unsubscribe?: () => void
+      } = {}
+      const finish = (outcome: InheritanceOutcome) => {
+        if (settled) return
+        settled = true
+        if (cleanupState.timer) clearTimeout(cleanupState.timer)
+        cleanupState.unsubscribe?.()
+        options.signal?.removeEventListener('abort', handleAbort)
+        resolve(outcome)
+      }
+      const handleAbort = () => finish({ status: 'aborted' })
+      const handleInherited = (
+        _event: unknown,
+        message: { requestId?: string; viewId?: string },
+      ) => {
+        if (
+          message?.requestId !== payload.requestId
+          || message?.viewId !== payload.viewId
+        ) return
+        finish({ status: 'confirmed' })
+      }
+
+      options.signal?.addEventListener('abort', handleAbort, { once: true })
+      const subscription = ipc.on('workspace:create-view:inherited', handleInherited)
+      cleanupState.unsubscribe =
+        typeof subscription === 'function' ? subscription : undefined
+      cleanupState.timer = setTimeout(
+        () => finish({ status: 'timeout' }),
+        options.timeoutMs ?? VIEW_CONTROL_INHERIT_TIMEOUT_MS,
+      )
+      try {
+        ipc.send('workspace:create-view:created', payload)
+      } catch (error) {
+        finish({ status: 'send-failed', error })
+      }
+    })
+  }
+
+  const outcome = await waitForConfirmation()
+  if (outcome.status === 'confirmed' && !options.signal?.aborted) {
+    await activateView()
+    return
+  }
+
+  const failureStatus = outcome.status === 'confirmed' ? 'aborted' : outcome.status
+  options.onFailure?.(failureStatus, outcome.error)
+  await options.closeView()
+}
 
 export interface CrawlspaceWorkspaceProps {
   crawlspaceId: string
@@ -473,6 +561,7 @@ const CrawlspaceWorkspaceInner: React.FC<CrawlspaceWorkspaceProps> = ({
   useEffect(() => {
     const ipc = window.electron?.ipcRenderer
     if (!ipc) return
+    const lifecycleController = new AbortController()
 
     const handleCreateViewRequested = async (_event: any, data: {
       crawlspaceId?: string
@@ -529,12 +618,29 @@ const CrawlspaceWorkspaceInner: React.FC<CrawlspaceWorkspaceProps> = ({
         const viewId = `view-${crawlspaceId}-${Date.now()}`
         const created = await ipcAdapter.createView(viewId, normalizedUrl, undefined, data.title)
         if (created) {
-          // 🛡️ 崩溃恢复：立即写入种子
-          seedManager.ensureSeed(crawlspaceId, { viewId, url: normalizedUrl, title: data.title })
-          await ipcAdapter.switchView?.(viewId)
-          if (storageKey) {
-            setActiveContextKey(storageKey, contextRegistry.buildTabKey('tabweb', viewId))
-          }
+          await runAfterViewControlInheritance(
+            ipc,
+            { requestId: data.requestId, viewId },
+            async () => {
+              // 🛡️ 崩溃恢复：立即写入种子
+              seedManager.ensureSeed(crawlspaceId, { viewId, url: normalizedUrl, title: data.title })
+              await ipcAdapter.switchView?.(viewId)
+              if (storageKey) {
+                setActiveContextKey(storageKey, contextRegistry.buildTabKey('tabweb', viewId))
+              }
+            },
+            {
+              signal: lifecycleController.signal,
+              closeView: () => ipcAdapter.destroyView(viewId),
+              onFailure: (reason, error) => {
+                log.warn('派生 view 控制态继承未确认，已关闭新 view:', {
+                  reason,
+                  error,
+                  viewId,
+                })
+              },
+            }
+          )
         }
       } finally {
         creatingViewByUrlRef.current.delete(normalizedUrl)
@@ -543,6 +649,7 @@ const CrawlspaceWorkspaceInner: React.FC<CrawlspaceWorkspaceProps> = ({
 
     const unsub = ipc.on('workspace:create-view-requested', handleCreateViewRequested)
     return () => {
+      lifecycleController.abort()
       unsub?.()
     }
   }, [

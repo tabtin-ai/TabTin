@@ -117,4 +117,12 @@ describe('ShellTopBar', () => {
     expect(screen.queryByTestId('shell-top-bar-window-controls')).toBeNull()
     expect(screen.queryByTestId('window-controls')).toBeNull()
   })
+
+  it('macOS 左侧 chrome 在顶栏内垂直居中，不额外平移', () => {
+    render(<ShellTopBar isMac isWindowFullScreen={false} />)
+    const chrome = screen.getByTestId('shell-top-bar-left-chrome')
+    expect(chrome.className).toContain('items-center')
+    expect(chrome.className).toContain('h-full')
+    expect(chrome.getAttribute('style')).toBeNull()
+  })
 })

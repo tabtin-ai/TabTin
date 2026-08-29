@@ -11,6 +11,7 @@ export type OpenAICodexStatus = {
 
 interface ByokCodexLoginPanelProps {
   disabled?: boolean
+  hideIntro?: boolean
   onConnected: (status: OpenAICodexStatus) => void | Promise<void>
 }
 
@@ -21,6 +22,7 @@ const DEVICE_CODE_LOGIN_UI_ENABLED = false
 
 export function ByokCodexLoginPanel({
   disabled = false,
+  hideIntro = false,
   onConnected,
 }: ByokCodexLoginPanelProps) {
   const { t } = useTranslation('organization')
@@ -164,7 +166,9 @@ export function ByokCodexLoginPanel({
         </>
       ) : (
         <>
-          <p className="text-caption text-muted-foreground leading-relaxed">{t('llm.codex.description')}</p>
+          {!hideIntro && (
+            <p className="text-caption text-muted-foreground leading-relaxed">{t('llm.codex.description')}</p>
+          )}
           {DEVICE_CODE_LOGIN_UI_ENABLED && deviceCode && (
             <div className="rounded-md border border-border/40 bg-muted/20 px-3 py-2.5">
               <p className="text-caption text-muted-foreground">{t('llm.codex.deviceCodeHint')}</p>

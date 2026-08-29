@@ -21,6 +21,26 @@ logger = logging.getLogger(__name__)
 MAX_KEY_RETRIES = 3
 
 
+def _resolve_failover_adapter_name(*, provider=None, provider_id: str = "", fallback_name: str = "") -> str:
+    """有 Provider 对象或能按 id 取到时走统一 Resolver。"""
+    from apps.services.llm.adapter_resolver import resolve_adapter_name
+
+    if provider is not None:
+        return resolve_adapter_name(provider)
+    if provider_id:
+        from django.core.exceptions import ValidationError
+
+        from apps.services.llm.models import LLMProvider
+
+        try:
+            loaded = LLMProvider.objects.filter(id=provider_id).only("name", "provider_key").first()
+        except (ValidationError, ValueError, TypeError):
+            loaded = None
+        if loaded is not None:
+            return resolve_adapter_name(loaded)
+    return str(fallback_name or "").strip().lower()
+
+
 def get_service_with_failover(
     *,
     provider,
@@ -56,7 +76,10 @@ def get_service_with_failover(
         **(extra_config or {}),
     }
 
-    service = LLMServiceFactory.create_service(provider.name, config)
+    service = LLMServiceFactory.create_service(
+        _resolve_failover_adapter_name(provider=provider, fallback_name=provider.name),
+        config,
+    )
     return service, selected_key
 
 
@@ -87,6 +110,10 @@ def chat_with_failover(
     from .failover_classifier import classify_failover_reason
     from .factory import LLMServiceFactory
 
+    adapter_name = _resolve_failover_adapter_name(
+        provider_id=provider_id,
+        fallback_name=provider_name,
+    )
     tried_key_ids: set = set()
     last_error = None
 
@@ -113,7 +140,7 @@ def chat_with_failover(
 
         start = time.perf_counter()
         try:
-            service = LLMServiceFactory.create_service(provider_name, config)
+            service = LLMServiceFactory.create_service(adapter_name, config)
             result = service.chat(messages=messages, **chat_kwargs)
 
             latency_s = time.perf_counter() - start
@@ -191,6 +218,10 @@ def vision_chat_with_failover(
     from .failover_classifier import classify_failover_reason
     from .factory import LLMServiceFactory
 
+    adapter_name = _resolve_failover_adapter_name(
+        provider_id=provider_id,
+        fallback_name=provider_name,
+    )
     tried_key_ids: set = set()
     last_error = None
 
@@ -216,7 +247,7 @@ def vision_chat_with_failover(
         }
 
         try:
-            service = LLMServiceFactory.create_service(provider_name, config)
+            service = LLMServiceFactory.create_service(adapter_name, config)
             result = service.chat_with_images(
                 messages=messages,
                 images=images,
@@ -301,6 +332,7 @@ def chat_stream_with_failover(
     from .failover_classifier import classify_failover_reason
     from .factory import LLMServiceFactory
 
+    adapter_name = _resolve_failover_adapter_name(provider=provider, fallback_name=provider.name)
     tried_key_ids: set = set()
 
     for attempt in range(MAX_KEY_RETRIES):
@@ -329,7 +361,7 @@ def chat_stream_with_failover(
 
         has_yielded_content = False
         try:
-            service = LLMServiceFactory.create_service(provider.name, config)
+            service = LLMServiceFactory.create_service(adapter_name, config)
             stream_gen = service.chat_stream(messages=messages, **stream_kwargs)
 
             for chunk in stream_gen:

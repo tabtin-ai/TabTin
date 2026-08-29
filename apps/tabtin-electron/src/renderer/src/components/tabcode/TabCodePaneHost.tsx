@@ -632,6 +632,7 @@ export const TabCodePaneHost: React.FC<TabCodePaneHostProps> = ({
     isGitRepo,
     isLoading: isGitStatusLoading,
     statusRevision,
+    contentRevisions,
     refresh: refreshGit,
   } = useGitStatus(safeRootPath, { assumeRepo: effectiveAssumeGitRepo });
 
@@ -1577,12 +1578,14 @@ export const TabCodePaneHost: React.FC<TabCodePaneHostProps> = ({
         (openFiles.length > 0 || previewFile || gitHistoryOpen) ? (
           <TabCodeEditorGroupLayout
             rootPath={rootPath}
+            isPaneActive={isPaneActive}
             editorSessionKey={sessionKey ?? ''}
             workspace={editorWorkspace}
             previewFilesByGroup={previewFilesByGroup}
             previewActiveByGroup={previewActiveByGroup}
             isGitRepo={isGitRepo}
             gitStatusRevision={statusRevision}
+            gitContentRevisions={contentRevisions}
             gitStatus={gitStatus}
             selectedLine={selectedLine}
             findRequest={findRequest}

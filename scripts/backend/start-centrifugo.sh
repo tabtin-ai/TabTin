@@ -310,7 +310,9 @@ if [[ -n "$(_centrifugo_port_pids "${PORT}")" ]]; then
     exit 1
 fi
 
-# 按 .env / .env.local 的 DJANGO_BIND_PORT 改写 proxy endpoint（模板默认 6060）。
+# 按 .env / .env.local 的 DJANGO_BIND_PORT 改写 proxy endpoint（模板默认 6060），
+# 并将模板中的开发密钥替换为 Django 实际读取的 Centrifugo 密钥。
+# 否则本地生成的 `.env` 密钥与模板固定密钥不一致，代理请求会被 Django 以 403 拒绝。
 # Vite 非标端口（5185/5195）依赖 centrifugo-dev.json 的 allowed_origins。
 RUNTIME_CONFIG_FILE="${LOG_DIR}/centrifugo.runtime.json"
 DJANGO_PORT="${DJANGO_BIND_PORT:-6060}"
@@ -328,10 +330,19 @@ const fs = require('fs');
 const src = process.env.CONFIG_FILE_SRC;
 const port = process.env.DJANGO_PORT || '6060';
 const outPath = process.env.RUNTIME_CONFIG_FILE;
+const secretReplacements = new Map([
+  ['tabtin-centrifugo-token-dev-secret', process.env.CENTRIFUGO_TOKEN_SECRET],
+  ['tabtin-centrifugo-proxy-dev-secret', process.env.CENTRIFUGO_PROXY_SECRET],
+  ['tabtin-centrifugo-dev-api-key', process.env.CENTRIFUGO_API_KEY],
+].filter(([, value]) => typeof value === 'string' && value.length > 0));
 const walk = (o) => {
   if (typeof o === 'string') {
-    return o.replace(/127\.0\.0\.1:6060/g, `127.0.0.1:${port}`)
+    let value = o.replace(/127\.0\.0\.1:6060/g, `127.0.0.1:${port}`)
       .replace(/localhost:6060/g, `localhost:${port}`);
+    for (const [templateValue, runtimeValue] of secretReplacements) {
+      if (value === templateValue) value = runtimeValue;
+    }
+    return value;
   }
   if (Array.isArray(o)) return o.map(walk);
   if (o && typeof o === 'object') {

@@ -852,11 +852,11 @@ class OrganizationBillingPolicy(models.Model):
     # ── LLM 点券自动补充（quota_only 模式的配套能力）──
     # 点券（月度配额）用尽时，从组织钱包按管理员设定的金额扣款购买补充量，
     # 写入当月预算池 topup_credits（1 元 = CREDITS_PER_YUAN 点券）。
-    auto_topup_enabled = models.BooleanField(default=False, verbose_name="LLM点券自动补充开关")
+    auto_topup_enabled = models.BooleanField(default=True, verbose_name="LLM点券自动补充开关")
     auto_topup_spend_yuan = models.DecimalField(
         max_digits=20,
         decimal_places=8,
-        default=Decimal("10"),
+        default=Decimal("1"),
         validators=[MinValueValidator(Decimal("0"))],
         verbose_name="每次自动补充花费（元）",
     )
@@ -870,7 +870,7 @@ class OrganizationBillingPolicy(models.Model):
     auto_topup_monthly_cap_yuan = models.DecimalField(
         max_digits=20,
         decimal_places=8,
-        default=Decimal("100"),
+        default=Decimal("0"),
         validators=[MinValueValidator(Decimal("0"))],
         verbose_name="每月自动补充花费上限（元）",
     )

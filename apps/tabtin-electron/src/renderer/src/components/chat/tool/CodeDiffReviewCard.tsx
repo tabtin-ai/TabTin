@@ -1,8 +1,10 @@
 /* eslint-disable tabtin/no-chat-design-violations -- 代码 Diff 的 +/- 颜色是编辑器领域约定。 */
 import React, { useCallback, useEffect, useMemo } from 'react'
+import { ChevronDown, ChevronRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import type { ChatMessage } from '@tabtin/chat-client'
 import { cn } from '@utils/cn'
+import { blockExpandKey, useBlockExpanded } from '@stores/chat/presentation/blockUiPrefs'
 import { useSpaceStore } from '@stores/useSpaceStore'
 import { useFileEditPatchJournalStore } from '@components/context-space/code-workspace/fileEditPatchJournalStore'
 import {
@@ -33,6 +35,8 @@ interface CodeDiffReviewCardProps {
   includeSubagentMessages?: boolean
   previewMode?: boolean
 }
+
+const MAX_VISIBLE_REVIEW_FILES = 5
 
 export const CodeDiffReviewCard: React.FC<CodeDiffReviewCardProps> = React.memo(({
   message,
@@ -89,9 +93,9 @@ export const CodeDiffReviewCard: React.FC<CodeDiffReviewCardProps> = React.memo(
   const loadJournal = useFileEditPatchJournalStore((state) => state.load)
 
   useEffect(() => {
-    if (!sessionId) return
+    if (!sessionId || isStreaming) return
     void loadJournal(sessionId)
-  }, [loadJournal, sessionId])
+  }, [isStreaming, loadJournal, sessionId])
 
   const review = useMemo<ClosedAgentTurnReview | null>(() => {
     if (
@@ -158,6 +162,20 @@ export const CodeDiffReviewCard: React.FC<CodeDiffReviewCardProps> = React.memo(
     [displayableFiles],
   )
 
+  const isExpandable = displayableFiles.length > MAX_VISIBLE_REVIEW_FILES
+  const reviewExpandKey = blockExpandKey(`review-card:${message.id}`)
+  const [expanded, setExpanded] = useBlockExpanded(reviewExpandKey, !isExpandable)
+  const visibleFiles = useMemo(
+    () => expanded ? displayableFiles : displayableFiles.slice(0, MAX_VISIBLE_REVIEW_FILES),
+    [displayableFiles, expanded],
+  )
+  const fileListId = `code-diff-review-files-${message.id}`
+  const remainingFileCount = displayableFiles.length - MAX_VISIBLE_REVIEW_FILES
+
+  const handleToggleExpanded = useCallback(() => {
+    setExpanded(!expanded)
+  }, [expanded, setExpanded])
+
   const handleOpenFile = useCallback((relativePath: string) => {
     if (!review || !sessionId || !codeRoot || !resolvedTabScopeKey || !effectiveSpaceId) return
     expandCanvasForScope(resolvedTabScopeKey)
@@ -175,6 +193,18 @@ export const CodeDiffReviewCard: React.FC<CodeDiffReviewCardProps> = React.memo(
 
   if (!review || displayableFiles.length === 0) return null
 
+  const headerSummary = (
+    <span className="flex min-w-0 flex-1 items-center gap-2.5">
+      <span className="min-w-0 truncate text-caption font-medium text-foreground">
+        {t('codeDiffReview.editedFiles', { defaultValue: '已编辑 {{count}} 个文件', count: displayableFiles.length })}
+      </span>
+      <span className="flex shrink-0 items-center gap-1.5 text-caption tabular-nums">
+        {displayableTotals.insertions > 0 && <span className="text-green-500">+{displayableTotals.insertions}</span>}
+        {displayableTotals.deletions > 0 && <span className="text-red-500">-{displayableTotals.deletions}</span>}
+      </span>
+    </span>
+  )
+
   return (
     <div
       data-testid="code-diff-review-card"
@@ -184,15 +214,7 @@ export const CodeDiffReviewCard: React.FC<CodeDiffReviewCardProps> = React.memo(
         data-testid="code-diff-review-header"
         className="flex min-h-9 w-full items-center gap-2.5 py-2 pl-3 pr-2"
       >
-        <span className="flex min-w-0 flex-1 items-center gap-2.5">
-          <span className="min-w-0 truncate text-caption font-medium text-foreground">
-            {t('codeDiffReview.editedFiles', { defaultValue: '已编辑 {{count}} 个文件', count: displayableFiles.length })}
-          </span>
-          <span className="flex shrink-0 items-center gap-1.5 text-caption tabular-nums">
-            {displayableTotals.insertions > 0 && <span className="text-green-500">+{displayableTotals.insertions}</span>}
-            {displayableTotals.deletions > 0 && <span className="text-red-500">-{displayableTotals.deletions}</span>}
-          </span>
-        </span>
+        {headerSummary}
         <button
           type="button"
           data-testid="code-diff-review-review-button"
@@ -204,8 +226,14 @@ export const CodeDiffReviewCard: React.FC<CodeDiffReviewCardProps> = React.memo(
         </button>
       </div>
 
-      <div className="border-t border-border/40 px-1 py-1" role="list" aria-label={t('codeDiffReview.fileList', { defaultValue: '已编辑文件' })}>
-        {displayableFiles.map((file) => (
+      <div
+        id={fileListId}
+        data-testid="code-diff-review-file-list"
+        className="border-t border-border/40 px-1 py-1"
+        role="list"
+        aria-label={t('codeDiffReview.fileList', { defaultValue: '已编辑文件' })}
+      >
+        {visibleFiles.map((file) => (
           <div key={file.relativePath} role="listitem">
             <button
               type="button"
@@ -249,6 +277,35 @@ export const CodeDiffReviewCard: React.FC<CodeDiffReviewCardProps> = React.memo(
           </div>
         ))}
       </div>
+      {isExpandable && (
+        <button
+          type="button"
+          data-testid="code-diff-review-expand-button"
+          className="flex w-full items-center gap-1 border-t border-border/40 px-3 py-1.5 text-left text-caption text-muted-foreground transition-colors hover:bg-muted/30 hover:text-foreground focus-visible:outline-none"
+          onClick={handleToggleExpanded}
+          aria-expanded={expanded}
+          aria-controls={fileListId}
+          aria-label={t(
+            expanded ? 'codeDiffReview.collapseAria' : 'codeDiffReview.expandRemainingAria',
+            {
+              defaultValue: expanded ? '收起文件' : '展开剩余 {{count}} 个文件',
+              count: remainingFileCount,
+            },
+          )}
+        >
+          {expanded ? (
+            <ChevronDown className="h-3 w-3 shrink-0" aria-hidden />
+          ) : (
+            <ChevronRight className="h-3 w-3 shrink-0" aria-hidden />
+          )}
+          {expanded
+            ? t('codeDiffReview.collapse', { defaultValue: '收起文件' })
+            : t('codeDiffReview.expandRemaining', {
+              defaultValue: '展开剩余 {{count}} 个文件',
+              count: remainingFileCount,
+            })}
+        </button>
+      )}
     </div>
   )
 })

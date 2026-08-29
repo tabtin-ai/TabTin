@@ -940,6 +940,64 @@ function defaultGroupRecipientCount(memberCount: number | undefined): number {
   return Math.max(1, (memberCount ?? 1) - 1)
 }
 
+type OutgoingReadReceipt = { read_count: number; recipient_count: number }
+
+function seedOutgoingReadReceipt(
+  conversation: Conversation | undefined,
+  existing?: OutgoingReadReceipt,
+): OutgoingReadReceipt | undefined {
+  if (
+    existing
+    && Number.isFinite(existing.read_count)
+    && Number.isFinite(existing.recipient_count)
+  ) {
+    return existing
+  }
+  if (conversation?.type === CONVERSATION_TYPE_DM) {
+    return { read_count: existing?.read_count ?? 0, recipient_count: 1 }
+  }
+  if (conversation?.type === CONVERSATION_TYPE_GROUP) {
+    return {
+      read_count: existing?.read_count ?? 0,
+      recipient_count: defaultGroupRecipientCount(conversation.member_count),
+    }
+  }
+  return existing
+}
+
+function overlayStoredPeerReceipts(
+  message: IMMessage,
+  conversation: Conversation | undefined,
+  currentUserId: string | undefined,
+  receipts: Record<string, number> | undefined,
+): IMMessage {
+  const seeded: IMMessage = {
+    ...message,
+    read_receipt: seedOutgoingReadReceipt(conversation, message.read_receipt),
+  }
+  if (
+    !currentUserId
+    || seeded.sender_id !== currentUserId
+    || !receipts
+    || !seeded.read_receipt
+  ) {
+    return seeded
+  }
+  const messageId = seeded.id
+  if (messageId <= 0) return seeded
+  const peerReadCount = Object.entries(receipts)
+    .filter(([userId, lastReadId]) => userId !== currentUserId && lastReadId >= messageId)
+    .length
+  if (peerReadCount <= (seeded.read_receipt.read_count ?? 0)) return seeded
+  return {
+    ...seeded,
+    read_receipt: {
+      ...seeded.read_receipt,
+      read_count: Math.min(seeded.read_receipt.recipient_count, peerReadCount),
+    },
+  }
+}
+
 interface DesktopNotifContext {
   convId: string
   message: IMMessage
@@ -1406,7 +1464,14 @@ export const useIMStore = create<IMState>((set, get) => ({
             const share: SessionShareInfo = {
               ...item.detail,
               id: item.detail.id || item.object_id || id,
-              session_id: item.detail.session_id || '',
+              session_id: item.detail.session_id
+                || get().sessionShares[id]?.detail?.session_id
+                || '',
+              shared_session_id: item.detail.shared_session_id
+                || get().sessionShares[id]?.detail?.shared_session_id
+                || item.detail.session_id
+                || get().sessionShares[id]?.detail?.session_id
+                || null,
             }
             if ((share.version ?? 0) < entry.minimumVersion && entry.attempt < 2) {
               _pendingSessionShareV2Loads.set(id, { ...entry, attempt: entry.attempt + 1 })
@@ -1758,9 +1823,7 @@ export const useIMStore = create<IMState>((set, get) => ({
         conversationId = result.conversation_id
       }
     } else {
-      if (!spaceId && memberIds.length + externalContactIds.length < 2) {
-        throw new Error('TabChat createConversationAndActivate requires at least two members for group')
-      }
+      // 服务端会将创建者自动写入群成员；普通群聊可不额外选择成员。
       const resolvedGroupName = groupName?.trim()
         || await resolveDefaultGroupName(organizationId, memberIds, externalContactIds)
       const result = clientRequestId
@@ -2135,21 +2198,29 @@ export const useIMStore = create<IMState>((set, get) => ({
 
       set((state) => {
         const matchedConv = state.conversations.find((c) => c.id === convId)
+        const currentUserId = useAuthStore.getState().user?.id
+        const conversationReceipts = state.readReceipts[convId]
         const updated = (state.messages[convId] || [])
           .map((m) =>
             m._tempId === tempId
-              ? {
-                  ...m,
-                  id: result.id,
-                  seq: result.seq,
-                  transport: result.transport,
-                  created_at: result.created_at,
-                  metadata: enrichedMetadata,
-                  _optimistic: false,
-                  _failed: undefined,
-                  _retrying: undefined,
-                  _tempId: undefined,
-                }
+              ? overlayStoredPeerReceipts(
+                  {
+                    ...m,
+                    id: result.id,
+                    seq: result.seq,
+                    transport: result.transport,
+                    created_at: result.created_at,
+                    metadata: enrichedMetadata,
+                    _optimistic: false,
+                    _failed: undefined,
+                    _retrying: undefined,
+                    _tempId: undefined,
+                    read_receipt: result.read_receipt ?? m.read_receipt,
+                  },
+                  matchedConv,
+                  currentUserId,
+                  conversationReceipts,
+                )
               : m,
           )
         const msgs = mergeAndSortMessages(updated)

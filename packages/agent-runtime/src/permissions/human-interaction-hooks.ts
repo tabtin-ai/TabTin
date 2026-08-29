@@ -1,6 +1,7 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
 
 import type { RuntimeMode } from '../engine/contracts/tools.js';
+import type { AccessBarrier, AccessBarrierResolution } from '../access-barrier/present.js';
 
 export interface HumanInteractionContext {
   threadId: string;
@@ -26,6 +27,15 @@ export interface HumanInteractionHooks {
     context: HumanInteractionContext,
     request: PlatformApprovalRequest,
   ): Promise<PlatformApprovalResult>;
+  /**
+   * Access Barrier HITL：宿主把 CLI/FC 浏览器编排出口拿到的 `AccessBarrier` 转成对话卡片
+   * 并等决议。可选——未注入时 `requestAccessBarrierResolution` 直接诚实失败
+   * （`host_unavailable`），不空转 glance。
+   */
+  resolveAccessBarrier?(
+    context: HumanInteractionContext,
+    barrier: AccessBarrier,
+  ): Promise<AccessBarrierResolution>;
 }
 
 const contextStorage = new AsyncLocalStorage<HumanInteractionContext>();
@@ -69,4 +79,20 @@ export async function requestPlatformApproval(
     return { approved: false };
   }
   return installedHooks.requestPlatformApproval(context, request);
+}
+
+/**
+ * Access Barrier HITL 出口（设计 §8.3 CLI-first 接线）：`BrowserOrchestratorHostHooks.
+ * resolveAccessBarrier` 的宿主实装从这里取得当前会话的 HITL 通道。缺上下文
+ * （未经 `runWithHumanInteractionContext` 包裹）或宿主未注册 `resolveAccessBarrier`
+ * 时诚实失败（fail-closed）——禁止假装成功或静默换源。
+ */
+export async function requestAccessBarrierResolution(
+  barrier: AccessBarrier,
+): Promise<AccessBarrierResolution> {
+  const context = contextStorage.getStore();
+  if (!context?.threadId || !installedHooks?.resolveAccessBarrier) {
+    return { action: 'host_unavailable' };
+  }
+  return installedHooks.resolveAccessBarrier(context, barrier);
 }

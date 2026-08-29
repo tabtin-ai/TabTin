@@ -16,13 +16,12 @@
  *     5. iteration budget（warn / grace / terminate 三档）
  *     6. tool loop guard（失败 streak / 成功复读三档 + nudge 消费——nudge
  *        消费依赖 budget 的 grace 信号先就绪，必须排在 5 之后）
- *     7. login-wall-gate（确定性 login_required → 下一轮只留 ask_user；
- *        排在 budget 之后，grace 时门禁让位）
- *     8. captcha-wall-gate（确定性 captcha_required → 下一轮只留 ask_user；
- *        与登录墙同构，紧随其后）
- *     9. context overflow recovery（413 三段式恢复，onModelError）
- *    10. model fallback（529 / 5xx 降级，onModelError；段间短路合并下
- *        overflow 先走 9，未处理才轮到 10）
+ *     7. context overflow recovery（413 三段式恢复，onModelError）
+ *     8. model fallback（529 / 5xx 降级，onModelError；段间短路合并下
+ *        overflow 先走 7，未处理才轮到 8）
+ *
+ * 登录墙 / 验证码不再进本栈：由浏览器能力层 Access Barrier HITL
+ * （`BrowserOrchestratorHostHooks.resolveAccessBarrier`）在工具返回前挂起。
  *
  * **实例化语义**：每个 QueryRun（= 每次 query()）调用本工厂新建一份 hook
  * 实例——有状态策略（tool-loop-guard tracker 等）随 run 生命周期，且
@@ -34,8 +33,6 @@ import { buildRunObservationsInjectorHook } from '../policy-hooks/run-observatio
 import { buildThreadNotificationsInjectorHook } from '../policy-hooks/thread-notifications-injector.js';
 import { buildMessageGovernanceHook } from '../policy-hooks/message-governance.js';
 import { buildToolLoopGuardHook } from '../policy-hooks/tool-loop-guard.js';
-import { buildLoginWallGateHook } from '../policy-hooks/login-wall-gate.js';
-import { buildCaptchaWallGateHook } from '../policy-hooks/captcha-wall-gate.js';
 import { buildIterationBudgetPolicyHook } from '../policy-hooks/iteration-budget-policy.js';
 import { buildContextOverflowRecoveryHook } from '../policy-hooks/context-overflow-recovery.js';
 import { buildModelFallbackHook } from '../policy-hooks/model-fallback.js';
@@ -89,9 +86,8 @@ export function buildDefaultPolicyPreHooks(
  * 返回多个 `EngineHooks`，由 `HookRunner` 逐段独立 fail-soft——任一策略
  * beforeModel 抛错只跳过该策略，不连坐后续（尤其 IterationBudget grace）。
  *
- * 栈序契约：governance → budget → tool-loop-guard → login-wall-gate →
- * captcha-wall-gate；onModelError 仍是 overflow recovery → model fallback
- * （段间短路：首个返回指令者生效）。
+ * 栈序契约：governance → budget → tool-loop-guard；onModelError 仍是
+ * overflow recovery → model fallback（段间短路：首个返回指令者生效）。
  */
 export function buildDefaultPolicyPostStages(
   config: EngineConfig,
@@ -123,25 +119,6 @@ export function buildDefaultPolicyPostStages(
       toolRepetitionConfig: config.toolRepetitionTracker,
       sessionId,
       observe: deps.observe,
-    }),
-    // 登录墙硬门禁：工具结果侦测确定性 login_required → 下一轮只留 ask_user。
-    // 排在 iteration-budget 之后（grace turn 信号已就绪，grace 时门禁让位）。
-    buildLoginWallGateHook({
-      sessionId,
-      observe: deps.observe,
-      getRuntimeMode: () => {
-        const mode = config.runtimeMode;
-        return (typeof mode === 'function' ? mode() : mode) ?? 'interactive';
-      },
-    }),
-    // 验证码硬门禁：与登录墙同构；captcha_required → ask_user 卡片，不再弹全局 toast。
-    buildCaptchaWallGateHook({
-      sessionId,
-      observe: deps.observe,
-      getRuntimeMode: () => {
-        const mode = config.runtimeMode;
-        return (typeof mode === 'function' ? mode() : mode) ?? 'interactive';
-      },
     }),
     // onModelError 段间短路：recovery 在 fallback 之前（overflow 错误先恢复）。
     buildContextOverflowRecoveryHook({

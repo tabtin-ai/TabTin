@@ -25,6 +25,7 @@ from apps.services.oss.services.factory import get_oss_service
 from apps.services.oss.services.file_registry import FileRegistryService
 
 _LOCAL_FILE_KIND = "local_file"
+_OSS_FILE_KIND = "oss_file"
 _RESTORE_ROOT = "artifacts/continuations"
 _UPLOAD_SOURCE = "session_continuation"
 _CONTEXT_TYPE = "session_continuation_local_file"
@@ -36,6 +37,14 @@ class ContinuationLocalFileHandoffError(ValueError):
     pass
 
 
+class ContinuationLocalFileTooLargeError(ContinuationLocalFileHandoffError):
+    def __init__(self, *, filename: str, size_bytes: int):
+        super().__init__("分享会话文件超过50MB")
+        self.filename = filename
+        self.size_bytes = size_bytes
+        self.limit_bytes = MAX_MATERIALIZE_BYTES
+
+
 def prepare_local_file_handoffs(
     *,
     continuation_id: str,
@@ -44,6 +53,7 @@ def prepare_local_file_handoffs(
     source,
     sender_user,
     turns: list[dict],
+    include_context: bool = True,
 ) -> tuple[list[dict], list[dict]]:
     """Upload source-session local files to OSS and annotate frozen turns.
 
@@ -51,6 +61,9 @@ def prepare_local_file_handoffs(
     recipient should open the restored workspace path. The stable FileRecord ID
     is stored in metadata so ``create_task`` can restore the bytes later.
     """
+    if not include_context:
+        return _dialogue_only_turns(turns), []
+
     handoffs: list[dict] = []
     replacements: dict[str, dict] = {}
     refs = _collect_local_file_refs(turns)
@@ -146,11 +159,16 @@ def _collect_local_file_refs(turns: list[dict]) -> dict[str, dict]:
         if not isinstance(blocks, list):
             continue
         for block in blocks:
-            payload = _local_file_payload(block)
+            payload = _file_payload(block)
             if payload is None:
                 continue
+            relative_path = (
+                payload.get("relative_path")
+                if payload.get("artifact_kind") == _LOCAL_FILE_KIND
+                else payload.get("source_relative_path")
+            )
             canonical = canonicalize_artifact_relative_path(
-                str(payload.get("relative_path") or "")
+                str(relative_path or "")
             )
             if not canonical or not is_deliverable_relative_path(canonical):
                 continue
@@ -166,6 +184,13 @@ def _collect_local_file_refs(turns: list[dict]) -> dict[str, dict]:
 
 
 def _local_file_payload(block: Any) -> dict | None:
+    payload = _file_payload(block)
+    if payload is not None and payload.get("artifact_kind") == _LOCAL_FILE_KIND:
+        return payload
+    return None
+
+
+def _file_payload(block: Any) -> dict | None:
     if not isinstance(block, dict):
         return None
     payload = block.get("payload")
@@ -173,7 +198,6 @@ def _local_file_payload(block: Any) -> dict | None:
         block.get("type") == "tabtin_rich_content"
         and block.get("kind") == "file"
         and isinstance(payload, dict)
-        and payload.get("artifact_kind") == _LOCAL_FILE_KIND
     ):
         return payload
     return None
@@ -208,7 +232,10 @@ def _upload_source_file(
     if not content_version:
         raise ContinuationLocalFileHandoffError("设备未返回本地文件内容版本")
     if isinstance(size_bytes, int) and size_bytes > MAX_MATERIALIZE_BYTES:
-        raise ContinuationLocalFileHandoffError("本地文件超过可交接大小上限")
+        raise ContinuationLocalFileTooLargeError(
+            filename=filename,
+            size_bytes=size_bytes,
+        )
 
     content_type = str(data.get("mime_type") or mime_type or "application/octet-stream")
     object_key = _object_key(
@@ -384,31 +411,104 @@ def _rewrite_turn_local_file_payloads(
         if not isinstance(blocks, list):
             continue
         for block in blocks:
-            payload = _local_file_payload(block)
+            payload = _file_payload(block)
             if payload is None:
                 continue
-            canonical = canonicalize_artifact_relative_path(
-                str(payload.get("relative_path") or "")
+            artifact_kind = str(payload.get("artifact_kind") or "")
+            source_path = (
+                payload.get("relative_path")
+                if artifact_kind == _LOCAL_FILE_KIND
+                else payload.get("source_relative_path")
             )
+            canonical = canonicalize_artifact_relative_path(str(source_path or ""))
             replacement = replacements.get(str(canonical or ""))
+            if replacement is None and artifact_kind == _OSS_FILE_KIND:
+                replacement = _legacy_oss_replacement(payload, replacements)
             if replacement is None:
                 continue
-            target_path = str(replacement.get("target_relative_path") or canonical)
+            replacement_source_path = str(
+                replacement.get("source_relative_path") or canonical or ""
+            )
+            target_path = str(
+                replacement.get("target_relative_path") or replacement_source_path
+            )
             file_id = str(replacement.get("id") or payload.get("handoff_file_id") or "")
+            source_file_id = str(payload.get("file_id") or payload.get("source_file_id") or "")
+            payload["artifact_kind"] = _LOCAL_FILE_KIND
             payload["relative_path"] = target_path
             payload["url"] = (
                 "tabtin://resource/file/"
                 f"{quote(target_path, safe='')}?hint=tabfiles"
             )
             payload["handoff_file_id"] = file_id
-            payload["source_relative_path"] = str(
-                replacement.get("source_relative_path") or canonical or ""
-            )
+            payload["source_relative_path"] = replacement_source_path
+            if source_file_id:
+                payload["source_file_id"] = source_file_id
+            payload.pop("file_id", None)
+            payload.pop("access_url", None)
             if replacement.get("file_size") is not None:
                 payload["file_size"] = replacement.get("file_size")
             if replacement.get("mime_type"):
                 payload["mime_type"] = replacement.get("mime_type")
     return rewritten
+
+
+def _legacy_oss_replacement(payload: dict, replacements: dict[str, dict]) -> dict | None:
+    """兼容尚未携带 source_relative_path 的 runtime 产物卡。
+
+    仅自动注册的 OSS 卡，且文件名与大小都唯一匹配时才回绑，避免把用户单独上传的
+    同名云文件误认为本地产物。
+    """
+    if payload.get("auto_register") is not True:
+        return None
+    filename = str(payload.get("filename") or "")
+    file_size = payload.get("file_size")
+    if not filename or not isinstance(file_size, int):
+        return None
+    matches = [
+        replacement
+        for replacement in replacements.values()
+        if str(replacement.get("filename") or "") == filename
+        and replacement.get("file_size") == file_size
+    ]
+    return matches[0] if len(matches) == 1 else None
+
+
+def _dialogue_only_turns(turns: list[dict]) -> list[dict]:
+    """复制纯对话快照并移除文件/资源上下文；源会话消息绝不原地改写。"""
+    rewritten = deepcopy(turns)
+    kept_turns: list[dict] = []
+    for turn in rewritten:
+        if not isinstance(turn, dict):
+            continue
+        blocks = turn.get("blocks")
+        if isinstance(blocks, list):
+            turn["blocks"] = [
+                block
+                for block in blocks
+                if not _is_context_artifact_block(block)
+            ]
+        if turn.get("blocks") or str(turn.get("text") or "").strip():
+            kept_turns.append(turn)
+    return kept_turns
+
+
+def _is_context_artifact_block(block: Any) -> bool:
+    if not isinstance(block, dict):
+        return False
+    if block.get("type") in {"file", "image", "document"}:
+        return True
+    return (
+        block.get("type") == "tabtin_rich_content"
+        and block.get("kind") in {
+            "file",
+            "image",
+            "document",
+            "resource_ref",
+            "platform_resource",
+            "widget",
+        }
+    )
 
 
 def _target_relative_path(*, continuation_id: str, relative_path: str) -> str:

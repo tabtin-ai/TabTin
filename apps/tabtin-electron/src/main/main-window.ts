@@ -193,7 +193,7 @@ export function createMainWindow(options: CreateMainWindowOptions): BrowserWindo
     // 几何真源：shared/shell-top-bar-layout.ts（与 ShellTopBar 行高同步）。
     titleBarStyle: 'hidden',
     trafficLightPosition:
-      process.platform === 'darwin' ? SHELL_TOP_BAR_MAC_TRAFFIC_LIGHT_POSITION : undefined,
+      process.platform === 'darwin' ? { ...SHELL_TOP_BAR_MAC_TRAFFIC_LIGHT_POSITION } : undefined,
     backgroundColor: options.getBackgroundColor(),
     icon: options.icon,
     webPreferences: {
@@ -338,6 +338,9 @@ export function createMainWindow(options: CreateMainWindowOptions): BrowserWindo
       return
     }
     windowShown = true
+    if (process.platform === 'darwin' && typeof mainWindow.setWindowButtonPosition === 'function') {
+      mainWindow.setWindowButtonPosition({ ...SHELL_TOP_BAR_MAC_TRAFFIC_LIGHT_POSITION })
+    }
     if (isMaximized) {
       mainWindow.maximize()
     }

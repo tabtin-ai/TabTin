@@ -5,8 +5,13 @@ const mocks = vi.hoisted(() => {
   return {
     handlers,
     createView: vi.fn(),
+    getViewState: vi.fn(),
     resolveBrowserContainerMode: vi.fn(() => 'wcv'),
     registerView: vi.fn(),
+    getContextSnapshot: vi.fn(() => ({ views: [] })),
+    unregisterContextView: vi.fn(),
+    registerOrganizationView: vi.fn(() => true),
+    unregisterOrganizationView: vi.fn(),
   }
 })
 
@@ -17,7 +22,12 @@ vi.mock('../utils/guarded-handle', () => ({
   }),
   guardedOn: vi.fn(),
 }))
-vi.mock('../view-factory', () => ({ getViewFactory: () => ({ createView: mocks.createView }) }))
+vi.mock('../view-factory', () => ({
+  getViewFactory: () => ({
+    createView: mocks.createView,
+    getViewState: mocks.getViewState,
+  }),
+}))
 vi.mock('../view-factory/background-interaction', async () => {
   const actual = await vi.importActual<typeof import('../view-factory/background-interaction')>('../view-factory/background-interaction')
   return actual
@@ -26,7 +36,17 @@ vi.mock('../../shared/browser-container-mode', () => ({
   resolveBrowserContainerMode: mocks.resolveBrowserContainerMode,
 }))
 vi.mock('../crawlspace/CrawlspaceContextHub', () => ({
-  getCrawlspaceContextHub: () => ({ registerView: mocks.registerView }),
+  getCrawlspaceContextHub: () => ({
+    registerView: mocks.registerView,
+    getSnapshot: mocks.getContextSnapshot,
+    unregisterView: mocks.unregisterContextView,
+  }),
+}))
+vi.mock('../organization/OrganizationTabManager', () => ({
+  getOrganizationTabManager: () => ({
+    registerView: mocks.registerOrganizationView,
+    unregisterView: mocks.unregisterOrganizationView,
+  }),
 }))
 vi.mock('../services/ResourceDetectionService', () => ({ getResourceDetectionService: vi.fn() }))
 vi.mock('../services/ResourceHubService', () => ({ getResourceHubService: vi.fn() }))
@@ -67,7 +87,12 @@ describe('crawlspace:createView background interaction', () => {
 
   beforeEach(() => {
     mocks.createView.mockReset().mockResolvedValue(undefined)
+    mocks.getViewState.mockReset().mockReturnValue(undefined)
     mocks.registerView.mockReset()
+    mocks.getContextSnapshot.mockReset().mockReturnValue({ views: [] })
+    mocks.unregisterContextView.mockReset()
+    mocks.registerOrganizationView.mockReset().mockReturnValue(true)
+    mocks.unregisterOrganizationView.mockReset()
     mocks.resolveBrowserContainerMode.mockReturnValue('wcv')
   })
 
@@ -105,5 +130,49 @@ describe('crawlspace:createView background interaction', () => {
     await handler!({}, payloadWithRunId)
 
     expect(mocks.createView).not.toHaveBeenCalled()
+  })
+
+  it('webview placeholder 在返回 created 前登记 workspace owner 映射', async () => {
+    const handler = mocks.handlers.get('crawlspace:createView')
+    mocks.resolveBrowserContainerMode.mockReturnValue('webview')
+
+    const result = await handler!({}, payloadWithRunId)
+
+    expect(mocks.registerOrganizationView).toHaveBeenCalledWith('cs-1', 'view-1', {
+      title: 'Example',
+      url: 'https://example.com',
+      runId: 'run-1',
+      createdAt: expect.any(Number),
+    })
+    expect(result).toEqual({ success: true, viewId: 'view-1' })
+  })
+
+  it('webview placeholder 已绑定其他 workspace 时拒绝创建', async () => {
+    const handler = mocks.handlers.get('crawlspace:createView')
+    mocks.resolveBrowserContainerMode.mockReturnValue('webview')
+    mocks.registerOrganizationView.mockReturnValue(false)
+
+    const result = await handler!({}, payloadWithRunId)
+
+    expect(result).toEqual({
+      success: false,
+      error: 'view 已绑定其他 crawlspace',
+    })
+    expect(mocks.registerView).not.toHaveBeenCalled()
+  })
+
+  it('关闭尚未 adopt 的 webview placeholder 时同步注销 owner 映射', async () => {
+    const handler = mocks.handlers.get('crawlspace:closeView')
+    mocks.getContextSnapshot.mockReturnValue({ views: [{ viewId: 'view-1' }] })
+
+    const result = await handler!({}, {
+      crawlspaceId: 'cs-1',
+      viewId: 'view-1',
+      reason: 'inheritance-timeout',
+    })
+
+    expect(result).toEqual({ success: true, code: 'context_pruned' })
+    expect(mocks.unregisterContextView).toHaveBeenCalledWith('cs-1', 'view-1')
+    expect(mocks.unregisterOrganizationView).toHaveBeenCalledWith('view-1')
   })
 })

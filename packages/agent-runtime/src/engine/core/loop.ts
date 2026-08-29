@@ -888,6 +888,10 @@ class AgentLoop {
     plan: IterationPlan,
     assistantResult: AssistantResult,
   ): AsyncGenerator<StreamEvent, LoopAction, undefined> {
+    // Access Barrier 等能力层 HITL 可能在「上一轮 shell 已后台化 → 本轮 LLM 已出
+    // tool_use」窗口内才发卡；工具开跑前再过一次 pause 门，避免有卡仍继续打工具。
+    await this.params.waitIfPaused?.(this.abortController.signal);
+    checkAbort(this.abortController);
     const toolExecution = yield* this.toolPhase.executeTools({
       toolUseBlocks: assistantResult.toolUseBlocks,
       toolCallMetadataById: assistantResult.toolCallMetadataById,

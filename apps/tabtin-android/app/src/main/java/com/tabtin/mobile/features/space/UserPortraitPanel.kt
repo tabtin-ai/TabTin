@@ -255,15 +255,10 @@ private fun TopStatusBar(
     disabled: Boolean,
     onTriggerDistill: () -> Unit,
 ) {
-    Card(
+    Column(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
-        shape = RoundedCornerShape(8.dp),
+        verticalArrangement = Arrangement.spacedBy(TTSpacing.xs),
     ) {
-        Column(
-            modifier = Modifier.padding(TTSpacing.md),
-            verticalArrangement = Arrangement.spacedBy(TTSpacing.xs),
-        ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
@@ -304,7 +299,6 @@ private fun TopStatusBar(
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
-        }
     }
 }
 
@@ -579,15 +573,10 @@ private fun HintInput(
     val overHard = trimmed.length > HINT_HARD_LIMIT
     val overSoft = trimmed.length > HINT_SOFT_LIMIT && !overHard
 
-    Card(
+    Column(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+        verticalArrangement = Arrangement.spacedBy(TTSpacing.sm),
     ) {
-        Column(
-            modifier = Modifier.padding(TTSpacing.md),
-            verticalArrangement = Arrangement.spacedBy(TTSpacing.sm),
-        ) {
             OutlinedTextField(
                 value = text,
                 onValueChange = { text = it },
@@ -657,7 +646,6 @@ private fun HintInput(
                     Text(stringResource(R.string.user_portrait_hint_submit))
                 }
             }
-        }
     }
 }
 

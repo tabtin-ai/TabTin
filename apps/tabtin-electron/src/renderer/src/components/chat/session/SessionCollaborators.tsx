@@ -31,10 +31,23 @@ import {
   planGroupMemberDirectChat,
   resolveGroupMemberDirectChat,
 } from '@components/tabchat/resolveGroupMemberDirectChat'
+import { collectSiblingShareIds } from '@/services/sessionCollaborationEventHandler'
 
 const log = createLogger('SessionCollaborators')
 
 const MAX_STACK_AVATARS = 4
+
+function reloadSiblingShareCards(
+  imState: ReturnType<typeof useIMStore.getState>,
+  share: Pick<SessionShareInfo, 'id' | 'session_id'>,
+) {
+  collectSiblingShareIds(imState.sessionShares, {
+    objectId: share.id,
+    sessionId: share.session_id,
+  }).forEach((shareId) => {
+    void imState.loadSessionShareV2(shareId)
+  })
+}
 
 interface Props {
   sessionId: string | null | undefined
@@ -114,6 +127,7 @@ export const SessionCollaborators: React.FC<Props> = ({
       const imState = useIMStore.getState()
       imState.setSessionShare(updated)
       imState.bumpSessionShareDetailVersion(share.id)
+      reloadSiblingShareCards(imState, share)
       if (share.status === 'pending') {
         forgetPendingShareIntentForShare({
           sessionId: share.session_id,
@@ -144,6 +158,7 @@ export const SessionCollaborators: React.FC<Props> = ({
       const imState = useIMStore.getState()
       imState.setSessionShare(updated)
       imState.bumpSessionShareDetailVersion(share.id)
+      reloadSiblingShareCards(imState, share)
       toast.success(t('sessionCollab.resumed', { defaultValue: '已恢复共享' }))
       await load()
     } catch (err) {

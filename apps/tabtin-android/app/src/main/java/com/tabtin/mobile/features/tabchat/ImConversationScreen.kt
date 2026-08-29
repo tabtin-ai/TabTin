@@ -263,6 +263,7 @@ public fun ImConversationScreen(
     val hasMoreHistory by viewModel.store.hasMoreHistory.collectAsState()
     val historyError by viewModel.store.historyError.collectAsState()
     val detail by viewModel.detail.collectAsState()
+    val externalDirectMessageSendAccess by viewModel.externalDirectMessageSendAccess.collectAsState()
     val conversations by viewModel.conversations.collectAsState()
     val organizationMembers by viewModel.organizationMembers.collectAsState()
     val draftAttachments by viewModel.attachmentManager.attachments.collectAsState()
@@ -313,12 +314,20 @@ public fun ImConversationScreen(
     } ?: false
     val isDirectMessage = detail?.isDm == true || conversationSnapshot?.type == ImConversationType.DM
     val isExternalConversation = detail?.isExternal == true || conversationSnapshot?.isExternal == true
+    val isExternalDirectMessage = isExternalConversation && isDirectMessage
     val externalConversationMessage = "外部会话仅支持发送文字消息"
-    val isReadOnlyConversation = isImConversationReadOnly(conversationSnapshot, detail)
-    val readOnlyMessage = if (detail?.canSend == false || conversationSnapshot?.canSend == false) {
-        "你已不在当前会话，历史仍可查看，但不能发送消息"
-    } else {
-        "对方已不在组织，当前会话只读"
+    val isReadOnlyConversation = isImConversationReadOnly(conversationSnapshot, detail) ||
+        (isExternalDirectMessage && externalDirectMessageSendAccess != ExternalDirectMessageSendAccess.ALLOWED)
+    val readOnlyMessage = when {
+        isExternalDirectMessage && externalDirectMessageSendAccess == ExternalDirectMessageSendAccess.CHECKING ->
+            "正在确认外部联系人状态"
+        isExternalDirectMessage && externalDirectMessageSendAccess == ExternalDirectMessageSendAccess.UNAVAILABLE ->
+            "暂时无法确认外部联系人状态，不能发送消息"
+        isExternalDirectMessage && externalDirectMessageSendAccess == ExternalDirectMessageSendAccess.DENIED ->
+            "你们已不是外部联系人，当前会话只读"
+        detail?.canSend == false || conversationSnapshot?.canSend == false ->
+            "你已不在当前会话，历史仍可查看，但不能发送消息"
+        else -> "对方已不在组织，当前会话只读"
     }
     val normalizedCurrentUserId = viewModel.currentUserId?.trim()?.takeIf { it.isNotEmpty() }
     val peerUserId = conversationSnapshot?.dmPeerUserId
@@ -475,12 +484,16 @@ public fun ImConversationScreen(
             showComposerHint(readOnlyMessage)
             return@sendCard
         }
-        val outcome = viewModel.sendCardImmediately(card)
-        if (outcome.didEnqueue) {
-            replyMessage = null
-            dismissKeyboard()
-        } else {
-            showComposerHint("消息无法发送")
+        actionScope.launch {
+            val outcome = viewModel.sendCardImmediately(card)
+            if (outcome.didEnqueue) {
+                replyMessage = null
+                dismissKeyboard()
+            } else if (outcome == ImSendOutcome.REJECTED_READ_ONLY) {
+                showComposerHint(readOnlyMessage)
+            } else {
+                showComposerHint("消息无法发送")
+            }
         }
     }
 
@@ -799,7 +812,27 @@ public fun ImConversationScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(resolvedConversationTitle, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = resolvedConversationTitle,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.weight(1f, fill = false),
+                        )
+                        if (isExternalDirectMessage) {
+                            Spacer(modifier = Modifier.width(TTSpacing.xs))
+                            Text(
+                                text = stringResource(R.string.external_contacts_badge),
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.SemiBold,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(6.dp))
+                                    .background(MaterialTheme.colorScheme.primaryContainer)
+                                    .padding(horizontal = TTSpacing.xs, vertical = 2.dp),
+                            )
+                        }
+                    }
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
@@ -1008,7 +1041,19 @@ public fun ImConversationScreen(
                                 )
                                 is ImConversationTimelineRow.Pending -> ImPendingBubble(
                                     pendingMessage = row.pending,
-                                    onRetry = { viewModel.retryPending(row.pending) },
+                                    onRetry = {
+                                        actionScope.launch {
+                                            if (viewModel.retryPending(row.pending) == ImSendOutcome.REJECTED_READ_ONLY) {
+                                                showComposerHint(
+                                                    if (isExternalDirectMessage) {
+                                                        "外部联系人状态已变更，当前会话只读"
+                                                    } else {
+                                                        readOnlyMessage
+                                                    },
+                                                )
+                                            }
+                                        }
+                                    },
                                 )
                             }
                         }
@@ -1156,44 +1201,56 @@ public fun ImConversationScreen(
                         draft = ""
                     } else {
                         val attachmentStatus = draftAttachments.firstOrNull()?.status
-                        // 同步创建独立 pending 后立即清 composer；确认/失败在后台按消息分别收敛。
-                        val outcome = viewModel.sendDraft(
-                            rawText = draft,
-                            mentions = pendingMentions,
-                            replyToId = replyMessage?.id,
-                            card = pendingCard,
-                        )
-                        if (outcome.didEnqueue) {
-                            draft = ""
-                            pendingMentions = emptyList()
-                            replyMessage = null
-                            pendingCard = null
-                        } else if (attachmentStatus == AttachmentStatus.UPLOADING ||
-                            attachmentStatus == AttachmentStatus.PENDING
-                        ) {
-                            android.widget.Toast.makeText(
-                                context,
-                                R.string.im_attachment_uploading_wait,
-                                android.widget.Toast.LENGTH_SHORT,
-                            ).show()
-                        } else if (attachmentStatus == AttachmentStatus.ERROR) {
-                            android.widget.Toast.makeText(
-                                context,
-                                R.string.im_attachment_fix_before_send,
-                                android.widget.Toast.LENGTH_LONG,
-                            ).show()
-                        } else if (outcome == ImSendOutcome.REJECTED_TOO_LONG) {
-                            android.widget.Toast.makeText(
-                                context,
-                                context.getString(
-                                    R.string.im_composer_message_too_long,
-                                    getImMessageContentLength(draft.trim()),
-                                    IM_MESSAGE_CONTENT_MAX_LENGTH,
-                                ),
-                                android.widget.Toast.LENGTH_LONG,
-                            ).show()
-                        } else if (outcome == ImSendOutcome.REJECTED_READ_ONLY) {
-                            showComposerHint(readOnlyMessage)
+                        val draftAtSend = draft
+                        val mentionsAtSend = pendingMentions
+                        val replyAtSend = replyMessage
+                        val cardAtSend = pendingCard
+                        // 关系复核通过后创建独立 pending；确认/失败仍在后台按消息分别收敛。
+                        actionScope.launch {
+                            val outcome = viewModel.sendDraft(
+                                rawText = draftAtSend,
+                                mentions = mentionsAtSend,
+                                replyToId = replyAtSend?.id,
+                                card = cardAtSend,
+                            )
+                            if (outcome.didEnqueue) {
+                                if (draft == draftAtSend) draft = ""
+                                if (pendingMentions == mentionsAtSend) pendingMentions = emptyList()
+                                if (replyMessage == replyAtSend) replyMessage = null
+                                if (pendingCard == cardAtSend) pendingCard = null
+                            } else if (attachmentStatus == AttachmentStatus.UPLOADING ||
+                                attachmentStatus == AttachmentStatus.PENDING
+                            ) {
+                                android.widget.Toast.makeText(
+                                    context,
+                                    R.string.im_attachment_uploading_wait,
+                                    android.widget.Toast.LENGTH_SHORT,
+                                ).show()
+                            } else if (attachmentStatus == AttachmentStatus.ERROR) {
+                                android.widget.Toast.makeText(
+                                    context,
+                                    R.string.im_attachment_fix_before_send,
+                                    android.widget.Toast.LENGTH_LONG,
+                                ).show()
+                            } else if (outcome == ImSendOutcome.REJECTED_TOO_LONG) {
+                                android.widget.Toast.makeText(
+                                    context,
+                                    context.getString(
+                                        R.string.im_composer_message_too_long,
+                                        getImMessageContentLength(draftAtSend.trim()),
+                                        IM_MESSAGE_CONTENT_MAX_LENGTH,
+                                    ),
+                                    android.widget.Toast.LENGTH_LONG,
+                                ).show()
+                            } else if (outcome == ImSendOutcome.REJECTED_READ_ONLY) {
+                                showComposerHint(
+                                    if (isExternalDirectMessage) {
+                                        "外部联系人状态已变更，当前会话只读"
+                                    } else {
+                                        readOnlyMessage
+                                    },
+                                )
+                            }
                         }
                     }
                 },
@@ -5282,7 +5339,7 @@ private fun ImComposer(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(TTSpacing.xs),
                 ) {
-                    if (!editing) {
+                    if (shouldShowImComposerAddButton(editing, contentMenuEnabled)) {
                         Box {
                             IconButton(
                                 onClick = { addMenuOpen = true },
@@ -5670,6 +5727,12 @@ internal fun shouldShowDmReadIndicator(
     isMine: Boolean,
     isReadByPeer: Boolean,
 ): Boolean = isMine
+
+/** 外部私聊只支持纯文本，不能展示一个点开后无效的内容入口。 */
+internal fun shouldShowImComposerAddButton(
+    editing: Boolean,
+    contentMenuEnabled: Boolean,
+): Boolean = !editing && contentMenuEnabled
 
 internal fun shouldFollowImConversationTail(
     previousTailMessageId: Int?,

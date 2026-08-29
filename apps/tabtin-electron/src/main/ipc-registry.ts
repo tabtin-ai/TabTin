@@ -16,6 +16,10 @@ import { registerRunSessionIpcHandlers } from './run-session/ipc'
 import { registerSessionIpcHandlers } from './session/ipc'
 import { registerTerminalIpcHandlers } from './terminal/ipc'
 import { registerCrawlspaceContextIpcHandlers } from './crawlspace/ipc'
+import {
+  registerBrowserTabControlIpc,
+  unregisterBrowserTabControlIpc,
+} from './browser-tab-lock/browserTabControlIpc'
 import { registerMarketplaceAppIpc } from './services/MarketplaceAppInstaller'
 import { registerAppDiscoveryIpc, initAppDiscoveryPatterns } from './services/AppDiscoveryService'
 import { registerOverlayIpc, OVERLAY_IPC_CHANNELS } from './overlay/overlay-ipc'
@@ -171,6 +175,7 @@ export function registerMainProcessIPCHandlers(
   registerRunSessionIpcHandlers()
   registerSessionIpcHandlers()
   registerCrawlspaceContextIpcHandlers()
+  registerBrowserTabControlIpc()
 
   registerMarketplaceAppIpc()
   registerAppDiscoveryIpc()
@@ -571,6 +576,8 @@ export function registerMainProcessIPCHandlers(
 }
 
 export function unregisterMainProcessIPCHandlers(): void {
+  unregisterBrowserTabControlIpc()
+
   const handleChannels = [
     'ping',
     ...OPENAI_CODEX_IPC_CHANNELS,

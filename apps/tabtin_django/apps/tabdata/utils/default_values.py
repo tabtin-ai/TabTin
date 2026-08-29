@@ -12,7 +12,7 @@ from apps.tabdata.utils.field_types import format_field_value, validate_field_va
 
 LITERAL_FIELD_TYPES = frozenset({
     "text", "long_text", "number",
-    "select", "multi_select", "date", "user",
+    "select", "multi_select", "checkbox", "date", "user",
 })
 LEGACY_IGNORED_LITERAL_FIELD_TYPES = frozenset({"percent", "currency"})
 TIME_FIELD_TYPES = frozenset({"date"})

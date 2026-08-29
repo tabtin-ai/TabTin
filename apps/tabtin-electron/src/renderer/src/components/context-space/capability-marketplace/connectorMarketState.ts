@@ -145,3 +145,40 @@ export function getConnectorMarketState({
     assignedAgentCount,
   }
 }
+
+/**
+ * 货架卸载：本机已有连接实例（已接入）。
+ * 未接入 / 即将开放不展示；探测失败走「重新授权」，卡片侧不再并排卸载。
+ */
+export function canUninstallMarketplaceConnector(
+  connection?: Pick<LocalMcpConnectionSummary, 'id'> | null,
+  canManage = true,
+): boolean {
+  return Boolean(canManage && connection)
+}
+
+/**
+ * 卡片是否并排展示「卸载」。
+ * 只跟真正显示「管理」的卡片走：`forceManageAction`（「我的」）或
+ * `action === 'manage'`。待测试 / 待选 Agent / 已停用 / 修复旁不展示。
+ */
+export function shouldShowMarketplaceUninstall({
+  hasUninstallHandler,
+  hideAction = false,
+  preferGhostAction = false,
+  actionLabel,
+  forceManageAction = false,
+  action,
+}: {
+  hasUninstallHandler: boolean
+  hideAction?: boolean
+  preferGhostAction?: boolean
+  actionLabel?: string
+  forceManageAction?: boolean
+  action: ConnectorMarketAction
+}): boolean {
+  if (!hasUninstallHandler || hideAction || preferGhostAction || Boolean(actionLabel)) {
+    return false
+  }
+  return forceManageAction || action === 'manage'
+}

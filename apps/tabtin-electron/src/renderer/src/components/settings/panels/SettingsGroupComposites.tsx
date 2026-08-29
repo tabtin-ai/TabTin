@@ -386,7 +386,13 @@ export const LlmComposite: React.FC<OrganizationCompositeProps> = ({ organizatio
         title={t('sections.organizationLlm')}
         subtitle={t('groupOverview.llmDesc')}
       />
-      {wrap(<OrganizationModelSettings organizationId={organization.id} canManageOrganization={canManageOrganization} />)}
+      {wrap(
+        <OrganizationModelSettings
+          organizationId={organization.id}
+          canManageOrganization={canManageOrganization}
+          isPersonalOrganization={organization.type === 'personal'}
+        />,
+      )}
     </SettingsPanelLayout>
   )
 }

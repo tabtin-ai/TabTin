@@ -153,7 +153,7 @@ export class LlmRequestBuilder {
       model: ctx.state.model,
       messages: ctx.state.messages,
       tools: requestTools,
-      // 协议层强制调工具（login-wall-gate 门禁轮）：grace turn 无工具时不带。
+      // 协议层强制调工具（beforeModel forceToolCall）：grace turn 无工具时不带。
       toolChoice: forceToolCall && !isGraceCallTurn ? 'required' : undefined,
       system: systemPrompt,
       maxTokens: resolveMaxTokensForRequest(ctx.config.maxOutputTokens),
@@ -190,7 +190,7 @@ export class LlmRequestBuilder {
   ): ToolParam[] | undefined {
     if (isGraceCallTurn) return undefined;
     let toolParams = this.ctx.getToolParams();
-    // beforeModel hook 的本轮工具面白名单（如 login-wall-gate 只留 ask_user）。
+    // beforeModel hook 的本轮工具面白名单（restrictToolsForTurn）。
     if (toolAllowlist) {
       const allowed = new Set(toolAllowlist);
       toolParams = toolParams.filter((t) => allowed.has(t.name));

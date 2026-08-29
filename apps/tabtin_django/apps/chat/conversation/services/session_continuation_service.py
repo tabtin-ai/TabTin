@@ -28,6 +28,7 @@ from .session_continuation_resources import (
 )
 from .session_continuation_local_files import (
     ContinuationLocalFileHandoffError,
+    ContinuationLocalFileTooLargeError,
     prepare_local_file_handoffs,
     restore_local_file_handoffs,
 )
@@ -192,6 +193,7 @@ def create_and_send(
     client_request_id,
     authorization_header: str = "",
     conversation_id_hint: str | None = None,
+    include_context: bool = True,
 ) -> dict:
     request_uuid = _canonical_uuid(client_request_id, "client_request_id")
     source_uuid = _canonical_uuid(source_session_id, "source_session_id")
@@ -227,11 +229,14 @@ def create_and_send(
             return _detail(continuation, str(sender_user.id))
     else:
         turns, truncated = collect_share_turns(source)
-        resources, resource_status = resource_snapshot(
-            source,
-            sender_user,
-            recipient_user,
-        )
+        if include_context:
+            resources, resource_status = resource_snapshot(
+                source,
+                sender_user,
+                recipient_user,
+            )
+        else:
+            resources, resource_status = [], "none"
         frozen_turns = [
             {
                 **turn,
@@ -249,6 +254,7 @@ def create_and_send(
             source=source,
             sender_user=sender_user,
             turns=frozen_turns,
+            include_context=include_context,
         )
         if local_resources:
             resources = [*resources, *local_resources]

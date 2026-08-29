@@ -190,6 +190,8 @@ export interface HomeSectionBaseProps {
   tabScopeKey?: string | null
   /** 独立 apphome 标签页的 key；供内嵌工作表面上报瞬时文件焦点。 */
   contextTabKey?: ContextTabKey | null
+  /** 独立 apphome pane 是否为当前活动标签；供需要保活的内嵌视图透传。 */
+  isPaneActive?: boolean
   /** 通用资源创建回调：传入 appId 即可触发对应 App 的新建流程 */
   onCreateResource: (appId: string, options?: CreateResourceOptions) => void
   /** 视图模式：列表 / 宫格（由 ContextHome 传入） */

@@ -163,7 +163,11 @@ import {
 } from '../cli/cli-server.js'
 import { createLogger } from '../logger.js'
 import { captureRunError } from '../sentry.js'
-import { unlockBySession } from '../browser-tab-lock/browserTabInputLock'
+import {
+  clearAllBrowserTabControl,
+  clearUserControlBySession,
+  unlockBySession,
+} from '../browser-tab-lock/browserTabInputLock'
 import {
   DEFAULT_MAX_LOCAL_FILE_SIZE_MB,
   FilePipelineErrorCode,
@@ -619,6 +623,15 @@ export class ElectronAgentHost {
    */
   private readonly abortRequestedSessionIds = new Set<string>()
   /**
+   * Browser takeover 独占的 HITL park ownership。
+   * 保存 controller 与 aliases，确保 session 从共享 Map 删除后仍可精确释放本引用。
+   */
+  private readonly browserControlOwnershipBySessionKey = new Map<string, {
+    sessionKey: string
+    controller: SessionPauseController
+    aliases: Set<string>
+  }>()
+  /**
    * Host promote 后发出的 chat.cancel 会 WS 回环到本机 handleAbort。
    * 窗口内跳过 clearQueued / 再 abort，避免掐掉刚 promote 的排队或新 run。
    */
@@ -644,6 +657,289 @@ export class ElectronAgentHost {
       hit = true
     }
     return hit
+  }
+
+  private getBrowserControlMatchingKeys(sessionId: string): {
+    requestedSessionId: string
+    matchingKeys: Set<string>
+  } {
+    const requestedSessionId = normalizeConversationId(sessionId)
+    const matchingKeys = new Set(resolveConversationAbortKeys(
+      requestedSessionId,
+      [...this.sessions.values()].map((session) => ({
+        key: session.sessionId,
+        businessThreadId: session.businessThreadId,
+      })),
+    ))
+    for (const ownership of this.browserControlOwnershipBySessionKey.values()) {
+      if (ownership.aliases.has(requestedSessionId)) matchingKeys.add(ownership.sessionKey)
+    }
+    return { requestedSessionId, matchingKeys }
+  }
+
+  private resolveBrowserControlTarget(sessionId: string): {
+    requestedSessionId: string
+    sessionKey: string
+    session: HostState | undefined
+    ownership: {
+      sessionKey: string
+      controller: SessionPauseController
+      aliases: Set<string>
+    } | undefined
+  } | undefined {
+    const { requestedSessionId, matchingKeys } =
+      this.getBrowserControlMatchingKeys(sessionId)
+
+    if (matchingKeys.size !== 1) {
+      if (matchingKeys.size > 1) {
+        log.warn('[BrowserControl] alias matched multiple sessions; operation rejected', {
+          matchingKeyCount: matchingKeys.size,
+        })
+      }
+      return undefined
+    }
+
+    const sessionKey = matchingKeys.values().next().value
+    if (typeof sessionKey !== 'string') return undefined
+    return {
+      requestedSessionId,
+      sessionKey,
+      session: this.sessions.get(sessionKey),
+      ownership: this.browserControlOwnershipBySessionKey.get(sessionKey),
+    }
+  }
+
+  private buildBrowserControlAliases(
+    requestedSessionId: string,
+    sessionKey: string,
+    businessThreadId?: string,
+  ): Set<string> {
+    const aliases = new Set([
+      normalizeConversationId(requestedSessionId),
+      normalizeConversationId(sessionKey),
+    ])
+    if (businessThreadId) aliases.add(normalizeConversationId(businessThreadId))
+    return aliases
+  }
+
+  private ensureBrowserControlParkForKey(sessionKey: string): void {
+    const ownership = this.browserControlOwnershipBySessionKey.get(sessionKey)
+    if (!ownership) return
+    const currentSession = this.sessions.get(sessionKey)
+    if (
+      currentSession
+      && ownership.controller !== currentSession.pauseController
+    ) {
+      this.browserControlOwnershipBySessionKey.delete(sessionKey)
+      try {
+        ownership.controller.releaseHitlPark()
+      } catch {
+        this.browserControlOwnershipBySessionKey.set(sessionKey, ownership)
+        log.error('[BrowserControl] failed to release stale session controller')
+        return
+      }
+      try {
+        currentSession.pauseController.acquireHitlPark()
+        this.browserControlOwnershipBySessionKey.set(sessionKey, {
+          sessionKey,
+          controller: currentSession.pauseController,
+          aliases: new Set([
+            ...ownership.aliases,
+            ...this.buildBrowserControlAliases(
+              sessionKey,
+              sessionKey,
+              currentSession.businessThreadId,
+            ),
+          ]),
+        })
+        log.warn('[BrowserControl] migrated ownership to rebuilt session controller')
+      } catch {
+        log.error('[BrowserControl] failed to park rebuilt session controller')
+      }
+      return
+    }
+    if (ownership.controller.isHitlParked) return
+    try {
+      ownership.controller.acquireHitlPark()
+      log.warn('[BrowserControl] restored missing park after generic resume')
+    } catch {
+      log.error('[BrowserControl] failed to restore park after generic resume')
+    }
+  }
+
+  parkBrowserControl(sessionIds: readonly string[]): string[] {
+    const parked: string[] = []
+    const visitedSessionKeys = new Set<string>()
+    for (const requestedSessionId of new Set(sessionIds.map(normalizeConversationId))) {
+      const target = this.resolveBrowserControlTarget(requestedSessionId)
+      if (!target || visitedSessionKeys.has(target.sessionKey)) continue
+      visitedSessionKeys.add(target.sessionKey)
+
+      let ownership = target.ownership
+      if (
+        ownership
+        && target.session
+        && ownership.controller !== target.session.pauseController
+      ) {
+        const staleOwnership = ownership
+        this.browserControlOwnershipBySessionKey.delete(target.sessionKey)
+        try {
+          staleOwnership.controller.releaseHitlPark()
+          ownership = undefined
+          log.warn('[BrowserControl] migrated ownership to rebuilt session controller')
+        } catch {
+          this.browserControlOwnershipBySessionKey.set(target.sessionKey, staleOwnership)
+          log.error('[BrowserControl] failed to release stale session controller')
+          continue
+        }
+      }
+
+      if (ownership) {
+        this.ensureBrowserControlParkForKey(target.sessionKey)
+        continue
+      }
+      if (!target.session) continue
+
+      try {
+        target.session.pauseController.acquireHitlPark()
+        this.browserControlOwnershipBySessionKey.set(target.sessionKey, {
+          sessionKey: target.sessionKey,
+          controller: target.session.pauseController,
+          aliases: this.buildBrowserControlAliases(
+            target.requestedSessionId,
+            target.sessionKey,
+            target.session.businessThreadId,
+          ),
+        })
+        parked.push(target.requestedSessionId)
+      } catch {
+        log.error('[BrowserControl] failed to acquire park')
+      }
+    }
+    return parked
+  }
+
+  releaseBrowserControl(sessionIds: readonly string[]): string[] {
+    const released: string[] = []
+    const visitedSessionKeys = new Set<string>()
+    for (const requestedSessionId of new Set(sessionIds.map(normalizeConversationId))) {
+      const target = this.resolveBrowserControlTarget(requestedSessionId)
+      if (!target || visitedSessionKeys.has(target.sessionKey) || !target.ownership) continue
+      visitedSessionKeys.add(target.sessionKey)
+
+      this.browserControlOwnershipBySessionKey.delete(target.sessionKey)
+      try {
+        target.ownership.controller.releaseHitlPark()
+        released.push(target.requestedSessionId)
+      } catch (error) {
+        this.browserControlOwnershipBySessionKey.set(target.sessionKey, target.ownership)
+        log.error('[BrowserControl] failed to release park')
+        throw error
+      }
+    }
+    return released
+  }
+
+  getBrowserControlOwnedSessionIds(sessionIds: readonly string[]): string[] {
+    const owned: string[] = []
+    for (const requestedSessionId of new Set(sessionIds.map(normalizeConversationId))) {
+      const target = this.resolveBrowserControlTarget(requestedSessionId)
+      if (target?.ownership) owned.push(target.requestedSessionId)
+    }
+    return owned
+  }
+
+  getBrowserControlStatus(sessionIds: readonly string[]): {
+    ownedSessionIds: string[]
+    parkedSessionIds: string[]
+    unresolvedSessionIds: string[]
+  } {
+    const ownedSessionIds: string[] = []
+    const parkedSessionIds: string[] = []
+    const unresolvedSessionIds: string[] = []
+    for (const sessionId of new Set(sessionIds.map(normalizeConversationId))) {
+      const { requestedSessionId, matchingKeys } =
+        this.getBrowserControlMatchingKeys(sessionId)
+      if (matchingKeys.size === 0) continue
+      if (matchingKeys.size > 1) {
+        unresolvedSessionIds.push(requestedSessionId)
+        log.warn('[BrowserControl] status query matched multiple sessions', {
+          matchingKeyCount: matchingKeys.size,
+        })
+        continue
+      }
+      const sessionKey = matchingKeys.values().next().value
+      if (typeof sessionKey !== 'string') continue
+      const ownership = this.browserControlOwnershipBySessionKey.get(sessionKey)
+      if (!ownership) continue
+      const currentSession = this.sessions.get(sessionKey)
+      if (
+        currentSession
+        && ownership.controller !== currentSession.pauseController
+      ) {
+        ownedSessionIds.push(requestedSessionId)
+        log.warn('[BrowserControl] ownership points to stale session controller')
+        continue
+      }
+      ownedSessionIds.push(requestedSessionId)
+      if (ownership.controller.isHitlParked) parkedSessionIds.push(requestedSessionId)
+    }
+    return { ownedSessionIds, parkedSessionIds, unresolvedSessionIds }
+  }
+
+  areBrowserControlSessionsParked(sessionIds: readonly string[]): boolean {
+    const requestedSessionIds = Array.from(new Set(sessionIds.map(normalizeConversationId)))
+    if (requestedSessionIds.length === 0) return false
+    const status = this.getBrowserControlStatus(requestedSessionIds)
+    return status.unresolvedSessionIds.length === 0
+      && status.parkedSessionIds.length === requestedSessionIds.length
+  }
+
+  clearBrowserControlForStoppedSession(sessionId: string): void {
+    const normalizedSessionId = normalizeConversationId(sessionId)
+    const aliases = new Set([normalizedSessionId])
+    const session = this.sessions.get(sessionId)
+    if (session?.businessThreadId) {
+      aliases.add(normalizeConversationId(session.businessThreadId))
+    }
+
+    const matchingOwnerships = Array.from(
+      this.browserControlOwnershipBySessionKey.values(),
+    ).filter((ownership) => (
+      ownership.sessionKey === sessionId
+      || ownership.aliases.has(normalizedSessionId)
+    ))
+    for (const ownership of matchingOwnerships) {
+      this.browserControlOwnershipBySessionKey.delete(ownership.sessionKey)
+      for (const alias of ownership.aliases) aliases.add(alias)
+      try {
+        ownership.controller.releaseHitlPark()
+      } catch {
+        log.error('[BrowserControl] terminal park release failed')
+      }
+    }
+
+    for (const alias of aliases) {
+      clearUserControlBySession(alias)
+      unlockBySession(alias)
+    }
+  }
+
+  private clearAllBrowserControlForHostStop(): void {
+    const ownerships = Array.from(this.browserControlOwnershipBySessionKey.values())
+    for (const ownership of ownerships) {
+      this.browserControlOwnershipBySessionKey.delete(ownership.sessionKey)
+      try {
+        ownership.controller.releaseHitlPark()
+      } catch {
+        log.error('[BrowserControl] shutdown park release failed')
+      }
+      for (const alias of ownership.aliases) {
+        clearUserControlBySession(alias)
+        unlockBySession(alias)
+      }
+    }
+    clearAllBrowserTabControl()
   }
 
   private armPromoteCancelEchoGuard(...candidateIds: Array<string | undefined | null>): void {
@@ -1380,6 +1676,14 @@ export class ElectronAgentHost {
           isStrict: request.isStrict,
         })
         return { approved: result.approved, scope: result.scope }
+      },
+      // Access Barrier HITL：进程级实装——委托 `AgentHost.presentAccessBarrier`
+      // 把 threadId 落到 session 并组出 InterruptPort（emit + wait）。CLI 出口
+      // 经 `resolveAccessBarrierHostHook()` 注入 BrowserOrchestrator。
+      resolveAccessBarrier: async (context, barrier) => {
+        const host = this.sharedHost
+        if (!host) return { action: 'host_unavailable' }
+        return host.presentAccessBarrier(context, barrier)
       },
     })
   }
@@ -4036,9 +4340,13 @@ export class ElectronAgentHost {
     }
 
     const sessionIds = [...this.sessions.keys()]
-    for (const sid of sessionIds) {
-      this.handleAbort(sid)
-      await sharedHost?.cancelSessionDelivery(sid)
+    try {
+      for (const sid of sessionIds) {
+        this.abortSessionForHostStop(sid)
+        await sharedHost?.cancelSessionDelivery(sid)
+      }
+    } finally {
+      this.clearAllBrowserControlForHostStop()
     }
 
     const sessionsSnapshot = [...this.sessions.values()]
@@ -5269,7 +5577,7 @@ export class ElectronAgentHost {
     queued_run_ids: string[]
   }): void {
     if (payload.status === 'idle' && payload.session_id) {
-      unlockBySession(payload.session_id)
+      this.clearBrowserControlForStoppedSession(payload.session_id)
     }
 
     try {
@@ -6352,7 +6660,10 @@ export class ElectronAgentHost {
         const session = this.sessions.get(key)
         if (!session) continue
         if (shouldPause) session.pauseController.pause()
-        else session.pauseController.resume()
+        else {
+          session.pauseController.resume()
+          this.ensureBrowserControlParkForKey(key)
+        }
       }
       for (const candidate of candidates) this.pendingPauseCandidateIds.delete(candidate)
       return { success: true }
@@ -6404,6 +6715,15 @@ export class ElectronAgentHost {
     const ok = cancelSubagent(childId)
     log.info(`[ElectronAgentHost] agent.subagent.cancel (WS) ${childId.slice(0, 8)}…: ${ok ? 'aborted' : 'not found'}`)
     return { success: ok }
+  }
+
+  /** Host shutdown 专用：即使 promote echo guard 短路 abort，也必须无条件终态双清。 */
+  private abortSessionForHostStop(sessionId: string): void {
+    try {
+      this.handleAbort(sessionId)
+    } finally {
+      this.clearBrowserControlForStoppedSession(sessionId)
+    }
   }
 
   private handleAbort(sessionId?: string): { success: boolean } {
@@ -6508,6 +6828,7 @@ export class ElectronAgentHost {
     // 的 controller，发出后立即停止会整轮跑完。换新改到 afterSessionReady
     //（仅当本轮未取消且旧 signal 已 aborted）。
     session.abortController.abort()
+    this.clearBrowserControlForStoppedSession(key)
     session.pauseController.resume()
     // 清掉 active-plan-tracker，避免下一轮 plan-mode-guard 拿到旧 active plan id。
     try {
@@ -6652,6 +6973,7 @@ export class ElectronAgentHost {
       if (abortedActive && session) {
         session.abortController.abort()
         session.pauseController.resume()
+        this.ensureBrowserControlParkForKey(key)
       }
     }
 

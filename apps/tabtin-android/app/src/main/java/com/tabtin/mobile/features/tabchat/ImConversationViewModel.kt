@@ -12,6 +12,7 @@ import com.tabtin.mobile.data.api.UploadScope
 import com.tabtin.mobile.data.im.CentrifugoClient
 import com.tabtin.mobile.data.im.ExternalContact
 import com.tabtin.mobile.data.im.ExternalContactRepository
+import com.tabtin.mobile.data.im.canSendExternalDirectMessage
 import com.tabtin.mobile.data.im.ImAgentSummary
 import com.tabtin.mobile.data.im.ImAgentTaskThreadResult
 import com.tabtin.mobile.data.im.ImApi
@@ -22,6 +23,7 @@ import com.tabtin.mobile.data.im.ImConversationLabel
 import com.tabtin.mobile.data.im.ImConversationLabelRepository
 import com.tabtin.mobile.data.im.ImConversationDataPlane
 import com.tabtin.mobile.data.im.ImConversation
+import com.tabtin.mobile.data.im.ImConversationType
 import com.tabtin.mobile.data.im.ImConversationService
 import com.tabtin.mobile.data.im.ImConversationStore
 import com.tabtin.mobile.data.im.ImMemberDisplayPolicy
@@ -95,6 +97,7 @@ import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import java.util.UUID
@@ -102,6 +105,14 @@ import javax.inject.Inject
 import kotlin.math.roundToInt
 
 private val mentionAllPattern = Regex("@所有人(?=[\\s,;.!?，。！？、；：]|$)")
+
+/** 外部私聊在发送前重新确认联系人关系，未知或查询失败时保守地不放行发送。 */
+internal enum class ExternalDirectMessageSendAccess {
+    CHECKING,
+    ALLOWED,
+    DENIED,
+    UNAVAILABLE,
+}
 
 internal fun canMentionAgentDirectly(
     agentId: String,
@@ -209,6 +220,10 @@ public class ImConversationViewModel @Inject constructor(
     private val handoffRepository = ImHandoffRepository(imApi)
     private val _detail = MutableStateFlow<ImConversationDetail?>(null)
     public val detail: StateFlow<ImConversationDetail?> = _detail.asStateFlow()
+    private val _externalDirectMessageSendAccess =
+        MutableStateFlow(ExternalDirectMessageSendAccess.CHECKING)
+    internal val externalDirectMessageSendAccess: StateFlow<ExternalDirectMessageSendAccess> =
+        _externalDirectMessageSendAccess.asStateFlow()
     private val _agentBindings = MutableStateFlow<List<ImConversationAgentBinding>>(emptyList())
     public val agentBindings: StateFlow<List<ImConversationAgentBinding>> = _agentBindings.asStateFlow()
     private val _conversationLabelLibrary = MutableStateFlow<List<ImConversationLabel>>(emptyList())
@@ -264,7 +279,8 @@ public class ImConversationViewModel @Inject constructor(
             !isImConversationReadOnly(
                 snapshot = conversationStore.conversations.value.firstOrNull { it.id == conversationId },
                 detail = _detail.value,
-            )
+            ) && (!isExternalDirectMessage() ||
+                _externalDirectMessageSendAccess.value == ExternalDirectMessageSendAccess.ALLOWED)
         },
     )
 
@@ -273,6 +289,7 @@ public class ImConversationViewModel @Inject constructor(
     private val _organizationMembers = MutableStateFlow<List<com.tabtin.mobile.data.model.OrganizationMember>>(emptyList())
     public val organizationMembers: StateFlow<List<com.tabtin.mobile.data.model.OrganizationMember>> = _organizationMembers.asStateFlow()
     private val directMessageOpenMutex = Mutex()
+    private val externalDirectMessageAccessMutex = Mutex()
     private val legacySessionShareRequests =
         ImCardDetailRequestCoalescer<ImSessionShareCard>(viewModelScope)
     private val sessionShareV2Requests =
@@ -390,6 +407,7 @@ public class ImConversationViewModel @Inject constructor(
         foregroundCatchUp.onForeground()
         store.markReadUpToLatest()
         startActiveStateReconcile()
+        viewModelScope.launch { refreshExternalDirectMessageSendAccess() }
     }
 
     public fun onBackground() {
@@ -512,7 +530,69 @@ public class ImConversationViewModel @Inject constructor(
                     conversationLabelRepository.list(it)
                 }.getOrDefault(_conversationLabelLibrary.value)
             }
+        refreshExternalDirectMessageSendAccess()
     }
+
+    private fun isExternalDirectMessage(): Boolean {
+        val snapshot = conversationStore.conversations.value.firstOrNull { it.id == conversationId }
+        val external = _detail.value?.isExternal == true || snapshot?.isExternal == true
+        val directMessage = _detail.value?.isDm == true || snapshot?.type == ImConversationType.DM
+        return external && directMessage
+    }
+
+    private fun externalDirectMessagePeerUserId(): String? {
+        val snapshotPeerUserId = conversationStore.conversations.value
+            .firstOrNull { it.id == conversationId }
+            ?.dmPeerUserId
+            ?.trim()
+            ?.takeIf { it.isNotEmpty() }
+        if (snapshotPeerUserId != null) return snapshotPeerUserId
+        val currentUserId = currentUserId?.trim()?.takeIf { it.isNotEmpty() } ?: return null
+        return _detail.value?.members
+            ?.firstOrNull { !it.isAgent && it.userId != currentUserId }
+            ?.userId
+            ?.trim()
+            ?.takeIf { it.isNotEmpty() }
+    }
+
+    /**
+     * 会话详情里的 can_send 可能还没收到对端解除关系的更新，外部私聊须以联系人目录复核。
+     * 无法确认时也不把消息先乐观入队，避免用户看到“已发送”但实际关系已经结束。
+     */
+    private suspend fun refreshExternalDirectMessageSendAccess(): Boolean =
+        externalDirectMessageAccessMutex.withLock {
+            if (!isExternalDirectMessage()) {
+                _externalDirectMessageSendAccess.value = ExternalDirectMessageSendAccess.ALLOWED
+                return@withLock true
+            }
+            val organizationId = conversationDirectoryOrganizationId
+            val peerUserId = externalDirectMessagePeerUserId()
+            if (organizationId.isNullOrBlank() || peerUserId.isNullOrBlank()) {
+                _externalDirectMessageSendAccess.value = ExternalDirectMessageSendAccess.UNAVAILABLE
+                return@withLock false
+            }
+
+            _externalDirectMessageSendAccess.value = ExternalDirectMessageSendAccess.CHECKING
+            return@withLock runSuspendCatching {
+                canSendExternalDirectMessage(
+                    contacts = externalContactRepository.list(organizationId),
+                    peerUserId = peerUserId,
+                )
+            }.fold(
+                onSuccess = { allowed ->
+                    _externalDirectMessageSendAccess.value = if (allowed) {
+                        ExternalDirectMessageSendAccess.ALLOWED
+                    } else {
+                        ExternalDirectMessageSendAccess.DENIED
+                    }
+                    allowed
+                },
+                onFailure = {
+                    _externalDirectMessageSendAccess.value = ExternalDirectMessageSendAccess.UNAVAILABLE
+                    false
+                },
+            )
+        }
 
     /** 提前以消息列表的 36dp 缓存键解码成员头像，LazyColumn 重新创建 item 时可同步命中。 */
     private fun prewarmAvatarImages(detail: ImConversationDetail?) {
@@ -748,6 +828,13 @@ public class ImConversationViewModel @Inject constructor(
 
     /** 发送文本；[mentions] 非空则正文带 @名字（可读）+ metadata.mentioned_agent_ids（触发回复）。 */
     public fun sendText(rawText: String, mentions: List<ImAgentSummary>) {
+        viewModelScope.launch {
+            if (!refreshExternalDirectMessageSendAccess()) return@launch
+            enqueueText(rawText, mentions)
+        }
+    }
+
+    private fun enqueueText(rawText: String, mentions: List<ImAgentSummary>) {
         val text = rawText.trim()
         val prefix = mentions.joinToString(" ") { "@${it.displayName}" }
         val content = when {
@@ -765,7 +852,17 @@ public class ImConversationViewModel @Inject constructor(
     }
 
     /** 文本/附言与单个附件作为同一条 IM 消息立即入队，网络确认在 Store 后台顺序执行。 */
-    public fun sendDraft(
+    public suspend fun sendDraft(
+        rawText: String,
+        mentions: List<ImDraftMention>,
+        replyToId: Int? = null,
+        card: ImOutgoingCard? = null,
+    ): ImSendOutcome {
+        if (!refreshExternalDirectMessageSendAccess()) return ImSendOutcome.REJECTED_READ_ONLY
+        return enqueueDraft(rawText, mentions, replyToId, card)
+    }
+
+    private fun enqueueDraft(
         rawText: String,
         mentions: List<ImDraftMention>,
         replyToId: Int? = null,
@@ -834,7 +931,8 @@ public class ImConversationViewModel @Inject constructor(
         )
     }
 
-    public fun retryPending(pending: com.tabtin.mobile.data.im.ImPendingMessage): ImSendOutcome {
+    public suspend fun retryPending(pending: com.tabtin.mobile.data.im.ImPendingMessage): ImSendOutcome {
+        if (!refreshExternalDirectMessageSendAccess()) return ImSendOutcome.REJECTED_READ_ONLY
         val outcome = store.enqueueSend(
             content = pending.content,
             messageType = pending.messageType,
@@ -851,11 +949,14 @@ public class ImConversationViewModel @Inject constructor(
     }
 
     /** 名片与指令卡选择后直接发送；失败会进入与普通消息相同的可重试 pending 队列。 */
-    public fun sendCardImmediately(card: ImOutgoingCard): ImSendOutcome = store.enqueueSend(
-        content = card.fallbackContent,
-        messageType = ImMessageType.TEXT,
-        card = card,
-    )
+    public suspend fun sendCardImmediately(card: ImOutgoingCard): ImSendOutcome {
+        if (!refreshExternalDirectMessageSendAccess()) return ImSendOutcome.REJECTED_READ_ONLY
+        return store.enqueueSend(
+            content = card.fallbackContent,
+            messageType = ImMessageType.TEXT,
+            card = card,
+        )
+    }
 
     /** 对齐 Electron“云文件”：加载当前会话组织下全部可分享云文档与多维表格。 */
     public suspend fun loadCardResources(): Result<List<SpaceResource>> {

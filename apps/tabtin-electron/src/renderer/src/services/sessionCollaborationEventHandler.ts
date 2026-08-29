@@ -1,5 +1,25 @@
 import { useIMStore } from '@/stores/useIMStore'
 
+type CachedShareDetail = {
+  session_id?: string | null
+  shared_session_id?: string | null
+  effective_share_id?: string | null
+} | null
+
+export function collectSiblingShareIds(
+  sessionShares: Record<string, { detail?: CachedShareDetail }>,
+  { objectId, sessionId }: { objectId: string; sessionId?: string },
+): string[] {
+  return Object.entries(sessionShares).flatMap(([shareId, entry]) => {
+    if (shareId === objectId) return []
+    const detail = entry?.detail
+    const cardSessionId = detail?.session_id || detail?.shared_session_id || ''
+    const sameTask = Boolean(sessionId && cardSessionId === sessionId)
+    const sameGrant = detail?.effective_share_id === objectId
+    return sameTask || sameGrant ? [shareId] : []
+  })
+}
+
 export function handleSessionCollaborationEnvelope(
   envelope: Record<string, unknown>,
 ): boolean {
@@ -14,12 +34,12 @@ export function handleSessionCollaborationEnvelope(
   ) return false
   const state = useIMStore.getState()
   void state.loadSessionShareV2(objectId, version as number)
-  if (typeof sessionId === 'string' && sessionId) {
-    Object.entries(state.sessionShares).forEach(([shareId, entry]) => {
-      if (shareId !== objectId && entry.detail?.session_id === sessionId) {
-        void state.loadSessionShareV2(shareId)
-      }
-    })
-  }
+  const siblingSessionId = typeof sessionId === 'string' ? sessionId : undefined
+  collectSiblingShareIds(state.sessionShares, {
+    objectId,
+    sessionId: siblingSessionId,
+  }).forEach((shareId) => {
+    void state.loadSessionShareV2(shareId)
+  })
   return true
 }

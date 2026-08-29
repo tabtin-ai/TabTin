@@ -21,11 +21,20 @@ vi.mock('./TabCodePreview', () => ({
   TabCodePreview: ({
     contentDropProps,
     contentOverlay,
+    gitContentRevision,
+    isPaneActive,
   }: {
     contentDropProps: React.HTMLAttributes<HTMLDivElement>
     contentOverlay: React.ReactNode
+    gitContentRevision?: number
+    isPaneActive?: boolean
   }) => (
-    <div data-testid="editor-content" {...contentDropProps}>
+    <div
+      data-testid="editor-content"
+      data-git-content-revision={gitContentRevision}
+      data-pane-active={String(isPaneActive ?? true)}
+      {...contentDropProps}
+    >
       {contentOverlay}
     </div>
   ),
@@ -46,7 +55,10 @@ function createDataTransfer() {
   }
 }
 
-function renderEditorLayout() {
+function renderEditorLayout(
+  gitContentRevisions: Record<string, number> = {},
+  isPaneActive = true,
+) {
   const workspace: TabCodeEditorWorkspace = {
     groupsById: {
       [ROOT_EDITOR_GROUP_ID]: {
@@ -76,8 +88,10 @@ function renderEditorLayout() {
   render(
     <TabCodeEditorGroupLayout
       rootPath="/repo"
+      isPaneActive={isPaneActive}
       workspace={workspace}
       isGitRepo={false}
+      gitContentRevisions={gitContentRevisions}
       gitStatus={new Map()}
       {...props}
     />,
@@ -158,6 +172,18 @@ describe('TabCodeEditorGroupLayout', () => {
       '/repo/b.ts',
       'left',
     )
+  })
+
+  it('把当前路径的 Git 内容版本传给文件预览', () => {
+    renderEditorLayout({ 'a.ts': 7, 'b.ts': 3 })
+
+    expect(screen.getByTestId('editor-content').getAttribute('data-git-content-revision')).toBe('7')
+  })
+
+  it('把外层 Context 标签的激活状态传给文件预览', () => {
+    renderEditorLayout({}, false)
+
+    expect(screen.getByTestId('editor-content').getAttribute('data-pane-active')).toBe('false')
   })
 
   it('shows the git history pane instead of the file preview when the extra tab is active', () => {

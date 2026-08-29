@@ -590,7 +590,15 @@
     "title": "Cambios de código",
     "files": "archivos",
     "viewDiff": "Ver diferencia",
-    "open": "Ver cambios de código"
+    "open": "Ver cambios de código",
+    "editedFiles": "{{count}} archivos editados",
+    "review": "Revisar",
+    "fileList": "Archivos editados",
+    "reviewFile": "Revisar {{file}}",
+    "expandRemaining": "Mostrar los {{count}} archivos restantes",
+    "collapse": "Contraer archivos",
+    "expandRemainingAria": "Mostrar los {{count}} archivos restantes",
+    "collapseAria": "Contraer archivos"
   },
   "turnArtifacts": {
     "title": "Artefactos",

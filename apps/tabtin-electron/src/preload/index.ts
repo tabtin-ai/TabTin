@@ -16,6 +16,7 @@ import {
 } from './auth-token-dedup'
 import { createLoginRelayPreloadApi } from './login-relay'
 import type { LoginRelayAPI } from '../shared/types/login-relay'
+import type { BrowserTabControlSnapshot } from '../main/browser-tab-lock/browserTabInputLock'
 import {
   BROWSER_CONTEXT_MENU_ADD_TO_CONTEXT_CHANNEL,
   type BrowserContextMenuAddToContextPayload,
@@ -1392,7 +1393,13 @@ interface TabTinAPIShape {
     setZoomLevel: (tabId: string, level: number) => Promise<{ success: boolean; error?: string }>
     getZoomLevel: (tabId: string) => Promise<{ success: boolean; level?: number; error?: string }>
     onZoomLevelChanged: (callback: (payload: BrowserZoomLevelChangedPayload) => void) => () => void
-    onAgentTabLockChanged: (callback: (payload: { lockedViewIds: string[] }) => void) => () => void
+    takeOverBrowser: (viewId: string) => Promise<{ success: boolean; sessionIds: string[] }>
+    handBackBrowser: (viewId: string) => Promise<{
+      success: boolean
+      sessionIds: string[]
+      releasedSessionIds?: string[]
+    }>
+    onAgentTabLockChanged: (callback: (snapshot: BrowserTabControlSnapshot) => void) => () => void
   }
 
   // ========== 🆕 webview 容器（ webview 迁移 Phase 2） ==========
@@ -4093,7 +4100,11 @@ const api = {
       ipcRenderer.on('crawl-view:zoom-level-changed', handler)
       return () => { ipcRenderer.removeListener('crawl-view:zoom-level-changed', handler) }
     },
-    onAgentTabLockChanged: overlayOn<{ lockedViewIds: string[] }>('browser-tab-lock:changed'),
+    takeOverBrowser: (viewId: string) =>
+      invokeIpc('browser-tab-control:take-over', viewId),
+    handBackBrowser: (viewId: string) =>
+      invokeIpc('browser-tab-control:hand-back', viewId),
+    onAgentTabLockChanged: overlayOn<BrowserTabControlSnapshot>('browser-tab-lock:changed'),
   },
 
   // ========== 🆕 webview 容器（ webview 迁移 Phase 2） ==========

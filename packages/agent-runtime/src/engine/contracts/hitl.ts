@@ -175,7 +175,12 @@ export interface EnginePermissionHandler {
 // 收成一个端口——emit 什么事件仍由调用方给（wire 协议不动），id 编排 / 超时 /
 // 恢复策略在实现内（`permissions/interrupt-adapter.ts`，组装根绑定）。
 
-export type InterruptKind = 'ask_user' | 'ask_form' | 'request_approval' | 'mode_switch';
+/**
+ * `access_barrier`：浏览器撞上登录墙 / 人机校验时，系统在能力出口发起的专用 HITL kind——
+ * 区别于 `ask_user`（发起方是模型），`access_barrier` 由能力层直接挂起，模型
+ * 不参与「该不该问」的决策（设计 §6.3）。
+ */
+export type InterruptKind = 'ask_user' | 'ask_form' | 'request_approval' | 'mode_switch' | 'access_barrier';
 
 export type InterruptOutcome<T = unknown> =
   | { status: 'resolved'; value: T }

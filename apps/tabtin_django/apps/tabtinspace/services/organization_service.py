@@ -694,11 +694,7 @@ class OrganizationService(BaseService):
                 # quota_only 后，新建组织仍会被这里的硬编码盖回旧的 quota_then_paygo。
                 OrganizationBillingPolicy.objects.get_or_create(
                     organization_id=organization_id,
-                    defaults={
-                        'storage_billing_mode': OrganizationBillingPolicyService.DEFAULT_STORAGE_BILLING_MODE,
-                        'llm_billing_mode': OrganizationBillingPolicyService.DEFAULT_LLM_BILLING_MODE,
-                        'is_active': True,
-                    },
+                    defaults=OrganizationBillingPolicyService.default_policy_create_kwargs(),
                 )
 
                 OrganizationBillingEntitlement.objects.get_or_create(

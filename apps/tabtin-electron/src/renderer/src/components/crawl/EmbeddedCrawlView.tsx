@@ -47,6 +47,7 @@ import { useScopedEventListener, useScopedResizeObserver } from '@hooks/spaceAct
 import { openBrowserHomeInSpace } from '@/services/openBrowserHomeInSpace'
 import i18n from '@/i18n'
 import { AgentBrowserLockOverlay } from './AgentBrowserLockOverlay'
+import { AgentBrowserControlCapsule } from './AgentBrowserControlCapsule'
 
 type Bounds = { x: number; y: number; width: number; height: number }
 type UpdateViewBounds = (force?: boolean) => void
@@ -1371,8 +1372,14 @@ export const EmbeddedCrawlView: React.FC<EmbeddedCrawlViewProps> = ({
       </div>
       </div>
     </Activity>
-    {/* 锁膜必须在 Activity 外：切走标签时 Activity 会把面板收成 0×0 并拆掉 effect，膜量到空尺寸就再也出不来。 */}
-    <AgentBrowserLockOverlay paneRef={paneRef} viewId={tab.id} isActive={isActive} spaceId={spaceId ?? null} />
+    {/* 锁膜和胶囊必须在 Activity 外：切走标签时 Activity 会把面板收成 0×0 并拆掉 effect。 */}
+    <AgentBrowserLockOverlay paneRef={paneRef} viewId={tab.id} isActive={isActive} />
+    <AgentBrowserControlCapsule
+      paneRef={paneRef}
+      viewId={tab.id}
+      isActive={isActive}
+      spaceId={spaceId ?? null}
+    />
     </>
   )
 }

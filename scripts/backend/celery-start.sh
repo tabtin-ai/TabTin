@@ -7,6 +7,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/_celery-platform.sh"
 
 # CELERY_PROFILE=lite：强制 solo（未显式指定时）+ 每队列 concurrency=1 + 抬 max-memory。
 # 与平台默认独立：Linux 全量仍是 prefork，lite 仍用 solo 减进程；macOS 全量默认已是 solo。
+# 默认 / community / lite 只起 critical + default + realtime + beat；全量加 CELERY_PROFILE=full。
 if [[ "${CELERY_PROFILE:-}" == "lite" ]]; then
   : "${CELERY_WORKER_POOL:=solo}"
   : "${CELERY_TRACKER_POOL:=solo}"
@@ -23,6 +24,14 @@ if [[ "${CELERY_PROFILE:-}" == "lite" ]]; then
   : "${CELERY_SCHEDULER_MAX_MEMORY:=1024000}"
   : "${CELERY_FTS_MAX_MEMORY:=1024000}"
   echo "ℹ️  CELERY_PROFILE=lite — pool=${CELERY_WORKER_POOL} / concurrency=1 / max_memory=${CELERY_MAX_MEMORY}"
+fi
+
+CELERY_WORKER_PROFILE="$(_celery_resolved_profile)"
+if [[ "${CELERY_WORKER_PROFILE}" == "full" ]]; then
+  echo "ℹ️  CELERY_PROFILE=full — 启动全部 worker + beat"
+else
+  echo "ℹ️  CELERY_PROFILE=${CELERY_PROFILE:-community} — 启动 critical / default / realtime + beat"
+  echo "   全量：CELERY_PROFILE=full；单队列：bash scripts/backend/celery-worker-local.sh <queue>"
 fi
 
 CELERY_POOL_ARGS="$(_celery_pool_args)"
@@ -197,70 +206,82 @@ PY
 # 队列：critical
 # 并发：${CELERY_CRITICAL_CONCURRENCY:-2}
 # 禁止：heavy/media/docparse/cleanup
+if _celery_should_start_worker critical; then
 start_worker "critical" "${CRITICAL_PID_FILE}" "${CRITICAL_LOG_FILE}" \
   "${PYTHON_BIN}" -m celery -A tabtin worker -l info ${CELERY_POOL_ARGS} \
   -Q critical -c "${CELERY_CRITICAL_CONCURRENCY:-2}" \
   --max-memory-per-child="${CELERY_MAX_MEMORY:-512000}" \
   -n "${NODE_CRITICAL}"
+fi
 
 # worker-default
 # 用途：普通轻量任务和低优先级任务
 # 队列：default,low_priority
 # 并发：${CELERY_DEFAULT_CONCURRENCY:-4}
 # 禁止：realtime/RAG/TabData compute/DocMerge/media/docparse
+if _celery_should_start_worker default; then
 start_worker "default" "${DEFAULT_PID_FILE}" "${DEFAULT_LOG_FILE}" \
   "${PYTHON_BIN}" -m celery -A tabtin worker -l info ${CELERY_POOL_ARGS} \
   -Q default,low_priority -c "${CELERY_DEFAULT_CONCURRENCY:-4}" \
   --max-memory-per-child="${CELERY_MAX_MEMORY:-512000}" \
   -n "${NODE_DEFAULT}"
+fi
 
 # worker-realtime
-# 用途：Channel Gateway 实时投递、polling、retry
+# 用途：Channel Gateway 实时投递、polling、retry；本地 IM 主路径
 # 队列：realtime_delivery
 # 并发：${CELERY_REALTIME_CONCURRENCY:-4}
 # Prefetch：1
+if _celery_should_start_worker realtime; then
 start_worker "realtime" "${REALTIME_PID_FILE}" "${REALTIME_LOG_FILE}" \
   "${PYTHON_BIN}" -m celery -A tabtin worker -l info ${CELERY_POOL_ARGS} \
   -Q realtime_delivery -c "${CELERY_REALTIME_CONCURRENCY:-4}" \
   --prefetch-multiplier=1 \
   --max-memory-per-child="${CELERY_MAX_MEMORY:-512000}" \
   -n "${NODE_REALTIME}"
+fi
 
 # worker-data-ai
 # 用途：RAG / TabData compute / DocMerge
 # 队列：rag_indexing,tabdata_compute,doc_merge
 # 并发：${CELERY_DATA_AI_CONCURRENCY:-4}
 # Prefetch：1
+if _celery_should_start_worker data-ai; then
 start_worker "data-ai" "${DATA_AI_PID_FILE}" "${DATA_AI_LOG_FILE}" \
   "${PYTHON_BIN}" -m celery -A tabtin worker -l info ${CELERY_POOL_ARGS} \
   -Q rag_indexing,tabdata_compute,doc_merge -c "${CELERY_DATA_AI_CONCURRENCY:-4}" \
   --prefetch-multiplier=1 \
   --max-memory-per-child="${CELERY_MAX_MEMORY:-512000}" \
   -n "${NODE_DATA_AI}"
+fi
 
 # worker-heavy
 # 用途：media/docparse/OCR/OSS heavy/文件转换
 # 队列：heavy,media,docparse,tabdata_conversion,pptx_import_oss
 # 并发：${CELERY_HEAVY_CONCURRENCY:-2}
 # Prefetch：1
+if _celery_should_start_worker heavy; then
 start_worker "heavy" "${HEAVY_PID_FILE}" "${HEAVY_LOG_FILE}" \
   "${PYTHON_BIN}" -m celery -A tabtin worker -l info ${CELERY_POOL_ARGS} \
   -Q heavy,media,docparse,tabdata_conversion,pptx_import_oss -c "${CELERY_HEAVY_CONCURRENCY:-2}" \
   --prefetch-multiplier=1 \
   --max-memory-per-child="${CELERY_MAX_MEMORY:-512000}" \
   -n "${NODE_HEAVY}"
+fi
 
 # worker-ai-background
 # 用途：Memory LLM / 任务摘要 / 日记蒸馏（P0 从 heavy 隔离）
 # 队列：ai_background
 # 并发：${CELERY_AI_BACKGROUND_CONCURRENCY:-1}
 # Prefetch：1
+if _celery_should_start_worker ai-background; then
 start_worker "ai-background" "${AI_BACKGROUND_PID_FILE}" "${AI_BACKGROUND_LOG_FILE}" \
   "${PYTHON_BIN}" -m celery -A tabtin worker -l info ${CELERY_POOL_ARGS} \
   -Q ai_background -c "${CELERY_AI_BACKGROUND_CONCURRENCY:-1}" \
   --prefetch-multiplier=1 \
   --max-memory-per-child="${CELERY_MAX_MEMORY:-512000}" \
   -n "${NODE_AI_BACKGROUND}"
+fi
 
 if [[ -f "${BEAT_PID_FILE}" ]] && _celery_pid_alive "$(cat "${BEAT_PID_FILE}")"; then
   echo "Celery beat already running (pid $(cat "${BEAT_PID_FILE}"))"
@@ -297,22 +318,26 @@ fi
 # 用途：Tracker / Agent scheduler
 # 队列：${TRACKER_AGENT_QUEUE:-tracker_agent}
 # 并发：${CELERY_TRACKER_CONCURRENCY:-2}
+if _celery_should_start_worker tracker; then
 start_worker "tracker" "${SCHEDULER_PID_FILE}" "${SCHEDULER_LOG_FILE}" \
   "${PYTHON_BIN}" -m celery -A tabtin worker -l info ${CELERY_TRACKER_POOL_ARGS} \
   -Q "${TRACKER_AGENT_QUEUE}" -c "${CELERY_TRACKER_CONCURRENCY:-2}" \
   --prefetch-multiplier="${CELERY_TRACKER_PREFETCH_MULTIPLIER:-1}" \
   --max-memory-per-child="${CELERY_SCHEDULER_MAX_MEMORY:-512000}" \
   -n "${NODE_SCHEDULER}"
+fi
 
 # worker-search
 # 用途：FTS / ES indexing / health probe
 # 队列：search_indexing
 # 并发：${CELERY_FTS_CONCURRENCY:-4}
+if _celery_should_start_worker search; then
 start_worker "search" "${FTS_PID_FILE}" "${FTS_LOG_FILE}" \
   "${PYTHON_BIN}" -m celery -A tabtin worker -l info ${CELERY_POOL_ARGS} \
   -Q search_indexing -c "${CELERY_FTS_CONCURRENCY:-4}" \
   --max-tasks-per-child="${CELERY_FTS_MAX_TASKS_PER_CHILD:-1000}" \
   --max-memory-per-child="${CELERY_FTS_MAX_MEMORY:-512000}" \
   -n "${NODE_FTS}"
+fi
 
-echo "✅ Celery workers + beat started (python -m celery via ${PYTHON_BIN})"
+echo "✅ Celery workers + beat started (profile=${CELERY_WORKER_PROFILE}, python -m celery via ${PYTHON_BIN})"

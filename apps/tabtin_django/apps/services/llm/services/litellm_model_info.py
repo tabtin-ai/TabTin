@@ -159,12 +159,18 @@ class LiteLLMModelInfoService:
         return payload
 
     @classmethod
-    def search_models(cls, keyword: str) -> Dict[str, Dict[str, Any]]:
+    def search_models(
+        cls,
+        keyword: str,
+        *,
+        provider_hints: set[str] | None = None,
+    ) -> Dict[str, Dict[str, Any]]:
         """
         搜索包含指定关键词的模型
 
         Args:
             keyword: 搜索关键词（如 'gpt-4', 'claude', 'qwen'）
+            provider_hints: 当前渠道对应的 LiteLLM provider；为空则不按渠道收窄
 
         Returns:
             匹配的模型配置字典
@@ -175,17 +181,33 @@ class LiteLLMModelInfoService:
                 return {}
 
             keyword_lower = keyword.lower()
+            hints = {item.strip().lower() for item in (provider_hints or set()) if item and item.strip()}
             matched = {}
 
             for model_name, model_info in model_database.items():
-                if keyword_lower in model_name.lower():
-                    matched[model_name] = model_info
+                if keyword_lower not in model_name.lower():
+                    continue
+                if hints and not cls._matches_provider_hints(model_name, model_info or {}, hints):
+                    continue
+                matched[model_name] = model_info
 
             return matched
 
         except Exception as e:
             logger.error("搜索模型失败: %s", e, exc_info=True)
             return {}
+
+    @staticmethod
+    def _matches_provider_hints(
+        model_name: str,
+        model_info: Dict[str, Any],
+        hints: set[str],
+    ) -> bool:
+        litellm_provider = str(model_info.get("litellm_provider") or "").strip().lower()
+        name = model_name.lower()
+        if litellm_provider and litellm_provider in hints:
+            return True
+        return any(name == hint or name.startswith(f"{hint}/") for hint in hints)
 
     @classmethod
     def get_all_providers(cls) -> Dict[str, list]:

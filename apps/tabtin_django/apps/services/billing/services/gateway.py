@@ -14,7 +14,7 @@ from decimal import Decimal
 from typing import Any, Dict, Optional
 
 from django.conf import settings
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
 
 from apps.services.billing.services.llm_budget_service import OrganizationLlmBudgetService
 from apps.services.billing.services.policy_service import OrganizationBillingPolicyService
@@ -416,13 +416,20 @@ class BillingGateway:
         wallet_available = cls._wallet_available(organization_id)
         if llm_billing_mode == "quota_only":
             # 扣费瀑布：月度配额 + 钱包 组合可覆盖本次预估即放行；
-            # 组合不足时尝试现金自动补充一档（入账钱包），补充后复查。
-            allowed = (
-                provider_covered + effective_included_available + wallet_available
-            ) >= required
-            if not allowed and perform_side_effects:
-                from apps.services.billing.services.llm_topup_service import LlmQuotaTopupService
+            # 组合不足，或低于预警阈值时，尝试现金自动补充一档（入账钱包），补充后复查。
+            from apps.services.billing.services.llm_topup_service import LlmQuotaTopupService
 
+            combined_available = (
+                provider_covered + effective_included_available + wallet_available
+            )
+            allowed = combined_available >= required
+            warning_threshold = LlmQuotaTopupService.warning_threshold_credits(
+                organization_id,
+            )
+            below_warning = (
+                warning_threshold > 0 and combined_available < warning_threshold
+            )
+            if perform_side_effects and (not allowed or below_warning):
                 topup = LlmQuotaTopupService.try_auto_topup(
                     organization_id,
                     trigger="gateway_precheck",
@@ -648,7 +655,39 @@ class BillingGateway:
             funding_mode or None
         ):
             normalized_result["provider_credit_credits"] = str(provider_credits)
+        cls._maybe_topup_after_settle(organization_id)
         return normalized_result
+
+    @classmethod
+    def _maybe_topup_after_settle(cls, organization_id: str) -> None:
+        """结算后若组合余额已低于预警阈值，提交后再补一档，避免下一跳撞空。"""
+        try:
+            from apps.services.billing.services.llm_topup_service import LlmQuotaTopupService
+
+            warning_threshold = LlmQuotaTopupService.warning_threshold_credits(
+                organization_id,
+            )
+            if warning_threshold <= 0:
+                return
+            remaining = cls._quantize(
+                OrganizationLlmBudgetService.get_remaining_quota_credits(organization_id),
+            ) + cls._wallet_available(organization_id)
+            if remaining >= warning_threshold:
+                return
+
+            def _topup() -> None:
+                LlmQuotaTopupService.try_auto_topup(
+                    organization_id,
+                    trigger="gateway_settle",
+                )
+
+            transaction.on_commit(_topup)
+        except Exception as exc:
+            logger.warning(
+                "[BillingGateway] post-settle auto top-up skipped: organization=%s err=%s",
+                organization_id,
+                exc,
+            )
 
     @classmethod
     def settle_fixed_usage(

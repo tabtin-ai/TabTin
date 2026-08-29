@@ -71,10 +71,13 @@ export async function runWithBrowserApprovalContext<T>(
 ): Promise<T> {
   const threadId = extractBrowserApprovalThreadId(body)
   if (!threadId) return fn()
+  // Access Barrier / 审批：scheduled 线程必须标成 scheduled，presentAccessBarrier
+  // 才走诚实失败不弹卡（设计 §7.2）；不可一律 interactive。
+  const interactionMode = isScheduledRuntimeThread(threadId) ? 'scheduled' : 'interactive'
   return browserApprovalContext.run(
     { threadId },
     () => runWithHumanInteractionContext(
-      { threadId, interactionMode: 'interactive' },
+      { threadId, interactionMode },
       fn,
     ),
   )

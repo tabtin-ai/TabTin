@@ -1,8 +1,9 @@
 import json
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone as datetime_timezone
 from decimal import Decimal
 from types import SimpleNamespace
 from unittest.mock import patch
+from uuid import uuid4
 
 from django.test import TestCase, override_settings
 from django.utils import timezone
@@ -11,6 +12,8 @@ from apps.services.payment.api import create_payment_order
 from apps.services.payment.schemas import CreateOrderRequest
 from apps.users.membership.api import (
     _create_membership_payment,
+    get_organization_membership,
+    get_subscription_overview,
     preview_membership_purchase,
 )
 from apps.users.membership.exceptions import MembershipLifecycleError
@@ -62,7 +65,7 @@ class MembershipLifecyclePreviewTests(TestCase):
             level=20,
             sort_order=-999,
         )
-        OrganizationMembership.objects.create(
+        self.membership = OrganizationMembership.objects.create(
             organization_id="org-preview-switch",
             tier=self.current_tier,
             status="active",
@@ -119,6 +122,43 @@ class MembershipLifecyclePreviewTests(TestCase):
         )
         self.assertEqual(result["tier"]["id"], self.current_tier.id)
         self.assertTrue(resolve.called)
+
+
+class CommunityPermanentMembershipStatusTests(TestCase):
+    databases = {"default"}
+
+    def setUp(self):
+        self.organization_id = str(uuid4())
+        self.tier = create_tier(
+            tier_type="community",
+            level=1,
+            price="0.00",
+        )
+        self.membership = OrganizationMembership.objects.create(
+            organization_id=self.organization_id,
+            tier=self.tier,
+            status="active",
+            start_date=timezone.now(),
+            end_date=datetime.max.replace(tzinfo=datetime_timezone.utc),
+        )
+        self.request = SimpleNamespace(auth=SimpleNamespace(id="community-user"))
+
+    @patch("apps.users.membership.api.ensure_organization_permission")
+    def test_membership_endpoint_does_not_add_grace_to_permanent_end_date(self, _permission):
+        response = get_organization_membership(self.request, self.organization_id)
+
+        self.assertTrue(response["success"])
+        self.assertEqual(response["data"]["end_date"], self.membership.end_date)
+        self.assertIsNone(response["data"]["grace_period_end"])
+        self.assertIsNone(response["data"]["grace_days_remaining"])
+
+    @patch("apps.users.membership.api.ensure_organization_permission")
+    def test_overview_endpoint_supports_permanent_community_membership(self, _permission):
+        response = get_subscription_overview(self.request, self.organization_id)
+
+        self.assertTrue(response["success"])
+        self.assertEqual(response["data"]["membership"]["end_date"], self.membership.end_date)
+        self.assertIsNone(response["data"]["membership"]["grace_period_end"])
 
 
 class MembershipLifecyclePurchaseGuardTests(TestCase):

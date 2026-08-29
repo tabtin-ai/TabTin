@@ -1652,6 +1652,8 @@ export interface SessionShareInfo {
   access_epoch?: number
   /** 同一任务重复分享时当前真正生效的授权；历史卡据此打开最新授权。 */
   effective_share_id?: string
+  /** 任务 id；停权后 `session_id` 会清空，兄弟卡实时刷新仍靠这个字段对齐。 */
+  shared_session_id?: string | null
   delivery_status?: 'pending' | 'confirmed' | 'unconfirmed' | 'rejected'
   role?: SessionShareV2Role
   phase?: SessionShareV2Phase
@@ -1838,6 +1840,7 @@ export async function createSessionContinuation(params: {
   recipientUserId: string
   conversationId?: string
   clientRequestId: string
+  includeContext?: boolean
 }): Promise<SessionContinuationDetail> {
   return shareApiRequest<SessionContinuationDetail>(
     'POST',
@@ -1847,7 +1850,17 @@ export async function createSessionContinuation(params: {
       recipient_user_id: params.recipientUserId,
       conversation_id: params.conversationId,
       client_request_id: params.clientRequestId,
+      include_context: params.includeContext ?? true,
     },
+  )
+}
+
+export function isContinuationLocalFileTooLargeError(error: unknown): boolean {
+  return (
+    typeof error === 'object'
+    && error !== null
+    && 'code' in error
+    && (error as { code?: unknown }).code === 'LOCAL_FILE_TOO_LARGE'
   )
 }
 

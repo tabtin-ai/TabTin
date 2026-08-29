@@ -532,18 +532,16 @@ def apply_provider_request_policy(
     incoming_body: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """把直连代理的厂商请求策略委托给原 Provider Service。"""
-    from apps.services.llm.registry import ProviderRegistry
+    from apps.services.llm.adapter_resolver import (
+        resolve_adapter_name,
+        resolve_provider_adapter,
+    )
 
-    provider = ctx.provider
-    provider_name = str(
-        getattr(provider, "provider_key", "")
-        or getattr(provider, "name", "")
-        or ""
-    ).strip().lower()
-    if not provider_name:
+    adapter_name = resolve_adapter_name(ctx.provider)
+    if not adapter_name:
         return upstream_body
 
-    service_class = ProviderRegistry.get_service_class(provider_name)
+    service_class = resolve_provider_adapter(ctx.provider)
     prepare_request = getattr(service_class, "prepare_proxy_request", None)
     if not callable(prepare_request):
         return upstream_body

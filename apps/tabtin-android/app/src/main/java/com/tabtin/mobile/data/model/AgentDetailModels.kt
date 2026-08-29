@@ -85,53 +85,6 @@ public data class OrgMcpConnectionListResponse(
     val total: Int? = null,
 )
 
-/** Electron 本机 MCP 来源摘要（只读）。 */
-@Serializable
-public data class AgentLocalMcpSource(
-    val kind: String = "",
-    val label: String = "",
-    @SerialName("org_connection_id")
-    @JsonNames("orgConnectionId")
-    val orgConnectionId: String? = null,
-) {
-    public val isOrganization: Boolean
-        get() = kind == "organization"
-}
-
-/**
- * Agent 在在线 Electron 上已挂载且启用的 MCP 摘要。
- * 字段兼容 camelCase / snake_case（Django 与 Electron 摘要可能混用）。
- */
-@Serializable
-public data class AgentLocalMcpAttachment(
-    val id: String,
-    val name: String = "",
-    val description: String = "",
-    @SerialName("transport_kind")
-    @JsonNames("transportKind")
-    val transportKind: String = "",
-    val url: String? = null,
-    val command: String? = null,
-    val enabled: Boolean = true,
-    val source: AgentLocalMcpSource? = null,
-) {
-    /** 品牌匹配用：HTTP 取 url。 */
-    public val endpointForBrand: String?
-        get() = url?.trim()?.takeIf { it.isNotEmpty() }
-
-    public val sourceKind: OrgMcpSourceKind
-        get() = if (source?.isOrganization == true) {
-            OrgMcpSourceKind.ORGANIZATION
-        } else {
-            OrgMcpSourceKind.LOCAL
-        }
-}
-
-@Serializable
-public data class AgentLocalMcpAttachmentListResponse(
-    val connections: List<AgentLocalMcpAttachment> = emptyList(),
-)
-
 /** AI分身作用域下的一条长期记忆。 */
 @Serializable
 public data class AgentMemoryRecord(

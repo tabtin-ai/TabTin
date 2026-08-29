@@ -1317,15 +1317,58 @@ describe('useIMStore.createConversationAndActivate', () => {
     expect(mockActivateConversation).not.toHaveBeenCalled()
   })
 
-  it('普通群聊至少需要选择两名成员', async () => {
+  it('普通群聊可由创建者单独创建', async () => {
+    mockCreateGroup.mockResolvedValue({ conversation_id: 'conv-solo-group' })
+    mockGetConversation.mockResolvedValue(buildConversation({
+      id: 'conv-solo-group',
+      type: CONVERSATION_TYPE_GROUP,
+      name: '个人群组',
+      member_count: 1,
+      dm_peer_user_id: null,
+    }))
+
+    await expect(useIMStore.getState().createConversationAndActivate({
+      organizationId: 'ws-1',
+      kind: 'group',
+      memberIds: [],
+      groupName: '个人群组',
+    })).resolves.toBe('conv-solo-group')
+
+    expect(mockCreateGroup).toHaveBeenCalledWith(
+      'ws-1',
+      '个人群组',
+      [],
+      '',
+      undefined,
+      [],
+    )
+    expect(mockActivateConversation).toHaveBeenCalledWith('conv-solo-group', 'im-group')
+  })
+
+  it('普通群聊再选一名成员即可创建', async () => {
+    mockCreateGroup.mockResolvedValue({ conversation_id: 'conv-two-person' })
+    mockGetConversation.mockResolvedValue(buildConversation({
+      id: 'conv-two-person',
+      type: CONVERSATION_TYPE_GROUP,
+      name: '两人群',
+      dm_peer_user_id: null,
+    }))
+
     await expect(useIMStore.getState().createConversationAndActivate({
       organizationId: 'ws-1',
       kind: 'group',
       memberIds: ['user-2'],
-      groupName: '人数不足',
-    })).rejects.toThrow('requires at least two members')
+      groupName: '两人群',
+    })).resolves.toBe('conv-two-person')
 
-    expect(mockCreateGroup).not.toHaveBeenCalled()
+    expect(mockCreateGroup).toHaveBeenCalledWith(
+      'ws-1',
+      '两人群',
+      ['user-2'],
+      '',
+      undefined,
+      [],
+    )
   })
 
   it('创建群聊后失效组织权益用量缓存，DM 不触发', async () => {
@@ -2916,6 +2959,89 @@ describe('useIMStore.sendMessage read receipt', () => {
     } finally {
       vi.useRealTimers()
     }
+  })
+
+  it('发送确认后为群消息补上未读回执，避免切开会话才出现已读圈', async () => {
+    mockSendMessage.mockResolvedValue({
+      id: 44,
+      seq: 44,
+      conversation_id: 'conv-1',
+      created_at: '2026-08-29T09:15:00Z',
+      read_receipt: { read_count: 0, recipient_count: 2 },
+    })
+    useIMStore.setState({
+      conversations: [buildConversation({ type: CONVERSATION_TYPE_GROUP, member_count: 3 })] as never,
+      messages: { 'conv-1': [] } as never,
+    })
+
+    await useIMStore.getState().sendMessage({
+      convId: 'conv-1',
+      content: '刚发出',
+    })
+
+    expect(useIMStore.getState().messages['conv-1'][0].read_receipt).toEqual({
+      read_count: 0,
+      recipient_count: 2,
+    })
+  })
+
+  it('发送确认时服务端未带回执，仍按成员数补未读圈', async () => {
+    mockSendMessage.mockResolvedValue({
+      id: 45,
+      seq: 45,
+      conversation_id: 'conv-1',
+      created_at: '2026-08-29T09:16:00Z',
+    })
+    useIMStore.setState({
+      conversations: [buildConversation({ type: CONVERSATION_TYPE_GROUP, member_count: 3 })] as never,
+      messages: { 'conv-1': [] } as never,
+    })
+
+    await useIMStore.getState().sendMessage({
+      convId: 'conv-1',
+      content: '仍应看见圈',
+    })
+
+    expect(useIMStore.getState().messages['conv-1'][0].read_receipt).toEqual({
+      read_count: 0,
+      recipient_count: 2,
+    })
+  })
+
+  it('对端回执先于发送确认到达时，确认后仍标已读', async () => {
+    const pending = deferred<{
+      id: number
+      seq: number
+      conversation_id: string
+      created_at: string
+    }>()
+    mockSendMessage.mockReturnValue(pending.promise)
+    useIMStore.setState({
+      conversations: [buildConversation({ type: CONVERSATION_TYPE_GROUP, member_count: 2 })] as never,
+      messages: { 'conv-1': [] } as never,
+    })
+
+    const sending = useIMStore.getState().sendMessage({
+      convId: 'conv-1',
+      content: '竞态',
+    })
+    await Promise.resolve()
+    expect(useIMStore.getState().messages['conv-1'][0]._optimistic).toBe(true)
+
+    useIMStore.getState().onReadReceipt('conv-1', 'user-2', 46, 46, 0)
+
+    pending.resolve({
+      id: 46,
+      seq: 46,
+      conversation_id: 'conv-1',
+      created_at: '2026-08-29T09:17:00Z',
+    })
+    await sending
+
+    expect(useIMStore.getState().messages['conv-1'][0].read_receipt).toEqual({
+      read_count: 1,
+      recipient_count: 1,
+    })
   })
 
   it('拒绝向已移除组织成员的只读私聊发送消息', async () => {
