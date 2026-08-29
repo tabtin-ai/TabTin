@@ -1,0 +1,87 @@
+name: 'Bug report / 缺陷报告'
+description: '报告可复现问题 / Report a reproducible problem'
+title: '[Bug] '
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        不要公开安全漏洞或敏感信息。安全问题请使用 Security 页面的私密报告入口。
+
+        Do not disclose vulnerabilities or sensitive information. Use private reporting on the Security page.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: '确认 / Confirm'
+      options:
+        - label: '已搜索现有 Issues / I searched existing Issues'
+          required: true
+        - label: '可在最新公开稳定版本复现 / Reproduces on the latest public stable version'
+          required: true
+        - label: '已删除敏感信息 / Sensitive information is removed'
+          required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: '版本 / Version'
+      placeholder: 'v0.x.x or commit'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: '组件 / Component'
+      options:
+        - 'Desktop / 桌面端'
+        - 'Server / 服务端'
+        - 'iOS'
+        - 'Android'
+        - 'CLI'
+        - 'Community Server'
+        - 'Documentation / 文档'
+        - 'Other / 其他'
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: '环境 / Environment'
+      description: '系统、架构、部署方式和相关版本 / OS, architecture, deployment, and relevant versions'
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: '复现步骤 / Steps to reproduce'
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: '预期结果 / Expected'
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: '实际结果 / Actual'
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: '脱敏证据 / Sanitized evidence'
+      description: '日志、截图、录屏或临时绕过方式 / Logs, screenshots, recordings, or workaround'

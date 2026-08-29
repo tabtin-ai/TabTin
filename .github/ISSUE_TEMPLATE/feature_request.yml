@@ -1,0 +1,73 @@
+name: 'Feature request / 功能建议'
+description: '从用户问题提出改进 / Propose an improvement from a user problem'
+title: '[Feature] '
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        先描述用户和问题，再讨论实现。开放想法请使用 Discussions。
+
+        Start with the user and problem before discussing implementation. Use Discussions for open ideas.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: '确认 / Confirm'
+      options:
+        - label: '已搜索 Issues 和 Discussions / I searched Issues and Discussions'
+          required: true
+        - label: '这不是安全漏洞 / This is not a security vulnerability'
+          required: true
+
+  - type: textarea
+    id: scenario
+    attributes:
+      label: '用户与场景 / User and scenario'
+      description: '谁在什么情况下需要它？/ Who needs this, and when?'
+    validations:
+      required: true
+
+  - type: textarea
+    id: obstacle
+    attributes:
+      label: '当前阻碍 / Current obstacle'
+      description: '现有流程造成什么成本？/ What cost does the current flow create?'
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: '期望结果 / Desired outcome'
+      description: '描述用户结果，不必指定技术实现 / Describe the user outcome without prescribing implementation'
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: '替代方案 / Alternatives'
+      description: '当前绕过方式及不足 / Current workarounds and limitations'
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: '影响范围 / Impact'
+      options:
+        - '个人工作流 / Individual workflow'
+        - '团队协作 / Team collaboration'
+        - 'Community Server 与管理 / Community Server and administration'
+        - 'Agent Runtime 与工具 / Agent Runtime and tools'
+        - '开发者体验 / Developer experience'
+        - '文档与社区 / Documentation and community'
+        - '其他 / Other'
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: '示例与边界 / Examples and boundaries'
+      description: '案例、草图、链接，以及本建议不解决什么 / Cases, sketches, links, and non-goals'

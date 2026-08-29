@@ -1,0 +1,19 @@
+INFO ✅ 注册生成器: speedcrawl - 快速 Schema 生成（apps/crawl）
+INFO ✅ 注册生成器: langgraph - LangGraph AI 生成（apps/langgraph）
+INFO ✅ 注册生成器: market - 模板市场（apps/schema/market）
+INFO ✅ 注册生成器: manual - 手动创建
+/usr/local/lib/python3.10/dist-packages/pydantic/_internal/_fields.py:198: UserWarning: Field name "schema" in "DiagnosisRequestSchema" shadows an attribute in parent "Schema"
+  warnings.warn(
+/usr/local/lib/python3.10/dist-packages/pydantic/_migration.py:283: UserWarning: `pydantic.generics:GenericModel` has been moved to `pydantic.BaseModel`.
+  warnings.warn(f'`{import_path}` has been moved to `{new_location}`.')
+/usr/local/lib/python3.10/dist-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+* 'schema_extra' has been renamed to 'json_schema_extra'
+  warnings.warn(message, UserWarning)
+/usr/local/lib/python3.10/dist-packages/pydantic/_internal/_fields.py:198: UserWarning: Field name "schema" in "SchemaSaveRequest" shadows an attribute in parent "BaseModel"
+  warnings.warn(
+/usr/local/lib/python3.10/dist-packages/pydantic/_internal/_fields.py:198: UserWarning: Field name "schema_json" in "SchemaUpdateRequest" shadows an attribute in parent "BaseModel"
+  warnings.warn(
+✅ Auth路由注册成功
+[
+]
+DEBUG Shutting down executor...
