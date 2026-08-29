@@ -19,7 +19,6 @@ import com.tabtin.mobile.data.model.AgentSkillLink
 import com.tabtin.mobile.data.model.AgentSkillLinkListResponse
 import com.tabtin.mobile.data.model.AgentSkillRemovalResult
 import com.tabtin.mobile.data.model.AgentSkillUpdateRequest
-import com.tabtin.mobile.data.model.AgentLocalMcpAttachmentListResponse
 import com.tabtin.mobile.data.model.OrgMcpConnectionListResponse
 import com.tabtin.mobile.data.model.AgentListResponse
 import com.tabtin.mobile.data.model.AgentTemplateListResponse
@@ -424,15 +423,6 @@ public interface ContextApi {
     public suspend fun getOrgMcpConnections(
         @Path("organizationId") organizationId: String,
     ): ApiEnvelope<OrgMcpConnectionListResponse>
-
-    /**
-     * Agent 在当前用户在线 Electron 上已挂载且启用的 MCP（只读）。
-     * 电脑离线时 HTTP 409 + DEVICE_RUNTIME_OFFLINE / UNAVAILABLE。
-     */
-    @GET("context/agents/{agentId}/local-mcp/attachments")
-    public suspend fun getAgentLocalMcpAttachments(
-        @Path("agentId") agentId: String,
-    ): ApiEnvelope<AgentLocalMcpAttachmentListResponse>
 
     @GET("context/projects/invitations/pending")
     public suspend fun getPendingProjectInvitations(): ApiEnvelope<PendingProjectInvitationListResponse>

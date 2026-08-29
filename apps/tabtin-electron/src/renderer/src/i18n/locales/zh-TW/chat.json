@@ -590,7 +590,15 @@
     "title": "程式碼改動",
     "files": "個文件",
     "viewDiff": "看 Diff",
-    "open": "檢視代碼改動 Diff"
+    "open": "檢視代碼改動 Diff",
+    "editedFiles": "已編輯 {{count}} 個文件",
+    "review": "檢視",
+    "fileList": "已編輯文件",
+    "reviewFile": "檢視 {{file}}",
+    "expandRemaining": "展開剩餘 {{count}} 個文件",
+    "collapse": "收起文件",
+    "expandRemainingAria": "展開剩餘 {{count}} 個文件",
+    "collapseAria": "收起文件"
   },
   "turnArtifacts": {
     "title": "產物",

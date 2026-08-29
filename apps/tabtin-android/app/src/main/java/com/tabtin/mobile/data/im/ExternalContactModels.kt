@@ -19,6 +19,22 @@ public data class ExternalContact(
     @SerialName("peer_organization_name") val peerOrganizationName: String = "",
 )
 
+/**
+ * 外部私信的发送资格只由当前联系人关系决定；已解除、拉黑、暂停以及没有对应关系
+ * 均不能继续向对方发送。调用方应在真正发送前重新读取联系人目录，不能依赖会话的旧快照。
+ */
+public fun canSendExternalDirectMessage(
+    contacts: List<ExternalContact>,
+    peerUserId: String,
+): Boolean {
+    val normalizedPeerUserId = peerUserId.trim()
+    if (normalizedPeerUserId.isEmpty()) return false
+    return contacts.any { contact ->
+        contact.peerUserId.trim() == normalizedPeerUserId &&
+            contact.relationship.equals("friend", ignoreCase = true)
+    }
+}
+
 @Serializable
 public data class ExternalContactCandidate(
     @SerialName("user_id") val userId: String = "",

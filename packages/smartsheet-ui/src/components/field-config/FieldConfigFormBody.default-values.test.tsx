@@ -243,6 +243,23 @@ describe('FieldConfigFormBody select defaults', () => {
     }
   })
 
+  it('renders a boolean control for checkbox defaults', () => {
+    const { container, cleanup } = renderFieldConfigForm({
+      ...baseState,
+      fieldType: 'checkbox',
+      defaultLiteral: 'true',
+    })
+
+    try {
+      const checkbox = container.querySelector('#field-default-checkbox')
+      expect(checkbox).not.toBeNull()
+      expect(checkbox?.getAttribute('data-state')).toBe('checked')
+      expect(container.querySelector('input[placeholder="fieldSettingPanel.defaultLiteralPlaceholder"]')).toBeNull()
+    } finally {
+      cleanup()
+    }
+  })
+
   it.each(['percent', 'currency'] as const)('does not show default value controls for %s fields', (fieldType) => {
     const { container, cleanup } = renderFieldConfigForm({
       ...baseState,

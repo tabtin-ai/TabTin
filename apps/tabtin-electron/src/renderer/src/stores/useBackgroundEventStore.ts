@@ -69,6 +69,8 @@ const QUEUEABLE_EVENT_TYPE_PREFIXES = [
   'agent.stream.approval_resolved',
   // W4 (2026-05-11): ask 三件套合一为 ask_user_required，多选问答 HITL。
   'agent.stream.ask_user_required',
+  // Access Barrier HITL：系统撞墙卡片，须入桶才能在后台会话弹出。
+  'agent.stream.access_barrier_required',
   'agent.stream.persist_error',
   'agent.stream.system_notice',
   'agent.stream.subagent_failed',

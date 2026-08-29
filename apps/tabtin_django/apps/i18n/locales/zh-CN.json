@@ -569,6 +569,7 @@
     "base_url_invalid": "API Base URL 必须是合法的 http/https 地址",
     "provider_key_required": "请填写渠道标识",
     "provider_key_invalid": "渠道标识仅支持小写字母、数字与 ._-，长度 3-64",
+    "model_endpoint_host_mismatch": "当前连接已绑定其他 API 地址，请为不同 API 地址创建新的连接。",
 
     "provider_list_success": "获取用户配置成功",
     "provider_list_failed": "获取用户配置失败: {detail}",

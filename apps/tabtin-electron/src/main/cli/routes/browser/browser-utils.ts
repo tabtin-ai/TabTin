@@ -1,7 +1,15 @@
 import http from 'node:http'
 import { okResponse } from '@tabtin/agent-wire'
 import type { SendJSON, ActionExecutor } from './_helpers'
-import { buildBrowserRequestScope, resolveTabId, makeTaskId, sendExecutorResult, errorResponse } from './_helpers'
+import {
+  buildBrowserRequestScope,
+  resolveTabId,
+  makeTaskId,
+  sendExecutorResult,
+  errorResponse,
+  handleRouteError,
+} from './_helpers'
+import { BrowserTabUserInControlError } from '../../../browser-tab-lock/browserTabInputLock'
 
 const batchLocks = new Map<string, Promise<void>>()
 
@@ -93,14 +101,37 @@ export async function handleSessionRoute(
       for (const action of actions) {
         try {
           const actionType = action.type
-          const actionBody = { ...action, runId: body.runId, tabId: action.tabId || body?.tabId }
+          const actionParams =
+            action?.params && typeof action.params === 'object' && !Array.isArray(action.params)
+              ? action.params
+              : {}
+          const actionBody = {
+            ...actionParams,
+            ...action,
+            runId: requestScope.runId,
+            tabId: action.tabId || actionParams.tabId || body?.tabId,
+            ...requestScope,
+          }
           delete actionBody.type
+          delete actionBody.params
+          delete actionBody._thread_id
+          delete actionBody.thread_id
+          delete actionBody.threadId
+          if (requestScope._thread_id) {
+            actionBody._thread_id = requestScope._thread_id
+          }
 
           const internalUrl = `/browser/${actionType}`
-          const resultPromise = new Promise<any>((resolve) => {
+          const resultPromise = new Promise<{ status: number; payload: any }>((resolve) => {
             let resolved = false
-            const safeResolve = (v: any) => { if (!resolved) { resolved = true; resolve(v) } }
-            const batchSendJSON = (_r: any, _s: number, d: any) => safeResolve(d)
+            const safeResolve = (status: number, payload: any) => {
+              if (!resolved) {
+                resolved = true
+                resolve({ status, payload })
+              }
+            }
+            const batchSendJSON = (_r: any, status: number, payload: any) =>
+              safeResolve(status, payload)
             // BT-005: 传入 noop res，防止子路由直接写入真实连接与 batchSendJSON 产生双写
             const noopRes = {
               write: () => {},
@@ -109,10 +140,24 @@ export async function handleSessionRoute(
               writeHead: () => {},
             } as unknown as http.ServerResponse
             handleBrowserRoute(internalUrl, 'POST', actionBody, noopRes, batchSendJSON)
-              .catch((err: any) => safeResolve({ ok: false, error: err?.message }))
+              .catch((err: any) => {
+                if (err instanceof BrowserTabUserInControlError) {
+                  handleRouteError(err, batchSendJSON, noopRes)
+                  return
+                }
+                safeResolve(500, { ok: false, error: err?.message })
+              })
           })
 
-          const result = await resultPromise
+          const { status, payload: result } = await resultPromise
+          if (
+            status === 409
+            && result?.ok === false
+            && result?.error?.code === 'BROWSER_TAB_USER_IN_CONTROL'
+          ) {
+            sendJSON(res, status, result)
+            return true
+          }
           results.push({ type: actionType, ...result })
           if (stopOnError && result.ok === false) break
         } catch (err: any) {

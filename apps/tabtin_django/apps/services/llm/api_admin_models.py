@@ -18,6 +18,7 @@ from .api_common import (
     envelope_errors,
     _get_organization_default_model_id,
     _extract_token_limits,
+    validate_model_endpoint_host,
 )
 from .models import LLMProvider, LLMModel, LLMSceneBinding
 from .schemas import (
@@ -251,6 +252,13 @@ def admin_create_model(request, payload: AdminModelCreateRequest):
             message="base_url 不能为空：请填写模型端点或先配置渠道默认端点",
             status_code=400,
         )
+    host_mismatch = validate_model_endpoint_host(provider, new_base_url)
+    if host_mismatch:
+        return error_response_with_status(
+            "MODEL_ENDPOINT_HOST_MISMATCH",
+            message=host_mismatch,
+            status_code=400,
+        )
     model = LLMModel.objects.create(
         provider=provider,
         model_name=model_name,
@@ -327,6 +335,17 @@ def _do_admin_update_model(request, model_id: str, payload: AdminModelUpdateRequ
             return error_response_with_status(
                 "BAD_REQUEST",
                 message="base_url 不能为空",
+                status_code=400,
+            )
+        host_mismatch = validate_model_endpoint_host(
+            model.provider,
+            _new_base_url,
+            exclude_model_id=model.id,
+        )
+        if host_mismatch:
+            return error_response_with_status(
+                "MODEL_ENDPOINT_HOST_MISMATCH",
+                message=host_mismatch,
                 status_code=400,
             )
         model.base_url = _new_base_url

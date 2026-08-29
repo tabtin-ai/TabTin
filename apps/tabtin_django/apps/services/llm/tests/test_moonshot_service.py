@@ -88,6 +88,32 @@ class MoonshotServiceTestCase(SimpleTestCase):
         self.assertEqual(body["prompt_cache_key"], "conversation-1")
         get_service_class.assert_called_once_with("moonshot")
 
+    def test_proxy_policy_prefers_registered_plan_key_over_name(self):
+        ctx = ProxyContext(
+            session_id="conversation-1",
+            provider=SimpleNamespace(provider_key="kimi_coding", name="moonshot"),
+        )
+
+        with patch(
+            "apps.services.llm.registry.ProviderRegistry.get_service_class",
+            return_value=MoonshotService,
+        ) as get_service_class:
+            apply_provider_request_policy({"model": "kimi-for-coding", "messages": []}, ctx)
+            get_service_class.assert_called_once_with("kimi_coding")
+
+    def test_proxy_policy_uses_registered_name_for_connection_slug(self):
+        ctx = ProxyContext(
+            session_id="conversation-1",
+            provider=SimpleNamespace(provider_key="openai-openrouter", name="openai"),
+        )
+
+        with patch(
+            "apps.services.llm.registry.ProviderRegistry.get_service_class",
+            return_value=MoonshotService,
+        ) as get_service_class:
+            apply_provider_request_policy({"model": "gpt-4o", "messages": []}, ctx)
+            get_service_class.assert_called_once_with("openai")
+
     def test_proxy_policy_preserves_legacy_explicit_cache_key(self):
         body = MoonshotService.prepare_proxy_request(
             {"model": "kimi-k3", "messages": []},

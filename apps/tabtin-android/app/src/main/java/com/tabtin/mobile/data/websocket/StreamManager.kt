@@ -14,6 +14,7 @@ import com.tabtin.mobile.data.model.AskUserOption
 import com.tabtin.mobile.data.model.AskUserQuestion
 import com.tabtin.mobile.data.model.BlockItem
 import com.tabtin.mobile.data.model.formalOssImagePayload
+import com.tabtin.mobile.data.model.isHttpImageUrl
 import com.tabtin.mobile.data.model.ChatMessage
 import com.tabtin.mobile.data.model.ConversationFocusContext
 import com.tabtin.mobile.data.model.ConversationRuntimeConfiguration
@@ -2149,6 +2150,7 @@ internal fun decodeRichContentBlock(block: JsonObject): BlockItem {
     val payload = block["payload"] as? JsonObject
     val kind = jsonString(payload, "kind") ?: jsonString(block, "kind")
     val formalImage = formalOssImagePayload(kind, payload)
+    val formalFile = formalOssFilePayload(kind, payload)
     return BlockItem(
         type = jsonString(block, "type") ?: "tabtin_rich_content",
         kind = kind,
@@ -2162,15 +2164,16 @@ internal fun decodeRichContentBlock(block: JsonObject): BlockItem {
         resourceId = jsonString(payload, "resource_id") ?: jsonString(payload, "id"),
         resourceName = jsonString(payload, "resource_name") ?: jsonString(payload, "name"),
         spaceName = jsonString(payload, "space_name"),
-        url = if (formalImage != null) {
-            formalImage.fallbackUrl
-        } else {
+        url = formalImage?.fallbackUrl ?: formalFile?.fallbackUrl ?: run {
             jsonString(payload, "url")
                 ?: jsonString(payload, "image_url")
                 ?: jsonString(payload, "file_url")
                 ?: jsonString(payload, "remote_url")
         },
-        fileId = formalImage?.fileId ?: jsonString(payload, "file_id") ?: jsonString(payload, "fileId"),
+        fileId = formalImage?.fileId
+            ?: formalFile?.fileId
+            ?: jsonString(payload, "file_id")
+            ?: jsonString(payload, "fileId"),
         filename = jsonString(payload, "filename") ?: jsonString(payload, "file_name"),
         mimeType = jsonString(payload, "mime_type"),
         fileSize = jsonLong(payload, "file_size") ?: jsonLong(payload, "size"),
@@ -2183,6 +2186,28 @@ internal fun decodeRichContentBlock(block: JsonObject): BlockItem {
         groupId = jsonString(block, "group_id") ?: jsonString(payload, "group_id"),
         groupTitle = jsonString(payload, "group_title"),
     )
+}
+
+private data class FormalOssFilePayload(
+    val fileId: String,
+    val fallbackUrl: String?,
+)
+
+/**
+ * 与正式图片同样，富文件只把 HTTP(S) 地址交给预览器；`file_id` 留作刷新私有地址的身份。
+ */
+private fun formalOssFilePayload(kind: String?, payload: JsonObject?): FormalOssFilePayload? {
+    if (kind != "file" || jsonString(payload, "artifact_kind") != "oss_file") return null
+    val fileId = jsonString(payload, "file_id") ?: jsonString(payload, "fileId") ?: return null
+    val fallbackUrl = listOf(
+        "resolved_url",
+        "access_url",
+        "cdn_url",
+        "file_url",
+        "remote_url",
+        "url",
+    ).firstNotNullOfOrNull { key -> jsonString(payload, key)?.takeIf(::isHttpImageUrl) }
+    return FormalOssFilePayload(fileId = fileId, fallbackUrl = fallbackUrl)
 }
 
 private fun jsonString(obj: JsonObject?, key: String): String? =

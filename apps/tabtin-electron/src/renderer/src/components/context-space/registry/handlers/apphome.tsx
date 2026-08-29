@@ -44,7 +44,8 @@ const HomeSectionPaneContent: React.FC<{
   spaceId: string
   tabScopeKey?: string | null
   contextTabKey: ContextItem['tabKey']
-}> = ({ section, spaceId, tabScopeKey, contextTabKey }) => {
+  isPaneActive?: boolean
+}> = ({ section, spaceId, tabScopeKey, contextTabKey, isPaneActive }) => {
   const { createHandlers, onSearchNavigate } = useSpaceContextActions()
   const onCreateResource = useCallback(
     (appId: string, options?: CreateResourceOptions) => {
@@ -58,6 +59,7 @@ const HomeSectionPaneContent: React.FC<{
       spaceId={spaceId}
       tabScopeKey={tabScopeKey}
       contextTabKey={contextTabKey}
+      isPaneActive={isPaneActive}
       onCreateResource={onCreateResource}
       onSearchNavigate={onSearchNavigate}
     />
@@ -168,6 +170,7 @@ export const apphomeHandler: ContextTypeHandler = {
           spaceId={spaceId}
           tabScopeKey={tabScopeKey}
           contextTabKey={item.tabKey}
+          isPaneActive={ctx?.isPaneActive !== false}
         />
       )
     } else {

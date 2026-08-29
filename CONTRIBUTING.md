@@ -13,7 +13,6 @@
 - Bug 和信息相对完整的功能需求：使用对应 Issue 模板。
 - 使用帮助、开放想法和尚未成形的方向：使用 Discussions。
 - 安全漏洞：按照 [SECURITY.md](SECURITY.md) 私密报告，不要公开提交。
-- 维护者发版：按照 [RELEASING.md](RELEASING.md)。公开 tag 使用产品版本号，不触发官方生产部署。
 - 小型 Bug、测试和文档修正：可以提交 Pull Request 供评审，但适用上述临时合并限制。
 - 会显著改变产品行为、数据结构、公共 API 或整体架构的改动：先发起 Issue 或 Discussion，确认方向后再编码。
 
@@ -79,14 +78,6 @@
 - 在 Pull Request 中披露主要使用的 AI 工具和验证方式。
 
 未经人类审阅的大批量原始 AI 输出不会被接受。
-
-TabTin 的官方编程代理身份是 [TabTin Agent](https://github.com/tabtinagent)。公开联系邮箱是 `tabtinagent@tabtin.com`。由该代理协助的提交可以在说明末尾加上：
-
-```text
-Co-authored-by: TabTin Agent <tabtinagent@tabtin.com>
-```
-
-GitHub 会据此把共同作者链到这个账号。提交作者仍是贡献者本人，不改为代理账号。
 
 ## 提交与文档风格
 

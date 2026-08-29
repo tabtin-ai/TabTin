@@ -146,6 +146,9 @@ class BillingGatewayPrecheckTests(SimpleTestCase):
             "apps.services.billing.services.gateway.BillingGateway._wallet_available",
             return_value=Decimal("0"),
         ), patch(
+            "apps.services.billing.services.llm_topup_service.LlmQuotaTopupService.warning_threshold_credits",
+            return_value=Decimal("0"),
+        ), patch(
             "apps.services.billing.services.llm_topup_service.LlmQuotaTopupService.try_auto_topup",
         ) as mock_topup, patch.object(
             BillingGateway, "record_blocked_llm_usage",
@@ -184,6 +187,9 @@ class BillingGatewayPrecheckTests(SimpleTestCase):
         ), patch(
             "apps.services.billing.services.gateway.BillingGateway._wallet_available",
             return_value=Decimal("0"),
+        ), patch(
+            "apps.services.billing.services.llm_topup_service.LlmQuotaTopupService.warning_threshold_credits",
+            return_value=Decimal("0"),
         ), patch.object(BillingGateway, "record_blocked_llm_usage") as mock_blocked:
             decision = BillingGateway.precheck_llm_usage(
                 fake_org_id("wt_1"),
@@ -214,6 +220,9 @@ class BillingGatewayPrecheckTests(SimpleTestCase):
         ), patch(
             "apps.services.billing.services.gateway.BillingGateway._wallet_available",
             return_value=Decimal("5"),
+        ), patch(
+            "apps.services.billing.services.llm_topup_service.LlmQuotaTopupService.warning_threshold_credits",
+            return_value=Decimal("0"),
         ), patch.object(BillingGateway, "record_blocked_llm_usage") as mock_blocked:
             decision = BillingGateway.precheck_llm_usage(
                 "wt_1",
@@ -228,6 +237,41 @@ class BillingGatewayPrecheckTests(SimpleTestCase):
 
         self.assertTrue(decision["allowed"])
         self.assertEqual(decision["wallet_required"], "1.0000")
+        mock_blocked.assert_not_called()
+
+    def test_precheck_quota_only_topup_when_below_warning_threshold(self):
+        with patch(
+            "apps.services.billing.services.gateway.MeterPricingService.get_unit_price",
+            return_value=Decimal("0.01"),
+        ), patch(
+            "apps.services.billing.services.gateway.OrganizationBillingPolicyService.get_effective_policy",
+            return_value={"llm_billing_mode": "quota_only"},
+        ), patch(
+            "apps.services.billing.services.gateway.OrganizationLlmBudgetService.get_remaining_quota_credits",
+            side_effect=[Decimal("10"), Decimal("10")],
+        ), patch(
+            "apps.services.billing.services.gateway.BillingGateway._wallet_available",
+            side_effect=[Decimal("0"), Decimal("100")],
+        ), patch(
+            "apps.services.billing.services.llm_topup_service.LlmQuotaTopupService.warning_threshold_credits",
+            return_value=Decimal("50"),
+        ), patch(
+            "apps.services.billing.services.llm_topup_service.LlmQuotaTopupService.try_auto_topup",
+            return_value={"topped_up": True, "reason": "topped_up"},
+        ) as mock_topup, patch.object(BillingGateway, "record_blocked_llm_usage") as mock_blocked:
+            decision = BillingGateway.precheck_llm_usage(
+                "wt_1",
+                "user_1",
+                1000,
+                model_config={
+                    "provider_key": "openai",
+                    "model_name": "gpt-test",
+                    "input_price_per_1k": "0.01",
+                },
+            )
+
+        self.assertTrue(decision["allowed"])
+        mock_topup.assert_called_once()
         mock_blocked.assert_not_called()
 
     def test_precheck_quota_only_topup_covers_dead_zone_dust(self):
@@ -245,6 +289,9 @@ class BillingGatewayPrecheckTests(SimpleTestCase):
         ), patch(
             "apps.services.billing.services.gateway.BillingGateway._wallet_available",
             side_effect=[Decimal("0.5"), Decimal("100.5")],
+        ), patch(
+            "apps.services.billing.services.llm_topup_service.LlmQuotaTopupService.warning_threshold_credits",
+            return_value=Decimal("0"),
         ), patch(
             "apps.services.billing.services.llm_topup_service.LlmQuotaTopupService.try_auto_topup",
             return_value={"topped_up": True, "reason": "topped_up"},
@@ -281,6 +328,9 @@ class BillingGatewayPrecheckTests(SimpleTestCase):
             "apps.services.billing.services.gateway.BillingGateway._wallet_available",
             return_value=Decimal("0"),
         ), patch(
+            "apps.services.billing.services.llm_topup_service.LlmQuotaTopupService.warning_threshold_credits",
+            return_value=Decimal("0"),
+        ), patch(
             "apps.services.billing.services.llm_topup_service.LlmQuotaTopupService.try_auto_topup",
             return_value={"topped_up": False, "reason": "wallet_insufficient"},
         ), patch.object(BillingGateway, "record_blocked_llm_usage") as mock_blocked:
@@ -301,6 +351,14 @@ class BillingGatewayPrecheckTests(SimpleTestCase):
 
 
 class BillingGatewaySettleTests(SimpleTestCase):
+    def setUp(self):
+        warning_patcher = patch(
+            "apps.services.billing.services.llm_topup_service.LlmQuotaTopupService.warning_threshold_credits",
+            return_value=Decimal("0"),
+        )
+        self.addCleanup(warning_patcher.stop)
+        warning_patcher.start()
+
     def test_settle_normalizes_quota_only_result(self):
         with patch(
             "apps.users.wallet.services.credits_service.CreditsService.consume_credits_for_llm",

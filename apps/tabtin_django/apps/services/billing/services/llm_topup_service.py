@@ -12,7 +12,9 @@ quota_only 模式的配套能力：会员月度配额 + 持久点券钱包（Org
 - 现金出账只发生在"显式购买"（本服务的自动补充 / 后台购买点券包）。
 - 有界：本月自动补充累计花费不超过 auto_topup_monthly_cap_yuan；
   「本月已补充」按当月 llm_auto_topup 现金流水求和（真实出账口径，不漂移）。
-- 触发口径：月度配额剩余 + 钱包可用 一起看，组合余额 ≤ 阈值才补充。
+- 触发口径：月度配额剩余 + 钱包可用 一起看，组合余额低于
+  「余额低预警」的预警阈值（warning_credits）才补充；仍覆盖
+  「零头不够付本次请求」的死区。
 - 并发幂等：当月预算行 select_for_update 串行化补充动作（锁顺序
   budget → cash → wallet，与结算路径一致）；现金 spend 与钱包 recharge
   共用同一 related_order_id，两侧各自幂等。
@@ -39,6 +41,21 @@ REASON_ERROR = "topup_error"                # 系统异常（调用方按拦截�
 
 class LlmQuotaTopupService:
     """LLM 点券自动补充：钱包 → 当月预算池"""
+
+    @classmethod
+    def warning_threshold_credits(cls, organization_id: str) -> Decimal:
+        """自动补充触发线 = 低余额预警阈值。读取失败时退回 0（沿用「用尽再补」）。"""
+        from apps.services.billing.services.llm_budget_service import OrganizationLlmBudgetService
+        from apps.services.billing.services.low_balance_alert_service import (
+            LowBalanceAlertService,
+        )
+
+        try:
+            return OrganizationLlmBudgetService._quantize(
+                LowBalanceAlertService.get_thresholds(organization_id).warning_credits,
+            )
+        except Exception:
+            return OrganizationLlmBudgetService._quantize(0)
 
     @classmethod
     def try_auto_topup(
@@ -113,7 +130,7 @@ class LlmQuotaTopupService:
         amount = quant(spend_yuan * credits_rate)
         if amount <= 0:
             return {"topped_up": False, "reason": REASON_DISABLED}
-        threshold = quant(policy.get("auto_topup_threshold_credits", 0))
+        threshold = cls.warning_threshold_credits(organization_id)
         monthly_cap_yuan = quant(policy.get("auto_topup_monthly_cap_yuan", 0))
 
         # 行锁串行化：锁当月预算行（锁顺序 budget → cash → wallet，与结算路径一致，
@@ -129,12 +146,12 @@ class LlmQuotaTopupService:
         wallet_available = wallet.get_available_credits_precise() if wallet else Decimal("0")
         combined_remaining = quant(quota_remaining) + quant(wallet_available)
         # 触发口径：月度配额剩余 + 钱包可用 的组合余额，同时看两条线——
-        # ① 高于静态阈值（buffer）② 足以支撑本次请求（required_credits）。
+        # ① 不低于预警阈值（低于才补）② 足以支撑本次请求（required_credits）。
         # 只有两者都满足才判定“无需补充”，否则购买一档。这样消除
-        # 「零头 > 阈值 但 < 单次请求成本」的死区（否则既不补充又一直拦，反复弹窗）。
+        # 「零头 ≥ 阈值 但 < 单次请求成本」的死区（否则既不补充又一直拦，反复弹窗）。
         required = quant(required_credits or 0)
         covers_request = required <= 0 or combined_remaining >= required
-        if combined_remaining > threshold and covers_request:
+        if combined_remaining >= threshold and covers_request:
             return {"topped_up": False, "reason": REASON_NOT_NEEDED, "remaining": combined_remaining}
 
         # 本月自动补充上限：按当月 llm_auto_topup 现金流水求和（真实出账口径，不漂移）

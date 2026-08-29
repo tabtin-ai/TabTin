@@ -51,7 +51,7 @@ export const ShellTopBar: React.FC<ShellTopBarProps> = ({
     >
       <div
         className={cn(
-          'app-region-drag relative flex min-w-0 flex-1 items-center',
+          'app-region-drag relative flex h-full min-w-0 flex-1 items-center',
         )}
         style={{
           paddingLeft: leftInset,
@@ -60,7 +60,10 @@ export const ShellTopBar: React.FC<ShellTopBarProps> = ({
         data-testid="shell-top-bar-drag"
       >
         {isAuthenticated ? (
-          <div className="no-drag flex min-w-0 items-center gap-1">
+          <div
+            className="no-drag flex h-full min-w-0 items-center gap-1"
+            data-testid="shell-top-bar-left-chrome"
+          >
             <SidebarExpandButton
               action={sidebarCollapsed ? 'expand' : 'collapse'}
               data-testid={sidebarCollapsed ? 'shell-top-bar-sidebar-expand' : 'shell-top-bar-sidebar-collapse'}

@@ -2,7 +2,10 @@ import { afterEach, beforeEach, describe, it, expect } from 'vitest'
 import * as fs from 'node:fs'
 import * as os from 'node:os'
 import * as path from 'node:path'
-import { createPresentationTools } from '../src/tools/presentation-tools'
+import {
+  createPresentationTools,
+  type PresentationToolsDeps,
+} from '../src/tools/presentation-tools'
 import { ToolRegistry } from '../src/engine/tooling/tool-system'
 import { runTools } from '../src/engine/tooling/tool-orchestration'
 import { createMockPermissionHandler } from './test-utils'
@@ -22,11 +25,12 @@ const autoOpenPolicy = (resourceType: string): boolean => resourceType !== 'slid
 const buildLocalFileArtifactUrl = (relativePath: string): string =>
   `tabtin://resource/file/${encodeURIComponent(relativePath)}?hint=tabfiles`
 
-function getPresentToUserTool(): Tool {
+function getPresentToUserTool(overrides: Partial<PresentationToolsDeps> = {}): Tool {
   const tool = createPresentationTools({
     supportedResourceTypes: SUPPORTED_RESOURCE_TYPES,
     autoOpenPolicy,
     buildLocalFileArtifactUrl,
+    ...overrides,
   }).find((candidate) => candidate.name === 'present_to_user')
   if (!tool) {
     throw new Error('present_to_user tool not registered')
@@ -431,6 +435,63 @@ describe('present_to_user local_file contract', () => {
       },
     })
     expect(String(richBlocks[0].payload?.url)).toBe('tabtin://resource/file/artifacts%2Freport.xlsx?hint=tabfiles')
+    expect(JSON.stringify(richBlocks[0])).not.toContain(tmpDir)
+  })
+
+  it('publishes a local file as an OSS artifact when the host supports it', async () => {
+    writeWorkspaceFile('artifacts/report.xlsx', 'workbook-bytes')
+    const richBlocks: RichBlockArg[] = []
+    const publishLocalFileArtifact = async (input: {
+      absolutePath: string
+      relativePath: string
+      fileType: string
+      mimeType: string
+      fileSize: number
+      threadId: string
+      agentRunId?: string
+      toolUseId?: string
+    }) => {
+      expect(input).toMatchObject({
+        relativePath: 'artifacts/report.xlsx',
+        fileType: 'xlsx',
+        mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        fileSize: 'workbook-bytes'.length,
+        threadId: 'tt-test',
+        agentRunId: 'run-test',
+        toolUseId: 'toolu-test',
+      })
+      expect(input.absolutePath).toContain('artifacts/report.xlsx')
+      return {
+        fileId: 'f0ea0780-650b-4b9b-82a8-a7f3afeabfc6',
+        url: 'https://cdn.example.test/agent-artifacts/report.xlsx',
+      }
+    }
+    const tool = getPresentToUserTool({ publishLocalFileArtifact })
+
+    const result = await tool.execute(
+      {
+        summary: '生成的报表',
+        items: [{ kind: 'local_file', relative_path: 'artifacts/report.xlsx', summary: '报表.xlsx' }],
+      },
+      makeContext(richBlocks, tmpDir),
+    )
+
+    expect(result.isError).toBeFalsy()
+    expect(richBlocks).toHaveLength(1)
+    expect(richBlocks[0]).toMatchObject({
+      kind: 'file',
+      summary: '报表.xlsx',
+      payload: {
+        artifact_kind: 'oss_file',
+        file_id: 'f0ea0780-650b-4b9b-82a8-a7f3afeabfc6',
+        source_relative_path: 'artifacts/report.xlsx',
+        filename: 'report.xlsx',
+        url: 'https://cdn.example.test/agent-artifacts/report.xlsx',
+        access_url: 'https://cdn.example.test/agent-artifacts/report.xlsx',
+        auto_register: true,
+        auto_open: true,
+      },
+    })
     expect(JSON.stringify(richBlocks[0])).not.toContain(tmpDir)
   })
 

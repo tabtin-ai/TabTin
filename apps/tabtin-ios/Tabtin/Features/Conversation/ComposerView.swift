@@ -268,8 +268,7 @@ struct ComposerView: View {
                         text: composerReplyBinding,
                         isEditable: !isDisabled && !isPaused && !isRunControlPending,
                         isFocused: $focused,
-                        focusRequest: focusRequest,
-                        onSubmit: submitIfPossible
+                        focusRequest: focusRequest
                     )
                     if editableReply.isEmpty, !inputPlaceholder.isEmpty {
                         Text(inputPlaceholder)
@@ -652,11 +651,6 @@ struct ComposerView: View {
         }
     }
 
-    private func submitIfPossible() {
-        guard !isDisabled, !isRunControlPending, !sendInFlight, canSubmitCurrentDraft else { return }
-        submitCurrentText()
-    }
-
     private func submitCurrentText() {
         let submittedText = text
         let submittedReply = editableReply
@@ -819,7 +813,6 @@ struct ScrollableComposerTextView: UIViewRepresentable {
     let isEditable: Bool
     @Binding var isFocused: Bool
     let focusRequest: UUID?
-    let onSubmit: () -> Void
 
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self)
@@ -952,9 +945,7 @@ struct ScrollableComposerTextView: UIViewRepresentable {
             shouldChangeTextIn range: NSRange,
             replacementText replacement: String
         ) -> Bool {
-            guard replacement == "\n" else { return true }
-            parent.onSubmit()
-            return false
+            true
         }
     }
 }

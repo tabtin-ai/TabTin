@@ -114,6 +114,16 @@ describe('isRenderableSystemMessage', () => {
     expect(isRenderableSystemMessage(systemMessage('plain'))).toBe(false)
   })
 
+  it.each([
+    'browser_control_taken_over',
+    'browser_control_handed_back',
+  ])('%s 浏览器控制事实允许渲染', (systemFact) => {
+    expect(isRenderableSystemMessage({
+      ...systemMessage(systemFact),
+      metadata: { system_fact: systemFact },
+    })).toBe(true)
+  })
+
   it('白名单 system_fact / push / proposal / external archive 允许渲染', () => {
     expect(isRenderableSystemMessage({
       id: 'status',

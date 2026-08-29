@@ -37,6 +37,56 @@ const log = createLogger('E2E:Hitl')
 const HITL_RESOLVED_TOMBSTONE_MAX_PER_SESSION = 50
 const resolvedTombstoneBySession = new Map<string, Set<string>>()
 
+/** Access Barrier 本地到期兜底：主路径靠 single_hitl_resolved；丢事件时按 expires_at 收卡。 */
+const accessBarrierExpiryTimers = new Map<string, ReturnType<typeof setTimeout>>()
+
+function accessBarrierExpiryKey(sessionId: string, requestId: string): string {
+  return `${sessionId}:${requestId}`
+}
+
+function clearAccessBarrierExpiryTimer(sessionId: string, requestId: string | undefined | null): void {
+  if (!sessionId || !requestId) return
+  const key = accessBarrierExpiryKey(sessionId, requestId)
+  const timer = accessBarrierExpiryTimers.get(key)
+  if (timer) {
+    clearTimeout(timer)
+    accessBarrierExpiryTimers.delete(key)
+  }
+}
+
+/** 本地清 Access Barrier 面板时顺带清到期兜底 timer（避免等 single_hitl_resolved）。 */
+export function clearAccessBarrierExpiryForSession(
+  sessionId: string,
+  requestId: string | undefined | null,
+): void {
+  clearAccessBarrierExpiryTimer(sessionId, requestId)
+}
+
+function scheduleAccessBarrierExpiry(
+  sessionId: string,
+  requestId: string,
+  expiresAt: number,
+): void {
+  clearAccessBarrierExpiryTimer(sessionId, requestId)
+  const delay = Math.max(0, expiresAt - Date.now())
+  const timer = setTimeout(() => {
+    accessBarrierExpiryTimers.delete(accessBarrierExpiryKey(sessionId, requestId))
+    handleSingleHitlResolvedStreamEvent(
+      {
+        type: StreamEvents.SINGLE_HITL_RESOLVED,
+        payload: {
+          request_id: requestId,
+          interrupt_id: requestId,
+          outcome: 'expired',
+          schema_version: 1,
+        },
+      },
+      { sessionId },
+    )
+  }, delay)
+  accessBarrierExpiryTimers.set(accessBarrierExpiryKey(sessionId, requestId), timer)
+}
+
 /** 记一条“该会话下某 HITL key 已解决”的墓碑（来自权威 resolved 信号）。 */
 export function recordHitlResolvedKey(sessionId: string, key: string | undefined | null): void {
   if (!sessionId || !key) return
@@ -410,6 +460,7 @@ export function handleSingleHitlResolvedStreamEvent(
   // 提交路径看不到 pending → 墓碑整段落空 → lifecycle-end 消息对账把仍
   // pending 的 hitl_interaction 派生回开（任务结束后又弹 ask 卡）。
   recordHitlResolvedKey(ctx.sessionId, resolvedId)
+  clearAccessBarrierExpiryTimer(ctx.sessionId, resolvedId)
   const state = access.getState()
   const pending = state.pendingAskUserBySessionId[ctx.sessionId]
   if (!pending || (resolvedId && pending.interruptId && pending.interruptId !== resolvedId)) {
@@ -420,6 +471,7 @@ export function handleSingleHitlResolvedStreamEvent(
   recordHitlResolvedKey(ctx.sessionId, pending.interruptId)
   recordHitlResolvedKey(ctx.sessionId, pending.toolCallId)
   recordHitlResolvedKey(ctx.sessionId, pending.messageId)
+  clearAccessBarrierExpiryTimer(ctx.sessionId, pending.interruptId)
 
   access.applyState((current) => {
     const nextPending = { ...current.pendingAskUserBySessionId }
@@ -814,5 +866,146 @@ export function handleHitlStreamEvent(
   if (eventType === StreamEvents.REQUEST_APPROVAL_REQUIRED) {
     return handleAskInteractionRequiredStreamEvent(event, 'approval', ctx)
   }
+  if (
+    eventType === StreamEvents.ACCESS_BARRIER_REQUIRED
+    || eventType === 'agent.stream.access_barrier_required'
+  ) {
+    return handleAccessBarrierRequiredStreamEvent(event, ctx)
+  }
   return false
+}
+
+const ACCESS_BARRIER_ACTION_LABELS: Record<string, { label: string; description: string }> = {
+  resume_same_tab: {
+    label: '我已在当前标签页完成，继续',
+    description: '登录或验证完成后，Agent 复用同一标签页继续',
+  },
+  alternate_source: {
+    label: '改用其他公开来源（须诚实标注）',
+    description: '同意换源；后续交付必须标注真实来源，不得冒充本站',
+  },
+  abort_this_target: {
+    label: '跳过该站',
+    description: '本站内容本次不覆盖',
+  },
+}
+
+function accessBarrierTitle(kind: string): string {
+  if (kind === 'login') return '页面需要登录'
+  if (kind === 'captcha' || kind === 'geetest' || kind === 'mfa') return '页面需要完成验证'
+  return '页面受阻'
+}
+
+/**
+ * Access Barrier HITL：系统撞墙 → 复用 AskUser 选择面板（固定选项 id = action），
+ * 提交时由 askUserSlice 映射为 `{ action }` 决议（见 accessBarrierMeta）。
+ */
+export function handleAccessBarrierRequiredStreamEvent(
+  event: AgentStreamMessage,
+  ctx: HitlStreamHandlerContext,
+): boolean {
+  const access = resolveHitlAccess()
+  if (!access) return false
+
+  const p = (event.payload ?? {}) as Record<string, unknown>
+  const requestId = typeof p.request_id === 'string' ? p.request_id.trim() : ''
+  if (!requestId) {
+    log.warn('access_barrier_required 缺少 request_id', { session: ctx.sessionId.slice(0, 8) })
+    return true
+  }
+
+  if (isHitlResolvedKey(ctx.sessionId, requestId)) {
+    log.info('access_barrier 命中已解决墓碑，忽略重放', {
+      session: ctx.sessionId.slice(0, 8),
+      requestId,
+    })
+    return true
+  }
+
+  const barrierRaw = p.barrier
+  if (!barrierRaw || typeof barrierRaw !== 'object' || Array.isArray(barrierRaw)) {
+    log.warn('access_barrier_required 缺少 barrier', { session: ctx.sessionId.slice(0, 8) })
+    return true
+  }
+  const barrier = barrierRaw as Record<string, unknown>
+  const kind = typeof barrier.kind === 'string' ? barrier.kind : 'unknown_wall'
+  const domain = typeof barrier.domain === 'string' ? barrier.domain : 'unknown'
+  const reason = typeof barrier.reason === 'string' ? barrier.reason : ''
+  const tabId = typeof barrier.tabId === 'string' ? barrier.tabId : undefined
+  const actions = Array.isArray(barrier.actions)
+    ? barrier.actions.filter((a): a is string => typeof a === 'string')
+    : ['resume_same_tab', 'alternate_source', 'abort_this_target']
+
+  const options = actions.map((actionId) => {
+    const copy = ACCESS_BARRIER_ACTION_LABELS[actionId] ?? {
+      label: actionId,
+      description: actionId,
+    }
+    return {
+      id: actionId,
+      label: copy.label,
+      description: copy.description,
+    }
+  })
+
+  const title = accessBarrierTitle(kind)
+  const prompt = [
+    domain !== 'unknown' ? `${domain}` : null,
+    reason || null,
+  ].filter(Boolean).join('：') || title
+
+  const expiresAt = typeof p.expires_at === 'number' ? p.expires_at : undefined
+
+  const pendingAskUserState: AskUserRequestStateChoice = {
+    sessionId: ctx.sessionId,
+    threadId: `chat-session-${ctx.sessionId}`,
+    kind: 'choice',
+    interruptId: requestId,
+    toolCallId: requestId,
+    title,
+    message: prompt,
+    interactionType: 'ask_user',
+    blockingPolicy: 'hard',
+    presetId: 'access_barrier',
+    canResolve: true,
+    openedAt: Date.now(),
+    ...(expiresAt !== undefined ? { expiresAt } : {}),
+    accessBarrierMeta: { tabId, domain, kind },
+    questions: [
+      {
+        id: 'access_barrier_action',
+        prompt,
+        header: title,
+        options,
+        allow_multiple: false,
+      },
+    ],
+  }
+
+  access.applyState((state) => ({
+    pendingAskUserBySessionId: {
+      ...state.pendingAskUserBySessionId,
+      [ctx.sessionId]: pendingAskUserState,
+    },
+    askUserSubmittingBySessionId: {
+      ...state.askUserSubmittingBySessionId,
+      [ctx.sessionId]: false,
+    },
+  }))
+
+  // 到期兜底收卡（丢 single_hitl_resolved 时不挡发送）；权威仍以后端事件为准。
+  if (expiresAt !== undefined) {
+    scheduleAccessBarrierExpiry(ctx.sessionId, requestId, expiresAt)
+  }
+
+  // 对话内卡片即可；不走 OS / 跨 org toast（设计 §6.1 / criticalEventNotifier 注释）。
+  log.info('access_barrier 面板已打开', {
+    session: ctx.sessionId.slice(0, 8),
+    kind,
+    domain,
+    requestId: requestId.slice(0, 8),
+    expiresAt,
+  })
+
+  return true
 }

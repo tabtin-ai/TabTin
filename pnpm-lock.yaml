@@ -636,6 +636,9 @@ importers:
       js-yaml:
         specifier: 4.1.1
         version: 4.1.1
+      jschardet:
+        specifier: 3.1.4
+        version: 3.1.4
       jsdom:
         specifier: 28.0.0
         version: 28.0.0(@noble/hashes@1.8.0)
@@ -973,6 +976,9 @@ importers:
       '@testing-library/react':
         specifier: ^16.1.0
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@testing-library/user-event':
+        specifier: 14.6.6
+        version: 14.6.6(@testing-library/dom@10.4.1)
       '@tiptap/core':
         specifier: ^2.26.1
         version: 2.27.2(@tiptap/pm@2.27.2)
@@ -7967,6 +7973,12 @@ packages:
         optional: true
       '@types/react-dom':
         optional: true
+
+  '@testing-library/user-event@14.6.6':
+    resolution: {integrity: sha512-Jbs9FpkkIDw8FgSc6kOVsOv8JuuqGAL7J4X1oot77JxAoDlkNn2GRkd0aYRVuQ+pVQAiHWVkE4rX/dkF5fBiCw==}
+    engines: {node: '>=12', npm: '>=6'}
+    peerDependencies:
+      '@testing-library/dom': '>=7.21.4'
 
   '@tiptap/core@2.27.2':
     resolution: {integrity: sha512-ABL1N6eoxzDzC1bYvkMbvyexHacszsKdVPYqhl5GwHLOvpZcv9VE9QaKwDILTyz5voCA0lGcAAXZp+qnXOk5lQ==}
@@ -20134,6 +20146,10 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.14
       '@types/react-dom': 19.2.3(@types/react@19.2.14)
+
+  '@testing-library/user-event@14.6.6(@testing-library/dom@10.4.1)':
+    dependencies:
+      '@testing-library/dom': 10.4.1
 
   '@tiptap/core@2.27.2(@tiptap/pm@2.27.2)':
     dependencies:

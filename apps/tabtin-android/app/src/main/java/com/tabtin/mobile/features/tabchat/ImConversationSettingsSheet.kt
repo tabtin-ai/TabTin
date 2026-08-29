@@ -83,6 +83,7 @@ import com.tabtin.mobile.data.model.OrganizationMember
 import com.tabtin.mobile.navigation.navigateOnce
 import com.tabtin.mobile.navigation.popBackStackSafely
 import com.tabtin.mobile.ui.components.IdentityColorAvatar
+import com.tabtin.mobile.ui.components.TabSearchField
 import com.tabtin.mobile.ui.theme.TTColors
 import com.tabtin.mobile.ui.theme.TTSpacing
 import com.tabtin.mobile.ui.theme.ttColor
@@ -1108,18 +1109,40 @@ private fun InviteList(
     onInviteExternal: (String) -> Unit,
     enabled: Boolean,
 ) {
-    if (candidates.isEmpty() && externalCandidates.isEmpty() && !isLoadingExternalContacts) {
-        Text(
-            "暂无可邀请成员",
-            modifier = Modifier.padding(TTSpacing.lg),
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+    var query by remember { mutableStateOf("") }
+    val filteredCandidates = filterImInviteMembers(candidates, query)
+    val filteredExternalCandidates = filterImInviteExternalContacts(externalCandidates, query)
+    val hasInviteCandidates = candidates.isNotEmpty() || externalCandidates.isNotEmpty()
+    val hasSearchResults = filteredCandidates.isNotEmpty() || filteredExternalCandidates.isNotEmpty()
+    Column(modifier = Modifier.fillMaxSize()) {
+        TabSearchField(
+            query = query,
+            onQueryChange = { query = it },
+            placeholder = "搜索成员",
+            modifier = Modifier.padding(horizontal = TTSpacing.md, vertical = TTSpacing.xs),
         )
-    } else {
-        LazyColumn {
-            if (candidates.isNotEmpty()) {
+        LazyColumn(modifier = Modifier.weight(1f)) {
+            if (!hasInviteCandidates && !isLoadingExternalContacts) {
+                item {
+                    Text(
+                        "暂无可邀请成员",
+                        modifier = Modifier.padding(TTSpacing.lg),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            } else if (!hasSearchResults && !isLoadingExternalContacts) {
+                item {
+                    Text(
+                        "没有匹配的成员",
+                        modifier = Modifier.padding(TTSpacing.lg),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
+            if (filteredCandidates.isNotEmpty()) {
                 item { Text("组织成员", modifier = Modifier.padding(TTSpacing.lg), fontWeight = FontWeight.SemiBold) }
             }
-            items(candidates, key = { it.userId }) { member ->
+            items(filteredCandidates, key = { it.userId }) { member ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -1148,7 +1171,7 @@ private fun InviteList(
                         }
                     }
                 }
-                items(externalCandidates, key = { "external:${it.contactId}" }) { contact ->
+                items(filteredExternalCandidates, key = { "external:${it.contactId}" }) { contact ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -1170,6 +1193,34 @@ private fun InviteList(
                 }
             }
         }
+    }
+}
+
+internal fun filterImInviteMembers(
+    candidates: List<OrganizationMember>,
+    query: String,
+): List<OrganizationMember> {
+    val normalizedQuery = query.trim()
+    if (normalizedQuery.isEmpty()) return candidates
+    return candidates.filter { member ->
+        listOfNotNull(
+            member.displayName,
+            member.user?.nickname,
+            member.user?.username,
+            member.user?.email,
+        ).any { it.contains(normalizedQuery, ignoreCase = true) }
+    }
+}
+
+internal fun filterImInviteExternalContacts(
+    candidates: List<ExternalContact>,
+    query: String,
+): List<ExternalContact> {
+    val normalizedQuery = query.trim()
+    if (normalizedQuery.isEmpty()) return candidates
+    return candidates.filter { contact ->
+        listOf(contact.displayName, contact.peerUserId, contact.peerOrganizationName)
+            .any { it.contains(normalizedQuery, ignoreCase = true) }
     }
 }
 

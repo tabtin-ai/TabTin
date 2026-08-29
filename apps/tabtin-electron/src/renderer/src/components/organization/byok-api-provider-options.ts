@@ -1,9 +1,9 @@
-/** 自定义 API（按量）接入 — 预置平台选项 */
+/** 自定义 API（按量）接入 — Tab 是协议类型（LLMProvider.name），不是连接身份。 */
 
 export type ByokApiProviderOption = {
-  /** LLMProvider.name / Catalog provider id */
+  /** 协议类型：写入 LLMProvider.name，供 Runtime 按 name 分发 */
   provider_name: string
-  /** i18n：厂家短名（芯片展示） */
+  /** i18n：协议短名（芯片 / Tab） */
   vendorLabelKey: string
   /** i18n：picker 列表副标题 */
   subtitleKey: string

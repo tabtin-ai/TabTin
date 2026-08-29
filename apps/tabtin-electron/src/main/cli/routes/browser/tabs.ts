@@ -13,6 +13,10 @@ import { getActiveSessionName } from '../../routes/session'
 import { buildBrowserQuotaExceededOptions } from './quota-exceeded-payload'
 import { verifyNavigationAgainstLivePage } from './navigation-evidence'
 import { runObserveForOpen } from './interaction'
+import {
+  consumeAccessBarrierTabTimedOut,
+  looksLikeAuthWallUrl,
+} from './access-barrier-tab-reuse'
 import { lock, unlock } from '../../../browser-tab-lock/browserTabInputLock'
 import { payloadHasUserInterventionWall } from '../../../browser-tab-lock/wallSignal'
 
@@ -29,11 +33,29 @@ const isViewQuotaFailure = (message: string): boolean => (
   message.includes('最大 View 数限制') || message.includes('配额不足')
 )
 
+async function executeLockedPageRoute(
+  tabId: string,
+  sessionId: unknown,
+  res: http.ServerResponse,
+  sendJSON: SendJSON,
+  execute: () => ReturnType<NonNullable<ActionExecutor>>,
+): Promise<void> {
+  try {
+    lock(tabId, typeof sessionId === 'string' ? sessionId : undefined)
+    const result = await execute()
+    sendExecutorResult(result, res, sendJSON)
+  } catch (error) {
+    handleRouteError(error, sendJSON, res)
+  }
+}
+
 /**
  * 同一 Agent run 的默认重试必须回到它自己之前打开的页面：
  * - 只在可信 runId 已随 CLI 请求进入 scope 时生效；手动 browser open 仍保持新建页语义；
  * - 显式 --new-tab 可保留多页并行场景；
  * - 只复用带相同 runId 的非关闭页，不按 URL 做猜测性去重。
+ * - Access Barrier HITL 超时过的 tab、或仍停在登录/授权 URL 的 tab：跳过复用，开新页，
+ *   避免「超时二次唤起粘死旧登录墙文档」。
  */
 function findReusableRunViewId(requestScope: ReturnType<typeof buildBrowserRequestScope>): string | undefined {
   const runId = requestScope.runId
@@ -50,8 +72,19 @@ function findReusableRunViewId(requestScope: ReturnType<typeof buildBrowserReque
     for (const snapshot of snapshots) {
       const views = snapshot?.views?.filter(view => view.runId === runId && !view.isClosing) ?? []
       if (views.length === 0) continue
-      const activeRunView = views.find(view => view.viewId === snapshot?.activeViewId)
-      return activeRunView?.viewId || views.at(-1)?.viewId
+      const ordered = [
+        ...(snapshot?.activeViewId
+          ? views.filter(view => view.viewId === snapshot.activeViewId)
+          : []),
+        ...views.filter(view => view.viewId !== snapshot?.activeViewId),
+      ]
+      for (const view of ordered) {
+        // 超时登记：消费后只挡这一次重试。
+        if (consumeAccessBarrierTabTimedOut(view.viewId)) continue
+        // 仍停在登录墙 URL：宁可新开，也不要把观察粘在旧 signin 文档上。
+        if (looksLikeAuthWallUrl(view.url)) continue
+        return view.viewId
+      }
     }
     return undefined
   } catch {
@@ -60,7 +93,7 @@ function findReusableRunViewId(requestScope: ReturnType<typeof buildBrowserReque
 }
 
 /**
- * : 等待新建 tab 的 WebContents 在主进程 ViewFactory 就绪。
+ * GH-4777: 等待新建 tab 的 WebContents 在主进程 ViewFactory 就绪。
  *
  * webview 容器模式下 create_web_tab 只在 store/hub 登记 + 激活 UI，guest
  * WebContents 要等 renderer 挂载 <webview>（did-attach → adoptWebviewGuest）
@@ -132,8 +165,6 @@ async function fetchLiveAnchorsFromActiveTab(
   // 即「Agent 当前在看的页」，正是要向它求证真实链接的那一页。
   const tabId = await resolveTabId(undefined, buildBrowserRequestScope(body))
   if (!tabId) return undefined
-  // 向该标签 eval 求证真实链接，属于「使用这个标签」——盖膜，不按命令种类分流。
-  lock(tabId, typeof body?._thread_id === 'string' ? body._thread_id : undefined)
 
   const evalResult = await executor({
     task_id: makeTaskId('nav-verify'),
@@ -194,7 +225,7 @@ type BrowserTabSummary = {
   url?: string
   favicon?: string
   /**
-   * ：主进程是否真实存在该 tab 的网页进程（WebContents）。
+   * #5125：主进程是否真实存在该 tab 的网页进程（WebContents）。
    * false = 仅登记未挂载（webview 模式 guest 尚未 attach，或已被 discard）——
    * 此时 url/title 来自登记数据，不代表页面已加载；glance/act/state 会失败。
    */
@@ -313,7 +344,7 @@ function sendOpenResult(
 }
 
 /**
- * open 是否内嵌观察：默认开；`--observe=false` 显式关（脚本化场景省输出），
+ * open 是否内嵌观察（#5376）：默认开；`--observe=false` 显式关（脚本化场景省输出），
  * 普通导航失败时跳过；load 执行超时例外，因为页面可能已被 webview src 加载到可观察状态。
  */
 function shouldEmbedObservation(body: any, loadResult: any): boolean {
@@ -321,24 +352,6 @@ function shouldEmbedObservation(body: any, loadResult: any): boolean {
     loadResult?.success !== false ||
     loadResult?.error?.code === 'CONNECTION_TIMEOUT'
   )
-}
-
-function lockOpenedTab(
-  tabId: string,
-  loadResult: unknown,
-  observation: Record<string, unknown> | undefined,
-  sessionId?: string,
-): void {
-  lock(tabId, sessionId)
-  if (payloadHasUserInterventionWall({
-    ...(loadResult as Record<string, unknown>),
-    data: {
-      ...((loadResult as { data?: Record<string, unknown> })?.data ?? {}),
-      ...observation,
-    },
-  })) {
-    unlock(tabId)
-  }
 }
 
 export async function handleTabsRoute(
@@ -359,7 +372,7 @@ export async function handleTabsRoute(
       return true
     }
 
-    // ：工作空间内 HTML 允许 file:// / 相对路径预览（需带 localPreviewRoot）。
+    // #6847：工作空间内 HTML 允许 file:// / 相对路径预览（需带 localPreviewRoot）。
     // 这与「打开 HTML 源码文件」的 present_to_user local_file / TabFiles 路径分开——browser open = 渲染预览。
     const localHtml = resolveWorkspaceLocalHtmlOpen(
       typeof rawTargetUrl === 'string' ? rawTargetUrl : String(rawTargetUrl),
@@ -449,7 +462,7 @@ export async function handleTabsRoute(
     if (requestedTabId) {
       const tabId = await resolveTabId(requestedTabId, requestScope)
       if (!tabId) {
-        // ：区分「标签根本不存在」和「已登记但网页进程未挂载」——后者
+        // #5125：区分「标签根本不存在」和「已登记但网页进程未挂载」——后者
         // 报 VIEW_NOT_FOUND 会把 Agent 引进「list 有、操作没有」的死循环。
         const registeredButUnattached = requestedTabId !== 'auto'
           ? await resolveContextBrowserTabId(requestedTabId, requestScope)
@@ -486,12 +499,6 @@ export async function handleTabsRoute(
       const observation = shouldEmbedObservation(body, result)
         ? await runObserveForOpen(executor, body, tabId)
         : undefined
-      lockOpenedTab(
-        tabId,
-        result,
-        observation,
-        typeof body?._thread_id === 'string' ? body._thread_id : undefined,
-      )
       sendOpenResult(res, sendJSON, { viewId: tabId, tabId }, result, observation)
       return true
     }
@@ -507,12 +514,6 @@ export async function handleTabsRoute(
           const observation = shouldEmbedObservation(body, result)
             ? await runObserveForOpen(executor, body, tabId)
             : undefined
-          lockOpenedTab(
-            tabId,
-            result,
-            observation,
-            typeof body?._thread_id === 'string' ? body._thread_id : undefined,
-          )
           sendOpenResult(res, sendJSON, { viewId: tabId, tabId, reused: true }, result, observation)
           return true
         }
@@ -524,7 +525,7 @@ export async function handleTabsRoute(
 
     try {
       const sessionName = body?.session || getActiveSessionName() || undefined
-      // ：只透传 thread + 显式 scope；缺 scope 时由 bridge-core 按 thread 注入，
+      // #6538：只透传 thread + 显式 scope；缺 scope 时由 bridge-core 按 thread 注入，
       // 避免此处与 bridge 双重注入、也避免无 thread 时写死全局 scope。
       const bridgeResult = await ctx.bridge('create_web_tab', {
         ...requestScope,
@@ -547,7 +548,7 @@ export async function handleTabsRoute(
         const viewReady = await waitForNewTabWebContents(viewId)
         if (!viewReady) {
           const totalAttachTimeoutMs = GUEST_ATTACH_TIMEOUT_MS + GUEST_ATTACH_RECOVERY_TIMEOUT_MS
-          //  止血：attach 超时的 tab 没有 WebContents，留着就是「新标签」
+          // #5125 止血：attach 超时的 tab 没有 WebContents，留着就是「新标签」
           // 尸体——--tab-id 重试 / glance / close 全走 validateViewExists 死路。
           // 这里尽力回收自己建的 tab，失败也照常报错（回收结果进 detail）。
           let cleanedUp = false
@@ -602,12 +603,6 @@ export async function handleTabsRoute(
         const observation = shouldEmbedObservation(body, loadResult)
           ? await runObserveForOpen(executor, body, viewId)
           : undefined
-        lockOpenedTab(
-          viewId,
-          loadResult,
-          observation,
-          typeof body?._thread_id === 'string' ? body._thread_id : undefined,
-        )
         sendOpenResult(
           res,
           sendJSON,
@@ -778,7 +773,7 @@ export async function handleTabsRoute(
 
     const ctx = requireBridgeAndSpace(body, res, sendJSON)
     if (!ctx) return true
-    // ：close 与 switch 同口径用 renderer 标签清单解析——关闭走 bridge
+    // #5125：close 与 switch 同口径用 renderer 标签清单解析——关闭走 bridge
     // close_context_tab，不需要 WebContents 存在。原先用 resolveTabId
     // （validateViewExists）会让「已登记未挂载」的僵尸标签连关都关不掉。
     const tabId = await resolveContextBrowserTabId(rawTabId, requestScope)
@@ -833,7 +828,7 @@ export async function handleTabsRoute(
       }))
       return true
     }
-    const result = await executor({
+    await executeLockedPageRoute(tabId, body?._thread_id, res, sendJSON, () => executor({
       task_id: makeTaskId('nav'),
       type: 'nav_tab',
       params: {
@@ -843,8 +838,7 @@ export async function handleTabsRoute(
         ...(body?.runId ? { runId: body.runId } : {}),
       },
       thread_id: '',
-    })
-    sendExecutorResult(result, res, sendJSON)
+    }))
     return true
   }
 
@@ -856,7 +850,7 @@ export async function handleTabsRoute(
       }))
       return true
     }
-    const result = await executor({
+    await executeLockedPageRoute(tabId, body?._thread_id, res, sendJSON, () => executor({
       task_id: makeTaskId('tab-state'),
       type: 'tab_state',
       params: {
@@ -865,8 +859,7 @@ export async function handleTabsRoute(
         crawlTabId: tabId,
       },
       thread_id: '',
-    })
-    sendExecutorResult(result, res, sendJSON)
+    }))
     return true
   }
 
@@ -879,7 +872,7 @@ export async function handleTabsRoute(
       }))
       return true
     }
-    const result = await executor({
+    await executeLockedPageRoute(tabId, body?._thread_id, res, sendJSON, () => executor({
       task_id: makeTaskId('wait'),
       type: 'wait_for',
       params: {
@@ -891,8 +884,7 @@ export async function handleTabsRoute(
         ...(body?.runId ? { runId: body.runId } : {}),
       },
       thread_id: '',
-    })
-    sendExecutorResult(result, res, sendJSON)
+    }))
     return true
   }
 

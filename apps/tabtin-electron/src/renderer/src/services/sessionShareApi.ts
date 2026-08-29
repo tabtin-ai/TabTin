@@ -30,11 +30,15 @@ interface ApiEnvelope<T = unknown> {
 /** 带 HTTP / 业务 status 的错误：403 → 查看器空态「共享已停止或无权查看」。 */
 export class ShareApiError extends Error {
   status: number
+  code?: string
+  data?: unknown
 
-  constructor(message: string, status: number) {
+  constructor(message: string, status: number, code?: string, data?: unknown) {
     super(message)
     this.name = 'ShareApiError'
     this.status = status
+    this.code = code
+    this.data = data
   }
 }
 
@@ -82,7 +86,12 @@ export async function shareApiRequest<T>(
       ? response.status
       : (typeof data.code === 'number' ? data.code : response.status)
     log.warn('share api request failed', { path, status, message: data.message })
-    throw new ShareApiError(data.message || `Session share API error: ${status}`, status)
+    throw new ShareApiError(
+      data.message || `Session share API error: ${status}`,
+      status,
+      typeof data.code === 'string' ? data.code : undefined,
+      data.data,
+    )
   }
   return data.data
 }
@@ -227,6 +236,8 @@ export interface CreateSessionShareParams {
   grantee_user_id: string
   can_fork?: boolean
   can_chat?: boolean
+  /** 当前组织内私聊；提供后复用该会话投递分享卡。 */
+  conversation_id?: string
   /** 失败重试必须复用同一幂等键；未传时由调用方生成。 */
   client_request_id: string
 }

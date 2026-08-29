@@ -23,6 +23,7 @@ vi.mock('../browser/_helpers', () => ({
   errorResponse: vi.fn(),
   saveScreenshotFromBase64: vi.fn(),
   electronPolicyHooks: {},
+  resolveAccessBarrierHostHook: () => undefined,
 }))
 
 import { runObserveForOpen, OPEN_EMBED_OBSERVE_TIMEOUT_MS } from '../browser/interaction'
@@ -90,6 +91,46 @@ describe('runObserveForOpen 总超时（ 内嵌观察 best-effort 兜底）', ()
     expect(Object.keys(result!)[0]).toBe('login_required')
   })
 
+  it('glance 命中 Access Barrier 时置顶透传 access_barrier(+resolution)，不剥成只有 login_required', async () => {
+    const loginRequired = { reason: '页面跳转到登录 / 授权页', hint: '请让用户手动登录' }
+    const barrier = {
+      kind: 'login',
+      reason: '页面跳转到登录 / 授权页',
+      domain: 'zhihu.com',
+      actions: ['resume_same_tab', 'alternate_source', 'abort_this_target'],
+    }
+    const resolution = { action: 'alternate_source' as const }
+    handleBrowserAction.mockResolvedValue({
+      ok: true,
+      status: 200,
+      data: {
+        access_barrier: barrier,
+        access_barrier_resolution: resolution,
+        login_required: loginRequired,
+        observed_elements: [{ ref: 'e1', text: '扫码登录' }],
+        page_url: 'https://www.zhihu.com/signin?next=%2Fhot',
+      },
+    })
+
+    const result = await runObserveForOpen(
+      executor as never,
+      { _thread_id: 'chat-session-live' },
+      'view-zhihu',
+    )
+    expect(result).toEqual({
+      access_barrier: barrier,
+      access_barrier_resolution: resolution,
+      login_required: loginRequired,
+      observed_elements: [{ ref: 'e1', text: '扫码登录' }],
+    })
+    expect(Object.keys(result!)[0]).toBe('access_barrier')
+    expect(handleBrowserAction).toHaveBeenCalledWith(
+      'glance',
+      expect.objectContaining({ _thread_id: 'chat-session-live', tabId: 'view-zhihu' }),
+      expect.anything(),
+    )
+  })
+
   it('glance 永不 settle（executeJavaScript 撞导航窗口）时按超时放弃，open 不被拖死', async () => {
     // 回归 120s CLI 超时挂起：观察链路最深处 Promise 悬死，此前 /open 会随之无限等待。
     handleBrowserAction.mockReturnValue(new Promise(() => {}))
@@ -100,7 +141,7 @@ describe('runObserveForOpen 总超时（ 内嵌观察 best-effort 兜底）', ()
     await expect(pending).resolves.toBeUndefined()
   })
 
-  it('超时上限须远低于 CLI 客户端 120s 硬超时', () => {
-    expect(OPEN_EMBED_OBSERVE_TIMEOUT_MS).toBeLessThan(120_000 / 2)
+  it('超时须盖过 Access Barrier HITL 卡片等待窗（默认 10 分钟）', () => {
+    expect(OPEN_EMBED_OBSERVE_TIMEOUT_MS).toBeGreaterThanOrEqual(10 * 60 * 1000)
   })
 })

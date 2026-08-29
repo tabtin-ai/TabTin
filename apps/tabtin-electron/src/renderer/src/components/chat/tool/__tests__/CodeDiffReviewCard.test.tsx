@@ -2,6 +2,7 @@ import React from 'react'
 import { act, fireEvent, render, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type { ChatMessage } from '@tabtin/chat-client'
+import { blockExpandKey, useChatBlockUiPrefsStore } from '@stores/chat/presentation/blockUiPrefs'
 
 const mocks = vi.hoisted(() => ({
   openCodeChangesTab: vi.fn(),
@@ -93,6 +94,23 @@ function message(id: string, role: ChatMessage['role']): ChatMessage {
   } as ChatMessage
 }
 
+function setReviewFiles(count: number) {
+  mocks.review.files = Array.from({ length: count }, (_, index) => ({
+    displayable: true,
+    relativePath: `src/file-${index + 1}.ts`,
+    status: index === 0 ? 'modified' : 'added',
+    insertions: index + 1,
+    deletions: index % 2,
+  }))
+}
+
+function setReviewExpanded(messageId: string, expanded: boolean) {
+  useChatBlockUiPrefsStore.getState().setExpanded(
+    blockExpandKey(`review-card:${messageId}`),
+    expanded,
+  )
+}
+
 describe('CodeDiffReviewCard', () => {
   beforeEach(() => {
     mocks.openCodeChangesTab.mockReset()
@@ -102,7 +120,168 @@ describe('CodeDiffReviewCard', () => {
     mocks.spaceType = 'workspace'
     mocks.gitStatus.isGitRepo = true
     mocks.gitStatus.statusRevision = 1
+    mocks.review.turnEndMessageId = 'a1'
+    mocks.review.files = [
+      { displayable: true, relativePath: 'src/one.ts', status: 'modified', insertions: 3, deletions: 1 },
+      { displayable: true, relativePath: 'src/two.ts', status: 'added', insertions: 1, deletions: 0 },
+    ]
+    setReviewExpanded('a1', true)
     useSessionBoundCodeRootStore.getState().reset()
+  })
+
+  it('shows all files without collapse controls when there are at most five displayable files', () => {
+    setReviewFiles(5)
+
+    render(
+      <CodeDiffReviewCard
+        message={message('a1', 'assistant')}
+        timelineMessages={[message('u1', 'user'), message('a1', 'assistant')]}
+        sessionId="s1"
+        isLastInTurn
+        isMiniMessage={false}
+        isErrorEnvelope={false}
+      />,
+    )
+
+    expect(screen.queryByTestId('code-diff-review-toggle')).toBeNull()
+    expect(screen.queryByTestId('code-diff-review-expand-button')).toBeNull()
+    expect(screen.getAllByTestId('code-diff-review-file')).toHaveLength(5)
+  })
+
+  it('previews five files by default and expands or collapses the complete list', () => {
+    const messageId = 'long-a1'
+    mocks.review.turnEndMessageId = messageId
+    setReviewFiles(6)
+    setReviewExpanded(messageId, false)
+
+    render(
+      <CodeDiffReviewCard
+        message={message(messageId, 'assistant')}
+        timelineMessages={[message('u1', 'user'), message(messageId, 'assistant')]}
+        sessionId="s1"
+        tabScopeKey="conversation:s1"
+        isLastInTurn
+        isMiniMessage={false}
+        isErrorEnvelope={false}
+      />,
+    )
+
+    const expandButton = screen.getByTestId('code-diff-review-expand-button')
+    expect(screen.queryByTestId('code-diff-review-toggle')).toBeNull()
+    expect(expandButton.getAttribute('aria-expanded')).toBe('false')
+    expect(expandButton.getAttribute('aria-controls')).toBe('code-diff-review-files-long-a1')
+    expect(screen.getAllByTestId('code-diff-review-file')).toHaveLength(5)
+    expect(screen.queryByText('src/file-6.ts')).toBeNull()
+    expect(expandButton.textContent).toContain('展开剩余 1 个文件')
+
+    fireEvent.click(expandButton)
+    expect(expandButton.getAttribute('aria-expanded')).toBe('true')
+    expect(screen.getAllByTestId('code-diff-review-file')).toHaveLength(6)
+    expect(screen.getByText('src/file-6.ts')).toBeTruthy()
+    expect(expandButton.textContent).toContain('收起文件')
+
+    fireEvent.click(expandButton)
+    expect(expandButton.getAttribute('aria-expanded')).toBe('false')
+    expect(screen.getAllByTestId('code-diff-review-file')).toHaveLength(5)
+  })
+
+  it('keeps the explicit expansion choice across remounts and keeps review available while collapsed', () => {
+    const messageId = 'remount-a1'
+    mocks.review.turnEndMessageId = messageId
+    setReviewFiles(6)
+    setReviewExpanded(messageId, false)
+
+    const props = {
+      message: message(messageId, 'assistant'),
+      timelineMessages: [message('u1', 'user'), message(messageId, 'assistant')],
+      sessionId: 's1',
+      tabScopeKey: 'conversation:s1',
+      isLastInTurn: true,
+      isMiniMessage: false,
+      isErrorEnvelope: false,
+    } as const
+    const { unmount } = render(<CodeDiffReviewCard {...props} />)
+
+    expect(screen.getAllByTestId('code-diff-review-file')).toHaveLength(5)
+    fireEvent.click(screen.getByTestId('code-diff-review-review-button'))
+    expect(mocks.openCodeChangesTab).toHaveBeenCalledWith(expect.objectContaining({
+      agentTurnEndMessageId: messageId,
+      focusView: 'agent',
+    }))
+
+    fireEvent.click(screen.getByTestId('code-diff-review-expand-button'))
+    expect(screen.getAllByTestId('code-diff-review-file')).toHaveLength(6)
+    unmount()
+
+    render(<CodeDiffReviewCard {...props} />)
+    expect(screen.getAllByTestId('code-diff-review-file')).toHaveLength(6)
+  })
+
+  it('reloads the patch journal once when each live turn closes', () => {
+    const firstTurnMessages = [message('u1', 'user'), message('a1', 'assistant')]
+    const secondTurnMessages = [
+      ...firstTurnMessages,
+      message('u2', 'user'),
+      message('a2', 'assistant'),
+    ]
+    const { rerender } = render(
+      <CodeDiffReviewCard
+        message={message('a1', 'assistant')}
+        timelineMessages={firstTurnMessages}
+        sessionId="s1"
+        isLastInTurn
+        isStreaming
+        isMiniMessage={false}
+        isErrorEnvelope={false}
+      />,
+    )
+
+    expect(mocks.loadJournal).not.toHaveBeenCalled()
+    expect(screen.queryByTestId('code-diff-review-card')).toBeNull()
+
+    rerender(
+      <CodeDiffReviewCard
+        message={message('a1', 'assistant')}
+        timelineMessages={firstTurnMessages}
+        sessionId="s1"
+        isLastInTurn
+        isStreaming={false}
+        isMiniMessage={false}
+        isErrorEnvelope={false}
+      />,
+    )
+    expect(mocks.loadJournal).toHaveBeenCalledTimes(1)
+    expect(mocks.loadJournal).toHaveBeenCalledWith('s1')
+    expect(screen.getByTestId('code-diff-review-card')).toBeTruthy()
+
+    mocks.review.turnEndMessageId = 'a2'
+    rerender(
+      <CodeDiffReviewCard
+        message={message('a2', 'assistant')}
+        timelineMessages={secondTurnMessages}
+        sessionId="s1"
+        isLastInTurn
+        isStreaming
+        isMiniMessage={false}
+        isErrorEnvelope={false}
+      />,
+    )
+    expect(mocks.loadJournal).toHaveBeenCalledTimes(1)
+    expect(screen.queryByTestId('code-diff-review-card')).toBeNull()
+
+    rerender(
+      <CodeDiffReviewCard
+        message={message('a2', 'assistant')}
+        timelineMessages={secondTurnMessages}
+        sessionId="s1"
+        isLastInTurn
+        isStreaming={false}
+        isMiniMessage={false}
+        isErrorEnvelope={false}
+      />,
+    )
+    expect(mocks.loadJournal).toHaveBeenCalledTimes(2)
+    expect(screen.getByTestId('code-diff-review-card')).toBeTruthy()
   })
 
   it('opens the referenced Agent turn in Changes', () => {

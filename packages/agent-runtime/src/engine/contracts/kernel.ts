@@ -475,7 +475,7 @@ export interface BeforeModelContext extends HookEventSink {
    * 把本轮 LLM 请求的工具面收窄到白名单（按工具名过滤，名单外的工具本轮
    * 不进请求）。与 grace turn（全扣工具）正交：grace 优先——grace 时白名单
    * 无效。仅影响本轮；跨轮持续收窄由 hook 自己在每轮 beforeModel 重设。
-   * 当前唯一写者：login-wall-gate（登录墙硬门禁只留 ask_user）。
+   * 默认策略栈无写者（登录/验证码墙已迁至 Access Barrier HITL）；API 保留供宿主钩子。
    *
    * `opts.forceCall`：本轮请求附带 `tool_choice: 'required'`——协议层强制
    * 模型必须产出真 tool_use（纯提示词挡不住模型把调用写成正文伪 XML，见

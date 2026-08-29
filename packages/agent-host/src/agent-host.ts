@@ -11,7 +11,13 @@ import {
   type HumanInteractionContext,
   type PlatformApprovalRequest,
   type PlatformApprovalResult,
+  createInterruptAdapter,
 } from '@tabtin/agent-runtime/permissions'
+import {
+  presentAccessBarrier as presentAccessBarrierCore,
+  type AccessBarrier,
+  type AccessBarrierResolution,
+} from '@tabtin/agent-runtime'
 import type { ConversationLifecycleIdentity } from './conversation/conversation-identity.js'
 import type {
   AgentPlatformAdapter,
@@ -46,6 +52,7 @@ import {
   type DeliveryCoordinatorConfig,
   type DeliveryDurableLayer,
 } from './delivery/delivery-coordinator.js'
+import { SessionPauseController } from './delivery/session-pause-controller.js'
 import type { DeliveryTransportPort } from './delivery/delivery-transport-port.js'
 import type { LlmSnapshotLedgerDirectory } from './delivery/llm-snapshot-http-ledger.js'
 import { approvalGateSessionId } from './interaction/approval-gate.js'
@@ -83,6 +90,14 @@ interface HostQueryPipelineHandle {
   abort(identity: ConversationLifecycleIdentity): QueryAbortResult
   getState(conversationId: string): ConversationExecutionState
 }
+
+/**
+ * Access Barrier HITL registry 安全网超时（设计 §8.3）：`HumanInteractionRegistry.
+ * waitForInput` 自带的 fallback timer，只用来防止 registry 条目无限挂着——真正
+ * 的用户超时由 `presentAccessBarrier`（`@tabtin/agent-runtime`）自己的
+ * `interrupt()` race 控制（默认 10 分钟），所以这里给一个远大于它的安全网。
+ */
+const ACCESS_BARRIER_REGISTRY_SAFETY_TIMEOUT_MS = 24 * 60 * 60 * 1000
 
 /** Type-erased handle for the composed RuntimeSessionLifecycle. */
 interface ComposedLifecycleHandle {
@@ -552,6 +567,59 @@ export class AgentHost<Request, Result, SessionState = unknown> {
     }
   }
 
+  /**
+   * Access Barrier HITL：浏览器编排出口拿到 `AccessBarrier` 后经此落到真实
+   * 会话通道——委托 `presentAccessBarrier`（`@tabtin/agent-runtime`）做「emit
+   * 专用卡片 + interrupt 挂起 + 超时」，本方法只负责把 threadId 解析成
+   * session 并组出 `InterruptPort`（`realtime.publish` + `interactions.waitForInput`）。
+   *
+   * 同时对 session 的 `SessionPauseController.acquireHitlPark()`：主循环已有
+   * `waitIfPaused` 边界，shell 把 `browser open` 甩后台后模型也不会继续跑工具。
+   * `finally releaseHitlPark` 覆盖用户点选 / 超时 / abort cancel（假死双清）。
+   *
+   * 与 {@link requestPlatformApproval} 同构但更薄：不做审批 memo / 远程 fanout /
+   * 零投递探测——关联不到 session（`approvalGateSessionId` 判空）直接诚实失败
+   * `host_unavailable`，其余交给 `presentAccessBarrier` 自身的运行时模式判定
+   * 与超时。`interactions.waitForInput` 的 `timeoutMs` 只是内存安全网（防止
+   * registry 条目无限挂着），真正的用户超时由 `presentAccessBarrier` 的
+   * `interrupt()` race 控制。
+   */
+  async presentAccessBarrier(
+    context: HumanInteractionContext,
+    barrier: AccessBarrier,
+  ): Promise<AccessBarrierResolution> {
+    const sessionId = approvalGateSessionId(context.threadId)
+    if (!sessionId) {
+      this.adapter.logger.warn('[access_barrier] host_unavailable: missing thread identity')
+      return { action: 'host_unavailable' }
+    }
+    // 会话级 park：与 shell wait_ms 后台化正交——卡挂着时主循环 waitIfPaused 停住，
+    // 避免「弹卡了模型还在跑」。finally 覆盖决议 / 超时 / abort cancel（双清）。
+    const pauseController = resolveSessionPauseController(this.sessions.get(sessionId))
+    pauseController?.acquireHitlPark()
+    try {
+      const interrupt = createInterruptAdapter({
+        emitStreamEvent: (event) => { this.realtime.publish(sessionId, { event }) },
+        waitForUserInput: (requestId) => this.interactions.waitForInput({
+          requestId,
+          conversationId: sessionId,
+          timeoutMs: ACCESS_BARRIER_REGISTRY_SAFETY_TIMEOUT_MS,
+        }),
+        threadId: context.threadId,
+      })
+      return await presentAccessBarrierCore({
+        interrupt,
+        barrier,
+        runtimeMode: context.interactionMode,
+        sessionId,
+        // 与 interrupt 开卡同出口：超时/取消/点选后对称补发 single_hitl_resolved 收卡。
+        emitStreamEvent: (event) => { this.realtime.publish(sessionId, { event }) },
+      })
+    } finally {
+      pauseController?.releaseHitlPark()
+    }
+  }
+
   broadcast(envelope: AgentStreamEnvelope): number {
     return this.realtime.broadcast(envelope)
   }
@@ -995,6 +1063,18 @@ function buildPlatformApprovalResolvedEvent(
     type: StreamEvents.APPROVAL_RESOLVED,
     payload,
   }
+}
+
+/**
+ * HostState（Electron）等 session 载体上挂着 `pauseController`；Daemon / 测试桩
+ * 可能没有。duck-type 取用，避免 AgentHost 绑死具体 SessionState 形状。
+ */
+function resolveSessionPauseController(
+  session: unknown,
+): SessionPauseController | undefined {
+  if (!session || typeof session !== 'object') return undefined
+  const pauseController = (session as { pauseController?: unknown }).pauseController
+  return pauseController instanceof SessionPauseController ? pauseController : undefined
 }
 
 async function settleBeforeDeadline(

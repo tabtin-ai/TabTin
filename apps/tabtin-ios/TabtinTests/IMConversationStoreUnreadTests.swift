@@ -11,6 +11,7 @@ private struct IMHostLeakingTestError: LocalizedError {
 private final class FakeIMConversationDataPlane: IMConversationDataPlane {
     var listError: Error?
     var searchError: Error?
+    var searchResults: [IMMessageSearchResult] = []
     var conversationChangedListener: (@MainActor @Sendable () -> Void)?
     private(set) var listConversationCalls: [String] = []
 
@@ -22,7 +23,7 @@ private final class FakeIMConversationDataPlane: IMConversationDataPlane {
 
     func searchMessages(organizationId: String, query: String) async throws -> [IMMessageSearchResult] {
         if let searchError { throw searchError }
-        return []
+        return searchResults
     }
 
     func setConversationChangedListener(_ listener: (@MainActor @Sendable () -> Void)?) {
@@ -108,6 +109,58 @@ final class IMConversationStoreErrorTests: XCTestCase {
         XCTAssertFalse(store.searchError?.contains("im-secret.internal.example") ?? true)
         XCTAssertFalse(store.searchError?.contains("timed out") ?? true)
         XCTAssertFalse(store.isSearching)
+    }
+
+    func testSuccessfulSearchAfterNetworkRecoveryClearsPreviousFailure() async {
+        let dataPlane = FakeIMConversationDataPlane()
+        dataPlane.searchError = IMHostLeakingTestError()
+        let store = IMConversationStore(dataPlane: dataPlane)
+
+        await store.searchMessages(organizationId: "org-1", query: "项目")
+        XCTAssertEqual(store.searchError, L10n.Messages.networkError)
+
+        dataPlane.searchError = nil
+        dataPlane.searchResults = [
+            IMMessageSearchResult(
+                conversation: IMConversation(
+                    id: "conversation-1",
+                    organizationId: "org-1",
+                    spaceId: nil,
+                    spaceName: "",
+                    isTeamSpaceChannel: false,
+                    isExternal: false,
+                    type: IMConversationType.dm.rawValue,
+                    name: "测试会话",
+                    avatarUrl: "",
+                    memberCount: 2,
+                    isArchived: false,
+                    lastMessageAt: nil,
+                    lastMessagePreview: "",
+                    unreadCount: 0,
+                    lastMessageSeq: 1,
+                    createdAt: "",
+                    dmPeerUserId: "user-2",
+                    pinned: false,
+                    isMuted: false
+                ),
+                matchedMessagePreview: "项目消息",
+                matchCount: 1
+            )
+        ]
+
+        await store.searchMessages(organizationId: "org-1", query: "项目")
+
+        XCTAssertNil(store.searchError)
+        XCTAssertFalse(store.isSearching)
+        XCTAssertEqual(store.searchResults, dataPlane.searchResults)
+        XCTAssertEqual(
+            IMConversationSearchFeedback.resolve(
+                query: "项目",
+                isSearching: store.isSearching,
+                error: store.searchError
+            ),
+            .none
+        )
     }
 }
 

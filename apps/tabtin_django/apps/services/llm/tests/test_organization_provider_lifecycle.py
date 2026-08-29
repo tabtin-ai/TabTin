@@ -263,7 +263,7 @@ class OrganizationProviderLifecycleTests(TestCase):
             name="openai",
             provider_key="custom-openai",
             display_name="Custom OpenAI",
-            default_base_url="https://default.example.com/v1",
+            default_base_url="https://openrouter.ai/api/v1",
             api_key="",
             scope="organization",
             organization_id=self.organization_id,
@@ -274,7 +274,7 @@ class OrganizationProviderLifecycleTests(TestCase):
             model_name="custom-model",
             display_name="Custom Model",
             capability_domain="chat",
-            base_url="https://old.example.com/v1",
+            base_url="https://openrouter.ai/api/v1",
             context_window_tokens=8192,
         )
 
@@ -282,12 +282,12 @@ class OrganizationProviderLifecycleTests(TestCase):
             self.request,
             self.organization_id,
             str(model.id),
-            OrganizationModelUpdateRequest(base_url="https://new.example.com/v1"),
+            OrganizationModelUpdateRequest(base_url="https://openrouter.ai/api/v1/beta"),
         )
 
         self.assertTrue(response["success"])
         model.refresh_from_db()
-        self.assertEqual(model.base_url, "https://new.example.com/v1")
+        self.assertEqual(model.base_url, "https://openrouter.ai/api/v1/beta")
         self.assertTrue(model.capabilities_config["supports_json_mode"])
         self.assertEqual(
             model.capabilities_config["json_mode"]["modes"],
@@ -299,7 +299,7 @@ class OrganizationProviderLifecycleTests(TestCase):
             include_inactive=True,
         )
         serialized = next(item for item in available if item["id"] == str(model.id))
-        self.assertEqual(serialized["base_url"], "https://new.example.com/v1")
+        self.assertEqual(serialized["base_url"], "https://openrouter.ai/api/v1/beta")
 
     @patch("apps.services.llm.api_config.invalidate_models_cache")
     @patch("apps.services.llm.api_config._clear_organization_subagent_model_id")

@@ -204,14 +204,12 @@ enum SettingsHomeCapabilityResolver {
 enum SettingsHomePresentation {
     static let homeOrder: [SettingsDestination] = [
         .settingsPersonalAccountInfo,
-        .settingsPersonalChangePassword,
         .settingsPersonalPrivacyAndData,
         .settingsPersonalAppearance,
         .settingsPersonalSystemPermissions,
         .settingsPersonalVoiceHabits,
         .settingsOrganizationSummary,
         .settingsOrganizationSettingsEntry,
-        .settingsDeviceInfo,
         .settingsDeviceDiagnostics,
         .settingsDeviceDebugEnvironment,
         .settingsDeviceAbout,
@@ -234,7 +232,7 @@ enum SettingsHomePresentation {
             SettingsHomeGroupPresentation(
                 id: "account-security",
                 title: L10n.Settings.sectionAccountSecurity,
-                destinations: [.settingsPersonalAccountInfo, .settingsPersonalChangePassword, .settingsPersonalPrivacyAndData]
+                destinations: [.settingsPersonalAccountInfo, .settingsPersonalPrivacyAndData]
             ),
             SettingsHomeGroupPresentation(
                 id: "preferences",
@@ -253,7 +251,7 @@ enum SettingsHomePresentation {
             SettingsHomeGroupPresentation(
                 id: "device",
                 title: L10n.Settings.sectionDevice,
-                destinations: [.settingsDeviceInfo, .settingsDeviceDiagnostics, .settingsDeviceDebugEnvironment]
+                destinations: [.settingsDeviceDiagnostics, .settingsDeviceDebugEnvironment]
             ),
             SettingsHomeGroupPresentation(
                 id: "about-support",
@@ -397,6 +395,7 @@ private struct SettingsHomeRow: View {
                 .frame(minHeight: 56)
                 .contentShape(Rectangle())
         }
+        .padding(.trailing, TTSpacing.sm)
         .accessibilityIdentifier("settings-home-row-\(capabilityID)")
     }
 

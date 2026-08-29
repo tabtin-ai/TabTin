@@ -2,9 +2,11 @@ import { describe, expect, it } from 'vitest'
 
 import type { LocalMcpCandidateSummary, LocalMcpConnectionSummary } from '@shared/types/mcp'
 import {
+  canUninstallMarketplaceConnector,
   diffManageableAgentAssignments,
   getConnectorMarketState,
   matchesConnectorSearch,
+  shouldShowMarketplaceUninstall,
 } from './connectorMarketState'
 
 function connection(overrides: Partial<LocalMcpConnectionSummary> = {}): LocalMcpConnectionSummary {
@@ -230,5 +232,81 @@ describe('matchesConnectorSearch', () => {
 
   it('排除无关搜索词', () => {
     expect(matchesConnectorSearch(searchableConnector, 'figma')).toBe(false)
+  })
+})
+
+describe('canUninstallMarketplaceConnector', () => {
+  it('未接入或只读时不展示卸载', () => {
+    expect(canUninstallMarketplaceConnector(undefined)).toBe(false)
+    expect(canUninstallMarketplaceConnector(null)).toBe(false)
+    expect(canUninstallMarketplaceConnector(connection(), false)).toBe(false)
+  })
+
+  it('本机已有连接且可管理时展示卸载', () => {
+    expect(canUninstallMarketplaceConnector(connection())).toBe(true)
+    expect(canUninstallMarketplaceConnector(connection({
+      lastProbe: {
+        ok: true,
+        probedAt: '2026-07-31T01:00:00Z',
+        tools: [],
+        resources: [],
+        prompts: [],
+      },
+    }))).toBe(true)
+  })
+})
+
+describe('shouldShowMarketplaceUninstall', () => {
+  it('已接入且按钮为管理时展示', () => {
+    expect(shouldShowMarketplaceUninstall({
+      hasUninstallHandler: true,
+      action: 'manage',
+    })).toBe(true)
+    expect(shouldShowMarketplaceUninstall({
+      hasUninstallHandler: true,
+      action: 'continue',
+      forceManageAction: true,
+    })).toBe(true)
+  })
+
+  it('接入 / 即将开放 / 重新授权不展示', () => {
+    expect(shouldShowMarketplaceUninstall({
+      hasUninstallHandler: true,
+      action: 'connect',
+    })).toBe(false)
+    expect(shouldShowMarketplaceUninstall({
+      hasUninstallHandler: true,
+      action: 'connect',
+      preferGhostAction: true,
+      actionLabel: '即将开放',
+    })).toBe(false)
+    expect(shouldShowMarketplaceUninstall({
+      hasUninstallHandler: true,
+      action: 'repair',
+      actionLabel: '重新授权',
+    })).toBe(false)
+  })
+
+  it('继续配置 / 修复在推荐和组织精选不展示', () => {
+    expect(shouldShowMarketplaceUninstall({
+      hasUninstallHandler: true,
+      action: 'continue',
+    })).toBe(false)
+    expect(shouldShowMarketplaceUninstall({
+      hasUninstallHandler: true,
+      action: 'repair',
+    })).toBe(false)
+  })
+
+  it('没有卸载回调或隐藏动作时不展示', () => {
+    expect(shouldShowMarketplaceUninstall({
+      hasUninstallHandler: false,
+      action: 'manage',
+    })).toBe(false)
+    expect(shouldShowMarketplaceUninstall({
+      hasUninstallHandler: true,
+      hideAction: true,
+      action: 'manage',
+    })).toBe(false)
   })
 })

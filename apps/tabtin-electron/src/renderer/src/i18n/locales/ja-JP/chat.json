@@ -590,7 +590,15 @@
     "title": "コードの変更",
     "files": "ファイル",
     "viewDiff": "差分を表示",
-    "open": "コード変更の差分を表示"
+    "open": "コード変更の差分を表示",
+    "editedFiles": "編集済み {{count}} ファイル",
+    "review": "レビュー",
+    "fileList": "編集済みファイル",
+    "reviewFile": "{{file}}をレビュー",
+    "expandRemaining": "残り {{count}} ファイルを表示",
+    "collapse": "ファイルを折りたたむ",
+    "expandRemainingAria": "残り {{count}} ファイルを表示",
+    "collapseAria": "ファイルを折りたたむ"
   },
   "turnArtifacts": {
     "title": "アーティファクト",

@@ -139,6 +139,54 @@ describe('CreateConversationDialog', () => {
     expect(onClose).toHaveBeenCalledTimes(1)
   })
 
+  it('创建群聊再选一名成员即可提交', async () => {
+    const onClose = vi.fn()
+
+    render(
+      <CreateConversationDialog
+        isOpen
+        onClose={onClose}
+      />,
+    )
+
+    fireEvent.click(screen.getByText('newGroup'))
+    fireEvent.click(screen.getByText('Bob').closest('button')!)
+    fireEvent.click(screen.getByRole('button', { name: 'createGroup' }))
+
+    await waitFor(() => {
+      expect(mockCreateConversationAndActivate).toHaveBeenCalledWith(
+        expect.objectContaining({
+          organizationId: 'ws-1',
+          kind: 'group',
+          memberIds: ['user-2'],
+        }),
+      )
+    })
+    expect(onClose).toHaveBeenCalledTimes(1)
+  })
+
+  it('创建群聊不选择成员时也可提交，创建者自动成为唯一成员', async () => {
+    const onClose = vi.fn()
+
+    render(<CreateConversationDialog isOpen initialTab="group" onClose={onClose} />)
+
+    const createButton = screen.getByRole('button', { name: 'createGroup' })
+    expect((createButton as HTMLButtonElement).disabled).toBe(false)
+    fireEvent.click(createButton)
+
+    await waitFor(() => {
+      expect(mockCreateConversationAndActivate).toHaveBeenCalledWith(
+        expect.objectContaining({
+          organizationId: 'ws-1',
+          kind: 'group',
+          memberIds: [],
+          externalContactIds: [],
+        }),
+      )
+    })
+    expect(onClose).toHaveBeenCalledTimes(1)
+  })
+
   it('创建群聊时传递选中的多个成员并使用输入的群名', async () => {
     const onClose = vi.fn()
 

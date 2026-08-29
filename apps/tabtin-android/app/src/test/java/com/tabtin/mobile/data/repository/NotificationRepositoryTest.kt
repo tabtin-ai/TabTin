@@ -207,6 +207,40 @@ class NotificationRepositoryTest {
     }
 
     @Test
+    fun `resolved invitation replaces unread invitation and clears its unread count`() = runTest {
+        val repository = NotificationRepository(
+            FakeNotificationApi(
+                notifications = emptyList(),
+                unreadCount = 0,
+                markReadResponse = ApiEnvelope(success = true),
+            ),
+        )
+        repository.activate(ORGANIZATION_ID)
+
+        repository.handleRealtimeEnvelope(
+            notificationEnvelope(
+                id = "invite-1",
+                type = "organization.invitation",
+                organizationId = "invited-org",
+            ),
+        )
+        repository.handleRealtimeEnvelope(
+            notificationEnvelope(
+                id = "invite-1",
+                type = "organization.invitation.cancelled",
+                organizationId = "invited-org",
+                isRead = true,
+            ),
+        )
+
+        val notification = repository.state.value.notifications.single()
+        assertEquals("organization.invitation.cancelled", notification.type)
+        assertTrue(notification.isRead)
+        assertEquals(0, repository.state.value.unreadCount)
+        assertFalse(repository.state.value.hasUnreadNotifications)
+    }
+
+    @Test
     fun `desktop only realtime notification is ignored`() = runTest {
         val repository = NotificationRepository(
             FakeNotificationApi(
@@ -266,6 +300,7 @@ class NotificationRepositoryTest {
         projectId: String? = null,
         legacyHostId: String? = null,
         desktopOnly: Boolean = false,
+        isRead: Boolean = false,
     ): WSEnvelope = WSEnvelope(
         type = "agent.user.notification.new",
         payload = buildJsonObject {
@@ -278,6 +313,7 @@ class NotificationRepositoryTest {
             if (desktopOnly) {
                 put("metadata", buildJsonObject { put("desktop_only", true) })
             }
+            put("is_read", isRead)
             put("created_at", "2026-07-17T10:00:00Z")
         },
     )

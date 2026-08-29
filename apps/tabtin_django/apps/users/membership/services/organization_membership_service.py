@@ -5,7 +5,7 @@
 """
 
 import logging
-from datetime import timedelta
+from datetime import date, timedelta
 from typing import Optional, Dict, Any
 from decimal import Decimal
 from django.conf import settings
@@ -267,11 +267,7 @@ class OrganizationMembershipService:
                 # quota_only 后，新建组织仍会被这里的硬编码盖回旧的 quota_then_paygo。
                 OrganizationBillingPolicy.objects.get_or_create(
                     organization_id=organization_id,
-                    defaults={
-                        'storage_billing_mode': OrganizationBillingPolicyService.DEFAULT_STORAGE_BILLING_MODE,
-                        'llm_billing_mode': OrganizationBillingPolicyService.DEFAULT_LLM_BILLING_MODE,
-                        'is_active': True,
-                    },
+                    defaults=OrganizationBillingPolicyService.default_policy_create_kwargs(),
                 )
 
                 # 会员购买/开通路径也必须同步当月 AI 预算；此前这里只更新
@@ -389,7 +385,9 @@ class OrganizationMembershipService:
             )
             grace_period_end = None
             grace_days_remaining = None
-            if wt_membership.end_date:
+            # Community 永久会员以 date.max 作为到期时间哨兵。它不应有宽
+            # 限期；对该日期再加 timedelta 会触发 ``date value out of range``。
+            if wt_membership.end_date and wt_membership.end_date.date() < date.max:
                 grace_period_end = wt_membership.end_date + timedelta(days=grace_days)
                 if in_grace_period:
                     grace_days_remaining = max(0, (grace_period_end - resolved_now).days)

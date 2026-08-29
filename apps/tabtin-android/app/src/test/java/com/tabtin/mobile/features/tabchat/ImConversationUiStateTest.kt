@@ -12,6 +12,13 @@ import org.junit.Test
 
 class ImConversationUiStateTest {
     @Test
+    fun `external direct message hides add menu while regular composer keeps it`() {
+        assertTrue(shouldShowImComposerAddButton(editing = false, contentMenuEnabled = true))
+        assertFalse(shouldShowImComposerAddButton(editing = false, contentMenuEnabled = false))
+        assertFalse(shouldShowImComposerAddButton(editing = true, contentMenuEnabled = true))
+    }
+
+    @Test
     fun `pin jump uses rendered timeline index when pending precedes target`() {
         val target = ImMessage(
             id = 92,

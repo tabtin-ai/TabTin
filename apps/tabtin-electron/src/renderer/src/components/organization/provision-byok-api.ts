@@ -16,6 +16,7 @@ export async function provisionByokApi(params: {
     baseUrl,
     apiKey,
     scope,
+    // 旧客户端不传 providerKey 时保持 provider_key = provider_name（第一套官方连接）。
     providerKey = providerName,
     displayName,
   } = params

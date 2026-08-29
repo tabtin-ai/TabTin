@@ -212,6 +212,17 @@ private struct SettingsAccountInfoScreen: View {
                     }
                 }
 
+                Section {
+                    NavigationLink {
+                        SettingsDestinationScreen(destination: .settingsPersonalChangePassword)
+                    } label: {
+                        TTSettingsDetailLabel(
+                            title: L10n.Profile.changePassword,
+                            systemImage: "key.fill"
+                        )
+                    }
+                }
+
                 if !user.id.isEmpty {
                     Section {
                         Button {
@@ -281,7 +292,7 @@ private struct SettingsAccountInfoScreen: View {
             }
         }
         .ttSettingsDetailListStyle()
-        .navigationTitle(L10n.Settings.accountInfo)
+        .navigationTitle(L10n.Settings.accountAndVerification)
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear {
             countdownTasks.values.forEach { $0.cancel() }

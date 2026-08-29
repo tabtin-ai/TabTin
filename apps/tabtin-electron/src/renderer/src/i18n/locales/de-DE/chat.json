@@ -590,7 +590,15 @@
     "title": "Codeänderungen",
     "files": "Dateien",
     "viewDiff": "Diff. anzeigen",
-    "open": "Codeänderungen anzeigen Diff"
+    "open": "Codeänderungen anzeigen Diff",
+    "editedFiles": "{{count}} bearbeitete Dateien",
+    "review": "Prüfen",
+    "fileList": "Bearbeitete Dateien",
+    "reviewFile": "{{file}} prüfen",
+    "expandRemaining": "Verbleibende {{count}} Dateien anzeigen",
+    "collapse": "Dateien einklappen",
+    "expandRemainingAria": "Verbleibende {{count}} Dateien anzeigen",
+    "collapseAria": "Dateien einklappen"
   },
   "turnArtifacts": {
     "title": "Artefakte",

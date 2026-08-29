@@ -479,7 +479,7 @@ export const SendToIMDialog: React.FC<SendToIMDialogProps> = ({
     hasOrganization && selectedCount > 0 && Boolean(normalizedResource) && !isSubmitting
   const canCreateGroupSend =
     hasOrganization
-    && createGroupMemberIds.size >= 2
+    && createGroupMemberIds.size >= 1
     && Boolean(normalizedResource)
     && !isSubmitting
   const failedCount = results.filter((result) => result.status === 'failed' || result.status === 'partial').length

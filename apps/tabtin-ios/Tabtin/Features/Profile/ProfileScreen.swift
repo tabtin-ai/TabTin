@@ -514,11 +514,38 @@ struct DebugSettingsScreen: View {
     @State private var message: String?
     @State private var isApplying = false
     @State private var showQRScanner = false
+    @State private var deviceIdCopied = false
 
     var body: some View {
         @Bindable var settings = settings
 
         Form {
+            Section {
+                Button {
+                    copyDeviceId()
+                } label: {
+                    HStack(spacing: TTSpacing.md) {
+                        TTSettingsDetailLabel(
+                            title: L10n.Profile.deviceId,
+                            systemImage: "doc.on.doc",
+                            tone: .neutral
+                        )
+                        Spacer()
+                        if deviceIdCopied {
+                            Label(L10n.Settings.userIdCopied, systemImage: "checkmark")
+                                .font(.tt.meta)
+                                .foregroundStyle(.tt.textSuccess)
+                        } else {
+                            Text(shortDeviceId)
+                                .font(.system(.body, design: .monospaced))
+                                .foregroundStyle(.tt.textSecondary)
+                                .lineLimit(1)
+                        }
+                    }
+                }
+                .buttonStyle(.plain)
+            }
+
             Section("当前连接") {
                 debugValueRow(
                     title: "API（通知等 REST 请求同此地址）",
@@ -661,6 +688,26 @@ struct DebugSettingsScreen: View {
             Button(L10n.Common.confirm, role: .cancel) { message = nil }
         } message: {
             Text(message ?? "")
+        }
+    }
+
+    private var deviceId: String {
+        KeychainService.shared.getOrCreateDeviceId()
+    }
+
+    private var shortDeviceId: String {
+        String(deviceId.prefix(8)) + "…"
+    }
+
+    private func copyDeviceId() {
+        UIPasteboard.general.string = deviceId
+        deviceIdCopied = true
+        Task {
+            try? await Task.sleep(nanoseconds: 1_500_000_000)
+            guard !Task.isCancelled else { return }
+            await MainActor.run {
+                deviceIdCopied = false
+            }
         }
     }
 

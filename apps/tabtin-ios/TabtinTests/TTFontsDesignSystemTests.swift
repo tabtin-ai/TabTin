@@ -80,8 +80,7 @@ final class TTFontsDesignSystemTests: XCTestCase {
             text: Binding(get: { text }, set: { text = $0 }),
             isEditable: true,
             isFocused: Binding(get: { focused }, set: { focused = $0 }),
-            focusRequest: focusRequest,
-            onSubmit: {}
+            focusRequest: focusRequest
         )
         let coordinator = sut.makeCoordinator()
         let textView = UITextView()
@@ -101,6 +100,32 @@ final class TTFontsDesignSystemTests: XCTestCase {
         XCTAssertTrue(textView.isFirstResponder)
 
         window.isHidden = true
+    }
+
+    @MainActor
+    func testComposerReturnKeyAllowsNewlineInDraft() {
+        var draft = ""
+        var focused = false
+        let sut = ScrollableComposerTextView(
+            text: Binding(get: { draft }, set: { draft = $0 }),
+            isEditable: true,
+            isFocused: Binding(get: { focused }, set: { focused = $0 }),
+            focusRequest: nil
+        )
+        let coordinator = sut.makeCoordinator()
+        let textView = UITextView()
+
+        XCTAssertTrue(
+            coordinator.textView(
+                textView,
+                shouldChangeTextIn: NSRange(location: 0, length: 0),
+                replacementText: "\n"
+            )
+        )
+
+        textView.text = "第一行\n第二行"
+        coordinator.textViewDidChange(textView)
+        XCTAssertEqual(draft, "第一行\n第二行")
     }
 
     func testLineSpacingHelperIsNonNegative() {

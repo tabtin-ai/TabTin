@@ -346,7 +346,12 @@ export function completeDraftMessageSend(sessionId: string, accepted: boolean): 
   }
   const draftSession = getDraftSessionBySessionId(sessionId)
   const draftMessage = getDraftMessageById(draftSession?.draftMessageId)
-  if (!draftSession || !draftMessage) return
+  if (!draftSession) return
+  if (!draftMessage) {
+    markDraftSessionClaimed(sessionId)
+    unregisterDraftMessageScope(draftSession.draftScopeKey, draftSession.draftMessageId)
+    return
+  }
   markDraftSessionClaimed(sessionId)
   destroyDraftMessage(draftMessage.draftMessageId)
   unregisterDraftMessageScope(draftMessage.draftScopeKey, draftMessage.draftMessageId)

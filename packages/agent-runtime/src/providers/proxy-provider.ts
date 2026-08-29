@@ -1999,15 +1999,13 @@ export class TabTinProxyProvider implements LLMProvider {
   }
 
   /**
-   * 附加 extended thinking 配置。强制工具轮（tool_choice: 'required'，如
-   * login-wall-gate 门禁轮）**显式关闭** thinking：Kimi/Anthropic 均规定
-   * 强制工具调用与思考互斥（上游 400 "tool_choice 'required' is
-   * incompatible with thinking enabled"）。注意 kimi-k2.6 等思考模型
-   * thinking 是**服务端默认开启**——省略字段不等于关闭（taobao2 dogfood
-   * 2026-07-22 实测仍 400），必须显式发 `{type:'disabled'}`（Kimi 官方
-   * 文档支持；不支持 reasoning 参数的模型由 Django wire_adapter
-   * `_normalize_reasoning_param` 统一剥掉）。该轮只需模型产出一个工具
-   * 调用，无需深思考。
+   * 附加 extended thinking 配置。强制工具轮（tool_choice: 'required'）
+   * **显式关闭** thinking：Kimi/Anthropic 均规定强制工具调用与思考互斥
+   * （上游 400 "tool_choice 'required' is incompatible with thinking enabled"）。
+   * 注意 kimi-k2.6 等思考模型 thinking 是**服务端默认开启**——省略字段不等于
+   * 关闭（taobao2 dogfood 2026-07-22 实测仍 400），必须显式发 `{type:'disabled'}`
+   * （Kimi 官方文档支持；不支持 reasoning 参数的模型由 Django wire_adapter
+   * `_normalize_reasoning_param` 统一剥掉）。该轮只需模型产出一个工具调用，无需深思考。
    */
   private applyThinkingConfig(body: OpenAIRequestBody, request: LLMRequest): void {
     if (request.toolChoice === 'required') {

@@ -202,8 +202,8 @@ export interface LLMRequest {
   /**
    * 工具调用策略（OpenAI 词汇，Django wire_adapter 按上游能力归一/降级：
    * required → Anthropic {type:'any'}；不支持时降 auto + downgrade event）。
-   * 当前唯一写者：login-wall-gate 门禁轮 'required'——纯提示词 + 工具收窄
-   * 挡不住模型把工具调用写成正文伪 XML（tbao-1 dogfood），协议层强制兜死。
+   * 由 beforeModel 钩子经 `restrictToolsForTurn(..., { forceCall: true })` 写入；
+   * 默认策略栈不再写（登录墙已迁 Access Barrier HITL）。
    */
   toolChoice?: 'auto' | 'required' | 'none' | { type: 'function'; function: { name: string } };
   system?: string | SystemBlock[];

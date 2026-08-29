@@ -8,6 +8,7 @@ const {
   revokeSessionShare,
   setSessionShare,
   bumpSessionShareDetailVersion,
+  loadSessionShareV2,
   ensureProfiles,
   createConversationAndActivate,
   setImSidebarView,
@@ -19,6 +20,7 @@ const {
   revokeSessionShare: vi.fn(),
   setSessionShare: vi.fn(),
   bumpSessionShareDetailVersion: vi.fn(),
+  loadSessionShareV2: vi.fn(),
   ensureProfiles: vi.fn(),
   createConversationAndActivate: vi.fn(),
   setImSidebarView: vi.fn(),
@@ -67,6 +69,8 @@ vi.mock('@stores/useIMStore', () => ({
     getState: () => ({
       setSessionShare,
       bumpSessionShareDetailVersion,
+      loadSessionShareV2,
+      sessionShares: {},
       createConversationAndActivate,
       setImSidebarView,
     }),
@@ -113,6 +117,7 @@ describe('SessionCollaborators', () => {
     revokeSessionShare.mockReset()
     setSessionShare.mockReset()
     bumpSessionShareDetailVersion.mockReset()
+    loadSessionShareV2.mockReset()
     ensureProfiles.mockReset()
     createConversationAndActivate.mockReset()
     setImSidebarView.mockReset()

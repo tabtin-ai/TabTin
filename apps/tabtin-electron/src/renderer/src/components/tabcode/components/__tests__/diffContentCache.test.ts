@@ -4,7 +4,6 @@ import {
   __getDiffContentQueueDepthForTests,
   __resetDiffContentCacheForTests,
   DIFF_CONTENT_MAX_CONCURRENCY,
-  invalidateDiffContentCache,
   loadDiffContents,
   parseGitDiffMetadata,
 } from '../diffContentCache'
@@ -122,7 +121,63 @@ describe('diffContentCache', () => {
     expect(readFilePreview).toHaveBeenCalledTimes(1)
   })
 
-  it('contentRevision 变化会重新加载；invalidate 清掉旧缓存', async () => {
+  it('branch 模式读取共同祖先与 HEAD 两个固定快照', async () => {
+    const getFileAtCommit = vi.fn(async (_root: string, options: { commitHash: string }) => ({
+      success: true,
+      content: options.commitHash === 'merge-base' ? 'old\n' : 'new\n',
+    }))
+    Object.defineProperty(window, 'tabtin', {
+      value: {
+        git: { getFileAtCommit },
+        fileSystem: {},
+      },
+      writable: true,
+      configurable: true,
+    })
+
+    const result = await loadDiffContents({
+      rootPath: '/repo',
+      filePath: '/repo/a.ts',
+      diffMode: 'branch',
+      baseCommitHash: 'merge-base',
+      commitHash: 'head-tip',
+      contentRevision: 1,
+    })
+
+    expect(result).toEqual({ left: 'old\n', right: 'new\n' })
+    expect(getFileAtCommit).toHaveBeenNthCalledWith(1, '/repo', {
+      filePath: 'a.ts', commitHash: 'merge-base', parent: undefined,
+    })
+    expect(getFileAtCommit).toHaveBeenNthCalledWith(2, '/repo', {
+      filePath: 'a.ts', commitHash: 'head-tip', parent: undefined,
+    })
+  })
+
+  it('branch 模式缓存键包含左右快照 hash', async () => {
+    const getFileAtCommit = vi.fn(async (_root: string, options: { commitHash: string }) => ({
+      success: true,
+      content: options.commitHash,
+    }))
+    Object.defineProperty(window, 'tabtin', {
+      value: { git: { getFileAtCommit }, fileSystem: {} },
+      writable: true,
+      configurable: true,
+    })
+
+    await loadDiffContents({
+      rootPath: '/repo', filePath: '/repo/a.ts', diffMode: 'branch',
+      baseCommitHash: 'base-a', commitHash: 'head', contentRevision: 1,
+    })
+    const next = await loadDiffContents({
+      rootPath: '/repo', filePath: '/repo/a.ts', diffMode: 'branch',
+      baseCommitHash: 'base-b', commitHash: 'head', contentRevision: 1,
+    })
+
+    expect(next.left).toBe('base-b')
+    expect(getFileAtCommit).toHaveBeenCalledTimes(4)
+  })
+
+  it('组合 contentRevision 变化会重新加载而不复用旧缓存', async () => {
     const getFileAtHead = vi
       .fn()
       .mockResolvedValueOnce({ content: 'v1' })
@@ -144,14 +199,13 @@ describe('diffContentCache', () => {
       rootPath: '/repo',
       filePath: '/repo/a.ts',
       diffMode: 'head',
-      contentRevision: 1,
+      contentRevision: '1:0',
     })
-    invalidateDiffContentCache('/repo')
     const next = await loadDiffContents({
       rootPath: '/repo',
       filePath: '/repo/a.ts',
       diffMode: 'head',
-      contentRevision: 2,
+      contentRevision: '2:0',
     })
     expect(next).toEqual({ left: 'v2', right: 'w2' })
     expect(getFileAtHead).toHaveBeenCalledTimes(2)

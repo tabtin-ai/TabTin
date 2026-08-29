@@ -590,7 +590,15 @@
     "title": "코드 변경",
     "files": "파일",
     "viewDiff": "차이점 보기",
-    "open": "코드 변경 사항 보기 차이점"
+    "open": "코드 변경 사항 보기 차이점",
+    "editedFiles": "편집한 파일 {{count}}개",
+    "review": "검토",
+    "fileList": "편집한 파일",
+    "reviewFile": "{{file}} 검토",
+    "expandRemaining": "남은 파일 {{count}}개 펼치기",
+    "collapse": "파일 접기",
+    "expandRemainingAria": "남은 파일 {{count}}개 펼치기",
+    "collapseAria": "파일 접기"
   },
   "turnArtifacts": {
     "title": "유물",

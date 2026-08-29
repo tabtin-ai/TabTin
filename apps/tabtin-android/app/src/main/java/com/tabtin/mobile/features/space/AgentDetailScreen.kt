@@ -1,6 +1,5 @@
 package com.tabtin.mobile.features.space
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -20,33 +18,36 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.MoreHoriz
+import androidx.compose.material.icons.filled.Extension
 import androidx.compose.material.icons.filled.RemoveCircleOutline
+import androidx.compose.material.icons.filled.SmartToy
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
+import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -58,7 +59,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -72,33 +74,26 @@ import com.tabtin.mobile.data.model.AgentMemoryRecord
 import com.tabtin.mobile.data.model.AgentProjectTask
 import com.tabtin.mobile.data.model.AgentSkillLink
 import com.tabtin.mobile.data.model.AllChatSession
-import com.tabtin.mobile.data.model.AgentLocalMcpAttachment
-import com.tabtin.mobile.data.model.OrgMcpSourceKind
 import com.tabtin.mobile.data.model.VisibleSkillEntry
-import com.tabtin.mobile.features.skills.ConnectorBrandGlyph
-import com.tabtin.mobile.features.skills.ConnectorBrandIconResolver
 import com.tabtin.mobile.ui.components.TTBottomSheet
 import com.tabtin.mobile.ui.components.TTSheetColumn
 import com.tabtin.mobile.ui.components.TabSearchField
-import com.tabtin.mobile.ui.theme.LocalTTDarkTheme
 import com.tabtin.mobile.ui.theme.TTColors
-import com.tabtin.mobile.ui.theme.TTRadius
 import com.tabtin.mobile.ui.theme.TTSpacing
 import com.tabtin.mobile.ui.theme.ttColor
 import com.tabtin.mobile.util.RelativeTimeFormatter
 import kotlinx.coroutines.launch
 
-/** 「最近任务」把 Chat 会话和 Project 任务混在一张时间线里。 */
-private sealed interface AgentActivityItem {
-    data class Session(val session: AllChatSession) : AgentActivityItem
-    data class Task(val task: AgentProjectTask) : AgentActivityItem
+private enum class AgentDetailSection {
+    MEMORY,
+    RECENT_TASKS,
+    SKILLS,
 }
 
-private fun agentActivityItems(
-    sessions: List<AllChatSession>,
-    tasks: List<AgentProjectTask>,
-): List<AgentActivityItem> =
-    sessions.take(10).map(AgentActivityItem::Session) + tasks.take(10).map(AgentActivityItem::Task)
+private enum class AgentMemorySection {
+    OVERVIEW,
+    RECORDS,
+}
 
 internal fun agentMemoryTypeLabelRes(memoryType: String): Int = when (memoryType.trim().lowercase()) {
     "about_you" -> R.string.my_agents_memory_type_about_you
@@ -114,12 +109,7 @@ internal fun shouldUseAgentMemoryTypeLabel(memoryType: String, title: String): B
     return normalizedTitle.isEmpty() || normalizedTitle.equals(normalizedType, ignoreCase = true)
 }
 
-/**
- * AI分身的移动工作台详情。进入时请求 /agents/{id}，不以列表摘要代替详情真源。
- *
- * 版式为「卡片感」：强调色淡底身份面 + 一列抬起的圆角卡片，每张卡一个区，
- * 不再用顶部标签把四个区藏起来。
- */
+/** AI分身的移动工作台详情。进入时请求 /agents/{id}，不以列表摘要代替详情真源。 */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 public fun AgentDetailScreen(
@@ -174,13 +164,9 @@ public fun AgentDetailScreen(
                         )
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = ttColor(TTColors.Background, TTColors.Dark.Background),
-                ),
             )
         },
         snackbarHost = { SnackbarHost(snackbar) },
-        containerColor = agentPageColor(),
     ) { padding ->
         val agent = state.agent
         when {
@@ -223,7 +209,6 @@ public fun AgentDetailScreen(
                     onCorrectMemory = { correctTarget = it },
                     portraitViewModel = portraitViewModel,
                     onOpenChatSession = onOpenChatSession,
-                    onRetry = viewModel::refresh,
                     onDeactivate = { deactivating = true },
                 )
             }
@@ -392,299 +377,219 @@ private fun AgentDetailContent(
     onCorrectMemory: (AgentMemoryRecord) -> Unit,
     portraitViewModel: UserPortraitViewModel,
     onOpenChatSession: (String, String, String, String) -> Unit,
-    onRetry: () -> Unit,
     onDeactivate: () -> Unit,
 ) {
-    val cardInset = Modifier.padding(horizontal = TTSpacing.lg)
+    var selectedSection by remember { mutableStateOf(AgentDetailSection.MEMORY) }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(top = TTSpacing.lg, bottom = TTSpacing.xxxl),
-        verticalArrangement = Arrangement.spacedBy(TTSpacing.lg),
+        contentPadding = PaddingValues(
+            start = TTSpacing.lg,
+            top = TTSpacing.xl,
+            end = TTSpacing.lg,
+            bottom = TTSpacing.huge,
+        ),
+        verticalArrangement = Arrangement.spacedBy(TTSpacing.xxl),
     ) {
+        item { AgentProfileCard(agent = agent, onEdit = onEdit, enabled = !isIdentityMutating) }
         item {
-            IdentityCard(
-                agent = agent,
-                enabled = !isIdentityMutating,
-                onEdit = onEdit,
-                modifier = cardInset,
+            AgentDetailTabRow(
+                selectedSection = selectedSection,
+                onSelect = { selectedSection = it },
             )
         }
-        item {
-            PersonaCard(
-                agent = agent,
-                enabled = !isIdentityMutating,
-                onEdit = onEdit,
-                modifier = cardInset,
-            )
-        }
-        item {
-            SkillsCard(
-                skills = state.skills,
-                loading = state.isLoading,
-                mutatingKeys = state.mutatingSkillKeys,
-                canAdd = agent.organizationId.isNotBlank(),
-                onAddSkill = onAddSkill,
-                onToggleSkill = onToggleSkill,
-                onRemoveSkill = onRemoveSkill,
-                modifier = cardInset,
-            )
-        }
-        item {
-            MemoryCard(
-                agent = agent,
-                portraitViewModel = portraitViewModel,
-                modifier = cardInset,
-            )
-        }
-        item {
-            MemoryRecordsCard(
-                memories = state.memories,
-                loading = state.isLoading,
-                forgettingIds = state.forgettingMemoryIds,
-                correctingIds = state.correctingMemoryIds,
-                onForget = onForgetMemory,
-                onCorrect = onCorrectMemory,
-                modifier = cardInset,
-            )
-        }
-        item {
-            RecentTasksCard(
-                sessions = state.sessions,
-                tasks = state.projectTasks,
-                loading = state.isLoading,
-                fallbackOrganizationId = agent.organizationId,
-                onOpenChatSession = onOpenChatSession,
-                modifier = cardInset,
-            )
-        }
-        item {
-            ToolsCard(
-                connections = state.mcpConnections,
-                loading = state.isLoading,
-                deviceOffline = state.mcpDeviceOffline,
-                loadErrorRes = state.mcpLoadErrorRes,
-                onRetry = onRetry,
-                modifier = cardInset,
-            )
+        when (selectedSection) {
+            AgentDetailSection.SKILLS -> item {
+                SkillsCard(
+                    skills = state.skills,
+                    loading = state.isLoading,
+                    mutatingKeys = state.mutatingSkillKeys,
+                    canAdd = agent.organizationId.isNotBlank(),
+                    onAddSkill = onAddSkill,
+                    onToggleSkill = onToggleSkill,
+                    onRemoveSkill = onRemoveSkill,
+                )
+            }
+            AgentDetailSection.MEMORY -> item {
+                MemoryCard(
+                    agent = agent,
+                    memories = state.memories,
+                    loading = state.isLoading,
+                    forgettingIds = state.forgettingMemoryIds,
+                    correctingIds = state.correctingMemoryIds,
+                    onForget = onForgetMemory,
+                    onCorrect = onCorrectMemory,
+                    portraitViewModel = portraitViewModel,
+                )
+            }
+            AgentDetailSection.RECENT_TASKS -> item {
+                RecentTasksCard(
+                    sessions = state.sessions,
+                    tasks = state.projectTasks,
+                    loading = state.isLoading,
+                    fallbackOrganizationId = agent.organizationId,
+                    onOpenChatSession = onOpenChatSession,
+                )
+            }
         }
         if (agent.isDefault != true) {
             item {
-                DetailCard(modifier = cardInset) {
-                    TextButton(
-                        onClick = onDeactivate,
-                        enabled = !isIdentityMutating,
-                        modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp),
-                    ) {
-                        Icon(Icons.Default.RemoveCircleOutline, contentDescription = null)
-                        Spacer(Modifier.width(TTSpacing.xs))
-                        Text(
-                            text = stringResource(R.string.my_agents_deactivate),
-                            color = MaterialTheme.colorScheme.error,
-                        )
-                    }
+                TextButton(
+                    onClick = onDeactivate,
+                    enabled = !isIdentityMutating,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Icon(Icons.Default.RemoveCircleOutline, contentDescription = null)
+                    Spacer(Modifier.width(TTSpacing.xs))
+                    Text(
+                        text = stringResource(R.string.my_agents_deactivate),
+                        color = MaterialTheme.colorScheme.error,
+                    )
                 }
             }
         }
     }
 }
 
-/** 身份证：沿用原来的竖排，只是收进一张抬起的圆角卡。 */
 @Composable
-private fun IdentityCard(
-    agent: Agent,
-    enabled: Boolean,
-    onEdit: () -> Unit,
-    modifier: Modifier = Modifier,
+private fun AgentDetailTabRow(
+    selectedSection: AgentDetailSection,
+    onSelect: (AgentDetailSection) -> Unit,
 ) {
-    Surface(
-        modifier = modifier.fillMaxWidth(),
-        shape = TTRadius.Shapes.xl,
-        color = agentPlateColor(),
-        shadowElevation = if (LocalTTDarkTheme.current) 0.dp else 2.dp,
+    val sections = AgentDetailSection.entries
+    val selectedIndex = sections.indexOf(selectedSection)
+    PrimaryScrollableTabRow(
+        selectedTabIndex = selectedIndex,
+        edgePadding = 0.dp,
+        divider = { HorizontalDivider() },
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(TTSpacing.xl),
-        ) {
+        sections.forEach { section ->
+            Tab(
+                selected = section == selectedSection,
+                onClick = { onSelect(section) },
+                icon = {
+                    Icon(
+                        imageVector = when (section) {
+                            AgentDetailSection.MEMORY -> Icons.Default.SmartToy
+                            AgentDetailSection.RECENT_TASKS -> Icons.Default.CheckCircle
+                            AgentDetailSection.SKILLS -> Icons.Default.Extension
+                        },
+                        contentDescription = null,
+                    )
+                },
+                text = {
+                    Text(
+                        text = stringResource(
+                            when (section) {
+                                AgentDetailSection.SKILLS -> R.string.my_agents_skills
+                                AgentDetailSection.MEMORY -> R.string.my_agents_memory
+                                AgentDetailSection.RECENT_TASKS -> R.string.my_agents_recent_tasks
+                            },
+                        ),
+                        maxLines = 1,
+                    )
+                },
+            )
+        }
+    }
+}
+
+@Composable
+private fun AgentProfileCard(agent: Agent, onEdit: () -> Unit, enabled: Boolean) {
+    val dividerColor = ttColor(TTColors.BorderLight, TTColors.Dark.BorderLight)
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .drawBehind {
+                val stroke = 1.dp.toPx()
+                drawLine(
+                    color = dividerColor,
+                    start = Offset(0f, size.height - stroke / 2f),
+                    end = Offset(size.width, size.height - stroke / 2f),
+                    strokeWidth = stroke,
+                )
+            }
+            .padding(bottom = TTSpacing.xxl),
+    ) {
+        Row(verticalAlignment = Alignment.Top) {
             AgentIdentityAvatar(
                 name = agent.detailName(),
                 avatarKey = agent.settings?.avatarKey,
                 avatarUrl = agent.settings?.avatarUrl,
-                size = 60.dp,
+                size = 72.dp,
             )
-            Spacer(Modifier.height(TTSpacing.md))
-            Text(
-                text = agent.detailName(),
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.SemiBold,
-                color = ttColor(TTColors.TextOnPrimary, TTColors.Dark.TextOnPrimary),
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-            )
-            Spacer(Modifier.height(TTSpacing.xs))
-            Text(
-                text = agentPlateMeta(agent),
-                style = MaterialTheme.typography.bodySmall,
-                color = ttColor(TTColors.TextOnPrimary, TTColors.Dark.TextOnPrimary).copy(alpha = 0.78f),
-            )
-            Spacer(Modifier.height(TTSpacing.xl))
-            Button(
-                onClick = onEdit,
-                enabled = enabled,
-                shape = RoundedCornerShape(TTRadius.full),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = ttColor(TTColors.TextOnPrimary, TTColors.Dark.TextOnPrimary),
-                    contentColor = ttColor(TTColors.Primary, TTColors.Dark.Primary),
-                ),
-                modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp),
+            Spacer(Modifier.width(TTSpacing.md))
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(TTSpacing.xs),
             ) {
-                Icon(Icons.Default.Edit, contentDescription = null, modifier = Modifier.size(18.dp))
-                Spacer(Modifier.width(TTSpacing.xs))
-                Text(stringResource(R.string.my_agents_edit))
+                Text(
+                    text = agent.detailName(),
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.SemiBold,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                Spacer(Modifier.height(TTSpacing.xs))
+                Row(horizontalArrangement = Arrangement.spacedBy(TTSpacing.xs)) {
+                    DetailPill(
+                        if (agent.templateId.isNullOrBlank()) {
+                            stringResource(R.string.my_agents_source_custom)
+                        } else {
+                            stringResource(R.string.my_agents_source_template)
+                        },
+                    )
+                    if (agent.isDefault == true) DetailPill(
+                        stringResource(R.string.my_agents_default),
+                        accent = true,
+                    )
+                }
+                RelativeTimeFormatter.format(androidx.compose.ui.platform.LocalContext.current, agent.updatedAt)
+                    ?.let { time ->
+                        Text(
+                            stringResource(R.string.my_agents_updated_at, time),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+            }
+            IconButton(onClick = onEdit, enabled = enabled) {
+                Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.my_agents_edit))
             }
         }
-    }
-}
-
-@Composable
-private fun agentPlateMeta(agent: Agent): String {
-    val source = stringResource(
-        if (agent.templateId.isNullOrBlank()) {
-            R.string.my_agents_source_custom
-        } else {
-            R.string.my_agents_source_template
-        },
-    )
-    val defaultLabel = stringResource(R.string.my_agents_default)
-    val updated = RelativeTimeFormatter.format(LocalContext.current, agent.updatedAt)
-        ?.let { stringResource(R.string.my_agents_updated_at, it) }
-    return listOfNotNull(
-        source,
-        defaultLabel.takeIf { agent.isDefault == true },
-        updated,
-    ).joinToString(" · ")
-}
-
-@Composable
-private fun PersonaCard(
-    agent: Agent,
-    enabled: Boolean,
-    onEdit: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    DetailCard(
-        modifier = modifier,
-        footnote = stringResource(R.string.my_agents_persona_scope_hint),
-    ) {
-        CardHeader(stringResource(R.string.my_agents_persona_rules))
-        Text(
-            text = agent.customRules.ifBlank { stringResource(R.string.my_agents_detail_rules_empty) },
-            style = MaterialTheme.typography.bodyMedium,
-            color = if (agent.customRules.isBlank()) {
-                ttColor(TTColors.TextTertiary, TTColors.Dark.TextTertiary)
-            } else {
-                MaterialTheme.colorScheme.onSurface
-            },
-            maxLines = 4,
-            overflow = TextOverflow.Ellipsis,
+        HorizontalDivider(modifier = Modifier.padding(vertical = TTSpacing.lg))
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable(enabled = enabled, onClick = onEdit)
-                .padding(
-                    start = TTSpacing.lg,
-                    end = TTSpacing.lg,
-                    top = TTSpacing.xs,
-                    bottom = TTSpacing.lg,
-                ),
-        )
-    }
-}
-
-/** 工具携带集：问在线 Electron 的已挂载 MCP（只读列表，挂载请在电脑端管理）。 */
-@Composable
-private fun ToolsCard(
-    connections: List<AgentLocalMcpAttachment>,
-    loading: Boolean,
-    deviceOffline: Boolean,
-    @androidx.annotation.StringRes loadErrorRes: Int?,
-    onRetry: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    DetailCard(
-        modifier = modifier,
-        footnote = stringResource(R.string.my_agents_tools_hint),
-    ) {
-        CardHeader(
-            title = stringResource(R.string.my_agents_tools),
-            count = connections.size.takeIf { it > 0 },
-        )
-        when {
-            deviceOffline -> CardNote(
-                text = stringResource(R.string.my_agents_tools_device_offline),
-                tint = ttColor(TTColors.TextWarning, TTColors.Dark.TextWarning),
-                onRetry = onRetry,
+                .clickable(enabled = enabled, onClick = onEdit),
+            verticalAlignment = Alignment.Top,
+        ) {
+            Icon(
+                imageVector = Icons.Default.SmartToy,
+                contentDescription = null,
+                tint = ttColor(TTColors.Primary, TTColors.Dark.Primary),
             )
-            loadErrorRes != null -> CardNote(
-                text = stringResource(loadErrorRes),
-                tint = ttColor(TTColors.TextWarning, TTColors.Dark.TextWarning),
-                onRetry = onRetry,
-            )
-            loading && connections.isEmpty() -> CardLoading()
-            connections.isEmpty() -> CardEmpty(stringResource(R.string.my_agents_tools_not_mounted))
-            else -> CardRows(connections.size) { index ->
-                McpConnectionRow(connection = connections[index])
-            }
-        }
-    }
-}
-
-@Composable
-private fun McpConnectionRow(connection: AgentLocalMcpAttachment) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = TTSpacing.lg, vertical = TTSpacing.md),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        ConnectorBrandGlyph(
-            query = ConnectorBrandIconResolver.Query(
-                name = connection.name,
-                endpointUrl = connection.endpointForBrand,
-            ),
-            size = 28.dp,
-            cornerRadius = 6.dp,
-            padded = true,
-        )
-        Spacer(Modifier.width(TTSpacing.md))
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = connection.name.ifBlank { connection.id },
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-            connection.description.takeIf { it.isNotBlank() }?.let { description ->
+            Spacer(Modifier.width(TTSpacing.sm))
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = description,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    maxLines = 2,
+                    text = stringResource(R.string.my_agents_persona_rules),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                )
+                Spacer(Modifier.height(TTSpacing.xs))
+                Text(
+                    text = agent.customRules.ifBlank { stringResource(R.string.my_agents_detail_rules_empty) },
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = if (agent.customRules.isBlank()) {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    } else {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    },
+                    maxLines = 3,
                     overflow = TextOverflow.Ellipsis,
                 )
             }
         }
-        Spacer(Modifier.width(TTSpacing.sm))
-        CardTag(
-            stringResource(
-                when (connection.sourceKind) {
-                    OrgMcpSourceKind.LOCAL -> R.string.my_agents_tools_source_local
-                    OrgMcpSourceKind.ORGANIZATION -> R.string.my_agents_tools_source_org
-                },
-            ),
-        )
     }
 }
 
@@ -697,30 +602,37 @@ private fun SkillsCard(
     onAddSkill: () -> Unit,
     onToggleSkill: (AgentSkillLink, Boolean) -> Unit,
     onRemoveSkill: (AgentSkillLink) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
-    DetailCard(
-        modifier = modifier,
-        footnote = stringResource(R.string.my_agents_skills_hint),
-    ) {
-        CardHeader(
-            title = stringResource(R.string.my_agents_skills),
-            count = skills.size.takeIf { it > 0 },
-            actionTitle = stringResource(R.string.my_agents_add_skill),
-            actionEnabled = canAdd,
-            onAction = onAddSkill,
+    DetailCard {
+        Text(
+            text = stringResource(R.string.my_agents_skills_hint),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
+        Spacer(Modifier.height(TTSpacing.sm))
+        OutlinedButton(
+            onClick = onAddSkill,
+            enabled = canAdd,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(18.dp))
+            Spacer(Modifier.width(TTSpacing.xs))
+            Text(stringResource(R.string.my_agents_add_skill))
+        }
+        Spacer(Modifier.height(TTSpacing.sm))
         when {
-            loading && skills.isEmpty() -> CardLoading()
-            skills.isEmpty() -> CardEmpty(stringResource(R.string.my_agents_skills_empty))
-            else -> CardRows(skills.size) { index ->
-                val skill = skills[index]
-                SkillRow(
-                    skill = skill,
-                    mutating = skill.skillCanonicalKey in mutatingKeys,
-                    onToggle = { onToggleSkill(skill, it) },
-                    onRemove = { onRemoveSkill(skill) },
-                )
+            loading && skills.isEmpty() -> DetailLoading()
+            skills.isEmpty() -> DetailEmpty(stringResource(R.string.my_agents_skills_empty), Icons.Default.Extension)
+            else -> Column {
+                skills.forEachIndexed { index, skill ->
+                    SkillRow(
+                        skill = skill,
+                        mutating = skill.skillCanonicalKey in mutatingKeys,
+                        onToggle = { onToggleSkill(skill, it) },
+                        onRemove = { onRemoveSkill(skill) },
+                    )
+                    if (index < skills.lastIndex) HorizontalDivider()
+                }
             }
         }
     }
@@ -734,9 +646,7 @@ private fun SkillRow(
     onRemove: () -> Unit,
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = TTSpacing.lg, vertical = TTSpacing.sm),
+        modifier = Modifier.fillMaxWidth().padding(vertical = TTSpacing.sm),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
@@ -745,7 +655,7 @@ private fun SkillRow(
             tint = ttColor(TTColors.Primary, TTColors.Dark.Primary),
             modifier = Modifier.size(24.dp),
         )
-        Spacer(Modifier.width(TTSpacing.md))
+        Spacer(Modifier.width(TTSpacing.sm))
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 skill.name.ifBlank { skill.skillCanonicalKey },
@@ -765,22 +675,21 @@ private fun SkillRow(
                 Text(
                     stringResource(R.string.my_agents_skill_locked),
                     style = MaterialTheme.typography.labelSmall,
-                    color = ttColor(TTColors.TextTertiary, TTColors.Dark.TextTertiary),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
         }
-        // 锁定项不摆按不动的开关和移除按钮，右侧留空。
+        Switch(
+            checked = skill.enabled,
+            onCheckedChange = onToggle,
+            enabled = !skill.locked && !mutating,
+        )
         if (!skill.locked) {
-            Switch(
-                checked = skill.enabled,
-                onCheckedChange = onToggle,
-                enabled = !mutating,
-            )
             IconButton(onClick = onRemove, enabled = !mutating) {
                 Icon(
                     Icons.Default.RemoveCircleOutline,
                     contentDescription = stringResource(R.string.my_agents_remove_skill),
-                    tint = ttColor(TTColors.TextTertiary, TTColors.Dark.TextTertiary),
+                    tint = MaterialTheme.colorScheme.error,
                 )
             }
         }
@@ -924,63 +833,94 @@ private fun AgentSkillPickerSheet(
     }
 }
 
-/** 记忆概览：TA 对你的综合理解。 */
 @Composable
 private fun MemoryCard(
     agent: Agent,
-    portraitViewModel: UserPortraitViewModel,
-    modifier: Modifier = Modifier,
-) {
-    DetailCard(
-        modifier = modifier,
-        footnote = stringResource(R.string.my_agents_memory_overview_hint),
-    ) {
-        CardHeader(stringResource(R.string.my_agents_memory))
-        UserPortraitPanel(
-            organizationId = agent.organizationId,
-            agentId = agent.id,
-            organizationName = null,
-            canManage = true,
-            viewModel = portraitViewModel,
-            modifier = Modifier.padding(
-                start = TTSpacing.lg,
-                end = TTSpacing.lg,
-                top = TTSpacing.xs,
-                bottom = TTSpacing.lg,
-            ),
-        )
-    }
-}
-
-@Composable
-private fun MemoryRecordsCard(
     memories: List<AgentMemoryRecord>,
     loading: Boolean,
     forgettingIds: Set<String>,
     correctingIds: Set<String>,
     onForget: (AgentMemoryRecord) -> Unit,
     onCorrect: (AgentMemoryRecord) -> Unit,
-    modifier: Modifier = Modifier,
+    portraitViewModel: UserPortraitViewModel,
 ) {
-    DetailCard(
-        modifier = modifier,
-        footnote = stringResource(R.string.my_agents_memory_records_hint),
-    ) {
-        CardHeader(
-            title = stringResource(R.string.my_agents_memory_records),
-            count = memories.size.takeIf { it > 0 },
-        )
-        when {
-            loading && memories.isEmpty() -> CardLoading()
-            memories.isEmpty() -> CardEmpty(stringResource(R.string.my_agents_memory_empty))
-            else -> CardRows(memories.size) { index ->
-                val memory = memories[index]
-                MemoryRow(
-                    memory = memory,
-                    busy = memory.id in forgettingIds || memory.id in correctingIds,
-                    onForget = onForget,
-                    onCorrect = onCorrect,
+    var selectedSection by remember(agent.id) { mutableStateOf(AgentMemorySection.OVERVIEW) }
+    val dividerColor = ttColor(TTColors.BorderLight, TTColors.Dark.BorderLight)
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .drawBehind {
+                val stroke = 1.dp.toPx()
+                drawLine(
+                    color = dividerColor,
+                    start = Offset(0f, size.height - stroke / 2f),
+                    end = Offset(size.width, size.height - stroke / 2f),
+                    strokeWidth = stroke,
                 )
+            }
+            .padding(bottom = TTSpacing.xxl),
+        verticalArrangement = Arrangement.spacedBy(TTSpacing.lg),
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = stringResource(
+                    if (selectedSection == AgentMemorySection.OVERVIEW) {
+                        R.string.my_agents_memory_overview
+                    } else {
+                        R.string.my_agents_memory_records
+                    },
+                ),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold,
+            )
+            TextButton(
+                onClick = {
+                    selectedSection = if (selectedSection == AgentMemorySection.OVERVIEW) {
+                        AgentMemorySection.RECORDS
+                    } else {
+                        AgentMemorySection.OVERVIEW
+                    }
+                },
+            ) {
+                Text(
+                    text = stringResource(
+                        if (selectedSection == AgentMemorySection.OVERVIEW) {
+                            R.string.my_agents_memory_records
+                        } else {
+                            R.string.my_agents_memory_overview
+                        },
+                    ),
+                )
+            }
+        }
+        when (selectedSection) {
+            AgentMemorySection.OVERVIEW -> UserPortraitPanel(
+                organizationId = agent.organizationId,
+                agentId = agent.id,
+                organizationName = null,
+                canManage = true,
+                viewModel = portraitViewModel,
+            )
+            AgentMemorySection.RECORDS -> when {
+                loading && memories.isEmpty() -> DetailLoading()
+                memories.isEmpty() -> DetailEmpty(stringResource(R.string.my_agents_memory_empty), Icons.Default.SmartToy)
+                else -> Column {
+                    memories.forEachIndexed { index, memory ->
+                        MemoryRow(
+                            memory = memory,
+                            forgetting = memory.id in forgettingIds,
+                            correcting = memory.id in correctingIds,
+                            onForget = onForget,
+                            onCorrect = onCorrect,
+                        )
+                        if (index < memories.lastIndex) HorizontalDivider()
+                    }
+                }
             }
         }
     }
@@ -989,17 +929,12 @@ private fun MemoryRecordsCard(
 @Composable
 private fun MemoryRow(
     memory: AgentMemoryRecord,
-    busy: Boolean,
+    forgetting: Boolean,
+    correcting: Boolean,
     onForget: (AgentMemoryRecord) -> Unit,
     onCorrect: (AgentMemoryRecord) -> Unit,
 ) {
-    var menuOpen by remember(memory.id) { mutableStateOf(false) }
-
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = TTSpacing.lg, end = TTSpacing.sm, top = TTSpacing.sm, bottom = TTSpacing.sm),
-    ) {
+    Column(modifier = Modifier.fillMaxWidth().padding(vertical = TTSpacing.sm)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             val normalizedTitle = memory.title.trim()
             Text(
@@ -1014,36 +949,11 @@ private fun MemoryRow(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
-            // 纠正 / 忘记收进一个菜单，行里只留一个控件。
-            Box {
-                IconButton(onClick = { menuOpen = true }, enabled = !busy) {
-                    Icon(
-                        Icons.Default.MoreHoriz,
-                        contentDescription = stringResource(R.string.my_agents_memory),
-                        tint = ttColor(TTColors.TextTertiary, TTColors.Dark.TextTertiary),
-                    )
-                }
-                DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
-                    DropdownMenuItem(
-                        text = { Text(stringResource(R.string.my_agents_correct_memory)) },
-                        onClick = {
-                            menuOpen = false
-                            onCorrect(memory)
-                        },
-                    )
-                    DropdownMenuItem(
-                        text = {
-                            Text(
-                                text = stringResource(R.string.my_agents_forget_memory),
-                                color = MaterialTheme.colorScheme.error,
-                            )
-                        },
-                        onClick = {
-                            menuOpen = false
-                            onForget(memory)
-                        },
-                    )
-                }
+            TextButton(onClick = { onCorrect(memory) }, enabled = !forgetting && !correcting) {
+                Text(stringResource(R.string.my_agents_correct_memory))
+            }
+            TextButton(onClick = { onForget(memory) }, enabled = !forgetting && !correcting) {
+                Text(stringResource(R.string.my_agents_forget_memory), color = MaterialTheme.colorScheme.error)
             }
         }
         Text(
@@ -1054,11 +964,11 @@ private fun MemoryRow(
             overflow = TextOverflow.Ellipsis,
         )
         if (memory.tags.isNotEmpty()) {
-            Spacer(Modifier.height(TTSpacing.xxs))
+            Spacer(Modifier.height(2.dp))
             Text(
                 text = memory.tags.take(3).joinToString("  ") { "#$it" },
                 style = MaterialTheme.typography.labelSmall,
-                color = ttColor(TTColors.TextTertiary, TTColors.Dark.TextTertiary),
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
@@ -1121,29 +1031,25 @@ private fun RecentTasksCard(
     loading: Boolean,
     fallbackOrganizationId: String,
     onOpenChatSession: (String, String, String, String) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
-    val items = remember(sessions, tasks) { agentActivityItems(sessions, tasks) }
-    DetailCard(
-        modifier = modifier,
-        footnote = stringResource(R.string.my_agents_recent_tasks_hint),
-    ) {
-        CardHeader(
-            title = stringResource(R.string.my_agents_recent_tasks),
-            count = items.size.takeIf { it > 0 },
+    DetailCard {
+        Text(
+            text = stringResource(R.string.my_agents_recent_tasks_hint),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
+        Spacer(Modifier.height(TTSpacing.sm))
         when {
-            loading && items.isEmpty() -> CardLoading()
-            items.isEmpty() -> CardEmpty(stringResource(R.string.my_agents_recent_tasks_empty))
-            else -> CardRows(items.size) { index ->
-                when (val item = items[index]) {
-                    is AgentActivityItem.Session -> SessionActivityRow(
-                        session = item.session,
-                        fallbackOrganizationId = fallbackOrganizationId,
-                        onOpenChatSession = onOpenChatSession,
-                    )
-                    is AgentActivityItem.Task -> TaskActivityRow(item.task)
+            loading && sessions.isEmpty() && tasks.isEmpty() -> DetailLoading()
+            sessions.isEmpty() && tasks.isEmpty() -> DetailEmpty(
+                stringResource(R.string.my_agents_recent_tasks_empty),
+                Icons.Default.CheckCircle,
+            )
+            else -> Column {
+                sessions.take(10).forEach { session ->
+                    SessionActivityRow(session, fallbackOrganizationId, onOpenChatSession)
                 }
+                tasks.take(10).forEach { task -> TaskActivityRow(task) }
             }
         }
     }
@@ -1156,14 +1062,16 @@ private fun SessionActivityRow(
     onOpenChatSession: (String, String, String, String) -> Unit,
 ) {
     val executionSpaceId = if (!session.projectId.isNullOrBlank()) session.workspaceId else session.spaceId
-    val kind = stringResource(R.string.my_agents_chat)
+    val title = session.displayTitle.ifBlank { stringResource(R.string.my_agents_chat) }
+    val subtitle = session.spaceName ?: session.projectName ?: stringResource(R.string.my_agents_chat)
     val time = (session.lastMessageAt ?: session.updatedAt ?: session.createdAt)?.let {
-        RelativeTimeFormatter.format(LocalContext.current, it)
+        RelativeTimeFormatter.format(androidx.compose.ui.platform.LocalContext.current, it)
     }
     ActivityRow(
-        title = session.displayTitle.ifBlank { kind },
-        subtitle = activitySubtitle(kind, session.spaceName ?: session.projectName),
+        title = title,
+        subtitle = subtitle,
         time = time,
+        icon = Icons.AutoMirrored.Filled.Chat,
         modifier = if (!executionSpaceId.isNullOrBlank()) {
             Modifier.clickable {
                 onOpenChatSession(
@@ -1179,47 +1087,39 @@ private fun SessionActivityRow(
 
 @Composable
 private fun TaskActivityRow(task: AgentProjectTask) {
-    val context = LocalContext.current
+    val context = androidx.compose.ui.platform.LocalContext.current
     ActivityRow(
         title = task.title,
-        subtitle = activitySubtitle(
-            kind = stringResource(R.string.my_agents_project_task),
-            scope = task.project?.name ?: task.workStatus ?: task.assignmentStatus,
-        ),
+        subtitle = task.project?.name ?: task.workStatus ?: task.assignmentStatus
+            ?: stringResource(R.string.my_agents_project_task),
         time = task.updatedAt?.let { RelativeTimeFormatter.format(context, it) },
+        icon = Icons.Default.CheckCircle,
     )
 }
 
-/** Chat 会话和 Project 任务混在一张列表里，类型必须写进副标题——行里没有图标区分。 */
-private fun activitySubtitle(kind: String, scope: String?): String {
-    val trimmed = scope?.trim()
-    return if (trimmed.isNullOrEmpty()) kind else "$kind · $trimmed"
-}
-
-/** 任务行不放前置图标：类型已经写在副标题里，图标只会把标题挤窄。 */
 @Composable
 private fun ActivityRow(
     title: String,
     subtitle: String,
     time: String?,
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
     modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = TTSpacing.lg, vertical = TTSpacing.md),
-        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.fillMaxWidth().padding(vertical = TTSpacing.sm),
+        verticalAlignment = Alignment.Top,
     ) {
+        Icon(
+            icon,
+            contentDescription = null,
+            tint = ttColor(TTColors.Primary, TTColors.Dark.Primary),
+            modifier = Modifier.size(20.dp),
+        )
+        Spacer(Modifier.width(TTSpacing.sm))
         Column(modifier = Modifier.weight(1f)) {
+            Text(title, style = MaterialTheme.typography.bodyMedium, maxLines = 2, overflow = TextOverflow.Ellipsis)
             Text(
-                text = title,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-            )
-            Text(
-                text = subtitle,
+                subtitle,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1,
@@ -1227,188 +1127,77 @@ private fun ActivityRow(
             )
         }
         time?.let {
-            Spacer(Modifier.width(TTSpacing.md))
-            Text(
-                text = it,
-                style = MaterialTheme.typography.labelSmall,
-                color = ttColor(TTColors.TextTertiary, TTColors.Dark.TextTertiary),
-            )
-        }
-    }
-}
-
-// region 卡片零件
-
-/** 页底压深一档、卡片抬亮一档，卡片才浮得起来。 */
-@Composable
-private fun agentPageColor(): Color = ttColor(TTColors.BgSubtle, TTColors.Dark.Background)
-
-@Composable
-private fun agentCardColor(): Color = ttColor(TTColors.Background, TTColors.Dark.SurfaceVariant)
-
-/** 身份证铺当前 scheme 的强调色，不再用白底。 */
-@Composable
-private fun agentPlateColor(): Color = ttColor(TTColors.Primary, TTColors.Dark.Primary)
-
-@Composable
-private fun DetailCard(
-    modifier: Modifier = Modifier,
-    footnote: String? = null,
-    content: @Composable ColumnScope.() -> Unit,
-) {
-    Column(modifier = modifier.fillMaxWidth()) {
-        Surface(
-            modifier = Modifier.fillMaxWidth(),
-            shape = TTRadius.Shapes.xl,
-            color = agentCardColor(),
-            // 深色底上投影看不见，只在浅色抬卡片。
-            shadowElevation = if (LocalTTDarkTheme.current) 0.dp else 2.dp,
-        ) {
-            Column(content = content)
-        }
-        if (footnote != null) {
-            Text(
-                text = footnote,
-                style = MaterialTheme.typography.bodySmall,
-                color = ttColor(TTColors.TextTertiary, TTColors.Dark.TextTertiary),
-                modifier = Modifier.padding(
-                    start = TTSpacing.xs,
-                    end = TTSpacing.xs,
-                    top = TTSpacing.sm,
-                ),
-            )
-        }
-    }
-}
-
-/** 区标题：一根强调色短标 + 标题 + 计数，右侧可挂一个文字动作。 */
-@Composable
-private fun CardHeader(
-    title: String,
-    count: Int? = null,
-    actionTitle: String? = null,
-    actionEnabled: Boolean = true,
-    onAction: (() -> Unit)? = null,
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(
-                start = TTSpacing.lg,
-                end = TTSpacing.sm,
-                top = TTSpacing.md,
-                bottom = TTSpacing.xs,
-            ),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Box(
-            modifier = Modifier
-                .size(width = 3.dp, height = 13.dp)
-                .background(
-                    color = ttColor(TTColors.Primary, TTColors.Dark.Primary),
-                    shape = RoundedCornerShape(TTSpacing.xxs),
-                ),
-        )
-        Spacer(Modifier.width(TTSpacing.sm))
-        Text(title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
-        if (count != null) {
             Spacer(Modifier.width(TTSpacing.sm))
-            Text(
-                text = count.toString(),
-                style = MaterialTheme.typography.labelMedium,
-                color = ttColor(TTColors.TextTertiary, TTColors.Dark.TextTertiary),
-            )
-        }
-        Spacer(Modifier.weight(1f))
-        if (actionTitle != null && onAction != null) {
-            TextButton(onClick = onAction, enabled = actionEnabled) { Text(actionTitle) }
+            Text(it, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
 
 @Composable
-private fun CardRows(count: Int, row: @Composable (Int) -> Unit) {
-    Column(modifier = Modifier.padding(bottom = TTSpacing.sm)) {
-        repeat(count) { index ->
-            row(index)
-            if (index < count - 1) {
-                HorizontalDivider(
-                    modifier = Modifier.padding(horizontal = TTSpacing.lg),
-                    color = ttColor(TTColors.BorderLight, TTColors.Dark.BorderLight),
+private fun DetailCard(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
+    // The agent detail is a continuous workspace rather than a stack of cards.
+    // Keep the spacing contract and use a hairline divider to preserve grouping.
+    val dividerColor = ttColor(TTColors.BorderLight, TTColors.Dark.BorderLight)
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(TTSpacing.md)
+            .drawBehind {
+                val stroke = 1.dp.toPx()
+                drawLine(
+                    color = dividerColor,
+                    start = Offset(0f, size.height - stroke / 2f),
+                    end = Offset(size.width, size.height - stroke / 2f),
+                    strokeWidth = stroke,
                 )
-            }
-        }
-    }
-}
-
-@Composable
-private fun CardEmpty(title: String) {
-    Text(
-        text = title,
-        style = MaterialTheme.typography.bodySmall,
-        color = ttColor(TTColors.TextTertiary, TTColors.Dark.TextTertiary),
-        modifier = Modifier.padding(
-            start = TTSpacing.lg,
-            end = TTSpacing.lg,
-            top = TTSpacing.xs,
-            bottom = TTSpacing.lg,
-        ),
+            },
+        content = content,
     )
 }
 
 @Composable
-private fun CardLoading() {
-    Box(
-        modifier = Modifier.padding(
-            start = TTSpacing.lg,
-            end = TTSpacing.lg,
-            top = TTSpacing.xs,
-            bottom = TTSpacing.lg,
-        ),
-    ) {
-        CircularProgressIndicator(modifier = Modifier.size(22.dp), strokeWidth = 2.dp)
-    }
-}
-
-/** 卡内的一段说明，可带重试（工具携带集读不到电脑端时用）。 */
-@Composable
-private fun CardNote(text: String, tint: Color, onRetry: (() -> Unit)? = null) {
-    Column(
-        modifier = Modifier.padding(
-            start = TTSpacing.lg,
-            end = TTSpacing.lg,
-            top = TTSpacing.xs,
-            bottom = TTSpacing.md,
-        ),
-    ) {
-        Text(text = text, style = MaterialTheme.typography.bodyMedium, color = tint)
-        if (onRetry != null) {
-            Spacer(Modifier.height(TTSpacing.xs))
-            TextButton(
-                onClick = onRetry,
-                contentPadding = PaddingValues(horizontal = 0.dp, vertical = 0.dp),
-            ) {
-                Text(stringResource(R.string.common_retry))
-            }
-        }
+private fun DetailSectionTitle(title: String, icon: androidx.compose.ui.graphics.vector.ImageVector) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Icon(icon, contentDescription = null, modifier = Modifier.size(18.dp), tint = ttColor(TTColors.Primary, TTColors.Dark.Primary))
+        Spacer(Modifier.width(TTSpacing.xs))
+        Text(title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
     }
 }
 
 @Composable
-private fun CardTag(title: String) {
+private fun DetailPill(title: String, accent: Boolean = false) {
     Surface(
-        shape = RoundedCornerShape(TTRadius.full),
-        color = ttColor(TTColors.BgSubtle, TTColors.Dark.BgSubtle),
+        shape = RoundedCornerShape(999.dp),
+        color = if (accent) ttColor(TTColors.Primary, TTColors.Dark.Primary).copy(alpha = 0.12f)
+        else MaterialTheme.colorScheme.surface,
     ) {
         Text(
-            text = title,
+            title,
             style = MaterialTheme.typography.labelSmall,
-            color = ttColor(TTColors.TextTertiary, TTColors.Dark.TextTertiary),
-            modifier = Modifier.padding(horizontal = TTSpacing.sm, vertical = 3.dp),
+            color = if (accent) ttColor(TTColors.Primary, TTColors.Dark.Primary) else MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(horizontal = 6.dp, vertical = 3.dp),
         )
     }
 }
 
-// endregion
+@Composable
+private fun DetailLoading() {
+    Box(modifier = Modifier.fillMaxWidth().height(72.dp), contentAlignment = Alignment.Center) {
+        CircularProgressIndicator(modifier = Modifier.size(22.dp), strokeWidth = 2.dp)
+    }
+}
+
+@Composable
+private fun DetailEmpty(title: String, icon: androidx.compose.ui.graphics.vector.ImageVector) {
+    Row(
+        modifier = Modifier.fillMaxWidth().height(72.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+        Spacer(Modifier.width(TTSpacing.xs))
+        Text(title, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
 
 private fun Agent.detailName(): String = displayName?.trim()?.takeIf { it.isNotEmpty() } ?: name

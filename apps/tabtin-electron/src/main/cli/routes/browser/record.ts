@@ -23,6 +23,7 @@ import { getReplayEngine } from '../../../run-session/ReplayEngine'
 import { getVideoRecorder, getExistingVideoRecorder, removeVideoRecorder } from '../../../run-session/VideoRecorder'
 import { createLogger } from '../../../logger'
 import { runWithTabLock } from '../../../browser-tab-lock/runWithTabLock'
+import { BrowserTabUserInControlError } from '../../../browser-tab-lock/browserTabInputLock'
 
 const log = createLogger('browser/record')
 
@@ -89,6 +90,7 @@ export async function runElectronReplay(
       },
     })
   } catch (err: any) {
+    if (err instanceof BrowserTabUserInControlError) throw err
     // BT-011: 统一使用 errorResponse() 保证错误字段完整性（code/suggestions/retryable）
     throw new BrowserActionError(500, {
       code: err?.name === 'AbortError' ? 'ABORTED' : 'INTERNAL_ERROR',

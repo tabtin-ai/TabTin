@@ -66,9 +66,11 @@ import { cn } from '@utils/cn'
 import { useMcpPanelData } from '@components/space-settings/hooks/useMcpPanelData'
 import { useMcpActions } from '@components/space-settings/hooks/useMcpActions'
 import {
+  canUninstallMarketplaceConnector,
   diffManageableAgentAssignments,
   getConnectorMarketState,
   getManageableAttachedAgentIds,
+  shouldShowMarketplaceUninstall,
   matchesConnectorSearch,
   type ConnectorLifecycle,
   type ConnectorMarketState,
@@ -1791,6 +1793,16 @@ export const McpPanel: React.FC<Props> = ({
     }
   }
 
+  const requestUninstallConnection = (connection: LocalMcpConnectionSummary) => {
+    if (managedConnectionId === connection.id) {
+      setManagedConnectionId(null)
+    }
+    if (catalogDetail?.kind === 'mine' && catalogDetail.connectionId === connection.id) {
+      setCatalogDetail(null)
+    }
+    handleDeleteConnection(connection)
+  }
+
   const openMineAgentManage = async (connection: LocalMcpConnectionSummary) => {
     const orgShare = findOrgShare(connection)
     const mirror = orgShare ? findLocalMirrorForOrg(orgShare.id) : undefined
@@ -2202,6 +2214,13 @@ export const McpPanel: React.FC<Props> = ({
                       onAction={() => {
                         void ensureOrgMirrorAndManage(orgConnection)
                       }}
+                      onUninstall={
+                        !sharedByMe
+                        && localConnection
+                        && canUninstallMarketplaceConnector(localConnection, canManage)
+                          ? () => requestUninstallConnection(localConnection)
+                          : undefined
+                      }
                       t={t}
                     />
                   )
@@ -2242,6 +2261,11 @@ export const McpPanel: React.FC<Props> = ({
                       onAction={() => {
                         void openMineAgentManage(connection)
                       }}
+                      onUninstall={
+                        canUninstallMarketplaceConnector(connection, canManage)
+                          ? () => requestUninstallConnection(connection)
+                          : undefined
+                      }
                       t={t}
                     />
                     )
@@ -2308,6 +2332,13 @@ export const McpPanel: React.FC<Props> = ({
                           }
                           void handleInstallRecommended(entry)
                         }}
+                        onUninstall={
+                          importedConnection
+                          && canUninstallMarketplaceConnector(importedConnection, canManage)
+                          && !repairOauth
+                            ? () => requestUninstallConnection(importedConnection)
+                            : undefined
+                        }
                         t={t}
                       />
                     )
@@ -3401,23 +3432,36 @@ export const McpPanel: React.FC<Props> = ({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {t('mcpConnections.deleteConfirmTitle', {
-                defaultValue: 'Delete MCP Connection',
-              })}
+              {embedded
+                ? t('mcpConnections.marketplace.uninstallConfirmTitle', {
+                    defaultValue: '卸载连接器',
+                  })
+                : t('mcpConnections.deleteConfirmTitle', {
+                    defaultValue: 'Delete MCP Connection',
+                  })}
             </DialogTitle>
           </DialogHeader>
           <p className="text-body text-muted-foreground">
-            {t('mcpConnections.deleteConfirm', {
-              defaultValue: `Delete MCP connection "${deleteTarget?.name}"?`,
-              name: deleteTarget?.name ?? '',
-            })}
+            {embedded
+              ? t('mcpConnections.marketplace.uninstallConfirm', {
+                  defaultValue: `确定要卸载「${deleteTarget?.name ?? ''}」吗？卸载后需要重新接入才能使用。`,
+                  name: deleteTarget?.name ?? '',
+                })
+              : t('mcpConnections.deleteConfirm', {
+                  defaultValue: `Delete MCP connection "${deleteTarget?.name}"?`,
+                  name: deleteTarget?.name ?? '',
+                })}
           </p>
           <DialogFooter>
             <Button variant="outline" onClick={() => setDeleteTarget(null)}>
               {t('mcpConnections.cancelButton', { defaultValue: 'Cancel' })}
             </Button>
             <Button variant="destructive" onClick={() => void confirmDeleteConnection()}>
-              {t('mcpConnections.deleteButton', { defaultValue: 'Delete' })}
+              {embedded
+                ? t('mcpConnections.marketplace.uninstallAction', {
+                    defaultValue: '卸载',
+                  })
+                : t('mcpConnections.deleteButton', { defaultValue: 'Delete' })}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -3542,6 +3586,7 @@ const ConnectorMarketplaceCard: React.FC<{
   preferGhostAction?: boolean
   onOpen?: () => void
   onAction: () => void
+  onUninstall?: () => void
   t: (key: string, opts?: Record<string, unknown>) => string
 }> = ({
   name,
@@ -3559,11 +3604,21 @@ const ConnectorMarketplaceCard: React.FC<{
   preferGhostAction = false,
   onOpen,
   onAction,
+  onUninstall,
   t,
 }) => {
   // 与技能市场卡片一致：未接入用主色「接入」；已接入 / 强制管理用次要「管理」。
   const isPrimaryAction =
     !forceManageAction && !preferGhostAction && state.action === 'connect'
+  const showManageAction = !hideAction
+  const showUninstall = shouldShowMarketplaceUninstall({
+    hasUninstallHandler: Boolean(onUninstall),
+    hideAction,
+    preferGhostAction,
+    actionLabel,
+    forceManageAction,
+    action: state.action,
+  })
   const showAssignmentStatus = !hideAction && (state.lifecycle !== 'available' || forceManageAction)
   const credentialGuide = credentialUrl
     ? t('mcpConnections.marketplace.credentialGuide', {
@@ -3620,7 +3675,7 @@ const ConnectorMarketplaceCard: React.FC<{
         {showAssignmentStatus ? (
           <span
             className={cn(
-              'mr-auto text-caption font-medium',
+              'mr-auto min-w-0 truncate text-caption font-medium',
               state.assignedAgentCount > 0 ? 'text-primary-text' : 'text-muted-foreground/60',
             )}
           >
@@ -3634,7 +3689,7 @@ const ConnectorMarketplaceCard: React.FC<{
                 })}
           </span>
         ) : null}
-        {!hideAction ? (
+        {showManageAction ? (
           <Button
             type="button"
             variant={isPrimaryAction && !actionDisabled ? 'default' : 'ghost'}
@@ -3645,7 +3700,7 @@ const ConnectorMarketplaceCard: React.FC<{
               onAction()
             }}
             className={cn(
-              'h-7 rounded-md px-3 text-caption font-medium',
+              'h-7 shrink-0 rounded-md px-3 text-caption font-medium',
               (!isPrimaryAction || actionDisabled) && 'bg-muted/60 text-foreground hover:bg-muted',
             )}
           >
@@ -3662,6 +3717,23 @@ const ConnectorMarketplaceCard: React.FC<{
                   : t('mcpConnections.marketplace.manageAction', {
                       defaultValue: '管理',
                     })}
+          </Button>
+        ) : null}
+        {showUninstall ? (
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            disabled={busy}
+            onClick={event => {
+              event.stopPropagation()
+              onUninstall?.()
+            }}
+            className="h-7 shrink-0 rounded-md bg-muted/60 px-3 text-caption font-medium text-foreground hover:bg-muted"
+          >
+            {t('mcpConnections.marketplace.uninstallAction', {
+              defaultValue: '卸载',
+            })}
           </Button>
         ) : null}
       </footer>

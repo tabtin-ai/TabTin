@@ -46,6 +46,50 @@ def _normalize_base_url(value: str) -> str:
     return normalized.rstrip('/')
 
 
+_PLACEHOLDER_ENDPOINT_HOSTS = frozenset({"api.example.com"})
+_PLACEHOLDER_BASE_URL = "https://api.example.com/v1"
+
+
+def _endpoint_host(url: str) -> str:
+    parsed = urlparse((url or "").strip())
+    host = (parsed.hostname or "").strip().lower()
+    if host.startswith("www."):
+        host = host[4:]
+    return host
+
+
+def _is_placeholder_endpoint_host(host: str) -> bool:
+    return not host or host in _PLACEHOLDER_ENDPOINT_HOSTS
+
+
+def validate_model_endpoint_host(provider, base_url, *, exclude_model_id=None) -> str | None:
+    """同一连接下模型必须指向同一 API host。不同 host 应建新连接。
+
+    返回错误文案；允许时返回 None。
+    空 URL、占位 ``api.example.com`` 不参与比较。同 host 不同 path 允许。
+    """
+    candidate = _endpoint_host(base_url)
+    if _is_placeholder_endpoint_host(candidate):
+        return None
+
+    hosts: set[str] = set()
+    default_host = _endpoint_host(getattr(provider, "default_base_url", "") or "")
+    if not _is_placeholder_endpoint_host(default_host):
+        hosts.add(default_host)
+
+    models = provider.models.exclude(base_url="").exclude(base_url=_PLACEHOLDER_BASE_URL)
+    if exclude_model_id:
+        models = models.exclude(id=exclude_model_id)
+    for model in models.only("base_url"):
+        host = _endpoint_host(getattr(model, "base_url", "") or "")
+        if not _is_placeholder_endpoint_host(host):
+            hosts.add(host)
+
+    if not hosts or candidate in hosts:
+        return None
+    return get_text("llm.model_endpoint_host_mismatch")
+
+
 def _get_organization_default_model_id(organization_id):
     """读取 organization.settings.llm_default_model_id；organization 不存在返回 None。
 

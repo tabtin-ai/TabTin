@@ -17,6 +17,12 @@ final class NativeConversationLayerContractTests: XCTestCase {
         super.tearDown()
     }
 
+    func testRichContentFileSizeKeepsSubKilobyteBytesVisible() {
+        XCTAssertEqual(RichContentFileSizeFormatter.string(from: 1), "1 B")
+        XCTAssertEqual(RichContentFileSizeFormatter.string(from: 512), "512 B")
+        XCTAssertEqual(RichContentFileSizeFormatter.string(from: 1024), "1 KB")
+    }
+
     func testCompactSurfaceSwitcherRemainsNativeSegmentedPicker() throws {
         let source = try sourceText(
             "Tabtin/Features/Conversation/ConversationScreen.swift"

@@ -41,6 +41,7 @@ export type {
 export {
   getHumanInteractionContext,
   requestPlatformApproval,
+  requestAccessBarrierResolution,
   runWithHumanInteractionContext,
   setHumanInteractionHooks,
 } from './human-interaction-hooks.js';
@@ -50,6 +51,11 @@ export type {
   PlatformApprovalRequest,
   PlatformApprovalResult,
 } from './human-interaction-hooks.js';
+
+// ── InterruptPort 默认实现（#4019 批次 5）——供宿主外发起点（Access Barrier
+//    HITL 等）自行构造 emit+wait 适配器。 ──
+export { createInterruptAdapter } from './interrupt-adapter.js';
+export type { InterruptAdapterDeps } from './interrupt-adapter.js';
 
 // ── ApprovalMemoStore 实装 (W2-轮 1) ──
 export {

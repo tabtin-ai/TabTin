@@ -30,6 +30,8 @@ const RENDERABLE_SYSTEM_FACTS = new Set([
   'ask_user_auto_skipped',
   'device_status',
   'external_archive_prefix',
+  'browser_control_taken_over',
+  'browser_control_handed_back',
 ])
 
 export function isRenderableSystemMessage(message: ChatMessage): boolean {

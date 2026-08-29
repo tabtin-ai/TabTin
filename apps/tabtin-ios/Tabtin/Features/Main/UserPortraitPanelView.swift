@@ -58,6 +58,9 @@ struct UserPortraitPanelView: View {
 
     private var statusRow: some View {
         HStack(spacing: TTSpacing.sm) {
+            Image(systemName: "sparkles")
+                .font(.tt.iconCaption)
+                .foregroundStyle(.tt.iconAccent)
             Text(L10n.Agent.userPortraitLastDistilled)
                 .font(.tt.caption)
                 .foregroundStyle(.tt.textTertiary)
@@ -69,8 +72,6 @@ struct UserPortraitPanelView: View {
                 ProgressView().controlSize(.small)
             }
         }
-        .padding(TTSpacing.sm)
-        .background(.tt.bgSubtle, in: RoundedRectangle(cornerRadius: TTRadius.sm))
     }
 
     @ViewBuilder
@@ -110,17 +111,17 @@ struct UserPortraitPanelView: View {
             VStack(spacing: TTSpacing.sm) {
                 Image(systemName: "leaf")
                     .font(.tt.iconEmpty)
-                    .foregroundStyle(.tt.textTertiary)
+                    .foregroundStyle(.tt.iconAccent)
                 Text(L10n.Agent.userPortraitEmptyTitle)
-                    .font(.tt.bodySemibold)
+                    .font(.tt.subtitleSemibold)
                     .foregroundStyle(.tt.textPrimary)
                 Text(L10n.Project.myAgentsMemoryOverviewHint)
-                    .font(.tt.meta)
-                    .foregroundStyle(.tt.textTertiary)
+                    .font(.tt.body)
+                    .foregroundStyle(.tt.textSecondary)
                     .multilineTextAlignment(.center)
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, TTSpacing.xl)
+            .padding(.vertical, TTSpacing.xxxl)
         }
 
         if observable.isStillDistilling {
@@ -205,7 +206,7 @@ private struct HintInputView: View {
         VStack(alignment: .leading, spacing: TTSpacing.xs) {
             Text(L10n.Project.myAgentsMemoryHintLabel)
                 .font(.tt.metaMedium)
-                .foregroundStyle(.tt.textSecondary)
+                .foregroundStyle(.tt.textPrimary)
             TextField(
                 L10n.Project.myAgentsMemoryHintPlaceholder,
                 text: $text,
@@ -238,8 +239,6 @@ private struct HintInputView: View {
             }
             .font(.tt.caption)
         }
-        .padding(TTSpacing.sm)
-        .background(.tt.bgSubtle, in: RoundedRectangle(cornerRadius: TTRadius.md))
     }
 
     private func submit() async {

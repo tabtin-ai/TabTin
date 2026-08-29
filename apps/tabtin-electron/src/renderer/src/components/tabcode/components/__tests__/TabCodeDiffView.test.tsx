@@ -2,9 +2,11 @@ import React from 'react'
 import { act, cleanup, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-const { layoutSpy, loadDiffContents } = vi.hoisted(() => ({
+const { createDiffEditorSpy, layoutSpy, loadDiffContents, modelSetValueSpy } = vi.hoisted(() => ({
+  createDiffEditorSpy: vi.fn(),
   layoutSpy: vi.fn(),
   loadDiffContents: vi.fn(),
+  modelSetValueSpy: vi.fn(),
 }))
 
 vi.mock('react-i18next', () => ({
@@ -55,12 +57,12 @@ vi.mock('../diffContentCache', () => ({
 vi.mock('monaco-editor/esm/vs/editor/editor.api', () => {
   const createModel = (value: string) => ({
     getValue: () => value,
-    setValue: vi.fn(),
+    setValue: modelSetValueSpy,
     dispose: vi.fn(),
   })
   return {
     editor: {
-      createDiffEditor: () => ({
+      createDiffEditor: createDiffEditorSpy.mockImplementation(() => ({
         layout: layoutSpy,
         setModel: vi.fn(),
         updateOptions: vi.fn(),
@@ -85,7 +87,7 @@ vi.mock('monaco-editor/esm/vs/editor/editor.api', () => {
           return { dispose: vi.fn() }
         },
         dispose: vi.fn(),
-      }),
+      })),
       createModel,
       setModelLanguage: vi.fn(),
     },
@@ -99,8 +101,10 @@ describe('TabCodeDiffView layout after hidden mount', () => {
   const originalClientHeight = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'clientHeight')
 
   beforeEach(() => {
+    createDiffEditorSpy.mockClear()
     layoutSpy.mockReset()
     loadDiffContents.mockReset()
+    modelSetValueSpy.mockReset()
     vi.stubGlobal('ResizeObserver', class {
       observe = vi.fn()
       disconnect = vi.fn()
@@ -181,6 +185,37 @@ describe('TabCodeDiffView layout after hidden mount', () => {
     await waitFor(() => {
       expect(onDiffReady).toHaveBeenCalledWith(expect.objectContaining({ hasChanges: true }))
     })
+  })
+
+  it('revision 变化时原地更新 model，不重建 DiffEditor', async () => {
+    loadDiffContents
+      .mockResolvedValueOnce({ left: 'HEAD\n', right: '#if\n' })
+      .mockResolvedValueOnce({ left: '团队q\n', right: '团队q1111\n' })
+
+    const { rerender } = render(
+      <TabCodeDiffView
+        rootPath="/repo"
+        filePath="/repo/tabtest"
+        language="plaintext"
+        contentRevision="1:0"
+      />,
+    )
+
+    await waitFor(() => expect(loadDiffContents).toHaveBeenCalledTimes(1))
+    rerender(
+      <TabCodeDiffView
+        rootPath="/repo"
+        filePath="/repo/tabtest"
+        language="plaintext"
+        contentRevision="2:0"
+      />,
+    )
+
+    await waitFor(() => {
+      expect(loadDiffContents).toHaveBeenCalledTimes(2)
+      expect(modelSetValueSpy).toHaveBeenCalledWith('团队q1111\n')
+    })
+    expect(createDiffEditorSpy).toHaveBeenCalledTimes(1)
   })
 
   it('文本相同但权限变化时显示属性变更，而不是无变更', async () => {

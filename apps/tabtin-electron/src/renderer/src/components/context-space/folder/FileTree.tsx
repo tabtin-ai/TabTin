@@ -585,7 +585,7 @@ export const FileTree: React.FC<FileTreeProps> = ({
         ref={parentRef}
         tabIndex={-1}
         className={cn(
-          'scrollbar-hover h-full min-h-0 overflow-y-auto overscroll-contain outline-none',
+          'scrollbar-hover h-full min-h-0 overflow-x-auto overflow-y-auto overscroll-contain outline-none',
           onMoveEntry && isDropTarget(normalizedRootPath) && 'bg-primary/5',
           className,
         )}

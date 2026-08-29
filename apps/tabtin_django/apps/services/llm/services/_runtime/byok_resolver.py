@@ -220,6 +220,7 @@ def create_exact_byok_runtime(
 
     model = execution.model
     from apps.services.agent_engine.configuration import OrchestrationConfiguration
+    from apps.services.llm.adapter_resolver import resolve_adapter_name
     from apps.services.llm.services.factory import LLMServiceFactory
     from apps.services.llm.utils.capabilities import resolve_model_capabilities
 
@@ -244,7 +245,10 @@ def create_exact_byok_runtime(
         "model_obj": model,
         "provider_key_obj": credential if credential is not provider else None,
     }
-    service = LLMServiceFactory.create_service(config["name"], config)
+    service = LLMServiceFactory.create_service(
+        resolve_adapter_name(provider),
+        config,
+    )
     return ResolvedBYOKRuntime(
         execution=replace(execution, credential_ref=credential_ref),
         service=service,

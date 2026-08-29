@@ -963,7 +963,8 @@ export class DefaultQueryTurnPipeline<Session, RuntimeInput, Mode extends string
         prompt: effectivePrompt,
         signal: querySignal,
         // Keep the platform-owned pause gate on the shared host → runtime
-        // path. This used to be injected separately by Electron and Daemon;
+        // path (user pause + Access Barrier HITL park via SessionPauseController).
+        // This used to be injected separately by Electron and Daemon;
         // keeping it here prevents either host from silently losing pause
         // semantics during orchestration refactors.
         waitIfPaused: async (runtimeSignal) => {

@@ -6,7 +6,7 @@ LLM 点券自动补充服务测试（ 重构后）
 - 自动补充：现金钱包（人民币）扣款 → 入账 OrganizationWallet
   （不再写 budget.topup_credits，避免随月度配额清零而丢失）
 - 月上限按当月 llm_auto_topup 现金流水求和（真实出账口径）
-- 触发口径：月度配额剩余 + 钱包可用 组合 ≤ 阈值才补充
+- 触发口径：月度配额剩余 + 钱包可用 组合低于预警阈值才补充
 - 预检链路：配额尽但钱包有余 → 直接放行（不补充）；两池皆空 + 现金充足 →
   补充放行；现金不足 / 未开启 → 阻断并带 topup_reason
 """
@@ -14,6 +14,7 @@ LLM 点券自动补充服务测试（ 重构后）
 from decimal import Decimal
 from unittest.mock import patch
 
+from django.core.cache import cache
 from django.test import TestCase
 
 from apps.services.billing.models import (
@@ -22,6 +23,7 @@ from apps.services.billing.models import (
     OrganizationLlmMonthlyBudget,
 )
 from apps.services.billing.services import OrganizationLlmBudgetService
+from apps.services.billing.services.low_balance_alert_service import LowBalanceAlertService
 from apps.services.billing.services.llm_topup_service import (
     LlmQuotaTopupService,
     REASON_DISABLED,
@@ -35,8 +37,9 @@ from apps.users.wallet.models import (
     OrganizationWallet,
     WalletTransaction,
 )
+from apps.services.billing.tests.org_test_utils import org_id_for
 
-ORG = "ws_llm_topup_001"
+ORG = ""
 
 
 def _make_wallet(credits: str) -> OrganizationWallet:
@@ -77,9 +80,12 @@ def _zero_wallet() -> None:
 
 
 class LlmQuotaTopupServiceTests(TestCase):
-    databases = {"default"}
+    databases = {"default", "postgresql"}
 
     def setUp(self):
+        global ORG
+        ORG = org_id_for("ws_llm_topup_001")
+        cache.delete(f"billing:low_bal_cfg:{ORG}")
         OrganizationBillingEntitlement.objects.create(
             organization_id=ORG,
             included_storage_bytes=0,
@@ -142,6 +148,9 @@ class LlmQuotaTopupServiceTests(TestCase):
     def test_topup_not_needed_when_quota_remaining(self):
         _make_cash_wallet("5.00")
         _make_policy()
+        LowBalanceAlertService.set_thresholds(
+            ORG, warning_credits=Decimal("0"), critical_credits=Decimal("0"),
+        )
         result = LlmQuotaTopupService.try_auto_topup(ORG)
         self.assertFalse(result["topped_up"])
         self.assertEqual(result["reason"], REASON_NOT_NEEDED)
@@ -172,14 +181,30 @@ class LlmQuotaTopupServiceTests(TestCase):
         self.assertEqual(wallet.get_available_credits_precise(), Decimal("100.5"))
 
     def test_topup_not_needed_when_dust_covers_request(self):
-        # 零头 5 > 阈值 0 且 >= 本次请求成本 1.0 → 无需补充
+        # 预警阈值 0、零头 5 >= 本次请求成本 1.0 → 无需补充
         _make_wallet("5")
         _make_cash_wallet("5.00")
         _make_policy()
+        LowBalanceAlertService.set_thresholds(
+            ORG, warning_credits=Decimal("0"), critical_credits=Decimal("0"),
+        )
         self._exhaust_quota()
         result = LlmQuotaTopupService.try_auto_topup(ORG, required_credits=Decimal("1.0"))
         self.assertFalse(result["topped_up"])
         self.assertEqual(result["reason"], REASON_NOT_NEEDED)
+
+    def test_topup_when_below_warning_threshold(self):
+        _make_wallet("20")
+        _make_cash_wallet("5.00")
+        _make_policy()
+        LowBalanceAlertService.set_thresholds(
+            ORG, warning_credits=Decimal("50"), critical_credits=Decimal("10"),
+        )
+        self._exhaust_quota()
+        result = LlmQuotaTopupService.try_auto_topup(ORG)
+        self.assertTrue(result["topped_up"])
+        wallet = OrganizationWallet.objects.get(organization_id=ORG)
+        self.assertEqual(wallet.get_available_credits_precise(), Decimal("120"))
 
     # ── 边界：开关 / 模式 / 月上限 / 现金不足 ──
 

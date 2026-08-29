@@ -18,6 +18,10 @@ import { getMainWindow } from '../window-manager'
 import { buildAntiDetectConfig, AccessLevel } from '@tabtin/browser-core'
 import { resolveBrowserContainerMode } from '../../shared/browser-container-mode'
 import { createLogger } from '../logger'
+import { fileUrlToLocalPath, isAllowedLocalFileUrl } from '../crawl-view/utils'
+import { detectLocalHtmlPreviewEncoding } from '../file-system/html-preview-encoding'
+import { discardViewControl } from '../browser-tab-lock/browserTabInputLock'
+import { getOrganizationTabManager } from '../organization/OrganizationTabManager'
 
 const log = createLogger('CrawlspaceIPC')
 
@@ -37,6 +41,18 @@ type Subscription = {
 }
 
 const subscriptions = new Map<number, Subscription>()
+
+async function detectLocalPreviewDefaultEncoding(url: string, root?: string): Promise<string | undefined> {
+  if (!root || !isAllowedLocalFileUrl(url, root)) return undefined
+  const filePath = fileUrlToLocalPath(url)
+  if (!filePath) return undefined
+  try {
+    return await detectLocalHtmlPreviewEncoding(filePath)
+  } catch (error) {
+    log.warn('本地 HTML 编码探测失败，继续使用 Chromium 默认编码', { url, error })
+    return undefined
+  }
+}
 
 function cleanupSubscription(id: number): void {
   const existing = subscriptions.get(id)
@@ -59,7 +75,7 @@ export function registerCrawlspaceContextIpcHandlers(): void {
   }
   _handlersRegistered = true
   const probeResourcesForView = async (viewId: string) => {
-    //  Phase 3: 容器无关取页面 WebContents（WCV 与 webview guest 通吃）
+    // GH-4777 Phase 3: 容器无关取页面 WebContents（WCV 与 webview guest 通吃）
     const wc = getViewFactory().getWebContents(viewId)
     if (!wc || wc.isDestroyed()) {
       return { result: null, error: `View not found: ${viewId}` }
@@ -116,7 +132,7 @@ export function registerCrawlspaceContextIpcHandlers(): void {
   }
 
   const captureResourceInPage = async (viewId: string, url: string, resource?: any) => {
-    //  Phase 3: 容器无关取页面 WebContents（WCV 与 webview guest 通吃）
+    // GH-4777 Phase 3: 容器无关取页面 WebContents（WCV 与 webview guest 通吃）
     const wc = getViewFactory().getWebContents(viewId)
     if (!wc || wc.isDestroyed()) {
       throw new Error(`View not found: ${viewId}`)
@@ -211,7 +227,7 @@ export function registerCrawlspaceContextIpcHandlers(): void {
     return results
   }
 
-  // ：本文件原有一份 handleDownloadResource 本地拷贝，与 resource-actions
+  // #4871：本文件原有一份 handleDownloadResource 本地拷贝，与 resource-actions
   // 的实现重复且漂移（漏掉 trackExternalDownload 登记，导致 UI 下载不进下载管理）。
   // 已删除，统一复用 resource-actions 导出的 handleDownloadResource。
 
@@ -364,8 +380,12 @@ export function registerCrawlspaceContextIpcHandlers(): void {
 
       const viewId = payload.viewId || `view-${payload.crawlspaceId}-${Date.now()}`
       const antiDetect = payload.antiDetect ?? buildAntiDetectConfig(AccessLevel.L0)
+      const localPreviewDefaultEncoding = await detectLocalPreviewDefaultEncoding(
+        payload.url,
+        payload.localPreviewRoot,
+      )
 
-      //  影子 WCV 根治：flag=webview 时容器由 <webview> 元素经
+      // GH-4777 影子 WCV 根治：flag=webview 时容器由 <webview> 元素经
       // announce → bind → adoptWebviewGuest 建立，这里若照旧 createView 会
       // 产出一个用户看不见的 WCV「影子视图」抢占 tabId 权威条目——地址栏
       // 导航 / executeScript / 截图全部打进影子（现象：地址栏变了页面没变）。
@@ -378,19 +398,33 @@ export function registerCrawlspaceContextIpcHandlers(): void {
           crawlspaceId: payload.crawlspaceId,
           viewId,
         })
-        // ：本地 HTML 产物预览的 file:// 放行根。本分支不建影子 WCV，
+        // #6215：本地 HTML 产物预览的 file:// 放行根。本分支不建影子 WCV，
         // root 无 view config 可落——寄存到 webview-host，announce 时取用
         // （否则 will-attach 白名单拒 file:// src，预览空白）。
         if (payload.localPreviewRoot) {
           const { registerWebviewLocalPreviewRoot } = await import('../webview-host/webview-host')
           registerWebviewLocalPreviewRoot(viewId, payload.localPreviewRoot)
         }
+        const createdAt = Date.now()
+        const ownerRegistered = getOrganizationTabManager().registerView(
+          payload.crawlspaceId,
+          viewId,
+          {
+            title: payload.title || payload.url,
+            url: payload.url,
+            runId: payload.runId,
+            createdAt,
+          },
+        )
+        if (!ownerRegistered) {
+          return { success: false, error: 'view 已绑定其他 crawlspace' }
+        }
         getCrawlspaceContextHub().registerView(payload.crawlspaceId, viewId, {
           title: payload.title,
           url: payload.url,
           runId: payload.runId,
           isPreview: Boolean(payload.isPreview),
-          createdAt: Date.now(),
+          createdAt,
         })
         return { success: true, viewId }
       }
@@ -407,6 +441,7 @@ export function registerCrawlspaceContextIpcHandlers(): void {
           sessionMode: payload.sessionMode as any,
           allowPrivateHostNavigation: payload.allowPrivateHostNavigation === true,
           ...(payload.localPreviewRoot ? { localPreviewRoot: payload.localPreviewRoot } : {}),
+          ...(localPreviewDefaultEncoding ? { localPreviewDefaultEncoding } : {}),
           antiDetect: antiDetect as any,
           proxy: payload.proxy,
           notifyRenderer: false,
@@ -767,8 +802,11 @@ export function registerCrawlspaceContextIpcHandlers(): void {
           const existsInContext = snapshot.views.some(view => view.viewId === payload.viewId)
           if (existsInContext) {
             hub.unregisterView(payload.crawlspaceId, payload.viewId)
+            getOrganizationTabManager().unregisterView(payload.viewId)
+            discardViewControl(payload.viewId)
             return { success: true, code: 'context_pruned' }
           }
+          discardViewControl(payload.viewId)
           return { success: true, code: 'already_closed' }
         }
         if (state?.config?.metadata?.crawlspaceId &&
@@ -780,6 +818,7 @@ export function registerCrawlspaceContextIpcHandlers(): void {
         }
 
         await viewFactory.destroyView(payload.viewId, { force: true })
+        discardViewControl(payload.viewId)
         return { success: true, code: 'closed' }
       } catch (error) {
         return {

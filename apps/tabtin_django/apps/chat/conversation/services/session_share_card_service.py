@@ -393,6 +393,7 @@ def share_and_send_card(
                     result=_result(share),
                     client_request_id=message_ref,
                 ) from exc
+            _publish_v2_state_changed(share, revoked=False)
             return _result(share)
         # 旧卡可能没有 UUID 锚点，或仍保存旧版 Django IM 的数字锚点。恢复只改变
         # 原授权状态，不能退化为重新发一张任务卡；客户端会从详情接口刷新。
@@ -400,6 +401,7 @@ def share_and_send_card(
             share=share,
             actor_user=actor_user,
         )
+        _publish_v2_state_changed(share, revoked=False)
         return _result(share)
     else:
         message_ref = _canonical_uuid(client_request_id)
@@ -518,6 +520,7 @@ def share_and_send_card(
             result=_result(share),
             client_request_id=message_ref,
         ) from exc
+    _publish_v2_state_changed(share, revoked=False)
     return _result(share)
 
 
@@ -689,14 +692,18 @@ def restore_and_refresh_card(*, actor_user, share_id: str) -> dict:
 
 def accept_and_refresh_card(*, actor_user, share_id: str) -> dict:
     """接收方显式加入 v2 协作；激活授权后再同步资源与卡片。"""
-    share = session_share_service.get_share_for_user(
+    requested = session_share_service.get_share_for_user(
         share_id=share_id,
         user=actor_user,
     )
-    if share.grantee_user_id != str(actor_user.id):
+    if requested.grantee_user_id != str(actor_user.id):
         raise session_share_service.SessionShareAccessError(
             "共享不存在或无权查看",
         )
+    share = requested
+    lifecycle = _resolve_lifecycle_share(requested)
+    if lifecycle.status == "pending":
+        share = lifecycle
     if share.card_contract != "session_share_v2":
         raise ValueError("历史共享卡不支持加入操作")
     if share.delivery_status != "confirmed":
@@ -733,7 +740,7 @@ def accept_and_refresh_card(*, actor_user, share_id: str) -> dict:
             "[session-share] joined but card refresh is pending: share=%s",
             share.id,
         )
-    return get_share_detail(viewer_user=actor_user, share_id=str(share.id))
+    return get_share_detail(viewer_user=actor_user, share_id=str(requested.id))
 
 
 def retry_share_delivery(
@@ -783,26 +790,55 @@ def _refresh_card(share) -> None:
     _refresh_django_share_card(share)
 
 
+def _publish_v2_state_changed(share, *, revoked: bool) -> None:
+    if getattr(share, "card_contract", "session_share") != "session_share_v2":
+        return
+    if getattr(share, "session", None) is None:
+        return
+    from .session_collaboration_events import send_collaboration_state_changed
+
+    send_collaboration_state_changed(share, revoked=revoked)
+
+
+def _resolve_lifecycle_share(share):
+    """同一任务 + 接收人的多张卡：生命周期跟最新授权。
+
+    最新撤销 → 旧卡也停。最新恢复/再邀请为 pending，且当前已没有仍有效的
+    落地授权时 → 旧卡跟着变成待确认。关系仍有效时，新 pending 不能把已
+    参与的旧卡改成待确认。
+    """
+    if share.status == "pending":
+        return share
+    from ..models import SessionShare
+
+    siblings = list(
+        SessionShare.objects.select_related("session", "session__workspace")
+        .filter(
+            session_id=share.session_id,
+            grantee_user_id=share.grantee_user_id,
+        )
+        .order_by("-created_at", "-id")
+    )
+    if not siblings:
+        return share
+    latest = siblings[0]
+    if latest.status != "pending":
+        return latest
+    latest_settled = next(
+        (row for row in siblings if row.status != "pending"),
+        None,
+    )
+    if latest_settled is not None and latest_settled.status == "active":
+        return latest_settled
+    return latest
+
+
 def get_share_detail(*, viewer_user, share_id: str) -> dict:
     share = session_share_service.get_share_for_user(
         share_id=share_id,
         user=viewer_user,
     )
-    effective_share = share
-    if share.status != "pending":
-        from ..models import SessionShare
-
-        effective_share = (
-            SessionShare.objects.select_related("session", "session__workspace")
-            .filter(
-                session_id=share.session_id,
-                grantee_user_id=share.grantee_user_id,
-            )
-            .exclude(status="pending")
-            .order_by("-created_at", "-id")
-            .first()
-            or share
-        )
+    effective_share = _resolve_lifecycle_share(share)
     users = {
         str(user.id): user
         for user in get_user_model().objects.filter(
@@ -968,7 +1004,8 @@ def _serialize_v2_detail(
         and share.status == "pending"
         and share.delivery_status == "confirmed"
     )
-    can_open = role == "owner" or (eligible and share.status == "active")
+    can_open = role == "owner" or (eligible and lifecycle.status == "active")
+    shared_session_id = str(share.session_id) if share.session_id else None
     if not can_open:
         detail["session_id"] = None
         detail["forked_session_id"] = None
@@ -976,6 +1013,7 @@ def _serialize_v2_detail(
         detail["live"] = _serialize_live_detail(share)
     return {
         **detail,
+        "shared_session_id": shared_session_id,
         "object_id": object_id or str(share.id),
         "role": role,
         "phase": phase,

@@ -264,6 +264,237 @@ describe('Wave 11 HITL local-IPC routing', () => {
     expect(stateRef.current.pendingAskUserBySessionId['session-a']).toBeUndefined()
   })
 
+  it('Access Barrier：命中 accessBarrierMeta 时选 resume_same_tab → 提交 { action, tabId }（非 answers[]）', async () => {
+    const { submitAskUserResponse } = installAgentEngineStub()
+    const clientSubmit = vi.fn()
+
+    const pending = {
+      sessionId: 'session-a',
+      threadId: 'thread-a',
+      interruptId: 'interrupt-a',
+      kind: 'choice' as const,
+      questions: [{
+        id: 'access_barrier_action',
+        prompt: 'xiaohongshu.com：需要登录',
+        options: [
+          { id: 'resume_same_tab', label: '我已在当前标签页完成，继续', description: '' },
+          { id: 'alternate_source', label: '改用其他公开来源', description: '' },
+          { id: 'abort_this_target', label: '跳过该站', description: '' },
+        ],
+      }],
+      title: '页面需要登录',
+      toolCallId: 'interrupt-a',
+      messageId: 'msg-a',
+      message: 'xiaohongshu.com：需要登录',
+      accessBarrierMeta: { tabId: 'tab-1', domain: 'xiaohongshu.com', kind: 'login' },
+    }
+    const stateRef: { current: AskUserSliceStore } = {
+      current: {
+        currentSessionId: 'session-a',
+        pendingAskUser: pending,
+        isAskUserSubmitting: false,
+        pendingAskUserBySessionId: { 'session-a': pending },
+        askUserSubmittingBySessionId: {},
+      },
+    }
+
+    const actions = createAskUserActions(
+      () => stateRef.current,
+      createMutableSet(stateRef),
+      {
+        getChatClient: () => ({
+          isStreaming: vi.fn(() => true),
+          messages: { submitAskUserResponse: clientSubmit },
+        } as unknown as ChatClient),
+      },
+      {
+        addStreamingSession: vi.fn(),
+        updateSessionMessages: vi.fn(),
+      },
+    )
+
+    await actions.submitAskUserAnswerForSession('session-a', [
+      { question_id: 'access_barrier_action', selected_options: ['resume_same_tab'] },
+    ] as any)
+
+    expect(submitAskUserResponse).toHaveBeenCalledWith(
+      'interrupt-a',
+      { action: 'resume_same_tab', tabId: 'tab-1' },
+      'thread-a',
+    )
+    expect(clientSubmit).not.toHaveBeenCalled()
+    expect(stateRef.current.pendingAskUserBySessionId['session-a']).toBeUndefined()
+  })
+
+  it('Access Barrier：重复点击同一卡只提交一次 IPC', async () => {
+    let resolveSubmit: ((value: { success: true }) => void) | undefined
+    const submitAskUserResponse = vi.fn().mockImplementation(
+      () => new Promise<{ success: true }>((resolve) => {
+        resolveSubmit = resolve
+      }),
+    )
+    const currentTabtin = (globalThis as { window?: { tabtin?: TabtinStub } }).window?.tabtin ?? {}
+    ;(globalThis as { window: { tabtin: TabtinStub } }).window = {
+      ...(globalThis as { window?: object }).window,
+      tabtin: {
+        ...currentTabtin,
+        agentEngine: { submitHitlBatch: vi.fn(), submitAskUserResponse },
+      },
+    } as { window: { tabtin: TabtinStub } }
+
+    const pending = {
+      sessionId: 'session-a',
+      threadId: 'thread-a',
+      interruptId: 'interrupt-a',
+      kind: 'choice' as const,
+      questions: [{
+        id: 'access_barrier_action',
+        prompt: 'p',
+        options: [{ id: 'resume_same_tab', label: '继续', description: '' }],
+      }],
+      title: '页面需要登录',
+      toolCallId: 'interrupt-a',
+      messageId: 'msg-a',
+      message: 'p',
+      accessBarrierMeta: { tabId: 'tab-1', domain: 'example.com', kind: 'login' },
+    }
+    const stateRef: { current: AskUserSliceStore } = {
+      current: {
+        currentSessionId: 'session-a',
+        pendingAskUser: pending,
+        isAskUserSubmitting: false,
+        pendingAskUserBySessionId: { 'session-a': pending },
+        askUserSubmittingBySessionId: {},
+      },
+    }
+
+    const actions = createAskUserActions(
+      () => stateRef.current,
+      createMutableSet(stateRef),
+      {
+        getChatClient: () => ({
+          isStreaming: vi.fn(() => true),
+          messages: { submitAskUserResponse: vi.fn() },
+        } as unknown as ChatClient),
+      },
+      {
+        addStreamingSession: vi.fn(),
+        updateSessionMessages: vi.fn(),
+      },
+    )
+
+    const answers = [
+      { question_id: 'access_barrier_action', selected_options: ['resume_same_tab'] },
+    ] as any
+    const first = actions.submitAskUserAnswerForSession('session-a', answers)
+    const second = actions.submitAskUserAnswerForSession('session-a', answers)
+    expect(stateRef.current.askUserSubmittingBySessionId['session-a']).toBe(true)
+    resolveSubmit?.({ success: true })
+    await Promise.all([first, second])
+
+    expect(submitAskUserResponse).toHaveBeenCalledTimes(1)
+  })
+
+  it('Access Barrier：选 alternate_source/abort_this_target → 提交 { action }（不带 tabId）', async () => {
+    const { submitAskUserResponse } = installAgentEngineStub()
+
+    const pending = {
+      sessionId: 'session-a',
+      threadId: 'thread-a',
+      interruptId: 'interrupt-a',
+      kind: 'choice' as const,
+      questions: [{ id: 'access_barrier_action', prompt: 'p', options: [] }],
+      title: '页面需要完成验证',
+      toolCallId: 'interrupt-a',
+      messageId: 'msg-a',
+      message: 'p',
+      accessBarrierMeta: { tabId: 'tab-1', domain: 'example.com', kind: 'geetest' },
+    }
+    const stateRef: { current: AskUserSliceStore } = {
+      current: {
+        currentSessionId: 'session-a',
+        pendingAskUser: pending,
+        isAskUserSubmitting: false,
+        pendingAskUserBySessionId: { 'session-a': pending },
+        askUserSubmittingBySessionId: {},
+      },
+    }
+
+    const actions = createAskUserActions(
+      () => stateRef.current,
+      createMutableSet(stateRef),
+      {
+        getChatClient: () => ({
+          isStreaming: vi.fn(() => true),
+          messages: { submitAskUserResponse: vi.fn() },
+        } as unknown as ChatClient),
+      },
+      {
+        addStreamingSession: vi.fn(),
+        updateSessionMessages: vi.fn(),
+      },
+    )
+
+    await actions.submitAskUserAnswerForSession('session-a', [
+      { question_id: 'access_barrier_action', selected_options: ['abort_this_target'] },
+    ] as any)
+
+    expect(submitAskUserResponse).toHaveBeenCalledWith(
+      'interrupt-a',
+      { action: 'abort_this_target' },
+      'thread-a',
+    )
+  })
+
+  it('Access Barrier：skip 走 { action: "skipped" }（不是通用 { skipped: true }）', async () => {
+    const { submitAskUserResponse } = installAgentEngineStub()
+
+    const pending = {
+      sessionId: 'session-a',
+      threadId: 'thread-a',
+      interruptId: 'interrupt-a',
+      kind: 'choice' as const,
+      questions: [{ id: 'access_barrier_action', prompt: 'p', options: [] }],
+      title: '页面受阻',
+      toolCallId: 'interrupt-a',
+      messageId: 'msg-a',
+      message: 'p',
+      accessBarrierMeta: { tabId: undefined, domain: 'example.com', kind: 'unknown_wall' },
+    }
+    const stateRef: { current: AskUserSliceStore } = {
+      current: {
+        currentSessionId: 'session-a',
+        pendingAskUser: pending,
+        isAskUserSubmitting: false,
+        pendingAskUserBySessionId: { 'session-a': pending },
+        askUserSubmittingBySessionId: {},
+      },
+    }
+
+    const actions = createAskUserActions(
+      () => stateRef.current,
+      createMutableSet(stateRef),
+      {
+        getChatClient: () => ({
+          isStreaming: vi.fn(() => true),
+          messages: { submitAskUserResponse: vi.fn() },
+        } as unknown as ChatClient),
+      },
+      {
+        addStreamingSession: vi.fn(),
+        updateSessionMessages: vi.fn(),
+      },
+    )
+
+    await actions.skipAskUserForSession('session-a')
+
+    expect(submitAskUserResponse).toHaveBeenCalledWith(
+      'interrupt-a',
+      { action: 'skipped' },
+      'thread-a',
+    )
+  })
+
   it('askUser skip 默认走本地 IPC，且 skipped=true', async () => {
     const { submitAskUserResponse } = installAgentEngineStub()
     const clientSubmit = vi.fn()

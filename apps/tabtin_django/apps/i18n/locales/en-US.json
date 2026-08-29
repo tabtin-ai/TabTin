@@ -569,6 +569,7 @@
     "base_url_invalid": "API Base URL must be a valid http/https URL",
     "provider_key_required": "Channel key is required",
     "provider_key_invalid": "Channel key may only contain lowercase letters, digits, and ._- (3-64 chars)",
+    "model_endpoint_host_mismatch": "This connection already uses another API endpoint. Create a separate connection for a different API endpoint.",
 
     "provider_list_success": "User providers fetched successfully",
     "provider_list_failed": "Failed to fetch user providers: {detail}",

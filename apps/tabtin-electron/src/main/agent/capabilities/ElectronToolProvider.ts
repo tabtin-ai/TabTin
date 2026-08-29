@@ -68,6 +68,7 @@ import {
   PRESENT_SUPPORTED_RESOURCE_TYPES,
   presentAutoOpenPolicy,
 } from '@tabtin/agent-host/capabilities'
+import { uploadFileToOSS } from '@tabtin/action-tools/headless'
 import { createSystemPromptProvider } from '@tabtin/agent-host/prompt'
 // W3 (2026-05-10): `ToolResultStore` (alias of legacy `ToolResultArchive`)
 // removed along with `retrieve_tool_result` — large-output disk persistence
@@ -411,6 +412,37 @@ export class ElectronToolProvider implements ToolProvider {
         supportedResourceTypes: PRESENT_SUPPORTED_RESOURCE_TYPES,
         autoOpenPolicy: presentAutoOpenPolicy,
         buildLocalFileArtifactUrl,
+        publishLocalFileArtifact: async ({
+          absolutePath,
+          mimeType,
+          threadId,
+          agentRunId,
+          toolUseId,
+        }) => {
+          const contextId = [
+            'agent-artifact',
+            agentRunId || threadId,
+            toolUseId || 'present',
+          ].join(':')
+          const uploaded = await uploadFileToOSS(absolutePath, {
+            folder: 'agent/artifacts',
+            module: 'agent',
+            contextType: 'agent_artifact',
+            contextId,
+            mimeType,
+            organizationId: this.organizationId,
+            // Agent 已显式把该文件呈递给当前会话；仍使用私有 FileRecord，
+            // 由移动端按 file_id 换取当前有效的访问地址。
+            isPublic: false,
+          })
+          return {
+            fileId: uploaded.fileId,
+            // `url` 是 OSS 确认上传后返回的当前可访问地址。私有 FileRecord
+            // 不能以 CDN 地址替代它；移动端会再用 file_id 刷新有效地址。
+            url: uploaded.url || uploaded.cdnUrl || undefined,
+            error: uploaded.error,
+          }
+        },
         bakeAndUpload: bakeAndUploadWidget,
       }),
       // PRD 08 W1：tabcode 4 件套（read_file / edit_file / write_file / delete_file）。

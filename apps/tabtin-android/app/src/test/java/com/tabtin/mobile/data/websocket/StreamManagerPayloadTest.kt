@@ -175,4 +175,29 @@ class StreamManagerPayloadTest {
         assertEquals("file-live-private", block.fileId)
         assertNull(block.url)
     }
+
+    @Test
+    fun `live OSS file keeps file identity and access URL for mobile preview`() {
+        val block = decodeRichContentBlock(
+            json.parseToJsonElement(
+                """{
+                  "type":"tabtin_rich_content",
+                  "kind":"file",
+                  "payload":{
+                    "artifact_kind":"oss_file",
+                    "file_id":"file-report-001",
+                    "filename":"report.xlsx",
+                    "mime_type":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    "file_size":4096,
+                    "access_url":"https://oss.example.com/report.xlsx"
+                  }
+                }""",
+            ).jsonObject,
+        )
+
+        assertEquals("file-report-001", block.fileId)
+        assertEquals("https://oss.example.com/report.xlsx", block.url)
+        assertEquals("report.xlsx", block.filename)
+        assertEquals(4096L, block.fileSize)
+    }
 }

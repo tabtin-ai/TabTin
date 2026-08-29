@@ -10,6 +10,7 @@ class CreateSessionContinuationRequest(Schema):
     recipient_user_id: str
     client_request_id: str
     conversation_id: str | None = None
+    include_context: bool = True
 
 
 class BatchSessionContinuationRequest(Schema):
@@ -38,7 +39,19 @@ def create_session_continuation(
                     getattr(request, "headers", {}).get("Authorization", "") or "",
                 ),
                 conversation_id_hint=data.conversation_id,
+                include_context=data.include_context,
             )
+        )
+    except session_continuation_service.ContinuationLocalFileTooLargeError as exc:
+        return error_response_with_status(
+            "LOCAL_FILE_TOO_LARGE",
+            message=str(exc),
+            status_code=409,
+            data={
+                "filename": exc.filename,
+                "size_bytes": exc.size_bytes,
+                "limit_bytes": exc.limit_bytes,
+            },
         )
     except session_continuation_service.SessionContinuationDeliveryError as exc:
         return error_response_with_status(

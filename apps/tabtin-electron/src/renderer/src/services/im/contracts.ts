@@ -309,6 +309,7 @@ export interface SendMessageResult {
   conversation_id: string
   created_at: string
   transport: IMMessageTransport
+  read_receipt?: { read_count: number; recipient_count: number }
 }
 
 export interface MarkReadInput {

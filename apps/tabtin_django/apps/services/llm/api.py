@@ -48,7 +48,8 @@ from .services.litellm_model_info import LiteLLMModelInfoService
 from .services.capability_guard import CHAT_MODEL_MODES
 from .services.model_resolver import resolve_model
 from .services.billing import charge_llm_usage
-from .models import LLMModel
+from .models import LLMModel, LLMProvider
+from .litellm_config import collect_channel_search_hints
 from .services.runtime import report_provider_call_result, resolve_provider_key_for_report
 from .services.llm_metrics import llm_calls_total, llm_call_duration_seconds, _model_to_family
 from .utils.capabilities import get_capability_flag, get_model_limit
@@ -1190,6 +1191,7 @@ def search_models(
     request,
     keyword: str,
     organization_id: str,
+    provider_id: str = "",
     limit: int = 30
 ):
     """
@@ -1203,7 +1205,26 @@ def search_models(
 
     _ensure_organization_permission(request, organization_id, role='viewer')
 
-    results = LiteLLMModelInfoService.search_models(normalized)
+    provider_hints = None
+    normalized_provider_id = (provider_id or "").strip()
+    if normalized_provider_id:
+        try:
+            provider = LLMProvider.objects.get(id=normalized_provider_id)
+        except (LLMProvider.DoesNotExist, ValueError, TypeError):
+            return error_response_with_status(
+                "NOT_FOUND", message="Provider not found", status_code=404,
+            )
+        if provider.scope == "organization" and str(provider.organization_id) != organization_id:
+            return error_response_with_status(
+                "NOT_FOUND", message="Provider not found", status_code=404,
+            )
+        if provider.scope == "user" and str(provider.user_id) != str(request.auth.id):
+            return error_response_with_status(
+                "FORBIDDEN", message="No permission", status_code=403,
+            )
+        provider_hints = collect_channel_search_hints(provider)
+
+    results = LiteLLMModelInfoService.search_models(normalized, provider_hints=provider_hints)
     model_items = []
     for model_name, model_info in list(results.items())[: max(1, min(limit, 100))]:
         token_limits = _extract_token_limits(model_info or {})

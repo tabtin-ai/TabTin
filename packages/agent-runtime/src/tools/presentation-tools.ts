@@ -14,9 +14,11 @@ import {
   NO_UI_SESSION,
 } from '../engine/errors/error-kinds.js'
 import {
+  buildOssFileArtifactBlock,
   buildLocalFileArtifactBlock,
   statLocalFileArtifact,
   type BuildArtifactUrl,
+  type LocalFileArtifactPublisher,
 } from '../capability/core/local-file-artifact.js'
 
 // ─── Schema ──────────────────────────────────────────────────────────
@@ -68,6 +70,12 @@ export interface PresentationToolsDeps {
   bakeAndUpload?: BakeAndUploadFn
   /** 本地文件交付：由工作目录相对路径构造 artifact 打开 URL。 */
   buildLocalFileArtifactUrl?: BuildArtifactUrl
+  /**
+   * 可选的跨设备文件发布能力。宿主提供时，`local_file` 会先同步为 OSS
+   * FileRecord，再以可在移动端预览的 `oss_file` 交付；未提供则保留旧的
+   * 本地文件行为，兼容 headless 与旧宿主。
+   */
+  publishLocalFileArtifact?: LocalFileArtifactPublisher
 }
 
 export function createPresentationTools(deps: PresentationToolsDeps): Tool[] {
@@ -182,6 +190,8 @@ function createPresentToUserTool(deps: PresentationToolsDeps): Tool {
           maxTableRows: MAX_TABLE_ROWS,
           workspaceRoot: context.workspaceRoot,
           buildLocalFileArtifactUrl: deps.buildLocalFileArtifactUrl,
+          publishLocalFileArtifact: deps.publishLocalFileArtifact,
+          context,
         })
         if (validation.error) errors.push(validation.error)
         if (validation.item) accepted.push(validation.item)
@@ -273,6 +283,8 @@ async function validatePresentItem(args: {
   maxTableRows: number
   workspaceRoot?: string
   buildLocalFileArtifactUrl?: BuildArtifactUrl
+  publishLocalFileArtifact?: LocalFileArtifactPublisher
+  context: ToolContext
 }): Promise<PresentItemValidationResult> {
   let item = args.item
   const kind = item.kind as string | undefined
@@ -296,6 +308,8 @@ async function validatePresentItem(args: {
       args.index,
       args.workspaceRoot,
       args.buildLocalFileArtifactUrl,
+      args.publishLocalFileArtifact,
+      args.context,
     )
     if (localFileResult.error) return { error: localFileResult.error }
     item = localFileResult.item!
@@ -318,6 +332,8 @@ async function validateLocalFileItem(
   index: number,
   workspaceRoot: string | undefined,
   buildLocalFileArtifactUrl: BuildArtifactUrl | undefined,
+  publishLocalFileArtifact: LocalFileArtifactPublisher | undefined,
+  context: ToolContext,
 ): Promise<PresentItemValidationResult> {
   if (!buildLocalFileArtifactUrl) {
     return { error: `Item ${index}: local_file is unavailable in this runtime` }
@@ -328,17 +344,32 @@ async function validateLocalFileItem(
     return { error: `Item ${index}: ${target.error}` }
   }
 
-  const block = buildLocalFileArtifactBlock({
+  const artifactArgs = {
     fileType: target.fileType,
     mimeType: target.mimeType,
     relativePath: target.relativePath,
     fileSize: target.fileSize,
-    buildUrl: buildLocalFileArtifactUrl,
     summary: item.summary as string | undefined,
     selfCheckSummary: item.self_check_summary as string | undefined,
     autoRegister: true,
     autoOpen: item.open_behavior === 'silent' ? false : true,
-  })
+  }
+
+  const published = await publishLocalFileArtifactToMobile(
+    publishLocalFileArtifact,
+    target,
+    context,
+  )
+  const block = published
+    ? buildOssFileArtifactBlock({
+        ...artifactArgs,
+        fileId: published.fileId,
+        url: published.url,
+      })
+    : buildLocalFileArtifactBlock({
+        ...artifactArgs,
+        buildUrl: buildLocalFileArtifactUrl,
+      })
 
   return {
     item: {
@@ -347,6 +378,37 @@ async function validateLocalFileItem(
       __local_file_block: block,
     },
   }
+}
+
+async function publishLocalFileArtifactToMobile(
+  publisher: LocalFileArtifactPublisher | undefined,
+  target: Extract<Awaited<ReturnType<typeof statLocalFileArtifact>>, { ok: true }>,
+  context: ToolContext,
+): Promise<{ fileId: string; url: string } | undefined> {
+  if (!publisher) return undefined
+  try {
+    const uploaded = await publisher({
+      absolutePath: target.absolutePath,
+      relativePath: target.relativePath,
+      fileType: target.fileType,
+      mimeType: target.mimeType,
+      fileSize: target.fileSize,
+      threadId: context.threadId,
+      agentRunId: context.agentRunId,
+      toolUseId: context.toolUseId,
+    })
+    const fileId = uploaded.fileId?.trim()
+    const url = uploaded.url?.trim()
+    if (fileId && isHttpURL(url)) return { fileId, url }
+  } catch {
+    // 文件已经在本地成功生成；上传失败时保留旧本地交付能力，避免把一次
+    // 短暂网络故障扩大成“没有交付物”。
+  }
+  return undefined
+}
+
+function isHttpURL(value: string | undefined): value is string {
+  return Boolean(value?.startsWith('https://') || value?.startsWith('http://'))
 }
 
 function validatePresentItemUrl(

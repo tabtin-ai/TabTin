@@ -5,7 +5,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tabtin.mobile.data.model.Agent
-import com.tabtin.mobile.data.model.AgentLocalMcpAttachment
 import com.tabtin.mobile.data.model.AgentMemoryRecord
 import com.tabtin.mobile.data.model.AgentProjectTask
 import com.tabtin.mobile.data.model.AgentSkillLink
@@ -13,7 +12,6 @@ import com.tabtin.mobile.data.model.AllChatSession
 import com.tabtin.mobile.data.model.VisibleSkillEntry
 import com.tabtin.mobile.R
 import com.tabtin.mobile.data.repository.AgentDetailRepository
-import com.tabtin.mobile.data.repository.AgentLocalMcpDeviceOfflineException
 import com.tabtin.mobile.util.ErrorClassifier
 import com.tabtin.mobile.util.safeLaunch
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,11 +27,6 @@ import javax.inject.Inject
 public data class AgentDetailUiState(
     val agent: Agent? = null,
     val skills: List<AgentSkillLink> = emptyList(),
-    /** Electron 本机已挂载且启用的 MCP（不是组织全量列表）。 */
-    val mcpConnections: List<AgentLocalMcpAttachment> = emptyList(),
-    /** 电脑离线 / 无可用 Electron / 查询超时。 */
-    val mcpDeviceOffline: Boolean = false,
-    @StringRes val mcpLoadErrorRes: Int? = null,
     val memories: List<AgentMemoryRecord> = emptyList(),
     val sessions: List<AllChatSession> = emptyList(),
     val projectTasks: List<AgentProjectTask> = emptyList(),
@@ -296,20 +289,16 @@ public class AgentDetailViewModel @Inject constructor(
                     isLoading = !isRefresh && it.agent == null,
                     isRefreshing = isRefresh,
                     loadErrorRes = null,
-                    mcpDeviceOffline = false,
-                    mcpLoadErrorRes = null,
                 )
             }
             val agent = repository.getAgent(agentId)
             val auxiliary = coroutineScope {
                 val skills = async { partial { repository.getSkills(agentId) } }
-                val mcp = async { loadMcpAttachments() }
                 val memories = async { partial { repository.getMemories(agent.organizationId, agentId) } }
                 val sessions = async { partial { repository.getSessions(agent.organizationId, agentId) } }
                 val tasks = async { partial { repository.getProjectTasks(agent.organizationId, agentId) } }
                 AgentDetailAuxiliary(
                     skills = skills.await(),
-                    mcp = mcp.await(),
                     memories = memories.await(),
                     sessions = sessions.await(),
                     tasks = tasks.await(),
@@ -319,9 +308,6 @@ public class AgentDetailViewModel @Inject constructor(
                 it.copy(
                     agent = agent,
                     skills = auxiliary.skills ?: emptyList(),
-                    mcpConnections = auxiliary.mcp.connections,
-                    mcpDeviceOffline = auxiliary.mcp.deviceOffline,
-                    mcpLoadErrorRes = auxiliary.mcp.errorRes,
                     memories = auxiliary.memories ?: emptyList(),
                     sessions = auxiliary.sessions ?: emptyList(),
                     projectTasks = auxiliary.tasks ?: emptyList(),
@@ -333,17 +319,6 @@ public class AgentDetailViewModel @Inject constructor(
         }
     }
 
-    private suspend fun loadMcpAttachments(): McpAttachmentsLoad =
-        try {
-            McpAttachmentsLoad(connections = repository.getAgentLocalMcpAttachments(agentId))
-        } catch (error: CancellationException) {
-            throw error
-        } catch (error: AgentLocalMcpDeviceOfflineException) {
-            McpAttachmentsLoad(deviceOffline = true)
-        } catch (_: Exception) {
-            McpAttachmentsLoad(errorRes = R.string.error_unknown)
-        }
-
     private suspend fun <T> partial(block: suspend () -> T): T? = try {
         block()
     } catch (error: CancellationException) {
@@ -353,23 +328,13 @@ public class AgentDetailViewModel @Inject constructor(
     }
 }
 
-private data class McpAttachmentsLoad(
-    val connections: List<AgentLocalMcpAttachment> = emptyList(),
-    val deviceOffline: Boolean = false,
-    @StringRes val errorRes: Int? = null,
-) {
-    val failed: Boolean
-        get() = deviceOffline || errorRes != null
-}
-
 private data class AgentDetailAuxiliary(
     val skills: List<AgentSkillLink>?,
-    val mcp: McpAttachmentsLoad,
     val memories: List<AgentMemoryRecord>?,
     val sessions: List<AllChatSession>?,
     val tasks: List<AgentProjectTask>?,
 ) {
     val hasFailure: Boolean
-        get() = skills == null || mcp.failed || memories == null ||
+        get() = skills == null || memories == null ||
             sessions == null || tasks == null
 }

@@ -972,4 +972,133 @@ describe('hitlStreamHandlers', () => {
       expect(SystemNotification.agentHitlWaiting).toHaveBeenCalledTimes(1)
     })
   })
+
+  describe('access_barrier_required', () => {
+    it('打开固定选项选择面板并带 accessBarrierMeta', async () => {
+      const { handleAccessBarrierRequiredStreamEvent } = await import('../hitlStreamHandlers')
+      const expiresAt = Date.now() + 60_000
+      const ok = handleAccessBarrierRequiredStreamEvent(
+        {
+          type: 'agent.stream.access_barrier_required',
+          payload: {
+            request_id: 'barrier-req-1',
+            expires_at: expiresAt,
+            barrier: {
+              kind: 'login',
+              reason: '需要登录',
+              domain: 'xiaohongshu.com',
+              tabId: 'tab-xhs',
+              detectedAt: new Date().toISOString(),
+              actions: ['resume_same_tab', 'alternate_source', 'abort_this_target'],
+            },
+          },
+        },
+        { sessionId: 'session-barrier' },
+      )
+      expect(ok).toBe(true)
+      const pending = pendingAskUserBySessionId['session-barrier'] as {
+        kind: string
+        title?: string
+        presetId?: string
+        expiresAt?: number
+        accessBarrierMeta?: { tabId?: string; domain?: string }
+        questions: Array<{ options: Array<{ id: string }> }>
+      }
+      expect(pending.kind).toBe('choice')
+      expect(pending.title).toBe('页面需要登录')
+      expect(pending.presetId).toBe('access_barrier')
+      expect(pending.expiresAt).toBe(expiresAt)
+      expect(pending.accessBarrierMeta).toEqual({
+        tabId: 'tab-xhs',
+        domain: 'xiaohongshu.com',
+        kind: 'login',
+      })
+      expect(pending.questions[0]?.options.map((o) => o.id)).toEqual([
+        'resume_same_tab',
+        'alternate_source',
+        'abort_this_target',
+      ])
+      // 不发 OS 通知（对话内卡片即可）
+      expect(SystemNotification.agentHitlWaiting).not.toHaveBeenCalled()
+    })
+
+    it('验证码/geetest 用「页面需要完成验证」标题', async () => {
+      const { handleAccessBarrierRequiredStreamEvent } = await import('../hitlStreamHandlers')
+      handleAccessBarrierRequiredStreamEvent(
+        {
+          type: 'agent.stream.access_barrier_required',
+          payload: {
+            request_id: 'barrier-captcha-1',
+            barrier: {
+              kind: 'geetest',
+              reason: '人机校验',
+              domain: 'example.com',
+              detectedAt: new Date().toISOString(),
+              actions: ['resume_same_tab', 'alternate_source', 'abort_this_target'],
+            },
+          },
+        },
+        { sessionId: 'session-barrier-captcha' },
+      )
+      const pending = pendingAskUserBySessionId['session-barrier-captcha'] as {
+        title?: string
+        accessBarrierMeta?: { kind?: string }
+      }
+      expect(pending.title).toBe('页面需要完成验证')
+      expect(pending.accessBarrierMeta?.kind).toBe('geetest')
+    })
+
+    it('已解决墓碑后重放 access_barrier_required 不再开卡', async () => {
+      const { handleAccessBarrierRequiredStreamEvent, recordHitlResolvedKey } = await import('../hitlStreamHandlers')
+      recordHitlResolvedKey('session-barrier-tomb', 'barrier-req-tomb')
+      const ok = handleAccessBarrierRequiredStreamEvent(
+        {
+          type: 'agent.stream.access_barrier_required',
+          payload: {
+            request_id: 'barrier-req-tomb',
+            barrier: {
+              kind: 'login',
+              reason: '需要登录',
+              domain: 'example.com',
+              detectedAt: new Date().toISOString(),
+              actions: ['resume_same_tab', 'alternate_source', 'abort_this_target'],
+            },
+          },
+        },
+        { sessionId: 'session-barrier-tomb' },
+      )
+      expect(ok).toBe(true)
+      expect(pendingAskUserBySessionId['session-barrier-tomb']).toBeUndefined()
+    })
+
+    it('expires_at 到期后兜底清 pendingAskUser', async () => {
+      vi.useFakeTimers()
+      try {
+        const { handleAccessBarrierRequiredStreamEvent } = await import('../hitlStreamHandlers')
+        const expiresAt = Date.now() + 5_000
+        handleAccessBarrierRequiredStreamEvent(
+          {
+            type: 'agent.stream.access_barrier_required',
+            payload: {
+              request_id: 'barrier-expire-1',
+              expires_at: expiresAt,
+              barrier: {
+                kind: 'login',
+                reason: '需要登录',
+                domain: 'example.com',
+                detectedAt: new Date().toISOString(),
+                actions: ['resume_same_tab', 'alternate_source', 'abort_this_target'],
+              },
+            },
+          },
+          { sessionId: 'session-barrier-expire' },
+        )
+        expect(pendingAskUserBySessionId['session-barrier-expire']).toBeTruthy()
+        await vi.advanceTimersByTimeAsync(5_000)
+        expect(pendingAskUserBySessionId['session-barrier-expire']).toBeUndefined()
+      } finally {
+        vi.useRealTimers()
+      }
+    })
+  })
 })

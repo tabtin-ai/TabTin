@@ -32,7 +32,7 @@ import { useSessionReadStore } from '@stores/useSessionReadStore'
 import { useTrackerStore } from '@stores/useTrackerStore'
 import { useSettingsSpaceStore } from '@stores/useSettingsSpaceStore'
 import { useChatModelStore } from '@stores/useChatModelStore'
-import { useBrowserTabLockStore } from '@stores/useBrowserTabLockStore'
+import { subscribeBrowserTabControlSnapshots } from '@stores/useBrowserTabLockStore'
 import { clearAllSessionLocalModelPreferences } from '@stores/chat/session/sessionLocalModelPreference'
 import { SystemNotification } from '@/services/systemNotification'
 import {
@@ -94,9 +94,7 @@ export function AppGlobalEffects({ isDetachedChat, hasMainWindowHost }: AppGloba
 
   useEffect(() => {
     if (isDetachedChat) return
-    return window.tabtin?.crawlView?.onAgentTabLockChanged(({ lockedViewIds }) => {
-      useBrowserTabLockStore.getState().setLockedViewIds(lockedViewIds)
-    })
+    return subscribeBrowserTabControlSnapshots()
   }, [isDetachedChat])
 
   // ChatGPT 本机连接是主窗级能力。连接变化后统一刷新聊天模型目录；断开或
@@ -114,7 +112,7 @@ export function AppGlobalEffects({ isDetachedChat, hasMainWindowHost }: AppGloba
     })
   }, [isDetachedChat])
 
-  // --- HTML5 DnD 生命周期探针 + Windows toast OLE 屏蔽---
+  // --- HTML5 DnD 生命周期探针 + Windows toast OLE 屏蔽（#7056）---
   // App 级全局：拖拽可从任意面板发起，不能挂 hot-Space 作用域。
   useEffect(() => {
     if (isDetachedChat) return
@@ -415,7 +413,7 @@ export function AppGlobalEffects({ isDetachedChat, hasMainWindowHost }: AppGloba
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
-  // --- 窗口焦点恢复：刷 Space +  已加载会话列表 REST reconcile（30s 节流）---
+  // --- 窗口焦点恢复：刷 Space + #8605 已加载会话列表 REST reconcile（30s 节流）---
   useEffect(() => {
     if (isDetachedChat || !isAuthenticated) return
 
@@ -558,7 +556,7 @@ export function AppGlobalEffects({ isDetachedChat, hasMainWindowHost }: AppGloba
     bootstrapConversationViewportProbe()
   }, [isDetachedChat])
 
-  // --- dev-only： 模拟异常终止 DONE（硬停 / 预算墙）---
+  // --- dev-only：#6116 模拟异常终止 DONE（硬停 / 预算墙）---
   useEffect(() => {
     if (!import.meta.env.DEV || isDetachedChat) return
     bootstrapMockRunTerminationProbe()
@@ -570,7 +568,7 @@ export function AppGlobalEffects({ isDetachedChat, hasMainWindowHost }: AppGloba
     return setupExitGuardListener()
   }, [isDetachedChat])
 
-  // --- Slide flush 监听器：常驻响应 main 进程的关窗 slide:flush-before-close，---
+  // --- Slide flush 监听器（#1751）：常驻响应 main 进程的关窗 slide:flush-before-close，---
   // 未打开过 slide 时立即回执，避免 main 干等 4000ms 超时才关窗。
   useEffect(() => {
     if (isDetachedChat) return

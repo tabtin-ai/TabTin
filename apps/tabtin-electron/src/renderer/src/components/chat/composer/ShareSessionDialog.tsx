@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import {
   Button,
+  ConfirmDialog,
   Dialog,
   DialogContent,
   DialogFooter,
@@ -28,6 +29,8 @@ import { useSpaceStore } from '@stores/useSpaceStore'
 import { useChatStore } from '@/stores/chat/useChatStore'
 import {
   createSessionContinuation,
+  createDM,
+  isContinuationLocalFileTooLargeError,
   searchOrganizationMembers,
   type SearchMemberResult,
 } from '@/services/tabchatApi'
@@ -50,6 +53,7 @@ import {
   rememberPendingShareIntent,
   resolvePendingShareClientRequestId,
 } from '@components/tabchat/sessionSharePendingIntent'
+import { resolveOrgInternalShareConversationId } from './resolveOrgInternalShareConversation'
 
 const log = createLogger('ShareSessionDialog')
 
@@ -200,6 +204,11 @@ export const ShareSessionDialog: React.FC<Props> = ({
   const [intent, setIntent] = useState<ShareIntent>('participate')
   const [tier, setTier] = useState<ShareTierLevel>('view')
   const [submitting, setSubmitting] = useState(false)
+  const [textOnlyContinuation, setTextOnlyContinuation] = useState<{
+    intentKey: string
+    clientRequestId: string
+    recipientUserId: string
+  } | null>(null)
   const pendingShareIntentRef = useRef<{
     key: string
     clientRequestId: string
@@ -229,6 +238,7 @@ export const ShareSessionDialog: React.FC<Props> = ({
     setSelected(null)
     setIntent('participate')
     setTier('view')
+    setTextOnlyContinuation(null)
   }, [open])
 
   useEffect(() => {
@@ -309,12 +319,19 @@ export const ShareSessionDialog: React.FC<Props> = ({
         return
       }
       const flags = shareTierToFlags(tier)
+      const conversationId = await resolveOrgInternalShareConversationId({
+        conversations: useIMStore.getState().conversations ?? [],
+        organizationId,
+        peerUserId: selected.id,
+        createDirect: createDM,
+      })
       const created = await createSessionShareFromChat({
         session_id: sessionId,
         grantee_user_id: selected.id,
         can_fork: flags.canFork,
         can_chat: flags.canChat,
         client_request_id: clientRequestId,
+        conversation_id: conversationId,
       })
       if (created.conversation_id) {
         useIMStore.getState().bumpSessionShareListVersion(created.conversation_id)
@@ -341,6 +358,18 @@ export const ShareSessionDialog: React.FC<Props> = ({
       toast({ title: t('shareSession.success', { defaultValue: '已共享并发送到私聊' }) })
       onOpenChange(false)
     } catch (err) {
+      if (intent === 'continue' && isContinuationLocalFileTooLargeError(err)) {
+        log.warn('continuation file exceeds handoff limit; awaiting text-only confirmation', {
+          sessionId,
+          clientRequestId,
+        })
+        setTextOnlyContinuation({
+          intentKey,
+          clientRequestId,
+          recipientUserId: selected.id,
+        })
+        return
+      }
       log.warn('share session failed', { sessionId, clientRequestId, err })
       toast({
         title: t('shareSession.failed', { defaultValue: '共享失败' }),
@@ -361,6 +390,48 @@ export const ShareSessionDialog: React.FC<Props> = ({
     tier,
   ])
 
+  const handleTextOnlyContinuation = useCallback(async () => {
+    if (!textOnlyContinuation) return
+    setSubmitting(true)
+    try {
+      const continuation = await createSessionContinuation({
+        sourceSessionId: sessionId,
+        recipientUserId: textOnlyContinuation.recipientUserId,
+        clientRequestId: textOnlyContinuation.clientRequestId,
+        includeContext: false,
+      })
+      useIMStore.getState().setSessionContinuation(continuation)
+      forgetPendingShareIntent(textOnlyContinuation.intentKey)
+      pendingShareIntentRef.current = null
+      setTextOnlyContinuation(null)
+      toast({
+        title: t('shareSession.continueSuccess', { defaultValue: '已发送工作转交' }),
+      })
+      onOpenChange(false)
+    } catch (err) {
+      const errorStatus = (
+        typeof err === 'object'
+        && err !== null
+        && 'status' in err
+      ) ? (err as { status?: unknown }).status : undefined
+      log.warn('text-only continuation failed', {
+        sessionId,
+        clientRequestId: textOnlyContinuation.clientRequestId,
+        errorName: err instanceof Error ? err.name : 'UnknownError',
+        errorMessage: err instanceof Error ? err.message : String(err),
+        status: typeof errorStatus === 'number' ? errorStatus : null,
+      })
+      toast({
+        title: t('shareSession.failed', { defaultValue: '共享失败' }),
+        description: err instanceof Error ? err.message : undefined,
+        variant: 'destructive',
+      })
+      throw new Error('text-only continuation failed')
+    } finally {
+      setSubmitting(false)
+    }
+  }, [onOpenChange, sessionId, t, textOnlyContinuation])
+
   const mode: SessionShareMode = intent === 'continue' ? 'continue' : tier
 
   const handleModeChange = useCallback((next: SessionShareMode) => {
@@ -373,6 +444,7 @@ export const ShareSessionDialog: React.FC<Props> = ({
   }, [])
 
   return (
+    <>
     <Dialog open={open} onOpenChange={(next) => { if (!submitting) onOpenChange(next) }}>
       <DialogContent className="w-[440px] max-w-[calc(100vw-32px)] gap-0 overflow-hidden p-0">
         <div className="flex items-center gap-2 border-b border-border/60 px-4 py-3">
@@ -507,5 +579,20 @@ export const ShareSessionDialog: React.FC<Props> = ({
         </DialogFooter>
       </DialogContent>
     </Dialog>
+    <ConfirmDialog
+      open={textOnlyContinuation !== null}
+      onOpenChange={(next) => { if (!next) setTextOnlyContinuation(null) }}
+      title={t('shareSession.fileTooLargeConfirm', {
+        defaultValue: '分享会话文件超过50MB，是否选择只交接对话，不交接上下文',
+      })}
+      description={t('shareSession.fileTooLargeDescription', {
+        defaultValue: '确定后将保留对话信息，但不会交接会话中的文件和资源上下文。',
+      })}
+      cancelText={t('shareSession.cancel', { defaultValue: '取消' })}
+      confirmText={t('shareSession.fileTooLargeConfirmAction', { defaultValue: '确定' })}
+      container={null}
+      onConfirm={handleTextOnlyContinuation}
+    />
+    </>
   )
 }

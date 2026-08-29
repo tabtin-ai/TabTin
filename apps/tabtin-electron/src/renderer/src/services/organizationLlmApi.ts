@@ -262,13 +262,17 @@ export class OrganizationLlmApiService {
 
   static async searchModels(
     keyword: string,
-    organizationId?: string
+    organizationId?: string,
+    providerId?: string,
   ): Promise<{ models: OrganizationModelSearchResult[]; total: number }> {
     const token = await getAuthToken()
     const query = new URLSearchParams()
     query.set('keyword', keyword)
     if (organizationId) {
       query.set('organization_id', organizationId)
+    }
+    if (providerId) {
+      query.set('provider_id', providerId)
     }
     const url = joinApiPath(API_CONFIG.baseURL, `${API_ENDPOINTS.LLM_SEARCH_MODELS}?${query.toString()}`)
 

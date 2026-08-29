@@ -81,6 +81,7 @@ interface RootBucket {
 }
 
 const buckets = new Map<string, RootBucket>()
+let contentRevisionSequence = 0
 
 function emptyMaps(): Pick<LocalGitStatusSnapshot, 'gitStatus' | 'stagedStatus' | 'unstagedStatus'> {
   return {
@@ -179,6 +180,7 @@ async function runFetch(bucket: RootBucket): Promise<void> {
     const entries = (result.status?.entries ?? {}) as Record<string, GitStatusEntry>
     const nextFingerprints = new Map<string, string>()
     const nextContentRevisions = { ...bucket.snapshot.contentRevisions }
+    let fetchContentRevision: number | null = null
 
     // 合并 fullStatus 等待期间新到达的 watch 意图，不能被本轮快照覆盖。
     // 这些事件对应的内容可能已经包含在当前结果里，因此直接纳入本轮 bump。
@@ -207,7 +209,11 @@ async function runFetch(bucket: RootBucket): Promise<void> {
       nextFingerprints.set(relPath, fp)
       const fingerprintChanged = bucket.prevFingerprints.get(relPath) !== fp
       if (shouldBumpContent(bucket, relPath, fingerprintChanged)) {
-        nextContentRevisions[relPath] = (nextContentRevisions[relPath] ?? 0) + 1
+        if (fetchContentRevision === null) {
+          contentRevisionSequence += 1
+          fetchContentRevision = contentRevisionSequence
+        }
+        nextContentRevisions[relPath] = fetchContentRevision
       }
     }
 
@@ -452,4 +458,5 @@ export function __resetLocalGitStatusSharedForTests(): void {
     stopPolling(bucket)
   }
   buckets.clear()
+  contentRevisionSequence = 0
 }

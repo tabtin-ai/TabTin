@@ -246,6 +246,7 @@ export function createDjangoIMProvider(
         conversation_id: message.conversation_id,
         created_at: message.created_at ?? new Date().toISOString(),
         transport: message.transport ?? { kind: 'group', sequence: message.id },
+        ...(message.read_receipt ? { read_receipt: message.read_receipt } : {}),
       }
     },
     async markRead(input: MarkReadInput): Promise<MarkReadResult> {

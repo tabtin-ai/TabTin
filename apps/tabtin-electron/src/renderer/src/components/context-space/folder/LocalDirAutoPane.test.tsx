@@ -48,11 +48,17 @@ vi.mock('@components/tabcode/TabCodePaneHost', () => ({
   TabCodePaneHost: ({
     gitFlowSwitch,
     assumeGitRepo,
+    isPaneActive,
   }: {
     gitFlowSwitch?: { onChange: (checked: boolean) => void }
     assumeGitRepo?: boolean
+    isPaneActive?: boolean
   }) => (
-    <div data-testid="tabcode-pane" data-assume-git-repo={assumeGitRepo ? 'true' : 'false'}>
+    <div
+      data-testid="tabcode-pane"
+      data-assume-git-repo={assumeGitRepo ? 'true' : 'false'}
+      data-pane-active={String(isPaneActive ?? true)}
+    >
       {gitFlowSwitch ? (
         <button type="button" onClick={() => gitFlowSwitch.onChange(false)}>
           disable-git-flow
@@ -279,5 +285,21 @@ describe('LocalDirAutoPane session authorization gate', () => {
     const tabCodePane = await screen.findByTestId('tabcode-pane')
     expect(tabCodePane).toBeTruthy()
     expect(tabCodePane.getAttribute('data-assume-git-repo')).toBe('true')
+  })
+
+  it('透传外层 Context 标签的激活状态到内嵌 TabCode', async () => {
+    render(
+      <LocalDirAutoPane
+        rootPath="/workspace/repo"
+        title="repo"
+        spaceId="space-1"
+        kind="user"
+        preferredView="code"
+        isPaneActive={false}
+      />,
+    )
+
+    const tabCodePane = await screen.findByTestId('tabcode-pane')
+    expect(tabCodePane.getAttribute('data-pane-active')).toBe('false')
   })
 })

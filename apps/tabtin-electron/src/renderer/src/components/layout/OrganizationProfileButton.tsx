@@ -226,7 +226,7 @@ export const TopBarOrganizationSwitcher: React.FC = () => {
             data-onboarding-target="new-user-organization-team-switcher"
             data-testid="shell-top-bar-organization-switcher"
           >
-            <span className="truncate text-body font-medium text-foreground">
+            <span className="truncate text-body font-medium leading-none text-foreground">
               {organizationLabel}
             </span>
             <ChevronDown

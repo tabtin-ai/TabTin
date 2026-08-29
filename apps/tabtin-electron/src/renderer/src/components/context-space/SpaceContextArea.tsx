@@ -358,7 +358,7 @@ export const SpaceContextArea: React.FC<SpaceContextAreaProps> = ({
                 : {})}
               style={
                 !isActive && useVisibilityKeepAlive
-                  ? { visibility: 'hidden', pointerEvents: 'none' }
+                  ? { visibility: 'hidden', opacity: 0, pointerEvents: 'none' }
                   : { pointerEvents: 'auto' }
               }
             >

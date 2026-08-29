@@ -40,6 +40,10 @@ from apps.chat.conversation.api.session_share import (
     shared_execution_status,
     shared_fork,
 )
+from apps.chat.conversation.api.session_continuation import (
+    CreateSessionContinuationRequest,
+    create_session_continuation,
+)
 from apps.chat.conversation.models import (
     ChatMessage,
     ChatSession,
@@ -57,6 +61,7 @@ from apps.chat.conversation.schemas import (
     UpdateSessionRequest,
 )
 from apps.chat.conversation.services import (
+    session_continuation_local_files,
     session_continuation_service,
     session_share_card_service,
     session_share_service,
@@ -83,6 +88,114 @@ User = get_user_model()
 _CHAT_SERVICE_PATH = (
     "apps.services.agent_execution.chat_service.ChatService.send_message_sync"
 )
+
+
+class SessionContinuationLocalFileRewriteTestCase(SimpleTestCase):
+    @patch.object(session_continuation_service, "create_and_send")
+    def test_oversized_file_api_returns_retryable_business_code(self, create_and_send):
+        create_and_send.side_effect = (
+            session_continuation_service.ContinuationLocalFileTooLargeError(
+                filename="large-report.zip",
+                size_bytes=50 * 1024 * 1024 + 1,
+            )
+        )
+        request = MagicMock(auth=MagicMock(id="sender-user"), headers={})
+
+        response = create_session_continuation(
+            request,
+            CreateSessionContinuationRequest(
+                source_session_id=str(uuid.uuid4()),
+                recipient_user_id=str(uuid.uuid4()),
+                client_request_id=str(uuid.uuid4()),
+            ),
+        )
+
+        self.assertEqual(response.status_code, 409)
+        payload = json.loads(response.content)
+        self.assertEqual(payload["code"], "LOCAL_FILE_TOO_LARGE")
+        self.assertEqual(payload["data"]["limit_bytes"], 50 * 1024 * 1024)
+
+    def test_oss_source_card_is_rebound_only_in_continuation_snapshot(self):
+        source_turns = [{
+            "blocks": [{
+                "type": "tabtin_rich_content",
+                "kind": "file",
+                "payload": {
+                    "artifact_kind": "oss_file",
+                    "file_id": "original-cloud-file",
+                    "filename": "report.xlsx",
+                    "source_relative_path": "artifacts/report.xlsx",
+                    "url": "https://example.test/original",
+                    "access_url": "https://example.test/original",
+                    "file_size": 42,
+                    "auto_register": True,
+                },
+            }],
+        }]
+        replacements = {
+            "artifacts/report.xlsx": {
+                "id": "handoff-file",
+                "filename": "report.xlsx",
+                "source_relative_path": "artifacts/report.xlsx",
+                "target_relative_path": "artifacts/continuations/abc/report.xlsx",
+                "file_size": 42,
+                "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            },
+        }
+
+        rewritten = session_continuation_local_files._rewrite_turn_local_file_payloads(
+            source_turns,
+            replacements,
+        )
+
+        payload = rewritten[0]["blocks"][0]["payload"]
+        self.assertEqual(payload["artifact_kind"], "local_file")
+        self.assertEqual(
+            payload["relative_path"],
+            "artifacts/continuations/abc/report.xlsx",
+        )
+        self.assertEqual(payload["handoff_file_id"], "handoff-file")
+        self.assertEqual(payload["source_file_id"], "original-cloud-file")
+        self.assertNotIn("file_id", payload)
+        self.assertNotIn("access_url", payload)
+
+        original_payload = source_turns[0]["blocks"][0]["payload"]
+        self.assertEqual(original_payload["artifact_kind"], "oss_file")
+        self.assertEqual(original_payload["file_id"], "original-cloud-file")
+        self.assertNotIn("relative_path", original_payload)
+
+    def test_legacy_auto_registered_oss_card_uses_unique_filename_and_size(self):
+        source_turns = [{
+            "blocks": [{
+                "type": "tabtin_rich_content",
+                "kind": "file",
+                "payload": {
+                    "artifact_kind": "oss_file",
+                    "file_id": "legacy-cloud-file",
+                    "filename": "report.xlsx",
+                    "file_size": 42,
+                    "auto_register": True,
+                },
+            }],
+        }]
+        replacements = {
+            "artifacts/report.xlsx": {
+                "id": "handoff-file",
+                "filename": "report.xlsx",
+                "source_relative_path": "artifacts/report.xlsx",
+                "target_relative_path": "artifacts/continuations/abc/report.xlsx",
+                "file_size": 42,
+            },
+        }
+
+        rewritten = session_continuation_local_files._rewrite_turn_local_file_payloads(
+            source_turns,
+            replacements,
+        )
+
+        payload = rewritten[0]["blocks"][0]["payload"]
+        self.assertEqual(payload["artifact_kind"], "local_file")
+        self.assertEqual(payload["handoff_file_id"], "handoff-file")
 
 
 def _make_workspace(organization, user, name: str, fingerprint: str) -> Workspace:
@@ -317,6 +430,7 @@ class SessionShareTestCase(TestCase):
         self.assertEqual(detail["phase"], "awaitingJoin")
         self.assertTrue(detail["actions"]["can_join"])
         self.assertIsNone(detail["session_id"])
+        self.assertEqual(detail["shared_session_id"], str(self.session.id))
         self.assertIsNone(session_share_service.get_active_share(
             session_id=str(self.session.id),
             user=self.grantee,
@@ -401,6 +515,260 @@ class SessionShareTestCase(TestCase):
         self.assertEqual(
             [item["detail"]["object_id"] for item in items],
             [str(older.id), str(latest.id)],
+        )
+        self.assertEqual(
+            [item["detail"]["session_id"] for item in items],
+            [None, None],
+        )
+        self.assertEqual(
+            [item["detail"]["shared_session_id"] for item in items],
+            [str(self.session.id), str(self.session.id)],
+        )
+
+    def test_v2_detail_keeps_older_card_permission_after_later_collaborate_share(self):
+        older = session_share_service.create_or_update_share(
+            session_id=str(self.session.id),
+            owner_user=self.owner,
+            grantee_user_id=str(self.grantee.id),
+            card_contract="session_share_v2",
+            status="active",
+        )
+        latest = session_share_service.create_or_update_share(
+            session_id=str(self.session.id),
+            owner_user=self.owner,
+            grantee_user_id=str(self.grantee.id),
+            can_chat=True,
+            card_contract="session_share_v2",
+            status="active",
+        )
+        SessionShare.objects.filter(id__in=[older.id, latest.id]).update(
+            delivery_status="confirmed",
+        )
+
+        items = session_share_card_service.batch_get_share_details(
+            object_ids=[str(older.id), str(latest.id)],
+            viewer_user=self.grantee,
+        )
+
+        self.assertEqual(
+            [item["detail"]["access_mode"] for item in items],
+            ["view", "collaborate"],
+        )
+        self.assertEqual(
+            [item["detail"]["phase"] for item in items],
+            ["activeView", "activeCollaborate"],
+        )
+        self.assertEqual(
+            [item["detail"]["can_chat"] for item in items],
+            [False, True],
+        )
+        self.assertEqual(
+            [item["detail"]["object_id"] for item in items],
+            [str(older.id), str(latest.id)],
+        )
+
+    def test_v2_detail_projects_later_pending_restore_onto_revoked_older_card(self):
+        older = session_share_service.create_or_update_share(
+            session_id=str(self.session.id),
+            owner_user=self.owner,
+            grantee_user_id=str(self.grantee.id),
+            card_contract="session_share_v2",
+            status="active",
+        )
+        latest = session_share_service.create_or_update_share(
+            session_id=str(self.session.id),
+            owner_user=self.owner,
+            grantee_user_id=str(self.grantee.id),
+            can_chat=True,
+            card_contract="session_share_v2",
+            status="active",
+        )
+        SessionShare.objects.filter(id__in=[older.id, latest.id]).update(
+            delivery_status="confirmed",
+        )
+        session_share_service.revoke_share(
+            share_id=str(older.id),
+            actor_user=self.owner,
+        )
+        session_share_service.revoke_share(
+            share_id=str(latest.id),
+            actor_user=self.owner,
+        )
+        session_share_service.restore_share(
+            share_id=str(latest.id),
+            owner_user=self.owner,
+            status="pending",
+        )
+        SessionShare.objects.filter(id=latest.id).update(delivery_status="confirmed")
+
+        items = session_share_card_service.batch_get_share_details(
+            object_ids=[str(older.id), str(latest.id)],
+            viewer_user=self.grantee,
+        )
+
+        self.assertEqual(
+            [item["detail"]["phase"] for item in items],
+            ["awaitingJoin", "awaitingJoin"],
+        )
+        self.assertEqual(
+            [item["detail"]["effective_share_id"] for item in items],
+            [str(latest.id), str(latest.id)],
+        )
+        self.assertEqual(
+            [item["detail"]["access_mode"] for item in items],
+            ["view", "collaborate"],
+        )
+        self.assertEqual(
+            [item["detail"]["actions"]["can_join"] for item in items],
+            [True, True],
+        )
+
+    def test_v2_detail_projects_later_pending_invite_after_latest_revoke(self):
+        older = session_share_service.create_or_update_share(
+            session_id=str(self.session.id),
+            owner_user=self.owner,
+            grantee_user_id=str(self.grantee.id),
+            card_contract="session_share_v2",
+            status="active",
+        )
+        revoked = session_share_service.create_or_update_share(
+            session_id=str(self.session.id),
+            owner_user=self.owner,
+            grantee_user_id=str(self.grantee.id),
+            can_chat=True,
+            card_contract="session_share_v2",
+            status="active",
+        )
+        SessionShare.objects.filter(id__in=[older.id, revoked.id]).update(
+            delivery_status="confirmed",
+        )
+        session_share_service.revoke_share(
+            share_id=str(revoked.id),
+            actor_user=self.owner,
+        )
+        pending = session_share_service.create_or_update_share(
+            session_id=str(self.session.id),
+            owner_user=self.owner,
+            grantee_user_id=str(self.grantee.id),
+            can_chat=True,
+            card_contract="session_share_v2",
+        )
+        pending = session_share_service.confirm_share_delivery(
+            share=pending,
+            conversation_id="conversation-restore",
+            message_ref="019fcaa1-3333-7333-8333-555555555555",
+            message_sequence=44,
+        )
+
+        items = session_share_card_service.batch_get_share_details(
+            object_ids=[str(older.id), str(revoked.id), str(pending.id)],
+            viewer_user=self.grantee,
+        )
+
+        self.assertEqual(
+            [item["detail"]["phase"] for item in items],
+            ["awaitingJoin", "awaitingJoin", "awaitingJoin"],
+        )
+        self.assertEqual(
+            [item["detail"]["effective_share_id"] for item in items],
+            [str(pending.id), str(pending.id), str(pending.id)],
+        )
+
+    def test_v2_detail_keeps_active_older_card_when_later_share_is_pending(self):
+        older = session_share_service.create_or_update_share(
+            session_id=str(self.session.id),
+            owner_user=self.owner,
+            grantee_user_id=str(self.grantee.id),
+            card_contract="session_share_v2",
+            status="active",
+        )
+        pending = session_share_service.create_or_update_share(
+            session_id=str(self.session.id),
+            owner_user=self.owner,
+            grantee_user_id=str(self.grantee.id),
+            can_chat=True,
+            card_contract="session_share_v2",
+        )
+        SessionShare.objects.filter(id=older.id).update(delivery_status="confirmed")
+        pending = session_share_service.confirm_share_delivery(
+            share=pending,
+            conversation_id="conversation-pending-invite",
+            message_ref="019fcaa1-3333-7333-8333-666666666666",
+            message_sequence=45,
+        )
+
+        items = session_share_card_service.batch_get_share_details(
+            object_ids=[str(older.id), str(pending.id)],
+            viewer_user=self.grantee,
+        )
+
+        self.assertEqual(
+            [item["detail"]["phase"] for item in items],
+            ["activeView", "awaitingJoin"],
+        )
+        self.assertEqual(
+            [item["detail"]["access_mode"] for item in items],
+            ["view", "collaborate"],
+        )
+        self.assertEqual(items[0]["detail"]["effective_share_id"], str(older.id))
+        self.assertFalse(items[0]["detail"]["actions"]["can_join"])
+        self.assertTrue(items[1]["detail"]["actions"]["can_join"])
+
+    def test_v2_accept_on_older_revoked_card_activates_latest_pending(self):
+        older = session_share_service.create_or_update_share(
+            session_id=str(self.session.id),
+            owner_user=self.owner,
+            grantee_user_id=str(self.grantee.id),
+            card_contract="session_share_v2",
+            status="active",
+        )
+        latest = session_share_service.create_or_update_share(
+            session_id=str(self.session.id),
+            owner_user=self.owner,
+            grantee_user_id=str(self.grantee.id),
+            can_chat=True,
+            card_contract="session_share_v2",
+            status="active",
+        )
+        SessionShare.objects.filter(id__in=[older.id, latest.id]).update(
+            delivery_status="confirmed",
+        )
+        session_share_service.revoke_share(
+            share_id=str(older.id),
+            actor_user=self.owner,
+        )
+        session_share_service.revoke_share(
+            share_id=str(latest.id),
+            actor_user=self.owner,
+        )
+        session_share_service.restore_share(
+            share_id=str(latest.id),
+            owner_user=self.owner,
+            status="pending",
+        )
+        SessionShare.objects.filter(id=latest.id).update(delivery_status="confirmed")
+
+        with patch(
+            "apps.chat.conversation.services.session_collaboration_events.send_collaboration_state_changed",
+        ):
+            joined = session_share_card_service.accept_and_refresh_card(
+                actor_user=self.grantee,
+                share_id=str(older.id),
+            )
+
+        latest.refresh_from_db()
+        older.refresh_from_db()
+        self.assertEqual(latest.status, "active")
+        self.assertEqual(older.status, "revoked")
+        self.assertEqual(joined["phase"], "activeView")
+        self.assertEqual(joined["object_id"], str(older.id))
+        self.assertEqual(joined["effective_share_id"], str(latest.id))
+        self.assertEqual(
+            session_share_service.get_active_share(
+                session_id=str(self.session.id),
+                user=self.grantee,
+            ).id,
+            latest.id,
         )
 
     def test_v2_detail_includes_last_live_snapshot_without_new_state_table(self):
@@ -927,6 +1295,99 @@ class SessionShareTestCase(TestCase):
             relative_path=restored_path,
             is_active=True,
         ).exists())
+
+    @patch.object(
+        session_continuation_service,
+        "send_user_business_projection",
+        return_value={"seq": 99},
+    )
+    @patch.object(
+        session_continuation_service,
+        "resolve_direct_conversation",
+        return_value="conversation-1",
+    )
+    def test_continuation_oversized_local_file_can_retry_without_files(
+        self,
+        _resolve_conversation,
+        _send_projection,
+    ):
+        """超限文件由客户端确认后可只交接对话，源消息保持原样。"""
+        original_path = "artifacts/large-report.zip"
+        source_message = ChatMessage.objects.create(
+            session=self.session,
+            role="assistant",
+            content_blocks_json=[
+                {"type": "text", "text": "报告已经生成。"},
+                {
+                    "type": "tabtin_rich_content",
+                    "kind": "resource_ref",
+                    "payload": {"resource_type": "document", "resource_id": "doc-1"},
+                },
+                {
+                    "type": "tabtin_rich_content",
+                    "kind": "file",
+                    "payload": {
+                        "artifact_kind": "local_file",
+                        "filename": "large-report.zip",
+                        "relative_path": original_path,
+                    },
+                },
+            ],
+        )
+        client_request_id = "019fcaa1-aaaa-7aaa-8aaa-aaaaaaaaaaaa"
+
+        with patch(
+            "apps.chat.conversation.services.session_continuation_local_files."
+            "DeviceRuntimeQueryService.dispatch_owner_workspace_fs_action",
+            return_value={
+                "success": True,
+                "data": {
+                    "content_version": "sha256:large-file",
+                    "size_bytes": 50 * 1024 * 1024 + 1,
+                    "mime_type": "application/zip",
+                },
+            },
+        ) as dispatch_file_action:
+            with self.assertRaises(
+                session_continuation_service.ContinuationLocalFileTooLargeError,
+            ):
+                session_continuation_service.create_and_send(
+                    sender_user=self.owner,
+                    source_session_id=str(self.session.id),
+                    recipient_user_id=str(self.grantee.id),
+                    client_request_id=client_request_id,
+                )
+
+            detail = session_continuation_service.create_and_send(
+                sender_user=self.owner,
+                source_session_id=str(self.session.id),
+                recipient_user_id=str(self.grantee.id),
+                client_request_id=client_request_id,
+                include_context=False,
+            )
+
+        self.assertEqual(dispatch_file_action.call_count, 1)
+        continuation = SessionContinuation.objects.get(id=detail["object_id"])
+        frozen_blocks = [
+            block
+            for turn in continuation.frozen_context_json
+            for block in turn.get("blocks", [])
+        ]
+        self.assertTrue(any(
+            block.get("type") == "text" and block.get("text") == "报告已经生成。"
+            for block in frozen_blocks
+        ))
+        self.assertFalse(any(block.get("kind") in {"file", "resource_ref"} for block in frozen_blocks))
+        self.assertEqual(continuation.resources_json, [])
+
+        source_message.refresh_from_db()
+        source_payload = next(
+            block["payload"]
+            for block in source_message.content_blocks_json
+            if block.get("kind") == "file"
+        )
+        self.assertEqual(source_payload["relative_path"], original_path)
+        self.assertNotIn("handoff_file_id", source_payload)
 
     @patch.object(
         session_continuation_service,
@@ -2542,6 +3003,140 @@ class SessionShareTestCase(TestCase):
         self.assertNotIn("工具：run_terminal_command", all_text)
         self.assertIn('"name": "run_terminal_command"', all_blocks)
         self.assertNotIn("tabtin slide --help", all_blocks)
+
+    def test_collect_share_turns_promotes_successful_file_tool_to_local_artifact(self):
+        """旧消息只有 write_file 工具对时，交接也必须生成本地产物块。"""
+        from apps.chat.conversation.services.share_fork_turns import (
+            collect_share_turns,
+        )
+
+        ChatMessage.objects.create(
+            session=self.session,
+            role="assistant",
+            content_blocks_json=[
+                {
+                    "type": "tool_use",
+                    "id": "tu_write_file",
+                    "name": "write_file",
+                    "input": {"path": "outputs/report.md"},
+                },
+                {
+                    "type": "tool_result",
+                    "tool_use_id": "tu_write_file",
+                    "content": '{"success": true}',
+                },
+            ],
+        )
+
+        turns, _ = collect_share_turns(self.session)
+        artifact_blocks = [
+            block
+            for turn in turns
+            for block in turn["blocks"]
+            if isinstance(block, dict)
+            and block.get("type") == "tabtin_rich_content"
+            and (block.get("payload") or {}).get("artifact_kind") == "local_file"
+        ]
+        self.assertEqual(len(artifact_blocks), 1)
+        self.assertEqual(
+            artifact_blocks[0]["payload"]["relative_path"],
+            "outputs/report.md",
+        )
+
+    def test_collect_share_turns_does_not_promote_failed_file_tool(self):
+        from apps.chat.conversation.services.share_fork_turns import (
+            collect_share_turns,
+        )
+
+        ChatMessage.objects.create(
+            session=self.session,
+            role="assistant",
+            content_blocks_json=[
+                {
+                    "type": "tool_use",
+                    "id": "tu_failed_write",
+                    "name": "write_file",
+                    "input": {"path": "outputs/failed.md"},
+                },
+                {
+                    "type": "tool_result",
+                    "tool_use_id": "tu_failed_write",
+                    "is_error": True,
+                    "content": '{"success": false}',
+                },
+            ],
+        )
+
+        turns, _ = collect_share_turns(self.session)
+        self.assertFalse(any(
+            (block.get("payload") or {}).get("relative_path") == "outputs/failed.md"
+            for turn in turns
+            for block in turn["blocks"]
+            if isinstance(block, dict)
+        ))
+
+    def test_collect_share_turns_uses_chronological_file_operation_order(self):
+        """文件最终状态按时间正序折叠，不能受消息快照倒序影响。"""
+        from apps.chat.conversation.services.share_fork_turns import (
+            collect_share_turns,
+        )
+
+        def add_file_operation(path, tool_name, tool_id, created_at):
+            message = ChatMessage.objects.create(
+                session=self.session,
+                role="assistant",
+                content_blocks_json=[
+                    {
+                        "type": "tool_use",
+                        "id": tool_id,
+                        "name": tool_name,
+                        "input": {"path": path},
+                    },
+                    {
+                        "type": "tool_result",
+                        "tool_use_id": tool_id,
+                        "content": '{"success": true}',
+                    },
+                ],
+            )
+            ChatMessage.objects.filter(id=message.id).update(created_at=created_at)
+
+        base_time = timezone.now()
+        add_file_operation(
+            "outputs/write-then-delete.md",
+            "write_file",
+            "tu_write_then_delete",
+            base_time,
+        )
+        add_file_operation(
+            "outputs/write-then-delete.md",
+            "delete_file",
+            "tu_delete_after_write",
+            base_time + timedelta(seconds=1),
+        )
+        add_file_operation(
+            "outputs/delete-then-write.md",
+            "delete_file",
+            "tu_delete_then_write",
+            base_time,
+        )
+        add_file_operation(
+            "outputs/delete-then-write.md",
+            "write_file",
+            "tu_write_after_delete",
+            base_time + timedelta(seconds=1),
+        )
+
+        turns, _ = collect_share_turns(self.session)
+        paths = {
+            (block.get("payload") or {}).get("relative_path")
+            for turn in turns
+            for block in turn["blocks"]
+            if isinstance(block, dict)
+            and (block.get("payload") or {}).get("artifact_kind") == "local_file"
+        }
+        self.assertNotIn("outputs/write-then-delete.md", paths)
+        self.assertIn("outputs/delete-then-write.md", paths)
 
     def test_collect_share_turns_keeps_deliverable_tool_artifact(self):
         """可交付 tool_artifact 进快照；纯文本占位产物气泡仍排除。"""

@@ -18,6 +18,7 @@ from .api_common import (
     envelope_errors,
     _normalize_provider_key,
     _normalize_base_url,
+    validate_model_endpoint_host,
     _get_organization_default_model_id,
     _read_user_default_model_id,
     _write_user_default_model_id,
@@ -844,6 +845,13 @@ def create_organization_model(request, organization_id: str, payload: Organizati
             message=get_text("llm.model_create_failed", detail="base_url 不能为空"),
             status_code=400,
         )
+    host_mismatch = validate_model_endpoint_host(provider, base_url)
+    if host_mismatch:
+        return error_response_with_status(
+            "MODEL_ENDPOINT_HOST_MISMATCH",
+            message=host_mismatch,
+            status_code=400,
+        )
 
     model = LLMModel.objects.create(
         provider=provider,
@@ -934,6 +942,17 @@ def update_organization_model(
             return error_response_with_status(
                 "BAD_REQUEST",
                 message=get_text("llm.model_create_failed", detail="base_url 不能为空"),
+                status_code=400,
+            )
+        host_mismatch = validate_model_endpoint_host(
+            provider,
+            normalized_base_url,
+            exclude_model_id=model.id,
+        )
+        if host_mismatch:
+            return error_response_with_status(
+                "MODEL_ENDPOINT_HOST_MISMATCH",
+                message=host_mismatch,
                 status_code=400,
             )
         model.base_url = normalized_base_url
@@ -1387,7 +1406,6 @@ def probe_provider(request, organization_id: str, provider_id: str, level: int =
             )
 
     target_model = target_model_record.model_name
-
     try:
         result = probe_upstream_chat(target_model_record, level=level)
     except Exception as e:

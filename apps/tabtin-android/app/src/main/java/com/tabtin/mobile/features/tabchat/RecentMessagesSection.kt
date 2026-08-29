@@ -736,7 +736,10 @@ public fun CreateGroupDialog(
                                 val exception = error as? Exception ?: Exception(error)
                                 Toast.makeText(
                                     context,
-                                    context.getString(ErrorClassifier.classify(exception)),
+                                    imGroupCreationFailureMessage(
+                                        exception,
+                                        context.getString(ErrorClassifier.classify(exception)),
+                                    ),
                                     Toast.LENGTH_LONG,
                                 ).show()
                             }

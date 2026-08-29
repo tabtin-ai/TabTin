@@ -3,21 +3,28 @@
  *
  * 统一 window-open-handler 和 context-menu-builder 的逻辑：
  * 1. workspace 判断（通过 OrganizationTabManager）
- * 2. in-flight 去重（同 workspace+URL 1 秒内不重复创建）
- * 3. ACK 清理（渲染进程确认后立即释放 in-flight 槽位）
+ * 2. in-flight 去重（同 workspace+URL 在 created/TTL 前只允许一个创建请求）
+ * 3. ACK 仅确认 renderer 收到请求；created 才完成继承并释放槽位
  * 4. 超时兜底（5 秒后自动清理，防止泄漏）
  */
 
 import { ipcMain, shell, type BrowserWindow } from 'electron'
 import { isPreviewableDirectFileUrl } from '../../shared/previewable-direct-url'
+import { inheritViewControl } from '../browser-tab-lock/browserTabInputLock'
 import { isBlockedExternalAppProtocol } from '../external-protocol-guard'
 import { getOrganizationTabManager } from '../organization/OrganizationTabManager'
 import { sendResourceOpenFallback } from '../resource-open-fallback'
 
-const inflight = new Map<string, { timer: NodeJS.Timeout; lastTs: number; ackHandler: (...args: any[]) => void }>()
+const inflight = new Map<string, {
+  timer: NodeJS.Timeout
+  retryTimer?: NodeJS.Timeout
+  ackHandler: (...args: any[]) => void
+  createdHandler: (...args: any[]) => void
+  pendingViewId?: string
+}>()
 
-const DEDUP_WINDOW_MS = 1000
 const INFLIGHT_TTL_MS = 5000
+const VIEW_OWNER_MAPPING_RETRY_MS = 25
 
 export interface OpenInTabOptions {
   url: string
@@ -74,18 +81,12 @@ export function openUrlInWorkspaceTab(opts: OpenInTabOptions): OpenInTabResult {
 
   // ── 去重检查 ──
   const key = `${ownerTabId}|${url}`
-  const now = Date.now()
   const existing = inflight.get(key)
-  if (existing && now - existing.lastTs < DEDUP_WINDOW_MS) {
+  if (existing) {
     return 'deduped'
   }
 
   // ── 派生标题 + 生成 requestId ──
-  if (existing) {
-    clearTimeout(existing.timer)
-    ipcMain.removeListener('workspace:create-view:ack', existing.ackHandler)
-  }
-
   let resolvedTitle = title || url
   try { resolvedTitle = title || new URL(url).hostname } catch { /* keep url */ }
 
@@ -94,28 +95,100 @@ export function openUrlInWorkspaceTab(opts: OpenInTabOptions): OpenInTabResult {
   // ── 注册 in-flight + ACK 清理 ──
   const ackHandler = (_event: any, ack: { requestId?: string }) => {
     if (ack?.requestId === requestId) {
-      const entry = inflight.get(key)
-      if (entry) clearTimeout(entry.timer)
-      inflight.delete(key)
       ipcMain.removeListener('workspace:create-view:ack', ackHandler)
     }
   }
 
-  const timer = setTimeout(() => {
-    inflight.delete(key)
+  const cleanup = () => {
+    clearTimeout(entry.timer)
+    if (entry.retryTimer) clearTimeout(entry.retryTimer)
+    if (inflight.get(key) === entry) {
+      inflight.delete(key)
+    }
     ipcMain.removeListener('workspace:create-view:ack', ackHandler)
+    ipcMain.removeListener('workspace:create-view:created', createdHandler)
+  }
+
+  const isRecordedMainRenderer = (event: any): boolean => {
+    if (mainWindow.isDestroyed()) return false
+    if (mainWindow.webContents.isDestroyed?.()) return false
+    return event?.sender?.id === mainWindow.webContents.id
+  }
+
+  const tryInheritPendingView = () => {
+    const newViewId = entry.pendingViewId
+    if (!newViewId) return
+    if (mainWindow.isDestroyed() || mainWindow.webContents.isDestroyed?.()) {
+      cleanup()
+      return
+    }
+
+    const targetOwnerTabId = organizationTabManager.getTabByView(newViewId)
+    if (!targetOwnerTabId) {
+      entry.retryTimer = setTimeout(() => {
+        entry.retryTimer = undefined
+        tryInheritPendingView()
+      }, VIEW_OWNER_MAPPING_RETRY_MS)
+      return
+    }
+    if (targetOwnerTabId !== ownerTabId) {
+      cleanup()
+      return
+    }
+
+    try {
+      inheritViewControl(viewId, newViewId)
+      mainWindow.webContents.send('workspace:create-view:inherited', {
+        requestId,
+        viewId: newViewId,
+      })
+    } catch {
+      // renderer 收不到成功确认后会 fail-closed 关闭新 view。
+    } finally {
+      cleanup()
+    }
+  }
+
+  const createdHandler = (event: any, msg: { requestId?: string; viewId?: string }) => {
+    if (msg?.requestId !== requestId) return
+    if (!isRecordedMainRenderer(event)) return
+
+    if (typeof msg.viewId !== 'string' || !msg.viewId) {
+      cleanup()
+      return
+    }
+    if (entry.pendingViewId && entry.pendingViewId !== msg.viewId) return
+
+    entry.pendingViewId = msg.viewId
+    tryInheritPendingView()
+  }
+
+  const timer = setTimeout(() => {
+    cleanup()
   }, INFLIGHT_TTL_MS)
-  inflight.set(key, { timer, lastTs: now, ackHandler })
+  const entry: {
+    timer: NodeJS.Timeout
+    retryTimer?: NodeJS.Timeout
+    ackHandler: (...args: any[]) => void
+    createdHandler: (...args: any[]) => void
+    pendingViewId?: string
+  } = { timer, ackHandler, createdHandler }
+  inflight.set(key, entry)
 
-  // ── 发送 IPC + 注册 ACK 监听 ──
-  mainWindow.webContents.send('workspace:create-view-requested', {
-    crawlspaceId: ownerTabId,
-    url,
-    title: resolvedTitle,
-    requestId,
-  })
-
+  // ── 发送 IPC + 注册 ACK / created 监听 ──
   ipcMain.on('workspace:create-view:ack', ackHandler)
+  ipcMain.on('workspace:create-view:created', createdHandler)
+  try {
+    mainWindow.webContents.send('workspace:create-view-requested', {
+      crawlspaceId: ownerTabId,
+      url,
+      title: resolvedTitle,
+      requestId,
+    })
+  } catch {
+    cleanup()
+    return 'invalid'
+  }
 
   return 'sent'
 }

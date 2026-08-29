@@ -56,6 +56,18 @@ function formatOfficialServicePrice(item: ServiceCatalogItem, t: CatalogT): stri
   })
 }
 
+function formatMonthlyCapInput(raw: string | number | undefined): string {
+  const n = Number(raw)
+  if (!Number.isFinite(n) || n === 0) return ''
+  return formatYuanAmountPlain(n)
+}
+
+function parseMonthlyCapInput(raw: string): number {
+  const trimmed = raw.trim()
+  if (!trimmed) return 0
+  return parseYuanInput(trimmed)
+}
+
 export const OrganizationServiceCatalogPanel: React.FC<Props> = ({ organization, canManageOrganization, readOnly = false }) => {
   const { t } = useTranslation('settings')
   const setRoute = useSettingsSpaceStore(state => state.setRoute)
@@ -88,8 +100,8 @@ export const OrganizationServiceCatalogPanel: React.FC<Props> = ({ organization,
         const policy = await OrganizationBillingApiService.getBillingPolicy(organization.id)
         if (cancelled) return
         setTopupEnabled(!!policy.auto_topup_enabled)
-        setTopupAmount(formatYuanAmountPlain(policy.auto_topup_spend_yuan ?? '0'))
-        setTopupCap(formatYuanAmountPlain(policy.auto_topup_monthly_cap_yuan ?? '0'))
+        setTopupAmount(formatYuanAmountPlain(policy.auto_topup_spend_yuan ?? '1'))
+        setTopupCap(formatMonthlyCapInput(policy.auto_topup_monthly_cap_yuan))
         setTopupPolicyLoaded(true)
         setTopupPolicyError(false)
       } catch {
@@ -125,8 +137,8 @@ export const OrganizationServiceCatalogPanel: React.FC<Props> = ({ organization,
 
   const validateTopupAmounts = useCallback((): { amount: number; cap: number } | null => {
     const amount = parseYuanInput(topupAmount)
-    const cap = parseYuanInput(topupCap)
-    if (!Number.isFinite(amount) || amount <= 0 || !Number.isFinite(cap) || cap < 0) {
+    const cap = parseMonthlyCapInput(topupCap)
+    if (!Number.isFinite(amount) || amount < 1 || !Number.isInteger(amount) || !Number.isFinite(cap) || cap < 0) {
       toast({ variant: 'destructive', title: t('billing.autoTopup.invalidValue') })
       return null
     }
@@ -140,7 +152,7 @@ export const OrganizationServiceCatalogPanel: React.FC<Props> = ({ organization,
   /** 开关 / 金额保存共用：enabled 必须显式传入，避免 setState 异步导致落库用旧值。 */
   const persistTopup = useCallback(async (enabled: boolean) => {
     const amount = parseYuanInput(topupAmount)
-    const cap = parseYuanInput(topupCap)
+    const cap = parseMonthlyCapInput(topupCap)
     setTopupSaving(true)
     try {
       const policy = await OrganizationBillingApiService.updateBillingPolicy(organization.id, {
@@ -150,8 +162,8 @@ export const OrganizationServiceCatalogPanel: React.FC<Props> = ({ organization,
           : {}),
       })
       setTopupEnabled(!!policy.auto_topup_enabled)
-      setTopupAmount(formatYuanAmountPlain(policy.auto_topup_spend_yuan ?? '0'))
-      setTopupCap(formatYuanAmountPlain(policy.auto_topup_monthly_cap_yuan ?? '0'))
+      setTopupAmount(formatYuanAmountPlain(policy.auto_topup_spend_yuan ?? '1'))
+      setTopupCap(formatMonthlyCapInput(policy.auto_topup_monthly_cap_yuan))
       toast({
         title: enabled
           ? t('billing.autoTopup.enabledSaved', { defaultValue: '已开启 credits 自动补充' })
@@ -169,7 +181,7 @@ export const OrganizationServiceCatalogPanel: React.FC<Props> = ({ organization,
   /** 金额 / 上限仍走「保存」；与开关即时落库区分。 */
   const persistTopupAmounts = useCallback(async () => {
     const amount = parseYuanInput(topupAmount)
-    const cap = parseYuanInput(topupCap)
+    const cap = parseMonthlyCapInput(topupCap)
     setTopupSaving(true)
     try {
       const policy = await OrganizationBillingApiService.updateBillingPolicy(organization.id, {
@@ -179,8 +191,8 @@ export const OrganizationServiceCatalogPanel: React.FC<Props> = ({ organization,
           : {}),
       })
       setTopupEnabled(!!policy.auto_topup_enabled)
-      setTopupAmount(formatYuanAmountPlain(policy.auto_topup_spend_yuan ?? '0'))
-      setTopupCap(formatYuanAmountPlain(policy.auto_topup_monthly_cap_yuan ?? '0'))
+      setTopupAmount(formatYuanAmountPlain(policy.auto_topup_spend_yuan ?? '1'))
+      setTopupCap(formatMonthlyCapInput(policy.auto_topup_monthly_cap_yuan))
       toast({ title: t('billing.autoTopup.saved') })
       return true
     } catch (e: unknown) {
@@ -207,12 +219,6 @@ export const OrganizationServiceCatalogPanel: React.FC<Props> = ({ organization,
     const amounts = validateTopupAmounts()
     if (!amounts) return
 
-    // 0 = 本月不限额：先二次确认，确认后再落库并打开开关
-    if (amounts.cap === 0) {
-      setUnlimitedCapConfirmOpen(true)
-      return
-    }
-
     setTopupEnabled(true)
     void (async () => {
       const ok = await persistTopup(true)
@@ -231,11 +237,6 @@ export const OrganizationServiceCatalogPanel: React.FC<Props> = ({ organization,
     if (topupEnabled) {
       const amounts = validateTopupAmounts()
       if (!amounts) return
-      // 0 = 本月不限额：后端会跳过月上限检查，可能持续从现金钱包扣款
-      if (amounts.cap === 0) {
-        setUnlimitedCapConfirmOpen(true)
-        return
-      }
     }
     void persistTopupAmounts()
   }, [topupEnabled, validateTopupAmounts, persistTopupAmounts])
@@ -515,11 +516,11 @@ export const OrganizationServiceCatalogPanel: React.FC<Props> = ({ organization,
                     <span className={SETTINGS_HINT}>¥</span>
                     <Input
                       type="number"
-                      min={0.01}
-                      step={0.01}
+                      min={1}
+                      step={1}
                       value={topupAmount}
                       disabled={!topupEnabled || topupPolicyError || !topupPolicyLoaded}
-                      onChange={e => setTopupAmount(e.target.value)}
+                      onChange={e => setTopupAmount(e.target.value.replace(/[^\d]/g, ''))}
                       onKeyDown={handleTopupKeyDown}
                       className={cn('w-28 tabular-nums', SETTINGS_CONTROL)}
                     />
@@ -529,18 +530,27 @@ export const OrganizationServiceCatalogPanel: React.FC<Props> = ({ organization,
               <SettingsRow
                 label={t('billing.autoTopup.monthlyCap')}
                 control={(
-                  <div className="flex items-center gap-1">
-                    <span className={SETTINGS_HINT}>¥</span>
-                    <Input
-                      type="number"
-                      min={0}
-                      step={0.01}
-                      value={topupCap}
-                      disabled={!topupEnabled || topupPolicyError || !topupPolicyLoaded}
-                      onChange={e => setTopupCap(e.target.value)}
-                      onKeyDown={handleTopupKeyDown}
-                      className={cn('w-28 tabular-nums', SETTINGS_CONTROL)}
-                    />
+                  <div className="flex flex-col items-end gap-1">
+                    <div className="flex items-center gap-1">
+                      <span className={SETTINGS_HINT}>¥</span>
+                      <Input
+                        type="number"
+                        min={0}
+                        step={0.01}
+                        placeholder={t('billing.autoTopup.capUnlimitedPlaceholder', { defaultValue: '不限额' })}
+                        value={topupCap}
+                        disabled={!topupEnabled || topupPolicyError || !topupPolicyLoaded}
+                        onChange={e => setTopupCap(e.target.value)}
+                        onKeyDown={handleTopupKeyDown}
+                        aria-label={t('billing.autoTopup.monthlyCap')}
+                        className={cn('w-28 tabular-nums', SETTINGS_CONTROL)}
+                      />
+                    </div>
+                    <p className={cn(SETTINGS_HINT, 'max-w-[16rem] text-right')}>
+                      {t('billing.autoTopup.capEmptyHint', {
+                        defaultValue: '留空表示不限额，余额充足时持续自动补充 credits。',
+                      })}
+                    </p>
                   </div>
                 )}
               />

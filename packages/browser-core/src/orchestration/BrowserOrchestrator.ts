@@ -61,6 +61,13 @@ import {
   type ActCompatibilityWarning,
   type BrowserActionErrorInfo,
 } from './act-request'
+import {
+  buildAccessBarrierFromObserveRaw,
+  buildUnattendedResolution,
+  mergeBarrierIntoPayload,
+  type AccessBarrier,
+  type AccessBarrierResolution,
+} from '../access-barrier/index.js'
 
 export { BrowserActionError, type BrowserActionErrorInfo } from './act-request'
 
@@ -340,6 +347,15 @@ export interface BrowserOrchestratorHostHooks {
    */
   allowedDomains?: readonly string[]
   jobs?: BrowserJobHooks
+  /**
+   * Access Barrier HITL：
+   * observe/act/glance 撞上登录墙 / 人机校验时，在**工具结果返回前**调用本 hook 挂起，
+   * 对齐现有 `policy.resolveConfirmation` 的「判定在 browser-core，处置在 host」分层：
+   *  - Electron：接到当前会话的 HITL 通道（InterruptPort），弹「页面受阻」卡片等决议。
+   *  - 未注入（如 Daemon / flag 关）：`applyAccessBarrierIfNeeded` 落 `buildUnattendedResolution`
+   *    诚实失败，不抛错、不假装成功。
+   */
+  resolveAccessBarrier?: (barrier: AccessBarrier) => Promise<AccessBarrierResolution>
 }
 
 // ── 编排结果（ok / error 判别联合）──────────────────────────────────
@@ -524,6 +540,79 @@ function withCaptchaRequired(
   const captchaRequired = buildCaptchaRequired(raw)
   if (!captchaRequired) return data
   return { captcha_required: captchaRequired, ...data }
+}
+
+/**
+ * 撞墙后、返回前挂起决议（plan Task 2）：从 raw 构造 `AccessBarrier`，无墙 → 原样返回 `data`；
+ * 命中墙 → 调 `hostHooks.resolveAccessBarrier`（未注入则 `buildUnattendedResolution` 诚实失败），
+ * 决议连同 barrier 经 `mergeBarrierIntoPayload` 置顶写入 `data`（过渡双写旧
+ * `login_required`/`captcha_required`）。
+ *
+ * `resume_same_tab`：决议返回后对同一 tab **强制再 observe 一次**（不经本函数、不再弹卡），
+ * 用复检结果覆盖撞墙快照，避免「人已登录、工具结果仍是登录墙」。
+ *
+ * 调用点约束（设计 §7.4「同一工具调用内只弹一次」）：每个 action case 只在**最终对外返回前**
+ * 调用一次——glance 转发到 observe/snapshot 时不重复调用（子管线各自只调一次）。
+ */
+async function applyAccessBarrierIfNeeded(
+  data: Record<string, unknown>,
+  raw: Record<string, any> | null | undefined,
+  hostHooks: BrowserOrchestratorHostHooks,
+  ctx: { pageUrl?: string; tabId?: string; sourceTool: string },
+): Promise<Record<string, unknown>> {
+  const barrier = buildAccessBarrierFromObserveRaw(raw, ctx)
+  if (!barrier) return data
+  const resolution = hostHooks.resolveAccessBarrier
+    ? await hostHooks.resolveAccessBarrier(barrier)
+    : buildUnattendedResolution(barrier)
+
+  if (resolution.action === 'resume_same_tab' && hostHooks.exec?.runObserve) {
+    const tabId =
+      (resolution.tabId && resolution.tabId.trim())
+      || (barrier.tabId && barrier.tabId.trim())
+      || (ctx.tabId && ctx.tabId.trim())
+      || undefined
+    try {
+      const recheck = await hostHooks.exec.runObserve(
+        tabId,
+        {
+          include_som: false,
+          limit: hostHooks.exec.observeLimitDefault,
+        },
+        tabId ? { tabId } : {},
+      )
+      if (recheck.success && recheck.raw) {
+        const pageUrl =
+          typeof recheck.raw.page_url === 'string' ? recheck.raw.page_url : undefined
+        const stillBarrier = buildAccessBarrierFromObserveRaw(recheck.raw, {
+          pageUrl,
+          tabId,
+          sourceTool: ctx.sourceTool,
+        })
+        const { data: projected, fullElements } = projectObservePayload(recheck.raw, true)
+        getSharedRefCache().replace(
+          tabId || '__default',
+          buildObserveRefEntries(fullElements),
+        )
+        if (!stillBarrier) {
+          // 复检已清墙：保留原 barrier + resume 决议作审计，payload 用新观察。
+          return mergeBarrierIntoPayload(projected, barrier, {
+            action: 'resume_same_tab',
+            ...(tabId ? { tabId } : {}),
+          }, { postResumeRecheck: 'cleared' })
+        }
+        // 复检仍有墙：用最新墙信号 + 诚实 hint，不再弹第二张卡。
+        return mergeBarrierIntoPayload(projected, stillBarrier, {
+          action: 'resume_same_tab',
+          ...(tabId ? { tabId } : {}),
+        }, { postResumeRecheck: 'still_blocked' })
+      }
+    } catch {
+      // 复检失败则退回撞墙快照 + resume 决议（hint 走 resume 兜底，不教 ask_user）。
+    }
+  }
+
+  return mergeBarrierIntoPayload(data, barrier, resolution)
 }
 
 /**
@@ -998,7 +1087,12 @@ async function dispatchBrowserAction(
         const resolved = getSharedRefCache().resolveRefsInActions<any>(actions, tabId || '__default')
         const outcome = await exec.runAct(tabId, resolved, body)
         if (outcome.success) {
-          const data = projectActPayload(hostHooks.runtime, outcome.raw)
+          let data = projectActPayload(hostHooks.runtime, outcome.raw)
+          data = await applyAccessBarrierIfNeeded(data, outcome.raw, hostHooks, {
+            pageUrl: typeof outcome.raw?.page_url === 'string' ? outcome.raw.page_url : undefined,
+            tabId,
+            sourceTool: 'act',
+          })
           return {
             ok: true,
             status: 200,
@@ -1016,13 +1110,18 @@ async function dispatchBrowserAction(
             : typeof outcome.raw?.captcha?.page_url === 'string' && outcome.raw.captcha.page_url
               ? outcome.raw.captcha.page_url
               : undefined
-        const failureDetail: Record<string, unknown> = {
+        let failureDetail: Record<string, unknown> = {
           ...(hostHooks.runtime === 'electron' && Array.isArray(outcome.raw?.executed_actions)
             ? { executed_actions: outcome.raw.executed_actions }
             : {}),
           ...(failedPageUrl ? { page_url: failedPageUrl } : {}),
           ...(failedCaptcha ? { captcha_required: failedCaptcha } : {}),
         }
+        failureDetail = await applyAccessBarrierIfNeeded(failureDetail, outcome.raw, hostHooks, {
+          pageUrl: failedPageUrl,
+          tabId,
+          sourceTool: 'act',
+        })
         return {
           ok: false,
           status: 500,
@@ -1089,7 +1188,7 @@ async function dispatchBrowserAction(
           // 命令族统一 --compact（#2440）：默认轻量投影；仅显式 compact=false 给全字段。
           // 缺省必须当 true——否则 CLI/FC 忘传时会吐超长 xpath selector，易撞 64KB 落盘。
           const compact = (body as any)?.compact !== false
-          const { data, fullElements } = projectObservePayload(outcome.raw, compact, tabId)
+          const { data: projected, fullElements } = projectObservePayload(outcome.raw, compact, tabId)
           // BR-27：把 observe 的 eN→selector 沉淀进共享 RefCache（与 snapshot --compact 同一套、
           // 同一分桶口径 `tabId || '__default'`，与 act 回解处 line 一致），使随后 `act --ref eN`
           // 双端一致地回解出 selector。RefCache 始终用全字段（含 selector），不受 compact 影响。
@@ -1097,6 +1196,11 @@ async function dispatchBrowserAction(
             tabId || '__default',
             buildObserveRefEntries(fullElements),
           )
+          const data = await applyAccessBarrierIfNeeded(projected, outcome.raw, hostHooks, {
+            pageUrl: typeof outcome.raw?.page_url === 'string' ? outcome.raw.page_url : undefined,
+            tabId,
+            sourceTool: 'observe',
+          })
           return { ok: true, status: 200, data }
         }
         return {

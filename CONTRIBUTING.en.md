@@ -13,7 +13,6 @@ By contributing, you agree to follow the project's [Code of Conduct](CODE_OF_CON
 - Bugs and well-shaped feature requests: use the corresponding Issue template.
 - Usage help, open ideas, and early directions: use Discussions.
 - Security vulnerabilities: report them privately according to [SECURITY.en.md](SECURITY.en.md). Do not disclose them publicly.
-- Maintainer releases: follow [RELEASING.en.md](RELEASING.en.md). Public tags use the product version and do not deploy official production.
 - Small bug fixes, tests, and documentation corrections: open a Pull Request for review, subject to the temporary merge restriction above.
 - Changes that significantly affect product behavior, data structures, public APIs, or the overall architecture: start with an Issue or Discussion and align on direction before implementation.
 
@@ -79,14 +78,6 @@ Contributors must:
 - disclose the primary AI tools used and the verification approach in the Pull Request.
 
 Large volumes of raw, unreviewed AI output will not be accepted.
-
-The official coding-agent identity is [TabTin Agent](https://github.com/tabtinagent). The public contact address is `tabtinagent@tabtin.com`. Agent-assisted commits may end with:
-
-```text
-Co-authored-by: TabTin Agent <tabtinagent@tabtin.com>
-```
-
-GitHub uses that trailer to link the co-author. The commit author stays the contributor; do not rewrite it to the agent account.
 
 ## Commit and documentation style
 

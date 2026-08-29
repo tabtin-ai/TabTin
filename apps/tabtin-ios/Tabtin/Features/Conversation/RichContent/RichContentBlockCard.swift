@@ -38,6 +38,19 @@ private struct RichImageGalleryPreview: Identifiable {
     var id: String { "\(initialItemId)-\(items.map(\.id).joined(separator: "|"))" }
 }
 
+/// 文件大小在不足 1KB 时保留字节单位，避免真实的小文件被误显示为“0 KB”。
+enum RichContentFileSizeFormatter {
+    static func string(from bytes: Int64) -> String {
+        if bytes < 1024 {
+            return "\(max(bytes, 0)) B"
+        }
+        let formatter = ByteCountFormatter()
+        formatter.allowedUnits = [.useKB, .useMB, .useGB]
+        formatter.countStyle = .file
+        return formatter.string(fromByteCount: bytes)
+    }
+}
+
 struct RichContentBlockCard: View {
     private static let collapsedSearchResultLimit = 5
 
@@ -874,10 +887,7 @@ struct RichContentBlockCard: View {
     }
 
     private func formatByteCount(_ bytes: Int64) -> String {
-        let formatter = ByteCountFormatter()
-        formatter.allowedUnits = [.useKB, .useMB, .useGB]
-        formatter.countStyle = .file
-        return formatter.string(fromByteCount: bytes)
+        RichContentFileSizeFormatter.string(from: bytes)
     }
 
     private func presentImageGallery() {

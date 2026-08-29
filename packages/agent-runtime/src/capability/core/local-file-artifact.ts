@@ -61,6 +61,30 @@ function makeAutoOpenToken(): string {
 /** 宿主注入：由工作目录相对路径构造 artifact 打开 URL。runtime 不内置具体 URI 协议。 */
 export type BuildArtifactUrl = (relativePath: string) => string;
 
+/**
+ * 宿主把已经确认存在的本地产物同步为受当前组织访问控制的 FileRecord。
+ *
+ * `present_to_user` 的 local_file 原先只带执行设备的相对路径，移动端没有
+ * 读取该磁盘的能力。runtime 只定义这个窄契约，具体的 OSS 上传、鉴权和组织
+ * 归属仍由 Electron 等宿主负责。
+ */
+export interface LocalFileArtifactPublisher {
+  (input: {
+    absolutePath: string;
+    relativePath: string;
+    fileType: string;
+    mimeType: string;
+    fileSize: number;
+    threadId: string;
+    agentRunId?: string;
+    toolUseId?: string;
+  }): Promise<{
+    fileId?: string;
+    url?: string;
+    error?: string;
+  }>;
+}
+
 /** 构造 local_file artifact 的 rich content block（kind='file'）。 */
 export function buildLocalFileArtifactBlock(args: {
   fileType: string;
@@ -90,6 +114,57 @@ export function buildLocalFileArtifactBlock(args: {
       relative_path: args.relativePath,
       filename,
       url: args.buildUrl(args.relativePath),
+      mime_type: args.mimeType,
+      file_size: args.fileSize,
+      ...(args.autoOpen
+        ? { auto_open: true, auto_open_token: args.autoOpenToken ?? makeAutoOpenToken() }
+        : {}),
+      ...(args.autoRegister
+        ? { auto_register: true, auto_register_token: args.autoRegisterToken ?? makeAutoOpenToken() }
+        : {}),
+      self_check: {
+        status: 'passed',
+        summary: selfCheckSummary,
+      },
+    },
+  };
+}
+
+/** 构造跨设备可访问的 OSS 文件交付物。 */
+export function buildOssFileArtifactBlock(args: {
+  fileId: string;
+  url: string;
+  fileType: string;
+  mimeType: string;
+  relativePath: string;
+  fileSize: number;
+  summary?: string;
+  selfCheckSummary?: string;
+  autoOpen?: boolean;
+  autoOpenToken?: string;
+  autoRegister?: boolean;
+  autoRegisterToken?: string;
+}): { kind: 'file'; summary: string; payload: Record<string, unknown> } {
+  const filename = path.posix.basename(args.relativePath);
+  const summary = normalizeOptionalText(args.summary) || filename;
+  const selfCheckSummary =
+    normalizeOptionalText(args.selfCheckSummary) ||
+    '已生成可跨设备访问的文件副本。';
+
+  return {
+    kind: 'file',
+    summary,
+    payload: {
+      artifact_kind: 'oss_file',
+      file_id: args.fileId,
+      file_type: args.fileType,
+      // 仅保留工作目录内的相对来源，用于任务交接时把卡片重绑到接收方产物地址。
+      // 绝对路径仍不会进入消息协议。
+      source_relative_path: args.relativePath,
+      filename,
+      // 移动端先使用当前地址预览，之后可按 file_id 刷新短期访问地址。
+      url: args.url,
+      access_url: args.url,
       mime_type: args.mimeType,
       file_size: args.fileSize,
       ...(args.autoOpen

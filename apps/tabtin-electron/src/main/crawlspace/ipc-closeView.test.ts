@@ -27,7 +27,8 @@ type Hub = {
 async function closeViewLogic(
   viewFactory: ViewFactory,
   hub: Hub,
-  payload: { crawlspaceId: string; viewId: string; reason?: string }
+  payload: { crawlspaceId: string; viewId: string; reason?: string },
+  discardViewControl: (viewId: string) => void = () => {},
 ) {
   if (!payload?.crawlspaceId || !payload?.viewId) {
     return { success: false, error: 'missing crawlspaceId/viewId' }
@@ -39,8 +40,10 @@ async function closeViewLogic(
       const existsInContext = snapshot.views.some(view => view.viewId === payload.viewId)
       if (existsInContext) {
         hub.unregisterView(payload.crawlspaceId, payload.viewId)
+        discardViewControl(payload.viewId)
         return { success: true, code: 'context_pruned' }
       }
+      discardViewControl(payload.viewId)
       return { success: true, code: 'already_closed' }
     }
     if (state?.config?.metadata?.crawlspaceId &&
@@ -52,6 +55,7 @@ async function closeViewLogic(
     }
 
     await viewFactory.destroyView(payload.viewId, { force: true })
+    discardViewControl(payload.viewId)
     return { success: true, code: 'closed' }
   } catch (error) {
     return {
@@ -66,6 +70,7 @@ describe('crawlspace:closeView (VL-003)', () => {
   it('destroyView 成功后不再调用 hub.unregisterView', async () => {
     const mockDestroyView = vi.fn().mockResolvedValue(undefined)
     const mockUnregisterView = vi.fn()
+    const mockDiscardViewControl = vi.fn()
 
     const viewFactory: ViewFactory = {
       destroyView: mockDestroyView,
@@ -83,11 +88,12 @@ describe('crawlspace:closeView (VL-003)', () => {
     const result = await closeViewLogic(viewFactory, hub, {
       crawlspaceId: 'cs-1',
       viewId: 'view-1',
-    })
+    }, mockDiscardViewControl)
 
     expect(result).toEqual({ success: true, code: 'closed' })
     expect(mockDestroyView).toHaveBeenCalledWith('view-1', { force: true })
     expect(mockUnregisterView).not.toHaveBeenCalled()
+    expect(mockDiscardViewControl).toHaveBeenCalledWith('view-1')
   })
 
   it('即使 hub snapshot 中仍有该 view（模拟旧 bug 路径），也不会二次 unregister', async () => {
@@ -122,6 +128,7 @@ describe('crawlspace:closeView (VL-003)', () => {
 
   it('view 不存在于 ViewFactory 但存在于 Hub 时，仅调用一次 hub.unregisterView', async () => {
     const mockUnregisterView = vi.fn()
+    const mockDiscardViewControl = vi.fn()
 
     const viewFactory: ViewFactory = {
       destroyView: vi.fn(),
@@ -135,11 +142,12 @@ describe('crawlspace:closeView (VL-003)', () => {
     const result = await closeViewLogic(viewFactory, hub, {
       crawlspaceId: 'cs-1',
       viewId: 'view-orphan',
-    })
+    }, mockDiscardViewControl)
 
     expect(result).toEqual({ success: true, code: 'context_pruned' })
     expect(mockUnregisterView).toHaveBeenCalledTimes(1)
     expect(mockUnregisterView).toHaveBeenCalledWith('cs-1', 'view-orphan')
+    expect(mockDiscardViewControl).toHaveBeenCalledWith('view-orphan')
   })
 
   it('destroyView 抛异常时返回 close_failed，不调用 hub.unregisterView', async () => {

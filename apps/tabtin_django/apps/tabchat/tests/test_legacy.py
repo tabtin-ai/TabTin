@@ -31,7 +31,7 @@ from django.test import TestCase
 from ninja.testing import TestClient
 
 from apps.tabchat.api import mark_read, router, toggle_mute, toggle_pin
-from apps.tabchat.constants import MessageType
+from apps.tabchat.constants import MemberRole, MessageType
 from apps.tabchat.schemas import (
     ConversationMuteRequest,
     ConversationPinRequest,
@@ -389,6 +389,28 @@ class ConversationSpaceFirstTests(TestCase):
         conv.refresh_from_db()
         self.assertIsNone(conv.space_id)
         self.assertNoShadowSpaces()
+
+    def test_create_group_allows_creator_as_the_only_member(self):
+        conv = ConversationService.create_group(
+            organization_id=str(self.organization.id),
+            creator_id=str(self.user_a.id),
+            name='个人群组',
+            member_ids=[],
+        )
+
+        self.assertEqual(conv.member_count, 1)
+        self.assertTrue(
+            ConversationMember.objects.filter(
+                conversation=conv,
+                user_id=str(self.user_a.id),
+                role=MemberRole.OWNER,
+                status=ConversationMember.Status.ACTIVE,
+            ).exists()
+        )
+        detail = ConversationService.get_conversation_detail(str(conv.id), str(self.user_a.id))
+        self.assertIsNotNone(detail)
+        self.assertEqual(detail['member_count'], 1)
+        self.assertEqual([member['user_id'] for member in detail['members']], [str(self.user_a.id)])
 
     def test_team_space_conversation_access_comes_from_space_membership(self):
         """Team Space 共享会话不以 per-conversation membership 限制可见性。"""

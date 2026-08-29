@@ -53,6 +53,27 @@ internal fun canInviteOrganizationMembers(
         currentUserId != null &&
         members.firstOrNull { it.userId == currentUserId }?.role?.isOwner == true
 
+internal fun hasMinimumImGroupRecipients(
+    memberIds: Collection<String>,
+    externalContactIds: Collection<String>,
+    currentUserId: String?,
+): Boolean {
+    val internalRecipients = memberIds
+        .asSequence()
+        .map(String::trim)
+        .filter { it.isNotEmpty() && it != currentUserId }
+        .toSet()
+    val externalRecipients = externalContactIds
+        .asSequence()
+        .map(String::trim)
+        .filter(String::isNotEmpty)
+        .toSet()
+    return internalRecipients.size + externalRecipients.size >= 2
+}
+
+internal fun imGroupCreationFailureMessage(error: Throwable, fallback: String): String =
+    (error as? IllegalArgumentException)?.message?.takeIf(String::isNotBlank) ?: fallback
+
 private data class ContactsReloadResults(
     val members: Result<List<OrganizationMember>>,
     val externalContacts: Result<List<ExternalContact>>,
@@ -504,8 +525,8 @@ public class ContactsViewModel @Inject constructor(
             .distinct()
             .sorted()
         val externalRecipients = externalContactIds.filter { it.isNotBlank() }.distinct().sorted()
-        if (recipients.isEmpty() && externalRecipients.isEmpty()) {
-            return Result.failure(IllegalArgumentException("请至少选择一位成员"))
+        if (!hasMinimumImGroupRecipients(recipients, externalRecipients, currentUserId)) {
+            return Result.failure(IllegalArgumentException("创建群聊至少添加两名成员"))
         }
         val attempt = resolveImGroupCreationAttempt(
             previous = pendingGroupAttempt,

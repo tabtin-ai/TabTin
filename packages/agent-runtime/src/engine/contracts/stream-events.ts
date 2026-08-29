@@ -14,6 +14,8 @@ export const StreamEvents = {
   ASK_FORM_REQUIRED: 'agent.stream.ask_form_required',
   REQUEST_APPROVAL_REQUIRED: 'agent.stream.request_approval_required',
   SINGLE_HITL_RESOLVED: 'agent.stream.single_hitl_resolved',
+  /** Access Barrier HITL：系统专用 HITL kind。 */
+  ACCESS_BARRIER_REQUIRED: 'agent.stream.access_barrier_required',
   MESSAGE_PERSISTED: 'agent.stream.message_persisted',
   MESSAGE_COMMITTED: 'agent.stream.message_committed',
   TODO: 'agent.stream.todo',

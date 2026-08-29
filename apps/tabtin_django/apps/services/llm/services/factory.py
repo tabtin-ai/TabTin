@@ -30,6 +30,18 @@ def _provider_supports_llm_capability(provider_name: Optional[str]) -> bool:
     return provider_supports_llm_capability(provider_name)
 
 
+def _adapter_name_from_config(provider_config: Optional[Dict[str, Any]], fallback_name: str = "") -> str:
+    """配置里有 provider 对象时走统一 Resolver，否则沿用传入名称。"""
+    from apps.services.llm.adapter_resolver import resolve_adapter_name
+
+    provider_obj = (provider_config or {}).get("provider_obj")
+    if provider_obj is not None:
+        resolved = resolve_adapter_name(provider_obj)
+        if resolved:
+            return resolved
+    return str(fallback_name or "").strip().lower()
+
+
 def _compute_tiers_user_selectable(tiers: List[Dict[str, Any]]) -> bool:
     """判断一组档位是否属于「用户可切换」语义（而非"纯按用量自动阶梯"）。
 
@@ -248,6 +260,7 @@ class LLMServiceFactory:
         Raises:
             ValueError: 不支持的提供商或配置无效
         """
+        provider_name = _adapter_name_from_config(provider_config, provider_name)
         service_class = cls._resolve_service_class(provider_name)
 
         try:
@@ -341,7 +354,10 @@ def get_llm_service(provider_name: Optional[str] = None,
         config = _get_provider_config(provider_name, user_id, model_name, model_id, organization_id)
 
         # 创建服务实例
-        return LLMServiceFactory.create_service(config['name'], config)
+        return LLMServiceFactory.create_service(
+            _adapter_name_from_config(config, config.get("name", "")),
+            config,
+        )
 
     except Exception as e:
         logger.error("获取LLM服务失败: %s", e)
@@ -741,7 +757,10 @@ def validate_provider_config(provider_name: str,
         )
 
         # 创建服务实例并验证
-        service = LLMServiceFactory.create_service(config['name'], config)
+        service = LLMServiceFactory.create_service(
+            _adapter_name_from_config(config, config.get("name", "")),
+            config,
+        )
         result = service.validate_config()
 
         logger.info("提供商 %s 配置验证完成: %s", provider_name, result['valid'])

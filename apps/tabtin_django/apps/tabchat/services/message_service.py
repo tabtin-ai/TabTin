@@ -2663,27 +2663,37 @@ class MessageService:
         # 前端为每条消息单独请求。群聊可据此画进度环，点击仍走详情接口拿名单。
         conversation = Conversation.objects.filter(pk=conversation_id).only("id").first()
         if conversation:
-            recipient_ids = [
-                str(member_id)
-                for member_id in ConversationAccessResolver.human_user_ids(conversation)
-                if str(member_id) != str(user_id)
-            ]
-            read_seq_by_user = {
-                str(state.user_id): state.last_read_seq
-                for state in ConversationUserState.objects.filter(
-                    conversation=conversation, user_id__in=recipient_ids,
-                ).only("user_id", "last_read_seq")
-            }
+            recipient_ids, read_seq_by_user = human_recipient_read_seqs(
+                conversation,
+                str(user_id),
+            )
             for message, payload in zip(messages, results):
                 if message.sender_type == SenderType.USER and str(message.sender_id) == str(user_id):
-                    payload["read_receipt"] = {
-                        "read_count": sum(
-                            1 for recipient_id in recipient_ids
-                            if read_seq_by_user.get(recipient_id, 0) >= message.seq
-                        ),
-                        "recipient_count": len(recipient_ids),
-                    }
+                    payload["read_receipt"] = outgoing_read_receipt_from_seqs(
+                        recipient_ids,
+                        read_seq_by_user,
+                        message.seq,
+                    )
         return results
+
+    @staticmethod
+    def build_send_result(msg: Message, sender_id: str) -> dict[str, Any]:
+        """发送 HTTP 回包：历史接口同款已读进度，避免前端确认后空圈。"""
+        data: dict[str, Any] = {
+            "id": msg.id,
+            "tabtin_message_id": str(msg.id),
+            "seq": msg.seq,
+            "conversation_id": str(msg.conversation_id),
+            "created_at": msg.created_at.isoformat() if msg.created_at else None,
+        }
+        conversation = Conversation.objects.filter(pk=msg.conversation_id).first()
+        if conversation is not None:
+            data["read_receipt"] = outgoing_read_receipt(
+                conversation,
+                sender_id=sender_id,
+                message_seq=msg.seq,
+            )
+        return data
 
     @staticmethod
     def resolve_message_references(
@@ -3938,6 +3948,50 @@ def _build_reply_preview(msg: Message) -> dict[str, Any]:
         "has_attachment": False if msg.is_deleted else bool(msg.has_attachment),
         "file_name": str(metadata.get("file_name") or ""),
     }
+
+
+def human_recipient_read_seqs(
+    conversation: Conversation,
+    sender_id: str,
+) -> tuple[list[str], dict[str, int]]:
+    recipient_ids = [
+        str(member_id)
+        for member_id in ConversationAccessResolver.human_user_ids(conversation)
+        if str(member_id) != str(sender_id)
+    ]
+    read_seq_by_user = {
+        str(state.user_id): state.last_read_seq
+        for state in ConversationUserState.objects.filter(
+            conversation=conversation,
+            user_id__in=recipient_ids,
+        ).only("user_id", "last_read_seq")
+    }
+    return recipient_ids, read_seq_by_user
+
+
+def outgoing_read_receipt_from_seqs(
+    recipient_ids: list[str],
+    read_seq_by_user: dict[str, int],
+    message_seq: int,
+) -> dict[str, int]:
+    return {
+        "read_count": sum(
+            1
+            for recipient_id in recipient_ids
+            if read_seq_by_user.get(recipient_id, 0) >= message_seq
+        ),
+        "recipient_count": len(recipient_ids),
+    }
+
+
+def outgoing_read_receipt(
+    conversation: Conversation,
+    *,
+    sender_id: str,
+    message_seq: int,
+) -> dict[str, int]:
+    recipient_ids, read_seq_by_user = human_recipient_read_seqs(conversation, sender_id)
+    return outgoing_read_receipt_from_seqs(recipient_ids, read_seq_by_user, message_seq)
 
 
 def _serialize_message(

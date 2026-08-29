@@ -612,6 +612,46 @@ class MessageRefactorContractTests(TestCase):
         self.assertTrue(preview["is_unavailable"])
         self.assertFalse(preview["has_attachment"])
 
+    def test_send_result_and_history_attach_unread_receipt_for_own_outgoing(self):
+        message = MessageService.send_message(
+            str(self.conversation.id),
+            str(self.sender.id),
+            "刚发出应带未读圈",
+            client_request_id="send-receipt-seed",
+        )
+
+        send_result = MessageService.build_send_result(message, str(self.sender.id))
+        self.assertEqual(
+            send_result["read_receipt"],
+            {"read_count": 0, "recipient_count": 1},
+        )
+
+        history = MessageService.get_messages(
+            str(self.conversation.id),
+            str(self.sender.id),
+        )
+        own = next(item for item in history if item["id"] == message.id)
+        self.assertEqual(own["read_receipt"], {"read_count": 0, "recipient_count": 1})
+
+    def test_outgoing_read_receipt_counts_peer_watermark(self):
+        message = MessageService.send_message(
+            str(self.conversation.id),
+            str(self.sender.id),
+            "对方已读",
+            client_request_id="send-receipt-peer",
+        )
+        ConversationUserState.objects.update_or_create(
+            conversation=self.conversation,
+            user_id=str(self.receiver.id),
+            defaults={"last_read_seq": message.seq},
+        )
+
+        send_result = MessageService.build_send_result(message, str(self.sender.id))
+        self.assertEqual(
+            send_result["read_receipt"],
+            {"read_count": 1, "recipient_count": 1},
+        )
+
     def test_get_unread_snapshots_pairs_count_with_consistent_waterline(self):
         # 回归 ：移动端加载在途做 baseline/delta 合并需要 unread_count 与 last_message_seq 水位
         # 来自同一致快照。get_unread_snapshots 用「先取水位、未读计数限制 seq<=水位」构造性对齐，

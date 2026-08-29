@@ -26,6 +26,7 @@ import {
   errorResponse,
   saveScreenshotFromBase64,
   electronPolicyHooks,
+  resolveAccessBarrierHostHook,
 } from './_helpers'
 import { runWithBrowserApprovalContext } from '../../browser-policy-middleware'
 import { recordBrowserNavigationEvidenceFromHrefs } from './navigation-evidence'
@@ -46,12 +47,11 @@ export const CAPTCHA_ACT_WATCH_INITIAL_DELAY_MS = 1_500
 export const CAPTCHA_ACT_WATCH_POLL_MS = 1_000
 
 /**
- * open 内嵌观察的总超时。观察链路最深处是 webContents.executeJavaScript——
- * 注入若撞上页面导航窗口（执行上下文销毁重建），其 Promise 可能永远不 settle，
- * /open 响应发不出去，Go CLI 端等满 120s 才超时（exit 7）。观察本就是
- * best-effort（失败不影响 open 结果），超时按观察失败处理即可。
+ * open 内嵌观察总超时。撞墙时 observe 会 await Access Barrier 卡片（默认最长
+ * 10 分钟），须盖过 HITL 等待窗；未撞墙时通常远早于该上限返回。
+ * 观察本是 best-effort——超时按观察失败处理，不影响 open 导航结果。
  */
-export const OPEN_EMBED_OBSERVE_TIMEOUT_MS = 20_000
+export const OPEN_EMBED_OBSERVE_TIMEOUT_MS = 10 * 60 * 1000
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms))
@@ -369,6 +369,8 @@ export async function handleInteractionRoute(
     exec: buildElectronExecHooks(executor),
     // BR-9：act/eval 等写操作经统一闸门判为 confirm 时走 ApprovalManager 真人审批。
     policy: electronPolicyHooks,
+    // Access Barrier HITL（plan Task 5）：flag 开时把撞墙暂停接到会话 HITL；关时不注入。
+    resolveAccessBarrier: resolveAccessBarrierHostHook(),
   }
   const tabId = await resolveTabId(
     body?.tabId ?? body?.tab_id,
@@ -416,15 +418,28 @@ export async function runEmbedObserve(
     runtime: 'electron',
     exec: buildElectronExecHooks(executor),
     policy: electronPolicyHooks,
+    // Access Barrier HITL（plan Task 5）：内嵌 observe 同样可能撞墙，同一开关。
+    resolveAccessBarrier: resolveAccessBarrierHostHook(),
   }
+  // 必须透传会话 thread：Access Barrier HITL 靠 `_thread_id` 挂对话卡片。
+  // 只拷 tab/space 会让 resolveAccessBarrier 落到 host_unavailable，open 撞墙无卡
+  // （live 证据：llm-snapshot …-iter5，仅有 login_required、无 access_barrier）。
+  const threadId =
+    (typeof body?._thread_id === 'string' && body._thread_id.trim())
+    || (typeof body?.thread_id === 'string' && body.thread_id.trim())
+    || (typeof body?.threadId === 'string' && body.threadId.trim())
+    || undefined
   const observeBody = {
     tabId,
     compact: true,
     spaceId: body?.spaceId ?? body?.space_id,
     crawlspaceId: body?.crawlspaceId ?? body?.crawlspace_id,
     ...(body?.runId ? { runId: body.runId } : {}),
+    ...(threadId ? { _thread_id: threadId } : {}),
   }
   try {
+    // 内嵌 observe 可能 await Access Barrier 卡片；超时须盖过 HITL 等待窗，
+    // 否则会把挂起掐成「只有 login_required、无卡」。
     const result = await withTimeout(
       runWithBrowserApprovalContext(
         observeBody,
@@ -437,12 +452,14 @@ export async function runEmbedObserve(
     recordNavigationEvidenceFromResult(result)
     const data = result.data as Record<string, any>
     if (!Array.isArray(data?.observed_elements)) return undefined
-    // hint（无 href 条目的 act --ref 用法）一并透传：open 是 Agent 首次见到元素清单的
-    // 地方，只给 observed_elements 会把编排层的用法提示剥掉。hint 在前，保证落盘
-    // file_ref 的头部 preview 也露出。
-    // login_required（登录墙拦截信号）置首键：open 一撞登录墙，Agent 第一眼即知「先停下来
-    // 让用户登录」，无需再解析元素文本自行推断。
+    // 置顶顺序：access_barrier(+resolution) → login_required → hint → elements。
+    // open 大响应落盘后 file_ref 只露头部；剥掉 barrier 会只剩旧 hint，模型纯文本
+    // 问人、不弹系统卡。
     return {
+      ...(data.access_barrier ? { access_barrier: data.access_barrier } : {}),
+      ...(data.access_barrier_resolution
+        ? { access_barrier_resolution: data.access_barrier_resolution }
+        : {}),
       ...(data.login_required ? { login_required: data.login_required } : {}),
       ...(typeof data.hint === 'string' && data.hint ? { hint: data.hint } : {}),
       observed_elements: data.observed_elements,

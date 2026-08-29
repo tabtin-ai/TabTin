@@ -20,7 +20,7 @@ import { isLocalRuntimeAvailable } from '@services/localAgentClient'
 import { getSessionController } from '@/services/agentService'
 import { isPlatformIpcError, formatIpcErrorForUser } from '@/services/ipc-error'
 import { ensureLegacyOk, extractLegacyErrorMessage } from '@/services/legacy-result'
-import { recordHitlResolvedKey } from '../handlers/hitlStreamHandlers'
+import { clearAccessBarrierExpiryForSession, recordHitlResolvedKey } from '../handlers/hitlStreamHandlers'
 
 /**
  * 把 askUser IPC 抛出的错误格式化为给用户看的文案。
@@ -167,6 +167,9 @@ export function createAskUserActions(
         recordHitlResolvedKey(sessionId, pending.interruptId)
         recordHitlResolvedKey(sessionId, pending.toolCallId)
         recordHitlResolvedKey(sessionId, pending.messageId)
+        if (pending.presetId === 'access_barrier' || pending.accessBarrierMeta) {
+          clearAccessBarrierExpiryForSession(sessionId, pending.interruptId)
+        }
       }
       const nextPending = { ...state.pendingAskUserBySessionId }
       delete nextPending[sessionId]
@@ -220,6 +223,9 @@ export function createAskUserActions(
       console.warn('[Chat] No pending question to answer')
       return
     }
+    if (get().askUserSubmittingBySessionId[sessionId]) {
+      return
+    }
 
     const requestId = pendingAskUser.interruptId
     if (!isLocalAskUserIpcAvailable() || !requestId) {
@@ -230,13 +236,28 @@ export function createAskUserActions(
     setAskUserSubmittingForSession(sessionId, true)
     setAskUserSubmitError(sessionId, undefined)
     try {
-      // Wave 11 P0 + contract W2-β：
-      // 主进程 resolver 失效时返 raw `{success: false}`（channel 仍在 LEGACY_HANDLERS，
-      // 透传到 caller）；envelope `ok:false` 路径走 invokeIpc 自动 throw PlatformIpcError。
-      // ensureLegacyOk 把"两种形态"统一成 throw —— catch 块统一识别 RESOLVER_MISSING 文案。
-      // **不删 success 检查**：D-3 不留 MVP，main 端转 envelope 前必须显式拦 success:false，
-      // 否则 resolver 失效会静默成功（用户以为审批通过但 Agent 没收到）。
-      const submitRes = await getSessionController(sessionId).answerAskUser(requestId, { answers }, pendingAskUser.threadId)
+      // Access Barrier：选项 id 即决议 action，直接回传给 presentAccessBarrier。
+      const barrierMeta = pendingAskUser.accessBarrierMeta
+      const response = barrierMeta
+        ? (() => {
+            const selected = answers[0]?.selected_options?.[0]
+            const action =
+              selected === 'resume_same_tab'
+              || selected === 'alternate_source'
+              || selected === 'abort_this_target'
+                ? selected
+                : 'host_unavailable'
+            return action === 'resume_same_tab'
+              ? { action, tabId: barrierMeta.tabId }
+              : { action }
+          })()
+        : { answers }
+
+      const submitRes = await getSessionController(sessionId).answerAskUser(
+        requestId,
+        response,
+        pendingAskUser.threadId,
+      )
       ensureAskUserResponseDelivered(submitRes, 'submitAskUserResponse')
       clearAskUserForSession(sessionId, pendingAskUser)
       const client = getChatClient()
@@ -385,7 +406,14 @@ export function createAskUserActions(
     try {
       // contract W2-β: skip 路径同样要拦 main 端 raw `{success: false}` —— 否则 resolver
       // 失效时用户看到面板被清掉但 Agent 没收到 skip，回来还在等。
-      const submitRes = await getSessionController(sessionId).answerAskUser(requestId, { skipped: true }, pendingAskUser.threadId)
+      const skipPayload = pendingAskUser.accessBarrierMeta
+        ? { action: 'skipped' as const }
+        : { skipped: true }
+      const submitRes = await getSessionController(sessionId).answerAskUser(
+        requestId,
+        skipPayload,
+        pendingAskUser.threadId,
+      )
       ensureAskUserResponseDelivered(submitRes, 'submitAskUserResponse(skip)')
       clearAskUserForSession(sessionId, pendingAskUser)
     } catch (error) {

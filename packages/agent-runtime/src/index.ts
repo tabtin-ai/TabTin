@@ -7,11 +7,11 @@
 
 export type { Logger, GatewayPort, RuntimeConfig } from './interfaces.js';
 
-//  Phase 2：permission-policy.ts（shouldAutoApprove / classifyTool /
+// #5394 Phase 2：permission-policy.ts（shouldAutoApprove / classifyTool /
 // presetToPermissionMode / ToolCategory）已整体删除——判决权威是
 // `@tabtin/security-policy` judge()，handler 不再自动批准任何请求。
 //
-//  Stage 6b：不再从本包 re-export `@tabtin/contracts/agent` 或
+// issue #6009 Stage 6b：不再从本包 re-export `@tabtin/contracts/agent` 或
 // `@tabtin/python-runtime-host`——宿主直接依赖对应包。
 
 // ─── Local Engine ───────────────────────────────────────────────────
@@ -60,6 +60,12 @@ export type {
   EnginePermissionHandler,
   PermissionRequest,
   PermissionDecisionResult,
+  // #4019 批次 5：HITL 单原语——供 Electron/Daemon 组装宿主外发起点（Access
+  // Barrier HITL 等）直接构造 InterruptPort。
+  InterruptKind,
+  InterruptRequest,
+  InterruptOutcome,
+  InterruptPort,
   SystemPromptProvider,
   SystemPromptToolRef,
   ResolveSubagentPromptInput,
@@ -133,7 +139,7 @@ export type {
   ApprovalRequestedPayload,
 } from './engine/index.js';
 
-// ─── Runtime entry point（ 批次 13：engine barrel 收敛后的对外出口）───
+// ─── Runtime entry point（#4019 批次 13：engine barrel 收敛后的对外出口）───
 // createRuntime / createDefaultQueryDeps 经 composition root（runtime-assembly）
 // 统一收口——组装根不属于 engine 内部，出口在包入口。详见 ./runtime-assembly.ts。
 export { createRuntime, createDefaultQueryDeps } from './runtime-assembly.js';
@@ -194,7 +200,7 @@ export type {
   FilePersistentQueueOptions,
 } from './session/index.js';
 
-// ─── Compact system（ 批次 13：出口从 engine barrel 收敛到包入口）────
+// ─── Compact system（#4019 批次 13：出口从 engine barrel 收敛到包入口）────
 export {
   compactConversation,
   summarizeHistoryForCheckpoint,
@@ -243,15 +249,15 @@ export type {
 // ─── Session storage ────────────────────────────────────────────────
 export {
   SessionStorage,
-  // ：本机 transcript 重建（messages.jsonl 6 件套重放），主进程 read-session-transcript 复用。
+  // #4897：本机 transcript 重建（messages.jsonl 6 件套重放），主进程 read-session-transcript 复用。
   reconstructMessagesFromTranscriptEntries,
   findCompactionDoneStartIndex,
   computeRewindCommitPrefixLength,
-  //  message block 权威：消息级 block 存储与重建。
+  // #5430 message block 权威：消息级 block 存储与重建。
   MessageBlockStorage,
   reconstructMessagesFromBlockRecords,
   blockRecordsToTranscriptMessages,
-  //  / ：in-turn push 双写门闸（相对 idle drain）
+  // #5592 / #8423：in-turn push 双写门闸（相对 idle drain）
   isInTurnPushNotificationUser,
   SnapshotStorage,
   EventStorage,
@@ -281,7 +287,7 @@ export {
   resolveSpaceConversationsRoot,
   resolveSpaceSessionArchiveDir,
   resolveSpaceToolLogsDir,
-  //  新 API
+  // issue #7118 新 API
   resolveUserRoot,
   resolveUserSkillsDir,
   resolveUserSkillDir,
@@ -299,7 +305,7 @@ export {
   resolveWorkspaceSessionArchiveDir,
   resolveWorkspaceToolLogsDir,
   resolveWorkspaceSiteDir,
-  // ：本机 session 归档分叉 + tool id remap
+  // #7033：本机 session 归档分叉 + tool id remap
   forkLocalSessionArchive,
   createForkToolIdMapper,
   remapToolIdsInValue,
@@ -339,13 +345,13 @@ export type {
 // `composeHooks` 是 EngineHooks 合并工具（SSoT 在 `capability/hooks-compose.ts`，
 // engine/core 透传），宿主装配 EngineConfig.hooks 时串联各 hook 用。
 //
-//  Phase 1：原来这里 re-export 的 7 个 `build*InjectorHook` +
+// issue #6009 Phase 1：原来这里 re-export 的 7 个 `build*InjectorHook` +
 // 各 Options 类型已整体迁到宿主内容包。引擎不再持有 6 段上下文贡献
 // （它们依赖 @tabtin/agent-prompt / agent-modes / lsp-runtime 这些产品内容包）
 // ——引擎只保留 EngineHooks 这一唯一注入原语。
 export { composeHooks } from './engine/index.js';
 
-// ─── 宿主消息注入 hook 依赖的引擎侧 helper（ Phase 1）─────────
+// ─── 宿主消息注入 hook 依赖的引擎侧 helper（issue #6009 Phase 1）─────────
 // 6 段上下文贡献迁到宿主后，仍需引擎这几件「宿主无关」的工具：
 //   - todo 回放（todo-state hook 每轮推导活跃批次）
 //   - RuntimeSystemNoticeEvent（rules hook 发「已加载项目规则」系统通知）
@@ -413,7 +419,7 @@ export type {
   PendingApprovalsRestoreInput,
   PendingApprovalsRestoreResult,
 } from './permissions/pending-approvals-restorer.js';
-// ─── ：单 HITL crash resume helpers ──────────────────────
+// ─── issue #6022：单 HITL crash resume helpers ──────────────────────
 export {
   applyPendingSingleHitlRestore,
   decodeWirePendingSingleHitl,
@@ -471,7 +477,7 @@ export type {
 } from './terminal/background-task-terminal-result.js';
 
 // AgentMode SSoT / 受限模式软拒：请直接从产品 modes 包导入
-// （ Stage 4；runtime 不再 re-export）。
+// （issue #6009 Stage 4；runtime 不再 re-export）。
 
 // ─── HITL 通道 + 审批记忆 ───────────────────────────────────────────
 // v3 judge() 主路径 + LocalPermissionHandler 用到的 memo 存储 / 跨设备同步 /
@@ -493,8 +499,10 @@ export {
   cancelAllSessionsHitlRequests,
   getHumanInteractionContext,
   requestPlatformApproval,
+  requestAccessBarrierResolution,
   runWithHumanInteractionContext,
   setHumanInteractionHooks,
+  createInterruptAdapter,
 } from './permissions/index.js';
 
 export type {
@@ -520,9 +528,25 @@ export type {
   HumanInteractionHooks,
   PlatformApprovalRequest,
   PlatformApprovalResult,
+  InterruptAdapterDeps,
 } from './permissions/index.js';
 
-// ─── OS Error Blacklist（ 后生产路径不再注入） ──────────
+// ─── Access Barrier HITL ────────────────────────────────────────────────────
+// 呈现辅助（非默认策略）：`agent-runtime` 主循环 / 默认策略栈不装配任何墙
+// 策略，本函数只是给宿主（Electron CLI 编排出口等）用的呈现辅助。
+export {
+  presentAccessBarrier,
+  buildUnattendedResolution as buildUnattendedAccessBarrierResolution,
+} from './access-barrier/present.js';
+export type {
+  AccessBarrier,
+  AccessBarrierKind,
+  AccessBarrierActionId,
+  AccessBarrierResolution,
+  PresentAccessBarrierArgs,
+} from './access-barrier/present.js';
+
+// ─── OS Error Blacklist（#10614 后生产路径不再注入） ──────────
 export {
   getSharedOSErrorBlacklist,
   OSErrorBlacklist,

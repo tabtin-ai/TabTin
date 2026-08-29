@@ -48,6 +48,7 @@ import {
   withMcpOpenShimPath,
 } from './mcp-oauth-window'
 import {
+  clearMcpRemoteAuth,
   ensureMcpRemoteClientName,
   extractMcpRemoteServerUrl,
 } from './mcp-remote-client'
@@ -997,6 +998,44 @@ export class LocalMcpService {
     this.saveStore(store)
     await closing
     this.invalidateConfiguredAgents(deleted?.attachedAgentIds ?? [])
+    this.clearUnusedRemoteAuth(deleted, nextConnections)
+  }
+
+  private resolveConnectionRemoteAuthUrl(connection: StoredConnection): string | null {
+    const overrideUrl = connection.organizationOverrides?.transport?.url
+    if (overrideUrl) return overrideUrl
+    if (connection.transport.kind === 'http') {
+      return connection.transport.url || null
+    }
+    return extractMcpRemoteServerUrl(connection.transport.args)
+  }
+
+  private clearUnusedRemoteAuth(
+    deleted: StoredConnection | undefined,
+    remaining: readonly StoredConnection[],
+  ): void {
+    if (!deleted) return
+    const serverUrl = this.resolveConnectionRemoteAuthUrl(deleted)
+    if (!serverUrl) return
+    const stillUsed = remaining.some(item => this.resolveConnectionRemoteAuthUrl(item) === serverUrl)
+    if (stillUsed) {
+      log.info('keep mcp-remote auth; another connection still uses this server', {
+        host: safeUrlHost(serverUrl),
+      })
+      return
+    }
+    try {
+      const removed = clearMcpRemoteAuth(serverUrl)
+      log.info('cleared mcp-remote auth after uninstall', {
+        host: safeUrlHost(serverUrl),
+        removed,
+      })
+    } catch (error) {
+      log.warn('failed to clear mcp-remote auth after uninstall', {
+        host: safeUrlHost(serverUrl),
+        error,
+      })
+    }
   }
 
   async probeConnection(

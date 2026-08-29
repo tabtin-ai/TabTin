@@ -590,7 +590,15 @@
     "title": "Code changes",
     "files": "files",
     "viewDiff": "View Diff",
-    "open": "View code changes Diff"
+    "open": "View code changes Diff",
+    "editedFiles": "Edited {{count}} files",
+    "review": "Review",
+    "fileList": "Edited files",
+    "reviewFile": "Review {{file}}",
+    "expandRemaining": "Show remaining {{count}} files",
+    "collapse": "Collapse files",
+    "expandRemainingAria": "Show remaining {{count}} files",
+    "collapseAria": "Collapse files"
   },
   "turnArtifacts": {
     "title": "Artifacts",

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Info, KeyRound, Plus, Power, Search, Trash2, X } from 'lucide-react'
+import { Info, Plus, Power, Search, Trash2, X } from 'lucide-react'
 import {
   Button, ConfirmDialog, Input, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator,
   SelectTrigger, SelectValue, Switch, toast,
@@ -19,7 +19,6 @@ import { useChatModelStore } from '@stores/useChatModelStore'
 import { SETTINGS_CONTROL } from '@components/settings/settingsUi'
 import { SettingsSectionCard } from '@components/settings/SettingsSectionCard'
 import { SettingsRow, SettingsRowGroup } from '@components/settings/SettingsRow'
-import { SettingsSection } from '@components/settings/SettingsSection'
 import { SettingsLink } from '@components/settings/SettingsLink'
 import { ChipTabBar } from '@components/common/ChipTabBar'
 import { cn } from '@utils/cn'
@@ -36,6 +35,13 @@ import {
   resolveProviderDegradedReason,
 } from './providerConnectivityStatus'
 import { ByokConnectEntries, type ByokConnectEntriesHandle } from './ByokConnectEntries'
+import {
+  BYOK_PROVIDER_KEY_PATTERN,
+  buildByokProviderKey,
+  suggestByokConnectionName,
+} from './byok-connection-identity'
+import { findPlanPresetByProviderKey } from './byok-service-catalog'
+import { modelMatchesChannel } from './byok-channel-model-search'
 import { ByokScenarioHint } from './byok-scenario-hint'
 import { getCustomApiModelRecommendations, type ByokCustomApiModelRecommendation } from './byok-custom-api-recommendations'
 import type { OpenAICodexStatus } from './ByokCodexLoginPanel'
@@ -55,10 +61,12 @@ import {
   saveOrganizationDeviceModelPreferences,
   type OrganizationDeviceModelPreferences,
 } from '@/stores/chat/session/organizationDeviceModelPreference'
+import { canUseOrganizationByokScope } from './byok-organization-scope'
 
-const PROVIDER_KEY_PATTERN = /^[a-z0-9][a-z0-9._-]{2,63}$/
+const PROVIDER_KEY_PATTERN = BYOK_PROVIDER_KEY_PATTERN
 const CHAT_MODES = new Set([undefined, null, '', 'chat', 'llm', 'completion', 'response'])
 const PRESET_MODEL_PREVIEW_LIMIT = 3
+const SERVICE_MODEL_PREVIEW_LIMIT = 4
 const USER_DEFAULT_MODEL_INHERIT_VALUE = '__inherit_team_default__'
 const SUBAGENT_FOLLOW_TEAM_VALUE = '__subagent_follow_team__'
 const SUBAGENT_FOLLOW_MAIN_VALUE = '__subagent_follow_main__'
@@ -92,35 +100,38 @@ function isProviderKeyUsable(key: import('@/types/llm-organization').ProviderKey
   return key.is_active ?? key.is_usable
 }
 
-/**
- * BYOK 渠道角标。
- *
- * scope=organization/user 表示自备渠道：聊天选中其模型时走该 Key；
- * 平台托管 Scene 仍强制 global。颜色按 scope 区分：
- *   - organization → 橙
- *   - user         → 紫
- *   - global       → 不显示
- */
-function ByokBadge({ scope }: { scope: 'global' | 'organization' | 'user' | string | null | undefined }) {
+function VisibilityLabel({ scope }: { scope: 'global' | 'organization' | 'user' | string | null | undefined }) {
   const { t } = useTranslation('organization')
-  if (scope !== 'organization' && scope !== 'user') return null
-  const tooltip = scope === 'organization'
-    ? t('modelSettings.byokBadge.tooltipOrganization')
-    : t('modelSettings.byokBadge.tooltipUser')
-  const colorClass = scope === 'organization'
-    ? 'bg-amber-500/15 text-amber-600 border-amber-500/30'
-    : 'bg-violet-500/15 text-violet-600 border-violet-500/30'
-  return (
-    <span
-      title={tooltip}
-      className={cn(
-        'inline-flex items-center gap-1 rounded border px-1.5 py-0 text-caption font-semibold uppercase tracking-wide',
-        colorClass,
-      )}
-    >
-      {t('modelSettings.byokBadge.label')}
-    </span>
-  )
+  if (scope === 'organization') {
+    return <span className="text-caption text-muted-foreground">{t('llm.providers.visibilityOrg')}</span>
+  }
+  if (scope === 'user') {
+    return <span className="text-caption text-muted-foreground">{t('llm.providers.visibilityUser')}</span>
+  }
+  return null
+}
+
+function formatServiceEndpoint(url?: string | null): string {
+  if (!url) return ''
+  try {
+    const parsed = new URL(url)
+    const path = parsed.pathname === '/' ? '' : parsed.pathname
+    return `${parsed.host}${path}`.replace(/\/$/, '')
+  } catch {
+    return url
+  }
+}
+
+function getServiceProtocolLabel(
+  provider: OrganizationLlmProvider,
+  translate: (key: string, options?: Record<string, unknown>) => string,
+): string {
+  const plan = findPlanPresetByProviderKey(provider.provider_key)
+  if (plan) return translate(plan.vendorLabelKey)
+  if (provider.name === 'openai') {
+    return translate('llm.serviceCatalog.openaiCompatible.label')
+  }
+  return getProviderShortLabel(provider.name, provider.display_name)
 }
 
 /**
@@ -145,13 +156,19 @@ function ByokScopeNotice({ scope }: { scope: 'global' | 'organization' | 'user' 
 interface OrganizationModelSettingsProps {
   organizationId: string
   canManageOrganization: boolean
+  isPersonalOrganization?: boolean
 }
 
 export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps> = ({
   organizationId,
   canManageOrganization,
+  isPersonalOrganization = false,
 }) => {
   const { t } = useTranslation('organization')
+  const canUseOrgScope = canUseOrganizationByokScope(
+    canManageOrganization,
+    isPersonalOrganization,
+  )
   const refreshChatModels = useChatModelStore((state) => state.loadModels)
   const [providers, setProviders] = useState<OrganizationLlmProvider[]>([])
   const [models, setModels] = useState<OrganizationLlmModel[]>([])
@@ -180,10 +197,13 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
 
   const [providerName, setProviderName] = useState('openai')
   const [providerKey, setProviderKey] = useState('')
+  const [providerKeyTouched, setProviderKeyTouched] = useState(false)
   const [providerDisplayName, setProviderDisplayName] = useState('')
   const [providerBaseUrl, setProviderBaseUrl] = useState('')
   const [providerApiKey, setProviderApiKey] = useState('')
-  const [providerScope, setProviderScope] = useState<'organization' | 'user'>('organization')
+  const [providerScope, setProviderScope] = useState<'organization' | 'user'>(
+    canUseOrgScope ? 'organization' : 'user',
+  )
   const [creatingProvider, setCreatingProvider] = useState(false)
   const [editingProviderId, setEditingProviderId] = useState<string | null>(null)
   const [providerFormError, setProviderFormError] = useState<string | null>(null)
@@ -198,8 +218,12 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
   const [modelMaxTokens, setModelMaxTokens] = useState(DEFAULT_BYOK_CONTEXT_WINDOW_TOKENS_INPUT)
   const [modelSupportsVision, setModelSupportsVision] = useState(false)
   const [modelSupportsStreaming, setModelSupportsStreaming] = useState(true)
+  const [modelSupportsFunctionCalling, setModelSupportsFunctionCalling] = useState(true)
   const [modelCapabilitiesConfig, setModelCapabilitiesConfig] = useState<Record<string, unknown>>({})
-  const [modelEndpointOverrideOpen, setModelEndpointOverrideOpen] = useState(false)
+  const [modelAdvancedOpen, setModelAdvancedOpen] = useState(false)
+  const [providerAdvancedOpen, setProviderAdvancedOpen] = useState(false)
+  const [expandedServiceId, setExpandedServiceId] = useState<string | null>(null)
+  const [moreActionsId, setMoreActionsId] = useState<string | null>(null)
   const [creatingModel, setCreatingModel] = useState(false)
   const [editingModelId, setEditingModelId] = useState<string | null>(null)
   const [modelFormError, setModelFormError] = useState<string | null>(null)
@@ -227,6 +251,10 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
   const availableModelProviders = useMemo(
     () => providers.filter((provider) => provider.scope !== 'global'),
     [providers]
+  )
+  const existingProviderKeys = useMemo(
+    () => providers.map((provider) => provider.provider_key).filter(Boolean),
+    [providers],
   )
 
   // BYOK「提供商」类型下拉读全局 providerMetas，该数据仅由 chat 模型目录加载
@@ -344,14 +372,17 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
   }, [])
 
   const resetProviderForm = () => {
+    const defaultUrl = getProviderDefaultBaseUrl('openai')
     setProviderName('openai')
-    setProviderKey('openai')
+    setProviderKeyTouched(false)
+    setProviderKey(buildByokProviderKey('openai', defaultUrl, { existingKeys: existingProviderKeys }))
     setProviderDisplayName('')
-    setProviderBaseUrl(getProviderDefaultBaseUrl('openai'))
+    setProviderBaseUrl(defaultUrl)
     setProviderApiKey('')
-    setProviderScope(canManageOrganization ? 'organization' : 'user')
+    setProviderScope(canUseOrgScope ? 'organization' : 'user')
     setEditingProviderId(null)
     setProviderFormError(null)
+    setProviderAdvancedOpen(false)
   }
 
   const resetModelForm = () => {
@@ -363,8 +394,9 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
     setModelMaxTokens(DEFAULT_BYOK_CONTEXT_WINDOW_TOKENS_INPUT)
     setModelSupportsVision(false)
     setModelSupportsStreaming(true)
+    setModelSupportsFunctionCalling(true)
     setModelCapabilitiesConfig(ensureCustomChatJsonCapability({}))
-    setModelEndpointOverrideOpen(false)
+    setModelAdvancedOpen(false)
     setEditingModelId(null)
     setModelFormError(null)
     setModelSearchKeyword('')
@@ -469,9 +501,11 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
     if (Date.now() < suppressCreateDialogUntilRef.current) return
     resetProviderForm()
     if (initialProviderName) {
+      const defaultUrl = getProviderDefaultBaseUrl(initialProviderName)
       setProviderName(initialProviderName)
-      setProviderKey(initialProviderName)
-      setProviderBaseUrl(getProviderDefaultBaseUrl(initialProviderName))
+      setProviderKeyTouched(false)
+      setProviderKey(buildByokProviderKey(initialProviderName, defaultUrl, { existingKeys: existingProviderKeys }))
+      setProviderBaseUrl(defaultUrl)
     }
     setProviderFormOpen(true)
   }
@@ -479,6 +513,7 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
   const openProviderEditDialog = (provider: OrganizationLlmProvider) => {
     setEditingProviderId(provider.id)
     setProviderName(provider.name)
+    setProviderKeyTouched(true)
     setProviderKey(provider.provider_key)
     setProviderDisplayName(provider.display_name || '')
     setProviderBaseUrl(provider.base_url || '')
@@ -537,13 +572,18 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
           api_key: providerApiKey.trim() || undefined,
         })
       } else {
+        const typeLabel = providerTypeOptions.find((option) => option.value === providerName)?.label || providerName
         const payload: OrganizationProviderCreatePayload = {
           provider_name: providerName,
           provider_key: providerKey.trim(),
-          display_name: providerDisplayName.trim() || undefined,
+          display_name: providerDisplayName.trim() || suggestByokConnectionName(
+            typeLabel,
+            providerBaseUrl.trim(),
+            providerName,
+          ),
           base_url: providerBaseUrl.trim(),
           api_key: providerApiKey.trim(),
-          scope: providerScope,
+          scope: canUseOrgScope ? providerScope : 'user',
         }
         await OrganizationLlmApiService.createProvider(organizationId, payload)
       }
@@ -722,8 +762,9 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
     setModelMaxTokens(String(model.max_tokens || DEFAULT_BYOK_CONTEXT_WINDOW_TOKENS))
     setModelSupportsVision(Boolean(model.supports_vision))
     setModelSupportsStreaming(Boolean(model.supports_streaming))
+    setModelSupportsFunctionCalling(model.supports_function_calling !== false)
     setModelCapabilitiesConfig(ensureCustomChatJsonCapability(model.capabilities_config))
-    setModelEndpointOverrideOpen(Boolean(model.base_url && providerBaseUrl && model.base_url !== providerBaseUrl))
+    setModelAdvancedOpen(false)
     setModelFormError(null)
     setModelSearchKeyword('')
     setModelSearchResults([])
@@ -749,8 +790,9 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
       setModelFormError(t('llm.models.validation.required'))
       return
     }
-    if (!modelBaseUrl.trim()) {
-      setModelFormError(t('llm.models.validation.baseUrlRequired', { defaultValue: '请填写模型 API Base URL' }))
+    const inheritedBaseUrl = selectedModelProvider?.base_url?.trim() || modelBaseUrl.trim()
+    if (!inheritedBaseUrl) {
+      setModelFormError(t('llm.models.validation.baseUrlRequired', { defaultValue: '当前渠道没有可用地址' }))
       return
     }
     const maxTokens = Number(modelMaxTokens)
@@ -765,11 +807,12 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
         await OrganizationLlmApiService.updateModel(organizationId, editingModelId, {
           model_name: modelName.trim(),
           display_name: modelDisplayName.trim(),
-          base_url: modelBaseUrl.trim(),
+          base_url: inheritedBaseUrl,
           max_tokens: maxTokens,
           capabilities_config: ensureCustomChatJsonCapability(modelCapabilitiesConfig),
           supports_vision: modelSupportsVision,
           supports_streaming: modelSupportsStreaming,
+          supports_function_calling: modelSupportsFunctionCalling,
         })
         setNotice({ type: 'success', message: t('llm.models.updateSuccess') })
       } else {
@@ -777,11 +820,12 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
           provider_id: modelProviderId,
           model_name: modelName.trim(),
           display_name: modelDisplayName.trim(),
-          base_url: modelBaseUrl.trim() || selectedModelProvider?.base_url?.trim() || undefined,
+          base_url: inheritedBaseUrl,
           max_tokens: maxTokens,
           capabilities_config: ensureCustomChatJsonCapability(modelCapabilitiesConfig),
           supports_vision: modelSupportsVision,
           supports_streaming: modelSupportsStreaming,
+          supports_function_calling: modelSupportsFunctionCalling,
         }
         await OrganizationLlmApiService.createModel(organizationId, payload)
         setNotice({ type: 'success', message: t('llm.models.createSuccess') })
@@ -819,6 +863,10 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
 
   const handleSearchModels = async () => {
     const keyword = modelSearchKeyword.trim()
+    if (!selectedModelProvider) {
+      setModelFormError(t('llm.models.validation.providerRequired'))
+      return
+    }
     if (!keyword) {
       setModelFormError(t('llm.models.searchValidation'))
       return
@@ -826,9 +874,14 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
     setModelFormError(null)
     setSearchingModels(true)
     try {
-      const result = await OrganizationLlmApiService.searchModels(keyword, organizationId)
-      setModelSearchResults(result.models || [])
-      if (!result.models || result.models.length === 0) {
+      const result = await OrganizationLlmApiService.searchModels(
+        keyword,
+        organizationId,
+        selectedModelProvider.id,
+      )
+      const scoped = (result.models || []).filter((item) => modelMatchesChannel(item, selectedModelProvider))
+      setModelSearchResults(scoped)
+      if (scoped.length === 0) {
         setModelFormError(t('llm.models.searchEmpty'))
       }
     } catch (err) {
@@ -986,19 +1039,31 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
     void saveSubagentModelPolicy(scope, 'fixed', modelId)
   }
 
-  // ── providerName → providerKey/default baseUrl sync ──
-  // 仅新建表单里联动填充：编辑态（editingProviderId）不覆盖既有值，开表单时名字已被
-  // resetProviderForm 清空，故加上 providerFormOpen / editingProviderId 依赖也不会误填。
+  // ── 新建表单：协议变化重置默认 URL；provider_key 仅首次派生，手改后不覆盖 ──
   useEffect(() => {
-    if (providerFormOpen && !editingProviderId) {
-      setProviderKey(providerName)
-      setProviderBaseUrl(getProviderDefaultBaseUrl(providerName))
-    }
+    if (!providerFormOpen || editingProviderId) return
+    setProviderBaseUrl(getProviderDefaultBaseUrl(providerName))
+    setProviderKeyTouched(false)
   }, [providerName, providerFormOpen, editingProviderId])
 
   useEffect(() => {
-    if (!canManageOrganization) setProviderScope('user')
-  }, [canManageOrganization])
+    if (!providerFormOpen || editingProviderId || providerKeyTouched) return
+    setProviderKey(buildByokProviderKey(providerName, providerBaseUrl, {
+      existingKeys: existingProviderKeys,
+      officialBaseUrl: getProviderDefaultBaseUrl(providerName),
+    }))
+  }, [
+    providerName,
+    providerBaseUrl,
+    providerFormOpen,
+    editingProviderId,
+    providerKeyTouched,
+    existingProviderKeys,
+  ])
+
+  useEffect(() => {
+    if (!canUseOrgScope) setProviderScope('user')
+  }, [canUseOrgScope])
 
   useEffect(() => {
     if (editingModelId || !modelProviderId) return
@@ -1014,7 +1079,6 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
     const isUserDefault = model.id === userDefaultModelId
     const canBeOrganizationDefault = canManageOrganization && canUseAsWorkspaceDefault(model)
     const canBeUserDefault = canUseAsPersonalDefault(model)
-    const scopeLabel = model.is_user_config ? t('llm.models.userOnly') : t('llm.models.organizationOnly')
     const statusLabel = isActive
       ? t('llm.models.statusReady', { defaultValue: '可用' })
       : !isModelProviderRoutingEnabled(model)
@@ -1022,35 +1086,20 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
       : t('llm.models.statusNotReady', { defaultValue: '未就绪' })
 
     return (
-      <div key={model.id} className="group flex items-center gap-3 rounded-md px-2 py-1.5 hover:bg-muted/20 transition-colors">
+      <div key={model.id} className="group flex items-center gap-2 rounded-md px-1.5 py-1 hover:bg-muted/20 transition-colors">
         <div className={cn('h-1.5 w-1.5 rounded-full shrink-0', isActive ? 'bg-success' : 'bg-muted-foreground/30')} title={statusLabel} />
         <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-body font-medium text-foreground truncate">{model.display_name}</span>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="text-body text-foreground truncate">{model.display_name}</span>
             {isOrganizationDefault && (
-              <span className="text-caption text-accent bg-accent/10 px-1.5 py-0.5 rounded">{t('llm.default.organizationLabel', { defaultValue: '团队默认' })}</span>
+              <span className="text-caption text-accent">{t('llm.default.organizationLabel', { defaultValue: '团队默认' })}</span>
             )}
             {isUserDefault && (
-              <span className="text-caption text-success bg-success/10 px-1.5 py-0.5 rounded">{t('llm.default.userLabel', { defaultValue: '我的默认' })}</span>
+              <span className="text-caption text-success">{t('llm.default.userLabel', { defaultValue: '我的默认' })}</span>
             )}
-            <span className={cn(
-              'rounded px-1.5 py-0.5 text-caption',
-              isActive ? 'bg-success/10 text-success' : 'bg-muted/40 text-muted-foreground/80',
-            )}>
-              {statusLabel}
-            </span>
-            <span className="text-caption text-muted-foreground/40">{scopeLabel}</span>
-            <span className={cn(
-              'text-caption px-1 rounded',
-              model.supports_vision ? 'bg-accent/10 text-accent' : 'bg-muted/40 text-muted-foreground/80',
-            )}>
-              {model.supports_vision
-                ? t('llm.models.multimodal', { defaultValue: '多模态' })
-                : t('llm.models.textOnly', { defaultValue: '文本' })}
-            </span>
-          </div>
-          <div className="text-caption text-muted-foreground/40 truncate">
-            {model.name} · {model.max_tokens} tokens
+            {!isActive && (
+              <span className="text-caption text-muted-foreground/70">{statusLabel}</span>
+            )}
           </div>
         </div>
         <div className="flex items-center gap-2 shrink-0">
@@ -1167,8 +1216,329 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
         </p>
       )}
 
+      {/* ── 分区一：TabTin 预置模型（平台内置，开箱即用） ── */}
+      {systemModels.length > 0 && (
+          <SettingsSectionCard
+            title={t('llm.presetSection.title', { defaultValue: 'TabTin 预置模型' })}
+          subtitle={t('llm.presetSection.subtitle', { defaultValue: '平台内置模型，开箱即用，可设为个人或团队默认。' })}
+          subtitleAsTooltip
+        >
+          <div className="space-y-0.5">
+            {previewSystemModels.map((model) => {
+              const isActive = isModelEnabled(model)
+              const isOrganizationDefault = model.id === organizationDefaultModelId
+              const isUserDefault = model.id === userDefaultModelId
+              const statusLabel = isActive
+                ? t('llm.models.statusReady', { defaultValue: '可用' })
+                : !isModelProviderRoutingEnabled(model)
+                ? t('llm.models.statusProviderDisabled', { defaultValue: '渠道未启用' })
+                : t('llm.models.statusNotReady', { defaultValue: '未就绪' })
+              return (
+                <div key={model.id} className="flex items-center gap-3 rounded-md px-2 py-2">
+                  <div className={cn('h-1.5 w-1.5 rounded-full shrink-0', isActive ? 'bg-success' : 'bg-muted-foreground/30')} title={statusLabel} />
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-body text-foreground truncate">{model.display_name}</span>
+                      <span className={cn(
+                        'rounded px-1.5 py-0.5 text-caption',
+                        isActive ? 'bg-success/10 text-success' : 'bg-muted/40 text-muted-foreground/80',
+                      )}>
+                        {statusLabel}
+                      </span>
+                      {isOrganizationDefault && (
+                        <span className="text-caption text-accent bg-accent/10 px-1.5 py-0.5 rounded">{t('llm.default.organizationLabel', { defaultValue: '团队默认' })}</span>
+                      )}
+                      {isUserDefault && (
+                        <span className="text-caption text-success bg-success/10 px-1.5 py-0.5 rounded">{t('llm.default.userLabel', { defaultValue: '我的默认' })}</span>
+                      )}
+                    </div>
+                    <div className="text-caption text-muted-foreground/40 truncate">
+                      {model.name} · {model.provider_display_name} · {model.max_tokens} tokens
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+            {systemModels.length > PRESET_MODEL_PREVIEW_LIMIT && (
+              <button
+                type="button"
+                onClick={() => setPresetModelsExpanded((expanded) => !expanded)}
+                className="px-2 pt-2 text-left text-caption text-muted-foreground/60 hover:text-foreground transition-colors"
+              >
+                {presetModelsExpanded
+                  ? t('llm.presetSection.collapse', { defaultValue: '收起' })
+                  : t('llm.presetSection.viewAll', { defaultValue: '查看全部 →' })}
+              </button>
+            )}
+          </div>
+        </SettingsSectionCard>
+      )}
+
+      {/* ── 我的模型服务 ── */}
       <SettingsSectionCard
-        title={t('llm.defaultConfig.title', { defaultValue: '默认模型配置' })}
+        title={t('llm.byokSection.title')}
+        subtitle={t('llm.byokSection.subtitle')}
+        actions={(
+          <SettingsLink onClick={() => byokConnectRef.current?.open()}>
+            {'+ ' + t('llm.providers.createApi')}
+          </SettingsLink>
+        )}
+        bodyClassName="space-y-3"
+      >
+        <ByokConnectEntries
+          ref={byokConnectRef}
+          organizationId={organizationId}
+          canManageOrganization={canManageOrganization}
+          isPersonalOrganization={isPersonalOrganization}
+          disabled={loading}
+          existingProviderKeys={existingProviderKeys}
+          onSuccess={async (message) => {
+            await loadAll()
+            await refreshChatModels(organizationId)
+            if (message) setNotice({ type: 'success', message })
+          }}
+        />
+        <div className="space-y-2">
+          <div className="space-y-3">
+            {customProviders.length === 0
+              && !(OPENAI_CODEX_BYOK_UI_ENABLED && openAICodexStatus.connected) ? (
+              <p className="text-caption text-muted-foreground/60 py-1">{t('llm.providers.empty')}</p>
+            ) : (
+              <>
+                {OPENAI_CODEX_BYOK_UI_ENABLED && openAICodexStatus.connected && (
+                  <div className="overflow-hidden rounded-md border border-border/50 bg-background">
+                    <div className="flex items-start gap-3 px-3 py-2.5">
+                      <div className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-success" />
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="text-body font-medium text-foreground">{t('llm.codex.vendorLabel')}</span>
+                          <span className="rounded bg-success/10 px-1.5 py-0.5 text-caption text-success">
+                            {t('llm.providers.connected')}
+                          </span>
+                        </div>
+                        <p className="mt-0.5 text-caption text-muted-foreground">
+                          {t('llm.codex.accountLogin')} · {t('llm.codex.devicePersonal')}
+                        </p>
+                        <p className="text-caption text-muted-foreground/70">{t('llm.codex.deviceOnly')}</p>
+                        <p className="mt-1.5 text-caption text-muted-foreground">
+                          {t('llm.providers.modelCount', { count: openAICodexStatus.models.length })}
+                        </p>
+                        <div className="mt-1 flex flex-wrap gap-1">
+                          {openAICodexStatus.models.map((model) => (
+                            <span key={model.id} className="rounded bg-muted/50 px-1.5 py-0.5 text-caption text-foreground">
+                              {model.displayName}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="flex shrink-0 items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => byokConnectRef.current?.openPlan('chatgpt_codex')}
+                          className="text-caption text-muted-foreground/80 transition-colors hover:text-foreground"
+                        >
+                          {t('llm.codex.reconnect')}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => void handleDisconnectOpenAICodex()}
+                          className="text-caption text-muted-foreground/80 transition-colors hover:text-destructive"
+                        >
+                          {t('llm.codex.disconnect')}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {customProviders.map((provider) => {
+                const providerModels = modelsByProviderId.get(provider.id) ?? []
+                const routingEnabled = isProviderRoutingEnabled(provider)
+                const probeResult = providerProbeResults[provider.id]
+                const canManageProvider = provider.scope !== 'organization' || canManageOrganization
+                const connectivityStatus = resolveProviderConnectivityStatus({
+                  routingEnabled,
+                  runtimeStatus: provider.runtime_status,
+                  latestProbe: probeResult,
+                })
+                const degradedReason = resolveProviderDegradedReason({
+                  healthSuccessRate: provider.health_success_rate,
+                  healthAverageLatencyMs: provider.health_avg_latency_ms,
+                  healthConsecutiveFailures: provider.health_consecutive_failures,
+                })
+                const degradedStatusLabel = {
+                  recent_failures: t('llm.providers.statusDegraded', { defaultValue: '近期有失败' }),
+                  slow_response: t('llm.providers.statusSlowResponse', { defaultValue: '响应较慢' }),
+                  recovering: t('llm.providers.statusRecovering', { defaultValue: '恢复观察中' }),
+                  unstable: t('llm.providers.statusUnstable', { defaultValue: '连接不稳定' }),
+                }[degradedReason]
+                const statusColor = connectivityStatus === 'paused' ? 'bg-muted-foreground/20'
+                  : connectivityStatus === 'healthy' ? 'bg-success'
+                  : connectivityStatus === 'degraded' ? 'bg-warning'
+                  : connectivityStatus === 'unhealthy' ? 'bg-destructive'
+                  : 'bg-muted-foreground/40'
+                const planPreset = findPlanPresetByProviderKey(provider.provider_key)
+                const previewModels = providerModels.slice(0, SERVICE_MODEL_PREVIEW_LIMIT)
+                const hiddenModelCount = Math.max(0, providerModels.length - previewModels.length)
+                const modelsExpanded = expandedServiceId === provider.id
+                const statusLabel = connectivityStatus === 'paused'
+                  ? t('llm.providers.routingPaused', { defaultValue: '已暂停路由' })
+                  : connectivityStatus === 'healthy'
+                  ? t('llm.providers.statusNormal', { defaultValue: '正常' })
+                  : connectivityStatus === 'degraded'
+                  ? degradedStatusLabel
+                  : connectivityStatus === 'unhealthy'
+                  ? t('llm.providers.statusUnhealthy', { defaultValue: '连通异常' })
+                  : t('llm.providers.statusUnknown', { defaultValue: '未测试' })
+                const statusBadgeClass = connectivityStatus === 'paused'
+                  ? 'bg-muted/40 text-muted-foreground/80'
+                  : connectivityStatus === 'healthy'
+                  ? 'bg-success/10 text-success'
+                  : connectivityStatus === 'degraded'
+                  ? 'bg-warning/10 text-warning'
+                  : connectivityStatus === 'unhealthy'
+                  ? 'bg-destructive/10 text-destructive'
+                  : 'bg-muted/40 text-muted-foreground/80'
+
+                return (
+                  <div key={provider.id} className="overflow-hidden rounded-md border border-border/50 bg-background">
+                    <div className="flex items-start gap-3 px-3 py-2.5">
+                      <div className={cn('mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full', statusColor)} title={statusLabel} />
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="text-body font-medium text-foreground truncate">{provider.display_name || provider.name}</span>
+                          <span className={cn('rounded px-1.5 py-0.5 text-caption', statusBadgeClass)}>
+                            {statusLabel}
+                          </span>
+                        </div>
+                        <p className="mt-0.5 text-caption text-muted-foreground">
+                          {getServiceProtocolLabel(provider, t)}
+                          {formatServiceEndpoint(provider.base_url) && (
+                            <>
+                              <span className="mx-1 text-muted-foreground/40">·</span>
+                              {formatServiceEndpoint(provider.base_url)}
+                            </>
+                          )}
+                        </p>
+                        <div className="mt-0.5 flex flex-wrap items-center gap-2">
+                          <VisibilityLabel scope={provider.scope} />
+                          {!routingEnabled && (
+                            <span className="text-caption text-muted-foreground/60">
+                              {t('llm.providers.routingDisabledHint', { defaultValue: '聊天不会自动选用' })}
+                            </span>
+                          )}
+                        </div>
+                        <p className="mt-1.5 text-caption text-muted-foreground">
+                          {t('llm.providers.modelCount', { count: providerModels.length })}
+                        </p>
+                        {providerModels.length > 0 && (
+                          <div className="mt-1 flex flex-wrap gap-1">
+                            {previewModels.map((model) => (
+                              <span key={model.id} className="rounded bg-muted/50 px-1.5 py-0.5 text-caption text-foreground">
+                                {model.display_name}
+                              </span>
+                            ))}
+                            {hiddenModelCount > 0 && (
+                              <button
+                                type="button"
+                                onClick={() => setExpandedServiceId(modelsExpanded ? null : provider.id)}
+                                className="rounded bg-muted/40 px-1.5 py-0.5 text-caption text-muted-foreground hover:text-foreground"
+                              >
+                                {t('llm.providers.moreModels', { count: hiddenModelCount })}
+                              </button>
+                            )}
+                          </div>
+                        )}
+                        {probeResult && (
+                          <div className={cn(
+                            'mt-1 truncate text-caption',
+                            probeResult.type === 'success' ? 'text-success' : 'text-destructive',
+                          )}>
+                            {probeResult.message}
+                          </div>
+                        )}
+                        {!probeResult
+                          && !!provider.health_last_error
+                          && (connectivityStatus === 'unhealthy' || connectivityStatus === 'degraded')
+                          && (
+                            <div className="mt-1 truncate text-caption text-destructive">
+                              {provider.health_last_error}
+                            </div>
+                          )}
+                      </div>
+                      <div className="flex flex-col items-end gap-1.5 shrink-0">
+                        <div className="flex flex-wrap items-center justify-end gap-2">
+                          <button type="button" onClick={() => openProviderEditDialog(provider)} disabled={!canManageProvider} className="text-caption text-muted-foreground/80 hover:text-foreground transition-colors disabled:opacity-30">
+                            {planPreset ? t('llm.providers.editKey') : t('llm.providers.edit')}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleProbeProvider(provider)}
+                            disabled={validatingProviderId === provider.id || providerModels.length === 0}
+                            className="text-caption text-muted-foreground/80 hover:text-foreground transition-colors disabled:opacity-30"
+                            title={providerModels.length === 0 ? t('llm.providers.testRequiresModel') : undefined}
+                          >
+                            {validatingProviderId === provider.id ? t('llm.providers.validating', { defaultValue: '测试中' }) : t('llm.providers.testConnection', { defaultValue: '测试' })}
+                          </button>
+                          <button type="button" onClick={() => handleDeleteProvider(provider)} disabled={!canManageProvider} className="text-caption text-muted-foreground/80 hover:text-destructive transition-colors disabled:opacity-30">
+                            {t('llm.providers.delete')}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setMoreActionsId(moreActionsId === provider.id ? null : provider.id)}
+                            className="text-caption text-muted-foreground/60 hover:text-foreground"
+                          >
+                            {t('llm.providers.moreActions')}
+                          </button>
+                        </div>
+                        {moreActionsId === provider.id && (
+                          <button type="button" onClick={() => handleToggleProvider(provider)} disabled={!canManageProvider} className="text-caption text-muted-foreground/80 hover:text-foreground transition-colors disabled:opacity-30">
+                            {routingEnabled ? t('llm.providers.pauseRouting', { defaultValue: '暂停路由' }) : t('llm.providers.resumeRouting', { defaultValue: '启用路由' })}
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="border-t border-border/20 bg-muted/10 px-3 py-2">
+                      <div className="space-y-1">
+                        {(modelsExpanded || providerModels.length <= SERVICE_MODEL_PREVIEW_LIMIT) && providerModels.map((model) => renderByokModelRow(model))}
+                        {providerModels.length === 0 && (
+                          <p className="text-caption text-muted-foreground/60 py-1">{t('llm.models.emptyUnderProvider')}</p>
+                        )}
+                        <div className="mt-1 flex flex-wrap items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => openModelDialogForProvider(provider)}
+                            disabled={!canManageProvider}
+                            className="inline-flex items-center gap-1 rounded-md px-1.5 py-1 text-caption font-medium text-accent hover:bg-accent/10 transition-colors disabled:opacity-30"
+                          >
+                            <Plus className="h-3 w-3" />
+                            {t('llm.models.addUnderProvider')}
+                          </button>
+                          {providerModels.length > SERVICE_MODEL_PREVIEW_LIMIT && (
+                            <button
+                              type="button"
+                              onClick={() => setExpandedServiceId(modelsExpanded ? null : provider.id)}
+                              className="text-caption text-muted-foreground hover:text-foreground"
+                            >
+                              {modelsExpanded
+                                ? t('llm.presetSection.collapse')
+                                : t('llm.providers.manageModels')}
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+                })}
+              </>
+            )}
+          </div>
+        </div>
+      </SettingsSectionCard>
+
+      <SettingsSectionCard
+        title={t('llm.defaultConfig.title', { defaultValue: '默认模型' })}
         subtitle={t('llm.defaultConfig.subtitle', {
           defaultValue: '我的默认只影响当前账号，团队默认由组织管理员配置。',
         })}
@@ -1178,7 +1548,7 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
         <ChipTabBar
           value={defaultConfigScope}
           onValueChange={setDefaultConfigScope}
-          ariaLabel={t('llm.defaultConfig.title', { defaultValue: '默认模型配置' })}
+          ariaLabel={t('llm.defaultConfig.title', { defaultValue: '默认模型' })}
           items={[
             { value: 'user', label: t('llm.defaultConfig.userDefaultsTab', { defaultValue: '我的' }) },
             { value: 'organization', label: t('llm.defaultConfig.organizationDefaultsTab', { defaultValue: '团队' }) },
@@ -1304,298 +1674,6 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
         </SettingsRowGroup>
       </SettingsSectionCard>
 
-      {/* ── 分区一：TabTin 预置模型（平台内置，开箱即用） ── */}
-      {systemModels.length > 0 && (
-          <SettingsSectionCard
-            title={t('llm.presetSection.title', { defaultValue: 'TabTin 预置模型' })}
-          subtitle={t('llm.presetSection.subtitle', { defaultValue: '平台内置模型，开箱即用，可设为个人或团队默认。' })}
-          subtitleAsTooltip
-        >
-          <div className="space-y-0.5">
-            {previewSystemModels.map((model) => {
-              const isActive = isModelEnabled(model)
-              const isOrganizationDefault = model.id === organizationDefaultModelId
-              const isUserDefault = model.id === userDefaultModelId
-              const statusLabel = isActive
-                ? t('llm.models.statusReady', { defaultValue: '可用' })
-                : !isModelProviderRoutingEnabled(model)
-                ? t('llm.models.statusProviderDisabled', { defaultValue: '渠道未启用' })
-                : t('llm.models.statusNotReady', { defaultValue: '未就绪' })
-              return (
-                <div key={model.id} className="flex items-center gap-3 rounded-md px-2 py-2">
-                  <div className={cn('h-1.5 w-1.5 rounded-full shrink-0', isActive ? 'bg-success' : 'bg-muted-foreground/30')} title={statusLabel} />
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-body text-foreground truncate">{model.display_name}</span>
-                      <span className={cn(
-                        'rounded px-1.5 py-0.5 text-caption',
-                        isActive ? 'bg-success/10 text-success' : 'bg-muted/40 text-muted-foreground/80',
-                      )}>
-                        {statusLabel}
-                      </span>
-                      {isOrganizationDefault && (
-                        <span className="text-caption text-accent bg-accent/10 px-1.5 py-0.5 rounded">{t('llm.default.organizationLabel', { defaultValue: '团队默认' })}</span>
-                      )}
-                      {isUserDefault && (
-                        <span className="text-caption text-success bg-success/10 px-1.5 py-0.5 rounded">{t('llm.default.userLabel', { defaultValue: '我的默认' })}</span>
-                      )}
-                    </div>
-                    <div className="text-caption text-muted-foreground/40 truncate">
-                      {model.name} · {model.provider_display_name} · {model.max_tokens} tokens
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-            {systemModels.length > PRESET_MODEL_PREVIEW_LIMIT && (
-              <button
-                type="button"
-                onClick={() => setPresetModelsExpanded((expanded) => !expanded)}
-                className="px-2 pt-2 text-left text-caption text-muted-foreground/60 hover:text-foreground transition-colors"
-              >
-                {presetModelsExpanded
-                  ? t('llm.presetSection.collapse', { defaultValue: '收起预置模型' })
-                  : t('llm.presetSection.expandHint', {
-                    defaultValue: '还有 {{count}} 个平台模型，展开查看全部。',
-                    count: systemModels.length - PRESET_MODEL_PREVIEW_LIMIT,
-                  })}
-              </button>
-            )}
-          </div>
-        </SettingsSectionCard>
-      )}
-
-      {/* ── 分区二：自定义模型（BYOK）：渠道嵌套模型 ── */}
-      <SettingsSectionCard
-        title={t('llm.byokSection.title')}
-        subtitle={(
-          <>
-            <p>{t('llm.byokSection.subtitle')}</p>
-            <p className="mt-1.5">{t('llm.byokSection.introUsageText')}</p>
-          </>
-        )}
-        subtitleAsTooltip
-        bodyClassName="space-y-4"
-      >
-        <ByokConnectEntries
-          ref={byokConnectRef}
-          organizationId={organizationId}
-          canManageOrganization={canManageOrganization}
-          disabled={loading}
-          onSuccess={async (message) => {
-            await loadAll()
-            await refreshChatModels(organizationId)
-            setNotice({ type: 'success', message })
-          }}
-        />
-        <SettingsSection
-          title={t('llm.providers.title')}
-          subtitle={t('llm.providers.desc')}
-          subtitleAsTooltip
-          action={customProviders.length > 0 ? (
-            <SettingsLink onClick={() => byokConnectRef.current?.openApi()}>
-              {'+ ' + t('llm.providers.createApi')}
-            </SettingsLink>
-          ) : undefined}
-        >
-          <div className="space-y-3">
-            {customProviders.length === 0
-              && !(OPENAI_CODEX_BYOK_UI_ENABLED && openAICodexStatus.connected) ? (
-              <p className="text-caption text-muted-foreground/60 py-1">{t('llm.providers.empty')}</p>
-            ) : (
-              <>
-                {OPENAI_CODEX_BYOK_UI_ENABLED && openAICodexStatus.connected && (
-                  <div className="overflow-hidden rounded-lg border border-border/40">
-                    <div className="flex items-center gap-3 px-3 py-2.5">
-                      <div className="h-1.5 w-1.5 shrink-0 rounded-full bg-success" />
-                      <div className="min-w-0 flex-1">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-body font-medium text-foreground">{t('llm.codex.vendorLabel')}</span>
-                          <span className="rounded bg-success/10 px-1.5 py-0.5 text-caption text-success">
-                            {t('llm.models.statusReady', { defaultValue: '可用' })}
-                          </span>
-                        </div>
-                        <div className="mt-0.5 text-caption text-muted-foreground/40">
-                          {t('llm.providers.codexLocalHint')}
-                        </div>
-                      </div>
-                      <div className="flex shrink-0 items-center gap-2">
-                        <button
-                          type="button"
-                          onClick={() => byokConnectRef.current?.openPlan('chatgpt_codex')}
-                          className="text-caption text-muted-foreground/80 transition-colors hover:text-foreground"
-                        >
-                          {t('llm.codex.reconnect')}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => void handleDisconnectOpenAICodex()}
-                          className="text-caption text-muted-foreground/80 transition-colors hover:text-destructive"
-                        >
-                          {t('llm.codex.disconnect')}
-                        </button>
-                      </div>
-                    </div>
-                    <div className="border-t border-border/20 bg-muted/5 px-3 py-2">
-                      <div className="ml-2 border-l border-border/30 pl-3">
-                        <p className="text-caption text-muted-foreground/60">
-                          {openAICodexStatus.models.map((model) => model.displayName).join(' · ')}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                {customProviders.map((provider) => {
-                const providerModels = modelsByProviderId.get(provider.id) ?? []
-                const routingEnabled = isProviderRoutingEnabled(provider)
-                const probeResult = providerProbeResults[provider.id]
-                const canManageProvider = provider.scope !== 'organization' || canManageOrganization
-                const connectivityStatus = resolveProviderConnectivityStatus({
-                  routingEnabled,
-                  runtimeStatus: provider.runtime_status,
-                  latestProbe: probeResult,
-                })
-                const degradedReason = resolveProviderDegradedReason({
-                  healthSuccessRate: provider.health_success_rate,
-                  healthAverageLatencyMs: provider.health_avg_latency_ms,
-                  healthConsecutiveFailures: provider.health_consecutive_failures,
-                })
-                const degradedStatusLabel = {
-                  recent_failures: t('llm.providers.statusDegraded', { defaultValue: '近期有失败' }),
-                  slow_response: t('llm.providers.statusSlowResponse', { defaultValue: '响应较慢' }),
-                  recovering: t('llm.providers.statusRecovering', { defaultValue: '恢复观察中' }),
-                  unstable: t('llm.providers.statusUnstable', { defaultValue: '连接不稳定' }),
-                }[degradedReason]
-                const statusColor = connectivityStatus === 'paused' ? 'bg-muted-foreground/20'
-                  : connectivityStatus === 'healthy' ? 'bg-success'
-                  : connectivityStatus === 'degraded' ? 'bg-warning'
-                  : connectivityStatus === 'unhealthy' ? 'bg-destructive'
-                  : 'bg-muted-foreground/40'
-                const statusLabel = connectivityStatus === 'paused'
-                  ? t('llm.providers.routingPaused', { defaultValue: '已暂停路由' })
-                  : connectivityStatus === 'healthy'
-                  ? t('llm.providers.statusHealthy', { defaultValue: '连通正常' })
-                  : connectivityStatus === 'degraded'
-                  ? degradedStatusLabel
-                  : connectivityStatus === 'unhealthy'
-                  ? t('llm.providers.statusUnhealthy', { defaultValue: '连通异常' })
-                  : t('llm.providers.statusUnknown', { defaultValue: '未测试' })
-                const statusBadgeClass = connectivityStatus === 'paused'
-                  ? 'bg-muted/40 text-muted-foreground/80'
-                  : connectivityStatus === 'healthy'
-                  ? 'bg-success/10 text-success'
-                  : connectivityStatus === 'degraded'
-                  ? 'bg-warning/10 text-warning'
-                  : connectivityStatus === 'unhealthy'
-                  ? 'bg-destructive/10 text-destructive'
-                  : 'bg-muted/40 text-muted-foreground/80'
-
-                return (
-                  <div key={provider.id} className="rounded-lg border border-border/40 overflow-hidden">
-                    <div className="group flex items-center gap-3 px-3 py-2.5 hover:bg-muted/10 transition-colors">
-                      <div className={cn('h-1.5 w-1.5 rounded-full shrink-0', statusColor)} title={statusLabel} />
-                      <div className="min-w-0 flex-1">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-body font-medium text-foreground truncate">{provider.display_name || provider.name}</span>
-                          <ByokBadge scope={provider.scope} />
-                          <span className={cn('rounded px-1.5 py-0.5 text-caption', statusBadgeClass)}>
-                            {statusLabel}
-                          </span>
-                          {!routingEnabled && (
-                            <span className="text-caption text-muted-foreground/60 bg-muted/40 px-1.5 py-0.5 rounded">
-                              {t('llm.providers.routingDisabledHint', { defaultValue: '聊天不会自动选用' })}
-                            </span>
-                          )}
-                          {(provider.key_count ?? 0) > 0 && (
-                            <span className="text-caption text-muted-foreground/40 flex items-center gap-0.5" title={t('llm.providers.keyCount', { count: provider.key_count })}>
-                              <KeyRound className="h-2.5 w-2.5" />{provider.key_count}
-                            </span>
-                          )}
-                        </div>
-                        <div className="text-caption text-muted-foreground/40 truncate">
-                          {provider.base_url}
-                          {provider.health_success_rate != null && (provider.health_total_checks ?? 0) > 0 && (
-                            <span
-                              className={cn(
-                                'ml-1',
-                                (connectivityStatus === 'unhealthy' || connectivityStatus === 'degraded') && 'opacity-60',
-                              )}
-                              title={t('llm.providers.healthSuccessRateHistorical', {
-                                defaultValue: '历史累计健康检查成功率（含周期探测与真实调用，不代表最近一次测试）',
-                              })}
-                            >
-                              {t('llm.providers.healthSuccessRateShort', { rate: provider.health_success_rate })}
-                            </span>
-                          )}
-                          {provider.health_avg_latency_ms != null && provider.health_avg_latency_ms > 0 && (
-                            <span className="ml-1" title={t('llm.providers.healthAvgLatency')}>{t('llm.providers.healthAvgLatencyShort', { ms: Math.round(provider.health_avg_latency_ms) })}</span>
-                          )}
-                        </div>
-                        {probeResult ? (
-                          <div className={cn(
-                            'mt-1 truncate text-caption',
-                            probeResult.type === 'success' ? 'text-success' : 'text-destructive',
-                          )}>
-                            {t('llm.providers.probeResult', { defaultValue: '连通性测试' })}: {probeResult.message}
-                          </div>
-                        ) : (
-                          !!provider.health_last_error
-                          && (connectivityStatus === 'unhealthy' || connectivityStatus === 'degraded')
-                          && (
-                            <div className="mt-1 truncate text-caption text-destructive">
-                              {t('llm.providers.probeResult', { defaultValue: '连通性测试' })}: {provider.health_last_error}
-                            </div>
-                          )
-                        )}
-                      </div>
-                      <div className="flex flex-wrap items-center justify-end gap-2 shrink-0">
-                        <button type="button" onClick={() => openProviderEditDialog(provider)} disabled={!canManageProvider} className="text-caption text-muted-foreground/80 hover:text-foreground transition-colors disabled:opacity-30">
-                          {t('llm.providers.edit')}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handleProbeProvider(provider)}
-                          disabled={validatingProviderId === provider.id || providerModels.length === 0}
-                          className="text-caption text-muted-foreground/80 hover:text-foreground transition-colors disabled:opacity-30"
-                          title={providerModels.length === 0 ? t('llm.providers.testRequiresModel') : undefined}
-                        >
-                          {validatingProviderId === provider.id ? t('llm.providers.validating', { defaultValue: '测试中' }) : t('llm.providers.testConnection', { defaultValue: '测试连接' })}
-                        </button>
-                        <button type="button" onClick={() => handleToggleProvider(provider)} disabled={!canManageProvider} className="text-caption text-muted-foreground/80 hover:text-foreground transition-colors disabled:opacity-30">
-                          {routingEnabled ? t('llm.providers.pauseRouting', { defaultValue: '暂停路由' }) : t('llm.providers.resumeRouting', { defaultValue: '启用路由' })}
-                        </button>
-                        <button type="button" onClick={() => handleDeleteProvider(provider)} disabled={!canManageProvider} className="text-caption text-muted-foreground/80 hover:text-destructive transition-colors disabled:opacity-30">
-                          {t('llm.providers.delete')}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="border-t border-border/20 bg-muted/5 px-3 py-2">
-                      <div className="ml-2 border-l border-border/30 pl-3 space-y-1">
-                        {providerModels.length === 0 ? (
-                          <p className="text-caption text-muted-foreground/60 py-1">{t('llm.models.emptyUnderProvider')}</p>
-                        ) : (
-                          providerModels.map((model) => renderByokModelRow(model))
-                        )}
-                        <button
-                          type="button"
-                          onClick={() => openModelDialogForProvider(provider)}
-                          disabled={!canManageProvider}
-                          className="mt-1 inline-flex items-center gap-1 rounded-md px-2 py-1 text-caption font-medium text-accent hover:bg-accent/10 transition-colors disabled:opacity-30"
-                        >
-                          <Plus className="h-3 w-3" />
-                          {t('llm.models.addUnderProvider')}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )
-                })}
-              </>
-            )}
-          </div>
-        </SettingsSection>
-      </SettingsSectionCard>
 
       {/* ── 添加/编辑渠道弹窗 ── */}
       {providerFormOpen && (
@@ -1605,9 +1683,11 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 space-y-1.5">
                 <DialogTitle>
-                  {editingProviderId ? t('llm.providers.edit') : t('llm.providers.createApiTitle')}
+                  {editingProviderId ? t('llm.providers.editTitle') : t('llm.providers.createApiTitle')}
                 </DialogTitle>
-                <DialogDescription>{t('llm.providers.createApiDesc')}</DialogDescription>
+                <DialogDescription>
+                  {editingProviderId ? t('llm.byokSection.subtitle') : t('llm.providers.createApiDesc')}
+                </DialogDescription>
               </div>
               {(providerScope === 'organization' || providerScope === 'user') && !editingProviderId && (
                 <ByokScenarioHint />
@@ -1640,19 +1720,50 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="organization" disabled={!canManageOrganization}>{t('llm.providers.scopeOrganization')}</SelectItem>
-                    <SelectItem value="user">{t('llm.providers.scopeUser')}</SelectItem>
+                    <SelectItem value="organization" disabled={!canUseOrgScope}>
+                      {t('llm.providers.scopeOrganization')} · {t('llm.serviceCatalog.scopeOrgDesc')}
+                    </SelectItem>
+                    <SelectItem value="user">
+                      {t('llm.providers.scopeUser')} · {t('llm.serviceCatalog.scopePersonalDesc')}
+                    </SelectItem>
                   </SelectContent>
                 </Select>
-                {!canManageOrganization && <p className="text-caption text-muted-foreground/40">{t('llm.providers.scopeHint')}</p>}
+                {!canUseOrgScope && (
+                  <p className="text-caption text-muted-foreground/40">
+                    {isPersonalOrganization
+                      ? t('llm.providers.scopePersonalAccountHint')
+                      : t('llm.providers.scopeHint')}
+                  </p>
+                )}
               </div>
+              {providerAdvancedOpen && (
               <div className="space-y-1.5">
                 <label className="text-body text-muted-foreground/80">{t('llm.providers.providerKey')}</label>
-                <Input className={cn('h-8 text-body', SETTINGS_CONTROL)} value={providerKey} onChange={(e) => setProviderKey(e.target.value)} placeholder="openai_official" disabled={!!editingProviderId} />
+                <Input
+                  className={cn('h-8 text-body', SETTINGS_CONTROL)}
+                  value={providerKey}
+                  onChange={(e) => {
+                    setProviderKeyTouched(true)
+                    setProviderKey(e.target.value)
+                  }}
+                  placeholder="openai-openrouter"
+                  disabled={!!editingProviderId}
+                />
+                <p className="text-caption text-muted-foreground/60">{t('llm.providers.providerKeyHint')}</p>
               </div>
+              )}
               <div className="space-y-1.5">
                 <label className="text-body text-muted-foreground/80">{t('llm.providers.displayName')}</label>
-                <Input className={cn('h-8 text-body', SETTINGS_CONTROL)} value={providerDisplayName} onChange={(e) => setProviderDisplayName(e.target.value)} placeholder="OpenAI 官方" />
+                <Input
+                  className={cn('h-8 text-body', SETTINGS_CONTROL)}
+                  value={providerDisplayName}
+                  onChange={(e) => setProviderDisplayName(e.target.value)}
+                  placeholder={suggestByokConnectionName(
+                    providerTypeOptions.find((option) => option.value === providerName)?.label || providerName,
+                    providerBaseUrl,
+                    providerName,
+                  )}
+                />
               </div>
               <div className="col-span-2 space-y-1.5">
                 <label htmlFor="organization-provider-base-url" className="text-body text-muted-foreground/80">
@@ -1702,6 +1813,13 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
                 {t('llm.providers.createModelHint')}
               </p>
             )}
+            <button
+              type="button"
+              onClick={() => setProviderAdvancedOpen((open) => !open)}
+              className="text-caption text-muted-foreground hover:text-foreground"
+            >
+              {t('llm.serviceCatalog.advancedSettings')}
+            </button>
 
             {/* ── 密钥管理区域（编辑模式下显示） ── */}
             {editingProviderId && (
@@ -1843,7 +1961,6 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
                 {modelProviderLocked && selectedModelProvider ? (
                   <div className={cn('flex h-8 items-center rounded-md border bg-muted/20 px-3 text-body', SETTINGS_CONTROL)}>
                     <span className="truncate">{selectedModelProvider.display_name || selectedModelProvider.name}</span>
-                    <span className="ml-2 truncate text-caption text-muted-foreground/60">({selectedModelProvider.provider_key})</span>
                   </div>
                 ) : (
                   <Select value={modelProviderId} onValueChange={setModelProviderId}>
@@ -1852,7 +1969,7 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
                     </SelectTrigger>
                     <SelectContent>
                       {availableModelProviders.map((p) => (
-                        <SelectItem key={p.id} value={p.id}>{p.display_name} ({p.provider_key})</SelectItem>
+                        <SelectItem key={p.id} value={p.id}>{p.display_name}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -1932,58 +2049,39 @@ export const OrganizationModelSettings: React.FC<OrganizationModelSettingsProps>
               </div>
             </div>
 
-            <div className="space-y-1.5 rounded-md border border-border/20 bg-muted/10 px-3 py-2">
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <p className="text-body text-muted-foreground/80">
-                    {t('llm.models.endpointSource', { defaultValue: '请求地址' })}
-                  </p>
-                  <p className="truncate text-caption text-muted-foreground/60">
-                    {modelEndpointOverrideOpen
-                      ? t('llm.models.endpointOverrideActive', { defaultValue: '此模型使用单独的 API Base URL。' })
-                      : t('llm.models.endpointInherit', {
-                        defaultValue: '默认使用渠道 Base URL：{{url}}',
-                        url: selectedModelProvider?.base_url || modelBaseUrl || '-',
-                      })}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setModelEndpointOverrideOpen((open) => !open)}
-                  className="shrink-0 text-caption text-accent hover:text-accent/80 transition-colors"
-                >
-                  {modelEndpointOverrideOpen
-                    ? t('llm.models.hideEndpointOverride', { defaultValue: '收起高级' })
-                    : t('llm.models.showEndpointOverride', { defaultValue: '高级：覆盖 URL' })}
-                </button>
-              </div>
-              {modelEndpointOverrideOpen && (
-                <div className="space-y-1.5 pt-2">
-                  <label className="text-body text-muted-foreground/80">
-                    {t('llm.models.baseUrl', { defaultValue: 'API Base URL' })}
+            <p className="truncate text-caption text-muted-foreground/60">
+              {t('llm.models.endpointInherit', {
+                defaultValue: '使用渠道地址：{{url}}',
+                url: selectedModelProvider?.base_url || modelBaseUrl || '-',
+              })}
+            </p>
+
+            <div className="space-y-2 rounded-md border border-border/20 bg-muted/10 px-3 py-2">
+              <button
+                type="button"
+                onClick={() => setModelAdvancedOpen((open) => !open)}
+                className="text-caption text-accent hover:text-accent/80"
+              >
+                {modelAdvancedOpen
+                  ? t('llm.models.hideEndpointOverride', { defaultValue: '收起高级' })
+                  : t('llm.models.advancedCapabilities', { defaultValue: '高级能力' })}
+              </button>
+              {modelAdvancedOpen && (
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
+                  <label className="flex items-center gap-2 text-body text-muted-foreground/80">
+                    <Switch checked={modelSupportsFunctionCalling} onCheckedChange={setModelSupportsFunctionCalling} />
+                    {t('llm.models.supportsFunctionCalling')}
                   </label>
-                  <Input
-                    className={cn('h-8 text-body', SETTINGS_CONTROL)}
-                    value={modelBaseUrl}
-                    onChange={(e) => setModelBaseUrl(e.target.value)}
-                    placeholder={selectedModelProvider?.base_url || 'https://api.openai.com/v1'}
-                  />
-                  <p className="text-caption text-muted-foreground/40">
-                    {t('llm.models.baseUrlHelp', { defaultValue: '仅当这个模型必须走不同 endpoint 时才需要覆盖；普通模型会继承渠道 Base URL。' })}
-                  </p>
+                  <label className="flex items-center gap-2 text-body text-muted-foreground/80">
+                    <Switch checked={modelSupportsVision} onCheckedChange={setModelSupportsVision} />
+                    {t('llm.models.supportsVision')}
+                  </label>
+                  <label className="flex items-center gap-2 text-body text-muted-foreground/80">
+                    <Switch checked={modelSupportsStreaming} onCheckedChange={setModelSupportsStreaming} />
+                    {t('llm.models.supportsStreaming')}
+                  </label>
                 </div>
               )}
-            </div>
-
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
-              <label className="flex items-center gap-2 text-body text-muted-foreground/80">
-                <Switch checked={modelSupportsVision} onCheckedChange={setModelSupportsVision} />
-                {t('llm.models.supportsVision')}
-              </label>
-              <label className="flex items-center gap-2 text-body text-muted-foreground/80">
-                <Switch checked={modelSupportsStreaming} onCheckedChange={setModelSupportsStreaming} />
-                {t('llm.models.supportsStreaming')}
-              </label>
             </div>
           </DialogScrollBody>
 
