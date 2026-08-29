@@ -15,8 +15,25 @@ describe('invite link helpers', () => {
   })
 
   it('allows localhost HTTP only for local development invite links', () => {
-    expect(buildPublicInviteBridgeUrl('http://127.0.0.1:5175/', 'abc_123-xyz-456789')).toBe(
-      'http://127.0.0.1:5175/invite/abc_123-xyz-456789',
+    expect(buildPublicInviteBridgeUrl('http://127.0.0.1:5176/', 'abc_123-xyz-456789')).toBe(
+      'http://127.0.0.1:5176/invite/abc_123-xyz-456789',
+    )
+  })
+
+  it.each([
+    'http://10.0.0.8:5176',
+    'http://172.16.0.8:5176',
+    'http://172.31.255.8:5176',
+    'http://192.168.0.10:5176',
+    'http://169.254.10.8:5176',
+    'http://[fd12:3456:789a::8]:5176',
+    'http://[fe80::8]:5176',
+  ])('allows private LAN HTTP invite web base %s', (baseUrl) => {
+    expect(buildPublicInviteBridgeUrl(baseUrl, 'abc_123-xyz-456789')).toBe(
+      `${baseUrl}/invite/abc_123-xyz-456789`,
+    )
+    expect(buildDesktopInviteDeepLink('abc_123-xyz-456789', baseUrl)).toBe(
+      'tabtin-dev://invite/abc_123-xyz-456789',
     )
   })
 

@@ -5,6 +5,8 @@ import test from 'node:test'
 const scriptDirectory = new URL('./', import.meta.url)
 const buildScript = readFileSync(new URL('build-packaged-app.sh', scriptDirectory), 'utf8')
 const example = readFileSync(new URL('../.env.community.example', scriptDirectory), 'utf8')
+const localDevExample = readFileSync(new URL('../.env.localdev.example', scriptDirectory), 'utf8')
+const packageConfig = JSON.parse(readFileSync(new URL('../package.json', scriptDirectory), 'utf8'))
 
 const COMMUNITY_ENDPOINTS = {
   TABTIN_COMMUNITY_API_BASE_URL: [
@@ -42,4 +44,16 @@ test('community profile validates endpoint inputs before packaging', () => {
     )
   }
   assert.match(buildScript, /echo "Invalid \$\{name\}/, 'shared validator must fail with the input name')
+})
+
+test('Mac packages declare why Community needs local-network access', () => {
+  assert.match(
+    packageConfig.build.mac.extendInfo.NSLocalNetworkUsageDescription ?? '',
+    /Community.*局域网|Community.*本地网络/,
+  )
+})
+
+test('local packaged profile points public invitation links at tabtin-web port 5176', () => {
+  assert.match(localDevExample, /^VITE_PUBLIC_WEB_BASE_URL=http:\/\/<YOUR_LAN_IP>:5176$/m)
+  assert.match(localDevExample, /^TABTIN_PUBLIC_WEB_BASE_URL=\$\{VITE_PUBLIC_WEB_BASE_URL\}$/m)
 })

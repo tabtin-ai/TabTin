@@ -4,7 +4,9 @@ import { describe, expect, it } from 'vitest'
 const require = createRequire(import.meta.url)
 const {
   createFusePolicy,
+  createWindowsAsarIntegrityList,
   resolveFuseProfile,
+  restoreWindowsAsarIntegrity,
 } = require('../../scripts/flip-electron-fuses.cjs')
 
 describe('flip-electron-fuses profile policy', () => {
@@ -32,5 +34,47 @@ describe('flip-electron-fuses profile policy', () => {
       TABTIN_RUNTIME_PROFILE: 'local',
       TABTIN_BUILD_PROFILE: 'local',
     })).toBe('production')
+  })
+
+  it('restores Windows ASAR integrity after the fuse rewrite', async () => {
+    const calls: Array<{ kind: string; value: unknown }> = []
+    const asarIntegrity = {
+      'resources/app.asar': { algorithm: 'SHA256', hash: 'header-hash' },
+    }
+
+    await restoreWindowsAsarIntegrity('/pack/tabtin-community.exe', {
+      computeData: async (options: unknown) => {
+        calls.push({ kind: 'compute', value: options })
+        return asarIntegrity
+      },
+      writeWindowsAsarIntegrityResource: async (exePath: string, integrity: unknown) => {
+        calls.push({ kind: 'write', value: { exePath, integrity } })
+      },
+    })
+
+    expect(calls).toEqual([
+      {
+        kind: 'compute',
+        value: {
+          resourcesPath: '/pack/resources',
+          resourcesRelativePath: 'resources',
+        },
+      },
+      {
+        kind: 'write',
+        value: {
+          exePath: '/pack/tabtin-community.exe',
+          integrity: asarIntegrity,
+        },
+      },
+    ])
+
+    expect(createWindowsAsarIntegrityList(asarIntegrity)).toEqual([
+      {
+        file: 'resources\\app.asar',
+        alg: 'SHA256',
+        value: 'header-hash',
+      },
+    ])
   })
 })

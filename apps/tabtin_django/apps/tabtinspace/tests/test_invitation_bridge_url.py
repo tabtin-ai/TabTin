@@ -13,10 +13,27 @@ def test_build_invitation_bridge_url_uses_public_web_base(monkeypatch):
 
 
 def test_build_invitation_bridge_url_allows_localhost_http(monkeypatch):
-    monkeypatch.setenv('TABTIN_PUBLIC_WEB_BASE_URL', 'http://127.0.0.1:5175/')
+    monkeypatch.setenv('TABTIN_PUBLIC_WEB_BASE_URL', 'http://127.0.0.1:5176/')
 
     assert build_invitation_bridge_url('abc_123-xyz-456789') == (
-        'http://127.0.0.1:5175/invite/abc_123-xyz-456789'
+        'http://127.0.0.1:5176/invite/abc_123-xyz-456789'
+    )
+
+
+@pytest.mark.parametrize('base_url', [
+    'http://10.0.0.8:5176',
+    'http://172.16.0.8:5176',
+    'http://172.31.255.8:5176',
+    'http://192.168.0.10:5176',
+    'http://169.254.10.8:5176',
+    'http://[fd12:3456:789a::8]:5176',
+    'http://[fe80::8]:5176',
+])
+def test_build_invitation_bridge_url_allows_private_lan_http(monkeypatch, base_url):
+    monkeypatch.setenv('TABTIN_PUBLIC_WEB_BASE_URL', base_url)
+
+    assert build_invitation_bridge_url('abc_123-xyz-456789') == (
+        f'{base_url}/invite/abc_123-xyz-456789'
     )
 
 

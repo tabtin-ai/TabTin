@@ -3,7 +3,7 @@ import { app } from 'electron'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
-export type TabTinRuntimeProfile = 'development' | 'local' | 'preprod' | 'production'
+export type TabTinRuntimeProfile = 'development' | 'local' | 'community' | 'preprod' | 'production'
 
 export interface TabTinAppIdentity {
   profile: TabTinRuntimeProfile
@@ -24,6 +24,12 @@ const PROFILE_IDENTITIES: Record<TabTinRuntimeProfile, TabTinAppIdentity> = {
     appId: 'com.tabtin.app.local',
     productName: 'TabTin Local',
     userDataDirName: 'TabTin Local',
+  },
+  community: {
+    profile: 'community',
+    appId: 'com.tabtin.community',
+    productName: 'TabTin Community',
+    userDataDirName: 'TabTin Community',
   },
   preprod: {
     profile: 'preprod',
@@ -46,6 +52,7 @@ function normalizeProfile(value: string | undefined): TabTinRuntimeProfile | und
   if (!normalized) return undefined
   if (normalized === 'dev' || normalized === 'development') return 'development'
   if (normalized === 'local' || normalized === 'localdev') return 'local'
+  if (normalized === 'community') return 'community'
   if (normalized === 'preprod' || normalized === 'preproduction') return 'preprod'
   if (normalized === 'prod' || normalized === 'production') return 'production'
   return undefined
@@ -55,6 +62,7 @@ function inferProfileFromText(value: string | undefined): TabTinRuntimeProfile |
   const normalized = value?.trim().toLowerCase()
   if (!normalized) return undefined
   if (normalized.includes('preprod')) return 'preprod'
+  if (normalized.includes('community')) return 'community'
   if (normalized.includes('com.tabtin.app.local')) return 'local'
   if (/(^|[^a-z0-9])tabtin[^a-z0-9]+local([^a-z0-9]|$)/.test(normalized)) return 'local'
   return undefined

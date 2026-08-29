@@ -3,6 +3,7 @@ const {
   readdirSync,
   statSync,
 } = require('node:fs')
+const { readFile, writeFile } = require('node:fs/promises')
 const { createRequire } = require('node:module')
 const path = require('node:path')
 
@@ -22,6 +23,82 @@ function loadElectronFusesModule() {
   throw new Error(
     '[electron-fuses] 无法解析 @electron/fuses。请确认 apps/tabtin-electron/node_modules/@electron/fuses 存在。',
   )
+}
+
+function loadElectronBuilderAsarIntegrityTools() {
+  const requireCandidates = []
+  if (require.main?.filename) {
+    requireCandidates.push(createRequire(require.main.filename))
+  }
+  if (process.argv[1]) {
+    requireCandidates.push(createRequire(path.resolve(process.argv[1])))
+  }
+
+  const appPackageJson = path.resolve(__dirname, '../../../apps/tabtin-electron/package.json')
+  if (existsSync(appPackageJson)) {
+    const appRequire = createRequire(appPackageJson)
+    try {
+      const electronBuilderPackageJson = appRequire.resolve('electron-builder/package.json')
+      requireCandidates.push(createRequire(electronBuilderPackageJson))
+    } catch {
+      // Isolated deploy trees load this hook from the electron-builder process.
+    }
+  }
+
+  for (const candidateRequire of requireCandidates) {
+    try {
+      const { computeData } = candidateRequire('app-builder-lib/out/asar/integrity')
+      const resedit = candidateRequire('resedit')
+      if (typeof computeData === 'function' && resedit?.NtExecutable) {
+        return { computeData, resedit }
+      }
+    } catch {
+      // Try the next resolver. pnpm keeps app-builder-lib beside electron-builder.
+    }
+  }
+
+  throw new Error(
+    '[electron-fuses] 无法解析 electron-builder 的 Windows ASAR 完整性工具，不能生成可启动的 Windows 包。',
+  )
+}
+
+function createWindowsAsarIntegrityList(asarIntegrity) {
+  return Object.entries(asarIntegrity).map(([file, { algorithm: alg, hash: value }]) => ({
+    // A Windows Electron process looks up resources\\app.asar. When Windows is
+    // cross-packaged on macOS, path.join in electron-builder emits '/', which
+    // makes the embedded record invisible to Electron at startup.
+    file: file.replaceAll('/', '\\'),
+    alg,
+    value,
+  }))
+}
+
+async function writeWindowsAsarIntegrityResource(exePath, asarIntegrity, resedit) {
+  const buffer = await readFile(exePath)
+  const executable = resedit.NtExecutable.from(buffer)
+  const resource = resedit.NtExecutableResource.from(executable)
+  const versionInfo = resedit.Resource.VersionInfo.fromEntries(resource.entries)
+  if (versionInfo.length !== 1) {
+    throw new Error(`[electron-fuses] 无法解析 Windows 版本资源: ${exePath}`)
+  }
+  const languages = versionInfo[0].getAllLanguagesForStringValues()
+  if (languages.length !== 1) {
+    throw new Error(`[electron-fuses] 无法定位 Windows 资源语言: ${exePath}`)
+  }
+
+  const integrityList = createWindowsAsarIntegrityList(asarIntegrity)
+  resource.entries = resource.entries.filter(
+    (entry) => !(entry.type === 'INTEGRITY' && entry.id === 'ELECTRONASAR'),
+  )
+  resource.entries.push({
+    type: 'INTEGRITY',
+    id: 'ELECTRONASAR',
+    bin: Buffer.from(JSON.stringify(integrityList)),
+    lang: languages[0].lang,
+    codepage: languages[0].codepage,
+  })
+  resource.outputResource(executable)
+  await writeFile(exePath, Buffer.from(executable.generate()))
 }
 
 function parseBoolean(value, defaultValue = false) {
@@ -266,7 +343,24 @@ function resolveResourcesPath(appPath, electronPlatformName = process.platform) 
   if (electronPlatformName === 'darwin' || electronPlatformName === 'mas') {
     return path.join(appPath, 'Contents', 'Resources')
   }
+  if (electronPlatformName === 'win32' && appPath.toLowerCase().endsWith('.exe')) {
+    return path.join(path.dirname(appPath), 'resources')
+  }
   return path.join(appPath, 'resources')
+}
+
+async function restoreWindowsAsarIntegrity(appPath, tools = loadElectronBuilderAsarIntegrityTools()) {
+  const resourcesPath = resolveResourcesPath(appPath, 'win32')
+  const asarIntegrity = await tools.computeData({
+    resourcesPath,
+    resourcesRelativePath: 'resources',
+  })
+  if (Object.keys(asarIntegrity).length === 0) {
+    throw new Error(`[electron-fuses] 未在 ${resourcesPath} 找到 ASAR，无法恢复 Windows 完整性资源`)
+  }
+  const writer = tools.writeWindowsAsarIntegrityResource ?? writeWindowsAsarIntegrityResource
+  await writer(appPath, asarIntegrity, tools.resedit)
+  return asarIntegrity
 }
 
 async function applyElectronFuses(context, fusesModule) {
@@ -282,6 +376,17 @@ async function applyElectronFuses(context, fusesModule) {
   }
 
   await resolvedModule.flipFuses(appPath, config)
+
+  // Re-embed INTEGRITY/ELECTRONASAR after the fuse rewrite. This also normalizes
+  // its file path to Windows separators: macOS cross-builds otherwise record
+  // resources/app.asar, while Electron asks for resources\\app.asar and aborts
+  // before main JS with archive_win.cc:142.
+  if (
+    context?.electronPlatformName === 'win32'
+    && policy.enableEmbeddedAsarIntegrityValidation
+  ) {
+    await restoreWindowsAsarIntegrity(appPath)
+  }
 
   return { appPath, policy, config }
 }
@@ -322,5 +427,9 @@ module.exports.createWireConfig = createWireConfig
 module.exports.getBrowserV8SnapshotCandidates = getBrowserV8SnapshotCandidates
 module.exports.assertBrowserV8SnapshotPresent = assertBrowserV8SnapshotPresent
 module.exports.resolveResourcesPath = resolveResourcesPath
+module.exports.loadElectronBuilderAsarIntegrityTools = loadElectronBuilderAsarIntegrityTools
+module.exports.createWindowsAsarIntegrityList = createWindowsAsarIntegrityList
+module.exports.writeWindowsAsarIntegrityResource = writeWindowsAsarIntegrityResource
+module.exports.restoreWindowsAsarIntegrity = restoreWindowsAsarIntegrity
 module.exports.applyElectronFuses = applyElectronFuses
 module.exports.flipElectronFusesHook = flipElectronFusesHook

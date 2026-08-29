@@ -5,6 +5,7 @@ import os
 import re
 import secrets
 import logging
+from ipaddress import ip_address, ip_network
 from typing import List, Dict, Any
 from urllib.parse import quote, urlparse
 from uuid import UUID
@@ -83,16 +84,30 @@ def _check_invite_rate_limit(organization_id: UUID, invite_type: str) -> None:
             cache.set(cache_key, 1, period_seconds)
 
 
-def _is_local_http_host(hostname: str | None) -> bool:
+PRIVATE_HTTP_NETWORKS = (
+    ip_network('10.0.0.0/8'),
+    ip_network('172.16.0.0/12'),
+    ip_network('192.168.0.0/16'),
+    ip_network('169.254.0.0/16'),
+    ip_network('fc00::/7'),
+    ip_network('fe80::/10'),
+)
+
+
+def _is_private_lan_http_host(hostname: str | None) -> bool:
     if not hostname:
         return False
     normalized = hostname.lower()
-    return (
+    if (
         normalized == 'localhost'
         or normalized.endswith('.localhost')
-        or normalized == '127.0.0.1'
-        or normalized == '::1'
-    )
+    ):
+        return True
+    try:
+        address = ip_address(normalized.split('%', 1)[0])
+    except ValueError:
+        return False
+    return address.is_loopback or any(address in network for network in PRIVATE_HTTP_NETWORKS)
 
 
 def _resolve_public_web_base_url() -> str:
@@ -105,9 +120,9 @@ def _resolve_public_web_base_url() -> str:
             raise ImproperlyConfigured(f'{key} must be an absolute HTTP(S) URL')
         if parsed.scheme == 'https':
             return value.rstrip('/')
-        if parsed.scheme == 'http' and _is_local_http_host(parsed.hostname):
+        if parsed.scheme == 'http' and _is_private_lan_http_host(parsed.hostname):
             return value.rstrip('/')
-        raise ImproperlyConfigured(f'{key} must use HTTPS outside localhost')
+        raise ImproperlyConfigured(f'{key} must use HTTPS outside localhost or a private LAN')
     raise ImproperlyConfigured(
         'TABTIN_PUBLIC_WEB_BASE_URL or VITE_PUBLIC_WEB_BASE_URL is required for invitation links'
     )
