@@ -161,6 +161,30 @@ describe('app-identity', () => {
     })
   })
 
+  it('packaged community runtime keeps an isolated identity and userData path', () => {
+    mocks.app.isPackaged = true
+    mocks.app.getName.mockReturnValue('TabTin Community')
+    mocks.readFileSync.mockReturnValue(JSON.stringify({
+      build: {
+        extraMetadata: {
+          tabtinDesktop: {
+            buildProfile: 'community',
+          },
+        },
+      },
+    }))
+
+    expect(applyRuntimeAppIdentity()).toMatchObject({
+      profile: 'community',
+      appId: 'com.tabtin.community',
+      productName: 'TabTin Community',
+    })
+    expect(mocks.app.setPath).toHaveBeenCalledWith(
+      'userData',
+      join('/Users/test/Library/Application Support', 'TabTin Community'),
+    )
+  })
+
   it('packaged preprod runtime is inferred from the app bundle resources path', () => {
     mocks.app.isPackaged = true
     mocks.app.getName.mockReturnValue('TabTin')
@@ -206,7 +230,7 @@ describe('app-identity', () => {
   it('treats only packaged local as dev-like in packaged mode', () => {
     mocks.app.isPackaged = true
 
-    for (const profile of ['preprod', 'production'] as const) {
+    for (const profile of ['community', 'preprod', 'production'] as const) {
       process.env.TABTIN_RUNTIME_PROFILE = profile
       expect(resolveIsDevRuntime()).toBe(false)
     }
@@ -225,7 +249,7 @@ describe('app-identity', () => {
   })
 
   it('keeps every runtime profile in a distinct macOS Safe Storage namespace', () => {
-    const profiles = ['development', 'local', 'preprod', 'production'] as const
+    const profiles = ['development', 'local', 'community', 'preprod', 'production'] as const
     const safeStorageNames = profiles.map((profile) => {
       process.env.TABTIN_RUNTIME_PROFILE = profile
       return `${resolveRuntimeAppIdentity().productName} Safe Storage`
@@ -240,6 +264,7 @@ describe('app-identity', () => {
 
   it('keeps production default Workspace root compatible while isolating other profiles', () => {
     expect(resolveDefaultWorkspaceDirectoryName('production')).toBe('TabTin')
+    expect(resolveDefaultWorkspaceDirectoryName('community')).toBe('TabTin Community')
     expect(resolveDefaultWorkspaceDirectoryName('preprod')).toBe('TabTin Preprod')
     expect(resolveDefaultWorkspaceDirectoryName('development')).toBe('TabTin Dev')
     expect(resolveDefaultWorkspaceDirectoryName('local')).toBe('TabTin Local')

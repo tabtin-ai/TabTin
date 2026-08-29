@@ -10,7 +10,8 @@
  */
 
 import { spawnSync } from 'node:child_process'
-import { existsSync, readdirSync, statSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
+import { createRequire } from 'node:module'
 import { basename, join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
@@ -114,7 +115,29 @@ export function readWindowsPeProductVersion(exePath) {
     }
     return String(result.stdout || '').trim()
   }
-  throw new Error(`failed to read ProductVersion: ${lastError}`)
+
+  // Cross-packaging Windows on macOS/Linux has no PowerShell. electron-builder
+  // already ships resedit, so read the same PE version resource in-process.
+  try {
+    const localRequire = createRequire(import.meta.url)
+    const electronBuilderPackageJson = localRequire.resolve('electron-builder/package.json')
+    const electronBuilderRequire = createRequire(electronBuilderPackageJson)
+    const { NtExecutable, NtExecutableResource, Resource } = electronBuilderRequire('resedit')
+    const executable = NtExecutable.from(readFileSync(exePath))
+    const resource = NtExecutableResource.from(executable)
+    const versionInfo = Resource.VersionInfo.fromEntries(resource.entries)
+    if (versionInfo.length !== 1) {
+      throw new Error(`expected one version resource, found ${versionInfo.length}`)
+    }
+    const languages = versionInfo[0].getAllLanguagesForStringValues()
+    if (languages.length === 0) {
+      throw new Error('version resource has no language')
+    }
+    return String(versionInfo[0].getStringValues(languages[0]).ProductVersion || '').trim()
+  } catch (error) {
+    const fallbackError = error instanceof Error ? error.message : String(error)
+    throw new Error(`failed to read ProductVersion: ${lastError}; resedit: ${fallbackError}`)
+  }
 }
 
 function parseArgs(argv) {

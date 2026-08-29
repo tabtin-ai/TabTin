@@ -1,0 +1,14 @@
+services:
+  django:
+    environment:
+      ALLOW_LAN_HOSTS_IN_DEBUG: 'True'
+      ALLOWED_HOSTS: localhost,127.0.0.1,django,192.168.0.10
+      CSRF_TRUSTED_ORIGINS: http://localhost:6060,http://127.0.0.1:6060,http://192.168.0.10:6060
+      CORS_ALLOWED_ORIGINS: http://localhost:5175,http://127.0.0.1:5175,http://192.168.0.10:5175,tabtin-file://app
+      TABTIN_PUBLIC_BASE_URL: http://192.168.0.10:6060
+    ports: !override
+      - '0.0.0.0:6060:6060'
+
+  centrifugo:
+    ports: !override
+      - '0.0.0.0:8100:8100'

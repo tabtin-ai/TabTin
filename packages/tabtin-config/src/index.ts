@@ -41,13 +41,35 @@ function normalizeUrl(value: string): string {
 }
 
 function isLocalHttpHost(hostname: string): boolean {
-  const normalized = hostname.toLowerCase();
+  const normalized = hostname.toLowerCase().replace(/^\[|\]$/g, '');
   return (
     normalized === 'localhost' ||
     normalized.endsWith('.localhost') ||
     normalized === '127.0.0.1' ||
-    normalized === '::1' ||
-    normalized === '[::1]'
+    normalized === '::1'
+  );
+}
+
+function isPrivateLanHttpHost(hostname: string): boolean {
+  const normalized = hostname.toLowerCase().replace(/^\[|\]$/g, '').split('%')[0];
+  if (isLocalHttpHost(normalized)) return true;
+
+  const ipv4 = normalized.split('.').map((part) => Number(part));
+  if (ipv4.length === 4 && ipv4.every((part) => Number.isInteger(part) && part >= 0 && part <= 255)) {
+    const [first, second] = ipv4;
+    return (
+      first === 10 ||
+      (first === 172 && second >= 16 && second <= 31) ||
+      (first === 192 && second === 168) ||
+      (first === 169 && second === 254)
+    );
+  }
+
+  if (!normalized.includes(':')) return false;
+  const firstHextet = Number.parseInt(normalized.split(':', 1)[0] || '0', 16);
+  return (
+    Number.isInteger(firstHextet) &&
+    ((firstHextet & 0xfe00) === 0xfc00 || (firstHextet & 0xffc0) === 0xfe80)
   );
 }
 
@@ -63,10 +85,10 @@ function normalizePublicInviteWebBaseUrl(value: string): string {
   if (parsed.protocol === 'https:') {
     return normalized;
   }
-  if (parsed.protocol === 'http:' && isLocalHttpHost(parsed.hostname)) {
+  if (parsed.protocol === 'http:' && isPrivateLanHttpHost(parsed.hostname)) {
     return normalized;
   }
-  throw new Error('Public invite links must use HTTPS web URLs outside localhost');
+  throw new Error('Public invite links must use HTTPS web URLs outside localhost or a private LAN');
 }
 
 export function isSupportedInviteToken(token: string | null | undefined): token is string {
@@ -87,7 +109,7 @@ function resolveDesktopInviteScheme(publicWebBaseUrl?: string): string {
   try {
     const hostname = new URL(publicWebBaseUrl).hostname.toLowerCase();
     if (hostname === 'web-test.example.com') return TABTIN_PREPROD_DESKTOP_INVITE_SCHEME;
-    if (isLocalHttpHost(hostname)) return TABTIN_DEV_DESKTOP_INVITE_SCHEME;
+    if (isPrivateLanHttpHost(hostname)) return TABTIN_DEV_DESKTOP_INVITE_SCHEME;
   } catch {
     // 调用方仍可使用历史单参数形式；无效环境地址不应破坏邀请 token 生成。
   }

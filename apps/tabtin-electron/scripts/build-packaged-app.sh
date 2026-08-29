@@ -47,7 +47,7 @@ if [ "$PROFILE" = "community" ]; then
   COMMUNITY_API_BASE_URL="${TABTIN_COMMUNITY_API_BASE_URL:-http://127.0.0.1:6060/api}"
   COMMUNITY_COLLAB_WS_BASE="${TABTIN_COMMUNITY_COLLAB_WS_BASE:-ws://127.0.0.1:4100}"
   COMMUNITY_CENTRIFUGO_WS_URL="${TABTIN_COMMUNITY_CENTRIFUGO_WS_URL:-ws://127.0.0.1:8100/connection/websocket}"
-  COMMUNITY_PUBLIC_WEB_BASE_URL="${TABTIN_COMMUNITY_PUBLIC_WEB_BASE_URL:-http://127.0.0.1:6060}"
+  COMMUNITY_PUBLIC_WEB_BASE_URL="${TABTIN_COMMUNITY_PUBLIC_WEB_BASE_URL:-http://127.0.0.1:5176}"
   COMMUNITY_UPDATE_FEED_URL="${TABTIN_COMMUNITY_UPDATE_FEED_URL:-}"
   COMMUNITY_IM_API_BASE_URL="$COMMUNITY_API_BASE_URL"
   COMMUNITY_WS_BASE_URL="$(node -e '
@@ -2166,6 +2166,15 @@ if [ "$TARGET_RUNTIME" = "win32" ]; then
 fi
 pack_time_step_begin "artifact audit and delivery"
 
+# Windows Electron 在进入 main JS 前会强校验 app.asar。跨平台打包时必须
+# 确认 PE 内记录使用 Windows 路径分隔符，避免安装成功但点击无响应。
+if [ "$TARGET_RUNTIME" = "win32" ]; then
+  echo "[5.05/5] Asserting Windows embedded ASAR integrity"
+  node "$SCRIPT_DIR/assert-windows-asar-integrity.mjs" \
+    --app-dir "$ARTIFACT_DIR/win-unpacked" \
+    --exe-name "${PROFILE_EXECUTABLE_NAME}.exe"
+fi
+
 # Windows：标签（文件名/任务 version）必须与 PE ProductVersion 对齐，防止交出去旧包。
 if [ "$TARGET_RUNTIME" = "win32" ] && [ -n "${PROFILE_VERSION:-}" ]; then
   echo "[5.1/5] Asserting Windows installer PE version == ${PROFILE_VERSION}"
@@ -2179,7 +2188,7 @@ fi
 # local 始终 ad-hoc；community 无 Developer ID 时也用 ad-hoc 兜底。
 if [ "$TARGET_RUNTIME" = "darwin" ]; then
   NEED_ADHOC_SIGN=0
-  if [ "$PROFILE" = "local" ]; then
+  if [ "$PROFILE" = "local" ] || [ "${CSC_IDENTITY_AUTO_DISCOVERY:-}" = "false" ]; then
     NEED_ADHOC_SIGN=1
   else
     DEV_ID="$(find_developer_id_identity 2>/dev/null || true)"
@@ -2187,7 +2196,7 @@ if [ "$TARGET_RUNTIME" = "darwin" ]; then
   fi
   if [ "$NEED_ADHOC_SIGN" = "1" ]; then
     APP_COUNT=0
-    for app_bundle in "$ARTIFACT_DIR"/*.app "$ARTIFACT_DIR"/mac-*/*.app; do
+    for app_bundle in "$ARTIFACT_DIR"/*.app "$ARTIFACT_DIR"/mac/*.app "$ARTIFACT_DIR"/mac-*/*.app; do
       [ -d "$app_bundle" ] || continue
       APP_COUNT=$((APP_COUNT + 1))
       echo "[5.25/5] ad-hoc 重签: $(basename "$app_bundle")"
@@ -2196,11 +2205,11 @@ if [ "$TARGET_RUNTIME" = "darwin" ]; then
       codesign --verify --verbose=2 "$app_bundle"
     done
     if [ "$APP_COUNT" -eq 0 ]; then
-      echo "❌ 未找到待 ad-hoc 签名的 macOS .app（产物目录: $ARTIFACT_DIR）" >&2
+      echo "❌ 未找到待 ad-hoc 签名的 macOS .app（产物目录: ${ARTIFACT_DIR}）" >&2
       exit 1
     fi
     # electron-builder 在 flip fuses 后、重签前已打出 DMG/ZIP；用重签后的 .app 重建分发包。
-    for app_bundle in "$ARTIFACT_DIR"/*.app "$ARTIFACT_DIR"/mac-*/*.app; do
+    for app_bundle in "$ARTIFACT_DIR"/*.app "$ARTIFACT_DIR"/mac/*.app "$ARTIFACT_DIR"/mac-*/*.app; do
       [ -d "$app_bundle" ] || continue
       app_base="$(basename "$app_bundle" .app)"
       dmg_path="$ARTIFACT_DIR/${app_base}-${ARTIFACT_VERSION_LABEL}-${ARCH}.dmg"

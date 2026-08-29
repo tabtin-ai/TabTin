@@ -1044,7 +1044,12 @@ interface TabTinAPIShape {
     getFileAtCommit: (
       cwd: string,
       options: { filePath: string; commitHash: string; parent?: boolean },
-    ) => Promise<{ success: boolean; content: string }>
+    ) => Promise<{
+      success: boolean
+      content: string
+      reason?: 'too_large'
+      error?: string
+    }>
     rawDiff: (cwd: string, extraArgs?: string[]) => Promise<{ success: boolean; diff?: string; error?: string }>
     stageFiles: (cwd: string, paths?: string[]) => Promise<{
       success: boolean

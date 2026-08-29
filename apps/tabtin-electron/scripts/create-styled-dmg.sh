@@ -29,6 +29,11 @@ MOUNT_DIR=""
 VOLNAME="$(basename "$APP_BUNDLE" .app)"
 APP_SIZE_MB="$(du -sm "$APP_BUNDLE" | awk '{print $1}')"
 DMG_SIZE_MB="$((APP_SIZE_MB * 2 + 512))"
+DMG_FS="HFS+"
+if [ "$(uname -m)" = "arm64" ]; then
+  # Apple Silicon no longer provides HFS+ image creation in newer macOS.
+  DMG_FS="APFS"
+fi
 
 cleanup() {
   if [ -n "$MOUNT_DIR" ]; then
@@ -38,10 +43,10 @@ cleanup() {
 }
 trap cleanup EXIT
 
-hdiutil create -quiet -volname "$VOLNAME" -size "${DMG_SIZE_MB}m" -fs HFS+ -ov "$RW_DMG"
+hdiutil create -quiet -volname "$VOLNAME" -size "${DMG_SIZE_MB}m" -fs "$DMG_FS" -ov "$RW_DMG"
 MOUNT_DIR="$(
   hdiutil attach "$RW_DMG" -readwrite -noverify \
-    | sed -n 's#^/dev/.*Apple_HFS[[:space:]]*##p' \
+    | awk -F '\t' 'NF >= 3 && $NF ~ /^\/Volumes\// { print $NF }' \
     | tail -n 1
 )"
 if [ -z "$MOUNT_DIR" ] || [ ! -d "$MOUNT_DIR" ]; then
