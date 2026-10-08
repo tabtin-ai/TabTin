@@ -1,0 +1,285 @@
+# ============================================================================
+# TabTin — GitHub Actions 桌面端打包工作流
+#
+# 用法：
+#   1. 把本文件放到仓库的 .github/workflows/ 目录下，例如：
+#        .github/workflows/tabtin-desktop-build.yml
+#   2. 直接推送到 main 即可。手动触发时选平台即可。
+#   3. 产物在该次运行页面底部 "Artifacts" 区下载（保留 14 天）。
+#
+# 设计要点（从 TabTin 源码读出来的约束）：
+#   - 多端 monorepo，桌面端在 apps/tabtin-electron，electron-builder 打包，
+#     产物输出到 apps/tabtin-electron/dist-app/
+#   - 包管理 pnpm@9.15.0（packageManager 锁定），Node >= 18
+#   - Windows 打包必须在 Windows 机器上跑（Git Bash）
+#   - 打包前需 runtimes:fetch 拉 Python / Office 运行时（数百 MB，需缓存）
+#   - 原生模块 node-pty / sharp / onnxruntime-node / @napi-rs/canvas 需
+#     electron-rebuild（postinstall 已处理）
+#   - 签名可选：无证书时打出未签名包，SmartScreen 会警告
+# ============================================================================
+
+name: '🔨 TabTin Desktop Build'
+
+on:
+  # 手动触发（你在 Actions 页面点 Run workflow 时走这里）
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: '要打包的分支'
+        required: true
+        default: 'main'
+        type: string
+      platform:
+        description: '目标平台'
+        required: true
+        type: choice
+        default: 'windows-x64'
+        options:
+          - windows-x64
+          - macos-arm64
+          - macos-x64
+          - linux-x64
+      profile:
+        description: '打包 profile（local = 桌面版，community = 社区服务端配套版）'
+        required: true
+        type: choice
+        default: 'local'
+        options:
+          - local
+          - community
+      skip_runtime_fetch:
+        description: '跳过 Python/Office 运行时拉取（仅调试用，产物可能缺功能）'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: '22'
+  PNPM_VERSION: '9.15.0'
+
+# ---------------------------------------------------------------------------
+# Job 1: 根据选择的平台生成 matrix（只跑你选的那一个，省 runner 时间）
+# ---------------------------------------------------------------------------
+jobs:
+  prepare-matrix:
+    name: Prepare Build Matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Generate build matrix
+        id: set-matrix
+        shell: bash
+        run: |
+          PLATFORM="${{ inputs.platform }}"
+          case "$PLATFORM" in
+            windows-x64)
+              MATRIX='{"include":[{"platform":"windows-x64","os":"windows-2022","arch":"x64"}]}'
+              ;;
+            macos-arm64)
+              MATRIX='{"include":[{"platform":"macos-arm64","os":"macos-14","arch":"arm64"}]}'
+              ;;
+            macos-x64)
+              MATRIX='{"include":[{"platform":"macos-x64","os":"macos-14","arch":"x64"}]}'
+              ;;
+            linux-x64)
+              MATRIX='{"include":[{"platform":"linux-x64","os":"ubuntu-latest","arch":"x64"}]}'
+              ;;
+            *)
+              echo "Unsupported platform: $PLATFORM"
+              exit 1
+              ;;
+          esac
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+          echo "Matrix: $MATRIX" | python3 -m json.tool
+
+  # ---------------------------------------------------------------------------
+  # Job 2: 真正的打包
+  # ---------------------------------------------------------------------------
+  build:
+    name: Build ${{ matrix.platform }} (${{ inputs.profile }})
+    runs-on: ${{ matrix.os }}
+    needs: prepare-matrix
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.prepare-matrix.outputs.matrix) }}
+    env:
+      # 传给 build-packaged-app.sh 的 profile / arch
+      TABTIN_BUILD_PROFILE: ${{ inputs.profile }}
+      TABTIN_BUILD_ARCH: ${{ matrix.arch }}
+      # Node 防 OOM（electron-vite 打包大 monorepo 时容易爆内存）
+      NODE_OPTIONS: '--max-old-space-size=8192'
+      # 让 build-packaged-app.sh 里的 bash 脚本在 Windows 上能跑
+      CI: 'true'
+    steps:
+      # ---- 1. 拉代码 ----
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+          fetch-depth: 0        # 需要完整历史以计算 commit hash
+
+      - name: Get commit hash
+        id: commit
+        shell: bash
+        run: |
+          SHORT=$(git rev-parse --short HEAD)
+          echo "short=$SHORT" >> "$GITHUB_OUTPUT"
+          echo "Commit: $SHORT"
+
+      # ---- 2. 工具链 ----
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          run_install: false     # 下面手动装，便于加缓存
+
+      # ---- 3. 缓存（三级：pnpm store + Electron + 桌面运行时） ----
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/pnpm/store
+          key: pnpm-${{ matrix.platform }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-${{ matrix.platform }}-
+
+      - name: Cache Electron artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ runner.temp }}/.cache/electron
+            ${{ runner.temp }}/.cache/electron-builder
+            ~/.cache/electron
+            ~/.cache/electron-builder
+            ${{ env.LOCALAPPDATA }}/electron/Cache
+            ${{ env.LOCALAPPDATA }}/electron-builder/Cache
+          key: electron-${{ matrix.platform }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            electron-${{ matrix.platform }}-
+
+      # 桌面运行时缓存（Python + Office，数百 MB，强烈建议缓存）
+      # 位置：~/.cache/tabtin-desktop-runtimes
+      - name: Cache desktop runtimes (Python + Office)
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/tabtin-desktop-runtimes
+            packages/python-runtime/runtime
+            packages/office-preview-runtime/runtime
+          key: runtimes-${{ matrix.platform }}-${{ hashFiles('scripts/electron/runtime/desktop-runtime-official-sources.json') }}
+          restore-keys: |
+            runtimes-${{ matrix.platform }}-
+
+      # ---- 4. 安装依赖 ----
+      - name: Install dependencies
+        shell: bash
+        run: pnpm install --frozen-lockfile
+
+      # ---- 5. 拉取 Python / Office 运行时 ----
+      # 默认失败只告警不阻断（脚本本身如此设计），需要时设 --strict
+      - name: Fetch desktop runtimes (Python + Office)
+        if: ${{ !inputs.skip_runtime_fetch }}
+        shell: bash
+        run: |
+          bash scripts/electron/runtime/fetch-desktop-runtimes.sh --platform ${{ matrix.platform }}
+
+      # ---- 6. 平台特定环境准备 ----
+      # Windows: Git Bash 环境下 msiexec 等已可用；确认 build 工具链
+      - name: Verify Windows environment
+        if: startsWith(matrix.platform, 'windows')
+        shell: bash
+        run: |
+          echo "=== Windows environment check ==="
+          uname -a
+          node -v
+          pnpm -v
+          echo "OS=$OS"
+          # 确认 Git Bash 在（build-packaged-app.sh 依赖它）
+          command -v cygpath || echo "cygpath not found (ok on MSYS2)"
+
+      # macOS: 装 Homebrew poppler（LibreOffice 用 dmg 不需要 brew，poppler 需要）
+      - name: Install macOS Homebrew dependencies
+        if: startsWith(matrix.platform, 'macos')
+        shell: bash
+        run: |
+          # poppler 是 office preview 必需，fetch 脚本会调 brew install
+          if ! command -v brew >/dev/null 2>&1; then
+            echo "⚠ Homebrew not found on macOS runner"
+          fi
+
+      # Linux: 装 electron-builder 打包依赖
+      - name: Install Linux dependencies
+        if: startsWith(matrix.platform, 'linux')
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgtk-3-dev libnss3 libatk1.0-0 libatk-bridge2.0-0 \
+            libdrm2 libxcomposite1 libxdamage1 libxrandr2 libgbm1 \
+            libasound2 libxkbcommon0 libxss1 libsecret-1-0 \
+            fakeroot dpkg-dev rpm
+
+      # ---- 7. 打包 ----
+      # 直接调 apps/tabtin-electron 的 bash 脚本（与 pnpm package:electron 等价，
+      # 但参数更直白，且 build-packaged-app.sh 会自己处理 staging / audit）
+      - name: Build desktop app
+        shell: bash
+        working-directory: apps/tabtin-electron
+        run: |
+          echo "=== TabTin desktop build ==="
+          echo "  profile: $TABTIN_BUILD_PROFILE"
+          echo "  arch:    $TABTIN_BUILD_ARCH"
+          echo "  target:  ${{ matrix.platform }}"
+
+          case "${{ matrix.platform }}" in
+            windows-x64|windows-arm64)
+              bash scripts/build-packaged-app.sh win "$TABTIN_BUILD_PROFILE" "$TABTIN_BUILD_ARCH"
+              ;;
+            macos-arm64|macos-x64)
+              ARCH_FLAG="${TABTIN_BUILD_ARCH}"
+              # mac 脚本支持不指定 arch 时全打，这里按 matrix 指定
+              bash scripts/build-packaged-app.sh mac "$TABTIN_BUILD_PROFILE" "$ARCH_FLAG"
+              ;;
+            linux-x64)
+              bash scripts/build-packaged-app.sh linux "$TABTIN_BUILD_PROFILE" "$TABTIN_BUILD_ARCH"
+              ;;
+          esac
+
+      # ---- 8. 列出产物 ----
+      - name: List build artifacts
+        shell: bash
+        run: |
+          echo "=== BUILD ARTIFACTS (apps/tabtin-electron/dist-app) ==="
+          if [ -d "apps/tabtin-electron/dist-app" ]; then
+            ls -lh apps/tabtin-electron/dist-app/
+            echo ""
+            echo "Installers found:"
+            find apps/tabtin-electron/dist-app -maxdepth 1 -type f \
+              \( -name '*.exe' -o -name '*.dmg' -o -name '*.AppImage' -o -name '*.deb' -o -name '*.zip' \) \
+              -exec basename {} \; | sort
+          else
+            echo "❌ dist-app directory not found!"
+            exit 1
+          fi
+
+      # ---- 9. 上传产物 ----
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: tabtin-${{ matrix.platform }}-${{ inputs.profile }}-${{ steps.commit.outputs.short }}
+          path: |
+            apps/tabtin-electron/dist-app/*.exe
+            apps/tabtin-electron/dist-app/*.dmg
+            apps/tabtin-electron/dist-app/*.AppImage
+            apps/tabtin-electron/dist-app/*.deb
+            apps/tabtin-electron/dist-app/*.zip
+          if-no-files-found: error
+          retention-days: 14
