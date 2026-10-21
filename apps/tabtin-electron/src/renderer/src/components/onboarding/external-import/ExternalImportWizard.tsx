@@ -712,7 +712,7 @@ export const ExternalImportFlow: React.FC = () => {
     const agentId = identity.resolveAgentId(targetOrgId)
     if (!agentId) {
       toast({
-        title: '未能识别执行 Agent（小Tin），请先在该组织创建一个工作空间后重试',
+        title: '未能识别执行 Agent（NiiNii），请先在该组织创建一个工作空间后重试',
         variant: 'destructive',
       })
       return

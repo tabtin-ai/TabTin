@@ -1,4 +1,4 @@
-import { TABTIN_APP_ICON_URL } from '@/constants/appIcon'
+import { NIINII_MASCOT_URL } from '@/constants/mascot'
 import { resolveAgentAvatarPresetUrl } from '@/constants/agentAvatarPresets'
 
 export interface AgentAvatarSettings {
@@ -27,9 +27,9 @@ export function extractAgentAvatarUrl(
 
 /**
  * 解析 Agent 身份头像展示 URL。
- * 有已解析头像时使用；否则回退 TabTin logo（与 Space 无头像兜底同源）。
+ * 有已解析头像时使用；否则回退 NiiNii。Space 默认图标独立处理。
  */
 export function resolveAgentAvatarUrl(avatarUrl?: string | null): string {
   const trimmed = avatarUrl?.trim()
-  return trimmed || TABTIN_APP_ICON_URL
+  return trimmed || NIINII_MASCOT_URL
 }

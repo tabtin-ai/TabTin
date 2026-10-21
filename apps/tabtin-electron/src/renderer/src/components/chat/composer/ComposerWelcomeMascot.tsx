@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@utils/cn'
-import companionUrl from '@/assets/brand/tabtin-input-companion.png?url'
+import { NIINII_MASCOT_URL } from '@/constants/mascot'
 
 const MASCOT_REACTION_COOLDOWN_MS = 450
 
@@ -41,7 +41,7 @@ export function ComposerWelcomeMascot({ className }: ComposerWelcomeMascotProps)
       >
         <img
           key={`base-${reactionKey}`}
-          src={companionUrl}
+          src={NIINII_MASCOT_URL}
           alt=""
           draggable={false}
           className={cn(

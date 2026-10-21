@@ -15,19 +15,45 @@
 export const AGENT_NAME_OWNER_TOKEN = '{owner}'
 
 /**
- * 后端 onboarding 固定中文名（见 `onboarding_defaults.py` / ）。
- * 落库仍用中文品牌名；UI 展示时按界面语言本地化。
+ * 后端 onboarding 默认伙伴名（见 `onboarding_defaults.py`）。
+ * 历史实例仅在展示时兼容旧工厂名，不改写用户保存的名称。
  */
-export const DEFAULT_ONBOARDING_AGENT_NAME_ZH = '小Tin'
+export const DEFAULT_ONBOARDING_AGENT_NAME = 'NiiNii'
+export const LEGACY_ONBOARDING_AGENT_NAME_XIAOTIN_ZH = '小Tin'
 /** 历史 onboarding 名，未迁完的存量展示仍识别。 */
 export const LEGACY_ONBOARDING_AGENT_NAME_ZH = '默认 Workspace 执行身份'
 export const LEGACY_ONBOARDING_AGENT_NAME_WANNENG_ZH = '万能Tin'
 
 const KNOWN_DEFAULT_AGENT_NAMES_ZH = new Set([
-  DEFAULT_ONBOARDING_AGENT_NAME_ZH,
+  DEFAULT_ONBOARDING_AGENT_NAME,
+  LEGACY_ONBOARDING_AGENT_NAME_XIAOTIN_ZH,
   LEGACY_ONBOARDING_AGENT_NAME_ZH,
   LEGACY_ONBOARDING_AGENT_NAME_WANNENG_ZH,
+  '默认 Space 执行身份',
 ])
+
+/** 仅识别精确工厂名；带旧品牌前缀的用户自定义名仍原样展示。 */
+const LEGACY_TEMPLATE_AGENT_DISPLAY_NAMES: Record<string, string> = {
+  '小Tin 日常版': 'NiiNii 日常版',
+  '小Tin 代码版': 'NiiNii 代码版',
+  '小Tin 文书版': 'NiiNii 文书版',
+  '小Tin 数据版': 'NiiNii 数据版',
+  '小Tin 冲浪版': 'NiiNii 冲浪版',
+  '小Tin PPT 版': 'NiiNii PPT 版',
+  '小Tin 跑腿版': 'NiiNii 跑腿版',
+  '小Tin 代碼版': 'NiiNii 代碼版',
+  '小Tin 文書版': 'NiiNii 文書版',
+  '小Tin 數據版': 'NiiNii 數據版',
+  '小Tin 衝浪版': 'NiiNii 衝浪版',
+}
+
+export function normalizeKnownAgentDisplayName(rawName: string | null | undefined): string {
+  const name = rawName?.trim() ?? ''
+  if (KNOWN_DEFAULT_AGENT_NAMES_ZH.has(name)) return DEFAULT_ONBOARDING_AGENT_NAME
+  return Object.hasOwn(LEGACY_TEMPLATE_AGENT_DISPLAY_NAMES, name)
+    ? LEGACY_TEMPLATE_AGENT_DISPLAY_NAMES[name]
+    : name
+}
 
 /**
  * 已知系统默认 Agent 名的展示本地化。未知名字原样返回（自定义名不受影响）。
@@ -36,11 +62,11 @@ export function localizeKnownAgentDisplayName(
   rawName: string | null | undefined,
   t: (key: string, opts?: Record<string, unknown>) => string,
 ): string {
-  const name = rawName?.trim() ?? ''
+  const name = normalizeKnownAgentDisplayName(rawName)
   if (!name) return ''
-  if (KNOWN_DEFAULT_AGENT_NAMES_ZH.has(name)) {
+  if (name === DEFAULT_ONBOARDING_AGENT_NAME) {
     return t('myAgents.defaultExecutionIdentityName', {
-      defaultValue: '小Tin',
+      defaultValue: DEFAULT_ONBOARDING_AGENT_NAME,
     })
   }
   return name
@@ -57,7 +83,7 @@ export function hasOwnerToken(rawName: string | null | undefined): boolean {
  *   字面量体面；调用方应尽量传昵称（nickname → username 逐级兜底）。
  */
 export function expandAgentName(rawName: string, ownerName: string | null | undefined): string {
-  if (!hasOwnerToken(rawName)) return rawName
+  if (!hasOwnerToken(rawName)) return normalizeKnownAgentDisplayName(rawName)
   const owner = ownerName?.trim() ?? ''
   return rawName.split(AGENT_NAME_OWNER_TOKEN).join(owner).trim()
 }

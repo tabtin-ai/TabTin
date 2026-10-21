@@ -16,6 +16,8 @@ import { ColorAvatar } from './ColorAvatar'
 import { agentOwnerDisplayName, isAgentExecutionOffline } from './conversationMembers'
 import { MENTION_ALL_ALIASES } from './resolveMentionsFromText'
 import { createLogger } from '@/utils/logger'
+import { normalizeKnownAgentDisplayName } from '@/utils/agentNameInterpolation'
+import { NIINII_MASCOT_URL } from '@/constants/mascot'
 
 const log = createLogger('MentionSelector')
 const EMPTY_CONVERSATION_MEMBERS: ConversationMember[] = []
@@ -61,7 +63,9 @@ function memberDisplayName(
   const resolvedProfileName = profileDisplayName && profileDisplayName !== idFallback
     ? profileDisplayName
     : ''
-  return resolvedProfileName || m.nickname || m.username || idFallback
+  const name = resolvedProfileName || m.nickname || m.username || idFallback
+  const isAgent = m.member_type === 'agent' || (!m.user_id && !!m.agent_id)
+  return isAgent ? normalizeKnownAgentDisplayName(name) : name
 }
 
 function matchesMentionAllQuery(query: string, label: string): boolean {
@@ -314,6 +318,7 @@ export const MentionSelector = forwardRef<MentionSelectorRef, Props>(
                           name={displayName}
                           seed={memberIdentity(member)}
                           imageUrl={member.avatar || undefined}
+                          fallbackImageUrl={isAgent ? NIINII_MASCOT_URL : undefined}
                           isAgent={isAgent}
                           className={`h-7 w-7${offline ? ' opacity-50' : ''}`}
                           fallbackClassName="text-caption"

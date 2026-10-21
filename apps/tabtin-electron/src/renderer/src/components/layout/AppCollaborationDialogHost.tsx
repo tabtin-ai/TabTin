@@ -165,7 +165,7 @@ export const AppCollaborationDialogHost: React.FC = () => {
     <Dialog open={Boolean(request)} onOpenChange={open => { if (!open && !submitting) close() }}>
       <DialogContent className="max-w-lg">
         <DialogHeader>
-          <DialogTitle>发起小Tin协作</DialogTitle>
+          <DialogTitle>发起 NiiNii 协作</DialogTitle>
         </DialogHeader>
         {request ? (
           <div className="space-y-4">

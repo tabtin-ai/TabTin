@@ -79,7 +79,7 @@ function buildPrefixMessage(meta: ArchiveMeta, createdAt?: string): ChatMessage 
     `来自 ${sourceLabel}`,
     title,
     meta.cwd ? `原目录：${meta.cwd}` : null,
-    '上面是外来历史，当作上下文即可——从这里开始，都可以交给小 Tin 继续做',
+    '上面是外来历史，当作上下文即可——从这里开始，都可以交给 NiiNii 继续做',
   ].filter(Boolean).join(' · ')
   const now = createdAt || new Date().toISOString()
   return {

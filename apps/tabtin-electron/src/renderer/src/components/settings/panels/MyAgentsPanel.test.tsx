@@ -1,7 +1,8 @@
 import React from 'react'
 import { render, screen, fireEvent, waitFor, within } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { MyAgentsPanel } from './MyAgentsPanel'
+import { AgentListIdentityAvatar, MyAgentsPanel } from './MyAgentsPanel'
+import { NIINII_MASCOT_URL } from '@/constants/mascot'
 import { useAgentMemoryFocusStore } from '@/services/agentMemoryNavigation'
 
 const mocks = vi.hoisted(() => ({
@@ -65,8 +66,10 @@ vi.mock('@tabtin/app-shell', async (importOriginal) => {
 })
 
 vi.mock('@stores/useOrganizationStore', () => ({
-  useOrganizationStore: (selector: (state: typeof mocks.organizationState) => unknown) =>
-    selector(mocks.organizationState),
+  useOrganizationStore: Object.assign(
+    (selector: (state: typeof mocks.organizationState) => unknown) => selector(mocks.organizationState),
+    { getState: () => mocks.organizationState, subscribe: () => () => undefined },
+  ),
 }))
 
 vi.mock('@stores/useAuthStore', () => ({
@@ -264,7 +267,7 @@ describe('MyAgentsPanel', () => {
     expect(screen.getByTestId('new-agent-dialog')).toBeTruthy()
   })
 
-  it('列表行与详情头共用圆形身份头像（默认 logo / 自定义图，）', async () => {
+  it('列表行与详情头共用圆形身份头像（默认 NiiNii / 自定义图，）', async () => {
     mocks.listOrganizationAgents.mockResolvedValue([
       { id: 'agent-1', name: '小钛', template_id: '' },
     ])
@@ -281,9 +284,23 @@ describe('MyAgentsPanel', () => {
     expect(listAvatar.className).toContain('rounded-full')
     expect(listAvatar.className).toContain('h-9')
     expect(listAvatar.className).toContain('w-9')
-    expect(listAvatar.getAttribute('src')).toBeTruthy()
+    expect(listAvatar.getAttribute('src')).toBe(NIINII_MASCOT_URL)
     expect(detailAvatar.getAttribute('src')).toBe(listAvatar.getAttribute('src'))
     expect(detailAvatar.className).toBe(listAvatar.className)
+  })
+
+  it('身份头像优先自定义图，加载失败后回退 NiiNii 并保持尺寸', () => {
+    render(<AgentListIdentityAvatar agent={{
+      id: 'agent-custom',
+      name: '自定义伙伴',
+      settings: { avatar_url: 'https://cdn.example.com/custom.png' },
+    }} />)
+    const avatar = screen.getByRole('img', { name: '自定义伙伴' })
+    expect(avatar.getAttribute('src')).toBe('https://cdn.example.com/custom.png')
+    fireEvent.error(avatar)
+    expect(avatar.getAttribute('src')).toBe(NIINII_MASCOT_URL)
+    expect(avatar.className).toContain('h-9')
+    expect(avatar.className).toContain('w-9')
   })
 
   it('已保存的人设出现在「人设与规则」编辑区，标题下不再摘要展示', async () => {
@@ -582,7 +599,7 @@ describe('MyAgentsPanel', () => {
 
     render(<MyAgentsPanel />)
 
-    expect((await screen.findAllByText('小Tin')).length).toBeGreaterThan(0)
+    expect((await screen.findAllByText('NiiNii')).length).toBeGreaterThan(0)
     // 列表 / 详情均不得标「自建」；应出现「默认」角标
     expect(screen.queryByText('自建')).toBeNull()
     expect(screen.getAllByText('默认').length).toBeGreaterThan(0)

@@ -18,7 +18,7 @@ class OnboardingDefaults(NamedTuple):
 
 # 产品语言：个人执行现场统一叫 Workspace（见 principle/workspace-project.md）。
 # 默认 Agent 身份名：与 Workspace 名刻意区分，避免「执行者 / 执行现场」混淆。
-DEFAULT_ONBOARDING_AGENT_NAME = "小Tin"
+DEFAULT_ONBOARDING_AGENT_NAME = "NiiNii"
 # 历史 onboarding 名，迁移与展示本地化仍识别。
 LEGACY_ONBOARDING_AGENT_NAME = "默认 Workspace 执行身份"
 LEGACY_ONBOARDING_AGENT_NAME_WANNENG = "万能Tin"

@@ -29,11 +29,11 @@ import { NewAgentDialog } from '@components/sidebar/NewAgentButton'
 import { AgentSkillsPanel } from '@components/space-settings/AgentSkillsPanel'
 import { AgentToolsPanel } from '@components/space-settings/AgentToolsPanel'
 import { AgentMemoryGovernancePanel } from './AgentMemoryGovernancePanel'
-import { TABTIN_APP_ICON_URL } from '@/constants/appIcon'
+import { NIINII_MASCOT_URL } from '@/constants/mascot'
 import { extractAgentAvatarUrl, resolveAgentAvatarUrl } from '@/utils/resolveAgentAvatar'
 import { useAgentMemoryFocusStore } from '@/services/agentMemoryNavigation'
 import { useSkillLibraryContextSpaceId } from './SkillLibraryPanel'
-import { expandAgentName, AGENT_NAME_OWNER_TOKEN } from '@utils/agentNameInterpolation'
+import { expandAgentName, AGENT_NAME_OWNER_TOKEN, normalizeKnownAgentDisplayName } from '@utils/agentNameInterpolation'
 import { resolveAgentSourceBadge } from '@utils/agentSourceBadge'
 import {
   getCachedOrganizationAgents,
@@ -76,7 +76,7 @@ export function formatAgentRelativeTime(
   return new Date(ts).toLocaleDateString()
 }
 
-/** 列表行与详情头共用圆形身份头像：自定义图或 TabTin logo。 */
+/** 列表行与详情头共用圆形身份头像：自定义图或 NiiNii。 */
 export const AgentListIdentityAvatar: React.FC<{
   agent: OrganizationAgentSummary
   /**
@@ -86,7 +86,7 @@ export const AgentListIdentityAvatar: React.FC<{
   size?: 'sm' | 'md' | 'stretch'
   className?: string
 }> = ({ agent, size = 'sm', className }) => {
-  const label = agent.name?.trim() || agent.id
+  const label = normalizeKnownAgentDisplayName(agent.name) || agent.id
   const resolved = resolveAgentAvatarUrl(extractAgentAvatarUrl(agent.settings))
   const [src, setSrc] = React.useState(resolved)
 
@@ -111,7 +111,7 @@ export const AgentListIdentityAvatar: React.FC<{
         className,
       )}
       onError={() => {
-        if (src !== TABTIN_APP_ICON_URL) setSrc(TABTIN_APP_ICON_URL)
+        if (src !== NIINII_MASCOT_URL) setSrc(NIINII_MASCOT_URL)
       }}
     />
   )
@@ -579,7 +579,7 @@ export const MyAgentsPanel: React.FC<MyAgentsPanelProps> = ({
                   <span className="min-w-0 flex-1">
                     <span className="flex min-w-0 items-center gap-1.5">
                       <span className="min-w-0 flex-1 truncate text-body font-medium text-foreground">
-                        {agent.name}
+                        {normalizeKnownAgentDisplayName(agent.name)}
                       </span>
                       {hasDraft ? (
                         <span className={cn(SETTINGS_TEXT_META_BASE, 'text-warning', 'shrink-0 rounded bg-warning/10 px-1 py-0.5')}>
@@ -832,7 +832,7 @@ export const AgentDetailPanel: React.FC<AgentDetailProps> = ({
       }
       setDeactivateConfirmOpen(false)
       toast({
-        title: t('myAgents.deactivateSuccess', { name: agent.name, defaultValue: `「${agent.name}」已停用` }),
+        title: t('myAgents.deactivateSuccess', { name: normalizeKnownAgentDisplayName(agent.name), defaultValue: `「${normalizeKnownAgentDisplayName(agent.name)}」已停用` }),
       })
       onDeactivated()
     } finally {
@@ -904,7 +904,7 @@ export const AgentDetailPanel: React.FC<AgentDetailProps> = ({
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <div className="flex min-w-0 items-center gap-2">
-                    <h2 className="truncate text-subtitle font-semibold text-foreground">{agent.name}</h2>
+                    <h2 className="truncate text-subtitle font-semibold text-foreground">{normalizeKnownAgentDisplayName(agent.name)}</h2>
                     {(() => {
                       const detailSource = resolveAgentSourceBadge(
                         agent,
@@ -1069,7 +1069,7 @@ export const AgentDetailPanel: React.FC<AgentDetailProps> = ({
           <AgentMemoryGovernancePanel
             organizationId={organizationId}
             agentId={agent.id}
-            agentName={agent.name}
+            agentName={normalizeKnownAgentDisplayName(agent.name)}
             focusMemoryId={focusMemoryId ?? undefined}
           />
         </SettingsSectionCard>
@@ -1116,8 +1116,8 @@ export const AgentDetailPanel: React.FC<AgentDetailProps> = ({
           onOpenChange={setDeactivateConfirmOpen}
           title={t('myAgents.deactivateConfirmTitle', { defaultValue: '确认停用这个 AI 分身？' })}
           description={t('myAgents.deactivateConfirmDesc', {
-            name: agent.name,
-            defaultValue: `停用「${agent.name}」后不会出现在 AI 分身列表和会话切换里，可以随时在「已停用」里恢复。`,
+            name: normalizeKnownAgentDisplayName(agent.name),
+            defaultValue: `停用「${normalizeKnownAgentDisplayName(agent.name)}」后不会出现在 AI 分身列表和会话切换里，可以随时在「已停用」里恢复。`,
           })}
           variant="destructive"
           isLoading={deactivating}

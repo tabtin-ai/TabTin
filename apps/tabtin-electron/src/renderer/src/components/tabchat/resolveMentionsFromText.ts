@@ -1,11 +1,18 @@
 import type { ConversationMember } from '@/services/tabchatApi'
+import { normalizeKnownAgentDisplayName } from '@/utils/agentNameInterpolation'
 import { parseMentionMarkdown, stripMentionMarkdown } from './mentionMarkdown'
 
 /** 跨语言识别 @所有人；发送时插入当前 locale 文案，解析时兼容中英文。 */
 export const MENTION_ALL_ALIASES = ['所有人', 'Everyone', 'everyone'] as const
 
 export function memberDisplayName(member: ConversationMember): string {
-  return member.nickname || member.username || member.agent_id || member.user_id || ''
+  const name = member.nickname || member.username || member.agent_id || member.user_id || ''
+  return isAgentMember(member) ? normalizeKnownAgentDisplayName(name) : name
+}
+
+function memberMentionAliases(member: ConversationMember): string[] {
+  const rawName = member.nickname || member.username || member.agent_id || member.user_id || ''
+  return [...new Set([rawName, memberDisplayName(member)])].filter(Boolean)
 }
 
 export function isAgentMember(member: ConversationMember): boolean {
@@ -52,8 +59,7 @@ export function resolveMentionsFromText(
   }
 
   const namedMembers = [...members]
-    .map((member) => ({ member, name: memberDisplayName(member) }))
-    .filter((item) => item.name.length > 0)
+    .flatMap((member) => memberMentionAliases(member).map((name) => ({ member, name })))
   const nameCounts = new Map<string, number>()
   for (const { name } of namedMembers) {
     nameCounts.set(name, (nameCounts.get(name) ?? 0) + 1)

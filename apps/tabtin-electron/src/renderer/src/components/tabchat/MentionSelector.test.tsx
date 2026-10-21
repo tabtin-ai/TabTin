@@ -2,6 +2,7 @@ import React, { createRef } from 'react'
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { MentionSelector, type MentionSelectorRef } from './MentionSelector'
+import { NIINII_MASCOT_URL } from '@/constants/mascot'
 
 const profileCacheMocks = vi.hoisted(() => ({
   ensureProfiles: vi.fn(),
@@ -121,6 +122,24 @@ describe('MentionSelector', () => {
     profileCacheMocks.displayNames = {}
   })
 
+  it('uses NiiNii for a legacy Agent mention while preserving a human name', () => {
+    imStoreMocks.setMembers('group-1', [
+      { ...sampleMember, nickname: '小Tin' },
+      { ...sampleMember, user_id: null, agent_id: 'agent-1', member_type: 'agent', nickname: '小Tin' },
+    ])
+    const onSelect = vi.fn()
+    render(<MentionSelector conversationId="group-1" query="" onSelect={onSelect} onClose={vi.fn()} />)
+
+    expect(screen.getByText('小Tin')).toBeTruthy()
+    fireEvent.mouseDown(screen.getByText('NiiNii'))
+    expect(onSelect).toHaveBeenCalledWith({
+      user_id: null,
+      agent_id: 'agent-1',
+      member_type: 'agent',
+      display_name: 'NiiNii',
+    })
+  })
+
   it('头像加载失败时使用与其他 IM 入口一致的默认头像', () => {
     const ref = createRef<MentionSelectorRef>()
     const { container } = render(
@@ -139,6 +158,34 @@ describe('MentionSelector', () => {
 
     expect(container.querySelector('img')).toBeNull()
     expect(screen.getByText('晨')).toBeTruthy()
+  })
+
+  it('Agent 使用伙伴默认头像，自定义图片优先且失败时回退伙伴', () => {
+    imStoreMocks.setMembers('group-1', [{
+      ...sampleMember,
+      user_id: null,
+      agent_id: 'agent-1',
+      member_type: 'agent',
+      nickname: 'NiiNii',
+      avatar: '',
+    }])
+    const { container } = render(
+      <MentionSelector conversationId="group-1" query="" onSelect={vi.fn()} onClose={vi.fn()} />,
+    )
+    expect(container.querySelector('img')?.getAttribute('src')).toBe(NIINII_MASCOT_URL)
+    expect(container.querySelector('img')?.parentElement?.className).toContain('h-7 w-7')
+
+    act(() => imStoreMocks.setMembers('group-1', [{
+      ...sampleMember,
+      user_id: null,
+      agent_id: 'agent-1',
+      member_type: 'agent',
+      nickname: 'NiiNii',
+      avatar: 'https://example.com/custom.png',
+    }]))
+    expect(container.querySelector('img')?.getAttribute('src')).toBe('https://example.com/custom.png')
+    fireEvent.error(container.querySelector('img')!)
+    expect(container.querySelector('img')?.getAttribute('src')).toBe(NIINII_MASCOT_URL)
   })
 
   it('群聊开启 allowMentionAll 时按设计稿展示所有人与成员分组', () => {

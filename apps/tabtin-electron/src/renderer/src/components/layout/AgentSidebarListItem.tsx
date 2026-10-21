@@ -5,6 +5,7 @@
 import React from 'react'
 import { cn } from '@utils/cn'
 import type { OrganizationAgentSummary } from '@/services/organizationAgentsApi'
+import { normalizeKnownAgentDisplayName } from '@utils/agentNameInterpolation'
 import { AgentListIdentityAvatar } from '@components/settings/panels/MyAgentsPanel'
 import {
   SIDEBAR_BADGE,
@@ -60,7 +61,7 @@ export const AgentSidebarListItem: React.FC<AgentSidebarListItemProps> = ({
           SIDEBAR_ROW_LABEL_GROW,
           isActive ? 'font-medium' : 'font-normal',
         )}>
-          <span className="truncate">{agent.name}</span>
+          <span className="truncate">{normalizeKnownAgentDisplayName(agent.name)}</span>
           {hasDraft && unsavedLabel ? (
             <span className={cn(SIDEBAR_BADGE, 'max-w-none rounded bg-warning/10 px-1 py-0.5 text-warning')}>
               {unsavedLabel}

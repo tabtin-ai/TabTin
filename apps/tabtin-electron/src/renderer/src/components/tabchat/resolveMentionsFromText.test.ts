@@ -84,6 +84,54 @@ describe('resolveMentionsFromText', () => {
     expect(result.mentioned_user_ids).toEqual([])
   })
 
+  const legacyDefault = buildMember({
+    user_id: null,
+    member_type: 'agent',
+    agent_id: 'agent-legacy',
+    nickname: '小Tin',
+  })
+
+  it('识别旧默认 Agent 的 NiiNii 展示别名，也保留旧名称', () => {
+    for (const name of ['NiiNii', '小Tin']) {
+      const result = resolveMentionsFromText(`@${name} 继续处理`, [legacyDefault])
+      expect(result.mentioned_agent_ids).toEqual(['agent-legacy'])
+      expect(result.mentioned_user_ids).toEqual([])
+    }
+  })
+
+  it('规范名与原名相同的 Agent 不会把自己的别名算成冲突', () => {
+    const result = resolveMentionsFromText('@NiiNii 继续处理', [
+      { ...legacyDefault, nickname: 'NiiNii' },
+    ])
+    expect(result.mentioned_agent_ids).toEqual(['agent-legacy'])
+  })
+
+  it('NiiNii 与人类重名时不猜测，但唯一旧别名仍可定位 Agent', () => {
+    const sameNameMembers = [legacyDefault, buildMember({ user_id: 'user-niinii', nickname: 'NiiNii' })]
+    const ambiguous = resolveMentionsFromText('@NiiNii 继续处理', sameNameMembers)
+    expect(ambiguous.mentioned_agent_ids).toEqual([])
+    expect(ambiguous.mentioned_user_ids).toEqual([])
+    expect(resolveMentionsFromText('@小Tin 继续处理', sameNameMembers).mentioned_agent_ids).toEqual(['agent-legacy'])
+  })
+
+  it('其他 Agent 同名或共享规范别名时不误 tag，markdown 唯一 ID 仍有效', () => {
+    for (const nickname of ['NiiNii', '万能Tin']) {
+      const sameNameMembers = [legacyDefault, { ...legacyDefault, agent_id: 'agent-other', nickname }]
+      const ambiguous = resolveMentionsFromText('@NiiNii 继续处理', sameNameMembers)
+      expect(ambiguous.mentioned_agent_ids).toEqual([])
+      expect(ambiguous.mentioned_user_ids).toEqual([])
+      expect(resolveMentionsFromText('[@NiiNii](mention:agent/agent-legacy) 继续处理', sameNameMembers).mentioned_agent_ids).toEqual(['agent-legacy'])
+    }
+  })
+
+  it('人类用户的旧昵称不产生 Agent 规范别名', () => {
+    const result = resolveMentionsFromText('@NiiNii 继续处理', [
+      buildMember({ user_id: 'user-tin', nickname: '小Tin' }),
+    ])
+    expect(result.mentioned_user_ids).toEqual([])
+    expect(result.mentioned_agent_ids).toEqual([])
+  })
+
   it('识别中文 @所有人', () => {
     const result = resolveMentionsFromText('@所有人 今晚开会', members)
     expect(result.mention_all).toBe(true)

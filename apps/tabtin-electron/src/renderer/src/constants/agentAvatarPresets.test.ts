@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { NIINII_MASCOT_URL } from './mascot'
 import {
   AGENT_AVATAR_PRESET_KEYS,
   DEFAULT_AGENT_AVATAR_PRESET_KEY,
@@ -37,5 +38,14 @@ describe('agentAvatarPresets', () => {
       expect(resolveAgentAvatarPresetUrl(avatarKey)).toBeTruthy()
     }
     expect(resolveAgentAvatarPresetUrl('not-a-real-avatar')).toBeNull()
+  })
+
+  it('旧角色预设统一显示 NiiNii，功能简笔预设保持独立', () => {
+    for (const avatarKey of LEGACY_AGENT_AVATAR_PRESET_KEYS) {
+      expect(resolveAgentAvatarPresetUrl(avatarKey)).toBe(NIINII_MASCOT_URL)
+    }
+    for (const avatarKey of FUNCTION_AGENT_AVATAR_PRESET_KEYS) {
+      expect(resolveAgentAvatarPresetUrl(avatarKey)).not.toBe(NIINII_MASCOT_URL)
+    }
   })
 })

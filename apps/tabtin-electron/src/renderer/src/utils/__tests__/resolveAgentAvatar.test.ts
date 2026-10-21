@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { resolveAgentAvatarPresetUrl } from '@/constants/agentAvatarPresets'
-import { TABTIN_APP_ICON_URL } from '@/constants/appIcon'
+import { NIINII_MASCOT_URL } from '@/constants/mascot'
 import {
   extractAgentAvatarUrl,
   extractAgentCustomAvatarUrl,
@@ -36,9 +36,9 @@ describe('resolveAgentAvatar', () => {
     })).toBe('https://cdn.example.com/custom.png')
   })
 
-  it('resolveAgentAvatarUrl 无自定义时回退 TabTin logo', () => {
-    expect(resolveAgentAvatarUrl(null)).toBe(TABTIN_APP_ICON_URL)
-    expect(resolveAgentAvatarUrl('')).toBe(TABTIN_APP_ICON_URL)
+  it('resolveAgentAvatarUrl 无自定义时回退 NiiNii', () => {
+    expect(resolveAgentAvatarUrl(null)).toBe(NIINII_MASCOT_URL)
+    expect(resolveAgentAvatarUrl('')).toBe(NIINII_MASCOT_URL)
     expect(resolveAgentAvatarUrl('https://cdn.example.com/a.png')).toBe(
       'https://cdn.example.com/a.png',
     )

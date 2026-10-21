@@ -20,6 +20,8 @@ interface ColorAvatarProps {
   name: string
   seed?: string
   imageUrl?: string
+  /** 指定身份的默认图片；真实头像缺失或加载失败时使用。 */
+  fallbackImageUrl?: string
   group?: boolean
   fallbackIcon?: React.ReactNode
   /** Agent 保持专属语义色，不与用户默认头像混用。 */
@@ -35,6 +37,7 @@ export const ColorAvatar: React.FC<ColorAvatarProps> = ({
   name,
   seed,
   imageUrl,
+  fallbackImageUrl,
   group = false,
   fallbackIcon,
   isAgent = false,
@@ -46,15 +49,16 @@ export const ColorAvatar: React.FC<ColorAvatarProps> = ({
   const initial = identityAvatarInitial(name)
   const [imageFailed, setImageFailed] = React.useState(false)
   const failedImageUrlRef = React.useRef<string | null>(null)
-  const showImage = Boolean(imageUrl && !imageFailed)
+  const resolvedImageUrl = imageFailed ? fallbackImageUrl : imageUrl || fallbackImageUrl
+  const showImage = Boolean(resolvedImageUrl)
 
   React.useEffect(() => {
     failedImageUrlRef.current = null
     setImageFailed(false)
-  }, [imageUrl])
+  }, [imageUrl, fallbackImageUrl])
 
   const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
-    const failedUrl = event.currentTarget.currentSrc || imageUrl || ''
+    const failedUrl = event.currentTarget.currentSrc || resolvedImageUrl || ''
     if (!failedUrl || failedImageUrlRef.current === failedUrl) return
     failedImageUrlRef.current = failedUrl
     log.warn('IM avatar image failed to load', {
@@ -74,7 +78,7 @@ export const ColorAvatar: React.FC<ColorAvatarProps> = ({
       aria-hidden={!showImage}
     >
       {showImage ? (
-        <img src={imageUrl} alt="" className="h-full w-full rounded-full object-cover" onError={handleImageError} />
+        <img src={resolvedImageUrl} alt="" className="h-full w-full rounded-full object-cover" onError={handleImageError} />
       ) : fallbackIcon ? (
         fallbackIcon
       ) : group ? (

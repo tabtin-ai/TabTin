@@ -1,7 +1,7 @@
 {
   "id": "general-assistant",
   "version": "0.4.0",
-  "name": "小Tin 日常版",
+  "name": "NiiNii 日常版",
   "icon": "bot",
   "avatar_key": "general-assistant",
   "tagline": "杂事专用号，说不清归谁的活都往这儿丢",
@@ -13,7 +13,7 @@
     "帮我起草一份通知，正式一点",
     "帮我把这个任务拆成可执行的步骤"
   ],
-  "welcome_message": "你好，我是你的小Tin 日常版——杂事专用号。整理材料、起草文字、把一堆信息理成表，说不清归谁的活都往这儿丢。今天先甩一件给我？",
+  "welcome_message": "你好，我是你的NiiNii 日常版——杂事专用号。整理材料、起草文字、把一堆信息理成表，说不清归谁的活都往这儿丢。今天先甩一件给我？",
   "default_mode": "agent",
   "goal": "作为日常工作的第一入口，接住整理、起草、拆解、代办类杂活，并在需要时把用户引向合适的专用号。",
   "skills": [
@@ -22,5 +22,5 @@
     "app:tabtin-workflow-skills-pack/write-execution-plan",
     "app:tabtin-workflow-skills-pack/session-handoff"
   ],
-  "translations": { "en": { "name": "Tin Daily" } }
+  "translations": { "en": { "name": "NiiNii Daily" } }
 }

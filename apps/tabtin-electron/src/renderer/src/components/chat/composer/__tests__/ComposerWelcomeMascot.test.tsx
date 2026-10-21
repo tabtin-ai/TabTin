@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { ComposerWelcomeMascot } from '../ComposerWelcomeMascot'
+import { NIINII_MASCOT_URL } from '@/constants/mascot'
 
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({ t: (key: string) => key }),
@@ -22,6 +23,7 @@ describe('ComposerWelcomeMascot', () => {
 
     const button = screen.getByRole('button', { name: 'input.mascotGreetingAction' })
     expect(button.querySelectorAll('img')).toHaveLength(1)
+    expect(button.querySelector('img')?.getAttribute('src')).toBe(NIINII_MASCOT_URL)
 
     fireEvent.click(button)
     const firstSparkles = button.querySelector('.composer-mascot-sparkles')

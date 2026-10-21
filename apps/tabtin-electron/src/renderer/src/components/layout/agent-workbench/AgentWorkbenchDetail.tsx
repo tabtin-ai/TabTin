@@ -52,7 +52,7 @@ import {
 } from '@components/settings/panels/MyAgentsPanel'
 import { personaFirstLinePreview } from '@components/chat/model/AgentModeSelector'
 import type { OrganizationAgentSummary } from '@/services/organizationAgentsApi'
-import { AGENT_NAME_OWNER_TOKEN } from '@utils/agentNameInterpolation'
+import { AGENT_NAME_OWNER_TOKEN, normalizeKnownAgentDisplayName } from '@utils/agentNameInterpolation'
 import { extractAgentCustomAvatarUrl } from '@/utils/resolveAgentAvatar'
 import {
   AGENT_AVATAR_PRESET_KEYS,
@@ -166,7 +166,7 @@ export const AgentWorkbenchDetail: React.FC<AgentWorkbenchDetailProps> = ({
   const [activePanel, setActivePanel] = useState<WorkbenchPanel>(null)
   const [editingName, setEditingName] = useState(false)
   /** 已提交展示名：保存成功后立刻本地更新，避免等 loadAgents 回写前只读态闪旧名 */
-  const [displayName, setDisplayName] = useState(agent.name)
+  const [displayName, setDisplayName] = useState(() => normalizeKnownAgentDisplayName(agent.name))
   const [nameValue, setNameValue] = useState(agent.name)
   const [nameError, setNameError] = useState('')
   const [savingName, setSavingName] = useState(false)
@@ -216,7 +216,7 @@ export const AgentWorkbenchDetail: React.FC<AgentWorkbenchDetailProps> = ({
   }, [loadAgentDetail])
 
   useEffect(() => {
-    setDisplayName(agent.name)
+    setDisplayName(normalizeKnownAgentDisplayName(agent.name))
     setNameValue(agent.name)
     setEditingName(false)
     setActivePanel(null)
@@ -282,7 +282,7 @@ export const AgentWorkbenchDetail: React.FC<AgentWorkbenchDetailProps> = ({
         return
       }
       toast({ title: t('myAgents.renameSuccess', { defaultValue: '名字已更新' }) })
-      setDisplayName(trimmed)
+      setDisplayName(normalizeKnownAgentDisplayName(trimmed))
       setNameValue(trimmed)
       setEditingName(false)
       onUpdated()
@@ -325,7 +325,7 @@ export const AgentWorkbenchDetail: React.FC<AgentWorkbenchDetailProps> = ({
       }
       setDeactivateConfirmOpen(false)
       toast({
-        title: t('myAgents.deactivateSuccess', { name: agent.name, defaultValue: `「${agent.name}」已停用` }),
+        title: t('myAgents.deactivateSuccess', { name: displayName, defaultValue: `「${displayName}」已停用` }),
       })
       onDeactivated()
     } finally {
@@ -713,8 +713,8 @@ export const AgentWorkbenchDetail: React.FC<AgentWorkbenchDetailProps> = ({
           onOpenChange={setDeactivateConfirmOpen}
           title={t('myAgents.deactivateConfirmTitle', { defaultValue: '确认停用这个 AI 分身？' })}
           description={t('myAgents.deactivateConfirmDesc', {
-            name: agent.name,
-            defaultValue: `停用「${agent.name}」后不会出现在 AI 分身列表和会话切换里，可以随时在「已停用」里恢复。`,
+            name: displayName,
+            defaultValue: `停用「${displayName}」后不会出现在 AI 分身列表和会话切换里，可以随时在「已停用」里恢复。`,
           })}
           variant="destructive"
           isLoading={deactivating}

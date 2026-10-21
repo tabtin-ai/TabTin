@@ -5,7 +5,7 @@
 import React from 'react'
 import { cn } from '@utils/cn'
 import type { ChatMessage } from '@tabtin/chat-client'
-import companionUrl from '@/assets/brand/tabtin-input-companion.png?url'
+import { NIINII_MASCOT_URL } from '@/constants/mascot'
 import { IMPORT_SOURCE_LABELS } from '@components/onboarding/external-import/useExternalImportDetection'
 import { TEXT } from '../../../registry/chatDesignTokens'
 
@@ -99,7 +99,7 @@ export const ExternalArchivePrefixBubble: React.FC<{
         className="pointer-events-none absolute -top-10 left-2 z-sticky select-none"
         >
           <img
-            src={companionUrl}
+            src={NIINII_MASCOT_URL}
             alt=""
             draggable={false}
             className="h-14 w-auto object-contain drop-shadow-[0_3px_8px_rgba(0,0,0,0.12)]"
@@ -128,7 +128,7 @@ export const ExternalArchivePrefixBubble: React.FC<{
           ) : null}
         </div>
         <p className={cn(TEXT.meta, 'mt-1 text-muted-foreground/60')}>
-          上面是外来历史，当作上下文即可——从这里开始，都可以交给小 Tin 继续做
+          上面是外来历史，当作上下文即可——从这里开始，都可以交给 NiiNii 继续做
         </p>
       </div>
     </div>

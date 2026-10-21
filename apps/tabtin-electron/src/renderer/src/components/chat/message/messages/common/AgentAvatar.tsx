@@ -1,7 +1,7 @@
 /**
  * AgentAvatar — 多 Agent 会话「行内身份牌」头像。
  *
- * ：优先展示 settings.avatar_url；无自定义时回退 TabTin logo。
+ * ：优先展示 settings.avatar_url；无自定义时回退 NiiNii。
  * 历史色块首字逻辑保留在 getAgentIdentityAvatar，供测试与兼容引用。
  */
 
@@ -13,7 +13,7 @@ import {
   type AgentIdentityPaletteEntry,
 } from '../../../registry/chatDesignTokens'
 import { resolveAgentAvatarUrl } from '@/utils/resolveAgentAvatar'
-import { TABTIN_APP_ICON_URL } from '@/constants/appIcon'
+import { NIINII_MASCOT_URL } from '@/constants/mascot'
 
 /** djb2 字符串哈希；只依赖输入内容，跨端 / 跨会话稳定。 */
 function djb2Hash(input: string): number {
@@ -56,7 +56,7 @@ interface AgentAvatarProps {
   agentId?: string | null
   /** 展示名；同时作为 a11y 名字 */
   name?: string | null
-  /** 自定义头像 URL；空则显示 TabTin logo */
+  /** 自定义头像 URL；空则显示 NiiNii */
   avatarUrl?: string | null
   className?: string
 }
@@ -71,7 +71,7 @@ export const AgentAvatar: React.FC<AgentAvatarProps> = ({
   const [src, setSrc] = useState(resolved)
   const label = name?.trim() || agentId || undefined
 
-  // avatarUrl 变化时重置（含失败后回退 logo 的场景）
+  // avatarUrl 变化时重置（含失败后回退 NiiNii 的场景）
   React.useEffect(() => {
     setSrc(resolveAgentAvatarUrl(avatarUrl))
   }, [avatarUrl])
@@ -88,7 +88,7 @@ export const AgentAvatar: React.FC<AgentAvatarProps> = ({
       className={cn(AGENT_AVATAR_20, '[-webkit-user-drag:none]', className)}
       data-testid="agent-avatar"
       onError={() => {
-        if (src !== TABTIN_APP_ICON_URL) setSrc(TABTIN_APP_ICON_URL)
+        if (src !== NIINII_MASCOT_URL) setSrc(NIINII_MASCOT_URL)
       }}
     />
   )

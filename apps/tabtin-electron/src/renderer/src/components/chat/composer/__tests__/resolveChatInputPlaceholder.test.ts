@@ -25,7 +25,7 @@ const base = {
 describe('resolveChatInputPlaceholder', () => {
   it('默认占位注入当前 Agent 展示名', () => {
     const t = makeT({
-      'input.defaultAgentName': '小Tin',
+      'input.defaultAgentName': 'NiiNii',
       'input.placeholderDefault': '输入你的任务，{{agentName}} 会帮你完成…',
     })
     expect(resolveChatInputPlaceholder({
@@ -37,14 +37,14 @@ describe('resolveChatInputPlaceholder', () => {
 
   it('无展示名时回落 defaultAgentName', () => {
     const t = makeT({
-      'input.defaultAgentName': '小Tin',
+      'input.defaultAgentName': 'NiiNii',
       'input.placeholderDefault': '输入你的任务，{{agentName}} 会帮你完成…',
     })
     expect(resolveChatInputPlaceholder({
       ...base,
       t,
       agentDisplayName: '  ',
-    })).toBe('输入你的任务，小Tin 会帮你完成…')
+    })).toBe('输入你的任务，NiiNii 会帮你完成…')
   })
 
   it('无可用模型时显示配置提示而不回落到初始化文案', () => {

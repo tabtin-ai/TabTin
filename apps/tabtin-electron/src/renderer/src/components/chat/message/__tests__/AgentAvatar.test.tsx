@@ -1,11 +1,11 @@
 /**
- * AgentAvatar — 生成要素确定性 + 组件展示（logo / 自定义图）。
+ * AgentAvatar — 生成要素确定性 + 组件展示（NiiNii / 自定义图）。
  */
 import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { getAgentIdentityAvatar, AgentAvatar } from '../messages/common/AgentAvatar'
 import { AGENT_IDENTITY_PALETTE, AGENT_AVATAR_20 } from '../../registry/chatDesignTokens'
-import { TABTIN_APP_ICON_URL } from '@/constants/appIcon'
+import { NIINII_MASCOT_URL } from '@/constants/mascot'
 
 describe('getAgentIdentityAvatar', () => {
   it('同 id 多次调用颜色稳定（哈希确定性，与 name 无关）', () => {
@@ -70,11 +70,11 @@ describe('getAgentIdentityAvatar', () => {
 })
 
 describe('AgentAvatar 组件', () => {
-  it('无自定义头像时渲染 TabTin logo 图，并用 aria-label 暴露名字', () => {
+  it('无自定义头像时渲染 NiiNii，并用 aria-label 暴露名字', () => {
     render(<AgentAvatar agentId="agent-1" name="查令" />)
     const avatar = screen.getByTestId('agent-avatar')
     expect(avatar.tagName).toBe('IMG')
-    expect(avatar.getAttribute('src')).toBe(TABTIN_APP_ICON_URL)
+    expect(avatar.getAttribute('src')).toBe(NIINII_MASCOT_URL)
     expect(avatar.getAttribute('aria-label')).toBe('查令')
     expect(avatar.getAttribute('role')).toBe('img')
     expect(avatar.className).toContain('h-5')
@@ -107,5 +107,15 @@ describe('AgentAvatar 组件', () => {
     render(<AgentAvatar agentId="agent-2" name="表哥" />)
     const cls = screen.getByTestId('agent-avatar').className
     expect(cls).not.toMatch(/destructive|warning|success|animate/)
+  })
+
+  it('加载失败时回退 NiiNii，头像更新后重试自定义图片', () => {
+    const { rerender } = render(<AgentAvatar avatarUrl="https://cdn.example.com/broken.png" />)
+    const avatar = screen.getByTestId('agent-avatar')
+    fireEvent.error(avatar)
+    expect(avatar.getAttribute('src')).toBe(NIINII_MASCOT_URL)
+
+    rerender(<AgentAvatar avatarUrl="https://cdn.example.com/new.png" />)
+    expect(avatar.getAttribute('src')).toBe('https://cdn.example.com/new.png')
   })
 })

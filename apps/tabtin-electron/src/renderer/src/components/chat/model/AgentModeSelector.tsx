@@ -20,6 +20,7 @@ import { NewAgentDialog } from '@components/sidebar/NewAgentButton'
 import { AgentAvatar } from '../message'
 import { extractAgentAvatarUrl } from '@/utils/resolveAgentAvatar'
 import { useAgentIdentitySelection } from './useAgentIdentitySelection'
+import { resolveAgentDisplayName } from './resolveAgentDisplayName'
 import { resolveFloatingMenuLayout, type FloatingMenuLayout } from '../panel/floatingMenuLayout'
 import { useCloseOnOrganizationContextReset } from '@/hooks/useCloseOnOrganizationContextReset'
 
@@ -90,7 +91,7 @@ export function buildAgentPickerSubtitle(
 
 /** composer 触发器与下拉行共用同一 20px 身份头像。 */
 const AgentPickerIdentityAvatar: React.FC<{ agent: Agent }> = ({ agent }) => {
-  const name = agent.display_name || agent.name
+  const name = resolveAgentDisplayName(agent)
   return (
     <AgentAvatar
       agentId={agent.id}
@@ -108,7 +109,7 @@ const AgentPickerRow: React.FC<{
   modelLabel: string | null
   onSelect: (agentId: string) => void
 }> = ({ agent, active, disabled, affiliation, modelLabel, onSelect }) => {
-  const name = agent.display_name || agent.name
+  const name = resolveAgentDisplayName(agent)
   const subtitle = buildAgentPickerSubtitle(agent, affiliation)
   const emptyPersona = !affiliation && !personaFirstLinePreview(agent.custom_rules)
 
@@ -361,7 +362,7 @@ export const AgentModeSelector: React.FC<AgentModeSelectorProps> = ({
     : null
   const modeName = t(`agentMode.${currentMode}.name`)
   const agentName = currentAgent
-    ? (currentAgent.display_name || currentAgent.name)
+    ? resolveAgentDisplayName(currentAgent)
     : (identityPlaceholder?.label ?? null)
   const identityLockedHint = !canChangeAgent && agentName
     ? t('agentMode.identityLocked', {
@@ -419,7 +420,7 @@ export const AgentModeSelector: React.FC<AgentModeSelectorProps> = ({
             {currentAgent ? (
               <AgentAvatar
                 agentId={currentAgent.id}
-                name={currentAgent.display_name || currentAgent.name}
+                name={resolveAgentDisplayName(currentAgent)}
                 avatarUrl={extractAgentAvatarUrl(currentAgent.settings)}
                 className={identityCompact ? 'h-4 w-4' : undefined}
               />

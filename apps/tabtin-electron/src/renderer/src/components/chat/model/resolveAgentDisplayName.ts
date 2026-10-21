@@ -1,5 +1,6 @@
 import type { Agent } from '@tabtin/app-shell'
 import { extractAgentAvatarUrl } from '@/utils/resolveAgentAvatar'
+import { normalizeKnownAgentDisplayName } from '@/utils/agentNameInterpolation'
 
 /**
  * 配置页 / 选择器同口径：优先 display_name，其次 name。
@@ -8,7 +9,7 @@ import { extractAgentAvatarUrl } from '@/utils/resolveAgentAvatar'
 export function resolveAgentDisplayName(
   agent: Pick<Agent, 'display_name' | 'name'> | null | undefined,
 ): string {
-  return agent?.display_name?.trim() || agent?.name?.trim() || ''
+  return normalizeKnownAgentDisplayName(agent?.display_name?.trim() || agent?.name)
 }
 
 export type AgentDisplaySource = Pick<Agent, 'id' | 'display_name' | 'name' | 'settings'>

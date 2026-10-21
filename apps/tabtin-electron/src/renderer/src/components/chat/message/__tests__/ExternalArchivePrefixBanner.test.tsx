@@ -64,7 +64,7 @@ describe('ExternalArchivePrefixBubble', () => {
     expect(banner.textContent).toContain('新任务')
     expect(banner.textContent).toContain('来自 Codex')
     expect(banner.textContent).toContain('理解连接和请求区别')
-    expect(banner.textContent).toContain('交给小 Tin')
+    expect(banner.textContent).toContain('交给 NiiNii')
     expect(banner.textContent).not.toContain('【外部历史 · 特殊新对话】')
     expect(screen.getByTestId('external-archive-prefix-mascot')).toBeTruthy()
   })

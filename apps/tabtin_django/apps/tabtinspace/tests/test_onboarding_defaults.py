@@ -28,7 +28,7 @@ class OnboardingDefaultsTests(TestCase):
         )
         defaults = resolve_onboarding_defaults(user)
         self.assertEqual(defaults.space_name, DEFAULT_ONBOARDING_SPACE_NAME)
-        self.assertEqual(defaults.agent_name, "小Tin")
+        self.assertEqual(defaults.agent_name, "NiiNii")
 
     def test_english_profile_also_gets_chinese_defaults(self) -> None:
         """默认名暂不跟 UI 语言走英文，避免本机 Default Space 目录。"""
@@ -43,7 +43,7 @@ class OnboardingDefaultsTests(TestCase):
 
         defaults = resolve_onboarding_defaults(user)
         self.assertEqual(defaults.space_name, DEFAULT_ONBOARDING_SPACE_NAME)
-        self.assertEqual(defaults.agent_name, "小Tin")
+        self.assertEqual(defaults.agent_name, "NiiNii")
         self.assertEqual(defaults.space_description, "自动创建的默认 Workspace")
 
     def test_thread_local_english_still_chinese_defaults(self) -> None:

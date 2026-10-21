@@ -168,7 +168,7 @@ export const DesktopHomePane: React.FC<{ variant?: 'apps' | 'task-workbench' }> 
                 defaultValue: '从已有应用或新应用进入工作现场，打开后会成为当前任务的一个标签。',
               })
             : t('desktop.home.appsStartSubtitle', {
-                defaultValue: '应用独立存在。需要小Tin参与时，再从应用详情发起协作。',
+                defaultValue: '应用独立存在。需要 NiiNii 参与时，再从应用详情发起协作。',
               })}
         />
 

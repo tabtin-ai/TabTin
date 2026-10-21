@@ -51,6 +51,15 @@ describe('resolveAgentDisplayName', () => {
     expect(resolveAgentDisplayName(null)).toBe('')
     expect(resolveAgentDisplayName({ display_name: '', name: '' })).toBe('')
   })
+
+  it('兼容旧默认名与工厂模板名，不覆盖用户自定义名', () => {
+    expect(resolveAgentDisplayName({ display_name: '小Tin', name: '小Tin' })).toBe('NiiNii')
+    expect(resolveAgentDisplayName({ name: '万能Tin' })).toBe('NiiNii')
+    expect(resolveAgentDisplayName({ name: '默认 Workspace 执行身份' })).toBe('NiiNii')
+    expect(resolveAgentDisplayName({ name: '小Tin 代码版' })).toBe('NiiNii 代码版')
+    expect(resolveAgentDisplayName({ name: '小Tin 我的专属代码号' })).toBe('小Tin 我的专属代码号')
+    expect(resolveAgentDisplayName({ display_name: '我的伙伴', name: '小Tin' })).toBe('我的伙伴')
+  })
 })
 
 describe('resolveCurrentAgentDisplay · ', () => {

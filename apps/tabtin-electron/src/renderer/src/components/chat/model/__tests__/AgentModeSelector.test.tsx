@@ -147,10 +147,7 @@ function openAgentPicker() {
       enableAgentPicker
     />,
   )
-  const triggerName = identityState.agents.find(a => a.id === identityState.currentAgentId)?.name
-    ?? identityState.agents[0]?.name
-    ?? '小豆子'
-  fireEvent.click(screen.getByText(triggerName))
+  fireEvent.click(screen.getByTestId('agent-identity-trigger'))
 }
 
 beforeEach(() => {
@@ -474,7 +471,7 @@ describe('AgentModeSelector', () => {
       ]
       identityState.currentAgentId = 'default-space'
       openAgentPicker()
-      const personalDefault = within(screen.getByRole('radio', { name: '小Tin' }))
+      const personalDefault = within(screen.getByRole('radio', { name: 'NiiNii' }))
       expect(personalDefault.getByText('个人 Space')).toBeTruthy()
       expect(personalDefault.getByTestId('agent-picker-model-badge').textContent).toBe('k2')
       expect(

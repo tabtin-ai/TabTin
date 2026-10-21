@@ -9,6 +9,7 @@ vi.mock('@/utils/logger', () => ({
 }))
 
 import { ColorAvatar } from './ColorAvatar'
+import { NIINII_MASCOT_URL } from '@/constants/mascot'
 
 describe('ColorAvatar', () => {
   it('同一 seed 始终映射到同一颜色', () => {
@@ -34,6 +35,25 @@ describe('ColorAvatar', () => {
   it('有真实头像时优先展示图片', () => {
     render(<ColorAvatar name="张三" seed="user-2" imageUrl="https://example.com/avatar.png" />)
     expect(document.querySelector('img')?.getAttribute('src')).toBe('https://example.com/avatar.png')
+  })
+
+  it('Agent 无图或自定义图失败时使用伙伴图，并保持头像尺寸', () => {
+    const { container, rerender } = render(
+      <ColorAvatar name="NiiNii" isAgent fallbackImageUrl={NIINII_MASCOT_URL} className="h-9 w-9" />,
+    )
+    const beforeClass = container.firstElementChild?.className
+    const beforeStyle = container.firstElementChild?.getAttribute('style')
+    expect(container.querySelector('img')?.getAttribute('src')).toBe(NIINII_MASCOT_URL)
+
+    rerender(<ColorAvatar name="NiiNii" isAgent imageUrl="https://example.com/custom.png" fallbackImageUrl={NIINII_MASCOT_URL} className="h-9 w-9" />)
+    expect(container.querySelector('img')?.getAttribute('src')).toBe('https://example.com/custom.png')
+    fireEvent.error(container.querySelector('img')!)
+    expect(container.querySelector('img')?.getAttribute('src')).toBe(NIINII_MASCOT_URL)
+    expect(container.firstElementChild?.className).toBe(beforeClass)
+    expect(container.firstElementChild?.getAttribute('style')).toBe(beforeStyle)
+
+    rerender(<ColorAvatar name="NiiNii" isAgent imageUrl="https://example.com/new.png" fallbackImageUrl={NIINII_MASCOT_URL} className="h-9 w-9" />)
+    expect(container.querySelector('img')?.getAttribute('src')).toBe('https://example.com/new.png')
   })
 
   it('头像加载失败时记录脱敏后的诊断上下文', () => {

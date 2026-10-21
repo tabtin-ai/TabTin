@@ -1,7 +1,8 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 import type { IMMessage } from '@/services/tabchatApi'
+import { NIINII_MASCOT_URL } from '@/constants/mascot'
 
 const { mockEnsureProfiles } = vi.hoisted(() => ({
   mockEnsureProfiles: vi.fn(),
@@ -19,6 +20,11 @@ vi.mock('react-i18next', () => ({
 
 vi.mock('react-markdown', () => ({
   default: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}))
+
+vi.mock('@components/context-space/registry/homeRegistry', () => ({}))
+vi.mock('@components/layout/project/teamSpaceProjectNavigation', () => ({
+  enterTeamSpaceProject: vi.fn(),
 }))
 
 vi.mock('@tabtin/smartsheet-ui', () => ({
@@ -44,14 +50,26 @@ vi.mock('@stores/useAuthStore', () => ({
     selector({ user: { id: 'human-user-1' } }),
 }))
 
+vi.mock('@stores/useSpaceStore', () => ({
+  useSpaceStore: (selector: (state: { selectedAgent: null }) => unknown) =>
+    selector({ selectedAgent: null }),
+}))
+
+vi.mock('@stores/chat/useChatStore', () => ({ useChatStore: { getState: () => ({}) } }))
+vi.mock('@stores/useUIStore', () => ({ useUIStore: { getState: () => ({}) } }))
+vi.mock('./cards/TabTinCustomCardRenderer', () => ({ TabTinCustomCardRenderer: () => null }))
+vi.mock('./imMarkdownComponents', () => ({ createImMarkdownComponents: () => ({}) }))
+
 vi.mock('@stores/useIMStore', () => ({
   useIMStore: (selector: (state: {
     conversations: Array<{ id: string; organization_id: string }>
     readReceipts: Record<string, unknown>
+    conversationMembers: Record<string, unknown[]>
   }) => unknown) =>
     selector({
       conversations: [{ id: 'conv-1', organization_id: 'organization-1' }],
       readReceipts: {},
+      conversationMembers: {},
     }),
 }))
 
@@ -87,7 +105,7 @@ vi.mock('./TeamSpaceCreateTaskDialog', () => ({
 }))
 
 describe('IMMessageBubble agent replay', () => {
-  it('renders concrete agent name from hydrated history message', async () => {
+  it('renders the Agent name and NiiNii avatar while preserving custom images and size', async () => {
     const { IMMessageBubble } = await import('./IMMessageBubble')
     const message: IMMessage = {
       id: 1,
@@ -105,7 +123,7 @@ describe('IMMessageBubble agent replay', () => {
       reactions: {},
     }
 
-    render(
+    const { container, rerender } = render(
       <IMMessageBubble
         message={message}
         prevMessage={null}
@@ -116,5 +134,16 @@ describe('IMMessageBubble agent replay', () => {
     expect(screen.getByLabelText('AI')).toBeTruthy()
     expect(screen.getByText('收到，我来处理。')).toBeTruthy()
     expect(mockEnsureProfiles).not.toHaveBeenCalledWith(['agent-1'])
+    expect(container.querySelector('img')?.getAttribute('src')).toBe(NIINII_MASCOT_URL)
+    expect(container.querySelector('img')?.parentElement?.className).toContain('h-9 w-9')
+
+    rerender(<IMMessageBubble message={{ ...message, sender_avatar: 'https://example.com/custom.png' }} prevMessage={null} />)
+    expect(container.querySelector('img')?.getAttribute('src')).toBe('https://example.com/custom.png')
+    fireEvent.error(container.querySelector('img')!)
+    expect(container.querySelector('img')?.getAttribute('src')).toBe(NIINII_MASCOT_URL)
+
+    rerender(<IMMessageBubble message={{ ...message, sender_name: '小Tin' }} prevMessage={null} />)
+    expect(screen.getByText('NiiNii')).toBeTruthy()
+    expect(screen.queryByText('小Tin')).toBeNull()
   })
 })

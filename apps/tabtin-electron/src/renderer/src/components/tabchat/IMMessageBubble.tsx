@@ -11,7 +11,7 @@ import remarkAutolinkResource from '@tabtin/markdown-resource-autolink'
 import rehypeSanitize from 'rehype-sanitize'
 import { sanitizeSchema, rehypeSanitizeCss } from '@/lib/rehypeSanitizeSchema'
 import {
-  FileText, Download, Share2, Bot, FileX,
+  FileText, Download, Share2, FileX,
   FileSpreadsheet, Presentation, FileCode, FileJson, FileQuestion,
   Check, CheckCircle2, Loader2, FolderOpen, MessageSquare,
 } from 'lucide-react'
@@ -95,6 +95,8 @@ import { useImConversationCanvas } from './ImConversationCanvasContext'
 import { TabTinCustomCardRenderer } from './cards/TabTinCustomCardRenderer'
 import { AgentMemberBadges } from './AgentMemberBadges'
 import { ColorAvatar } from './ColorAvatar'
+import { NIINII_MASCOT_URL } from '@/constants/mascot'
+import { normalizeKnownAgentDisplayName } from '@/utils/agentNameInterpolation'
 import { agentOwnerDisplayName } from './conversationMembers'
 import { isMentionHref } from './mentionMarkdown'
 import { MENTION_ALL_ALIASES } from './resolveMentionsFromText'
@@ -472,8 +474,8 @@ export const IMMessageBubble: React.FC<Props> = React.memo(({ message, prevMessa
   // Agent 没有 user profile，名字直接取消息自带的 sender_name（后端=Agent.name）。
   const profileSenderName = useDisplayName(!isAgent ? message.sender_id : null)
   const profileSenderAvatar = useAvatar(!isAgent ? message.sender_id : null)
-  const senderName = isAgent ? (message.sender_name || t('aiAssistant')) : profileSenderName
-  const senderAvatar = isAgent ? '' : profileSenderAvatar
+  const senderName = isAgent ? (normalizeKnownAgentDisplayName(message.sender_name) || t('aiAssistant')) : profileSenderName
+  const senderAvatar = isAgent ? message.sender_avatar || '' : profileSenderAvatar
   const replySenderName = useDisplayName(message.reply_to_preview?.sender_id)
   const mentionedIds: string[] = message.metadata?.mentioned_user_ids || EMPTY_IDS
   const mentionAll = Boolean(message.metadata?.mention_all)
@@ -1344,7 +1346,7 @@ export const IMMessageBubble: React.FC<Props> = React.memo(({ message, prevMessa
                   name={senderName || message.sender_id || '?'}
                   seed={message.sender_id}
                   imageUrl={senderAvatar}
-                  fallbackIcon={isAgent ? <Bot className="h-5 w-5 text-white" /> : undefined}
+                  fallbackImageUrl={isAgent ? NIINII_MASCOT_URL : undefined}
                   isAgent={isAgent}
                   className="h-9 w-9"
                 />

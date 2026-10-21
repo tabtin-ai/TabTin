@@ -378,10 +378,10 @@ class DefaultAgentGuaranteeTests(TestCase):
             ),
             {
                 DEFAULT_ONBOARDING_AGENT_NAME,
-                "小Tin 代码版",
-                "小Tin 文书版",
-                "小Tin 数据版",
-                "小Tin 冲浪版",
+                "NiiNii 代码版",
+                "NiiNii 文书版",
+                "NiiNii 数据版",
+                "NiiNii 冲浪版",
             },
         )
         starter_agents = Agent.objects.filter(
